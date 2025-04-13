@@ -16,8 +16,8 @@ def is_sorted(arr):
         j += 1
     return True
 
-# print(is_sorted([1, 2, 3, 4]))  # Output: True
-# print(is_sorted([1, 3, 2]))     # Output: False
+print(is_sorted([1, 2, 3, 4]))  # Output: True
+print(is_sorted([1, 3, 2]))     # Output: False
 
 
 # Solution
@@ -41,5 +41,50 @@ def is_sorted(arr):   # Define the function that takes an array 'arr' as input
     return True           # If loop finishes, all elements are in order, so return True
 
 # Test the function
-# print(is_sorted([1, 2, 3, 4]))  # Output: True
-# print(is_sorted([1, 3, 2]))     # Output: False
+print(is_sorted([1, 2, 3, 4]))  # Output: True
+print(is_sorted([1, 3, 2]))     # Output: False
+
+
+# ----------------------------------------------------------------------------------
+# Solution with output 
+
+def is_sorted(arr):              # arr = [1, 2, 3, 4]
+    if len(arr) < 2:             # 4 < 2 → False
+        return True              # skip
+    i, j = 0, 1                  # i = 0, j = 1
+    while j < len(arr):          # j < 4 → True (loop runs)
+        if arr[i] > arr[j]:      # Iteration 1: arr[0] > arr[1] → 1 > 2 → False
+            return False         # skip
+        i += 1                   # i = 1
+        j += 1                   # j = 2
+                                 # Iteration 2: j < 4 → True
+                                 # arr[1] > arr[2] → 2 > 3 → False
+                                 # i = 2, j = 3
+                                 # Iteration 3: j < 4 → True
+                                 # arr[2] > arr[3] → 3 > 4 → False
+                                 # i = 3, j = 4
+                                 # Iteration 4: j < 4 → False (loop ends)
+    return True                  # Return True (all pairs in order)
+
+print(is_sorted([1, 2, 3, 4]))  # Output: True (1≤2, 2≤3, 3≤4)
+
+
+# ----------------------------------------------------------------------------------
+# Solution with output 
+
+def is_sorted(arr):              # arr = [1, 3, 2]
+    if len(arr) < 2:             # 3 < 2 → False
+        return True              # skip
+    i, j = 0, 1                  # i = 0, j = 1
+    while j < len(arr):          # j < 3 → True (loop runs)
+        if arr[i] > arr[j]:      # Iteration 1: arr[0] > arr[1] → 1 > 3 → False
+            return False         # skip
+        i += 1                   # i = 1
+        j += 1                   # j = 2
+                                 # Iteration 2: j < 3 → True
+                                 # arr[1] > arr[2] → 3 > 2 → True
+                                 # Return False (triggered when 3 > 2)
+                                 # Loop stops here
+    return True                  # Not reached
+
+print(is_sorted([1, 3, 2]))   # Output: False (3 > 2 breaks ascending order)

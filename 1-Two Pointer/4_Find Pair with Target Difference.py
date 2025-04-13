@@ -20,10 +20,10 @@ def find_pair_with_difference(arr, target):
                 right += 1       
     return None       
 
-# print(find_pair_with_difference([1, 3, 5, 8], 2))  # Output: [1, 3]
-# print(find_pair_with_difference([8, 1, 3, 5], 3))  # Output: [5, 8]
-# print(find_pair_with_difference([1, 2, 4], 5))  # Output: None
-# print(find_pair_with_difference([1, 5, 6], 2))  # Output: None
+print(find_pair_with_difference([1, 3, 5, 8], 2))  # Output: [1, 3]
+print(find_pair_with_difference([8, 1, 3, 5], 3))  # Output: [5, 8]
+print(find_pair_with_difference([1, 2, 4], 5))  # Output: None
+print(find_pair_with_difference([1, 5, 6], 2))  # Output: None
 
 
 # Solution
@@ -54,3 +54,60 @@ def find_pair_with_difference(arr, target):   # Define the function that takes a
 # print(find_pair_with_difference([8, 1, 3, 5], 3))  # Output: [5, 8]
 # print(find_pair_with_difference([1, 2, 4], 5))  # Output: None
 # print(find_pair_with_difference([1, 5, 6], 2))  # Output: None
+
+
+# ----------------------------------------------------------------------------------
+# Solution with output 
+def find_pair_with_difference(arr, target):         # arr = [1, 3, 5, 8], target = 2
+    arr.sort()                                      # arr = [1, 3, 5, 8] (already sorted)
+    left, right = 0, 1                              # left = 0, right = 1
+    while right < len(arr):                         # right < 4 → True (loop runs)
+        diff = arr[right] - arr[left]               # Iteration 1: arr[1] - arr[0] = 3 - 1 = 2
+        if diff == target:                          # 2 == 2 → True
+            return [arr[left], arr[right]]          # Return [arr[0], arr[1]] = [1, 3]
+        elif diff < target:                         # skip
+            right += 1                              # skip
+        else:                                       # skip
+            left += 1                               # skip
+            if left == right:                       # skip
+                right += 1                          # skip
+    return None                                     # Not reached
+
+print(find_pair_with_difference([1, 3, 5, 8], 2))  # Output: [1, 3] (pair with difference 2)
+
+
+# ----------------------------------------------------------------------------------
+# Solution with output 
+def find_pair_with_difference(arr, target):         # arr = [8, 1, 3, 5], target = 3
+    arr.sort()                                      # arr = [1, 3, 5, 8]
+    left, right = 0, 1                              # left = 0, right = 1
+    while right < len(arr):                         # right < 4 → True (loop runs)
+        diff = arr[right] - arr[left]               # Iteration 1: arr[1] - arr[0] = 3 - 1 = 2
+        if diff == target:                          # 2 == 3 → False
+            return [arr[left], arr[right]]          # skip
+        elif diff < target:                         # 2 < 3 → True
+            right += 1                              # right = 2
+        else:                                       # skip
+            left += 1                               # skip
+            if left == right:                       # skip
+                right += 1                          # skip
+                                    # Iteration 2: right < 4 → True
+                                    # diff = arr[2] - arr[0] = 5 - 1 = 4
+                                    # 4 == 3 → False
+                                    # 4 < 3 → False
+                                    # else: True
+                                    # left = 1
+                                    # left == right → 1 == 2 → False
+                                    # Iteration 3: right < 4 → True
+                                    # diff = arr[2] - arr[1] = 5 - 3 = 2
+                                    # 2 == 3 → False
+                                    # 2 < 3 → True
+                                    # right = 3
+                                    # Iteration 4: right < 4 → True
+                                    # diff = arr[3] - arr[1] = 8 - 5 = 3
+                                    # 3 == 3 → True
+                                    # Return [arr[1], arr[3]] = [5, 8]
+    return None                                      # Not reached
+
+print(find_pair_with_difference([8, 1, 3, 5], 3))  # Output: [5, 8] (pair with difference 3)
+

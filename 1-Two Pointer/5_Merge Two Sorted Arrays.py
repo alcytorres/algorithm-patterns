@@ -19,8 +19,8 @@ def merge_sorted_arrays(arr1, arr2):
     result.extend(arr2[j:])  
     return result       
 
-# print(merge_sorted_arrays([1, 3], [2, 4]))  # Output: [1, 2, 3, 4]
-# print(merge_sorted_arrays([1, 3], [2, 4, 6]))  # Output: [1, 2, 3, 4, 6]
+print(merge_sorted_arrays([1, 3], [2, 4]))  # Output: [1, 2, 3, 4]
+print(merge_sorted_arrays([1, 3], [2, 4, 6]))  # Output: [1, 2, 3, 4, 6]
 
 
 # Solution
@@ -49,4 +49,51 @@ def merge_sorted_arrays(arr1, arr2):   # Define the function that takes two arra
 # Test the function
 # print(merge_sorted_arrays([1, 3], [2, 4]))  # Output: [1, 2, 3, 4]
 # print(merge_sorted_arrays([1, 3], [2, 4, 6]))  # Output: [1, 2, 3, 4, 6]
+
+
+# ----------------------------------------------------------------------------------
+# Solution with output 
+
+def merge_sorted_arrays(arr1, arr2):
+    result = []        
+    i, j = 0, 0          
+    while i < len(arr1) and j < len(arr2): 
+        if arr1[i] < arr2[j]:  
+            result.append(arr1[i]) 
+            i += 1        
+        else:              
+            result.append(arr2[j])  
+            j += 1         
+    result.extend(arr1[i:])  
+    result.extend(arr2[j:])  
+    return result       
+
+# print(merge_sorted_arrays([1, 3], [2, 4]))  # Output: [1, 2, 3, 4]
+
+# Solution with output 
+def merge_sorted_arrays(arr1, arr2):         # arr1 = [1, 3], arr2 = [2, 4]
+    result = []                              # result = []
+    i, j = 0, 0                              # i = 0, j = 0
+    while i < len(arr1) and j < len(arr2):   # i < 2 and j < 2 → True (loop runs)
+        if arr1[i] < arr2[j]:                # Iteration 1: arr1[0] < arr2[0] → 1 < 2 → True
+            result.append(arr1[i])           # result = [1]
+            i += 1                           # i = 1
+        else:                                # skip
+            result.append(arr2[j])           # skip
+            j += 1                           # skip
+                    # Iteration 2: i < 2 and j < 2 → True
+                    # arr1[1] < arr2[0] → 3 < 2 → False
+                    # else: True
+                    # result.append(arr2[0]) → result = [1, 2]
+                    # j = 1
+                    # Iteration 3: i < 2 and j < 2 → True
+                    # arr1[1] < arr2[1] → 3 < 4 → True
+                    # result.append(arr1[1]) → result = [1, 2, 3]
+                    # i = 2
+                    # Iteration 4: i < 2 and j < 2 → False (i = 2, loop ends)
+    result.extend(arr1[i:])                  # arr1[2:] = [] → result = [1, 2, 3]
+    result.extend(arr2[j:])                  # arr2[1:] = [4] → result = [1, 2, 3, 4]
+    return result                            # Return [1, 2, 3, 4]
+
+print(merge_sorted_arrays([1, 3], [2, 4]))  # Output: [1, 2, 3, 4] (merged sorted array)
 

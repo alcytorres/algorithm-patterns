@@ -13,7 +13,7 @@ def reverse_array(arr):
         right -= 1                  
     return arr                      
 
-# print(reverse_array([1, 2, 3]))  # Output: [3, 2, 1]
+print(reverse_array([1, 2, 3]))  # Output: [3, 2, 1]
 
 
 # Solution
@@ -35,3 +35,38 @@ def reverse_array(arr):   # Define the function that takes an array 'arr' as inp
 
 # Test the function
 # print(reverse_array([1, 2, 3]))  # Output: [3, 2, 1]
+
+
+# ----------------------------------------------------------------------------------
+# Solution with output 
+
+def reverse_array(arr):                       # arr = [1, 2, 3]
+    left, right = 0, len(arr) - 1             # left = 0, right = 3 - 1 = 2
+    while left < right:                       # 0 < 2 → True (loop runs)
+        arr[left], arr[right] = arr[right], arr[left]  # arr[0], arr[2] = arr[2], arr[0] → arr = [3, 2, 1]
+        left += 1                             # left = 1
+        right -= 1                            # right = 1
+        # Iteration 2: left < right → 1 < 1 → False (loop ends)
+    return arr                                # Return arr = [3, 2, 1]
+
+print(reverse_array([1, 2, 3]))  # Output: [3, 2, 1] (reversed array)
+
+
+# ----------------------------------------------------------------------------------
+# Solution with output 
+
+def reverse_array(arr):                     # arr = [1, 2, 3, 4]
+    left, right = 0, len(arr) - 1           # left = 0, right = 4 - 1 = 3
+    while left < right:                     # 0 < 3 → True (loop runs)
+        arr[left], arr[right] = arr[right], arr[left]  # arr[0], arr[3] = arr[3], arr[0] → arr = [4, 2, 3, 1]
+        left += 1                           # left = 1
+        right -= 1                          # right = 2
+                                            # Iteration 2: left < right → 1 < 2 → True
+                                            # arr[1], arr[2] = arr[2], arr[1] → arr = [4, 3, 2, 1]
+                                            # left = 2
+                                            # right = 1
+                                            # Iteration 3: left < right → 2 < 1 → False (loop ends)
+    return arr                              # Return arr = [4, 3, 2, 1]
+
+print(reverse_array([1, 2, 3, 4]))  # Output: [4, 3, 2, 1] (reversed array)
+

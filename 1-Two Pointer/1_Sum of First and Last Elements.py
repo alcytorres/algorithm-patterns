@@ -26,7 +26,7 @@ def sum_first_last(arr):
     last = arr[-1]
     return first + last
 
-# print(sum_first_last([1, 2, 3]))  # Output: 4 (1 + 3)
+print(sum_first_last([1, 2, 3]))  # Output: 4 (1 + 3)
 
 # Test cases:
 # print(sum_first_last([5]))        # Output: 10 (5 + 5)
@@ -51,4 +51,21 @@ def sum_first_last(arr):   # Define the function that takes an array 'arr' as in
 
 # Test the function
 print(sum_first_last([1, 2, 3]))  # Output: 4 (1 + 3)
+
+
+# ----------------------------------------------------------------------------------
+# Solution with output 
+
+def sum_first_last(arr):
+    if not arr:  # false, arr = [1, 2, 3] 
+        return 0  # skip  
+    first = arr[0]  # first = 1
+    last = arr[-1]  # last = 3
+    return first + last  # 4
+
+print(sum_first_last([1, 2, 3]))  # Output: 4 (1 + 3)
+
+print(sum_first_last([]))         # Output: 0 (0 + 0)
+print(sum_first_last([5]))        # Output: 10 (5 + 5)
+print(sum_first_last([1, 2]))     # Output: 3 (1 + 2)
 
