@@ -1,52 +1,91 @@
-# ----------------------------------------------------------------------------------
-# 1. Compute Prefix Sum Array  → Reference this solution [1, 3, 6, 10)] for Maximum Subarray Sum of Size K
+# 2. Check if Array is Sorted
 """
-Task: Given an array, create a new array of its prefix sums.
-Example: [1, 2, 3] → [1, 3, 6]
-Why: Direct practice for Running Sum of 1d Array.
+# Task: Determine if an array is sorted in ascending order. If not return false.
+# Example: [1, 2, 3, 4] → True, [1, 3, 2] → False
+# Why: Practices moving pointers to compare adjacent elements.
 """
 
-def prefix_sum(arr):   # Define the function that takes an array 'arr' as input
-    if not arr:         # Check if the array is empty
-        return []       # Return an empty array if input is empty
-    result = [arr[0]]   # Start the result with the first element of 'arr'
-    for i in range(1, len(arr)):  # Loop from the second element to the end
-        result.append(result[-1] + arr[i])  # Add the previous sum to the current element
-    return result       # Return the prefix sum array
+def is_sorted(arr):
+    if len(arr) < 2:
+        return True
+    i, j = 0, 1
+    while j < len(arr):
+        if arr[i] > arr[j]:
+            return False
+        i += 1
+        j += 1
+    return True
 
-# Test the function
-# print(prefix_sum([1, 2, 3]))  # Output: [1, 3, 6)]  →  [1, 1+2=3, 1+2+3=6)]
-# print(prefix_sum([1, 2, 3, 4]))  # Output: [1, 3, 6, 10)]  →  [1, 1+2=3, 1+2+3=6 1+3+6=10)]
+print(is_sorted([1, 2, 3, 4]))  # Output: True
+print(is_sorted([1, 3, 2]))     # Output: False
 
-
-
-# 4. Maximum Subarray Sum of Size K
-"""
-Task: Find the maximum sum of any subarray of size k.
-
-Find the largest sum of k consecutive numbers in the array.******
-
-Example: [1, 2, 3, 4], k=2 → 7 (3 + 4)
-Why: Bridges to more complex subarray problems.
-"""
 
 # Solution
-def max_subarray_sum(arr, k):  # Define the function that takes an array 'arr' and integer 'k'
+def is_sorted(arr):   # Define the function that takes an array 'arr' as input
     """
-    Finds the maximum sum of any subarray of size k.
+    Determines if the array is sorted in ascending order.
     
-    - Uses prefix sums to compute subarray sums efficiently.
-    - Time Complexity: O(n), Space Complexity: O(n) for prefix array.
-    - Prefix sum approach is simpler than sliding window for beginners here.
+    - Uses two pointers to compare adjacent elements iteratively.
+    - Time Complexity: O(n), Space Complexity: O(1).
+    - Iterative approach chosen for simplicity over recursive alternatives.
     """
-    if len(arr) < k:      # If array is shorter than 'k'
-        return None       # Cannot form a subarray of size 'k'
-    prefix = prefix_sum(arr)      # prefix = [1, 3, 6, 10)] 
-    max_sum = prefix[k - 1]       # max_sum = 3
-    for i in range(k, len(arr)):  # for i in range(2, 4), i = 2  |  i = 3
-        current_sum = prefix[i] - prefix[i - k]  # current_sum = 3-1=2  |  10-3=7
-        max_sum = max(max_sum, current_sum)      #  max_sum = 3  |  7
-    return max_sum                               # 7
+
+    if len(arr) < 2:      # Check if array has 0 or 1 element (nothing to compare)
+        return True       # Return True since empty or single-element arrays are sorted
+    i, j = 0, 1           # Set 'i' to 0 (current element) and 'j' to 1 (next element)
+    while j < len(arr):   # Loop until 'j' reaches the end of the array
+        if arr[i] > arr[j]:  # Compare: if current element is greater than next, not sorted
+            return False     # Return False since order is broken
+        i += 1            # Move 'i' forward to the next element
+        j += 1            # Move 'j' forward to the element after that
+    return True           # If loop finishes, all elements are in order, so return True
 
 # Test the function
-print(max_subarray_sum([100, 20, 30, 40], 2))  # Output: 7 (3 + 4)
+print(is_sorted([1, 2, 3, 4]))  # Output: True
+print(is_sorted([1, 3, 2]))     # Output: False
+
+
+# ----------------------------------------------------------------------------------
+# Solution with output 
+
+def is_sorted(arr):              # arr = [1, 2, 3, 4]
+    if len(arr) < 2:             # 4 < 2 → False
+        return True              # skip
+    i, j = 0, 1                  # i = 0, j = 1
+    while j < len(arr):          # j < 4 → True (loop runs)
+        if arr[i] > arr[j]:      # Iteration 1: arr[0] > arr[1] → 1 > 2 → False
+            return False         # skip
+        i += 1                   # i = 1
+        j += 1                   # j = 2
+                                 # Iteration 2: j < 4 → True
+                                 # arr[1] > arr[2] → 2 > 3 → False
+                                 # i = 2, j = 3
+                                 # Iteration 3: j < 4 → True
+                                 # arr[2] > arr[3] → 3 > 4 → False
+                                 # i = 3, j = 4
+                                 # Iteration 4: j < 4 → False (loop ends)
+    return True                  # Return True (all pairs in order)
+
+print(is_sorted([1, 2, 3, 4]))  # Output: True (1≤2, 2≤3, 3≤4)
+
+
+# ----------------------------------------------------------------------------------
+# Solution with output 
+
+def is_sorted(arr):              # arr = [1, 3, 2]
+    if len(arr) < 2:             # 3 < 2 → False
+        return True              # skip
+    i, j = 0, 1                  # i = 0, j = 1
+    while j < len(arr):          # j < 3 → True (loop runs)
+        if arr[i] > arr[j]:      # Iteration 1: arr[0] > arr[1] → 1 > 3 → False
+            return False         # skip
+        i += 1                   # i = 1
+        j += 1                   # j = 2
+                                 # Iteration 2: j < 3 → True
+                                 # arr[1] > arr[2] → 3 > 2 → True
+                                 # Return False (triggered when 3 > 2)
+                                 # Loop stops here
+    return True                  # Not reached
+
+print(is_sorted([1, 3, 2]))   # Output: False (3 > 2 breaks ascending order)
+
