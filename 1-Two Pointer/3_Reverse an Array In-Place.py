@@ -46,7 +46,7 @@ def reverse_array(arr):                       # arr = [1, 2, 3]
         arr[left], arr[right] = arr[right], arr[left]  # arr[0], arr[2] = arr[2], arr[0] → arr = [3, 2, 1]
         left += 1                             # left = 1
         right -= 1                            # right = 1
-        # Iteration 2: left < right → 1 < 1 → False (loop ends)
+                                              # Iteration 2: left < right → 1 < 1 → False (loop ends)
     return arr                                # Return arr = [3, 2, 1]
 
 print(reverse_array([1, 2, 3]))  # Output: [3, 2, 1] (reversed array)

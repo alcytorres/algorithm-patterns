@@ -22,8 +22,7 @@ def find_pair_with_difference(arr, target):
 
 print(find_pair_with_difference([1, 3, 5, 8], 2))  # Output: [1, 3]
 print(find_pair_with_difference([8, 1, 3, 5], 3))  # Output: [5, 8]
-print(find_pair_with_difference([1, 2, 4], 5))  # Output: None
-print(find_pair_with_difference([1, 5, 6], 2))  # Output: None
+print(find_pair_with_difference([1, 2, 10], 5))  # Output: None
 
 
 # Solution
@@ -52,9 +51,22 @@ def find_pair_with_difference(arr, target):   # Define the function that takes a
 # Test the function
 # print(find_pair_with_difference([1, 3, 5, 8], 2))  # Output: [1, 3]
 # print(find_pair_with_difference([8, 1, 3, 5], 3))  # Output: [5, 8]
-# print(find_pair_with_difference([1, 2, 4], 5))  # Output: None
-# print(find_pair_with_difference([1, 5, 6], 2))  # Output: None
+# print(find_pair_with_difference([1, 2, 10], 5))  # Output: None
 
+
+"""
+Explanation  if left == right: 
+                right += 1  
+This part of the find_pair_with_difference code prevents the left and right pointers from pointing to the same number after left moves forward.
+
+How to know when to Use if left == right: right += 1
+      - Two pointers (left, right) compare/process pairs in a loop.
+      - Moving one pointer (left += 1) might make left == right.
+      - You need different elements (e.g., for sum, difference).
+   - Sign it’s needed: Overlapping pointers give wrong results (e.g., arr[right] - arr[left] = 0).
+   - Examples: Pair-finding (difference = target), two-sum, sorted array problems where left catching right breaks logic.
+"""
+# ----------------------------------------------------------------------------------
 
 # ----------------------------------------------------------------------------------
 # Solution with output 

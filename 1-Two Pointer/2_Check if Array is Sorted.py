@@ -84,7 +84,15 @@ def is_sorted(arr):              # arr = [1, 3, 2]
                                  # Iteration 2: j < 3 → True
                                  # arr[1] > arr[2] → 3 > 2 → True
                                  # Return False (triggered when 3 > 2)
-                                 # Loop stops here
+                                 # Loop stops here → Break out completely
     return True                  # Not reached
 
 print(is_sorted([1, 3, 2]))   # Output: False (3 > 2 breaks ascending order)
+
+
+"""
+Explanation of what happens when 3 > 2: 
+Since 3 > 2 is True, we hit return False.
+What happens now? We break out of the loop completely and stop the function. return False sends False back and ends everything—no going back to the top, no more looping, no checking other numbers.
+"""
+# ----------------------------------------------------------------------------------
