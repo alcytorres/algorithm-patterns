@@ -29,9 +29,9 @@ def sum_first_last(arr):
 print(sum_first_last([1, 2, 3]))  # Output: 4 (1 + 3)
 
 # Test cases:
-# print(sum_first_last([5]))        # Output: 10 (5 + 5)
-# print(sum_first_last([]))         # Output: 0 (0 + 0)
-# print(sum_first_last([1, 2]))     # Output: 3 (1 + 2)
+print(sum_first_last([5]))        # Output: 10 (5 + 5)
+print(sum_first_last([]))         # Output: 0 (0 + 0)
+print(sum_first_last([1, 2]))     # Output: 3 (1 + 2)
 
 
 # Solution
@@ -52,6 +52,13 @@ def sum_first_last(arr):   # Define the function that takes an array 'arr' as in
 # Test the function
 print(sum_first_last([1, 2, 3]))  # Output: 4 (1 + 3)
 
+"""
+Explanation: if not arr:
+    - if not arr: asks: "Is the array empty?"  →  Same as if len(arr) == 0
+    - If yes (like []), it returns 0 and stops.
+    - If no (like [1, 2, 3]), it skips to sum the first and last elements.
+    - It is there to avoid errors and handle the empty case safely.
+"""
 
 # ----------------------------------------------------------------------------------
 # Solution with output 
