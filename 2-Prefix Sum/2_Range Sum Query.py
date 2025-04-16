@@ -1,11 +1,7 @@
 # 2. Range Sum Query  → Reference problem 1. Compute Prefix Sum Array 
-"""
-Task: Find the sum of elements between two indices (inclusive) using prefix sums.
-Example: [1, 2, 3], indices 0 to 1 → 3 (1 + 2)
-Why: Teaches efficient range sum calculation.
-"""
+
 # ----------------------------------------------------------------------------------
-# 1. Compute Prefix Sum Array
+# *** Reference: 1. Compute Prefix Sum Array ***
 """
 Task: Given an array, create a new array of its prefix sums.
 Example: [1, 2, 3] → [1, 3, 6]
@@ -22,6 +18,11 @@ print(prefix_sum([1, 2, 3]))  # Output: [1, 3, 6]  →  [1, 1+2, 1+2+3]
 # ----------------------------------------------------------------------------------
 
 # 2. Range Sum Query 
+"""
+Task: Find the sum of elements between two indices (inclusive) using prefix sums.
+Example: [1, 2, 3], indices 0 to 1 → 3 (1 + 2)
+Why: Teaches efficient range sum calculation.
+"""
 def range_sum(prefix, start, end):
     if start == 0:
         return prefix[end]  # Sum from start of array
@@ -30,7 +31,7 @@ def range_sum(prefix, start, end):
 # Test the function
 prefix = prefix_sum([1, 2, 3])
 print(range_sum(prefix, 0, 1))  # Output: 3 
-print (range_sum(prefix, 1, 2)) # Output: 5 
+print(range_sum(prefix, 1, 2)) # Output: 5 
 
 # Solution
 def range_sum(prefix, start, end):   # Define the function that takes a prefix sum array and two indices
@@ -48,7 +49,19 @@ def range_sum(prefix, start, end):   # Define the function that takes a prefix s
 # Test the function
 prefix = prefix_sum([1, 2, 3])
 print(range_sum(prefix, 0, 1))  # Output: 3  (1+2=3)
-print (range_sum(prefix, 1, 2)) # Output: 5  (2+3=5)
+print(range_sum(prefix, 1, 2)) # Output: 5  (2+3=5)
+
+
+"""
+Explanation for range_sum(prefix, 2, 2): 
+The line return prefix[end] - prefix[start - 1] works because it isolates the sum of numbers from index start to end in the original array.
+    - prefix[end] is the total of all numbers up to end (e.g., for end = 2, prefix[2] = 1 + 2 + 3 = 6).
+    - prefix[start - 1] is the total up to just before start (e.g., start = 2, start - 1 = 1, prefix[1] = 1 + 2 = 3).
+    - Subtracting them (6 - 3 = 3) gives only the numbers from start to end (just 3 here).
+It is like taking a big pile of coins up to end and removing the coins before start to get what is in between.
+
+*** Pro Tip: Actually use coins to test this problem to visually understand it ***
+"""
 
 # ----------------------------------------------------------------------------------
 # Solution with output 
@@ -58,7 +71,7 @@ def range_sum(prefix, start, end):  # range_sum([1, 3, 6], 0, 1)
     return prefix[end] - prefix[start - 1]  # skip
 
 prefix = prefix_sum([1, 2, 3])  # → [1, 3, 6]
-print(range_sum(prefix, 0, 1))  # Output: 3 (1+2)
+print(range_sum(prefix, 0, 1))  # Output: 3  
 
 # ----------------------------------------------------------------------------------
 # Solution with output 
@@ -68,7 +81,15 @@ def range_sum(prefix, start, end):  # range_sum([1, 3, 6], 1, 2)
     return prefix[end] - prefix[start - 1]  # prefix[2] - prefix[0] = 6 - 1 = 5
 
 prefix = prefix_sum([1, 2, 3])  # → [1, 3, 6]
-print(range_sum(prefix, 1, 2))  # Output: 5 (2+3)
-# ----------------------------------------------------------------------------------
+print(range_sum(prefix, 1, 2))  # Output: 5 
 
+# ----------------------------------------------------------------------------------
+# Solution with output 
+def range_sum(prefix, start, end):
+    if start == 0:  # False (start = 2)
+        return prefix[end]  # skip
+    return prefix[end] - prefix[start - 1]  # prefix[2] - prefix[1] = 6 - 3 = 3
+
+prefix = prefix_sum([1, 2, 3])  # → [1, 3, 6]
+print(range_sum(prefix, 2, 2))  # Output: 3
 

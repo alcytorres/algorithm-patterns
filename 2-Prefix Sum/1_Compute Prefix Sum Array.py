@@ -12,7 +12,7 @@ Potential Knowledge Gaps
 # ----------------------------------------------------------------------------------
 # 1. Compute Prefix Sum Array
 """
-Task: Given an array, create a new array of its prefix sums.
+Task: Given an array, create a new array of its prefix sums. Return an empty array if input is empty
 Example: [1, 2, 3] → [1, 3, 6]
 Why: Direct practice for Running Sum of 1d Array.
 """
@@ -27,6 +27,7 @@ def prefix_sum(arr):
 
 # Test the function
 print(prefix_sum([1, 2, 3]))  # Output: [1, 3, 6]  →  [1, 1+2, 1+2+3]
+print(prefix_sum([]))  # Output: []  
 
 
 # Solution
@@ -52,13 +53,16 @@ print(prefix_sum([1, 2, 3]))  # Output: [1, 3, 6]  →  [1, 1+2, 1+2+3]
 # ----------------------------------------------------------------------------------
 # Solution with output 
 
-def prefix_sum(arr):  
-    if not arr:    # false, arr = [1, 2, 3] 
-        return []  # skip
-    result = [arr[0]]  # result = [1]
-    for i in range(1, len(arr)):  # range(1, 3): i = 1 | i = 2 
-        result.append(result[-1] + arr[i])  # [1, 3] | [1, 3, 6]  
-    return result  # [1, 3, 6] 
+def prefix_sum(arr):              # arr = [1, 2, 3]
+    if not arr:                   # Is arr empty? No, it has numbers → False
+        return []                 # skip
+    result = [arr[0]]             # result = [1] (start with first number)
+    for i in range(1, len(arr)):  # i = 1 to 2 (len = 3, skip 0)
+                                  # Iteration 1: i = 1
+        result.append(result[-1] + arr[i])  # result[-1] = 1, arr[1] = 2 → append 1 + 2 = 3, result = [1, 3]
+                                  # Iteration 2: i = 2
+                                  # result[-1] = 3, arr[2] = 3 → append 3 + 3 = 6, result = [1, 3, 6]
+    return result                 # Return [1, 3, 6]
 
+print(prefix_sum([1, 2, 3]))  # Output: [1, 3, 6] (1, 1+2, 1+2+3)
 
-print(prefix_sum([1, 2, 3]))  # Output: [1, 3, 6]  →  [1, 1+2, 1+2+3]

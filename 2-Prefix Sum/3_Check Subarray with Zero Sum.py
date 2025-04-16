@@ -52,20 +52,24 @@ The code checks if there’s a piece of the list [4, -4, 1] that adds to 0 (like
 
 # ----------------------------------------------------------------------------------
 # Solution with output
-def has_zero_sum_subarray(arr):
-    prefix_sum = 0   # prefix_sum = 0
-    seen = set()     # seen = set()
-    for num in arr:  # num = 4  |  num = -4
-        prefix_sum += num  # prefix_sum = 0+4=4  |  prefix_sum = 4+-4=0
-        if prefix_sum == 0 or prefix_sum in seen:  # prefix_sum = 4 → skip  |  prefix_sum = 0 → return True
-            return True      # skip  |  return True bc zero sum found 
-        seen.add(prefix_sum) # seen = {4}  |  skip 
-    return False  # skip
 
+def has_zero_sum_subarray(arr):        # arr = [4, -4, 1]
+    prefix_sum = 0                     # prefix_sum = 0
+    seen = set()                       # seen = {}
+    for num in arr:                    # Iteration 1: num = 4
+        prefix_sum += num              # prefix_sum = 0 + 4 = 4
+        if prefix_sum == 0 or prefix_sum in seen:  # 4 == 0? False, 4 in {}? False
+            return True                # skip
+        seen.add(prefix_sum)           # seen = {4}
+                                       # Iteration 2: num = -4
+                                       # prefix_sum = 4 + (-4) = 0
+                                       # 0 == 0? True
+                                       # return True (found zero sum)
+    return False                       # not reached
 
-print(has_zero_sum_subarray([4, -4, 1]))  # Output: True (4 + -4 = 0)  
+print(has_zero_sum_subarray([4, -4, 1]))  # Output: True (4 + -4 = 0)
 
 # Test the function
 # Add this: print(seen) to see seen after each addition below this line: seen.add(prefix_sum)
 # seen = {4} 
-# ----------------------------------------------------------------------------------
+
