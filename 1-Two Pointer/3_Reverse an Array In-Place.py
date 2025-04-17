@@ -14,6 +14,8 @@ def reverse_array(arr):
     return arr                      
 
 print(reverse_array([1, 2, 3]))  # Output: [3, 2, 1]
+print(reverse_array([10]))  # Output: [10]
+print(reverse_array([]))  # Output: []
 
 
 # Solution

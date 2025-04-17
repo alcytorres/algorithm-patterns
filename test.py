@@ -15,51 +15,30 @@ def prefix_sum(arr):
     return result
 
 
-# Test the function
-print(prefix_sum([1, 2, 3, 4]))  # Output: [1, 3, 6]  →  [1, 1+2, 1+2+3]
-# print(prefix_sum([]))  # Output: []  
-
+# print(prefix_sum([1, 2, 3]))     # Output: [1, 3, 6]  → [1, 1+2, 1+2+3]
+# print(prefix_sum([1, 2, 3, 4]))  # Output: [1, 3, 6, 10]  → [1, 1+2, 1+2+3 + 1+2+3+4]
 
 
 # ----------------------------------------------------------------------------------
-# 4. Maximum Subarray Sum of Size K
+# 3. Check Subarray with Zero Sum
 """
-Task: Find the largest sum of consecutive numbers (for any subarray) in the array of size k.
-      i.e. Find the maximum sum of any subarray of size k.
-Example 1: [1, 2, 3, 4], k=2 → 7 (3 + 4)
-Example 2: [7, 1, 8, 3], k=3 → 16 (7 + 1 + 8)
-Why: Bridges to more complex subarray problems.
+Task: Determine if an array has a subarray summing to zero. Return false otherwise.
+Example: [4, -4, 1] → True
+Why: Introduces prefix sum applications beyond simple running sums.
 """
 
-def max_subarray_sum(arr, k):
-    if len(arr) < 2:
-        return None
-    prefix = prefix_sum(arr)   # prefix = [1, 3, 6]
-    max_sum = prefix[k - 1]    # max_sum = 3 
-    for i in range(k, len(arr)):
-        current_sum = prefix[i] - prefix[i - k]
-        max_sum = max(max_sum, current_sum)
-    return max_sum
-
-# Test the function
-print(max_subarray_sum([1, 2, 3], 2))  # Output: 5 (2 + 3, largest sum of 2 consecutive numbers)
-print(max_subarray_sum([1, 2, 3, 4], 2))  # Output: 7 (3 + 4)
-print(max_subarray_sum([7, 1, 8, 3], 3))  # Output: 16
+def has_zero_sum_subarray(arr):
+    prefix_sum = 0
+    seen = set()
+    for num in arr:
+        prefix_sum += num
+        if prefix_sum == 0 or prefix_sum in seen:
+            return True
+        seen.add(prefix_sum)
+    return False
 
 
+print(has_zero_sum_subarray([4, -4, 1]))  # Output: True (4 + -4 = 0)
+print(has_zero_sum_subarray([1, 2, -4]))  # Output: False (no chunk sums to 0)
+print(has_zero_sum_subarray([1, 2, -3]))  # Output: True (1 + 2 + -3 = 0)
 
-# def max_subarray_sum(arr, k):
-#     if len(arr) < 2:
-#         return None
-#     prefix = prefix_sum(arr)   # prefix = [1, 3, 6]
-#     max_sum = prefix[k - 1]
-#     for i in range(k, len(arr)):
-#         current_sum = prefix[i] - prefix[i - k]
-#         max_sum = max(max_sum, current_sum)
-#     return max_sum
-        
-
-# Test the function
-print(max_subarray_sum([1, 2, 3], 2))  # Output: 5 (2 + 3, largest sum of 2 consecutive numbers)
-print(max_subarray_sum([1, 2, 3, 4], 2))  # Output: 7 (3 + 4)
-print(max_subarray_sum([7, 1, 8, 3], 3))  # Output: 16

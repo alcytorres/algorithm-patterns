@@ -1,7 +1,7 @@
 # 5. Average of Sliding Window
 """
-Task: Compute the list of averages for all contiguous subarrays of size k.
-Example: [1, 2, 3, 4], k=2 → [1.5, 2.5, 3.5]
+Task: Compute the list of averages for all contiguous subarrays of size k. If the input array is shorter than 'k' return [].
+Example: [1, 2, 3], k=2 → [1.5, 2.5]
 Why: Directly supports Maximum Average Subarray I.
 """
 
@@ -15,8 +15,8 @@ def sliding_window_average(arr, k):
         averages.append(window_sum / k)
     return averages
 
-# Test the function
-print(sliding_window_average([1, 2, 3, 4], 2))  # Output: [1.5, 2.5, 3.5]
+print(sliding_window_average([1, 2, 3], 2))  # Output: [1.5, 2.5]
+print(sliding_window_average([1, 2, 10], 2))  # Output: [1.5, 6.0]
 
 
 # Solution
@@ -38,23 +38,37 @@ def sliding_window_average(arr, k):   # Define the function that takes an array 
     return averages        # Return the list of all averages
 
 # Test the function
-print(sliding_window_average([1, 2, 3, 4], 2))  # Output: [1.5, 2.5, 3.5]
+print(sliding_window_average([1, 2, 3], 2))  # Output: [1.5, 2.5]
 
 
 # ----------------------------------------------------------------------------------
 # Solution with output 
 
-def sliding_window_average(arr, k):                 # arr = [1, 2, 3, 4], k = 2
-    if len(arr) < k:                                # 4 < 2 → False
-        return []                                   # Skipped
-    window_sum = sum(arr[:k])                       # arr[:2] = [1, 2] → window_sum = 1 + 2 = 3
-    averages = [window_sum / k]                     # averages = [3 / 2] = [1.5]
-    for i in range(k, len(arr)):                    # range(2, 4) → i = 2, 3
-        window_sum = window_sum - arr[i - k] + arr[i]  # i = 2: 3 - arr[0] + arr[2] = 3 - 1 + 3 = 5
-                                                       # i = 3: 5 - arr[1] + arr[3] = 5 - 2 + 4 = 7
-        averages.append(window_sum / k)             # i = 2: averages.append(5 / 2) → averages = [1.5, 2.5]
-                                                   # i = 3: averages.append(7 / 2) → averages = [1.5, 2.5, 3.5]
-    return averages                                 # Return [1.5, 2.5, 3.5]
+def sliding_window_average(arr, k):         # arr = [1, 2, 3], k = 2
+    if len(arr) < k:                        # Is len(arr) = 3 < k = 2? No → False
+        return []                           # skip
+    window_sum = sum(arr[:k])               # arr[:2] = [1, 2] → window_sum = 1 + 2 = 3
+    averages = [window_sum / k]             # averages = [3 / 2] = [1.5]
+    for i in range(k, len(arr)):            # i = 2 to 2 (k = 2, len = 3)
+                                            # Iteration 1: i = 2
+        window_sum = window_sum - arr[i - k] + arr[i]  # window_sum = 3 - arr[0] + arr[2] = 3 - 1 + 3 = 5
+        averages.append(window_sum / k)     # append 5 / 2 = 2.5 → averages = [1.5, 2.5]
+    return averages                         # Return [1.5, 2.5]
 
-print(sliding_window_average([1, 2, 3, 4], 2))  # Output: [1.5, 2.5, 3.5] (averages of [1,2], [2,3], [3,4])
+print(sliding_window_average([1, 2, 3], 2))  # Output: [1.5, 2.5]
 
+# ----------------------------------------------------------------------------------
+# Solution with output 
+
+def sliding_window_average(arr, k):          # arr = [1, 2, 10], k = 2
+    if len(arr) < k:                        # Is len(arr) = 3 < k = 2? No → False
+        return []                           # skip
+    window_sum = sum(arr[:k])               # arr[:2] = [1, 2] → window_sum = 1 + 2 = 3
+    averages = [window_sum / k]             # averages = [3 / 2] = [1.5]
+    for i in range(k, len(arr)):            # i = 2 to 2 (k = 2, len = 3)
+                                            # Iteration 1: i = 2
+        window_sum = window_sum - arr[i - k] + arr[i]  # window_sum = 3 - arr[0] + arr[2] = 3 - 1 + 10 = 12
+        averages.append(window_sum / k)     # append 12 / 2 = 6.0 → averages = [1.5, 6.0]
+    return averages                         # Return [1.5, 6.0]
+
+print(sliding_window_average([1, 2, 10], 2))  # Output: [1.5, 6.0]

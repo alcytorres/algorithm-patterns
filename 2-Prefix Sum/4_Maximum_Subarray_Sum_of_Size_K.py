@@ -88,8 +88,8 @@ def max_subarray_sum(arr, k):            # arr = [1, 2, 3], k = 2
     return max_sum                       # Return 5 (biggest sum found)
 
 print(max_subarray_sum([1, 2, 3], 2))  # Output: 5 (2 + 3, largest sum of 2 consecutive numbers)
-# ----------------------------------------------------------------------------------
 
+# ----------------------------------------------------------------------------------
 # Solution with output
 
 def max_subarray_sum(arr, k):            # arr = [1, 2, 3, 4], k = 2
@@ -107,8 +107,8 @@ def max_subarray_sum(arr, k):            # arr = [1, 2, 3, 4], k = 2
     return max_sum                       # Return 7 (biggest sum found)
 
 print(max_subarray_sum([1, 2, 3, 4], 2))  # Output: 7 (3 + 4, largest sum of 2 consecutive numbers)
-# ----------------------------------------------------------------------------------
 
+# ----------------------------------------------------------------------------------
 # Solution with output
 
 def max_subarray_sum(arr, k):            # arr = [4, 6, 1], k = 2

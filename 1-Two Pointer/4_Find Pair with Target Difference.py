@@ -1,7 +1,7 @@
 # 4. Find Pair with Target Difference
 """
-Task: Find two numbers in an array whose difference is a given target. The larger number minus the smaller should equal the target. Return None if no pair is found
-Example: [1, 3, 5, 8], target = 2 → [1, 3]
+Task: Find two numbers in an array whose difference is a given target. The larger number minus the smaller should equal the target. Return None if no pair is found.
+Example: [1, 3, 8], target = 2 → [1, 3]
 Why: Prepares for Two Sum by practicing pointer movement for a condition.
 """
 
@@ -20,7 +20,7 @@ def find_pair_with_difference(arr, target):
                 right += 1       
     return None       
 
-print(find_pair_with_difference([1, 3, 5, 8], 2))  # Output: [1, 3]
+print(find_pair_with_difference([1, 3, 8], 2))  # Output: [1, 3]
 print(find_pair_with_difference([8, 1, 3, 5], 3))  # Output: [5, 8]
 print(find_pair_with_difference([1, 2, 10], 5))  # Output: None
 
@@ -49,7 +49,7 @@ def find_pair_with_difference(arr, target):   # Define the function that takes a
     return None                  # Return None if no pair is found
 
 # Test the function
-# print(find_pair_with_difference([1, 3, 5, 8], 2))  # Output: [1, 3]
+# print(find_pair_with_difference([1, 3, 8], 2))  # Output: [1, 3]
 # print(find_pair_with_difference([8, 1, 3, 5], 3))  # Output: [5, 8]
 # print(find_pair_with_difference([1, 2, 10], 5))  # Output: None
 
@@ -70,10 +70,10 @@ How to know when to Use if left == right: right += 1
 
 # ----------------------------------------------------------------------------------
 # Solution with output 
-def find_pair_with_difference(arr, target):         # arr = [1, 3, 5, 8], target = 2
-    arr.sort()                                      # arr = [1, 3, 5, 8] (already sorted)
+def find_pair_with_difference(arr, target):         # arr = [1, 3, 8], target = 2
+    arr.sort()                                      # arr = [1, 3, 8] (already sorted)
     left, right = 0, 1                              # left = 0, right = 1
-    while right < len(arr):                         # right < 4 → True (loop runs)
+    while right < len(arr):                         # right < 3 → True (loop runs)
         diff = arr[right] - arr[left]               # Iteration 1: arr[1] - arr[0] = 3 - 1 = 2
         if diff == target:                          # 2 == 2 → True
             return [arr[left], arr[right]]          # Return [arr[0], arr[1]] = [1, 3]
@@ -85,7 +85,7 @@ def find_pair_with_difference(arr, target):         # arr = [1, 3, 5, 8], target
                 right += 1                          # skip
     return None                                     # Not reached
 
-print(find_pair_with_difference([1, 3, 5, 8], 2))  # Output: [1, 3] (pair with difference 2)
+print(find_pair_with_difference([1, 3, 8], 2))  # Output: [1, 3] (pair with difference 2)
 
 
 # ----------------------------------------------------------------------------------

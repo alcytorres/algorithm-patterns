@@ -28,7 +28,6 @@ def range_sum(prefix, start, end):
         return prefix[end]  # Sum from start of array
     return prefix[end] - prefix[start - 1]  # Difference gives range sum
 
-# Test the function
 prefix = prefix_sum([1, 2, 3])
 print(range_sum(prefix, 0, 1))  # Output: 3 
 print(range_sum(prefix, 1, 2)) # Output: 5 

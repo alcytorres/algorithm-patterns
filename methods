@@ -173,3 +173,12 @@ max(iterable)  # Returns the maximum value; can also compare multiple arguments
 # Example:
 numbers = [1, 5, 3]
 print(max(numbers))  # Output: 5
+
+sum()
+# What it does: Calculates the sum of all items in an iterable (e.g., list of numbers).
+# Why use it: Quickly computing totals in numerical data (e.g., array problems).
+# Syntax:
+sum(iterable)  # Returns the sum of all elements in 'iterable'
+# Example:
+numbers = [1, 2, 3]
+print(sum(numbers))  # Output: 6
