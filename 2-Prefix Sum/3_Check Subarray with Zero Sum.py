@@ -1,6 +1,6 @@
 # 3. Check Subarray with Zero Sum
 """
-Task: Determine if an array has a subarray summing to zero.
+Task: Determine if an array has a subarray summing to zero. Return false otherwise.
 Example: [4, -4, 1] → True
 Why: Introduces prefix sum applications beyond simple running sums.
 """
@@ -17,6 +17,7 @@ def has_zero_sum_subarray(arr):
 
 # Test the function
 print(has_zero_sum_subarray([4, -4, 1]))  # Output: True (4 + -4 = 0)
+print(has_zero_sum_subarray([1, 2, -4]))  # Output: False (no chunk sums to 0)
 
 # Test the function
 # Add this: print(seen) to see seen after each addition below this line: seen.add(prefix_sum)
@@ -48,14 +49,18 @@ Explnation:
 Imagine you’re adding numbers in a list, step-by-step, and you’re looking for a trick: if at any point your total either hits 0 or matches a total you’ve seen before, you’ve found a chunk of numbers that adds up to 0. That’s what this code does.
 
 The code checks if there’s a piece of the list [4, -4, 1] that adds to 0 (like 4 + -4 = 0). It keeps a running total and uses a “memory box” to remember totals it’s seen. If the total ever becomes 0 or repeats a number from the box, it says “Yes!” (True). If not, it says “No!” (False).
+
+If we say True we exit the loop (and the whole function).
+    - No more loop, no more numbers, just True because [4, -4] works.
+    - It iss like finding the answer and running out the door!
 """
 
 # ----------------------------------------------------------------------------------
 # Solution with output
 
 def has_zero_sum_subarray(arr):        # arr = [4, -4, 1]
-    prefix_sum = 0                     # prefix_sum = 0
-    seen = set()                       # seen = {}
+    prefix_sum = 0                     # prefix_sum = 0 (start with no total)
+    seen = set()                       # seen = {} (empty box for totals)
     for num in arr:                    # Iteration 1: num = 4
         prefix_sum += num              # prefix_sum = 0 + 4 = 4
         if prefix_sum == 0 or prefix_sum in seen:  # 4 == 0? False, 4 in {}? False
@@ -64,7 +69,7 @@ def has_zero_sum_subarray(arr):        # arr = [4, -4, 1]
                                        # Iteration 2: num = -4
                                        # prefix_sum = 4 + (-4) = 0
                                        # 0 == 0? True
-                                       # return True (found zero sum)
+                                       # return True (found zero sum) → Exit the loop (and the whole function).
     return False                       # not reached
 
 print(has_zero_sum_subarray([4, -4, 1]))  # Output: True (4 + -4 = 0)
@@ -72,4 +77,34 @@ print(has_zero_sum_subarray([4, -4, 1]))  # Output: True (4 + -4 = 0)
 # Test the function
 # Add this: print(seen) to see seen after each addition below this line: seen.add(prefix_sum)
 # seen = {4} 
+
+
+# ----------------------------------------------------------------------------------
+# Solution with output: [1, 2, -4]
+
+def has_zero_sum_subarray(arr):        # arr = [1, 2, -4]
+    prefix_sum = 0                     # prefix_sum = 0 (start with no total)
+    seen = set()                       # seen = {} (empty box for totals)
+    for num in arr:                    # Iteration 1: num = 1
+        prefix_sum += num              # prefix_sum = 0 + 1 = 1 (add 1 to total)
+        if prefix_sum == 0 or prefix_sum in seen:  # 1 == 0? False, 1 in {}? False
+            return True                # skip
+        seen.add(prefix_sum)           # seen = {1} (store total 1)
+                                       # Iteration 2: num = 2
+                                       # prefix_sum = 1 + 2 = 3 (add 2 to total)
+                                       # 3 == 0? False, 3 in {1}? False
+                                       # skip
+                                       # seen = {1, 3} (store total 3)
+                                       # Iteration 3: num = -4
+                                       # prefix_sum = 3 + (-4) = -1 (add -4 to total)
+                                       # -1 == 0? False, -1 in {1, 3}? False
+                                       # skip
+                                       # seen = {1, 3, -1} (store total -1)
+    return False                       # Return False (no zero sum found)
+
+print(has_zero_sum_subarray([1, 2, -4]))  # Output: False (no chunk sums to 0)
+
+# Test the function
+# Add this: print(seen) to see seen after each addition below this line: seen.add(prefix_sum)
+# seen = {1, 3, -1}
 

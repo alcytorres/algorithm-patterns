@@ -26,8 +26,9 @@ def prefix_sum(arr):
     return result
 
 # Test the function
-print(prefix_sum([1, 2, 3]))  # Output: [1, 3, 6]  →  [1, 1+2, 1+2+3]
-print(prefix_sum([]))  # Output: []  
+print(prefix_sum([1, 2, 3]))     # Output: [1, 3, 6]  → [1, 1+2, 1+2+3]
+print(prefix_sum([1, 2, 3, 4]))  # Output: [1, 3, 6, 10]  → [1, 1+2, 1+2+3 + 1+2+3+4]
+print(prefix_sum([]))            # Output: []  
 
 
 # Solution
