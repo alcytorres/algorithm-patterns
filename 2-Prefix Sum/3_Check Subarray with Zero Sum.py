@@ -49,7 +49,7 @@ print(has_zero_sum_subarray([4, -4, 1]))  # Output: True (4 + -4 = 0)
 Explnation: 
 Imagine you are adding numbers in a list, step-by-step, and you are looking for a trick: if at any point your total either hits 0 or matches a total you have seen before, you’ve found a chunk of numbers that adds up to 0. That’s what this code does.
 
-The code checks if there’s a piece of the list [4, -4, 1] that adds to 0 (like 4 + -4 = 0). It keeps a running total and uses a “memory box” to remember totals it’s seen. If the total ever becomes 0 or repeats a number from the box, it says “Yes!” (True). If not, it says “No!” (False).
+The code checks if there is a piece of the list [4, -4, 1] that adds to 0 (like 4 + -4 = 0). It keeps a running total and uses a “memory box” to remember totals it’s seen. If the total ever becomes 0 or repeats a number from the box, it says “Yes!” (True). If not, it says “No!” (False).
 
 If we say True we exit the loop (and the whole function).
     - No more loop, no more numbers, just True because [4, -4] works.

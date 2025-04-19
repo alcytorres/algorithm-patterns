@@ -124,3 +124,5 @@ def max_subarray_sum(arr, k):            # arr = [4, 6, 1], k = 2
 
 print(max_subarray_sum([4, 6, 1], 2))  # Output: 10 (4 + 6, largest sum of 2 consecutive numbers)
 
+
+
