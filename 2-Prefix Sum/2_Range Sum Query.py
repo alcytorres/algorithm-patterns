@@ -95,6 +95,16 @@ print(range_sum(prefix, 2, 2))  # Output: 3
 # ----------------------------------------------------------------------------------
 # Solution with output 
 def range_sum(prefix, start, end):
+    if start == 0:  # False (start = 1)
+        return prefix[end]  # skip
+    return prefix[end] - prefix[start - 1]  # prefix[3] - prefix[1] = 10 - 1 = 9
+
+prefix = prefix_sum([1, 2, 3, 4])  # → [1, 3, 6, 10]
+print(range_sum(prefix, 1, 3))  # Output: 9
+
+# ----------------------------------------------------------------------------------
+# Solution with output 
+def range_sum(prefix, start, end):
     if start == 0:  # False (start = 2)
         return prefix[end]  # skip
     return prefix[end] - prefix[start - 1]  # prefix[3] - prefix[1] = 10 - 3 = 7

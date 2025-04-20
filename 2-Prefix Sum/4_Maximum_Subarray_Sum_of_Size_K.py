@@ -92,20 +92,22 @@ print(max_subarray_sum([1, 2, 3], 2))  # Output: 5 (2 + 3, largest sum of 2 cons
 # ----------------------------------------------------------------------------------
 # Solution with output
 
-def max_subarray_sum(arr, k):            # arr = [1, 2, 3, 4], k = 2
-    if len(arr) < k:                     # len(arr) = 4, k = 2, is 4 < 2? False
-        return None                      # skip
-    prefix = prefix_sum(arr)             # prefix = [1, 3, 6, 10] (totals: 1, 1+2, 1+2+3, 1+2+3+4)
-    max_sum = prefix[k - 1]              # k = 2, k-1 = 1, max_sum = prefix[1] = 3 (sum of [1, 2])
-    for i in range(k, len(arr)):         # k = 2, len(arr) = 4, i = 2 to 3
-                                         # Iteration 1: i = 2
-        current_sum = prefix[i] - prefix[i - k]  # i = 2, i-k = 2-2 = 0, prefix[2] = 6, prefix[0] = 1, current_sum = 6-1=5 (sum of [2, 3])
+def max_subarray_sum(arr, k):          # arr = [1, 2, 3, 4], k = 2
+    if len(arr) < k:                   # len(arr) = 4, k = 2, is 4 < 2? False
+        return None                    # skip
+    prefix = prefix_sum(arr)           # prefix = [1, 3, 6, 10] (totals: 1, 1+2, 1+2+3, 1+2+3+4)
+    max_sum = prefix[k - 1]            # k = 2, k-1 = 1, max_sum = prefix[1] = 3 (sum of [1, 2])
+    for i in range(k, len(arr)):       # k = 2, len(arr) = 4, i = 2 to 3
+                                       # Iteration 1: i = 2
+        current_sum = prefix[i] - prefix[i - k]  # i = 2, i-k = 2-2 = 0, prefix[2] = 6, prefix[0] = 1, current_sum = 6 - 1 = 5 (sum of [2, 3])
         max_sum = max(max_sum, current_sum)  # max(3, 5) = 5, max_sum = 5
-                                         # Iteration 2: i = 3
-                                         # i = 3, i-k = 3-2 = 1, prefix[3] = 10, prefix[1] = 3, current_sum = 10-3=7 (sum of [3, 4])
-                                         # max(5, 7) = 7, max_sum = 7
-    return max_sum                       # Return 7 (biggest sum found)
+                                       # Iteration 2: i = 3
+        current_sum = prefix[i] - prefix[i - k]  # i = 3, i-k = 3-2 = 1, prefix[3] = 10, prefix[1] = 3, current_sum = 10 - 3 = 7 (sum of [3, 4])
+        max_sum = max(max_sum, current_sum)  # max(5, 7) = 7, max_sum = 7
 
+    return max_sum                     # Return 7 (biggest sum found)
+
+# Test the function
 print(max_subarray_sum([1, 2, 3, 4], 2))  # Output: 7 (3 + 4, largest sum of 2 consecutive numbers)
 
 # ----------------------------------------------------------------------------------
@@ -123,6 +125,5 @@ def max_subarray_sum(arr, k):            # arr = [4, 6, 1], k = 2
     return max_sum                       # Return 10 (biggest sum found)
 
 print(max_subarray_sum([4, 6, 1], 2))  # Output: 10 (4 + 6, largest sum of 2 consecutive numbers)
-
 
 
