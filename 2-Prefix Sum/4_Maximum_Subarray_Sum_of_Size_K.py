@@ -37,6 +37,7 @@ def max_subarray_sum(arr, k):
     return max_sum
 
 print(max_subarray_sum([1, 2, 3], 2))  # Output: 5 (2 + 3, largest sum of 2 consecutive numbers)
+print(max_subarray_sum([1, 2, 3, 4], 2))  # Output: 7 (3 + 4, largest sum of 2 consecutive numbers)
 print(max_subarray_sum([4, 6, 1], 2))  # Output: 10 (4 + 6, largest sum of 2 consecutive numbers)
 # print(max_subarray_sum([7, 1, 8, 3], 3))  # Output: 16  (7 + 1 + 8)
 

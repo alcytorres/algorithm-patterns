@@ -2,56 +2,54 @@
 Guide to Solving Prefix Sum Problems
 
 # Key Strategies
-1. **Identify the Goal**: Determine what the problem asks for—running totals (e.g., `prefix_sum`), range sums (e.g., `range_sum`), or subarray properties (e.g., `has_zero_sum_subarray`, `max_subarray_sum`).
-2. **Build Prefix Sums**: Create an array or running total of cumulative sums to avoid recalculating sums repeatedly.
-3. **Use Efficiently**:
-   - Range sums: Subtract prefix sums for O(1) queries.
-   - Subarrays: Track sums or use sliding windows for contiguous segments.
-4. **Handle Edge Cases**: Check for empty arrays, invalid indices, or arrays shorter than required lengths.
-5. **Optimize with Data Structures**: Use sets to track seen sums (e.g., for zero-sum subarrays).
+1. **Compute Prefix Sums**: Create an array where each element is the sum of all previous elements plus the current one. Useful for running totals (e.g., `prefix_sum`).
+2. **Use Prefix Sums for Ranges**: Efficiently calculate subarray sums using `prefix[end] - prefix[start-1]` (e.g., `range_sum`).
+3. **Detect Patterns**: Identify subarrays with specific sums (like zero) using prefix sums and a set (e.g., `has_zero_sum_subarray`).
+4. **Optimize Subarray Problems**: Solve maximum or specific-sized subarray sum problems efficiently (e.g., `max_subarray_sum`).
+5. **Check for Equal Sums**: Split arrays into equal-sum parts by comparing prefix sums to a target (e.g., `can_partition`).
 
 # Key Plan in Your Head
-1. **Classify the Problem**: Is it a cumulative sum, range query, or subarray task?
-2. **Prepare Prefix Sums**: Build the prefix array or track a running sum.
-3. **Solve Efficiently**:
-   - Range sums: Use subtraction (`prefix[end] - prefix[start - 1]`).
-   - Subarrays: Check conditions (e.g., zero sum) or slide a window.
-4. **Test Boundaries**: Validate inputs and edge cases.
+1. **Identify the Problem**: Does it involve subarray sums or running totals? (e.g., range queries, zero-sum subarrays).
+2. **Build Prefix Sums**: If sums are needed, compute a prefix sum array.
+3. **Apply Subtraction**: Use `prefix[end] - prefix[start-1]` for range sums (or `prefix[end]` if starting at 0).
+4. **Track Sums**: Use a set to detect repeated sums or specific conditions (e.g., sum equals zero or target).
+5. **Handle Edges**: Check for empty arrays or invalid inputs (e.g., `if not arr: return []`).
+6. **Optimize**: Leverage precomputed prefix sums to avoid redundant calculations.
 
 # Key Lines of Code to Know
-1. **Build Prefix Sum Array**:
-   result = [arr[0]]
+1. **Compute Prefix Sums**:
+   result = [arr[0]]  # Start with first element
    for i in range(1, len(arr)): result.append(result[-1] + arr[i])
-   # Edge case: if not arr: return []
-
-2. **Range Sum**:
+   
+2. **Range Sum Query**:
    if start == 0: return prefix[end]
    return prefix[end] - prefix[start - 1]
-
-3. **Zero-Sum Subarray**:
+   
+3. **Check for Zero Sum Subarray**:
    prefix_sum = 0; seen = set()
    for num in arr: 
        prefix_sum += num
        if prefix_sum == 0 or prefix_sum in seen: return True
        seen.add(prefix_sum)
-
-4. **Max Subarray Sum (Size k)**:
-   if len(arr) < k: return None
+   
+4. **Max Subarray Sum of Size K**:
    prefix = prefix_sum(arr)
    max_sum = prefix[k - 1]
-   for i in range(k, len(arr)): max_sum = max(max_sum, prefix[i] - prefix[i - k])
-
-5. **Sliding Window Average**:
-   if len(arr) < k: return []
-   window_sum = sum(arr[:k])
-   averages = [window_sum / k]
    for i in range(k, len(arr)): 
-       window_sum = window_sum - arr[i - k] + arr[i]
-       averages.append(window_sum / k)
+       current_sum = prefix[i] - prefix[i - k]
+       max_sum = max(max_sum, current_sum)
+   
+5. **Partition Array into Equal Sums**:
+   total_sum = sum(arr)
+   if total_sum % 2 != 0: return False
+   target = total_sum // 2; prefix_sum = 0
+   for num in arr: 
+       prefix_sum += num
+       if prefix_sum == target: return True
 
 # Other Key Notes
-- **Time Efficiency**: Building prefix sums is O(n); queries can be O(1).
-- **Space**: O(n) for arrays, reducible to O(1) with running sums.
-- **Visualization**: Think of prefix sums as a cumulative total you can "slice" for answers.
+- **Efficiency**: O(n) preprocessing for prefix sums enables O(1) range queries.
+- **Space**: Usually O(n) for the prefix array, but some problems can use O(1) space.
+- **Edge Cases**: Always handle empty arrays, single elements, or invalid inputs.
+- **Visualization**: Think of prefix sums as a "running total" to quickly extract subarray sums.
 """
-

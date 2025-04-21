@@ -182,3 +182,4 @@ sum(iterable)  # Returns the sum of all elements in 'iterable'
 # Example:
 numbers = [1, 2, 3]
 print(sum(numbers))  # Output: 6
+
