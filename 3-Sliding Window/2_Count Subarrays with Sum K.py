@@ -1,7 +1,7 @@
 # 2. Count Subarrays with Sum K
 """
-Count the number of contiguous subarrays that sum to a given value k.
-Task: Count subarrays with a given sum.
+Task: Count the number of contiguous subarrays that sum up to a given value k. Assume non-negative numbers.
+Example: [1, 1],    k=1 → 2 ([1], [1])
 Example: [1, 2, 3], k=3 → 2 ([1, 2], [3])
 Why: Practices maintaining a window with a condition.
 """
@@ -20,7 +20,8 @@ def count_subarrays_with_sum(arr, k):
     return count
 
 
-print(count_subarrays_with_sum([1, 2, 3], 3))  # Output: 2 ([1, 2], [3])
+print(count_subarrays_with_sum([1, 1], 1))  # Output: 2 ([1], [1])
+# print(count_subarrays_with_sum([1, 2, 3], 3))  # Output: 2 ([1, 2], [3])
 
 
 # Solution
@@ -45,33 +46,90 @@ def count_subarrays_with_sum(arr, k):   # Define the function that takes an arra
     return count               # Return the total number of subarrays found
 
 # Test the function
-print(count_subarrays_with_sum([1, 2, 3], 3))  # Output: 2 ([1, 2], [3])
+print(count_subarrays_with_sum([1, 1], 1))  # Output: 2 ([1], [1])
+# print(count_subarrays_with_sum([1, 2, 3], 3))  # Output: 2 ([1, 2], [3])
 
+
+"""
+Concise Walkthrough of Why count_subarrays_with_sum Works
+
+The count_subarrays_with_sum function counts how many contiguous subarrays in an array sum to a target value k. Here’s why it works, explained simply:
+
+    1. Track Window Sum: It uses two pointers (left and right) to form a sliding window. window_sum tracks the sum of elements from left to right. For [1, 1], k=1, it starts with window_sum = 0.
+    2.Expand Window: For each right, it adds arr[right] to window_sum. For example, at right=0, window_sum = 1 (adds 1).
+    3. Shrink if Too Big: If window_sum > k, it shrinks the window by subtracting arr[left] and moving left forward until window_sum <= k or left > right. For right=1, window_sum = 2 > 1, so it subtracts arr[0]=1, making window_sum = 1.
+    4. Count Matches: If window_sum == k, it increments count. For [1, 1], it finds window_sum = 1 at right=0 (subarray [1]) and after shrinking at right=1 (subarray [1]), so count = 2.
+    5. Repeat Until End: It continues moving right through the array, checking each window. The while loop ensures only valid windows are counted.
+
+    Why It Works: The sliding window efficiently checks all possible contiguous subarrays by expanding (right moves) and shrinking (left moves) as needed. It counts a subarray whenever its sum equals k, ensuring no valid subarray is missed. For [1, 1], k=1, it correctly finds both [1] subarrays, returning 2.
+"""
 
 # ----------------------------------------------------------------------------------
 # Solution with output 
 
-def count_subarrays_with_sum(arr, k):           # arr = [1, 2, 3], k = 3
-    count = 0                                   # count = 0
-    window_sum = 0                              # window_sum = 0
-    left = 0                                    # left = 0
-    for right in range(len(arr)):                # range(3) → right = 0, 1, 2
-        window_sum += arr[right]                 # right = 0: window_sum = 0 + 1 = 1
-                                                 # right = 1: window_sum = 1 + 2 = 3
-                                                 # right = 2: window_sum = 3 + 3 = 6
-        while window_sum > k and left <= right:  # right = 0: 1 > 3 → False
-                                                 # right = 1: 3 > 3 → False
-                                                 # right = 2: 6 > 3 and 0 ≤ 2 → True
-            window_sum -= arr[left]              # right = 2: window_sum = 6 - 1 = 5
-                                                 # Loop again: 5 > 3 and 1 ≤ 2 → True
-                                                 # window_sum = 5 - 2 = 3
-            left += 1                            # right = 2: left = 1, then left = 2
-        if window_sum == k:                      # right = 0: 1 == 3 → False
-                                                 # right = 1: 3 == 3 → True
-                                                 # right = 2: 3 == 3 → True
-            count += 1                           # right = 1: count = 1
-                                                 # right = 2: count = 2
-    return count                                 # Return 2
+def count_subarrays_with_sum(arr, k):      # arr = [1, 1], k = 1
+    count = 0                              # count = 0 (start with no subarrays found)
+    window_sum = 0                         # window_sum = 0 (start with no total)
+    left = 0                               # left = 0 (left pointer at start)
+    for right in range(len(arr)):          # right = 0 to 1 (len = 2)
+                                           # Iteration 1: right = 0
+        window_sum += arr[right]           # window_sum = 0 + arr[0] = 0 + 1 = 1
+        while window_sum > k and left <= right:  # Is 1 > 1 and 0 <= 0? No
+            window_sum -= arr[left]        # skip
+            left += 1                      # skip
+        if window_sum == k:                # Is 1 == 1? Yes
+            count += 1                     # count = 0 + 1 = 1 (found subarray [1])
+                                           # Iteration 2: right = 1
+        window_sum += arr[right]           # window_sum = 1 + arr[1] = 1 + 1 = 2
+        while window_sum > k and left <= right:  # Is 2 > 1 and 0 <= 1? Yes
+            window_sum -= arr[left]        # window_sum = 2 - arr[0] = 2 - 1 = 1
+            left += 1                      # left = 0 + 1 = 1
+        while window_sum > k and left <= right:  # Is 1 > 1 and 1 <= 1? No
+            window_sum -= arr[left]        # skip
+            left += 1                      # skip
+        if window_sum == k:                # Is 1 == 1? Yes
+            count += 1                     # count = 1 + 1 = 2 (found subarray [1])
+    return count                           # Return 2 (total subarrays found)
+
+# Test the function
+print(count_subarrays_with_sum([1, 1], 1))  # Output: 2 ([1], [1])
+
+# ----------------------------------------------------------------------------------
+# Solution with output 
+
+def count_subarrays_with_sum(arr, k):      # arr = [1, 2, 3], k = 3
+    count = 0                              # count = 0 (start with no subarrays found)
+    window_sum = 0                         # window_sum = 0 (start with no total)
+    left = 0                               # left = 0 (left pointer at start)
+    for right in range(len(arr)):          # right = 0 to 2 (len = 3)
+                                           # Iteration 1: right = 0
+        window_sum += arr[right]           # window_sum = 0 + arr[0] = 0 + 1 = 1
+        while window_sum > k and left <= right:  # Is 1 > 3 and 0 <= 0? No
+            window_sum -= arr[left]        # skip
+            left += 1                      # skip
+        if window_sum == k:                # Is 1 == 3? No
+            count += 1                     # skip
+                                           # Iteration 2: right = 1
+        window_sum += arr[right]           # window_sum = 1 + arr[1] = 1 + 2 = 3
+        while window_sum > k and left <= right:  # Is 3 > 3 and 0 <= 1? No
+            window_sum -= arr[left]        # skip
+            left += 1                      # skip
+        if window_sum == k:                # Is 3 == 3? Yes
+            count += 1                     # count = 0 + 1 = 1 (found subarray [1, 2])
+                                           # Iteration 3: right = 2
+        window_sum += arr[right]           # window_sum = 3 + arr[2] = 3 + 3 = 6
+        while window_sum > k and left <= right:  # Is 6 > 3 and 0 <= 2? Yes
+            window_sum -= arr[left]        # window_sum = 6 - arr[0] = 6 - 1 = 5
+            left += 1                      # left = 0 + 1 = 1
+        while window_sum > k and left <= right:  # Is 5 > 3 and 1 <= 2? Yes
+            window_sum -= arr[left]        # window_sum = 5 - arr[1] = 5 - 2 = 3
+            left += 1                      # left = 1 + 1 = 2
+        while window_sum > k and left <= right:  # Is 3 > 3 and 2 <= 2? No
+            window_sum -= arr[left]        # skip
+            left += 1                      # skip
+        if window_sum == k:                # Is 3 == 3? Yes
+            count += 1                     # count = 1 + 1 = 2 (found subarray [3])
+    return count                           # Return 2 (total subarrays found)
+
 
 print(count_subarrays_with_sum([1, 2, 3], 3))  # Output: 2 ([1, 2], [3])
-

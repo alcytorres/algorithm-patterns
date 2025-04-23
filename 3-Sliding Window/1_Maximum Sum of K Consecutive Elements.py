@@ -12,9 +12,9 @@ Potential Knowledge Gaps
 # ----------------------------------------------------------------------------------
 # 1. Maximum Sum of K Consecutive Elements
 """
-Maximum Sum of K Consecutive Elements
-Task: Find the maximum sum of any k consecutive elements in an array.
-Example: [1, 2, 3, 4], k=2 → 7 (3 + 4)
+Task: Find the maximum sum of any k consecutive elements in an array. .
+Example 1: [1, 2, 3],    k=2 → 5 (2 + 3)
+Example 2: [1, 2, 3, 4], k=2 → 7 (3 + 4)
 Why: Introduces fixed-size window sliding, key for Maximum Average Subarray I.
 """
 
@@ -28,7 +28,7 @@ def max_sum_k_consecutive(arr, k):
         max_sum = max(max_sum, window_sum)
     return max_sum
 
-
+print(max_sum_k_consecutive([1, 2, 3], 2))  # Output: 5 (2 + 3)
 print(max_sum_k_consecutive([1, 2, 3, 4], 2))  # Output: 7 (3 + 4)
 
 
@@ -51,23 +51,41 @@ def max_sum_k_consecutive(arr, k):   # Define the function that takes an array '
     return max_sum         # Return the maximum sum found
 
 # Test the function
-print(max_sum_k_consecutive([1, 2, 3, 4], 2))  # Output: 7 (3 + 4)
+print(max_sum_k_consecutive([1, 2, 3], 2))  # Output: 5 (2 + 3)
 
 
 # ----------------------------------------------------------------------------------
 # Solution with output 
 
-def max_sum_k_consecutive(arr, k):                 # arr = [1, 2, 3, 4], k = 2
-    if len(arr) < k:                               # 4 < 2 → False
-        return None                                # skip
-    window_sum = sum(arr[:k])                      # arr[:2] = [1, 2] → window_sum = 1 + 2 = 3
-    max_sum = window_sum                           # max_sum = 3
-    for i in range(k, len(arr)):                   # range(2, 4) → i = 2, 3
-        window_sum = window_sum - arr[i - k] + arr[i]  # i = 2: 3 - arr[0] + arr[2] = 3 - 1 + 3 = 5
-                                                       # i = 3: 5 - arr[1] + arr[3] = 5 - 2 + 4 = 7
-        max_sum = max(max_sum, window_sum)         # i = 2: max(3, 5) = 5
-                                                   # i = 3: max(5, 7) = 7
-    return max_sum                                 # Return 7
+def max_sum_k_consecutive(arr, k):         # arr = [1, 2, 3], k = 2
+    if len(arr) < k:                       # Is len(arr) = 3 < k = 2? No
+        return None                        # skip
+    window_sum = sum(arr[:k])              # arr[:2] = [1, 2] → window_sum = 1 + 2 = 3
+    max_sum = window_sum                   # max_sum = 3 (start with first window sum)
+    for i in range(k, len(arr)):           # i = 2 to 2 (k = 2, len = 3)
+                                           # Iteration 1: i = 2
+        window_sum = window_sum - arr[i - k] + arr[i]  # window_sum = 3 - arr[0] + arr[2] = 3 - 1 + 3 = 5
+        max_sum = max(max_sum, window_sum) # max(3, 5) = 5, max_sum = 5
+    return max_sum                         # Return 5 (biggest sum found)
 
+
+print(max_sum_k_consecutive([1, 2, 3], 2))  # Output: 5 (2 + 3)
+# ----------------------------------------------------------------------------------
+
+# Solution with output 
+
+def max_sum_k_consecutive(arr, k):         # arr = [1, 2, 3, 4], k = 2
+    if len(arr) < k:                       # Is len(arr) = 4 < k = 2? No
+        return None                        # skip
+    window_sum = sum(arr[:k])              # arr[:2] = [1, 2] → window_sum = 1 + 2 = 3
+    max_sum = window_sum                   # max_sum = 3 (start with first window sum)
+    for i in range(k, len(arr)):           # i = 2 to 3 (k = 2, len = 4)
+                                           # Iteration 1: i = 2
+        window_sum = window_sum - arr[i - k] + arr[i]  # window_sum = 3 - arr[0] + arr[2] = 3 - 1 + 3 = 5
+        max_sum = max(max_sum, window_sum) # max(3, 5) = 5, max_sum = 5
+                                           # Iteration 2: i = 3
+        window_sum = window_sum - arr[i - k] + arr[i]  # window_sum = 5 - arr[1] + arr[3] = 5 - 2 + 4 = 7
+        max_sum = max(max_sum, window_sum) # max(5, 7) = 7, max_sum = 7
+    return max_sum                         # Return 7 (biggest sum found)
 
 print(max_sum_k_consecutive([1, 2, 3, 4], 2))  # Output: 7 (3 + 4)
