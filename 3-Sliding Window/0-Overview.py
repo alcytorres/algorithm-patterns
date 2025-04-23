@@ -47,3 +47,52 @@ Guide to Solving Sliding Window Problems
 - **Applicability**: Ideal for contiguous subarray/substring problems.
 - **Visualization**: Imagine a moving frame that maintains relevant data within its bounds.
 """
+
+# ----------------------------------------------------------------------------------
+"""
+Templates
+    Fixed Sliding Window
+    Dynamic Sliding Window
+"""
+
+# ----------------------------------------------------------------------------------
+# Fixed-size sliding window
+def sliding_window_fixed(arr, k):
+    # Initialize
+    window_sum = 0
+    
+    # Set up the initial window
+    for i in range(k):
+        window_sum += arr[i]
+    
+    max_result = window_sum  # Initialize result
+    
+    # Slide the window across the array
+    for i in range(k, len(arr)):
+        window_sum += arr[i] - arr[i - k]  # Add new element, remove old element
+        max_result = max(max_result, window_sum)  # Update max_result
+    
+    return max_result
+
+
+# ----------------------------------------------------------------------------------
+# Dynamic Sliding Window
+
+def sliding_window_variable(arr):
+    left = 0
+    window_state = 0  # (sum, count, frequency_map, etc.)
+    min_or_max_result = float('inf')  # or float('-inf') depending on the goal
+    
+    for right in range(len(arr)):
+        # Expand the window
+        window_state += arr[right]  # Update window_state to include arr[right]
+        
+        # Shrink the window while the condition is violated
+        while window_state > some_condition:  # Replace with actual condition
+            min_or_max_result = min(min_or_max_result, window_state)  # Update result if needed
+            window_state -= arr[left]  # Update window_state to exclude arr[left]
+            left += 1  # Move left pointer forward
+    
+    return min_or_max_result
+
+# ----------------------------------------------------------------------------------
