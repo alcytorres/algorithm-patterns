@@ -1,35 +1,44 @@
 """
-Use the Fixed Sliding Window and Dynamic Sliding Window templates to solve these problems 
+Use the Fixed Sliding Window templates to solve these problems 
 """
 
 """
-Task: Given an integer array nums and an integer k, find maximum average of any contiguous subarray of size k
-Example: [1, 2, 3, 4], k=2 → 3.5
+Task: Given an integer array nums and an integer k, find maximum average of any contiguous subarray of size k. If the array has fewer than k elements, return None.
+Example 1: [1, 2, 3, 4], k=2 → 3.5
+Example 2: [10, 2, 4],   k=2 → 6
 """
 
 # Fixed-size sliding window
-def sliding_window_fixed(arr, k):
+def sliding_window_fixed(arr, k):        
+    if len(arr) < k:                      
+        return None            
+                
     # Initialize
-    window_sum = sum(arr[:k]) 
+    window_sum = sum(arr[:k])           
     
-    # # Set up the initial window
-    average = window_sum / k  
-    
-    max_result = window_sum # Initialize result
+    # Set up the initial window
+    max_result = window_sum / k   # Initialize result      
     
     # Slide the window across the array
-    for i in range(k, len(arr)):          
+    for i in range(k, len(arr)):                                      
         window_sum = window_sum - arr[i - k] + arr[i]  # Add new element, remove old element
-        max_result = max(max_result, window_sum)  # Update max_result
+        current_average = window_sum / k   
+        max_result = max(max_result, current_average)  # Update max_result
     
-    return max_result / k
+    return max_result                      # Return highest average found
+
 
 print(sliding_window_fixed([1, 2, 3, 4], 2))  # Output: 3.5
+# print(sliding_window_fixed([10, 2, 4], 2))    # Output: 6
 
 
 # ----------------------------------------------------------------------------------
 # Concise Solution with annotations → (I used the template as a starting point and cut out what I did not need)
+
 def sliding_window_fixed(arr, k):          # arr = [1, 2, 3, 4], k = 2
+    if len(arr) < k:                       # Is len(arr) = 4 < k = 2? No
+        return None                        # skip
+    
     # Initialize
     window_sum = sum(arr[:k])              # arr[:2] = [1, 2] → window_sum = 1 + 2 = 3
     
@@ -37,7 +46,7 @@ def sliding_window_fixed(arr, k):          # arr = [1, 2, 3, 4], k = 2
     max_result = window_sum / k            # max_result = 3 / 2 = 1.5 (average of [1, 2])
     
     # Slide the window across the array
-    for i in range(k, len(arr)):           # i = 2 to 3 (k = 2, len = 4)
+    for i in range(k, len(arr)):           # i = 2 to 3
                                            # Iteration 1: i = 2
         window_sum = window_sum - arr[i - k] + arr[i]  # window_sum = 3 - arr[0] + arr[2] = 3 - 1 + 3 = 5
         current_average = window_sum / k   # current_average = 5 / 2 = 2.5 (average of [2, 3])
@@ -57,6 +66,9 @@ print(sliding_window_fixed([1, 2, 3, 4], 2))  # Output: 3.5
 # Full Solution with annotations 
 
 def sliding_window_fixed(arr, k):          # arr = [1, 2, 3, 4], k = 2
+    if len(arr) < k:                       # Is len(arr) = 4 < k = 2? No
+        return None                        # skip
+    
     # Initialize
     window_sum = 0                         # window_sum = 0 (start with no total)
     
@@ -84,3 +96,4 @@ def sliding_window_fixed(arr, k):          # arr = [1, 2, 3, 4], k = 2
 
 
 print(sliding_window_fixed([1, 2, 3, 4], 2))  # Output: 3.5
+
