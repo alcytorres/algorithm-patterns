@@ -7,25 +7,65 @@ Example 2: [5, 2, 1], k = 2 → 3 (subarray [2, 5] has max 5, min 2, difference 
 Example 3: [1, 4, 2, 8], k = 2 → 6 (subarray [2, 8] has max 8, min 2, difference 8 - 2 = 6)
 """
 
+def max_difference_sliding_window(arr, k):  
 
-# Solution Breakdown 
-def max_difference_sliding_window(arr, k):    # arr = [1, 2, 5], k = 2 (window size is 2)
-    # Check if array is too short
-    if len(arr) < k:                         # Is length of arr (3) less than k (2)? No
-        return None                          # If yes, return None (not enough elements)
+    # Input Validation 
+    if len(arr) < k:                         
+        return None                         
     
-    # Set up the first window
-    window = arr[:k]                         # Take first k elements: arr[:2] = [1, 2]
-    max_diff = max(window) - min(window)     # Find max(1, 2) = 2, min(1, 2) = 1, so 2 - 1 = 1
+    # Initialize the first window
+    window = arr[:k]                         
+
+    # Compute initial result for first window
+    max_diff = max(window) - min(window)     
     
-    # Slide the window to check other subarrays
+    # Slide the window across the array and update result
+    for i in range(k, len(arr)):                                         
+        window = arr[i - k + 1:i + 1]       
+        current_diff = max(window) - min(window)  
+        max_diff = max(max_diff, current_diff)    
+    
+    return max_diff                        
+
+
+print(max_difference_sliding_window([1, 2, 5], 2))  # Output: 3 ([2, 5] has max=5, min=2, diff=5-2=3)
+
+
+# ----------------------------------------------------------------------------------
+# Solution Breakdown: Maximum Difference in K Consecutive Elements  
+
+def max_difference_sliding_window(arr, k):    # Example: arr = [1, 2, 5], k = 2
+    # Check if the array is too short to have a subarray of size k
+    if len(arr) < k:                         # len(arr) = 3, k = 2, so 3 >= 2, skip this
+        # Return None since no subarrays of size k are possible
+        return None                          # skip
+    
+    # Take the first k numbers as our starting group (window)
+    # Why? This is the first group we can check for the difference
+    window = arr[:k]                         # arr[:2] = [1, 2]
+    
+    # Find the difference between the largest and smallest in the first window
+    # Why? This is the first possible difference we can check
+    max_diff = max(window) - min(window)     # max(1, 2) = 2, min(1, 2) = 1, so 2 - 1 = 1
+    
+    # Slide the window across the array, one step at a time
+    # Why? To check every possible group of k numbers
     for i in range(k, len(arr)):             # k = 2, len(arr) = 3, so i goes from 2 to 2
-                                             # Only one iteration: i = 2
-        window = arr[i - k + 1:i + 1]        # New window: arr[1:3] = [2, 5] (slide right)
+                                             # Iteration 1: i = 2
+        # Move the window to the next group of k numbers
+        # Why? This gives us the next group to check
+        window = arr[i - k + 1:i + 1]        # arr[1:3] = [2, 5]
+        
+        # Find the difference between the largest and smallest in the new window
+        # Why? We need to compare this difference to find the biggest
         current_diff = max(window) - min(window)  # max(2, 5) = 5, min(2, 5) = 2, so 5 - 2 = 3
-        max_diff = max(max_diff, current_diff)    # Compare: max(1, 3) = 3, so max_diff = 3
+        
+        # Update the maximum if our new difference is bigger
+        # Why? We want the biggest difference we find across all windows
+        max_diff = max(max_diff, current_diff)    # max(1, 3) = 3, so max_diff = 3
     
-    return max_diff                          # Return 3 (largest difference found)
+    # Give back the biggest difference we found
+    return max_diff                          # max_diff = 3 (from window [2, 5])
 
 
 print(max_difference_sliding_window([1, 2, 5], 2))  # Output: 3 ([2, 5] has max=5, min=2, diff=5-2=3)
@@ -54,15 +94,17 @@ Why the Solution Works: The sliding window efficiently checks every `k`-sized su
 
 
 # ----------------------------------------------------------------------------------
-# Solution Maximum Difference in K Consecutive Elements  [1, 2, 5]
+# Solution Output:
 
 def max_difference_sliding_window(arr, k):    # arr = [1, 2, 5], k = 2
     # Input Validation 
     if len(arr) < k:                         # Is len(arr) = 3 < k = 2? No
         return None                          # Skip
     
-    # Initialize
+    # Initialize the first window
     window = arr[:k]                         # Initial window: arr[:2] = [1, 2]
+    
+    # Compute initial result for first window
     max_diff = max(window) - min(window)     # max([1, 2]) - min([1, 2]) = 2 - 1 = 1
     
     # Slide the window across the array
@@ -78,15 +120,17 @@ print(max_difference_sliding_window([1, 2, 5], 2))  # Output: 3 ([2, 5])
 
 
 # ----------------------------------------------------------------------------------
-# Solution Maximum Difference in K Consecutive Elements  [5, 2, 1]
+# Solution Output:
 
 def max_difference_sliding_window(arr, k):    # arr = [5, 2, 1], k = 2
     # Input Validation 
     if len(arr) < k:                         # Is len(arr) = 3 < k = 2? No
         return None                          # Skip
     
-    # Initialize
+    # Initialize the first window
     window = arr[:k]                         # Initial window: arr[:2] = [5, 2]
+
+    # Compute initial result for first window
     max_diff = max(window) - min(window)     # max([5, 2]) - min([5, 2]) = 5 - 2 = 3
     
     # Slide the window across the array
@@ -102,15 +146,17 @@ print(max_difference_sliding_window([5, 2, 1], 2))  # Output: 3 ([5, 2])
 
 
 # ----------------------------------------------------------------------------------
-# Solution Finds the maximum difference (max - min) in any subarray of size k  [1, 4, 2, 8]
+# Solution Output:
 
 def max_difference_sliding_window(arr, k):    # arr = [1, 4, 2, 8], k = 2 (window size is 2)
     # Check if array is too short
     if len(arr) < k:                         # Is length of arr (4) less than k (2)? No
         return None                          # If yes, return None (not enough elements)
     
-    # Set up the first window
+    # Initialize the first window
     window = arr[:k]                         # Take first k elements: arr[:2] = [1, 4]
+
+    # Compute initial result for first window
     max_diff = max(window) - min(window)     # Find max(1, 4) = 4, min(1, 4) = 1, so 4 - 1 = 3
     
     # Slide the window to check other subarrays
