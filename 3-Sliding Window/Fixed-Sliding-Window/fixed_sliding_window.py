@@ -1,5 +1,12 @@
 """
 Use the Fixed Sliding Window templates to solve these problems 
+
+# Maximum Difference (max -min) in K Consecutive Elements
+# Maximum Product of K Consecutive Elements
+# Maximum Subarray Average of Size K
+# Maximum Subarray Sum of Size K
+# Minimum Subarray Sum of Size K
+
 """
 
 """
