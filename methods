@@ -35,6 +35,7 @@ string.isdigit()  # Returns True if all characters are digits, else False
 text = "123"
 print(text.isdigit())  # Output: True
 
+# ----------------------------------------------------------------------------------
 # LIST METHODS
 .append()
 # What it does: Adds a single element to the end of a list.
@@ -66,6 +67,16 @@ numbers = [1, 2, 4]
 numbers.insert(2, 3)
 print(numbers)  # Output: [1, 2, 3, 4]
 
+.remove()
+# What it does: Removes the first occurrence of a specified value from a list.
+# Why use it: Deleting a specific item when you know its value but not its index.
+# Syntax:
+list.remove(value)  # Modifies the list in place; raises ValueError if value not found
+# Example:
+numbers = [1, 2, 3, 2]
+numbers.remove(2)
+print(numbers)  # Output: [1, 3, 2]
+
 .pop()
 # What it does: Removes and returns an element at a given index (defaults to last item).
 # Why use it: Removing items from a list while retrieving them (e.g., for stacks).
@@ -76,16 +87,34 @@ numbers = [1, 2, 3]
 last = numbers.pop()
 print(last, numbers)  # Output: 3 [1, 2]
 
+# ----------------------------------------------------------------------------------
 # DICTIONARY METHODS
 .keys()
 # What it does: Returns a view of all keys in a dictionary.
-# Why use it: Accessing or iterating over dictionary keys.
+# Why use it:18n Accessing or iterating over dictionary keys.
 # Syntax:
 dict.keys()  # Returns a view of the dictionary’s keys
 # Example:
 ages = {"Alice": 25, "Bob": 30}
 print(list(ages.keys()))  # Output: ["Alice", "Bob"]
 
+.get()
+# What it does: Retrieves the value for a key in a dictionary, returning a default if the key is not found.
+# Why use it: Safely accessing dictionary values without raising errors for missing keys.
+# Syntax:
+dict.get(key, default)  # Returns the value for 'key' or 'default' (None if not specified)
+# Example:
+ages = {"Alice": 25, "Bob": 30}
+print(ages.get("Charlie", 0))  # Output: 0
+print(ages.get("Alice", 0))  # Output: 25
+
+# LeetCode Example (from length_of_longest_substring):
+char_count = {}
+current_char = "a"
+char_count[current_char] = char_count.get(current_char, 0) + 1  # Gets count of "a" (0 if not found) and adds 1
+print(char_count)  # Output: {'a': 1}
+
+# ----------------------------------------------------------------------------------
 # SET METHODS
 .add()
 # What it does: Adds a single element to a set if it’s not already present.
@@ -97,7 +126,7 @@ unique = {1, 2}
 unique.add(3)
 print(unique)  # Output: {1, 2, 3}
 
-
+# ----------------------------------------------------------------------------------
 # BUILT-IN FUNCTIONS
 len()
 # What it does: Returns the length (number of items) of an object (list, string, etc.).
@@ -117,6 +146,15 @@ int(value)  # Returns an integer; 'value' can be a string, float, etc.
 num = "123"
 print(int(num) + 1)  # Output: 124
 
+float()
+# What it does: Converts a value (like a string or integer) to a floating-point number.
+# Why use it: Type conversion for decimal or floating-point operations.
+# Syntax:
+float(value)  # Returns a float; 'value' can be a string, integer, etc.
+# Example:
+num = "123.45"
+print(float(num) + 0.55)  # Output: 124.0
+
 input()
 # What it does: Reads a line of input from the user as a string.
 # Why use it: Getting user data for interactive programs.
@@ -135,13 +173,17 @@ list(iterable)  # Returns a new list; 'iterable' is optional
 text = "abc"
 print(list(text))  # Output: ['a', 'b', 'c']
 
-range(start, stop)
-# What it does: Generates a sequence of numbers from 'start' to 'stop-1'.
+range(start, stop[, step]) or range(stop)
+# What it does: Generates a sequence of numbers from 'start' to 'stop-1', optionally with a 'step' increment. If only 'stop' is provided, starts from 0.
 # Why use it: Creating loops or sequences for iteration (common in algorithms).
 # Syntax:
-range(start, stop)  # Returns a range object; 'start' is inclusive, 'stop' is exclusive
-# Example:
-print(list(range(1, 4)))  # Output: [1, 2, 3]
+range(stop)                # Starts from 0, goes to 'stop-1'
+range(start, stop)         # Starts from 'start', goes to 'stop-1'
+range(start, stop, step)   # Includes 'step' increment
+# Examples:
+print(list(range(3)))          # Output: [0, 1, 2]
+print(list(range(1, 4)))       # Output: [1, 2, 3]
+print(list(range(1, 6, 2)))    # Output: [1, 3, 5]
 
 set()
 # What it does: Creates a set from an iterable or an empty set, storing unique elements.
@@ -152,6 +194,7 @@ set(iterable)  # Returns a new set; 'iterable' is optional
 nums = [1, 2, 2, 3]
 print(set(nums))  # Output: {1, 2, 3}
 
+# ----------------------------------------------------------------------------------
 # ADDITIONAL COMMON METHODS/FUNCTIONS FOR LEETCODE
 # LIST METHOD
 .sort()
@@ -164,6 +207,7 @@ numbers = [3, 1, 2]
 numbers.sort()
 print(numbers)  # Output: [1, 2, 3]
 
+# ----------------------------------------------------------------------------------
 # BUILT-IN FUNCTION
 max()
 # What it does: Returns the largest item in an iterable or among arguments.
@@ -182,4 +226,3 @@ sum(iterable)  # Returns the sum of all elements in 'iterable'
 # Example:
 numbers = [1, 2, 3]
 print(sum(numbers))  # Output: 6
-

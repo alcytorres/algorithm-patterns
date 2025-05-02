@@ -15,7 +15,7 @@ def max_product_sliding_window(arr, k):
     # Initialize
     window_product = 1
 
-    # Set up the initial window
+    # Initialize the first window
     for i in range(k):         # i = 0, 1
         window_product *= arr[i]   #  window_product = 1*1=1 | 1*2=2
     
