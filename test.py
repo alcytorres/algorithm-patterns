@@ -9,6 +9,8 @@ Example 4: s = "eceba"    → Output = 4 (substring "ceba")
 """
 
 def lengthOfLongestSubstring(s):    # Example: s = "abcabccc"
+
+    # 1️⃣ Initialize pointers & tracking variables
     # Initialize left pointer for the start of our sliding window
     # Why? We'll slide this to shrink the window when we find repeating characters
     left = 0                       # left = 0 (start at beginning)
@@ -25,6 +27,7 @@ def lengthOfLongestSubstring(s):    # Example: s = "abcabccc"
     # Why? We'll use this to loop through each character
     n = len(s)                     # n = 8 (for "abcabccc")
 
+    # 2️⃣ Expand window by moving `right` & update conditions
     # Loop through each character as the right end of our window
     # Why? We check each character to build valid substrings
     for right in range(n):         # right goes from 0 to 7
