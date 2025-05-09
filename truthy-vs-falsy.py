@@ -3,7 +3,7 @@ Here's a concise cheat sheet for truthy vs. falsy values in Python, tailored for
 
 # Truthy vs. Falsy in Python for LeetCode
 
-In Python, **truthy** values evaluate to `True` and **falsy** values evaluate to `False` in boolean contexts (e.g., `if`, `while`). This is key for handling edge cases and writing efficient code in LeetCode problems.
+In Python, truthy values evaluate to `True` and falsy values evaluate to `False` in boolean contexts (e.g., `if`, `while`). This is key for handling edge cases and writing efficient code in LeetCode problems.
 
 ---
 
@@ -33,25 +33,25 @@ In Python, **truthy** values evaluate to `True` and **falsy** values evaluate to
 ---
 
 # Key Use Cases in LeetCode
-1. **Empty Checks**: Use `if not x:` to handle empty lists, strings, dicts, etc.
+1. Empty Checks: Use `if not x:` to handle empty lists, strings, dicts, etc.
    - Example: Early return for empty array in two-pointer problems.
-2. **None Checks**: Common in trees/graphs.
+2. None Checks: Common in trees/graphs.
    - Example: `if node is None:` to stop recursion.
-3. **Zero Handling**: `0` is falsy, so use `if x == 0:` if zero is valid.
+3. Zero Handling: `0` is falsy, so use `if x == 0:` if zero is valid.
    - Example: Avoid `if not x:` when `x` can be zero in math problems.
-4. **Loops**: Use truthy/falsy for concise conditions.
+4. Loops: Use truthy/falsy for concise conditions.
    - Example: `while stack:` to process until stack is empty.
-5. **Built-ins**: Leverage `any()` and `all()` for collections.
+5. Built-ins: Leverage `any()` and `all()` for collections.
    - Example: `if any(nums):` to check for non-zero elements.
 
 ---
 
 # Quick Tips
-- **Debug with bool()**: `bool([])` → `False`, `bool([1])` → `True`.
-- **Avoid Pitfalls**:
+- Debug with bool(): `bool([])` → `False`, `bool([1])` → `True`.
+- Avoid Pitfalls:
   - `''` is falsy, but `'0'` is truthy (non-empty string).
   - `0` is falsy, but `0.1` is truthy.
-- **Edge Cases**: Test with `[]`, `0`, `None` to ensure correctness.
+- Edge Cases: Test with `[]`, `0`, `None` to ensure correctness.
 
 This guide keeps your code Pythonic and efficient for LeetCode challenges!
 """

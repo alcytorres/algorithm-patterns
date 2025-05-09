@@ -17,13 +17,13 @@ Key Strategies:
 5. Sort if Needed: Sort for pair-finding problems to simplify pointer logic (e.g., `arr.sort()` in `find_pair_with_difference`).
 
 Key Plan in Your Head:
-1. Ask: Does the problem involve pairs, order, or merging? (e.g., reverse → opposite ends, merge → two arrays).
-2. Set up pointers: Decide if they start at ends, adjacent, or separate arrays.
-3. Loop: Use `while` or `for` to move pointers based on a condition (e.g., `while left < right` or `while right < len(arr)`).
-4. Act: Compare (`arr[i] > arr[j]`), swap (`arr[left], arr[right] = arr[right], arr[left]`), or collect (`result.append()`).
-5. Check Overlap: If pointers might collide, add `if left == right: right += 1`.
-6. Handle Leftovers: For merging, add remaining elements (`result.extend(arr1[i:])`).
-7. Test Edges: Empty, single-element, or invalid inputs.
+   1. Ask: Does the problem involve pairs, order, or merging? (e.g., reverse → opposite ends, merge → two arrays).
+   2. Set up pointers: Decide if they start at ends, adjacent, or separate arrays.
+   3. Loop: Use `while` or `for` to move pointers based on a condition (e.g., `while left < right` or `while right < len(arr)`).
+   4. Act: Compare (`arr[i] > arr[j]`), swap (`arr[left], arr[right] = arr[right], arr[left]`), or collect (`result.append()`).
+   5. Check Overlap: If pointers might collide, add `if left == right: right += 1`.
+   6. Handle Leftovers: For merging, add remaining elements (`result.extend(arr1[i:])`).
+   7. Test Edges: Empty, single-element, or invalid inputs.
 
 Key Lines of Code to Know:
 1. Initialize Pointers:
@@ -52,8 +52,8 @@ Key Lines of Code to Know:
    - `if len(arr) < 2: return True` (e.g., `is_sorted`)
 
 Other Key Notes:
-- Sorting: Use `arr.sort()` for pair-finding (e.g., `find_pair_with_difference`) to make pointer movement predictable (O(n log n)).
-- Array Order: Sorting is not always needed (e.g., `reverse_array`, `is_sorted` work on unsorted arrays).
-- Efficiency: Two pointers often give O(n) time (or O(n log n) with sorting) and O(1) space (excluding output).
-- Visualize: Think of pointers as fingers moving on the array, either toward each other, together, or across two arrays.
+   - Sorting: Use `arr.sort()` for pair-finding (e.g., `find_pair_with_difference`) to make pointer movement predictable (O(n log n)).
+   - Array Order: Sorting is not always needed (e.g., `reverse_array`, `is_sorted` work on unsorted arrays).
+   - Efficiency: Two pointers often give O(n) time (or O(n log n) with sorting) and O(1) space (excluding output).
+   - Visualize: Think of pointers as fingers moving on the array, either toward each other, together, or across two arrays.
 """

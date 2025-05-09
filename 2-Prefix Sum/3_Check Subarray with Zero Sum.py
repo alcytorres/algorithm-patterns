@@ -1,22 +1,34 @@
 # 3. Check Subarray with Zero Sum
 """
 Task: Determine if an array has a subarray summing to zero. Return false otherwise.
+Example: [1, 3, -4, 5] → True  (1 + 3 + -4 = 0)
+Example: [1, 2, -2, 3] → True  (2 + -2 = 0)
 Example: [4, -4, 1] → True  (4 + -4 = 0)
 Why: Introduces prefix sum applications beyond simple running sums.
 """
 
 def has_zero_sum_subarray(arr):
+
+    # 1️⃣ Initialize prefix sum and set for tracking
     prefix_sum = 0
     seen = set()
+
+    # 2️⃣ Iterate through the array to compute prefix sums
     for num in arr:
         prefix_sum += num  # Update running sum
         if prefix_sum == 0 or prefix_sum in seen:
-            return True  # Zero sum found
+            return True  
         seen.add(prefix_sum)
+
+    # 3️⃣ Return False if no zero-sum subarray is found
     return False
 
 # Test the function
-print(has_zero_sum_subarray([4, -4, 1]))  # Output: True (4 + -4 = 0)
+print(has_zero_sum_subarray([1, 3, -4, 5,])) # Output: True  (1 + 3 + -4 = 0)
+print(has_zero_sum_subarray([1, 3, 5, -4]))  # Output: False (no chunk sums to 0)
+print(has_zero_sum_subarray([1, 2, -2, 3]))  # Output: True (2 + -2 = 0)
+
+print(has_zero_sum_subarray([3, -3, 1]))  # Output: True (3 + -3 = 0)
 print(has_zero_sum_subarray([1, 2, -4]))  # Output: False (no chunk sums to 0)
 print(has_zero_sum_subarray([1, 2, -3]))  # Output: True (1 + 2 + -3 = 0)
 
@@ -24,7 +36,7 @@ print(has_zero_sum_subarray([1, 2, -3]))  # Output: True (1 + 2 + -3 = 0)
 # Add this: print(seen) to see seen after each addition below this line: seen.add(prefix_sum)
 
 
-# Solution
+# Simple Breakdown
 def has_zero_sum_subarray(arr):    # Define the function that takes an array 'arr' as input
     """
     Determines if there exists a subarray with sum zero.
@@ -43,7 +55,7 @@ def has_zero_sum_subarray(arr):    # Define the function that takes an array 'ar
     return False        # No subarray with sum zero found
 
 # Test the function
-print(has_zero_sum_subarray([4, -4, 1]))  # Output: True (4 + -4 = 0)
+
 
 """
 Explnation: 
@@ -55,6 +67,200 @@ If we say True we exit the loop (and the whole function).
     - No more loop, no more numbers, just True because [4, -4] works.
     - It is like finding the answer and running out the door!
 """
+
+
+
+# ----------------------------------------------------------------------------------
+# Solution with Output Full Breakdown 
+
+def has_zero_sum_subarray(arr):  # Example: arr = [1, 3, -4, 5]
+
+    # 1️⃣ Initialize prefix sum and set for tracking
+    # Initialize prefix sum to 0
+    # Why? We'll accumulate the sum of elements to compute prefix sums
+    prefix_sum = 0               # prefix_sum = 0
+    
+    # Create an empty set to store seen prefix sums
+    # Why? We track prefix sums to detect if a subarray sums to zero
+    seen = set()                 # seen = {}
+    # After initialization: prefix_sum = 0, seen is empty
+
+    # 2️⃣ Iterate through the array to compute prefix sums
+    # Loop through each element in the array
+    # Why? We check if the current prefix sum is 0 or has been seen before
+    for num in arr:              # arr = [1, 3, -4, 5]
+        
+        # --- Iteration 1: num = 1 ---
+        # Update prefix sum by adding the current element
+        # Why? Prefix sum at each step is the sum of elements up to that point
+        prefix_sum += num        # prefix_sum = 0 + 1 = 1
+        
+        # Check if prefix sum is 0 or already in seen set
+        # Why? A prefix sum of 0 or a repeated prefix sum indicates a subarray with sum 0
+        if prefix_sum == 0 or prefix_sum in seen:  # prefix_sum = 1, 1 == 0 → False
+                                                  # seen = {}, 1 in seen → False
+            return True                           # Skip (no zero-sum subarray yet)
+        
+        # Add current prefix sum to seen set
+        # Why? We store this prefix sum to detect future repeats
+        seen.add(prefix_sum)     # seen = {1}
+        # After Iteration 1: prefix_sum = 1, seen = {1}
+        # Current state: No zero-sum subarray found
+
+        # --- Iteration 2: num = 3 ---
+        prefix_sum += num        # prefix_sum = 1 + 3 = 4
+        if prefix_sum == 0 or prefix_sum in seen:  # prefix_sum = 4, 4 == 0 → False
+                                                  # seen = {1}, 4 in seen → False
+            return True                           # Skip
+        seen.add(prefix_sum)     # seen = {1, 4}
+        # After Iteration 2: prefix_sum = 4, seen = {1, 4}
+        # Current state: No zero-sum subarray found
+
+        # --- Iteration 3: num = -4 ---
+        prefix_sum += num        # prefix_sum = 4 + (-4) = 0
+        if prefix_sum == 0 or prefix_sum in seen:  # prefix_sum = 0, 0 == 0 → True
+                                                  # (No need to check seen since 0 == 0 is True)
+            return True                           # Return True (subarray [1, 3, -4] sums to 0)
+        seen.add(prefix_sum)     # Skip (function returns before this)
+        # After Iteration 3: Function returns True
+        # Current state: Found subarray [1, 3, -4] with sum 1 + 3 + (-4) = 0
+        # Loop terminates early due to return
+
+        # --- Iteration 4: num = 5 ---
+        # Note: Not executed due to early return in Iteration 3
+
+    # 3️⃣ Return False if no zero-sum subarray is found
+    # Why? If we complete the loop without finding a zero-sum subarray, none exists
+    return False             # Skip (not reached due to early return)
+    # Final state: Returned True in Iteration 3
+    # Conclusion: Successfully identified a subarray [1, 3, -4] with sum 0
+
+print(has_zero_sum_subarray([1, 3, -4, 5]))  # Output: True (1 + 3 + -4 = 0)
+
+
+
+# ----------------------------------------------------------------------------------
+# Solution with output FUll Breakdown
+
+def has_zero_sum_subarray(arr):  # Example: arr = [1, 2, -2, 3]
+
+    # 1️⃣ Initialize prefix sum and set for tracking
+    # Initialize prefix sum to 0
+    # Why? We'll accumulate the sum of elements to compute prefix sums
+    prefix_sum = 0               # prefix_sum = 0
+    
+    # Create an empty set to store seen prefix sums
+    # Why? We track prefix sums to detect if a subarray sums to zero
+    seen = set()                 # seen = {}
+    # After initialization: prefix_sum = 0, seen is empty
+
+    # 2️⃣ Iterate through the array to compute prefix sums
+    # Loop through each element in the array
+    # Why? We check if the current prefix sum is 0 or has been seen before
+    for num in arr:              # arr = [1, 2, -2, 3]
+        
+        # --- Iteration 1: num = 1 ---
+        # Update prefix sum by adding the current element
+        # Why? Prefix sum at each step is the sum of elements up to that point
+        prefix_sum += num        # prefix_sum = 0 + 1 = 1
+        
+        # Check if prefix sum is 0 or already in seen set
+        # Why? A prefix sum of 0 or a repeated prefix sum indicates a subarray with sum 0
+        if prefix_sum == 0 or prefix_sum in seen:  # prefix_sum = 1, 1 == 0 → False
+                                                  # seen = {}, 1 in seen → False
+            return True                           # Skip (no zero-sum subarray yet)
+        
+        # Add current prefix sum to seen set
+        # Why? We store this prefix sum to detect future repeats
+        seen.add(prefix_sum)     # seen = {1}
+        # After Iteration 1: prefix_sum = 1, seen = {1}
+        # Current state: No zero-sum subarray found
+
+        # --- Iteration 2: num = 2 ---
+        prefix_sum += num        # prefix_sum = 1 + 2 = 3
+        if prefix_sum == 0 or prefix_sum in seen:  # prefix_sum = 3, 3 == 0 → False
+                                                  # seen = {1}, 3 in seen → False
+            return True                           # Skip
+        seen.add(prefix_sum)     # seen = {1, 3}
+        # After Iteration 2: prefix_sum = 3, seen = {1, 3}
+        # Current state: No zero-sum subarray found
+
+        # --- Iteration 3: num = -2 ---
+        prefix_sum += num        # prefix_sum = 3 + (-2) = 1
+        if prefix_sum == 0 or prefix_sum in seen:  # prefix_sum = 1, 1 == 0 → False
+                                                  # seen = {1, 3}, 1 in seen → True
+            return True                           # Return True (subarray [2, -2] sums to 0)
+        seen.add(prefix_sum)     # Skip (function returns before this)
+        # After Iteration 3: Function returns True
+        # Current state: Found subarray [2, -2] with sum 2 + (-2) = 0
+        # Loop terminates early due to return
+
+        # --- Iteration 4: num = 3 ---
+        # Note: Not executed due to early return in Iteration 3
+
+    # 3️⃣ Return False if no zero-sum subarray is found
+    # Why? If we complete the loop without finding a zero-sum subarray, none exists
+    return False             # Skip (not reached due to early return)
+    # Final state: Returned True in Iteration 3
+    # Conclusion: Successfully identified a subarray [2, -2] with sum 0
+
+print(has_zero_sum_subarray([1, 2, -2, 3]))  # Output: True (2 + -2 = 0)
+
+
+
+
+# ----------------------------------------------------------------------------------
+# Solution with output
+
+def has_zero_sum_subarray(arr):  # Example: arr = [3, -3, 1]
+
+    # 1️⃣ Initialize prefix sum and set for tracking
+    # Initialize prefix sum to 0
+    prefix_sum = 0               # prefix_sum = 0
+    
+    # Create an empty set to store seen prefix sums
+    seen = set()                 # seen = {}
+    # After initialization: prefix_sum = 0, seen is empty
+
+    # 2️⃣ Iterate through the array to compute prefix sums
+    # Loop through each element in the array
+    for num in arr:              # arr = [3, -3, 1]
+        
+        # --- Iteration 1: num = 3 ---
+        # Update prefix sum by adding the current element
+        prefix_sum += num        # prefix_sum = 0 + 3 = 3
+        
+        # Check if prefix sum is 0 or already in seen set
+        if prefix_sum == 0 or prefix_sum in seen:  # prefix_sum = 3, 3 == 0 → False
+                                                  # seen = {}, 3 in seen → False
+            return True                           # Skip (no zero-sum subarray yet)
+        
+        # Add current prefix sum to seen set
+        seen.add(prefix_sum)     # seen = {3}
+        # After Iteration 1: prefix_sum = 3, seen = {3}
+        # Current state: No zero-sum subarray found
+
+        # --- Iteration 2: num = -3 ---
+        prefix_sum += num        # prefix_sum = 3 + (-3) = 0
+        if prefix_sum == 0 or prefix_sum in seen:  # prefix_sum = 0, 0 == 0 → True
+                                                  # (No need to check seen since 0 == 0 is True)
+            return True                           # Return True (subarray [3, -3] sums to 0)
+        seen.add(prefix_sum)     # Skip (function returns before this)
+        # After Iteration 2: Function returns True
+        # Current state: Found subarray [3, -3] with sum 3 + (-3) = 0
+        # Loop terminates early due to return
+
+        # --- Iteration 3: num = 1 ---
+        # Note: Not executed due to early return in Iteration 2
+
+    # 3️⃣ Return False if no zero-sum subarray is found
+    return False             # Skip (not reached due to early return)
+    # Final state: Returned True in Iteration 2
+    # Conclusion: Successfully identified a subarray [3, -3] with sum 0
+
+print(has_zero_sum_subarray([3, -3, 1]))  # Output: True (3 + -3 = 0)
+
+
 
 # ----------------------------------------------------------------------------------
 # Solution with output
