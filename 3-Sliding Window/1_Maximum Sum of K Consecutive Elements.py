@@ -19,20 +19,25 @@ Why: Introduces fixed-size window sliding, key for Maximum Average Subarray I.
 """
 
 def max_sum_k_consecutive(arr, k):
+
     if len(arr) < k:
         return None
+    
     window_sum = sum(arr[:k])  # Sum of first window
+
     max_sum = window_sum
+
     for i in range(k, len(arr)):
         window_sum = window_sum - arr[i - k] + arr[i]  # Slide window
         max_sum = max(max_sum, window_sum)
+
     return max_sum
 
 print(max_sum_k_consecutive([1, 2, 3], 2))  # Output: 5 (2 + 3)
 print(max_sum_k_consecutive([1, 2, 3, 4], 2))  # Output: 7 (3 + 4)
 
 
-# Solution
+# Simple Breakdown
 def max_sum_k_consecutive(arr, k):   # Define the function that takes an array 'arr' and integer 'k'
     """
     Finds the maximum sum of any k consecutive elements.
@@ -43,15 +48,28 @@ def max_sum_k_consecutive(arr, k):   # Define the function that takes an array '
     """
     if len(arr) < k:       # Check if the array is shorter than 'k'
         return None        # Return None since we can't form a window of size 'k'
+    
     window_sum = sum(arr[:k])  # Calculate the sum of the first k elements (first window)
+
     max_sum = window_sum   # Set the initial maximum sum to the first window's sum
+
     for i in range(k, len(arr)):  # Loop from index k to the end of the array
         window_sum = window_sum - arr[i - k] + arr[i]  # Slide the window: subtract the leftmost element, add the new right element
         max_sum = max(max_sum, window_sum)  # Update max_sum if the current window sum is larger
+
     return max_sum         # Return the maximum sum found
 
 # Test the function
 print(max_sum_k_consecutive([1, 2, 3], 2))  # Output: 5 (2 + 3)
+
+
+# ----------------------------------------------------------------------------------
+# Solution with output Full Breakdown 
+
+
+
+
+
 
 
 # ----------------------------------------------------------------------------------
