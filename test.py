@@ -25,3 +25,5 @@ def max_sum_k_consecutive(arr, k):
     return max_sum
 
 print(max_sum_k_consecutive([1, 4, 6, 2], 2))  # Output: 10 
+
+
