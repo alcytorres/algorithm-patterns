@@ -1,4 +1,4 @@
-# Length of Longest Substring without Reapeating Characters
+# Length of Longest Substring without Repeating Characters
 
 """
 Task: Given a string, find the length of the longest substring without any repeating characters.
@@ -50,6 +50,8 @@ Example 4: s = "eceba"    → Output = 4 (substring "ceba")
 """
 
 def lengthOfLongestSubstring(s):    # Example: s = "abcabccc"
+
+    # 1️⃣ Initialize pointers & tracking variables
     # Initialize left pointer for the start of our sliding window
     # Why? We'll slide this to shrink the window when we find repeating characters
     left = 0                       # left = 0 (start at beginning)
@@ -66,10 +68,13 @@ def lengthOfLongestSubstring(s):    # Example: s = "abcabccc"
     # Why? We'll use this to loop through each character
     n = len(s)                     # n = 8 (for "abcabccc")
 
+    # 2️⃣ Expand window by moving `right` & update conditions
     # Loop through each character as the right end of our window
     # Why? We check each character to build valid substrings
     for right in range(n):         # right goes from 0 to 7
                                    # Let's follow right = 0 (s[0] = 'a')
+        
+        # 3️⃣ Shrink window when condition is violated
         # If the current character is already in our set, we have a repeat
         # Why? We need to shrink the window until the repeat is gone
         while s[right] in sett:    # s[0] = 'a', sett = {}, 'a' not in sett, skip
@@ -80,6 +85,7 @@ def lengthOfLongestSubstring(s):    # Example: s = "abcabccc"
             # Why? We've removed the leftmost character, so adjust the window
             left += 1              # skip (no repeat yet)
 
+        # 4️⃣ Update result with current window
         # Calculate the size of the current window
         # Why? This is the length of our current substring with no repeats
         current_window_size = (right - left) + 1  # right = 0, left = 0
@@ -101,7 +107,8 @@ def lengthOfLongestSubstring(s):    # Example: s = "abcabccc"
         # right = 3: s[3] = 'a', in sett, remove s[0] = 'a', left = 1, size = 3, longest_substring = 3
         # Continues until right = 7
 
-    # Return the length of the longest_substring substring found
+    # 5️⃣ Return longest_substring. 
+    # Why? longest_substring contains the length of the longest substring found.
     return longest_substring                 # longest_substring = 3 (from substring "abc")
 
 
@@ -109,7 +116,7 @@ print(lengthOfLongestSubstring("abcabccc"))  # Output: 3 (substring "abc" has le
 
 
 # ----------------------------------------------------------------------------------
-# Solution 1 FULL Breakdown
+# Solution 1 Output FULL Breakdown
 
 """
 Task: Given a string, find the length of the longest substring without any repeating characters.
@@ -145,6 +152,8 @@ def lengthOfLongestSubstring(s):    # Example: s = "abcabccc"
         # --- Iteration 0: right = 0, s[0] = 'a' ---
         # Check if the current character is in the set (indicates a repeat)
         # Why? We need to ensure no repeating characters in our window
+
+        # 3️⃣ Shrink window when condition is violated
         while s[right] in sett:    # s[0] = 'a', sett = {}, 'a' not in sett, skip
             # Remove the leftmost character from the set
             # Why? This shrinks the window to remove the repeating character
@@ -153,6 +162,7 @@ def lengthOfLongestSubstring(s):    # Example: s = "abcabccc"
             # Why? Adjust the window start after removing a character
             left += 1              # skip (no repeat)
 
+        # 4️⃣ Update result with current window
         # Calculate the size of the current window
         # Why? This is the length of our current substring with no repeats
         current_window_size = (right - left) + 1  # right = 0, left = 0
@@ -286,7 +296,8 @@ def lengthOfLongestSubstring(s):    # Example: s = "abcabccc"
             # After Iteration 7: sett = {'c'}, left = 7, longest_substring = 3
             # Current substring: "c" (length 1)
 
-    # Return the length of the longest substring found
+    # 5️⃣ Return longest_substring. 
+    # Why? longest_substring contains the length of the longest substring found.
     return longest_substring       # longest_substring = 3 (from substring "abc")
 
 

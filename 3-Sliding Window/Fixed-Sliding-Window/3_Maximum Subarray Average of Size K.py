@@ -7,22 +7,24 @@ Example 2: [10, 2, 4],   k=2 → 6
 
 # Fixed-size sliding window
 def sliding_window_fixed(arr, k):        
-
+    
+    # 1️⃣ Input Validation  
     if len(arr) < k:                      
         return None            
                 
-    # Initialize the first window
+    # 2️⃣ Initialize the first window
     window_sum = sum(arr[:k])           
     
-    # Compute initial result for first window
+    # 3️⃣ Compute initial result for first window
     max_result = window_sum / k   # Initialize result      
     
-    # Slide the window across the array
+    # 4️⃣ Slide the window across the array
     for i in range(k, len(arr)):                                      
         window_sum = window_sum - arr[i - k] + arr[i]  # Add new element, remove old element
         current_average = window_sum / k   
         max_result = max(max_result, current_average)  # Update max_result
     
+    # 5️⃣ Return max_result
     return max_result                      # Return highest average found
 
 
@@ -35,17 +37,17 @@ print(sliding_window_fixed([1, 2, 3, 4], 2))  # Output: 3.5
 
 def sliding_window_fixed(arr, k):          # arr = [1, 2, 3, 4], k = 2
 
-    # Input Validation  
+    # 1️⃣ Input Validation  
     if len(arr) < k:                       # Is len(arr) = 4 < k = 2? No
         return None                        # skip
     
-    # Initialize the first window
+    # 2️⃣ Initialize the first window
     window_sum = sum(arr[:k])              # arr[:2] = [1, 2] → window_sum = 1 + 2 = 3
     
-    # Compute initial result for first window
+    # 3️⃣ Compute initial result for first window
     max_result = window_sum / k            # max_result = 3 / 2 = 1.5 (average of [1, 2])
     
-    # Slide the window across the array
+    # 4️⃣ Slide the window across the array
     for i in range(k, len(arr)):           # i = 2 to 3
                                            # Iteration 1: i = 2
         window_sum = window_sum - arr[i - k] + arr[i]  # window_sum = 3 - arr[0] + arr[2] = 3 - 1 + 3 = 5
@@ -56,6 +58,7 @@ def sliding_window_fixed(arr, k):          # arr = [1, 2, 3, 4], k = 2
         current_average = window_sum / k   # current_average = 7 / 2 = 3.5 (average of [3, 4])
         max_result = max(max_result, current_average)  # max(2.5, 3.5) = 3.5, max_result = 3.5
     
+    # 5️⃣ Return max_result
     return max_result                      # Return 3.5 (highest average found)
 
 

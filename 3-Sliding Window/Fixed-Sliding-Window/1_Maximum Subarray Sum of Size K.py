@@ -8,21 +8,22 @@ Example 3: [4, 5, 6, 7], k = 3 → 18
 
 def max_sum_sliding_window(arr, k):
 
-    # Input Validation 
+    # 1️⃣ Input Validation  
     if len(arr) < k:
         return None
     
-    # Initialize the first window
+    # 2️⃣ Initialize the first window
     window_sum = sum(arr[:k])   
 
-    # Compute initial result for first window
+    # 3️⃣ Compute initial result for first window
     max_sum = window_sum 
     
-    # Slide the window across the array
+    # 4️⃣ Slide the window across the array
     for i in range(k, len(arr)):
         window_sum += arr[i] - arr[i-k]  
         max_sum = max(max_sum, window_sum)
     
+    # 5️⃣ Return max_result
     return max_sum
 
 
