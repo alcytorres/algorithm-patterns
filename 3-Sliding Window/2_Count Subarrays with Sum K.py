@@ -1,5 +1,6 @@
 # 2. Count Subarrays with Sum K  
-# ***Note this solution has limitations for negative numbers. Review the limitations below.*** Search if there is a better solution 
+# *** Note this solution has limitations for negative numbers. Review the limitations below. *** 
+# Search if there is a better solution 
 """
 Task: Count the number of contiguous subarrays that sum up to a given value k. Assume non-negative numbers.
 
