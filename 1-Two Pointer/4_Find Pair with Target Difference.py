@@ -1,8 +1,10 @@
 # 4. Find Pair with Target Difference
 """
 Task: Find two numbers in an array whose difference is a given target. The larger number minus the smaller should equal the target. Return None if no pair is found.
+
 Example 1: [1, 4, 3, 7], target = 6 → [1, 7]
 Example 2: [1, 3, 8],    target = 2 → [1, 3]
+
 Why: Prepares for Two Sum by practicing pointer movement for a condition.
 """
 

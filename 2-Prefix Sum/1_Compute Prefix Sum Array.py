@@ -13,8 +13,10 @@ Potential Knowledge Gaps
 # 1. Compute Prefix Sum Array
 """
 Task: Given an array, create a new array of its prefix sums. Return an empty array if input is empty
+
 Example 1: [1, 2, 3, 4] → [1, 3, 6, 10]
-Example 2: [3, 7, 5] → [3, 10, 15]
+Example 2: [3, 7, 5]    → [3, 10, 15]
+
 Why: Direct practice for Running Sum of 1d Array.
 """
 

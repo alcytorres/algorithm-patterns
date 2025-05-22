@@ -2,6 +2,7 @@
 """
 Task: Reverse an array using two pointers without extra space.
 Example: [1, 2, 3] → [3, 2, 1]
+
 Why: Builds intuition for swapping elements with pointers, relevant to Valid Palindrome. 
 """
 

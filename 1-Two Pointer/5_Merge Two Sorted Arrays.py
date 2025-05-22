@@ -1,8 +1,10 @@
 # 5. Merge Two Sorted Arrays
 """
 Task: Merge two sorted arrays into one sorted array.
+
 Example 1: [1, 3], [2, 4, 6] → [1, 2, 3, 4, 6]
 Example 2: [1, 3], [2, 4] → [1, 2, 3, 4]
+
 Why: Reinforces pointer use in sorted data, akin to Remove Duplicates From Sorted Array.
 """
 

@@ -1,82 +1,37 @@
-def longest_substring_with_k_vowels(s, k):
+# 5. Average of Sliding Window
+"""
+Task: Compute the list of averages for all contiguous subarrays of size k. If the input array is shorter than 'k' return [].
 
-    # 1️⃣ Initialize pointers & tracking variables
-    vowels = set('aeiou')
-    max_length = 0
-    vowel_count = 0
-    left = 0
+Example: [1, 2, 3, 4], k=2 → [1.5, 2.5, 3.5]
 
-    # 2️⃣ Expand window by moving `right` & process characters
-    for right in range(len(s)):
-        if s[right] in vowels:
-            vowel_count += 1
+Why: Directly supports Maximum Average Subarray I.
+"""
 
-        # 3️⃣ Shrink window if vowel count exceeds k
-        while vowel_count > k and left <= right:
-            if s[left] in vowels:
-                vowel_count -= 1
-            left += 1
+def sliding_window_average(arr, k):
 
-        # 4️⃣ Update the longest substring length
-        max_length = max(max_length, right - left + 1)
+    # 1️⃣ Check if array is too short
+    if len(arr) < k:
+        return []
+    
+    # 2️⃣ Compute the sum of the first window
+    window_sum = sum(arr[:k])
 
-    # 5️⃣ Return the longest substring length
-    return max_length
+    # 3️⃣ Compute the average of the first window
+    averages = [window_sum / k]  
 
+    # 4️⃣ Slide the window and compute averages for remaining windows
+    for i in range(k, len(arr)):
+        window_sum = window_sum - arr[i - k] + arr[i]
+        averages.append(window_sum / k)
+    
+    # 5️⃣ Return the list of averages
+    return averages
 
-print(longest_substring_with_k_vowels("aet", 1))  # Output: 2
-# Longest substring with at most 1 vowel is "et" (length 2).
-
-print(longest_substring_with_k_vowels("ae", 1))  # Output: 1
-# Longest substring with at most 1 vowel is "a" or "e" (length 1).
-
-print(longest_substring_with_k_vowels("banana", 2))  # Output: 5
-# Longest substring with at most 2 vowels is "banan" (length 5).
-
-print(longest_substring_with_k_vowels("xyz", 1))  # Output: 3
-# Longest substring with at most 1 vowel is "xyz" (length 3).
-
-print(longest_substring_with_k_vowels("aabbcc", 1))  # Output: 5
-# Longest substring with at most 1 vowel is "abbcc" (length 5).
+print(sliding_window_average([1, 2, 3], 2))  # Output: [1.5, 2.5]
+print(sliding_window_average([1, 2, 3, 4], 2))  # Output: [1.5, 2.5, 3.5]
+print(sliding_window_average([2, 4, 6, 8], 2))  # Output: [3, 5, 7]
+print(sliding_window_average([1, 2, 10], 2))  # Output: [1.5, 6.0]
 
 
-def longest_substring_with_k_vowels(s, k):
-
-    # 1️⃣ Initialize pointers & tracking variables
-    vowels = set('aeiou')
-    max_length = 0
-    vowel_count = 0
-    left = 0
-
-    # 2️⃣ Expand window by moving `right` & process characters
-    for right in range(len(s)):
-        if s[right] in vowels:
-            vowel_count += 1
-
-        # 3️⃣ Shrink window if vowel count exceeds k
-        while vowel_count > k and left <= right:
-            if s[left] in vowels:
-                vowel_count -= 1  # Reduce count when removing a vowel
-            left += 1  # Shrink window
-
-        # 4️⃣ Update the longest substring length
-        max_length = max(max_length, right - left + 1)
-
-    # 5️⃣ Return the longest substring length
-    return max_length
 
 
-# print(longest_substring_with_k_vowels("aet", 1))  # Output: 2
-# # Longest substring with at most 1 vowel is "et" (length 2).
-
-# print(longest_substring_with_k_vowels("ae", 1))  # Output: 1
-# # Longest substring with at most 1 vowel is "a" or "e" (length 1).
-
-# print(longest_substring_with_k_vowels("banana", 2))  # Output: 5
-# # Longest substring with at most 2 vowels is "banan" (length 5).
-
-# print(longest_substring_with_k_vowels("xyz", 1))  # Output: 3
-# # Longest substring with at most 1 vowel is "xyz" (length 3).
-
-# print(longest_substring_with_k_vowels("aabbcc", 1))  # Output: 5
-# # Longest substring with at most 1 vowel is "abbcc" (length 5).

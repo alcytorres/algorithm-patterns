@@ -9,9 +9,12 @@ Example: [1, 2, 3, 4] → [1, 3, 6, 10]
 def prefix_sum(arr):
     if not arr:
         return []
+    
     result = [arr[0]]  
+
     for i in range(1, len(arr)):
-        result.append(result[-1] + arr[i])  
+        result.append(result[-1] + arr[i]) 
+
     return result
 
 print(prefix_sum([1, 2, 3, 4]))  # Output: [1, 3, 6, 10]  →  [1, 1+2, 1+2+3, 1+2+3+4]
@@ -20,8 +23,10 @@ print(prefix_sum([1, 2, 3, 4]))  # Output: [1, 3, 6, 10]  →  [1, 1+2, 1+2+3, 1
 # 2. Range Sum Query 
 """
 Task: Find the sum of elements between two indices (inclusive) using prefix sums.
+
 Example 1: [1, 2, 3, 4], indices 1 to 3 → 9 (2 + 3 + 5)
 Example 2: [1, 2, 3, 4], indices 0 to 2 → 6 (1 + 2 + 3)
+
 Why: Teaches efficient range sum calculation.
 """
 def range_sum(prefix, start, end):
@@ -33,10 +38,12 @@ def range_sum(prefix, start, end):
     # 2️⃣ Compute range sum for non-zero start index
     return prefix[end] - prefix[start - 1]  # Difference gives range sum
 
+
 prefix = prefix_sum([1, 2, 3, 4])
+
 print(range_sum(prefix, 1, 3))  # Output: 9 
-print(range_sum(prefix, 0, 2))  # Output: 6 
-print(range_sum(prefix, 2, 2))  # Output: 3 
+# print(range_sum(prefix, 0, 2))  # Output: 6 
+# print(range_sum(prefix, 2, 2))  # Output: 3 
 
 
 # Simple Breakdown
@@ -48,25 +55,40 @@ def range_sum(prefix, start, end):   # Define the function that takes a prefix s
     - Time Complexity: O(1) per query, Space Complexity: O(1).
     - Direct calculation is simple and showcases prefix sum utility.
     """
+    # 1️⃣ Handle case where range starts at index 0
     if start == 0:      # If starting from the beginning
         return prefix[end]  # Directly return the prefix sum at 'end'
+    
+    # 2️⃣ Compute range sum for non-zero start index
     return prefix[end] - prefix[start - 1]  # Subtract prefix sum before 'start' from prefix sum at 'end'
 
-# Test the function
+
 prefix = prefix_sum([1, 2, 3, 4])
+
 print(range_sum(prefix, 1, 3))  # Output: 9 (2+3+4 = 9)
 
 
 """
-Explanation for range_sum(prefix, 2, 2): 
-The line return prefix[end] - prefix[start - 1] works because it isolates the sum of numbers from index start to end in the original array.
-    - prefix[end] is the total of all numbers up to end (e.g., for end = 2, prefix[2] = 1 + 2 + 3 = 6).
-    - prefix[start - 1] is the total up to just before start (e.g., start = 2, start - 1 = 1, prefix[1] = 1 + 2 = 3).
-    - Subtracting them (6 - 3 = 3) gives only the numbers from start to end (just 3 here).
-It is like taking a big pile of coins up to end and removing the coins before start to get what is in between.
+# ----------------------------------------------------------------------------------
+Simple Breakdown of: prefix[end] - prefix[start - 1]
 
-*** Pro Tip: Actually use coins to test this problem to visually understand it ***
+The line return prefix[end] - prefix[start - 1] calculates the sum of elements from index start to end in the original array using the prefix sum array.
 
+Why it works:
+
+    - The prefix sum array prefix stores running totals: prefix[i] is the sum of all elements from index 0 to i.
+    - To get the sum from start to end, take the total sum up to end (prefix[end]) and subtract the sum up to just before start (prefix[start - 1]).
+    - This gives only the sum of elements in the range [start, end].
+
+Example:
+    For arr = [1, 2, 3, 4], the prefix sum is prefix = [1, 3, 6, 10].
+
+For range [1, 3] (elements 2 + 3 + 4):
+    prefix[3] = 10 (sum 1 + 2 + 3 + 4).
+    prefix[1 - 1] = prefix[0] = 1 (sum 1).
+    10 - 1 = 9 (sum 2 + 3 + 4).
+
+It works because subtracting the sum before start isolates the desired range. If start = 0, we just use prefix[end] since there's nothing to subtract.
 
 # ----------------------------------------------------------------------------------
 # Key Lesson: Omitting `else` When `if` Returns
@@ -81,6 +103,20 @@ It is like taking a big pile of coins up to end and removing the coins before st
 #   return prefix[end] - prefix[start - 1]  # Runs if start != 0
 
 # Takeaway: Skip `else` if `if` returns, as the function exits early.
+
+
+# ----------------------------------------------------------------------------------
+Explanation for range_sum(prefix, 2, 2): 
+
+The line return prefix[end] - prefix[start - 1] works because it isolates the sum of numbers from index start to end in the original array.
+    - prefix[end] is the total of all numbers up to end (e.g., for end = 2, prefix[2] = 1 + 2 + 3 = 6).
+    - prefix[start - 1] is the total up to just before start (e.g., start = 2, start - 1 = 1, prefix[1] = 1 + 2 = 3).
+    - Subtracting them (6 - 3 = 3) gives only the numbers from start to end (just 3 here).
+
+It is like taking a big pile of coins up to end and removing the coins before start to get what is in between.
+
+*** Pro Tip: Actually use coins to test this problem to visually understand it ***
+
 """
 
 
