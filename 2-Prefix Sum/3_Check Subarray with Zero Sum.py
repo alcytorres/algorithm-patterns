@@ -1,10 +1,12 @@
 # 3. Check Subarray with Zero Sum
 """
 Task: Determine if an array has a subarray summing to zero. Return false otherwise.
+
 Example 1: [1, 3, -4, 5] → True  (1 + 3 + -4 = 0)
 Example 2: [1, 3, 5, -4] → False (no chunk sums to 0)
 Example 3: [1, 2, -2, 3] → True  (2 + -2 = 0)
 Example 4: [4, -4, 1]    → True  (4 + -4 = 0)
+
 Why: Introduces prefix sum applications beyond simple running sums.
 """
 
@@ -80,21 +82,21 @@ Key Lesson: Understanding `if prefix_sum == 0 or prefix_sum in seen:` and Its To
 Purpose: Detects subarrays with a sum of 0 using prefix sums.
 
 How it Works:
-   - `prefix_sum == 0`: True if the subarray from the start to the current index sums to 0.
+   - prefix_sum == 0: True if the subarray from the start to the current index sums to 0.
    - Example: arr = [2, -2] → prefix_sum = 2 + (-2) = 0 → True (subarray [2, -2]).
 
-    - `prefix_sum in seen`: True if the current prefix sum matches a previous one, meaning the subarray between them sums to 0.
+    - prefix_sum in seen: True if the current prefix sum matches a previous one, meaning the subarray between them sums to 0.
      Example: arr = [1, 2, -2] → prefix sums = [1, 3, 1]. Second prefix_sum = 1 matches first prefix_sum = 1, so 1 - 1 = 0 for subarray [2, -2] → True.
 
 Top 2 Use Cases for Each:
-    1. `prefix_sum == 0`:
+    1. prefix_sum == 0:
     - Case 1: Subarray from start sums to 0.
       Example: arr = [3, -3] → prefix_sum = 3 + (-3) = 0 → True (subarray [3, -3]).
 
     - Case 2: Single zero element.
       Example: arr = [0] → prefix_sum = 0 → True (subarray [0]).
 
-2. `prefix_sum in seen`:
+2. prefix_sum in seen:
     - Case 1: Subarray between indices sums to 0.
      Example: arr = [1, 2, -2] → prefix sums = [1, 3, 1]. Second prefix_sum = 1 matches first prefix_sum = 1, so 1 - 1 = 0 for subarray [2, -2] → True.
 
@@ -110,24 +112,23 @@ Key Lesson: Which Condition Hits in `if prefix_sum == 0 or prefix_sum in seen:`
 Purpose: Identifies which condition (`prefix_sum == 0` or `prefix_sum in seen`) triggers True in has_zero_sum_subarray.
 
 Test Cases and Condition Hits:
-1. [1, 3, -4, 5] → True: `prefix_sum == 0`
+1. [1, 3, -4, 5] → True: prefix_sum == 0
    - At index 2: prefix_sum = 1 + 3 + (-4) = 0 → True.
 2. [1, 3, 5, -4] → False: Neither
    - No prefix_sum = 0, no repeated prefix sums in seen.
-3. [1, 2, -2, 3] → True: `prefix_sum in seen`
+3. [1, 2, -2, 3] → True: prefix_sum in seen
    - Prefix sums = [1, 3, 1, 4]. At index 2: prefix_sum = 1, already in seen → True.
-4. [1, 2, -1, -1] → True: `prefix_sum in seen`
+4. [1, 2, -1, -1] → True: prefix_sum in seen
    - Prefix sums = [1, 3, 2, 1]. At index 3: prefix_sum = 1, already in seen (from index 0) → True (subarray [2, -1, -1] sums to 0).
 
-
-5. [4, -4, 1] → True: `prefix_sum == 0`
+5. [4, -4, 1] → True: prefix_sum == 0
    - At index 1: prefix_sum = 4 + (-4) = 0 → True.
 6. [1, 2, -4] → False: Neither
    - No prefix_sum = 0, no repeated prefix sums in seen. 
-7. [1, 2, -3] → True: `prefix_sum == 0`
+7. [1, 2, -3] → True: prefix_sum == 0
    - At index 2: prefix_sum = 1 + 2 + (-3) = 0 → True.
 
-Takeaway: `prefix_sum == 0` hits when the sum from start is 0; `prefix_sum in seen` hits when a subarray between indices sums to 0.
+Takeaway: prefix_sum == 0 hits when the sum from start is 0; prefix_sum in seen hits when a subarray between indices sums to 0.
 """
 
 # ----------------------------------------------------------------------------------

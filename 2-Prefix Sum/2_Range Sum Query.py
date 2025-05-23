@@ -26,6 +26,8 @@ Task: Find the sum of elements between two indices (inclusive) using prefix sums
 
 Example 1: [1, 2, 3, 4], indices 1 to 3 → 9 (2 + 3 + 5)
 Example 2: [1, 2, 3, 4], indices 0 to 2 → 6 (1 + 2 + 3)
+Example 3: [1, 2, 3, 4], indices 2 to 2 → 3 (3)
+
 
 Why: Teaches efficient range sum calculation.
 """
@@ -39,9 +41,10 @@ def range_sum(prefix, start, end):
     return prefix[end] - prefix[start - 1]  # Difference gives range sum
 
 
-prefix = prefix_sum([1, 2, 3, 4])
+prefix = prefix_sum([1, 2, 3, 4])  # → [1, 3, 6, 10]
 
 print(range_sum(prefix, 1, 3))  # Output: 9 
+
 # print(range_sum(prefix, 0, 2))  # Output: 6 
 # print(range_sum(prefix, 2, 2))  # Output: 3 
 
@@ -63,9 +66,20 @@ def range_sum(prefix, start, end):   # Define the function that takes a prefix s
     return prefix[end] - prefix[start - 1]  # Subtract prefix sum before 'start' from prefix sum at 'end'
 
 
-prefix = prefix_sum([1, 2, 3, 4])
+prefix = prefix_sum([1, 2, 3, 4])  # → [1, 3, 6, 10]
 
 print(range_sum(prefix, 1, 3))  # Output: 9 (2+3+4 = 9)
+
+
+# ----------------------------------------------------------------------------------
+# Solution with output 
+def range_sum(prefix, start, end):
+    if start == 0:  # False (start = 1)
+        return prefix[end]  # skip
+    return prefix[end] - prefix[start - 1]  # prefix[3] - prefix[1] = 10 - 1 = 9
+
+prefix = prefix_sum([1, 2, 3, 4])  # → [1, 3, 6, 10]
+print(range_sum(prefix, 1, 3))  # Output: 9
 
 
 """

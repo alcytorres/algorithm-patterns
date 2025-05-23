@@ -1,52 +1,32 @@
-# 2. Range Sum Query  → Reference problem 1. Compute Prefix Sum Array 
-
-# ----------------------------------------------------------------------------------
-# *** Reference: 1. Compute Prefix Sum Array ***
+# 3. Check Subarray with Zero Sum
 """
-Task: Given an array, create a new array of its prefix sums.
-Example: [1, 2, 3, 4] → [1, 3, 6, 10]
+Task: Determine if an array has a subarray summing to zero. Return false otherwise.
+
+Example 1: [1, 3, -4, 5] → True  (1 + 3 + -4 = 0)
+Example 2: [1, 3, 5, -4] → False (no chunk sums to 0)
+Example 3: [1, 2, -2, 3] → True  (2 + -2 = 0)
+Example 4: [4, -4, 1]    → True  (4 + -4 = 0)
+
+Why: Introduces prefix sum applications beyond simple running sums.
 """
-def prefix_sum(arr):
-    if not arr:
-        return []
-    
-    result = [arr[0]]  
 
-    for i in range(1, len(arr)):
-        result.append(result[-1] + arr[i]) 
+def has_zero_sum_subarray(arr):
 
-    return result
+    # 1️⃣ Initialize prefix sum and set for tracking
+    prefix_sum = 0
+    seen = set()
 
-print(prefix_sum([1, 2, 3, 4]))  # Output: [1, 3, 6, 10]  →  [1, 1+2, 1+2+3, 1+2+3+4]
-# ----------------------------------------------------------------------------------
+    # 2️⃣ Iterate through the array to compute prefix sums
+    for num in arr:
+        prefix_sum += num
+        if prefix_sum == 0 or prefix_sum in seen:
+            return True
+        seen.add(prefix_sum)
 
-# 2. Range Sum Query 
-"""
-Task: Find the sum of elements between two indices (inclusive) using prefix sums.
-
-Example 1: [1, 2, 3, 4], indices 1 to 3 → 9 (2 + 3 + 5)
-Example 2: [1, 2, 3, 4], indices 0 to 2 → 6 (1 + 2 + 3)
-
-Why: Teaches efficient range sum calculation.
-"""
-def range_sum(prefix, start, end):
-
-    # 1️⃣ Handle case where range starts at index 0
-    if start == 0: 
-        return prefix[end]
-    
-    # 2️⃣ Compute range sum for non-zero start index
-    return prefix[end] - prefix[start - 1]
+    # 3️⃣ Return False if no zero-sum subarray is found
+    return False
 
 
-prefix = prefix_sum([1, 2, 3, 4])    # [1, 3, 6. 10]
 
-print(range_sum(prefix, 1, 3))  # Output: 9 
 
-# prefix[3] - prefix[1]
-# 10 - 3
-# 7
-
-# prefix[3] - prefix[1] - 1
-# 10 - 1
-# 9
+print(has_zero_sum_subarray([1, 3, -4, 5,])) # Output: True  (1 + 3 + -4 = 0)
