@@ -9,7 +9,6 @@ Example 3: [1, 2, -1, -1] → True  (1 + 2 = -1 -1)        → prefix_sums: [1, 
 Example 4: [1, 3, 5, -4]  → False (no chunk sums to 0)   → prefix_sums: [1, 4, 9, 5]
 Example 5: [4, -4, 1]     → True  (4 + -4 = 0)           → prefix_sums: [4, 0, 1]
 
-
 Why: Uses prefix sums to detect subarrays with a sum of zero efficiently.
      Introduces prefix sum applications beyond simple running sums.
 """
