@@ -2,10 +2,12 @@
 """
 Task: Check if an array can be split into two non-empty contiguous parts with equal sums.
       i.e. Split an array into two next-to-each-other parts, where each part has at least one number and both parts add up to the same total.
+
 Example 1: [1, 4, 2, 3]   → True (1 + 4 = 2 + 3)
 Example 2: [1, 2, 3]      → True (1 + 2 = 3)
 Example 3: [1, 4, 10, 15] → True (1 + 4 + 10 = 15)
 Example 4: [1, 2, 6]      → False (no split gives equal sums)
+
 Why: Reinforces cumulative sum usage.
 """
 

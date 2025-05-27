@@ -27,11 +27,13 @@ print(prefix_sum([1, 2, 3]))  # Output: [1, 3, 6]  →  [1, 1+2, 1+2+3]
 # 4. Maximum Subarray Sum of Size K
 """
 Task: Find the largest sum of consecutive numbers (any subarray) in the array of size k. If array is shorter than 'k' return none
-      i.e. "Find the maximum sum of any subarray of size k."
+      i.e. "Find the maximum sum of any continous subarray of size k."
+      
 Example 1: [1, 2, 3],     k=2 → 5 (2 + 3)
 Example 2: [1, 2, 3, 4],  k=2 → 7 (3 + 4)
 Example 3: [1, 4, 6, 1],  k=2 → 10 (4 + 6)
 Example 4: [7, 1, 8, 3],  k=3 → 16 (7 + 1 + 8)
+
 Why: Bridges to more complex subarray problems.
 """
 
@@ -46,6 +48,8 @@ def max_subarray_sum(arr, k):
 
     # 3️⃣ Initialize maximum sum with first window
     max_sum = prefix[k - 1]  # First window sum
+
+    # 4️⃣ Iterate through remaining window
     for i in range(k, len(arr)):
         current_sum = prefix[i] - prefix[i - k]  
         max_sum = max(max_sum, current_sum)

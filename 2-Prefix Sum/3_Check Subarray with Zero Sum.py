@@ -52,15 +52,24 @@ def has_zero_sum_subarray(arr):    # Define the function that takes an array 'ar
     - Time Complexity: O(n), Space Complexity: O(n) for the set.
     - Set-based approach is intuitive for beginners and efficient.
     """
+
+    # 1️⃣ Initialize prefix sum and set for tracking
     prefix_sum = 0      # Initialize prefix sum to zero
     seen = set()        # Create an empty set to store seen prefix sums
 
+    # 2️⃣ Iterate through the array to compute prefix sums
     for num in arr:     # Iterate through each element in 'arr'
         prefix_sum += num  # Add the current number to the prefix sum
-        if prefix_sum == 0 or prefix_sum in seen:  # If prefix sum is zero or seen before
+
+        # If prefix sum is zero or seen before
+            # *** A prefix sum of 0 or a repeated prefix sum indicates a subarray with sum 0 ***
+        if prefix_sum == 0 or prefix_sum in seen:  
+                                 
             return True   # A subarray with sum zero exists
+        
         seen.add(prefix_sum)  # Add the current prefix sum to the set
 
+    # 3️⃣ Return False if no zero-sum subarray is found
     return False        # No subarray with sum zero found
 
 
