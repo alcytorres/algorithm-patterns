@@ -21,7 +21,7 @@ def prefix_sum(arr):
     # 4️⃣ Return the prefix sum array
     return result
 
-print(prefix_sum([1, 2, 3]))  # Output: [1, 3, 6]  →  [1, 1+2, 1+2+3]
+print(prefix_sum([1, 2, 3, 4]))  # Output: [1, 3, 6, 10]  →  [1, 1+2, 1+2+3 + 1+2+3+4]
 # ----------------------------------------------------------------------------------
 
 # 4. Maximum Subarray Sum of Size K
