@@ -4,8 +4,11 @@
 """
 # Longest Substring with At Most K Distinct Characters
 Task: Given a string s and an integer k, find the length of the longest substring that contains at most k distinct characters. If the string is empty or k is 0, return 0.
+
 Example 1: s = "eceba", k = 2 → 3 (substring "ece" has 2 distinct characters: 'e', 'c')
+
 Example 2: s = "aa", k = 1 → 2 (substring "aa" has 1 distinct character: 'a')
+
 Example 3: s = "aabbcc", k = 2 → 4 (substring "aabb" or "bbcc" has 2 distinct characters: 'a', 'b' or 'b', 'c')
 
     Generic dynamic sliding-window template.

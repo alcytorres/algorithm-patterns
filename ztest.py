@@ -1,36 +1,44 @@
-# 5. Partition Array into Equal Sums
+# 2. Check if Array is Sorted
 """
-Task: Check if an array can be split into two non-empty contiguous parts with equal sums.
-      i.e. Split an array into two next-to-each-other parts, where each part has at least one number and both parts add up to the same total.
+# Task: Determine if an array is sorted in ascending order. If not return false.
+# Example: [1, 2, 3, 4] → True,  [1, 3, 2] → False
 
-Example 1: [1, 4, 2, 3]   → True (1 + 4 = 2 + 3)
-Example 2: [1, 2, 3]      → True (1 + 2 = 3)
-Example 3: [1, 4, 10, 15] → True (1 + 4 + 10 = 15)
-Example 4: [1, 2, 6]      → False (no split gives equal sums)
-
-Why: Reinforces cumulative sum usage.
+# Why: Practices moving pointers to compare adjacent elements.
 """
 
-def can_partition(arr):
-
-    # 1️⃣ Compute total sum and check if it can be split evenly
-    total_sum = sum(arr)
-    if total_sum % 2 != 0:
-        return False
+def is_sorted(arr):
+    # 1️⃣ Handle edge cases: empty or single-element arrays are always sorted
+    if len(arr) < 2:
+        return True
     
-    # 2️⃣ Calculate target sum for each part
-    target = total_sum // 2
+    # 2️⃣ Initialize pointers for comparing adjacent elements
+    left, right = 0, 1
 
-    # 3️⃣ Initialize prefix sum
-    prefix_sum = 0
+    # 3️⃣ Loop through the array to compare adjacent elements
+    while right < len(arr):
+        if arr[left] > arr[right]:
+            return False
+        left += 1
+        right += 1
 
-    # 4️⃣ Iterate through array to find split point
-    for num in arr:
-        prefix_sum += num
-        if prefix_sum == target:
-            return True
-        
-    # 5️⃣ Return False if no split point is found
-    return False
+    # 4️⃣ Return result
+    return True
 
-print(can_partition([1, 4, 2, 3]))  # Output: True (1 + 4 = 2 + 3)
+print(is_sorted([1, 2, 3, 4]))  # Output: True
+print(is_sorted([1, 3, 2]))     # Output: False
+
+
+def is_sorted(arr):
+
+    if len(arr) < 2:
+        return True
+    
+    for i in range(len(arr) - 1):
+        if arr[i] > arr[i + 1]:
+            return False
+
+    # 4️⃣ Return result
+    return True
+
+print(is_sorted([1, 2, 3, 4]))  # Output: True
+print(is_sorted([1, 3, 2]))     # Output: False

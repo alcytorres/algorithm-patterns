@@ -7,7 +7,7 @@
 """
 
 def is_sorted(arr):
-    # 1️⃣ Handle base cases: empty or single-element arrays are always sorted
+    # 1️⃣ Handle edge cases: empty or single-element arrays are always sorted
     if len(arr) < 2:
         return True
     
@@ -38,17 +38,24 @@ def is_sorted(arr):   # Define the function that takes an array 'arr' as input
     - Iterative approach chosen for simplicity over recursive alternatives.
     """
 
+    # 1️⃣ Handle edge cases: empty or single-element arrays are always sorted
     if len(arr) < 2:      # Check if array has 0 or 1 element (nothing to compare)
         return True       # Return True since empty or single-element arrays are sorted
+    
+    # 2️⃣ Initialize pointers for comparing adjacent elements
     i, j = 0, 1           # Set 'i' to 0 (current element) and 'j' to 1 (next element)
+
+    # 3️⃣ Loop through the array to compare adjacent elements
     while j < len(arr):   # Loop until 'j' reaches the end of the array
         if arr[i] > arr[j]:  # Compare: if current element is greater than next, not sorted
             return False     # Return False since order is broken
         i += 1            # Move 'i' forward to the next element
         j += 1            # Move 'j' forward to the element after that
+
+    # 4️⃣ Return result
     return True           # If loop finishes, all elements are in order, so return True
 
-# Test the function
+
 print(is_sorted([1, 2, 3, 4]))  # Output: True
 print(is_sorted([1, 3, 2]))     # Output: False
 
@@ -57,7 +64,7 @@ print(is_sorted([1, 3, 2]))     # Output: False
 # Solution with output 
 
 def is_sorted(arr):              # Example: arr = [1, 2, 3, 4]
-    # 1️⃣ Handle base cases: empty or single-element arrays are always sorted
+    # 1️⃣ Handle edge cases: empty or single-element arrays are always sorted
     if len(arr) < 2:             # len(arr) = 4 < 2 → False
         return True              # Skip
     
@@ -109,7 +116,7 @@ print(is_sorted([1, 2, 3, 4]))  # Output: True (1 ≤ 2, 2 ≤ 3, 3 ≤ 4)
 # Solution with output Full Breakdown 
 def is_sorted(arr):              # Example: arr = [1, 2, 3, 4]
 
-    # 1️⃣ Handle base cases: empty or single-element arrays are always sorted
+    # 1️⃣ Handle edge cases: empty or single-element arrays are always sorted
     # Check if the array has fewer than 2 elements
     # Why? Arrays with 0 or 1 elements are inherently sorted
     if len(arr) < 2:             # len(arr) = 4 < 2 → False
@@ -175,7 +182,7 @@ print(is_sorted([1, 2, 3, 4]))  # Output: True (1 ≤ 2, 2 ≤ 3, 3 ≤ 4)
 # Solution with output 
 
 def is_sorted(arr):              # Example: arr = [1, 3, 2]
-    # 1️⃣ Handle base cases: empty or single-element arrays are always sorted
+    # 1️⃣ Handle edge cases: empty or single-element arrays are always sorted
     if len(arr) < 2:             # len(arr) = 3 < 2 → False
         return True              # Skip
     
@@ -218,3 +225,24 @@ Since 3 > 2 is True, we hit return False.
 What happens now? We break out of the loop completely and stop the function. return False sends False back and ends everything—no going back to the top, no more looping, no checking other numbers.
 """
 # ----------------------------------------------------------------------------------
+
+
+
+# Alternative Solutions 
+
+def is_sorted(arr):
+
+    # 1️⃣ Handle edge cases: empty or single-element arrays are always sorted
+    if len(arr) < 2:
+        return True
+    
+    # 2️⃣ Iterate through adjacent elements to verify ascending order
+    for i in range(len(arr) - 1):
+        if arr[i] > arr[i + 1]:
+            return False
+
+    # 3️⃣ Return result
+    return True
+
+print(is_sorted([1, 2, 3, 4]))  # Output: True
+print(is_sorted([1, 3, 2]))     # Output: False
