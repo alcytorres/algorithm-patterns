@@ -224,10 +224,8 @@ Explanation of what happens when 3 > 2:
 Since 3 > 2 is True, we hit return False.
 What happens now? We break out of the loop completely and stop the function. return False sends False back and ends everything—no going back to the top, no more looping, no checking other numbers.
 """
+
 # ----------------------------------------------------------------------------------
-
-
-
 # Alternative Solutions 
 
 def is_sorted(arr):
@@ -246,3 +244,35 @@ def is_sorted(arr):
 
 print(is_sorted([1, 2, 3, 4]))  # Output: True
 print(is_sorted([1, 3, 2]))     # Output: False
+
+
+
+# ----------------------------------------------------------------------------------
+# 2.1 Check if Array is Sorted in Descending Order
+
+"""
+# Task: Determine if an array is sorted in descending order. If not, return False.
+# Example: [4, 3, 2, 1] → True, [1, 3, 2] → False
+"""
+
+def is_sorted_descending(arr):
+     # 1️⃣ Handle edge cases: empty or single-element arrays are always sorted
+    if len(arr) < 2:
+        return True
+    
+    # 2️⃣ Initialize pointers for comparing adjacent elements
+    i, j = 0, 1
+
+    # 3️⃣ Loop through the array to compare adjacent elements
+    while j < len(arr):
+        if arr[i] < arr[j]: 
+            return False
+        i += 1
+        j += 1
+
+    # 4️⃣ Return result
+    return True
+
+print(is_sorted_descending([4, 3, 2, 1]))  # Output: True
+print(is_sorted_descending([1, 3, 2]))     # Output: False
+print(is_sorted_descending([5, 5, 4, 3]))  # Output: True (allows equal elements)

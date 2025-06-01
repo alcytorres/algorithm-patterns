@@ -34,17 +34,51 @@ def reverse_array(arr):   # Define the function that takes an array 'arr' as inp
     - Time Complexity: O(n/2) = O(n), Space Complexity: O(1).
     - In-place swapping makes this memory-efficient and beginner-friendly.
     """
-
+    
+    # 1️⃣ Initialize pointers for swapping elements
     left, right = 0, len(arr) - 1   # Set 'left' to start (0) and 'right' to end (last index)
+    
+    # 2️⃣ Loop to swap elements from both ends
     while left < right:             # Loop until pointers meet in the middle
         arr[left], arr[right] = arr[right], arr[left]  # Swap elements at left and right pointers
         left += 1                   # Move left pointer one step right
         right -= 1                  # Move right pointer one step left
+    
+    # 3️⃣ Return the reversed array
     return arr                      # Return the reversed array
 
-# Test the function
-# print(reverse_array([1, 2, 3]))  # Output: [3, 2, 1]
 
+# print(reverse_array([1, 2, 3, 4]))  # Output: [4, 3, 2, 1]
+
+
+# ----------------------------------------------------------------------------------
+# Simple Explanation
+"""
+Why it works: Reverses an array in-place by swapping elements from start and end using two pointers, moving inward until they meet, without extra space.
+
+Section 1: Initialize pointers
+   - Code: left, right = 0, len(arr) - 1
+
+   - Why: left points to first element (index 0), right to last (index len(arr) - 1, e.g., 3 for [1, 2, 3, 4]).
+
+   - Syntax: len(arr) gets array length; multiple assignment sets left and right in one line.
+
+Section 2: Loop to swap elements
+   - Code: while left < right: arr[left], arr[right] = arr[right], arr[left]; left += 1; right -= 1
+
+   - Why: Loops while left is before right (e.g., 0 < 3). Swaps arr[left] and arr[right] (e.g., 1 and 4), then moves left right (+1) and right left (-1). Stops when left >= right (e.g., after [4, 3, 2, 1]).
+
+   - Syntax: while runs until left < right is False. arr[left], arr[right] = arr[right], arr[left] swaps values simultaneously. += and -= update pointers.
+
+Section 3: Return reversed array
+   - Code: return arr
+
+   - Why: Returns the now-reversed array (e.g., [4, 3, 2, 1]), modified in-place.
+
+   - Syntax: return arr outputs the mutable array; Python lists allow in-place changes.
+
+Efficiency: Swaps only half the array (e.g., 2 swaps for 4 elements), uses constant space, and leverages Python’s concise swap syntax.
+"""
 
 # ----------------------------------------------------------------------------------
 # Solution with output Full Breakdown 

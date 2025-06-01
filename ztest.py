@@ -1,44 +1,33 @@
-# 2. Check if Array is Sorted
+# 5. Merge Two Sorted Arrays
 """
-# Task: Determine if an array is sorted in ascending order. If not return false.
-# Example: [1, 2, 3, 4] → True,  [1, 3, 2] → False
+Task: Merge two sorted arrays into one sorted array.
 
-# Why: Practices moving pointers to compare adjacent elements.
+Example 1: [1, 3], [2, 4, 6] → [1, 2, 3, 4, 6]
+Example 2: [1, 3], [2, 4] → [1, 2, 3, 4]
+
+Why: Reinforces pointer use in sorted data, akin to Remove Duplicates From Sorted Array.
 """
 
-def is_sorted(arr):
-    # 1️⃣ Handle edge cases: empty or single-element arrays are always sorted
-    if len(arr) < 2:
-        return True
+def merge_sorted_arrays(arr1, arr2):
     
-    # 2️⃣ Initialize pointers for comparing adjacent elements
-    left, right = 0, 1
+    # 1️⃣ Initialize result array and pointers
+    result = []
+    i, j = 0, 0
 
-    # 3️⃣ Loop through the array to compare adjacent elements
-    while right < len(arr):
-        if arr[left] > arr[right]:
-            return False
-        left += 1
-        right += 1
-
-    # 4️⃣ Return result
-    return True
-
-print(is_sorted([1, 2, 3, 4]))  # Output: True
-print(is_sorted([1, 3, 2]))     # Output: False
-
-
-def is_sorted(arr):
-
-    if len(arr) < 2:
-        return True
+    # 2️⃣ Merge arrays while both pointers are within bounds     
+    while i < len(arr1) and j < len(arr2):
+        if arr1[i] < arr2[j]:
+            result.append(arr1[i])
+            i += 1
+        else:
+            result.append(arr2[j])
+            j += 1
     
-    for i in range(len(arr) - 1):
-        if arr[i] > arr[i + 1]:
-            return False
+    result.extend(arr1[i:])
+    result.extend(arr2[j:])
 
-    # 4️⃣ Return result
-    return True
+    # 5️⃣ Return the merged sorted array   
+    return result 
 
-print(is_sorted([1, 2, 3, 4]))  # Output: True
-print(is_sorted([1, 3, 2]))     # Output: False
+
+print(merge_sorted_arrays([1, 3], [2, 4, 6]))  # Output: [1, 2, 3, 4, 6]

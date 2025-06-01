@@ -31,9 +31,9 @@ def find_pair_with_difference(arr, target):
     return None       
 
 print(find_pair_with_difference([1, 5, 4, 10], 3))  # Output: [1, 4]
-print(find_pair_with_difference([1, 3, 8], 2))  # Output: [1, 3]
-print(find_pair_with_difference([8, 1, 3, 5], 3))  # Output: [5, 8]
-print(find_pair_with_difference([1, 2, 10], 5))  # Output: None
+print(find_pair_with_difference([1, 3, 8], 2))      # Output: [1, 3]
+print(find_pair_with_difference([8, 1, 3, 5], 3))   # Output: [5, 8]
+print(find_pair_with_difference([1, 2, 10], 5))     # Output: None
 
 
 # Simple Breakdown
@@ -45,21 +45,32 @@ def find_pair_with_difference(arr, target):   # Define the function that takes a
     - Time Complexity: O(n log n) due to sorting, Space Complexity: O(1).
     - Sorting simplifies the problem for beginners, though a hash table could be O(n).
     """
+
+    # 1️⃣ Sort the array
     arr.sort()                   # Sort array in ascending order to use two pointers effectively
-    left, right = 0, 1           # Set 'left' to 0 and 'right' to 1 (start with adjacent elements)
+
+    # 2️⃣ Initialize two pointers                    
+    left, right = 0, 1           # Set 'left' to 0 and 'right' to 1 (start with adjacent elements)   
+
+    # 3️⃣ Iterate while right pointer is within bounds
     while right < len(arr):      # Loop until 'right' reaches the end of the array
         diff = arr[right] - arr[left]  # Calculate difference between elements at right and left
+
+        # 4️⃣ Check if difference equals target
         if diff == target:       # Check if the difference matches the target
             return [arr[left], arr[right]]  # Return the pair if target is found
+        
+        # 5️⃣ Adjust pointers based on difference
         elif diff < target:      # If difference is too small
             right += 1           # Move 'right' forward to increase the difference
         else:                    # If difference is too large
             left += 1            # Move 'left' forward to decrease the difference
             if left == right:    # If pointers overlap after moving 'left'
                 right += 1       # Move 'right' forward to keep them distinct
+    
+    # 6️⃣ Return None if no pair is found
     return None                  # Return None if no pair is found
 
-# Test the function
 # print(find_pair_with_difference([1, 5, 4, 10], 3))  # Output: [1, 4]
 # print(find_pair_with_difference([1, 3, 8], 2))  # Output: [1, 3]
 # print(find_pair_with_difference([8, 1, 3, 5], 3))  # Output: [5, 8]
