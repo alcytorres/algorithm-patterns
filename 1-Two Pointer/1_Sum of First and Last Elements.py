@@ -15,7 +15,9 @@ Potential Knowledge Gaps
 # 1. Sum of First and Last Elements
 """
 # Task: Given an array, return the sum of its first and last elements. If the input is not an array return 0.
+
 # Example: [1, 2, 3] → 4 (1 + 3)
+
 # Why: Introduces using two pointers at opposite ends.
 """
 

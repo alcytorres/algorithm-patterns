@@ -1,7 +1,8 @@
 # 3. Reverse an Array In-Place 
 """
 Task: Reverse an array using two pointers without extra space.
-Example: [1, 2, 3] → [3, 2, 1]
+
+Example: [1, 2, 3, 4] → [4, 3, 2, 1]
 
 Why: Builds intuition for swapping elements with pointers, relevant to Valid Palindrome. 
 """
@@ -19,8 +20,8 @@ def reverse_array(arr):
     # 3️⃣ Return the reversed array              
     return arr                      
 
-print(reverse_array([1, 2, 3]))  # Output: [3, 2, 1]
 print(reverse_array([1, 2, 3, 4]))  # Output: [4, 3, 2, 1]
+print(reverse_array([1, 2, 3]))  # Output: [3, 2, 1]
 print(reverse_array([10]))  # Output: [10]
 print(reverse_array([]))  # Output: []
 

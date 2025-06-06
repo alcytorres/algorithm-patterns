@@ -1,6 +1,5 @@
 # longest_unique_substring.py
 
-
 """
 # Longest Substring with At Most K Distinct Characters
 Task: Given a string s and an integer k, find the length of the longest substring that contains at most k distinct characters. If the string is empty or k is 0, return 0.
@@ -58,5 +57,7 @@ print(length_of_longest_substring("abcabccc"))  # Output: 3 ("abc")
 print(length_of_longest_substring("aa"))        # Output: 1 ("a")
 print(length_of_longest_substring("aabbcc"))    # Output: 2 ("ab" or "bc")
 print(length_of_longest_substring("eceba"))     # Output: 4 ("ceba")
+
+
 
 

@@ -1,6 +1,7 @@
 # 2. Check if Array is Sorted
 """
 # Task: Determine if an array is sorted in ascending order. If not return false.
+
 # Example: [1, 2, 3, 4] → True,  [1, 3, 2] → False
 
 # Why: Practices moving pointers to compare adjacent elements.
