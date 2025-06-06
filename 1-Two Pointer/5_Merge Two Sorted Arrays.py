@@ -44,8 +44,11 @@ def merge_sorted_arrays(arr1, arr2):   # Define the function that takes two arra
     - Iterative merging is straightforward and beginner-friendly.
     """
 
+    # 1️⃣ Initialize result array and pointers
     result = []           # Create empty list to store the merged sorted array
     i, j = 0, 0           # Set 'i' as pointer for arr1, 'j' as pointer for arr2, both start at 0
+    
+    # 2️⃣ Merge arrays while both pointers are within bounds     
     while i < len(arr1) and j < len(arr2):  # Loop while both arrays have elements to compare
         if arr1[i] < arr2[j]:  # Compare elements at pointers: if arr1's is smaller
             result.append(arr1[i])  # Add arr1's element to result
@@ -53,11 +56,16 @@ def merge_sorted_arrays(arr1, arr2):   # Define the function that takes two arra
         else:               # If arr2's element is smaller or equal
             result.append(arr2[j])  # Add arr2's element to result
             j += 1          # Move arr2's pointer forward
+    
+    # 3️⃣ Append remaining elements from arr1, if any
     result.extend(arr1[i:])  # Add any remaining elements from arr1 (from i to end)
+    # 4️⃣ Append remaining elements from arr2, if any
     result.extend(arr2[j:])  # Add any remaining elements from arr2 (from j to end)
+    
+    # 5️⃣ Return the merged sorted array
     return result         # Return the fully merged and sorted array
 
-# Test the function
+
 # print(merge_sorted_arrays([1, 3], [2, 4]))  # Output: [1, 2, 3, 4]
 # print(merge_sorted_arrays([1, 3], [2, 4, 6]))  # Output: [1, 2, 3, 4, 6]
 
