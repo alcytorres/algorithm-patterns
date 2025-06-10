@@ -36,7 +36,7 @@ def two_pointer_same_direction(arr):
 # Finding a Pair with Target Sum
 
 """
-Task: Given an array of integers and a target value, find two numbers that add up to the target. Return the pair as a list, or None if no pair exists.
+Task: Given an array of integers and a target value, find two numbers that add up to the target. Return the pair as a list. If no pair exists return None.
 
 Example: [2, 10, 5, 15], target = 7 → [2, 5] (since 2 + 5 = 7)
 
@@ -64,6 +64,13 @@ def find_pair_with_target_sum(arr, target):
     return None       
 
 print(find_pair_with_target_sum([1, 5, 4, 10], 15))  # Output: [5, 10]
+
+
+"""
+Why while left < right:?
+    
+    The while left < right: ensures left and right pointers don’t meet or cross, so we always check pairs of different elements in the sorted array.
+"""
 
 
 # ----------------------------------------------------------------------------------
@@ -96,6 +103,23 @@ def is_palindrome(s):
     return True
 
 print(is_palindrome("abba"))
+
+
+
+"""
+Why if s[left] != s[right]:?
+
+This line checks if characters at left and right pointers differ. If they do, the string isn’t a palindrome, so we return False.
+
+    Why needed: Palindromes require exact matches from both ends. != spots any mismatch to fail fast.
+
+    Why this check: Problem demands exact character comparison (e.g., "abba" needs a == a). != is simplest to detect failure.
+
+    Why not others: Direct inequality check avoids extra logic for mismatches.
+
+The focus on exact matching signals != for quick, clear validation.
+"""
+
 
 # ----------------------------------------------------------------------------------
 
