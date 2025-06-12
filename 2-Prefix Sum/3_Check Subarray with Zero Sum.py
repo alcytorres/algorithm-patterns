@@ -74,7 +74,7 @@ def has_zero_sum_subarray(arr):    # Define the function that takes an array 'ar
 
 
 print(has_zero_sum_subarray([1, 3, -4, 5,])) # Output: True  (1 + 3 + -4 = 0)
-
+print(has_zero_sum_subarray([1, 3, 5, -4]))  # Output: False (no chunk sums to 0)
 
 """
 Solution Explnation: 
