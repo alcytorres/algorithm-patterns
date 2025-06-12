@@ -1,37 +1,3 @@
-# Template 1: Two Pointers from Opposite Ends
-def two_pointer_opposite(arr):
-    left = 0
-    right = len(arr) - 1
-    while left < right:
-    # Process the pair (arr[left], arr[right]).
-    # For example, compare sum to target, or check if they match some condition.
-    # if <some condition based on arr[left] and arr[right]>:
-    # Maybe return True/indices or record the result.
-        return (left, right)
-    elif <condition to move left pointer>:
-        left += 1 # Move left pointer to the right
-    else:
-        right -= 1 # Move right pointer to the left
-    # If we exit the loop, either we found a result or there is no valid pair.
-    return None
-
-
-
-# Template 2: Two Pointers moving in the Same Direction
-def two_pointer_same_direction(arr):
-    i = 0
-    # j will move from 0 to n-1 (or 1 to n-1 if i starts at 0)
-    for j in range(len(arr)):
-    # Use j to explore and i to build or compare
-    if <some condition involving arr[j] (and maybe arr[i])>:
-    # If condition met, update arr[i] or record result
-    arr[i] = arr[j] # (for example, keep this element)
-    i += 1 # move the slow pointer
-    # After loop, first i elements of arr might be the result,
-    # or use i as a count of valid elements.
-    return i
-
-
 # ----------------------------------------------------------------------------------
 # Finding a Pair with Target Sum
 
@@ -105,7 +71,6 @@ def is_palindrome(s):
 print(is_palindrome("abba"))
 
 
-
 """
 Why if s[left] != s[right]:?
 
@@ -119,7 +84,6 @@ This line checks if characters at left and right pointers differ. If they do, th
 
 The focus on exact matching signals != for quick, clear validation.
 """
-
 
 # ----------------------------------------------------------------------------------
 

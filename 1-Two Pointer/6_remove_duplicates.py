@@ -63,7 +63,10 @@ def remove_duplicates(arr):   # Define the function that takes a sorted array 'a
     # 5️⃣ Return count of unique elements
     return write             # Return 'write' (number of unique elements)
 
-
+sorted_nums = [0,0,1,2,2,3,4]
+length = remove_duplicates(sorted_nums)  # length = 5
+print(length)  # Output: 5
+print(sorted_nums[0:length])  # Output: [0, 1, 2, 3, 4]
 
 
 """
@@ -220,11 +223,21 @@ def remove_duplicates(arr):  # Example: arr = [0,0,1,1,1,2,2,3,3,4]
     return write  # write = 5
 
 
-sorted_nums = [0,0,1,1,1,2,2,3,3,4]
-length = remove_duplicates(sorted_nums)  # length = 5
-print(length)  # Output: 5
-print(sorted_nums[0:length])  # Output: [0, 1, 2, 3, 4]
+# Initialize the input array with duplicates for testing
+# Why? To verify the function correctly removes duplicates and returns the expected length
+sorted_nums = [0,0,1,1,1,2,2,3,3,4]  
 
+# Call the function to remove duplicates and store the returned length
+# Why? The function modifies the array in-place and returns the count of unique elements
+length = remove_duplicates(sorted_nums)  # length = 5 after removing duplicates
+
+# Print the number of unique elements returned by the function
+# Why? To confirm the function returns the correct length (5 for unique elements: 0,1,2,3,4)
+print(length)  # Output: 5
+
+# Print the modified array slice. This contains the unique elements. 
+# Why? To verify the array was correctly modified in-place to contain unique elements in order
+print(sorted_nums[0:length])  # Output: [0, 1, 2, 3, 4]
 
 
 # ----------------------------------------------------------------------------------
@@ -308,7 +321,18 @@ def remove_duplicates(arr):  # Example: arr = [0,0,1,2,2,3,4]
     return write  # write = 5
 
 
+# Initialize the input array with duplicates for testing
+# Why? To verify the function correctly removes duplicates and returns the expected length
 sorted_nums = [0,0,1,2,2,3,4]
-length = remove_duplicates(sorted_nums)  # length = 5
+
+# Call the function to remove duplicates and store the returned length
+# Why? The function modifies the array in-place and returns the count of unique elements
+length = remove_duplicates(sorted_nums)  # length = 5 after removing duplicates
+
+# Print the number of unique elements returned by the function
+# Why? To confirm the function returns the correct length (5 for unique elements: 0,1,2,3,4)
 print(length)  # Output: 5
+
+# Print the modified array slice. This contains the unique elements. 
+# Why? To verify the array was correctly modified in-place to contain unique elements in order
 print(sorted_nums[0:length])  # Output: [0, 1, 2, 3, 4]
