@@ -112,3 +112,6 @@ def two_pointer_same_direction(arr):
     # After loop, first i elements of arr might be the result,
     # or use i as a count of valid elements.
     return i
+
+
+

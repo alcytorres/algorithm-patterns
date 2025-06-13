@@ -59,3 +59,7 @@ def count_subarrays_with_sum(arr, k):
     return count
 
 # print(count_subarrays_with_sum([1, 1, 1], 2))  # Output: 2
+
+
+
+∂

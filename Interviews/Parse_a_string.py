@@ -1,3 +1,5 @@
+# EverQuote Interview Question
+
 """
 Task: Parse a string containing infix operators and values, do the math evaluation and print the result
 
@@ -154,5 +156,3 @@ def evaluate(expr):  # Example: expr = "1 + 2 * 10"
 
 
 print(evaluate("1 + 2 * 10"))  # Output: 21
-
-
