@@ -16,21 +16,21 @@ def max_product_sliding_window(arr, k):
         return None
     
     # 2️⃣ Initialize the first window
-    max_product = 1
-    for num in arr[:k]:  # First k elements
-        max_product *= num
+    window_product = 1
+    for num in arr[:k]:
+        window_product *= num
     
     # 3️⃣ Set initial result
-    result = max_product
+    max_product = window_product
     
     # 4️⃣ Slide the window across the array
     for i in range(k, len(arr)):
         # Update product: divide by first element of previous window, multiply by new element
-        max_product = (max_product // arr[i - k]) * arr[i]
-        result = max(result, max_product)
+        window_product = (window_product // arr[i - k] * arr[i])
+        max_product = max(max_product, window_product)
     
     # 5️⃣ Return the result
-    return result
+    return max_product
 
 print(max_product_sliding_window([1, 2, 3], 2))      # Output: 6 ([2, 3])
 print(max_product_sliding_window([1, 2, 3, 4], 2))   # Output: 12 ([3, 4])
@@ -40,9 +40,43 @@ print(max_product_sliding_window([2, 3, 4, 5], 2))   # Output: 20 ([4, 5])
 
 
 """
-Explanation: window_product = window_product // arr[i - k] * arr[i]
+# ----------------------------------------------------------------------------------
+Simple Explanation of window_product = (window_product // arr[i - k] * arr[i]):
 
-The line max_product = (max_product // arr[i - k]) * arr[i] updates the product of the current window of k elements as the window slides. Here’s a simple, concise explanation:
+Imagine you have a list of numbers like [1, 2, 3, 4, 5] and you’re looking at groups of 2 numbers at a time (k=2). You want to multiply those 2 numbers and find the biggest result. 
+
+The line window_product = (window_product // arr[i - k] * arr[i]) is like sliding a window to look at the next group without starting over.
+
+Here’s what it does, super simple:
+
+    You have the product of the current group, say 1 * 2 = 2 for [1, 2].
+    
+    To get the next group [2, 3], you don’t want to multiply 2 * 3 from scratch.
+    
+    Instead, you undo the first number (1) by dividing (2 ÷ 1 = 2) and add the new number (3) by multiplying (2 * 3 = 6).
+    
+    This line does that in one step: divide by the old number (arr[i - k]) and multiply by the new number (arr[i]).
+    
+    Why? It’s faster! Instead of multiplying the whole group again, you just tweak the old product to get the new one, like sliding a toy car one step forward instead of building a new car each time.
+
+
+Full Summary
+    For [1, 2, 3, 4, 5], k=2 in max_product_sliding_window:
+
+1. Validate: len(arr)=5 ≥ k=2, proceed.
+2. First window ([1, 2]): window_product = 1 * 2 = 2, max_product = 2.
+3. Slide to [2, 3]: i=2, window_product = (2 // arr[0]=1) * arr[2]=3 = 6, max_product = max(2, 6) = 6.
+4. Slide to [3, 4]: i=3, window_product = (6 // arr[1]=2) * arr[3]=4 = 12, max_product = max(6, 12) = 12.
+5. Slide to [4, 5]: i=4, window_product = (12 // arr[2]=3) * arr[4]=5 = 20, max_product = max(12, 20) = 20.
+6. Return: max_product = 20 (from [4, 5]).
+    
+
+
+
+# ----------------------------------------------------------------------------------
+Explanation: window_product = (window_product // arr[i - k]) * arr[i]
+
+The line window_product = (window_product // arr[i - k]) * arr[i] updates the product of the current window of k elements as the window slides. Here’s a simple, concise explanation:
 
 What it does: It calculates the product of the new window by:
     Removing the first element of the previous window (divide by arr[i - k]).
@@ -57,15 +91,16 @@ Example: For arr = [1, 2, 3, 4], k = 2:
     New window is [2, 3]:
         arr[i - k] = arr[2 - 2] = arr[0] = 1 (oldest element).
         arr[i] = arr[2] = 3 (new element).
-        max_product = (2 // 1) * 3 = 2 * 3 = 6 (product of [2, 3]).
-
-Note: // is integer division, assuming no zeros (if zeros are possible, a different approach is needed to avoid division errors).
+        window_product = (2 // 1) * 3 = 2 * 3 = 6 (product of [2, 3]).
 
 This keeps the product updated efficiently without recalculating it from scratch.
 
 
+# ----------------------------------------------------------------------------------
+The solution uses // (integer division) instead of / (floating-point division) to keep the product calculation simple, precise, and consistent with the integer inputs, avoiding decimal results and potential precision issues.
 
 
+# ----------------------------------------------------------------------------------
 Why I chose to use 2 loops for this Sliding Window Product Problem 
 
 Two Loops for max_product_sliding_window
@@ -81,15 +116,12 @@ One Loop for max_sum_sliding_window (This is a differnt problem: find the maximu
 Why Different
     - Operation Nature: Product needs a loop for initialization; sum uses sum for simplicity.
     - Readability: Loop choice optimizes clarity for each problem’s operation.
-    - Performance: Both achieve O(n) time complexity, but structure enhances maintainability.
 """
 
 
 
 # ----------------------------------------------------------------------------------
 # Solution Breakdown: Maximum Product of K Consecutive Elements
-
-# Task: Find the maximum product of any group of k consecutive elements in an array. If the array has fewer than k elements, return None.
 
 # Example: arr = [1, 2, 3, 4], k = 2 → Output = 12 (subarray [3, 4] has product 3 * 4 = 12)
 
@@ -104,16 +136,16 @@ def max_product_sliding_window(arr, k):  # Example: arr = [1, 2, 3, 4], k = 2
     # 2️⃣ Initialize the first window
     # Compute the product of the first k elements
     # Why? We need the product of the first subarray as the starting point
-    max_product = 1  # max_product = 1 (initial value for multiplication)
+    window_product = 1  # window_product = 1 (initial value for multiplication)
     for num in arr[:k]:  # arr[:2] = [1, 2]
-        max_product *= num  # First: max_product = 1 * 1 = 1
-                            # Second: max_product = 1 * 2 = 2
-    # After loop: max_product = 2 (product of [1, 2])
+        window_product *= num  # First: window_product = 1 * 1 = 1
+                               # Second: window_product = 1 * 2 = 2
+    # After loop: window_product = 2 (product of [1, 2])
 
     # 3️⃣ Set initial result
     # Store the first window's product as the initial maximum
     # Why? We need to compare this with products of subsequent windows
-    result = max_product  # result = 2
+    max_product = window_product  # max_product = 2
 
     # 4️⃣ Slide the window across the array
     # Iterate from index k to the end to process each subsequent window
@@ -122,31 +154,31 @@ def max_product_sliding_window(arr, k):  # Example: arr = [1, 2, 3, 4], k = 2
         # --- Iteration 1: i = 2 ---
         # Update product: divide by first element of previous window, multiply by new element
         # Why? This efficiently updates the product without recomputing the entire window
-        max_product = (max_product // arr[i - k]) * arr[i]  # i = 2, i-k = 2-2 = 0
-                                                           # arr[0] = 1, arr[2] = 3
-                                                           # max_product = (2 // 1) * 3 = 2 * 3 = 6
+        window_product = (window_product // arr[i - k]) * arr[i]  # i = 2, i-k = 2-2 = 0
+                                                                 # arr[0] = 1, arr[2] = 3
+                                                                 # window_product = (2 // 1) * 3 = 2 * 3 = 6
 
         # Update result if current product is larger
         # Why? We want the largest product across all windows
-        result = max(result, max_product)  # result = max(2, 6) = 6
-        # After Iteration 1: max_product = 6, result = 6
+        max_product = max(max_product, window_product)  # max_product = max(2, 6) = 6
+        # After Iteration 1: window_product = 6, max_product = 6
         # Current window: [2, 3] (product = 6)
 
         # --- Iteration 2: i = 3 ---
         if i == 3:
             # Update product
-            max_product = (max_product // arr[i - k]) * arr[i]  # i = 3, i-k = 3-2 = 1
-                                                               # arr[1] = 2, arr[3] = 4
-                                                               # max_product = (6 // 2) * 4 = 3 * 4 = 12
+            window_product = (window_product // arr[i - k]) * arr[i]  # i = 3, i-k = 3-2 = 1
+                                                                     # arr[1] = 2, arr[3] = 4
+                                                                     # window_product = (6 // 2) * 4 = 3 * 4 = 12
 
             # Update result
-            result = max(result, max_product)  # result = max(6, 12) = 12
-            # After Iteration 2: max_product = 12, result = 12
+            max_product = max(max_product, window_product)  # max_product = max(6, 12) = 12
+            # After Iteration 2: window_product = 12, max_product = 12
             # Current window: [3, 4] (product = 12)
 
-    # 5️⃣ Return the result
-    # Why? result contains the largest product found in any k-sized subarray
-    return result  # result = 12
+    # 5️⃣ Return the max_product
+    # Why? max_product contains the largest product found in any k-sized subarray
+    return max_product  # max_product = 12
 
 
 print(max_product_sliding_window([1, 2, 3, 4], 2))  # Output: 12 ([3, 4])
