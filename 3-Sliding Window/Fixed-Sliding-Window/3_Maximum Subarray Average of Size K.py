@@ -1,6 +1,7 @@
 # Maximum Subarray Average of Size K
 """
 Task: Given an integer array nums and an integer k, find maximum average of any contiguous subarray of size k. If the array has fewer than k elements, return None.
+
 Example 1: [1, 2, 3, 4], k=2 → 3.5
 Example 2: [10, 2, 4],   k=2 → 6
 """
@@ -20,7 +21,7 @@ def sliding_window_fixed(arr, k):
     
     # 4️⃣ Slide the window across the array
     for i in range(k, len(arr)):                                      
-        window_sum = window_sum - arr[i - k] + arr[i]  # Add new element, remove old element
+        window_sum =  arr[i] - arr[i - k]  # Add new element, remove old element
         current_average = window_sum / k   
         max_result = max(max_result, current_average)  # Update max_result
     

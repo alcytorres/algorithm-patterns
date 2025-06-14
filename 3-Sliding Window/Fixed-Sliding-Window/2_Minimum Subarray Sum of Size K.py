@@ -1,6 +1,7 @@
 # Minimum Subarray Sum of Size K
 """
 Task: Given an integer array nums and an integer k, find the minimum sum of any contiguous subarray of size k. If the array has fewer than k elements, return None.
+
 Example 1: [1, 2, 3],    k = 2 → 3
 Example 1: [1, 4, 3, 8], k = 2 → 5
 Example 3: [6, 4, 3],    k = 2 → 7

@@ -1,6 +1,7 @@
 # Maximum Subarray Sum of Size K 
 """
 Task: Given an array of numbers and an integer k, find the maximum sum of any contiguous subarray of size k. If the array has fewer than k numbers, return None.
+
 Example 1: [1, 2, 3],    k = 2 → 5  
 Example 2: [1, 4, 3, 8], k = 2 → 11  
 Example 3: [4, 5, 6, 7], k = 3 → 18  
