@@ -92,9 +92,13 @@ Concise Walkthrough of Why count_subarrays_with_sum Works
 The count_subarrays_with_sum function counts how many contiguous subarrays in an array sum to a target value k. Here’s why it works, explained simply:
 
     1. Track Window Sum: It uses two pointers (left and right) to form a sliding window. window_sum tracks the sum of elements from left to right. For [1, 1], k=1, it starts with window_sum = 0.
+    
     2.Expand Window: For each right, it adds arr[right] to window_sum. For example, at right=0, window_sum = 1 (adds 1).
+
     3. Shrink if Too Big: If window_sum > k, it shrinks the window by subtracting arr[left] and moving left forward until window_sum <= k or left > right. For right=1, window_sum = 2 > 1, so it subtracts arr[0]=1, making window_sum = 1.
+
     4. Count Matches: If window_sum == k, it increments count. For [1, 1], it finds window_sum = 1 at right=0 (subarray [1]) and after shrinking at right=1 (subarray [1]), so count = 2.
+
     5. Repeat Until End: It continues moving right through the array, checking each window. The while loop ensures only valid windows are counted.
 
     Why It Works: The sliding window efficiently checks all possible contiguous subarrays by expanding (right moves) and shrinking (left moves) as needed. It counts a subarray whenever its sum equals k, ensuring no valid subarray is missed. For [1, 1], k=1, it correctly finds both [1] subarrays, returning 2.

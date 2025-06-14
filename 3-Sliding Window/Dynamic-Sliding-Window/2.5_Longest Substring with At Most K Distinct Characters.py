@@ -1,5 +1,8 @@
+# 2.5 Longest Substring with At Most K Distinct Characters
+
 """
 Task: Given a string, find the length of the longest substring with at most K distinct characters.
+
 Example 1: s = "eceba", K = 2 → Output = 3 (substring "ece")
 Example 2: s = "aa", K = 1 → Output = 2 (substring "aa")
 Example 3: s = "aabbcc", K = 2 → Output = 4 (substring "aabb" or "bbcc")
