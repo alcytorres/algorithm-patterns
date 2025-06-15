@@ -2,6 +2,7 @@
 
 """
 Task: Given a string, find the length of the longest substring without any repeating characters.
+
 Example 1: s = "abcabccc" → Output = 3 (substring "abc")
 Example 2: s = "aa"       → Output = 1 (substring "a") 
 Example 3: s = "aabbcc"   → Output = 2 (substring "ab" or "bc")

@@ -114,6 +114,7 @@ def is_sorted(arr):              # Example: arr = [1, 2, 3, 4]
 print(is_sorted([1, 2, 3, 4]))  # Output: True (1 ≤ 2, 2 ≤ 3, 3 ≤ 4)
 
 
+
 # Solution with output Full Breakdown 
 def is_sorted(arr):              # Example: arr = [1, 2, 3, 4]
 

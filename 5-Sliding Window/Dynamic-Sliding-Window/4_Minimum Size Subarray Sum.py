@@ -5,8 +5,8 @@ Task: Given an array of positive integers nums and a positive integer S, find th
 
 Example 1: nums = [1,3,4,3,1], S = 7 → Output = 2 (subarray [4,3])
 Example 2: nums = [1,2,3,4,5], S = 15 → Output = 5 (subarray [1,2,3,4,5])
-Example 3: nums = [1,2,3], S = 10 → Output = 0 (no subarray sums to 10 or more)
-Example 4: nums = [1,2,10], S = 6 → Output: 1 (subarray [10] sums to 10)
+Example 3: nums = [1,2,3],     S = 10 → Output = 0 (no subarray sums to 10 or more)
+Example 4: nums = [1,2,10],    S = 6 → Output: 1 (subarray [10] sums to 10)
 """
 
 def minSubArrayLen(S, nums):

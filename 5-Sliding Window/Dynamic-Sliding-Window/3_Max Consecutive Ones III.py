@@ -2,9 +2,10 @@
 
 """
 Task: Given a binary array and an integer K, return the maximum number of consecutive 1's if you can flip at most K 0's.
+
 Example 1: nums = [1,1,0,0,1,1,0], K = 2 → Output = 6 (flip 0's at indices 2 and 3)
-Example 2: nums = [0,0,1,1,0,1], K = 1 → Output = 4 (flip 0 at index 4)
-Example 3: nums = [1,1,1,1], K = 1 → Output = 4 (no flip needed)
+Example 2: nums = [0,0,1,1,0,1],   K = 1 → Output = 4 (flip 0 at index 4)
+Example 3: nums = [1,1,1,1],       K = 1 → Output = 4 (no flip needed)
 """
 
 def longestOnes(nums, K):

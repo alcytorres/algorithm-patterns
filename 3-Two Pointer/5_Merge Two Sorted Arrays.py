@@ -66,8 +66,9 @@ def merge_sorted_arrays(arr1, arr2):   # Define the function that takes two arra
     return result         # Return the fully merged and sorted array
 
 
+print(merge_sorted_arrays([1, 3], [2, 4, 6]))  # Output: [1, 2, 3, 4, 6]
 # print(merge_sorted_arrays([1, 3], [2, 4]))  # Output: [1, 2, 3, 4]
-# print(merge_sorted_arrays([1, 3], [2, 4, 6]))  # Output: [1, 2, 3, 4, 6]
+
 
 """
 Explanation: Why Only One Array Has Leftovers for the last couple of line?
