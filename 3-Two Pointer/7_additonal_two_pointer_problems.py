@@ -1,5 +1,4 @@
-# ----------------------------------------------------------------------------------
-# Finding a Pair with Target Sum
+# 7.1 Finding a Pair with Target Sum
 
 """
 Task: Given an array of integers and a target value, find two numbers that add up to the target. Return the pair as a list. If no pair exists return None.
@@ -40,7 +39,7 @@ Why while left < right:?
 
 
 # ----------------------------------------------------------------------------------
-# Valid Palindrome Check
+# 7.2 Valid Palindrome Check
 """
 Task: Determine if a given string is a palindrome (reads the same forward and backward). Consider exact characters (no case or space handling for simplicity).
 
@@ -60,15 +59,17 @@ def is_palindrome(s):
     left, right = 0, len(s) - 1
     
     # 3️⃣ Loop to compare characters from both ends
-    if s[left] != s[right]:
-        return False
-    left += 1
-    right -= 1
+    while left < right:
+        if s[left] != s[right]:
+            return False
+        left += 1
+        right -= 1
     
     # 4️⃣ Return True if all characters match
     return True
 
-print(is_palindrome("abba"))
+print(is_palindrome("abba"))  # Output: True
+
 
 
 """

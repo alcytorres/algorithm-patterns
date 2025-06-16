@@ -65,22 +65,6 @@ text = "12a3"
 print(text.isdigit())  # Output: False
 
 
-# STRING METHOD: .split()
-# What it does: Splits a string into a list of substrings based on a delimiter (default is whitespace).
-# DSA use case: Parses strings into tokens for array or word-based problems (e.g., word count, reverse words).
-# Why it’s useful: Simplifies string processing by converting text into manageable list elements.
-# Time/Space: O(n) time (n = string length), O(n) space for the resulting list.
-# Syntax:
-string.split(separator)  # Returns a list of substrings; 'separator' is optional (defaults to whitespace)
-# DSA Example 1 (Word Parsing):
-text = "hello world"
-print(text.split())  # Output: ['hello', 'world']
-# DSA Example 2 (Custom Delimiter):
-text = "a,b,c"
-print(text.split(','))  # Output: ['a', 'b', 'c']
-
-
-
 # ----------------------------------------------------------------------------------
 # LIST METHODS
 
@@ -271,16 +255,12 @@ print(int(value))  # Output: 5
 
 # BUILT-IN FUNCTION: 
 float()
-# What it does: Converts a value (like a string or integer) to a decimal (floating-point number).
+# What it does: Converts a value (like a string or integer) to a floating-point number.
 # DSA use case: Handles decimal inputs in numerical problems (e.g., geometric or precision calculations).
 # Why it’s useful: Supports floating-point arithmetic when decimals are needed.
-# How it works:
-    # Takes a string (like "123.45") or an integer (like 5) as input.
-    # Returns a float (a number with decimals).
 # Time/Space: O(n) time (n = string length for strings), O(1) space.
 # Syntax:
 float(value)  # Returns a float; 'value' can be a string, integer, etc.
-
 # DSA Example 1 (String to Float):
 num = "123.45"
 print(float(num) + 0.55)  # Output: 124.0
