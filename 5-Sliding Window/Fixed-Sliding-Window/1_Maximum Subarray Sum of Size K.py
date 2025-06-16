@@ -9,7 +9,8 @@ Potential Knowledge Gaps
    - Adjusting the window dynamically (e.g., shrinking or expanding)
 
    
-Task: Given an array of numbers and an integer k, find the maximum sum of any contiguous subarray of size k. If the array has fewer than k numbers, return None.
+Task: Given an array of numbers and an integer k, find the maximum sum of any contiguous subarray of size k. 
+If the array has fewer than k numbers, return None.
 
 Example 1: [1, 2, 3, 4]     k=2 → 7 (3 + 4)
 Example 2: [1, 4, 6, 2]     k=2 → 10 (4 + 6)

@@ -1,6 +1,7 @@
 # Maximum Subarray Average of Size K
 """
-Task: Given an integer array nums and an integer k, find maximum average of any contiguous subarray of size k. If the array has fewer than k elements, return None.
+Task: Given an integer array nums and an integer k, find maximum average of any contiguous subarray of size k. 
+If the array has fewer than k elements, return None.
 
 Example 1: [1, 2, 3, 4], k=2 → 3.5
 Example 2: [10, 2, 4],   k=2 → 6
@@ -18,13 +19,13 @@ def sliding_window_fixed(arr, k):
     window_sum = sum(arr[:k])           
     
     # 3️⃣ Compute initial result for first window
-    max_result = window_sum / k   # Initialize result      
+    max_result = window_sum / k        
     
     # 4️⃣ Slide the window across the array
     for i in range(k, len(arr)):                                      
-        window_sum = arr[i] - arr[i - k]  # Add new element, remove old element
+        window_sum += arr[i] - arr[i - k]
         current_average = window_sum / k   
-        max_result = max(max_result, current_average)  # Update max_result
+        max_result = max(max_result, current_average)
     
     # 5️⃣ Return max_result
     return max_result                     
@@ -33,6 +34,32 @@ def sliding_window_fixed(arr, k):
 print(sliding_window_fixed([1, 2, 3, 4], 2))  # Output: 3.5
 
 # print(sliding_window_fixed([10, 2, 4], 2))    # Output: 6
+
+
+# Simple Breakdown
+def sliding_window_fixed(arr, k):        
+    
+    # 1️⃣ Input Validation  
+    if len(arr) < k:                      
+        return None            
+                
+    # 2️⃣ Initialize the first window
+    window_sum = sum(arr[:k])           
+    
+    # 3️⃣ Compute initial result for first window
+    max_result = window_sum / k   # Initialize result      
+    
+    # 4️⃣ Slide the window across the array
+    for i in range(k, len(arr)):                                      
+        window_sum += arr[i] - arr[i - k]  # Add new element, remove old element
+        current_average = window_sum / k   # Calculate the current average
+        max_result = max(max_result, current_average)  # Update max_result
+    
+    # 5️⃣ Return max_result
+    return max_result                     
+
+
+print(sliding_window_fixed([1, 2, 3, 4], 2))  # Output: 3.5
 
 
 
@@ -98,7 +125,5 @@ def sliding_window_fixed(arr, k):  # Example: arr = [1, 2, 3, 4], k = 2
 
 
 print(sliding_window_fixed([1, 2, 3, 4], 2))  # Output: 3.5
-
-
 
 

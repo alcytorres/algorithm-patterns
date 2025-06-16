@@ -1,4 +1,4 @@
-# 4.5. Sliding Window Averages
+# 3.5. Sliding Window Averages
 """
 Task: Compute the list of averages for all contiguous subarrays of size k. If the input array is shorter than 'k' return [].
 
@@ -56,7 +56,7 @@ def sliding_window_average(arr, k):   # Define the function that takes an array 
 
     # 4️⃣ Slide the window and compute averages for remaining windows
     for i in range(k, len(arr)):  # Loop from index k to the end of the array
-        window_sum = window_sum - arr[i - k] + arr[i]  # Slide the window: subtract the leftmost element, add the new right element
+        window_sum += arr[i] - arr[i - k]  # Slide the window: subtract the leftmost element, add the new right element
         averages.append(window_sum / k)  # Calculate the new average and append it to the list
 
     # 5️⃣ Return the list of averages
@@ -79,59 +79,58 @@ How does this work?:  window_sum = window_sum - arr[i - k] + arr[i]:
 # ----------------------------------------------------------------------------------
 # Task: Compute the list of averages for all contiguous subarrays of size k.
 
+
 def sliding_window_average(arr, k):  # Example: arr = [1, 2, 3, 4], k = 2
 
     # 1️⃣ Check if array is too short
     # If the array length is less than k, return an empty list
     # Why? We can't form any subarray of size k if the array is too small
-    if len(arr) < k:        # len(arr) = 4, k = 2, 4 < 2 is false, proceed
-        return []           # skip
+    if len(arr) < k:  # len(arr) = 4, k = 2, 4 < 2 is false, proceed
+        return []  # skip
 
     # 2️⃣ Compute the sum of the first window
     # Sum the first k elements to get the initial window sum
-    # Why? This gives us the sum for the first subarray of size k
-    window_sum = sum(arr[:k])  # arr[:2] = [1, 2], sum = 1 + 2 = 3
-                               # window_sum = 3
+    # Why? We need the sum to calculate the average for the first subarray
+    window_sum = sum(arr[:k])  # arr[:2] = [1, 2], window_sum = 1 + 2 = 3
 
     # 3️⃣ Compute the average of the first window
-    # Create a list with the average of the first window
+    # Initialize the list with the average of the first window
     # Why? We need to store the average (sum/k) for the first subarray
-    averages = [window_sum / k]  # window_sum = 3, k = 2, 3/2 = 1.5
+    averages = [window_sum / k]  # window_sum = 3, k = 2, 3 / 2 = 1.5
                                  # averages = [1.5]
 
     # 4️⃣ Slide the window and compute averages for remaining windows
-    # Loop through the array starting from index k to process each window
-    # Why? Each iteration slides the window by one element to compute the next average
+    # Iterate from index k to the end to process each subsequent window
+    # Why? We slide the window one element at a time to compute averages for all k-sized subarrays
     for i in range(k, len(arr)):  # k = 2, len(arr) = 4, i goes from 2 to 3
-        # --- Iteration 0: i = 2 ---
-        # Update the window sum by removing the first element of the previous window
-        # and adding the current element
+        # --- Iteration 1: i = 2 ---
+        # Update sum: add new element, subtract the first element of the previous window
         # Why? This efficiently updates the sum without recalculating the entire window
-        window_sum = window_sum - arr[i - k] + arr[i]  # i = 2, i-k = 2-2 = 0
-                                                       # arr[0] = 1, arr[2] = 3
-                                                       # window_sum = 3 - 1 + 3 = 5
+        window_sum += arr[i] - arr[i - k]  # i = 2, arr[2] = 3, i-k = 2-2 = 0, arr[0] = 1
+                                           # window_sum = 3 + 3 - 1 = 5
 
-        # Compute the average for the current window and append it
-        # Why? We need the average (sum/k) for this window
-        averages.append(window_sum / k)  # window_sum = 5, k = 2, 5/2 = 2.5
+        # Compute and append the average for the current window
+        # Why? We need to store the average for each window
+        averages.append(window_sum / k)  # window_sum = 5, k = 2, 5 / 2 = 2.5
                                         # averages = [1.5, 2.5]
-        # After Iteration 0: window_sum = 5, averages = [1.5, 2.5]
+        # After Iteration 1: window_sum = 5, averages = [1.5, 2.5]
         # Current window: [2, 3] (sum = 5, average = 2.5)
 
-        # --- Iteration 1: i = 3 ---
+        # --- Iteration 2: i = 3 ---
         if i == 3:
-            window_sum = window_sum - arr[i - k] + arr[i]  # i = 3, i-k = 3-2 = 1
-                                                           # arr[1] = 2, arr[3] = 4
-                                                           # window_sum = 5 - 2 + 4 = 7
+            # Update sum
+            window_sum += arr[i] - arr[i - k]  # i = 3, arr[3] = 4, i-k = 3-2 = 1, arr[1] = 2
+                                               # window_sum = 5 + 4 - 2 = 7
 
-            averages.append(window_sum / k)  # window_sum = 7, k = 2, 7/2 = 3.5
+            # Compute and append the average
+            averages.append(window_sum / k)  # window_sum = 7, k = 2, 7 / 2 = 3.5
                                             # averages = [1.5, 2.5, 3.5]
-            # After Iteration 1: window_sum = 7, averages = [1.5, 2.5, 3.5]
+            # After Iteration 2: window_sum = 7, averages = [1.5, 2.5, 3.5]
             # Current window: [3, 4] (sum = 7, average = 3.5)
 
     # 5️⃣ Return the list of averages
     # Why? averages contains the average of each contiguous subarray of size k
-    return averages            # averages = [1.5, 2.5, 3.5]
+    return averages  # averages = [1.5, 2.5, 3.5]
 
 
 print(sliding_window_average([1, 2, 3, 4], 2))  # Output: [1.5, 2.5, 3.5]

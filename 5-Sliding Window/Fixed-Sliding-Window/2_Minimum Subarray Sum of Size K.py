@@ -11,21 +11,22 @@ Why: Practices sliding window technique to compute sums efficiently.
 
 def min_sum_sliding_window(arr, k):
 
-    # Input Validation 
+    # 1️⃣ Input Validation
     if len(arr) < k:
         return None
     
-    # Initialize the first window
+    # 2️⃣ Initialize the first window
     window_sum = sum(arr[:k])
 
-    # Compute initial result for first window   
+    # 3️⃣ Compute initial result for first window
     min_sum = window_sum 
     
-    # Slide the window across the array
+    # 4️⃣ Slide the window across the array
     for i in range(k, len(arr)):
         window_sum += arr[i] - arr[i-k]  
         min_sum = min(min_sum, window_sum)
     
+    # 5️⃣ Return min_sum
     return min_sum
 
 print(min_sum_sliding_window([1, 2, 3, 4], 2))   # Output: 3 → 1+2 = 3

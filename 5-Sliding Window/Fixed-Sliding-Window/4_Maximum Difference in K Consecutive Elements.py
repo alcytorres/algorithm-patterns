@@ -1,6 +1,7 @@
 # Maximum Difference (max -min) in K Consecutive Elements
 """
-Task: Given an array of numbers and an integer k, find the maximum difference between the largest and smallest numbers in any group of k numbers that are next to each other in the list. If the array has fewer than k numbers, return None.
+Task: Given an array of numbers and an integer k, find the maximum difference between the largest and smallest numbers in any group of k numbers that are next to each other in the list. 
+If the array has fewer than k numbers, return None.
 
 Example 1: [1, 2, 6], k = 2 → 4 (subarray [2, 6] has max 6, min 2, difference 6 - 2 = 4)
 Example 2: [6, 2, 1], k = 2 → 4 (subarray [2, 6] has max 6, min 2, difference 6 - 2 = 4)
@@ -22,7 +23,7 @@ def max_difference_sliding_window(arr, k):
     max_diff = max(window) - min(window)     
     
     # 4️⃣ Slide the window across the array and update result
-    for i in range(k, len(arr)):                                         
+    for i in range(k, len(arr)):         
         window = arr[i - k + 1:i + 1]       
         current_diff = max(window) - min(window)  
         max_diff = max(max_diff, current_diff)    
