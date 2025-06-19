@@ -1,10 +1,12 @@
 # Maximum Difference (max -min) in K Consecutive Elements
 """
 Task: Given an array of numbers and an integer k, find the maximum difference between the largest and smallest numbers in any group of k numbers that are next to each other in the list. 
-If the array has fewer than k numbers, return None.
+    - If the array has fewer than k numbers, return None.
 
 Example 1: [1, 2, 6], k = 2 → 4 (subarray [2, 6] has max 6, min 2, difference 6 - 2 = 4)
+
 Example 2: [6, 2, 1], k = 2 → 4 (subarray [2, 6] has max 6, min 2, difference 6 - 2 = 4)
+
 Example 3: [1, 2, 8, 10], k = 2 → 6 (subarray [2, 8] has max 8, min 2, difference 8 - 2 = 6)
 
 Why: Practices sliding window technique to compute differences efficiently.

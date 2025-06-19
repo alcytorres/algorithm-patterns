@@ -1,7 +1,8 @@
 # 7.1 Finding a Pair with Target Sum
 
 """
-Task: Given an array of integers and a target value, find two numbers that add up to the target. Return the pair as a list. If no pair exists return None.
+Task: Given an array of integers and a target value, find two numbers that add up to the target. Return the pair as a list. 
+If no pair exists return None.
 
 Example: [2, 10, 5, 15], target = 7 → [2, 5] (since 2 + 5 = 7)
 
@@ -35,6 +36,23 @@ print(find_pair_with_target_sum([1, 5, 4, 10], 15))  # Output: [5, 10]
 Why while left < right:?
     
     The while left < right: ensures left and right pointers don’t meet or cross, so we always check pairs of different elements in the sorted array.
+
+
+
+
+Why different pointers for Two Pointer problem #4 and #7?
+    Target Difference: Starts left=0, right=1 (close) to check if arr[right] - arr[left] = target.
+    
+    Target Sum: Starts left=0, right=end (far) to check if arr[left] + arr[right] = target.
+
+Why loop differently?
+    Target Difference: Loops until right reaches end, moves left or right to adjust difference, ensures left != right.
+    
+    Target Sum: Loops while left < right, moves left up or right down to adjust sum.
+
+*** Easy Takeaway: 
+    Difference uses nearby pointers to find a gap; 
+    Sum uses far pointers to find a total. ***
 """
 
 

@@ -1,7 +1,7 @@
 # Maximum Product of K Consecutive Elements
 """
 Task: Given an integer array nums and an integer k, find the maximum product of any contiguous subarray of size k. 
-If the array has fewer than k elements, return None.
+    - If the array has fewer than k elements, return None.
 
 Example 1: [1, 2, 3],    k = 2 → 6 ([2, 3])
 Example 1: [1, 2, 3, 4], k = 2 → 12 ([3, 4])

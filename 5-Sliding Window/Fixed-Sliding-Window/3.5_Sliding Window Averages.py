@@ -1,6 +1,7 @@
 # 3.5. Sliding Window Averages
 """
-Task: Compute the list of averages for all contiguous subarrays of size k. If the input array is shorter than 'k' return [].
+Task: Compute the list of averages for all contiguous subarrays of size k. 
+    - If the input array is shorter than 'k' return [].
 
 Example 1: [1, 2, 3, 4],  k=2 → [1.5, 2.5, 3.5]
 Example 2: [2, 4, 6, 10], k=2 → [3, 5, 8]

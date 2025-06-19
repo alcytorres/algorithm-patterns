@@ -1,6 +1,7 @@
 # 4. Find Pair with Target Difference
 """
-Task: Find two numbers in an array whose difference is a given target. The larger number minus the smaller should equal the target. Return None if no pair is found.
+Task: Find two numbers in an array whose difference is a given target. The larger number minus the smaller should equal the target. 
+    - Return None if no pair is found.
     - Assume target is non-negative
 
 Example 1: [1, 4, 3, 7], target = 6 → [1, 7]
@@ -79,18 +80,36 @@ def find_pair_with_difference(arr, target):   # Define the function that takes a
 
 
 """
-Explanation  if left == right: 
-                right += 1  
+Explanation if left == right: 
+               right += 1  
 This part of the find_pair_with_difference code prevents the left and right pointers from pointing to the same number after left moves forward.
 
 How to know when to Use if left == right: right += 1
       - Two pointers (left, right) compare/process pairs in a loop.
       - Moving one pointer (left += 1) might make left == right.
       - You need different elements (e.g., for sum, difference).
+
    - Sign it’s needed: Overlapping pointers give wrong results (e.g., arr[right] - arr[left] = 0).
+
    - Examples: Pair-finding (difference = target), two-sum, sorted array problems where left catching right breaks logic.
+
+
+   
+
+Why different pointers for Two Pointer problem #4 and #7?
+    Target Difference: Starts left=0, right=1 (close) to check if arr[right] - arr[left] = target.
+    
+    Target Sum: Starts left=0, right=end (far) to check if arr[left] + arr[right] = target.
+
+Why loop differently?
+    Target Difference: Loops until right reaches end, moves left or right to adjust difference, ensures left != right.
+    
+    Target Sum: Loops while left < right, moves left up or right down to adjust sum.
+
+*** Easy Takeaway: 
+    Difference uses nearby pointers to find a gap; 
+    Sum uses far pointers to find a total. ***
 """
-# ----------------------------------------------------------------------------------
 
 
 # ----------------------------------------------------------------------------------

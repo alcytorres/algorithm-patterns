@@ -58,7 +58,7 @@ def prefix_sum(arr):   # Define the function that takes an array 'arr' as input
 
     return result       # Return the prefix sum array
 
-# Test the function
+
 # print(prefix_sum([1, 2, 3, 4]))  # Output: [1, 3, 6, 10]  → [1, 1+2, 1+2+3 + 1+2+3+4]
 
 
