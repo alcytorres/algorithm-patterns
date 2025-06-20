@@ -1,7 +1,7 @@
 # Maximum Subarray Average of Size K
 """
 Task: Given an integer array nums and an integer k, find maximum average of any contiguous subarray of size k. 
-If the array has fewer than k elements, return None.
+    - If the array has fewer than k elements, return None.
 
 Example 1: [1, 2, 3, 4], k=2 → 3.5
 Example 2: [10, 2, 4],   k=2 → 6

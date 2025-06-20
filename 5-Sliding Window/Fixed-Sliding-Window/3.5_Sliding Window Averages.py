@@ -23,7 +23,7 @@ def sliding_window_average(arr, k):
 
     # 4️⃣ Slide the window and compute averages for remaining windows
     for i in range(k, len(arr)):
-        window_sum = window_sum - arr[i - k] + arr[i]
+        window_sum += arr[i] - arr[i - k]    
         averages.append(window_sum / k)
     
     # 5️⃣ Return the list of averages
