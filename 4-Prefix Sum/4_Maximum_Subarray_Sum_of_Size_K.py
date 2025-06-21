@@ -26,7 +26,8 @@ print(prefix_sum([1, 2, 3, 4]))  # Output: [1, 3, 6, 10]  →  [1, 1+2, 1+2+3 + 
 
 # 4. Maximum Subarray Sum of Size K
 """
-Task: Find the maximum sum of any continous subarray in the array of size k. If array is shorter than 'k' return none.
+Task: Find the maximum sum of any continous subarray in the array of size k. 
+    - If array is shorter than 'k' return none.
       
 Example 1: [1, 2, 3],     k=2 → 5 (2 + 3)
 Example 2: [1, 2, 3, 4],  k=2 → 7 (3 + 4)

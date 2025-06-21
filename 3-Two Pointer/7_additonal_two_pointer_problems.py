@@ -2,7 +2,7 @@
 
 """
 Task: Given an array of integers and a target value, find two numbers that add up to the target. Return the pair as a list. 
-If no pair exists return None.
+    - If no pair exists return None.
 
 Example: [2, 10, 5, 15], target = 7 → [2, 5] (since 2 + 5 = 7)
 
