@@ -1,23 +1,20 @@
+# Subarray Manipulation: Subarray with Sum
 """
-Subarray Manipulation
 Task: Find a contiguous subarray that sums to a given target (non-negative numbers).
+    - Input is a non-empty array of integers with a target
 
 Example 1: [1, 2, 3, 7, 5], target=12 → [2, 3, 7] (sums to 12)
-Example 2: [1, 2, 3, 4], target=0 → None
 
 Why: Teaches sliding window technique for subarray problems.
 """
 
+
 def subarray_with_sum(arr, target):
-    # 1️⃣ Handle edge case: empty array
-    if not arr:
-        return None
-    
-    # 2️⃣ Initialize window sum and start pointer
+    # 1️⃣ Initialize window sum and start pointer
     current_sum = arr[0]
     start = 0
     
-    # 3️⃣ Slide window to find subarray with target sum
+    # 2️⃣ Slide window to find subarray with target sum
     for end in range(1, len(arr)):
         while current_sum > target and start < end:
             current_sum -= arr[start]  # Shrink window from start
@@ -26,14 +23,13 @@ def subarray_with_sum(arr, target):
             return arr[start:end]  # Return subarray if sum matches
         current_sum += arr[end]  # Expand window by adding end element
     
-    # 4️⃣ Check final window
+    # 3️⃣ Check final window
     if current_sum == target:
         return arr[start:]
     return None
 
-# Test the function
 print(subarray_with_sum([1, 2, 3, 7, 5], 12))  # Output: [2, 3, 7]
-print(subarray_with_sum([1, 2, 3, 4], 0))     # Output: None
+
 
 # Simple Breakdown
 """

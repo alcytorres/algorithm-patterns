@@ -1,5 +1,5 @@
+# Sorting and Searching: Bubble Sort
 """
-Sorting and Searching
 Task: Implement bubble sort to sort an array in ascending order.
 
 Example 1: [3, 2, 1] → [1, 2, 3]
@@ -22,7 +22,6 @@ def bubble_sort(arr):
     # 4️⃣ Return the sorted array
     return arr
 
-# Test the function
 print(bubble_sort([3, 2, 1]))      # Output: [1, 2, 3]
 print(bubble_sort([4, 2, 5, 1]))  # Output: [1, 2, 4, 5]
 

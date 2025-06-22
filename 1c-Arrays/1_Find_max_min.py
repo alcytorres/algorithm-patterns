@@ -1,5 +1,5 @@
+# Array Manipulation: Find max and min
 """
-Array Manipulation
 Task: Find the maximum and minimum elements in an array.
 
 Example 1: [1, 2, 3] → Max: 3, Min: 1
@@ -27,9 +27,9 @@ def find_max_min(arr):
     # 4️⃣ Return the tuple of max and min values
     return max_val, min_val
 
-
 print(find_max_min([1, 2, 3]))      # Output: (3, 1)
 print(find_max_min([4, 2, 5, 1]))  # Output: (5, 1)
+
 
 # Simple Breakdown
 """

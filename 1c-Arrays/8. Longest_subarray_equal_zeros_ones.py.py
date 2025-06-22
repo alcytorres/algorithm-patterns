@@ -1,3 +1,4 @@
+# Longest Subarray Equal Zeros Ones
 """
 Task: Find the length of the longest subarray with an equal number of 0s and 1s.
 
@@ -24,9 +25,9 @@ def longest_subarray_equal_zeros_ones(arr):
     # 3️⃣ Return the maximum length found
     return max_length
 
-# Test the function
 print(longest_subarray_equal_zeros_ones([0, 1]))     # Output: 2
 print(longest_subarray_equal_zeros_ones([0, 1, 0]))  # Output: 2
+
 
 # Simple Breakdown
 """

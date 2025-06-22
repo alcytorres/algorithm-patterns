@@ -1,5 +1,5 @@
+# Sorting and Searching: Find First Occurance
 """
-Sorting and Searching
 Task: Find the index of the first occurrence of a target in a sorted array with duplicates.
 
 Example 1: [1, 2, 2, 3], target=2 → 1
@@ -28,9 +28,9 @@ def find_first_occurrence(arr, target):
     # 3️⃣ Return the earliest index or -1 if not found
     return result
 
-# Test the function
 print(find_first_occurrence([1, 2, 2, 3], 2))  # Output: 1
 print(find_first_occurrence([1, 2, 3, 4], 5))  # Output: -1
+
 
 # Simple Breakdown
 """

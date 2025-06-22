@@ -1,5 +1,5 @@
+# Sorting and Searching: Binary Search
 """
-Sorting and Searching
 Task: Implement binary search on a sorted array to find the index of a target element.
 
 Example 1: [1, 2, 3, 4], target=3 → 2
@@ -26,9 +26,9 @@ def binary_search(arr, target):
     # 3️⃣ Target not found
     return -1
 
-# Test the function
 print(binary_search([1, 2, 3, 4], 3))  # Output: 2
 print(binary_search([1, 2, 3, 4], 5))  # Output: -1
+
 
 # Simple Breakdown
 """
