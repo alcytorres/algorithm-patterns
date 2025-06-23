@@ -1,4 +1,4 @@
-# 122. Best Time to Buy and Sell Stock II
+# Best Time to Buy and Sell Stock I
 """
 You are given an array prices where prices[i] is the price of a given stock on the ith day.
 
@@ -15,6 +15,8 @@ Output: 5
 Explanation: Buy on day 2 (price = 1) and sell on day 5 (price = 6), profit = 6-1 = 5.
 
 Note that buying on day 2 and selling on day 1 is not allowed because you must buy before you sell.
+
+# Why: Practices tracking minimum price and maximum profit efficiently in a single pass.
 
 https://www.youtube.com/watch?v=kJZrMGpyWpk
 """
@@ -38,7 +40,7 @@ def max_profit(prices):
     # 3️⃣ Return the maximum profit
     return max_profit
 
-print(max_profit([7,1,5,3,6,4]))
+print(max_profit([7, 1, 5, 3, 6, 4]))
 
 # Time: O(n)
 # Space: O(1)
@@ -47,9 +49,10 @@ print(max_profit([7,1,5,3,6,4]))
 # ----------------------------------------------------------------------------------
 
 # Task: Find the maximum profit from buying and selling a stock once, given an array of daily prices.
+
 # Return 0 if no profit is possible. Buy must occur before sell.
+
 # Example: prices = [7, 1, 5, 3, 6, 4] → Output = 5 (buy at 1, sell at 6, profit = 6 - 1 = 5)
-# Why: Practices tracking minimum price and maximum profit efficiently in a single pass.
 
 def max_profit(prices):  # Example: prices = [7, 1, 5, 3, 6, 4]
 

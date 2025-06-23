@@ -19,7 +19,7 @@ def remove_duplicates(arr):
             arr[unique_pos] = arr[i]  # Place it at the next unique position
             unique_pos += 1  # Move the unique position forward
     
-    # 3️⃣Return the length of the array with duplicates removed
+    # 3️⃣ Return the length of the array with duplicates removed
     return unique_pos
 
 arr1 = [1, 1, 2]
