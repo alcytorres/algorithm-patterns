@@ -1,25 +1,31 @@
 """
-Given an integer array nums, move all 0's to the end of it while maintaining the relative order of the non-zero elements.
+Task: Given an integer array nums, move all 0's to the end of it while maintaining the relative order of the non-zero elements.
+
+In other words: move all non-zero values to the left side of the array. 
 
 Note that you must do this in-place without making a copy of the array.
 
 Example 1: Input: nums = [0,1,0,3,12] --> Output: [1,3,12,0,0]
-Example 2: Input: nums = [3,5,0,0,4] --> Output: [3,5,4,0,0]
+Example 2: Input: nums = [3,5,0,0,4]  --> Output: [3,5,4,0,0]
 
 https://www.youtube.com/watch?v=ls2rIJoj0c4&t=100s
+https://www.youtube.com/watch?v=aayNRwUN3Do
 """
-
-
 
 def move_zeros(arr):
 
+    # 1️⃣ Initialize pointer for non-zero elements
     non_zero_pos = 0
 
-    for read in range(len(arr)):
-        if arr[read] != 0:
+    # Iterate through the array with a read pointer
+    for read in range(len(arr)):     
+
+        # Check if the current element is non-zero
+        if arr[read] != 0:           
             arr[non_zero_pos], arr[read] = arr[read], arr[non_zero_pos]
             non_zero_pos += 1
 
+    # 3️⃣ Return the modified array
     return arr
 
 print(move_zeros([0, 1, 0, 3, 12]))  # Output: [1, 3, 12, 0, 0]
@@ -28,8 +34,7 @@ print(move_zeros([3, 5, 0, 0, 4]))  # Output: [3, 5, 4, 0, 0]
 
 
 
-
-
+# ----------------------------------------------------------------------------------
 # Task: Move all zeros to the end of an integer array in-place while maintaining the relative order of non-zero elements.
 # Example: arr = [0, 1, 0, 3, 12] → Output = [1, 3, 12, 0, 0]
 

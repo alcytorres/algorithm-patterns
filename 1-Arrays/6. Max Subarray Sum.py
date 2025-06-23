@@ -20,6 +20,7 @@ def max_subarray_sum(arr):
     for num in arr:
         current_sum += num
 
+        # Update max_sum if the current_sum is larger
         max_sum = max(max_sum, current_sum)
         if current_sum < 0:
             current_sum = 0
@@ -35,6 +36,15 @@ Simple Breakdown
 - Uses Kadane’s algorithm to track the maximum sum ending at each position.
 - Time Complexity: O(n), Space Complexity: O(1).
 - Efficient and fundamental for subarray problems.
+
+
+'-inf' Explained:
+    
+    is a string that Python uses to mean "negative infinity," a super tiny number smaller than any other number. 
+
+    When we write float('-inf'), Python turns that string into a number so small it’s like the lowest possible score. 
+
+    It’s in quotes because '-inf' is like a word that Python understands as "make this a huge negative number."
 """
 
 
@@ -120,5 +130,5 @@ def max_subarray_sum(arr):
     # 3️⃣ Return the maximum subarray sum
     return max_global
 
-print(max_subarray_sum([-2, 1, -3, 4, -1, 2, 1, -5, 4]))  # Output: 6
+print(max_subarray_sum([-2, 7, -3, 4]))  # Output: 8
 
