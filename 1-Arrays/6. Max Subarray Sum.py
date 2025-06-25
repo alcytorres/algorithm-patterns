@@ -33,9 +33,9 @@ print(max_subarray_sum([-2, 7, -3, 4]))  # Output: 8
 
 """
 Simple Breakdown
-- Uses Kadane’s algorithm to track the maximum sum ending at each position.
-- Time Complexity: O(n), Space Complexity: O(1).
-- Efficient and fundamental for subarray problems.
+    - Uses Kadane’s algorithm to track the maximum sum ending at each position.
+    - Time Complexity: O(n), Space Complexity: O(1).
+    - Efficient and fundamental for subarray problems.
 
 
 '-inf' Explained:
