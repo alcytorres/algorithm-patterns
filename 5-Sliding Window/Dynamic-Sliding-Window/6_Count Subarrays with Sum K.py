@@ -206,4 +206,17 @@ print(count_subarrays_with_sum([1, 2, 3], 3))  # Output: 2 (subarrays [1, 2] and
 
 
 # ----------------------------------------------------------------------------------
-# Solution with output 
+# Alternative Solution?
+
+def count_subarrays_with_sum(arr, k):
+    count = 0
+    prefix_sum = 0
+    sum_count = {0: 1}
+    for num in arr:
+        prefix_sum += num
+        if prefix_sum - k in sum_count:
+            count += sum_count[prefix_sum - k]
+        sum_count[prefix_sum] = sum_count.get(prefix_sum, 0) + 1
+    return count
+
+print(count_subarrays_with_sum([1, 1, 1], 2))  # Output: 2
