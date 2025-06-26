@@ -321,6 +321,23 @@ unique = {1, 2, 3}
 print(list(unique))  # Output: [1, 2, 3]
 
 
+# BUILT-IN FUNCTION: enumerate()
+# What it does: Returns an iterator of tuples containing indices and elements from an iterable.
+# DSA use case: Tracks both index and value during iteration (e.g., array traversal, index-based operations).
+# Why it’s useful: Simplifies loops needing both element and position, avoiding manual index tracking.
+# Time/Space: O(1) time to create iterator, O(1) space per iteration.
+# Syntax:
+enumerate(iterable, start=0)  # Returns (index, element) tuples; 'start' is optional
+# DSA Example 1 (Index Tracking):
+nums = ['a', 'b']
+for i, val in enumerate(nums):
+    print(i, val)  # Output: 0 a, 1 b
+# DSA Example 2 (Custom Start):
+chars = ['x', 'y']
+for i, val in enumerate(chars, start=1):
+    print(i, val)  # Output: 1 x, 2 y
+
+
 # BUILT-IN FUNCTION: 
 range()
 # What it does: Generates a sequence of numbers from 'start' to 'stop-1', optionally with a 'step'.
