@@ -13,9 +13,9 @@
 # 0:41:35 While Loops
 # 0:47:30 If / Elif / Else
 # 0:56:40 Functions
-# 1:11:15 Is
+# 1:11:15 Is             ***Review Important***
 # 1:27:13 Cool Function Tricks
-# 1:34:27 File Reading / Writing
+# 1:34:27 File Reading / Writing    ***Skipped review later***
 # 1:42:33 Objects and Classes
 # 1:56:00 Comments / Docstrings
 # 2:03:55 Lists in Detail
@@ -640,61 +640,118 @@ print(a)  # Outputs: [1, 2, 3] (a unchanged)
 # 1:27:13 Cool Function Tricks
 
 # Key Points:
-# - **Default Parameters**: Parameters can have default values (e.g., `b=4`), making them optional. Defaults must come after required parameters to avoid errors.
-# - **Keyword Arguments**: Specify arguments by name (e.g., `a=4`) in any order, overriding defaults. Mixing positional and keyword arguments is allowed but can cause errors if ambiguous (e.g., multiple values for a parameter).
-# - **Best Practice**: Use either all positional arguments (in order) or all keyword arguments to avoid confusion. Mixing requires careful ordering to prevent errors like `multiple values for argument`.
-# - **Practical Use**: Default parameters simplify function calls; keyword arguments improve readability and flexibility, especially for functions with many parameters.
-# - **Pitfalls**: Ensure required parameters precede defaults in the function definition. Avoid mixing positional and keyword arguments unless necessary to prevent errors.
+# - Default Parameters: Parameters can have default values (e.g., `b=4`), making them optional. Defaults must come after required parameters to avoid errors.
+# - Keyword Arguments: Specify arguments by name (e.g., `a=4`) in any order, overriding defaults. Mixing positional and keyword arguments is allowed but can cause errors if ambiguous (e.g., multiple values for a parameter).
+# - Best Practice: Use either all positional arguments (in order) or all keyword arguments to avoid confusion. Mixing requires careful ordering to prevent errors like `multiple values for argument`.
+# - Practical Use: Default parameters simplify function calls; keyword arguments improve readability and flexibility, especially for functions with many parameters.
+# - Pitfalls: Ensure required parameters precede defaults in the function definition. Avoid mixing positional and keyword arguments unless necessary to prevent errors.
 
-# Function with default parameters
+# Function with multiple parameters
+def add(a, b, c):
+    return a + b + c
+print(add(5, 9, 2))  # Outputs: 16 (5 + 9 + 2)
+
+# Error: Missing required argument
+def add(a, b, c):
+    return a + b + c
+print(add(5, 9))  # TypeError: add() missing 1 required positional argument: 'c'
+
+# Function with default parameter
+def add(a, b, c=4):
+    return a + b + c
+print(add(5, 9))  # Outputs: 18 (5 + 9 + 4, default c=4)
+print(add(5, 9, 2))  # Outputs: 16 (5 + 9 + 2, overrides c)
+
+# Function with multiple default parameters
+def add(a, b=4, c=5, d=2):
+    return a + b + c + d
+print(add(1))  # Outputs: 12 (1 + 4 + 5 + 2)
+print(add(1, 2))  # Outputs: 10 (1 + 2 + 5 + 2)
+
+# Error: Non-default argument after default
+def add(a=2, b):
+    return a + b  # SyntaxError: non-default argument follows default argument
+print(add(1, 2))  # Outputs: 10 (1 + 2 + 5 + 2)
+
+# Function with default parameter (corrected)
+def add(a, b=4):
+    return a + b
+print(add(2))  # Outputs: 6 (2 + 4)
+print(add(2, 5))  # Outputs: 7 (2 + 5, overrides b)
+
+# Function with multiple defaults
 def add(a, b=4, c=5):
-    return a * b + c
-print(add(2))        # Outputs: 6 (2 * 4 + 5)
-print(add(2, 5))     # Outputs: 15 (2 * 5 + 5)
+    return (a * b) + c
+print(add(2))  # Outputs: 13 (2 * 4 + 5)
+print(add(2, 5))  # Outputs: 15 (2 * 5 + 5)
 print(add(2, 5, 4))  # Outputs: 14 (2 * 5 + 4)
 
-# Keyword arguments
+# # Keyword arguments
+print(add(a=4))  # Outputs: 21 (4 * 4 + 5)
 print(add(a=4, b=10, c=4))  # Outputs: 44 (4 * 10 + 4)
-print(add(c=2, a=5))        # Outputs: 27 (5 * 4 + 2)
-print(add(10, c=4))         # Outputs: 44 (10 * 4 + 4)
-# print(add(10, a=4))        # TypeError: multiple values for argument 'a'
+print(add(b=10, c=4, a=4))  # Outputs: 44 (4 * 10 + 4, order irrelevant)
+print(add(c=2, a=5))  # Outputs: 22 (5 * 4 + 2)
+print(add(10, c=4))  # Outputs: 44 (10 * 4 + 4)
+
+# Error: Multiple values for argument
+print(add(10, a=4))  # TypeError: add() got multiple values for argument 'a'
+print(add(10, c=4, a=4))  # TypeError: add() got multiple values for argument 'a'
 
 # Correct mixing of positional and keyword
-print(add(10, b=4, c=4))    # Outputs: 44 (10 * 4 + 4)
+def add(a, b=4, c=5):
+    return (a * b) + c
+print(add(10, 3))  # Outputs: 35 (10 * 3 + 5)
+print(add(a=10, b=3))  # Outputs: 35 (10 * 3 + 5)
+print(add(10, b=4, c=4))  # Outputs: 44 (10 * 4 + 4)
 
 
 # ----------------------------------------------------------------------------------
 # 1:34:27 File Reading / Writing
 
 # Key Points:
-# - **Reading Files**: Use `with open(path, 'r') as f:` to safely read files. `f.readlines()` returns a list of lines (including `\n`); `f.read()` returns the entire file as a string; looping (`for line in f`) reads line by line, ideal for large files.
-# - **Writing Files**: Use `with open(path, 'w') as f:` to overwrite a file with `f.write()`. Use `'a'` mode to append instead of overwriting.
-# - **Newlines**: Files don’t automatically add `\n` when writing; add explicitly for new lines. Use `line.rstrip()` to remove trailing `\n` when reading line by line.
-# - **File Paths**: In Colab, use simple paths (e.g., `a_test.txt`) if files are in the current directory. Use `!ls` to check available files.
-# - **Best Practices**: Always use `with` to ensure files are properly closed. Append mode (`'a'`) preserves existing content; write mode (`'w'`) overwrites. Line-by-line reading is memory-efficient for large files.
-# - **Setup**: The example assumes a file `a_test.txt` with content: "hello there\n42\n35\n76\n,is comma the end".
+# - Reading Files: Use `with open(path, 'r') as f:` to safely read files. `f.readlines()` returns a list of lines (including `\n`); `f.read()` returns the entire file as a string; looping (`for line in f`) reads line by line, ideal for large files.
+# - Writing Files: Use `with open(path, 'w') as f:` to overwrite a file with `f.write()`. Use `'a'` mode to append instead of overwriting.
+# - Newlines: Files don’t automatically add `\n` when writing; add explicitly for new lines. Use `line.rstrip()` to remove trailing `\n` when reading line by line.
+# - File Paths: In Colab, use simple paths (e.g., `a_test.txt`) if files are in the current directory. Use `!ls` to check available files.
+# - Best Practices: Always use `with` to ensure files are properly closed. Append mode (`'a'`) preserves existing content; write mode (`'w'`) overwrites. Line-by-line reading is memory-efficient for large files.
+# - Setup: The example assumes a file `a_test.txt` with content: "hello there\n42\n35\n76\n,is comma the end".
 
 # Reading a file
+    # Opens a_test.txt in read mode and prints all lines as a list of strings, including newlines.
 p = "a_test.txt"
 with open(p, 'r') as f:
     print(f.readlines())  # Outputs: ['hello there\n', '42\n', '35\n', '76\n', ',is comma the end\n']
 
+# Reading entire file as a string
 with open(p, 'r') as f:
     print(f.read())  # Outputs: hello there\n42\n35\n76\n,is comma the end
 
+# Reading lines iteratively
 with open(p, 'r') as f:
     for line in f:
-        print(line.rstrip())  # Outputs: hello there, 42, 35, 76, ,is comma the end (one per line)
+        print(line)  # Outputs: hello there, 42, 35, 76, ,is comma the end (one per line)
 
-# Writing and appending to a file
+# Reading lines without trailing newlines
+with open(p, 'r') as f:
+    for line in f:
+        print(line.rstrip())  # Outputs: hello there, 42, 35, 76, ,is comma the end (no trailing \n)
+
+# Writing to a file
 with open("newfile.txt", 'w') as f:
     f.write("hello")  # Overwrites file with "hello"
 # File content: hello
 
+# Overwriting file content
 with open("newfile.txt", 'w') as f:
     f.write("hi")  # Overwrites file with "hi"
 # File content: hi
 
+# Appending to file
+with open("newfile.txt", 'a') as f:
+    f.write("hello")  # Appends "hello" to file
+# File content: hihello
+
+# Appending with newline
 with open("newfile.txt", 'a') as f:
     f.write("\nhello")  # Appends "\nhello" to file
 # File content: hi\nhello
@@ -704,14 +761,14 @@ with open("newfile.txt", 'a') as f:
 # 1:42:33 Objects and Classes
 
 # Key Points:
-# - A **class** is a blueprint (or "factory") for creating objects, which are instances of the class.
-# - **Objects** are instances of a class, holding data (attributes) and behaviors (methods).
+# - A class is a blueprint (or "factory") for creating objects, which are instances of the class.
+# - Objects are instances of a class, holding data (attributes) and behaviors (methods).
 # - Syntax: `class ClassName:` defines a class; `__init__` is the constructor method to initialize objects.
-# - **self**: Refers to the instance of the class within its methods, allowing access to its attributes (e.g., `self._age`).
+# - self: Refers to the instance of the class within its methods, allowing access to its attributes (e.g., `self._age`).
 # - Attributes (e.g., `_age`, `_name`) store data; methods (e.g., `__str__`, `older_younger_than`) define actions.
-# - **Special Methods**: `__str__` and `__repr__` control string representations for `print()` and direct output (e.g., in Colab).
-# - **Dot Notation**: Access attributes/methods with `object.attribute` or `object.method()`.
-# - **Underscores**: Single underscores (e.g., `_age`) suggest private attributes (convention, not enforced); double underscores (e.g., `__str__`) are special methods.
+# - Special Methods: `__str__` and `__repr__` control string representations for `print()` and direct output (e.g., in Colab).
+# - Dot Notation: Access attributes/methods with `object.attribute` or `object.method()`.
+# - Underscores: Single underscores (e.g., `_age`) suggest private attributes (convention, not enforced); double underscores (e.g., `__str__`) are special methods.
 # - Practical Use: Classes model real-world entities (e.g., a `Human` with name and age); methods add functionality (e.g., comparing ages).
 # - Pitfalls: Forgetting `self` in methods causes errors; string concatenation with non-strings (e.g., integers) requires conversion (e.g., `str()`).
 # - Example: The `Human` class demonstrates creating objects with attributes and methods, including custom string output and age comparison.
