@@ -924,52 +924,89 @@ h.older_younger_than(5)  # Outputs: our age is less than their age.
 # - Pitfalls: Poor docstrings (e.g., vague descriptions) reduce code usability; avoid duplicating obvious code details in comments.
 # - Example: A function with a docstring and `help()` demonstrates documentation; docstrings on classes provide class-level info.
 
-# Comment and docstring example
+# Basic comment
+# The following is a function that multiplies two numbers
 def mult(a, b):
-    '''mult(a, b) is a function which returns the multiplication of a and b.
-    a must be a number.
-    b must be a number.'''
     return a * b
 
-# Using help to view docstring
-help(mult)  # Outputs: mult(a, b) is a function which returns the multiplication of a and b...
+# Using help on built-in function
+help(print)  # Outputs: Documentation for print function
+
+# Adding docstring to function
+def mult(a, b):
+    '''
+    mult(a, b) is a function which returns the multiplication of a and b.
+
+    a must be a number.
+    b must be a number.
+    '''
+    return a * b
+help(mult)  # Outputs: mult(a, b) is a function which returns...
+
+# Invalid input for mult
+mult("friend", [1, 2, 3])  # TypeError: can't multiply sequence by non-int
+
+# Valid input for mult
+print(mult(4, -3.2))  # Outputs: -12.8 (4 * -3.2)
+
 
 # Docstring for Human class
 class Human:
-    '''A class that represents a very simplified human.
-    Takes their age as an int and their name as a str.'''
+    '''
+    A class that represents a very simplified human.
+    
+    It takes their age as an int and their name as a str.
+    '''
     def __init__(self, age, name):
         self._age = age
         self._name = name
+    
+    def __str__(self):
+        return f"a human with name {self._name}. their age is {str(self._age)}."
+    
+    def older_younger_than(self, age):
+        if self._age > age:
+            print("our age is bigger than their age.")
+        elif self._age == age:
+            print("our age is equal to their age.")
+        else:
+            print("our age is less than their age.")
 
-# Using help on class and object
+h = Human(age=4, name="greg")
+
+# Help on Human Class
 help(Human)  # Outputs: A class that represents a very simplified human...
-h = Human(4, "greg")
+
+# Help on Human object
 help(h)  # Outputs: Same as help(Human)
 
-# Help on built-in types
+# Help on Class and Object is the same
+    # help(Human) shows the class docstring and details, and help(h) shows the same since h is a Human instance.
+
+# # Help on integer
 a = 4
 help(a)  # Outputs: Documentation for int class
-help(6)  # Outputs: Documentation for int class (literals work too)
+help(6)  # Outputs: Documentation for int class (literal)
 
-# Error: Invalid input
-# mult("friend", [1, 2, 3])  # TypeError: can't multiply sequence by non-int
+# You can ask help on almost everything.
 
 
 # ----------------------------------------------------------------------------------
 # 2:03:55 Lists in Detail
 
 # Key Points:
-# - **Lists** are mutable, ordered sequences of items, defined with square brackets `[item1, item2, ...]`.
+# - Lists are mutable, ordered sequences of items, defined with square brackets `[item1, item2, ...]`.
 # - Methods: `append(item)` adds an item; `insert(index, item)` inserts at index; `count(item)` counts occurrences; `reverse()` reverses order; `remove(item)` removes first occurrence.
-# - All methods above have side effects, modifying the list in place; most return `None`.
+# - Most methods below have sife effects, modifying the list in place and return None; count() returns an integer.
 # - Lists support indexing (`list[index]`) and iteration (`for item in list`); indices start at 0.
-# - **Mutability**: Lists can be modified in place (e.g., `list[0] = 5`), affecting all references to the list (see `is` operator).
+# - Mutability: Lists can be modified in place (e.g., `list[0] = 5`), affecting all references to the list (see `is` operator).
 # - Practical Use: Lists are ideal for ordered, dynamic collections; methods like `append` and `remove` simplify manipulation.
 # - Pitfalls: Modifying a list in a function affects the original (side effect); use `deepcopy` to avoid. Out-of-range indices cause `IndexError`.
 # - Example: Nested loops demonstrate complex list-building logic, requiring careful analysis to understand output.
 
-# List methods
+# Most methods below have sife effects, modifying the list in place and return None; count() returns an integer.
+
+# Basic list methods
 l = [1, 2, 3]
 l.append(4)
 print(l)  # Outputs: [1, 2, 3, 4]
@@ -978,15 +1015,49 @@ l.insert(0, "hi")
 print(l)  # Outputs: ['hi', 1, 2, 3, 4]
 
 l.append(4)
+print(l)  # Outputs: ['hi', 1, 2, 3, 4, 4]
+
 print(l.count(4))  # Outputs: 2
 print(l.count("hi"))  # Outputs: 1
 print(l.count(7))  # Outputs: 0
 
 l.reverse()
-print(l)  # Outputs: [4, 4, 3, 2, 'hi']
+print(l)  # Outputs: [4, 4, 3, 2, 1, 'hi']
 
 l.remove(3)
-print(l)  # Outputs: [4, 4, 2, 'hi']
+print(l)  # Outputs: [4, 4, 2, 1, 'hi']
+
+# Understanding list append and print
+# Demonstrates the difference between printing a method's return value and the list itself.
+l = [1, 2, 3]
+print(l.append(4))  # Outputs: None (append modifies list, returns None)
+print(l)  # Outputs: [1, 2, 3, 4] (shows modified list)
+
+# Guide: Why print(l.append(4)) outputs None but print(l) shows [1, 2, 3, 4]
+# This explains how append works and why the outputs differ.
+# 1. append(4) modifies the list:
+#    - append(4) adds 4 to l, changing it to [1, 2, 3, 4].
+#    - It’s a mutating method with a side effect (changes l in place).
+#    - It returns None, meaning "no value," not the list.
+# 2. print(l.append(4)) shows None:
+#    - Python evaluates l.append(4) first, which returns None.
+#    - print() then outputs None, not the list’s contents.
+# 3. print(l) shows the list:
+#    - After append(4), l is [1, 2, 3, 4].
+#    - print(l) directly shows the list’s current state: [1, 2, 3, 4].
+# 4. Key takeaway:
+#    - append() changes the list but returns None.
+#    - Use print(l) to see the list, not print(l.append()).
+# Analogy: Think of append(4) as adding a toy to a box (l). The action updates the box but doesn’t give you the box—it says “Done!” (None). Asking “What’s in the box?” (print(l)) shows [1, 2, 3, 4].
+
+# Printing a method's return value
+l = [1, 2, 3]
+print(l.append(4))      # Outputs: None
+print(l.insert(0, "hi")) # Outputs: None
+print(l.reverse())      # Outputs: None
+print(l.remove(1))      # Outputs: None
+print(l.count(2))       # Outputs: 1 (not None)
+
 
 # Complex nested loop example
 l = []
@@ -995,7 +1066,13 @@ for i in range(5):
         if (i + j) % 2 == 0:
             l.append(i + j)
 print(l)  # Outputs: [0, 2, 2, 2, 4, 4, 4, 6]
-# Explanation: Appends i+j when i+j is even; i=0..4, j=0..2; e.g., (0,0)=0, (1,1)=2, (2,0)=2, etc.
+# Explanation: Appends i+j when i+j is even; i=0..4, j=0..2; e.g., (0,0)=0, (0,2)=2, (1,1)=2, (2,0)=2, (2,2)=4, (3,1)=4, (4,0)=4, (4,2)=6.
+
+
+# ----------------------------------------------------------------------------------
+# 2:07:15 List Slicing  --> Greg skipped this in video
+
+#  Use my Index and Slicing Guide 
 
 
 # ----------------------------------------------------------------------------------
@@ -1036,12 +1113,6 @@ for k in d.keys():
 d2 = {0: "greg", 1: "sarah", 2: "tom"}
 print(d2)  # Outputs: {0: 'greg', 1: 'sarah', 2: 'tom'}
 print(d2[1])  # Outputs: sarah
-
-
-
-# ----------------------------------------------------------------------------------
-# 2:07:15 List Slicing --> Use my Guide --> Greg skipped this in video
-
 
 
 # ----------------------------------------------------------------------------------
