@@ -1079,11 +1079,11 @@ print(l)  # Outputs: [0, 2, 2, 2, 4, 4, 4, 6]
 # 2:08:58 Dictionaries
 
 # Key Points:
-# - **Dictionaries** are unordered key-value pair collections, defined with curly braces `{key: value, ...}`.
+# - Dictionaries are unordered key-value pair collections, defined with curly braces `{key: value, ...}`.
 # - Keys must be hashable (e.g., strings, integers); values can be any type (e.g., strings, lists, objects).
 # - Operations: Lookup (`dict[key]`), update (`dict[key] = value`), delete (`del dict[key]`).
 # - Iteration: `for k in dict.keys():` loops through keys; access values with `dict[k]`.
-# - **Side Effects**: Updating or deleting keys modifies the dictionary in place.
+# - Side Effects: Updating or deleting keys modifies the dictionary in place.
 # - Practical Use: Dictionaries provide fast key-based lookups (O(1) complexity), ideal for mappings (e.g., word definitions, rankings).
 # - Pitfalls: Non-hashable keys (e.g., lists) cause `TypeError`; missing keys raise `KeyError`; use consistent key types (e.g., all strings).
 # - Example: A fruit dictionary demonstrates key-value operations; an integer-key dictionary shows alternative key types.
