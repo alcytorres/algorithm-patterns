@@ -16,7 +16,7 @@
 # 1:11:15 Is             ***Review Important***
 # 1:27:13 Cool Function Tricks
 # 1:34:27 File Reading / Writing    ***Skipped review later***
-# 1:42:33 Objects and Classes
+# 1:42:33 Objects and Classes.   ***Review Important***
 # 1:56:00 Comments / Docstrings
 # 2:03:55 Lists in Detail
 # 2:08:58 Dictionaries
@@ -773,22 +773,132 @@ with open("newfile.txt", 'a') as f:
 # - Pitfalls: Forgetting `self` in methods causes errors; string concatenation with non-strings (e.g., integers) requires conversion (e.g., `str()`).
 # - Example: The `Human` class demonstrates creating objects with attributes and methods, including custom string output and age comparison.
 
-# Defining a Human class
+# Defining Human class with basic constructor
 class Human:
-    def __init__(self, age, name):
+    def __init__(self, age, name):  # Initialize object with age and name attributes
         self._age = age  # Store age as attribute
         self._name = name  # Store name as attribute
+
+# Creating a Human object
+h = Human(age=4, name="greg")  # Instantiate Human with age 4 and name "greg"
+print(h)  # Outputs: <main.Human object at ...> (default representation)
+
+# Adding __str__ method
+class Human:
+    def __init__(self, age, name):
+        self._age = age
+        self._name = name
     
     def __str__(self):
-        # String representation for print()
-        return f"a human with name {self._name}. their age is {str(self._age)}."
+        return "hi"  # Temporary string representation
+
+# Creating a Human object
+h = Human(age=4, name="greg")  
+print(h)  # Outputs: hi (if redefined)
+
+# Adding __repr__ method --> For Google Colabs 
+# class Human:
+#     def __init__(self, age, name):
+#         self._age = age
+#         self._name = name
     
-    def __repr__(self):
-        # String representation for direct output (e.g., Colab)
+#     def __str__(self):
+#         return "hi"
+    
+#     def __repr__(self):
+#         return "hi"
+# print(h)  # Outputs: hi (in Colab, uses __repr__)
+
+# Updating __str__ and __repr__ with name
+class Human:
+    def __init__(self, age, name):
+        self._age = age
+        self._name = name
+    
+    def __str__(self):
+        return f"A human with name {self._name}."
+
+h = Human(age=4, name="greg")
+print(h)  # Outputs: A human with name greg.
+
+# Adding age to __str__ and __repr__
+class Human:
+    def __init__(self, age, name):
+        self._age = age
+        self._name = name
+    
+    def __str__(self):
+        return f"A human with name {self._name}. their age is {self._age}."
+    
+h = Human(age=4, name="greg")
+print(h)  # Outputs: A human with name greg. their age is 4.
+
+# Adding age to __str__ and __repr__ w Concatenation
+# With OUT str(self._age) you get:
+    # TypeError: can only concatenate str (not "int") to str
+    # Fix: Convert age to string
+class Human:
+    def __init__(self, age, name):
+        self._age = age
+        self._name = name
+    
+    def __str__(self):
+        return "A human with name " + self._name + "." + " Their age is " + str(self._age) + "."
+    
+h = Human(age=4, name="greg")
+print(h)  # Outputs: a human with name greg. their age is 4.
+
+
+# Breakdown: Defining Human class
+class Human:  # Creates Human class for storing age and name
+              # Think of it like a factory that makes humans.
+    def __init__(self, age, name):  # Initializes age and name attributes
+        self._age = age  # Sets age attribute
+        self._name = name  # Sets name attribute
+    
+    def __str__(self):  # Defines string representation of Human
+        return f"A human with name {self._name}. their age is {self._age}."  # Returns formatted description
+    
+# Using Human object
+h = Human(age=4, name="greg")  # Creates Human with age 4, name "greg"
+                               # h is an object of class Human.
+print(h)  # Outputs: A human with name greg. their age is 4.
+
+# Explanation: How a Class works:
+# The Human class is like a factory that builds human objects with age and name.
+# 1. Class as Blueprint:
+#    - The Human class defines a template for creating humans with two attributes: age and name.
+# 2. Creating a Human:
+#    - When we write h = Human(age=4, name="greg"), we tell the factory to make a human.
+#    - The constructor (__init__) runs to set up this human.
+#    - self is *this specific human* (greg), automatically set by Python.
+#    - self._age = 4 and self._name = "greg" store these as attributes (data) for this human.
+#    - The underscore (_) in _age and _name is a convention to suggest these attributes are private.
+# 3. Printing a Human:
+#    - When we print(h), Python calls __str__ to get a string description of this human.
+#    - __str__ uses self._name ("greg") and self._age (4) to return: "A human with name greg. their age is 4."
+# 4. Understanding self:
+#    - self refers to the particular human object we’re working with (here, greg).
+#    - It lets us access this human’s attributes (self._age, self._name) in methods like __init__ and __str__.
+# This code creates a human named greg, age 4, stores their attributes, and prints a friendly description!
+
+
+# Accessing attributes
+print(h._age)  # Outputs: 4
+print(h._name)  # Outputs: greg
+print(h.__str__())  # Outputs: a human with name greg. their age is 4.
+                    # "You would never actually do this - 1:52:55"
+
+# Adding a method
+class Human:
+    def __init__(self, age, name):
+        self._age = age
+        self._name = name
+    
+    def __str__(self):
         return f"a human with name {self._name}. their age is {str(self._age)}."
     
     def older_younger_than(self, age):
-        # Compare self's age to another age
         if self._age > age:
             print("our age is bigger than their age.")
         elif self._age == age:
@@ -796,31 +906,18 @@ class Human:
         else:
             print("our age is less than their age.")
 
-# Creating a Human object
 h = Human(age=4, name="greg")
-print(h)  # Outputs: a human with name greg. their age is 4.
 h.older_younger_than(3)  # Outputs: our age is bigger than their age.
 h.older_younger_than(4)  # Outputs: our age is equal to their age.
 h.older_younger_than(5)  # Outputs: our age is less than their age.
-
-# Accessing attributes
-print(h._age)  # Outputs: 4
-print(h._name)  # Outputs: greg
-
-# Calling __str__ directly (rare)
-print(h.__str__())  # Outputs: a human with name greg. their age is 4.
-
-# Error: String concatenation with integer
-# print("Age: " + h._age)  # TypeError: can only concatenate str (not "int") to str
-print("Age: " + str(h._age))  # Outputs: Age: 4
 
 
 # ----------------------------------------------------------------------------------
 # 1:56:00 Comments / Docstrings
 
 # Key Points:
-# - **Comments**: Lines starting with `#` are ignored by Python, used for human-readable notes (e.g., explaining code purpose).
-# - **Docstrings**: Triple-quoted strings (`'''` or `"""`) at the start of functions, classes, or modules provide documentation, accessible via `help()`.
+# - Comments: Lines starting with `#` are ignored by Python, used for human-readable notes (e.g., explaining code purpose).
+# - Docstrings: Triple-quoted strings (`'''` or `"""`) at the start of functions, classes, or modules provide documentation, accessible via `help()`.
 # - Docstrings describe purpose, parameters, and return values; they’re critical for reusable code and libraries.
 # - The `help()` function displays docstrings for functions, classes, or objects, aiding debugging and collaboration.
 # - Practical Use: Comments clarify code logic; docstrings document APIs for users (e.g., specifying parameter types).
