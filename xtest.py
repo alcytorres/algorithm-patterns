@@ -1,32 +1,7 @@
-# Basic try/except
-t = (1, 2, 3)
-try:
-    t[0] = 1  # Raises TypeError
-except:
-    print("caught it")  # Outputs: caught it
+# Getting user input
+result = input("hey please give us a number: ")
+print(f"the result is {result}.")  # Outputs: the result is 32. (if user enters 32)
+print(type(result))  # Outputs: <class 'str'>
 
-# Try/except with multiple statements
-try:
-    print("hi")
-    t[0] = 1  # Raises TypeError
-    print("hello")  # Skipped
-except:
-    print("caught it")  # Outputs: hi, caught it
-
-# Specific error catching
-try:
-    t[0] = 1  # Raises TypeError
-except TypeError:
-    print("caught it")  # Outputs: caught it
-
-# Wrong error type
-try:
-    t[0] = 1  # Raises TypeError
-except SyntaxError:
-    print("caught it")  # TypeError: not caught, program crashes
-
-# Syntax error cannot be caught
-try:
-    t[0] === 1  # SyntaxError: invalid syntax (cannot be caught)
-except SyntaxError:
-    print("caught it")
+# Validating input
+print(result.isnumeric())  # Outputs: True (if "32"), False (if "hi")

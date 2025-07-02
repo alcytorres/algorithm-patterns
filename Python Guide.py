@@ -1448,36 +1448,97 @@ empty_bool = False  # Represents a default "empty" boolean (False is often used)
 # - Pitfalls: Catching all errors (`except:`) can hide unexpected issues; specify error types when possible. `SyntaxError` cannot be caught in `try/except` as it’s a compile-time error.
 # - Example: Catching a `TypeError` for tuple assignment prevents program crashes; specific error handling improves robustness.
 
+# Tuple TypeError:
+t = (1, 2, 3)
+t[0] = 1  # Raises TypeError: 'tuple' object does not support item assignment
+
 # Basic try/except
+t = (1, 2, 3)
+try:
+    t[0] = 1  # Raises TypeError
+except:
+    print("caught it")  # Outputs: caught it
+
+# Try/except with multiple statements
+t = (1, 2, 3)
 try:
     print("hi")
-    t = (1, 2, 3)
     t[0] = 1  # Raises TypeError
     print("hello")  # Skipped
-except TypeError:
+except:
     print("caught it")  # Outputs: hi, caught it
 
-# Catching wrong error type
+# Specific error catching
+t = (1, 2, 3)
 try:
-    t = (1, 2, 3)
+    t[0] = 1  # Raises TypeError
+except TypeError:
+    print("caught it")  # Outputs: caught it
+
+# Wrong error type
+try:
     t[0] = 1  # Raises TypeError
 except SyntaxError:
     print("caught it")  # TypeError: not caught, program crashes
 
 # Syntax error cannot be caught
 try:
-    t[0] === 1  # SyntaxError: invalid syntax (cannot be caught)
+    t[0] ==== 1  # SyntaxError: invalid syntax (cannot be caught)
 except SyntaxError:
     print("caught it")
+# Note there are some syntax errors that Try/except does NOT work with.
+
+
+# -----------------------------------------------------------------------------
+# Most Common Python Errors
+SyntaxError
+# Occurs when Python cannot parse code due to incorrect syntax (e.g., missing colon or parentheses).
+# Example: print("hello"  # Missing closing parenthesis
+
+TypeError
+# Happens when an operation is applied to an incompatible type (e.g., adding a string and integer).
+# Example: "2" + 2  # Cannot add str and int
+
+NameError
+# Raised when a variable or name is used but not defined.
+# Example: print(x)  # x is not defined
+
+IndexError
+# Occurs when accessing a list, tuple, or string index that doesn’t exist.
+# Example: lst = [1, 2]; print(lst[2])  # Index 2 is out of range
+
+KeyError
+# Happens when accessing a dictionary key that doesn’t exist.
+# Example: d = {"a": 1}; print(d["b"])  # Key "b" not found
+
+ValueError
+# Raised when a function gets an argument of the correct type but an invalid value.
+# Example: int("abc")  # Cannot convert "abc" to integer
+
+AttributeError
+# Occurs when an object doesn’t have the attribute or method being accessed.
+# Example: s = "hello"; s.append("!")  # Strings have no append method
+
+ZeroDivisionError
+# Happens when dividing a number by zero.
+# Example: 5 / 0  # Division by zero is undefined
+
+FileNotFoundError
+# Raised when trying to open a file that doesn’t exist.
+# Example: open("missing.txt")  # File "missing.txt" not found
+
+IndentationError
+# Occurs when code blocks have incorrect or inconsistent indentation.
+# Example: def func(): print("hi")  # Missing indentation for print
 
 
 # ----------------------------------------------------------------------------------
 # 2:38:35 User Input
 
 # Key Points:
-# - **Input**: The `input(prompt)` function displays a prompt and returns user input as a string.
+# - Input: The `input(prompt)` function displays a prompt and returns user input as a string.
 # - Practical Use: Combine with `isnumeric()` to validate numeric input or `try/except` to handle invalid input gracefully.
-# - **F-strings**: Useful for formatting input results dynamically (e.g., `f"result is {result}"`).
+# - F-strings: Useful for formatting input results dynamically (e.g., `f"result is {result}"`).
 # - Pitfalls: Input is always a string, even for numbers (e.g., `"32"`); use `int()` or `float()` for conversion, but validate first to avoid `ValueError`.
 # - Example: Prompting for a number and checking if it’s numeric demonstrates basic input validation.
 
