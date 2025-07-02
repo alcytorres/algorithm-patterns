@@ -1,217 +1,114 @@
-# Head first Python 
+# F-string Error: Undefined variable
+print(f"Hey {name} how is it going?")  # NameError: name 'name' is not defined
 
-# Chapter 1: Lists
+# F-string with variable
+name = "greg"
+print(f"Hey {name} how is it going?")  # Outputs: Hey greg how is it going?
 
-# Start by defining a list of names, which you then display on screen using the print() BIF. Then, use the len() BIF to work out how many data items are in the list, before accessing and displaying the value of the second data item:
+# F-string with varaible and number
+name = "greg"
+fave_num = 23
+print(f"Hey {name} how is it going? My favorite number is {fave_num}")  
+# Outputs: Hey greg how is it going? My favorite number is 23
 
-cast = ["Cleese", 'Palin', 'Jones', "Idle"]
-print(cast)  # ['Cleese', 'Palin', 'Jones', 'Idle']
-# # It’s OK to invoke a BIF on the results of another BIF.
-print(len(cast))  # 4
-print(cast[1])  # Palin
-
-
-# With your list created, you can use list methods to add a single data item to the end of your list (using the append() method), remove data from the end of your list (with the pop() method), and add a collection of data items to the end of your list (thanks to the extend() method):
-
-# Methods are invoked using the common “.” dot notation.
-cast.append("Gilliam")
-print(cast)  # ['Cleese', 'Palin', 'Jones', 'Idle', 'Gilliam']
-cast.pop()  # Removes and returns last element ('Gilliam')
-print(cast)  # ['Cleese', 'Palin', 'Jones', 'Idle']
-# It’s another list: items separated by commas, surrounded by square brackets.
-cast.extend(["Gilliam", "Chapman"])
-print(cast)  # ['Cleese', 'Palin', 'Jones', 'Idle', 'Gilliam', 'Chapman']
+# String Concatenation Error
+print("My favorite number is " + fav_num)
+# Output: NameError: name 'fav_num' is not defined.
 
 
-# Finally, find and remove a specific data item from your list (with the remove() method) and then add a data item before a specific slot location (using the insert() method):
+# Class from prior section 
+class Human:
+    def __init__(self, age, name):
+        self._age = age
+        self._name = name
+    
+    def __str__(self):
+        return f"A human with name {self._name}. Their age is {str(self._age)}."
+    
+h = Human(age=4, name="greg")
+# print(h)
 
-cast.remove("Chapman")
-print(cast) # ['Cleese', 'Palin', 'Jones', 'Idle', 'Gilliam']
-cast.insert(0, "Chapman")
-# After all that, we end up with the cast of Monty Python’s Flying Circus!
-print(cast)  # ['Chapman', 'Cleese', 'Palin', 'Jones', 'Idle', 'Gilliam']
+# F-string with object
+# Uses the Human object's __str__ method to format it as a string.
+h = Human(4, "greg")
+print(f"My favorite person is {h}")  
+# Outputs: My favorite person is A human with name greg. Their age is 4.
 
+# F-string with numbers and strings
+# Everything in Python is an object, including numbers like 4.
+name = "greg"
+fave_num = 23
+print(f"Hey {name} how is it going? My favorite number is {4}")  
+# Outputs: Hey greg how is it going? My favorite number is 4
 
+# Explanation: Objects in Python
+# In Python, everything is an object, meaning every value (numbers, strings, custom classes) has associated methods and properties.
+# 1. Objects and f-strings:
+#    - In f-strings (e.g., f"...{h}"), Python calls the object's __str__ method to convert it to a string.
+#    - For h (a Human object), __str__ returns "a human with name greg. their age is 4."
+# 2. Numbers as objects:
+#    - Even a number like 4 is an object (an int). Its __str__ method returns "4" for printing.
+#    - In f"...{4}", Python uses 4's __str__ to include "4" in the output.
+# 3. Why this matters:
+#    - Objects like numbers, strings, or Human instances can be used in f-strings because they know how to describe themselves as strings.
+#    - This makes Python flexible: you can print or format any object, from simple numbers to complex classes.
+# Example: Try print(f"Num: {42}, Person: {h}") to see how different objects work together!
 
-# ---------------------------------------------------------------------------
-# Let’s take a bit of time to try to work out which strategy to use when adding data to your list in this case.
-# Given the following list-creation code:
-movies = ["The Holy Grail", "The Life of Brian", "The Meaning of Life"]
-
-# 1. Work out the Python code required to insert the numeric year data into the preceding list, changing the list so that it ends up looking like this:
-["The Holy Grail", 1975, "The Life of Brian", 1979, "The Meaning of Life", 1983]
-
-movies = ["The Holy Grail", "The Life of Brian", "The Meaning of Life"]
-movies.insert(1, 1975)
-movies.insert(3, 1979)
-movies.append(1983)
-
-print(movies)
-
-
-# 2. Now write the Python code required to re-create the list with the data you need all in one go:
-
-movies = ["The Holy Grail", 1975, "The Life of Brian", 1979, "The Meaning of Life", 1983]
-
-# In this case, which of these two methods do you think is best?
-    # Answer: Yes, method 2 seems the better option here…that is, for a small list like this. Also, there’s no tricky counting to do.
-
-
-# ---------------------------------------------------------------------------
-# Loops
-
-nums = [1, 2, 3]     # nums: list name (source list containing integers)
-for num in nums:     # num: target identifier (current integer being processed from nums)
-                      # nums: iterable list being looped over
-    print(num * 2)    # list-processing code (doubles the current target identifier value)
-# Output: 2, 4, 6
+print(f"Num: {42}, Person: {h}")
+# Output: Num: 42, Person: A human with name greg. their age is 4.
 
 
-# Equivalent For and While Loops:
-movies = ["The Holy Grail", "The Life of Brian", "The Meaning of Life"]
+# Format method
+print("Hey {0} how is it going? my favorite person is {1}".format(name, h))
+# Outputs: Hey greg how is it going? My favorite person is A human with name greg. Their age is 4.
 
-# For loops work with lists of any size
-for movie in movies:
-    print(movie) 
-# Output: The Holy Grail, The Life of Brian, The Meaning of Life    
-
-# While Loop
-count = 0
-while count < len(movies):
-    print(movies[count]) 
-    count += 1
- # Output: The Holy Grail, The Life of Brian, The Meaning of Life    
+# The .format() method is preferred over f-strings when reusing the same template multiple times, as it avoids repeatedly writing long variable names, using concise numeric indices (e.g., {0}) instead, which reduces clunkiness.
 
 
-# ---------------------------------------------------------------------------
-# Store lists within lists
-movies = [
-"The Holy Grail", 1975, "Terry Jones & Terry Gilliam", 91,
-["Graham Chapman", ["Michael Palin", "John Cleese", "Terry Gilliam", "Eric Idle", "Terry Jones"]]]
+# Iterating over string characters
+# Loops through each character in a string.
+for c in "Greg":  # Iterates over characters: G, r, e, g
+    print(c)  # Outputs: G, r, e, g (one per line)
 
-print(movies[0])         # The Holy Grail
-print(movies[0][1])      # h
-print(movies[4])         # ['Graham Chapman', ['Michael Palin', 'John Cleese', 'Terry Gilliam', 'Eric Idle', 'Terry Jones']]
-print(movies[4][0])      # Graham Chapman
-print(movies[4][1])      # ['Michael Palin', 'John Cleese', 'Terry Gilliam', 'Eric Idle', 'Terry Jones']
-print(movies[4][1][3])   # Eric Idle
-print(movies[5])         # IndexError: list index out of range
+# Checking character types
+for c in "Greg":  # Iterates over characters: G, r, e, g
+    print(type(c))  # Outputs: <class 'str'> (four times, one per character)
 
+# String methods
+print("my name is greg".split(" "))  # Outputs: ['my', 'name', 'is', 'greg']
+    # Split() instantly transforms a string into a list of substrings, enabling easy manipulation of text data.
 
-# ---------------------------------------------------------------------------
-# Creating a list that contains another list
-movies = ["The Holy Grail", 1975, "Terry Jones & Terry Gilliam", 91,
-["Graham Chapman", ["Michael Palin", "John Cleese", "Terry Gilliam", "Eric Idle", "Terry Jones"]]]
+print("greg".isnumeric())  # Outputs: False
+print("452".isnumeric())  # Outputs: True
+print("4g6".isnumeric())  # Outputs: False
 
-print(movies)
-# Output:
-# ['The Holy Grail', 1975, 'Terry Jones & Terry Gilliam', 91, ['Graham Chapman', ['Michael Palin',
-# 'John Cleese', 'Terry Gilliam', 'Eric Idle', 'Terry Jones']]]
+print("HELLO there".lower())  # Outputs: hello there
+print("hello there".lower())  # Outputs: hello there
+print("HELLO there".upper())  # Outputs: HELLO THERE
+print("hello THERE".upper())  # Outputs: HELLO THERE
 
-# The list within a list within a list has been created in memory.
-# The “for” loop prints each item of the outer loop ONLY.
-# The inner list within the inner list is printed “as-is.”
+# String indexing
+s = "hello"
+print(s[0])  # Outputs: h
+print(s[1])  # Outputs: e
+print(s[2])  # Outputs: l
+print(s[3])  # Outputs: l
+print(s[4])  # Outputs: o
+print(s[5])  # Outputs: IndexError: string index out of range
+print(len(s))  # Outputs: 5
 
-# ---------------------------------------------------------------------------
-# How isinstance() works:
+# List mutability
+l = [1, 2]
+l[0] = 5
+print(l)  # Outputs: [5, 2]
 
-# Solution
-names = ['Michael', 'Terry']
-if isinstance(names, list):
-    print(True)  # Ouput: True
-else: 
-    print(False)
+# String immutability
+s = "hello"
+s[0] = 't'  # TypeError: 'str' object does not support item assignment
+    # Strings are immutable, so you can't change individual characters like with lists.
 
-num_names = len(names)
-if isinstance(num_names, list):
-    print(True)
-else:
-    print(False)  # Output: False
-
-# Alternative Solution 
-names = ['Michael', 'Terry']
-print(isinstance(names, list))  # True
-num_names = len(names)
-print(isinstance(num_names, list))  # False
-
-# Refer to a Python type here. In this case, the type is “list”.
-
-
-# ---------------------------------------------------------------------------
-movies = ["The Holy Grail", 1975, "Terry Jones & Terry Gilliam", 91,
-["Graham Chapman", ["Michael Palin", "John Cleese", "Terry Gilliam", "Eric Idle", "Terry Jones"]]]
-
-print(movies)
-# Output:
-# ['The Holy Grail', 1975, 'Terry Jones & Terry Gilliam', 91, ['Graham Chapman', ['Michael Palin', 'John Cleese', 'Terry Gilliam', 'Eric Idle', 'Terry Jones']]]
-
-# Here’s a copy of the current list-processing code. Your task is to rewrite this code using an if statement and the isinstance() BIF to process a list that displays another list.
-
-# Single-Level Loop: Print Each Item Directly
-for each_item in movies:
-    print(each_item)
-
-# Output:
-# The Holy Grail
-# 1975
-# Terry Jones & Terry Gilliam
-# 91
-# ['Graham Chapman', ['Michael Palin', 'John Cleese', 'Terry Gilliam', 'Eric Idle', 'Terry Jones']]
-
-# Write your new code here.
-
-# Single-Level Nested Loop with Type Checking: Unpack First-Level Lists
-for each_item in movies:
-    if isinstance(each_item, list):
-        for nest_item in each_item:
-            print(nest_item)
-    else:
-        print(each_item)
-
-# Output
-# The Holy Grail
-# 1975
-# Terry Jones & Terry Gilliam
-# 91
-# Graham Chapman
-# ['Michael Palin', 'John Cleese', 'Terry Gilliam', 'Eric Idle', 'Terry Jones']
-
-# This is a little better, but not by much…there’s another nested list here that’s not being processed properly.
-
-
-# Double-Level Nested Loop with Type Checking: Fully Unpack Nested Lists
-for each_item in movies:
-    if isinstance(each_item, list):
-        for nest_item in each_item:
-            if isinstance(nest_item, list):
-                for deepest_item in nest_item:
-                    print(deepest_item)
-            else:
-                print(nest_item)
-    else:
-        print(each_item)
-
-# Output:
-# The Holy Grail
-# 1975
-# Terry Jones & Terry Gilliam
-# 91
-# Graham Chapman
-# Michael Palin
-# John Cleese
-# Terry Gilliam
-# Eric Idle
-# Terry Jones
-
-# Note: in this code, each “if” needs an associated “else”.
-
-# The repeated code replaces the “print()” statement and introduces another target identifier called "deepest_item"
-
-
-
-# ----------------------------------------------------------------------------
-# Chapter 2: Modules of functions
-
-
-
-
+# String method with no side effect
+s = "hello"
+print(s.upper())  # Outputs: HELLO (new string, no side effect)
+print(s)  # Outputs: hello (original unchanged)
+# upper() returns a new string; it doesn’t modify s (no side effect, unlike list methods).

@@ -65,7 +65,8 @@ text = "12a3"
 print(text.isdigit())  # Output: False
 
 
-# STRING METHOD: .split()
+# STRING METHOD: 
+.split()
 # What it does: Splits a string into a list of substrings based on a delimiter (default is whitespace).
 # DSA use case: Parses strings into tokens for array or word-based problems (e.g., word count, reverse words).
 # Why it’s useful: Simplifies string processing by converting text into manageable list elements.
@@ -78,6 +79,22 @@ print(text.split())  # Output: ['hello', 'world']
 # DSA Example 2 (Custom Delimiter):
 text = "a,b,c"
 print(text.split(','))  # Output: ['a', 'b', 'c']
+
+
+# STRING METHOD: 
+.format()
+# What it does: Formats a string by replacing placeholders with specified values.
+# DSA use case: Constructs formatted output strings in problems requiring specific string patterns (e.g., custom string construction, debugging).
+# Why it’s useful: Simplifies creating readable strings with dynamic values, useful for testing or formatting results.
+# Time/Space: O(n) time (n = string length), O(n) space for the resulting string.
+# Syntax:
+string.format(*args, **kwargs)  # Returns a formatted string; placeholders like {0} or {name}
+# DSA Example 1 (Format Result):
+template = "Value: {}"
+print(template.format(42))  # Output: "Value: 42"
+# DSA Example 2 (Multiple Values):
+template = "x: {}, y: {}"
+print(template.format(1, 2))  # Output: "x: 1, y: 2"
 
 
 

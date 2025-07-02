@@ -1088,19 +1088,27 @@ print(l)  # Outputs: [0, 2, 2, 2, 4, 4, 4, 6]
 # - Pitfalls: Non-hashable keys (e.g., lists) cause `TypeError`; missing keys raise `KeyError`; use consistent key types (e.g., all strings).
 # - Example: A fruit dictionary demonstrates key-value operations; an integer-key dictionary shows alternative key types.
 
-# Dictionary operations
+# Creating a dictionary
 d = {"apple": "it's a fruit that is high in vitamin c"}
 print(d)  # Outputs: {'apple': "it's a fruit that is high in vitamin c"}
 
+# Adding a key-value pair
 d["banana"] = "it's a fruit that is high in potassium"
 print(d)  # Outputs: {'apple': "...", 'banana': "..."}
 
+# Updating a key's value
 d["banana"] = "it's a vegetable that is high in potassium"
 print(d)  # Outputs: {'apple': "...", 'banana': "..."}
 
+# Looking up values
+print(d["apple"])  # Outputs: it's a fruit that is high in vitamin c
+print(d["banana"])  # Outputs: it's a vegetable that is high in potassium
+
+# Deleting a key
 del d["banana"]
 print(d)  # Outputs: {'apple': "..."}
 
+# Adding a new key-value pair
 d["cucumber"] = "this is a long cylindrical fruit with a boring taste"
 print(d)  # Outputs: {'apple': "...", 'cucumber': "..."}
 
@@ -1109,65 +1117,187 @@ for k in d.keys():
     v = d[k]
     print(k, v)  # Outputs: apple it's a fruit..., cucumber this is a long...
 
+# Hashable in Python: 
+    # An object is hashable if it’s immutable (like int, str, or tuple) and can be assigned a unique, fixed number (hash) for quick lookup.
+
+    # Keys Must Be Hashable: Dictionary keys need to be hashable so Python can use their fixed hash to store and find them fast; mutable objects like list can’t be keys because they can change.
+
 # Integer-key dictionary
-d2 = {0: "greg", 1: "sarah", 2: "tom"}
-print(d2)  # Outputs: {0: 'greg', 1: 'sarah', 2: 'tom'}
-print(d2[1])  # Outputs: sarah
+# Dictionaries can use any hashable type as keys, like integers.
+d = {0: "greg", 1: "sarah", 2: "tom"}  # Creates dictionary with integer keys
+print(d)  # Outputs: {0: 'greg', 1: 'sarah', 2: 'tom'}
+print(d[1])  # Outputs: sarah (access value for key 1)
+
+# Iterating with keys()
+# Loops over keys to access values manually using dictionary indexing.
+for k in d.keys():  # Iterates over keys: 0, 1, 2
+    v = d[k]  # Gets value for key k (e.g., d[0] = "greg")
+    print(k, v)  # Outputs: 0 greg, 1 sarah, 2 tom
+
+# Simpler iteration with items()
+# Directly loops over key-value pairs for cleaner code.
+for k, v in d.items():  # Iterates over pairs: (0, "greg"), (1, "sarah"), (2, "tom")
+    print(k, v)  # Outputs: 0 greg, 1 sarah, 2 tom
+
+# Exercise: Iterating a book dictionary
+# Practice iterating and filtering dictionary data.
+books = {
+    "The Hobbit": 1937,
+    "Harry Potter": 1997,
+    "The Da Vinci Code": 2003,
+    "The Hunger Games": 2008
+}
+
+# Print all books and years
+for k in books.keys():  # Iterates over book titles
+    v = books[k]  # Gets year for book k
+    print(k, v)  # Outputs: The Hobbit 1937, Harry Potter 1997, ...
+
+# Print books after 2000
+for k in books.keys():  # Iterates over book titles
+    v = books[k]  # Gets year for book k
+    if v > 2000:  # Filters for years > 2000
+        print(k, v)  # Outputs: The Da Vinci Code 2003, The Hunger Games 2008
+
+# Hashable keys explained
+# - Hashable: An immutable object (e.g., int, str, tuple) with a fixed hash value for quick lookup.
+# - Why keys must be hashable: Dictionaries use hashes to store and retrieve keys efficiently.
+# - Example: Integers (0, 1, 2) and strings ("greg", "apple") are hashable, so they work as keys.
+# - Mutable objects (e.g., lists) can’t be keys because their hash could change.
 
 
 # ----------------------------------------------------------------------------------
 # 2:17:02 Strings in Detail
 
 # Key Points:
-# - **Strings** are immutable sequences of characters, defined with single (`'`) or double (`"`) quotes.
-# - **Immutability**: Strings cannot be modified in place (e.g., `s[0] = 't'` raises `TypeError`); methods like `upper()` return new strings.
-# - **F-strings**: `f"string {variable}"` embed expressions in strings, automatically calling `str()` on non-strings (e.g., numbers, objects).
-# - **Format Method**: `string.format(var1, var2)` inserts values into `{0}`, `{1}` placeholders; less common than f-strings but useful for repeated patterns.
+# - Strings are immutable sequences of characters, defined with single (`'`) or double (`"`) quotes.
+# - Immutability: Strings cannot be modified in place (e.g., `s[0] = 't'` raises `TypeError`); methods like `upper()` return new strings.
+# - F-strings: `f"string {variable}"` embed expressions in strings, automatically calling `str()` on non-strings (e.g., numbers, objects).
+# - Format Method: `string.format(var1, var2)` inserts values into `{0}`, `{1}` placeholders; less common than f-strings but useful for repeated patterns.
 # - Methods: `split(sep)` splits into a list; `isnumeric()` checks if string represents a number; `lower()`/`upper()` convert case; `rstrip()` removes trailing characters (e.g., `\n`).
 # - Indexing: Strings support `s[index]` (0-based); `len(s)` gives length.
 # - Practical Use: F-strings simplify dynamic string creation; methods like `split` and `isnumeric` are useful for parsing user input.
 # - Pitfalls: String immutability requires creating new strings for modifications; mixing types in concatenation requires `str()`.
 # - Example: F-strings and `format()` show dynamic string creation; string methods demonstrate common operations.
 
-# F-string examples
+# F-string Error: Undefined variable
+print(f"Hey {name} how is it going?")  # NameError: name 'name' is not defined
+
+# F-string with variable
+name = "greg"
+print(f"Hey {name} how is it going?")  # Outputs: Hey greg how is it going?
+
+# F-string with varaible and number
 name = "greg"
 fave_num = 23
-print(f"hey {name} how is it going?")  # Outputs: hey greg how is it going?
-print(f"my favorite number is {fave_num}")  # Outputs: my favorite number is 23
+print(f"Hey {name} how is it going? My favorite number is {fave_num}")  
+# Outputs: Hey greg how is it going? My favorite number is 23
 
+# String Concatenation Error
+print("My favorite number is " + fav_num)
+# Output: NameError: name 'fav_num' is not defined.
+
+
+# ----------------------------------------------------------------------------
+# Objects in Python
+
+# Class from prior section 
+class Human:
+    def __init__(self, age, name):
+        self._age = age
+        self._name = name
+    
+    def __str__(self):
+        return f"A human with name {self._name}. Their age is {str(self._age)}."
+    
+h = Human(age=4, name="greg")
+# print(h)
+
+# F-string with object
+# Uses the Human object's __str__ method to format it as a string.
 h = Human(4, "greg")
-print(f"my favorite person is {h}")  # Outputs: my favorite person is a human with name greg. their age is 4.
+print(f"My favorite person is {h}")  
+# Outputs: My favorite person is A human with name greg. Their age is 4.
 
+# F-string with numbers and strings
+# Everything in Python is an object, including numbers like 4.
+name = "greg"
+fave_num = 23
+print(f"Hey {name} how is it going? My favorite number is {4}")  
+# Outputs: Hey greg how is it going? My favorite number is 4
+
+# Explanation: Objects in Python
+# In Python, everything is an object, meaning every value (numbers, strings, custom classes) has associated methods and properties.
+# 1. Objects and f-strings:
+#    - In f-strings (e.g., f"...{h}"), Python calls the object's __str__ method to convert it to a string.
+#    - For h (a Human object), __str__ returns "a human with name greg. their age is 4."
+# 2. Numbers as objects:
+#    - Even a number like 4 is an object (an int). Its __str__ method returns "4" for printing.
+#    - In f"...{4}", Python uses 4's __str__ to include "4" in the output.
+# 3. Why this matters:
+#    - Objects like numbers, strings, or Human instances can be used in f-strings because they know how to describe themselves as strings.
+#    - This makes Python flexible: you can print or format any object, from simple numbers to complex classes.
+# Example: Try print(f"Num: {42}, Person: {h}") to see how different objects work together!
+
+print(f"Num: {42}, Person: {h}")
+# Output: Num: 42, Person: A human with name greg. their age is 4.
+
+
+# ----------------------------------------------------------------------------
 # Format method
-print("hey {0} how is it going? my favorite person is {1}".format(name, h))
-# Outputs: hey greg how is it going? my favorite person is a human...
+print("Hey {0} how is it going? my favorite person is {1}".format(name, h))
+# Outputs: Hey greg how is it going? My favorite person is A human with name greg. Their age is 4.
+
+# The .format() method is preferred over f-strings when reusing the same template multiple times, as it avoids repeatedly writing long variable names, using concise numeric indices (e.g., {0}) instead, which reduces clunkiness.
+
+
+# Iterating over string characters
+# Loops through each character in a string.
+for c in "Greg":  # Iterates over characters: G, r, e, g
+    print(c)  # Outputs: G, r, e, g (one per line)
+
+# Checking character types
+for c in "Greg":  # Iterates over characters: G, r, e, g
+    print(type(c))  # Outputs: <class 'str'> (four times, one per character)
 
 # String methods
-s = "my name is greg"
-print(s.split(" "))  # Outputs: ['my', 'name', 'is', 'greg']
+print("my name is greg".split(" "))  # Outputs: ['my', 'name', 'is', 'greg']
+    # Split() instantly transforms a string into a list of substrings, enabling easy manipulation of text data.
 
 print("greg".isnumeric())  # Outputs: False
 print("452".isnumeric())  # Outputs: True
 print("4g6".isnumeric())  # Outputs: False
 
 print("HELLO there".lower())  # Outputs: hello there
+print("hello there".lower())  # Outputs: hello there
+print("HELLO there".upper())  # Outputs: HELLO THERE
 print("hello THERE".upper())  # Outputs: HELLO THERE
 
 # String indexing
 s = "hello"
 print(s[0])  # Outputs: h
 print(s[1])  # Outputs: e
+print(s[2])  # Outputs: l
+print(s[3])  # Outputs: l
+print(s[4])  # Outputs: o
+print(s[5])  # Outputs: IndexError: string index out of range
 print(len(s))  # Outputs: 5
 
-# Immutability
+# List mutability
 l = [1, 2]
 l[0] = 5
 print(l)  # Outputs: [5, 2]
 
+# String immutability
 s = "hello"
-# s[0] = 't'  # TypeError: 'str' object does not support item assignment
-s = s.upper()  # Creates new string
-print(s)  # Outputs: HELLO (original s unchanged until reassigned)
+s[0] = 't'  # TypeError: 'str' object does not support item assignment
+    # Strings are immutable, so you can't change individual characters like with lists.
+
+# String method with no side effect
+s = "hello"
+print(s.upper())  # Outputs: HELLO (new string, no side effect)
+print(s)  # Outputs: hello (original unchanged)
+# upper() returns a new string; it doesn’t modify s (no side effect, unlike list methods).
 
 
 # ----------------------------------------------------------------------------------
