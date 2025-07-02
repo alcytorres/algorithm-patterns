@@ -422,6 +422,21 @@ num = 42
 print(type(num) == int)  # Output: True
 
 
+# BUILT-IN FUNCTION: 
+sorted()
+# What it does: Returns a new sorted list from the elements of an iterable.
+# DSA use case: Sorts arrays or iterables for problems like binary search, two-pointer, or pattern finding.
+# Why it’s useful: Creates a sorted copy without modifying the original, ideal when preserving input is needed.
+# Time/Space: O(n log n) time (n = iterable length), O(n) space for the new list.
+# Syntax:
+sorted(iterable, reverse=False)  # Returns a new sorted list; 'reverse=True' for descending
+# DSA Example 1 (Sort Array):
+nums = [3, 1, 2]
+print(sorted(nums))  # Output: [1, 2, 3]
+# DSA Example 2 (Sort Descending):
+chars = ['b', 'a', 'c']
+print(sorted(chars, reverse=True))  # Output: ['c', 'b', 'a']
+
 # ----------------------------------------------------------------------------------
 # ADDITIONAL COMMON METHODS/FUNCTIONS FOR LEETCODE
 # LIST METHOD: 

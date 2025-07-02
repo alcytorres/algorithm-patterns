@@ -1069,6 +1069,16 @@ print(l)  # Outputs: [0, 2, 2, 2, 4, 4, 4, 6]
 # Explanation: Appends i+j when i+j is even; i=0..4, j=0..2; e.g., (0,0)=0, (0,2)=2, (1,1)=2, (2,0)=2, (2,2)=4, (3,1)=4, (4,0)=4, (4,2)=6.
 
 
+# Sorted returns a new list 
+    # 2:30:15  --> Shown in Tuple section, move it here.
+nums = [2, 1, 4]
+print(sorted(nums))  
+# Outputs: [1, 2, 4] (sorted() returns a new sorted list, no side effect on original)
+
+print(nums)
+# Outputs: [2, 1, 4]
+# original nums list remains unchanged 
+
 # ----------------------------------------------------------------------------------
 # 2:07:15 List Slicing  --> Greg skipped this in video
 
@@ -1304,9 +1314,9 @@ print(s)  # Outputs: hello (original unchanged)
 # 2:27:47 Tuples
 
 # Key Points:
-# - **Tuples** are immutable, ordered sequences defined with parentheses `(item1, item2, ...)`, similar to lists but unchangeable.
+# - Tuples are immutable, ordered sequences defined with parentheses `(item1, item2, ...)`, similar to lists but unchangeable.
 # - Syntax: `(0, 1)` creates a tuple; access items with `tuple[index]` (0-based); iterate with `for item in tuple`.
-# - **Immutability**: Tuples cannot be modified (e.g., no `append`, no item assignment), raising `TypeError` if attempted (like strings).
+# - Immutability: Tuples cannot be modified (e.g., no `append`, no item assignment), raising `TypeError` if attempted (like strings).
 # - Practical Use: Tuples ensure data integrity when immutability is desired (e.g., fixed coordinates, constant data). They’re lighter than lists in memory and often used as dictionary keys (unlike lists, which are unhashable).
 # - Comparison to Lists: Lists are mutable (`list[0] = 5` works), while tuples are not (`tuple[0] = 5` fails). Lists have methods like `append`; tuples have fewer methods (e.g., `count`, `index`).
 # - Pitfalls: Attempting to modify a tuple raises `TypeError`. Tuples with one item need a trailing comma (e.g., `(1,)`); otherwise, it’s treated as a scalar (e.g., `(1)` is just `1`).
@@ -1323,14 +1333,17 @@ for item in t:
     print(item)  # Outputs: 0, 1 (one per line)
 
 # Immutability error
-# t[0] = 5  # TypeError: 'tuple' object does not support item assignment
+t[0] = 5  # TypeError: 'tuple' object does not support item assignment
+
+# Tuples exist primarily to provide an immutable, lightweight data structure for grouping related data
+    # Use when you want to make something constant and secure
 
 
 # ----------------------------------------------------------------------------------
 # 2:30:35 Sets
 
 # Key Points:
-# - **Sets** are unordered, mutable collections of unique items, defined with braces `{item1, item2, ...}` or `set(iterable)`.
+# - Sets are unordered, mutable collections of unique items, defined with braces `{item1, item2, ...}` or `set(iterable)`.
 # - Uniqueness: Sets automatically remove duplicates (e.g., `{1, 1, 2}` becomes `{1, 2}`).
 # - Unordered: No indexing (e.g., `set[0]` raises `TypeError`); order in output is not guaranteed.
 # - Practical Use: Sets are ideal for removing duplicates (e.g., unique characters in a string) or performing mathematical operations (e.g., union, intersection).
