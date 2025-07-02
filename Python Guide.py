@@ -9,20 +9,20 @@
 # 0:20:26 Booleans / Conditions
 # 0:27:55 If Statements
 # 0:31:10 Introduction to Lists
-# 0:33:24 For Loops      ***Review Important***
+# 0:33:24 For Loops             ***Review Important***
 # 0:41:35 While Loops
 # 0:47:30 If / Elif / Else
 # 0:56:40 Functions
-# 1:11:15 Is             ***Review Important***
+# 1:11:15 Is                    ***Review Important***
 # 1:27:13 Cool Function Tricks
 # 1:34:27 File Reading / Writing    ***Skipped review later***
-# 1:42:33 Objects and Classes.   ***Review Important***
+# 1:42:33 Objects and Classes.  ***Review Important***
 # 1:56:00 Comments / Docstrings
 # 2:03:55 Lists in Detail
-# 2:08:58 Dictionaries
-# 2:17:02 Strings in Detail
-# 2:27:47 Tuples
-# 2:30:35 Sets
+# 2:08:58 Dictionaries          ***Review Important***
+# 2:17:02 Strings in Detail     ***Review Important***
+# 2:27:47 Tuples                ***Review Important***
+# 2:30:35 Sets                  ***Review Important***
 # 2:34:33 Errors / Try / Except
 # 2:38:35 User Input
 # 2:41:18 List Comprehension
@@ -1351,30 +1351,98 @@ t[0] = 5  # TypeError: 'tuple' object does not support item assignment
 # - Pitfalls: Using `{}` for an empty set creates a dictionary; use `set()`. Sets only store hashable items (e.g., numbers, strings, not lists).
 # - Example: Sets remove duplicates from strings or lists; `sorted()` returns a sorted list from any iterable (no side effect).
 
+
+# What does hashable mean?
+
+# In Python, a hashable object is one that can't be changed (immutable) and can be given a unique number (called a hash) to identify it quickly, like a fingerprint. This is important for things like dictionary keys, which need to stay consistent for fast lookups.
+
+# String (immutable, hashable)
+name = "Greg"
+print(hash(name))  # Outputs: a unique number, e.g., 594372991234
+d = {name: 25}    # Works: "Greg" is hashable, used as a dictionary key
+print(d["Greg"])   # Outputs: 25
+
+# List (mutable, not hashable)
+numbers = [1, 2]
+# d[numbers] = 10  # Error: lists can't be keys because they're not hashable
+
+# Easy Analogy: Think of a hashable object like a labeled, sealed box (e.g., a string like "Greg"). Its label (hash) never changes, so Python can find it fast in a dictionary. A list is like an unsealed box—its contents can change, so it can’t have a reliable label and isn’t hashable.
+
+
+# -----------------------------------------------------------------------------
 # Creating a set
 s = {1, 1, 2, -4}
 print(s)  # Outputs: {1, 2, -4} (duplicates removed, order may vary)
 
-# Removing duplicates from a string
-print(set("greg is a great guy"))  # Outputs: {' ', 'a', 'e', 'g', 'i', 'r', 's', 't', 'u', 'y'} (unique characters)
+# Python recognizes {1, 1, 2, -4} as a set because {} with comma-separated values (without colons like in dictionaries) indicates a set, unlike () which defines a tuple.
+
+# Convert string to a set and remove duplicate characters
+print(set("Greg is a great guy"))  
+# Outputs: {' ', 'a', 'e', 'g', 'i', 'r', 's', 't', 'u', 'y'}
+# Creates a set from the string, keeping only unique characters.
+# Unordered: set order varies each run, as sets don’t maintain a fixed sequence.
 
 # Removing duplicates from a list
-print(set([1, 1, 2, 2, 3, -5, 6, 4]))  # Outputs: {1, 2, 3, 4, -5, 6} (unique numbers)
+print(set([1, 1, 2, 2, 3, -5, 6, 4]))  # Outputs: {1, 2, 3, 4, -5, 6}
 
-# Empty set
-print(type({}))  # Outputs: <class 'dict'> (empty dictionary)
-print(type(set()))  # Outputs: <class 'set'> (empty set)
+# Empty set vs. dictionary
+print(type({}))     # Outputs: <class 'dict'> (creates an empty dictionary)
+print(type(set()))  # Outputs: <class 'set'> (creates an empty set)
+# {} defaults to an empty dictionary; use set() to create an empty set.
 
 # Sorting an iterable
 print(sorted([2, 1, 4]))  # Outputs: [1, 2, 4] (returns new list, no side effect)
+
+
+# -----------------------------------------------------------------------------
+# Types Review
+s = {1, 1, 2, -4}
+print(type(s))
+
+t = (1, 1, 2, -4)
+print(type(t))
+
+l = [1, 1, 2, -4]
+print(type(l))
+
+d = {1: 'a', 2: 'b', 3: 'c'}
+print(type(d))
+
+
+# -----------------------------------------------------------------------------
+# Empty instances of main Python data types
+
+# List: Ordered, mutable collection
+empty_list = []  # Creates an empty list
+
+# Tuple: Ordered, immutable collection
+empty_tuple = ()  # Creates an empty tuple
+
+# Dictionary: Key-value pairs, mutable
+empty_dict = {}  # Creates an empty dictionary
+
+# Set: Unordered, mutable collection of unique elements
+empty_set = set()  # Creates an empty set (note: {} creates a dict)
+
+# Integer: Whole number
+empty_int = 0  # Represents an "empty" or zero integer
+
+# Float: Floating-point number
+empty_float = 0.0  # Represents an "empty" or zero float
+
+# String: Sequence of characters
+empty_string = ""  # Creates an empty string
+
+# Boolean: True or False value
+empty_bool = False  # Represents a default "empty" boolean (False is often used)
 
 
 # ----------------------------------------------------------------------------------
 # 2:34:33 Errors / Try / Except
 
 # Key Points:
-# - **Exceptions**: Errors (e.g., `TypeError`, `SyntaxError`) halt execution unless handled.
-# - **Try/Except**: `try:` runs code that might raise an error; `except:` catches specific errors (e.g., `except TypeError:`) or all errors (`except:`) to prevent program crashes.
+# - Exceptions: Errors (e.g., `TypeError`, `SyntaxError`) halt execution unless handled.
+# - Try/Except: `try:` runs code that might raise an error; `except:` catches specific errors (e.g., `except TypeError:`) or all errors (`except:`) to prevent program crashes.
 # - Execution Flow: If an error occurs in `try`, execution jumps to `except`; subsequent `try` code is skipped. Non-indented code after `try/except` runs regardless.
 # - Practical Use: Use `try/except` to handle invalid user input, file errors, or operations like tuple assignment that may fail.
 # - Pitfalls: Catching all errors (`except:`) can hide unexpected issues; specify error types when possible. `SyntaxError` cannot be caught in `try/except` as it’s a compile-time error.
@@ -1397,10 +1465,10 @@ except SyntaxError:
     print("caught it")  # TypeError: not caught, program crashes
 
 # Syntax error cannot be caught
-# try:
-#     t[0] === 1  # SyntaxError: invalid syntax (cannot be caught)
-# except SyntaxError:
-#     print("caught it")
+try:
+    t[0] === 1  # SyntaxError: invalid syntax (cannot be caught)
+except SyntaxError:
+    print("caught it")
 
 
 # ----------------------------------------------------------------------------------
