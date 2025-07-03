@@ -1693,6 +1693,14 @@ print(d)  # Outputs: {1: 'A', 2: 'B', ..., 26: 'Z'}
 # - Pitfalls: Missing modules raise `ModuleNotFoundError`; ensure packages are installed via `pip install`. Colab’s pre-installed packages may not be available locally.
 # - Example: Importing `deepcopy` from `copy` module demonstrates module usage; `pip list` shows available packages in Colab.
 
+
+# A module is a file containing reusable code (functions, classes, variables) that you can import to use in other programs.
+
+# Importing the math module
+import math  # Loads the math module with mathematical functions
+print(math.sqrt(16))  # Uses the sqrt function from the math module to calculate the square root of 16.
+# Outputs: 4.0
+
 # Importing specific function from module
 from copy import deepcopy
 a = [1, 2, 3]
