@@ -66,6 +66,22 @@ print(text.isdigit())  # Output: False
 
 
 # STRING METHOD: 
+.isnumeric()
+# What it does: Checks if all characters in a string are numeric (e.g., digits, Unicode numeric characters).
+# DSA use case: Validates numeric strings in parsing problems (e.g., atoi, numeric input checks).
+# Why it’s useful: Ensures a string contains only numeric characters, useful for robust input validation.
+# Time/Space: O(n) time (n = string length), O(1) space.
+# Syntax:
+string.isnumeric()  # Returns True if all characters are numeric, else False
+# DSA Example 1 (Numeric Validation):
+text = "123"
+print(text.isnumeric())  # Output: True
+# DSA Example 2 (Non-Numeric Check):
+text = "12a3"
+print(text.isnumeric())  # Output: False
+
+
+# STRING METHOD: 
 .split()
 # What it does: Splits a string into a list of substrings based on a delimiter (default is whitespace).
 # DSA use case: Parses strings into tokens for array or word-based problems (e.g., word count, reverse words).
@@ -373,6 +389,22 @@ print(list(range(5))) # Output: [0, 1, 2, 3, 4]
 print(list(range(3)))  # Output: [0, 1, 2]
 # DSA Example 2 (Custom Range):
 print(list(range(1, 5, 2)))  # Output: [1, 3]
+
+
+# BUILT-IN FUNCTION: zip()
+# What it does: Combines multiple iterables into an iterator of tuples, pairing elements by position.
+# DSA use case: Pairs elements from multiple lists in problems like merging or comparing arrays (e.g., two-pointer, matrix operations).
+# Why it’s useful: Simplifies simultaneous iteration over multiple sequences, reducing manual index management.
+# Time/Space: O(1) time to create iterator, O(1) space per iteration.
+# Syntax:
+zip(*iterables)  # Returns an iterator of tuples; each tuple contains elements from 'iterables'
+# DSA Example 1 (Pair Lists):
+nums = [1, 2]
+chars = ['a', 'b']
+print(list(zip(nums, chars)))  # Output: [(1, 'a'), (2, 'b')]
+# DSA Example 2 (Matrix Transpose Prep):
+matrix = [[1, 2], [3, 4]]
+print(list(zip(*matrix)))  # Output: [(1, 3), (2, 4)]
 
 
 # BUILT-IN FUNCTION: 

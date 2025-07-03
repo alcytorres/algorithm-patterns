@@ -25,7 +25,7 @@
 # 2:30:35 Sets                  ***Review Important***
 # 2:34:33 Errors / Try / Except
 # 2:38:35 User Input
-# 2:41:18 List Comprehension
+# 2:41:18 List Comprehension    ***Review Important***
 # 2:49:13 ASCII / Ord / Chr
 # 2:53:50 Modules / Pip / Packages
 # 2:57:52 Python Scripts / Files
@@ -1543,22 +1543,39 @@ IndentationError
 # - Example: Prompting for a number and checking if it’s numeric demonstrates basic input validation.
 
 # Getting user input
-result = input("hey please give us a number: ")
-print(f"the result is {result}.")  # Outputs: the result is 32. (if user enters 32)
+result = input("Hey please give us a number: ")
+print(f"The result is {result}.")  
+# Outputs: The result is 32. (if user enters 32)
+
+# User input stored as a string
 print(type(result))  # Outputs: <class 'str'>
 
 # Validating input
 print(result.isnumeric())  # Outputs: True (if "32"), False (if "hi")
 
 
+# Validating user input with try/except
+# Prompts for a number, checks if valid, and handles errors.
+try:
+    user_input = input("Enter a number: ")  # Gets user input as string
+    number = int(user_input)  # Tries to convert input to integer
+    print(f"Success! Your number is {number}.")  # Proceeds if valid
+except ValueError:
+    print("Error: Please enter a valid number, not text.")  # Informs user if invalid
+
+# Choosing try/except vs. if/else
+    # Use try/except for robust error handling when testing operations that might fail (e.g., type conversions); 
+    # Use if/else for simple, predictable condition checks (e.g., validating specific patterns).
+
+
 # ----------------------------------------------------------------------------------
 # 2:41:18 List Comprehension
 
 # Key Points:
-# - **List Comprehension**: A concise way to create lists: `[expression for var in iterable if condition]`.
+# - List Comprehension: A concise way to create lists: `[expression for var in iterable if condition]`.
 # - Syntax: `[x for x in range(5)]` generates a list from `x` values; add `if` for filtering (e.g., `x % 2 == 0` for evens); use `if/else` before `for` for conditional expressions.
-# - **Zip**: `zip(iter1, iter2)` pairs elements from multiple iterables, enabling multi-variable iteration (e.g., `for a, b in zip(range(3), range(4, 7))`).
-# - **Dictionary Comprehension**: Similar to list comprehension, `{key: value for var in iterable}` creates dictionaries (e.g., `{a: b for a, b in zip(...)}`).
+# - Zip: `zip(iter1, iter2)` pairs elements from multiple iterables, enabling multi-variable iteration (e.g., `for a, b in zip(range(3), range(4, 7))`).
+# - Dictionary Comprehension: Similar to list comprehension, `{key: value for var in iterable}` creates dictionaries (e.g., `{a: b for a, b in zip(...)}`).
 # - Practical Use: List comprehensions are fast and readable for generating lists (e.g., squares, filtered values); used heavily in data science. Dictionary comprehensions create key-value mappings efficiently.
 # - Pitfalls: Incorrect syntax (e.g., `if` before `for` without `else`) raises `SyntaxError`. Complex comprehensions can reduce readability; use sparingly for clarity.
 # - Example: List comprehensions create lists of squares or evens; `zip` pairs values; dictionary comprehension builds key-value pairs.
@@ -1575,55 +1592,90 @@ print(l)  # Outputs: [0, 1, 4, 9, 16]
 l = [x for x in range(5) if x % 2 == 0]
 print(l)  # Outputs: [0, 2, 4]
 
+
+# Error: Invalid syntax (if without else)
+l = [x if x % 2 == 0 for x in range(5)]  # SyntaxError: invalid syntax
+
+# Error: Invalid syntax (if with else)
+l = [x for x in range(5) if (x%2) == 0 else 5]  # SyntaxError: invalid syntax
+
 # List comprehension with if/else
 l = [x if x % 2 == 0 else 5 for x in range(5)]
 print(l)  # Outputs: [0, 5, 2, 5, 4]
 
-# Error: Invalid syntax
-# l = [x if x % 2 == 0 for x in range(5)]  # SyntaxError: invalid syntax
-# l = [x else 5 for x in range(5) if x % 2 == 0]  # SyntaxError: invalid syntax
 
-# List concatenation and multiplication
+# List comprehension with different iterable
+l = [x if x % 2 == 0 else 5 for x in [4, 1, 6, 12]]
+print(l)  # Outputs: [4, 5, 6, 12]
+
+
+# List multiplication
 print([0] * 5)  # Outputs: [0, 0, 0, 0, 0]
+
+# List concatenation
 print([1, 2] + [5, 4, 7])  # Outputs: [1, 2, 5, 4, 7]
 
-# Zip function
+
+# Zip function with loop
+# Pairs elements from two iterables and iterates over them together.
 for a, b in zip(range(3), range(4, 7)):
     print(a, b)  # Outputs: 0 4, 1 5, 2 6
+# zip(range(3), range(4, 7)) pairs [0, 1, 2] with [4, 5, 6].
+# The loop unpacks each pair (e.g., (0, 4)) into a, b and prints them.
+# Use this to iterate over multiple sequences in parallel.
 
 # List comprehension with zip
+# Creates a list of tuples by pairing elements from two iterables.
 l = [(a, b) for a, b in zip(range(3), range(4, 7))]
 print(l)  # Outputs: [(0, 4), (1, 5), (2, 6)]
+# zip(range(3), range(4, 7)) creates pairs: (0, 4), (1, 5), (2, 6).
+# The list comprehension collects these pairs into a list of tuples.
+# Use this to build a list of paired values from multiple sequences.
 
-# Dictionary comprehension
+# Dictionary comprehension with zip
+# Creates a dictionary by pairing keys and values from two iterables.
 d = {a: b for a, b in zip(range(3), range(4, 7))}
 print(d)  # Outputs: {0: 4, 1: 5, 2: 6}
+# zip(range(3), range(4, 7)) pairs [0, 1, 2] with [4, 5, 6].
+# The dictionary comprehension uses a as key, b as value to build a dict.
+# Use this to create a dictionary from two sequences paired together.
 
 
 # ----------------------------------------------------------------------------------
 # 2:49:13 ASCII / Ord / Chr
 
 # Key Points:
-# - **ASCII**: A standard mapping where each character is represented by an integer (e.g., 'A' is 65, 'a' is 97).
-# - **chr()**: Converts an integer to its ASCII character (e.g., `chr(65)` returns 'A').
-# - **ord()**: Converts a single character to its ASCII integer (e.g., `ord('A')` returns 65).
+# - ASCII: A standard mapping where each character is represented by an integer (e.g., 'A' is 65, 'a' is 97).
+# - chr(): Converts an integer to its ASCII character (e.g., `chr(65)` returns 'A').
+# - ord(): Converts a single character to its ASCII integer (e.g., `ord('A')` returns 65).
 # - Practical Use: Useful for character manipulation, encoding/decoding, or creating mappings (e.g., alphabet dictionary).
 # - Combined with dictionary comprehension, `chr()` and `ord()` can generate mappings like alphabet positions (1 to 'a', 2 to 'b', etc.).
 # - Pitfalls: `chr()` expects integers in valid ASCII range (0-127 for standard ASCII); `ord()` expects a single character. Incorrect inputs raise errors (e.g., `ValueError` for invalid integers).
 # - Example: Create a dictionary mapping numbers 1-26 to lowercase letters 'a' to 'z' using `chr()` and comprehension, leveraging ASCII values starting at 97.
 
-# ASCII character and integer conversion
+# ASCII conversions
 print(chr(65))  # Outputs: A
 print(chr(97))  # Outputs: a
 print(ord('A'))  # Outputs: 65
 print(ord('a'))  # Outputs: 97
+print(chr(66))  # Outputs: B
+print(chr(98))  # Outputs: b
+print(chr(67))  # Outputs: C
+
+# Dictionary comprehension with zip (mismatched lengths)
+d = {k: v for k, v in zip(range(1, 27), range(4, 7))}
+print(d)  # Outputs: {1: 4, 2: 5, 3: 6} (stops at shorter range)
+
+# Dictionary comprehension with zip (matched lengths)
+d = {k: v for k, v in zip(range(1, 27), range(1, 27))}
+print(d)  # Outputs: {1: 1, 2: 2, ... 25: 25, 26: 26}
 
 # Dictionary comprehension for alphabet
-d = {k: chr(k + 96) for k in range(1, 27)}  # Maps 1->a, 2->b, ..., 26->z
-print(d)  # Outputs: {1: 'a', 2: 'b', ..., 26: 'z'}
+d = {k: chr(k) for k in range(1, 27)}
+print(d)  # Outputs: {1: '\x01', 2: '\x02', ...} (non-printable characters)
 
-# Error: Zip length mismatch (demonstrated but fixed)
-# d = {k: v for k, v in zip(range(1, 27), range(3))}  # Stops at shorter range (length 3)
+d = {k: chr(k + 64) for k in range(1, 27)}
+print(d)  # Outputs: {1: 'A', 2: 'B', ..., 26: 'Z'}
 
 
 # ----------------------------------------------------------------------------------
@@ -1634,42 +1686,50 @@ print(d)  # Outputs: {1: 'a', 2: 'b', ..., 26: 'z'}
 # 2:53:50 Modules / Pip / Packages
 
 # Key Points:
-# - **Modules**: Reusable Python files or libraries containing functions, classes, or variables (e.g., `copy` module with `deepcopy`).
-# - **Importing**: Use `import module` or `from module import item` to access module contents; `as` renames modules (e.g., `import numpy as np`).
-# - **Pip**: Python’s package manager; `pip list` shows installed packages. Colab includes many pre-installed packages (e.g., `numpy`, `tensorflow`), unlike a fresh local Python install.
+# - Modules: Reusable Python files or libraries containing functions, classes, or variables (e.g., `copy` module with `deepcopy`).
+# - Importing: Use `import module` or `from module import item` to access module contents; `as` renames modules (e.g., `import numpy as np`).
+# - Pip: Python’s package manager; `pip list` shows installed packages. Colab includes many pre-installed packages (e.g., `numpy`, `tensorflow`), unlike a fresh local Python install.
 # - Practical Use: Modules enable code reuse and access to powerful libraries (e.g., `numpy` for numerical operations). Importing specific items reduces namespace clutter.
 # - Pitfalls: Missing modules raise `ModuleNotFoundError`; ensure packages are installed via `pip install`. Colab’s pre-installed packages may not be available locally.
 # - Example: Importing `deepcopy` from `copy` module demonstrates module usage; `pip list` shows available packages in Colab.
 
-# Importing a module
+# Importing specific function from module
 from copy import deepcopy
 a = [1, 2, 3]
 b = deepcopy(a)
-print(b)  # Outputs: [1, 2, 3]
-print(a is b)  # Outputs: False (deepcopy creates a new object)
+print(a is b)  # Outputs: False (b is a separate copy of a)
 
-# Importing with alias
+# Importing module with alias
 import copy as cp
+a = [1, 2, 3]
 b = cp.deepcopy(a)
-print(b)  # Outputs: [1, 2, 3]
+print(a is b)  # Outputs: False (b is a separate copy of a)
+
+# Both create a deep copy of a; differ only in import syntax.
+
+# copy is a module: copy is a built-in Python module that provides functions for copying objects.
+
+# deepcopy is a function: deepcopy is a function within the copy module that creates a deep copy of an object, duplicating all nested objects.
+
+
+# Importing numpy
+import numpy as np
+print(np)  # Outputs: <module 'numpy'> (shows module object)
 
 # Listing installed packages (Colab-specific)
-# !pip list  # Outputs: List of packages (e.g., tensorboard, tensorflow)
+!pip list  # Outputs: List of packages (e.g., tensorboard, tensorflow)
 
-# Importing numpy (pre-installed in Colab)
-import numpy as np
-print(np)  # Outputs: <module 'numpy' ...>
 
 
 # ----------------------------------------------------------------------------------
 # 2:57:52 Python Scripts / Files
 
 # Key Points:
-# - **Python Scripts**: Files with `.py` extension containing Python code, executed top-to-bottom (unlike Colab notebooks, which retain variables between cells).
-# - **Running Scripts**: Use `python filename.py` in a terminal or `!python filename.py` in Colab to execute.
-# - **Importing Scripts**: Place reusable code (e.g., classes) in a `.py` file and import it (e.g., `from human import Human`) to use in other scripts.
+# - Python Scripts: Files with `.py` extension containing Python code, executed top-to-bottom.
+# - Running Scripts: Use `python filename.py` in a terminal to execute.
+# - Importing Scripts: Place reusable code (e.g., classes) in a `.py` file and import it (e.g., `from human import Human`) to use in other scripts.
 # - Practical Use: Scripts are ideal for standalone programs or reusable modules. Importing allows modular code organization, avoiding code duplication.
-# - Pitfalls: Scripts don’t retain variables after execution (unlike Colab cells). Ensure imported files are in the same directory or specify the path.
+# - Pitfalls: Scripts don’t retain variables after execution. Ensure imported files are in the same directory or specify the path.
 # - Example: A `test.py` script validates user input; a `human.py` file contains the `Human` class, imported into `test.py` for reuse.
 
 # Content of test.py (simulated here)
