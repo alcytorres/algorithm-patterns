@@ -1732,51 +1732,60 @@ print(np)  # Outputs: <module 'numpy'> (shows module object)
 # - Pitfalls: Scripts don’t retain variables after execution. Ensure imported files are in the same directory or specify the path.
 # - Example: A `test.py` script validates user input; a `human.py` file contains the `Human` class, imported into `test.py` for reuse.
 
-# Content of test.py (simulated here)
-"""
+# Checking files
+# ls  # Outputs: test.py, human.py, ...
+
+# Content of test.py (simulated as inline code)
+
 # test.py
-from human import Human
-l = [1, 2, 3]
 u = input("Give us a number please: ")
 if u.isnumeric():
     print(f"Thank you for the number {u}")
 else:
     print("Hey, why didn't you give us a number??")
-print(Human)  # Outputs: <class '__main__.Human'>
-"""
-# Run with: !python test.py
-# Input: 45
-# Outputs: Thank you for the number 45
-#          <class '__main__.Human'>
 
-# Content of human.py (simulated here)
-"""
+# Run test.py
+python3 test.py  # Prompts: Give us a number please: e.g., "6" 
+# Outputs: Thank you for the number 6
+
+# -----------------------------------------------------------------------------
+# Content of human.py (for reference, not executed)
 # human.py
 class Human:
     def __init__(self, age, name):
         self._age = age
         self._name = name
+    
     def __str__(self):
         return f"a human with name {self._name}. their age is {str(self._age)}."
-    def __repr__(self):
-        return f"a human with name {self._name}. their age is {str(self._age)}."
+
     def older_younger_than(self, age):
-        if self._age > age:
-            print("our age is bigger than their age.")
-        elif self._age == age:
-            print("our age is equal to their age.")
-        else:
-            print("our age is less than their age.")
-"""
+            if self._age > age:
+                print("our age is bigger than their age.")
+            elif self._age == age:
+                print("our age is equal to their age.")
+            else:
+                print("our age is less than their age.")
+
+# -----------------------------------------------------------------------------
+# test.py
+from human import Human 
+
+print(Human)
+
+# Output:
+# Give us a number please: e.g., "6"
+# Thank you for the number 6
+# <class 'human.Human'>
 
 
 # ----------------------------------------------------------------------------------
 # 3:04:11 Local Python
 
 # Key Points:
-# - **Local Setup**: Install Python from python.org (e.g., version 3.8 for stability, not the latest 3.10). Use a terminal to run scripts (`python filename.py`).
-# - **File Management**: Place `.py` files in a working directory (e.g., `test` folder); use `dir` (Windows) or `ls` (Linux/Mac) to verify files; navigate with `cd`.
-# - **Editors**: Use VS Code, Notepad++, or any text editor to write `.py` files. Ensure correct indentation and file extensions.
+# - Local Setup: Install Python from python.org (e.g., version 3.8 for stability, not the latest 3.10). Use a terminal to run scripts (`python filename.py`).
+# - File Management: Place `.py` files in a working directory (e.g., `test` folder); use `dir` (Windows) or `ls` (Linux/Mac) to verify files; navigate with `cd`.
+# - Editors: Use VS Code, Notepad++, or any text editor to write `.py` files. Ensure correct indentation and file extensions.
 # - Practical Use: Local Python enables running scripts without Colab, ideal for production or offline work. Virtual environments (not covered here) manage package dependencies.
 # - Pitfalls: Local Python has fewer pre-installed packages than Colab; install needed packages via `pip`. Incorrect file paths or missing Python installation cause errors.
 # - Example: Running `test.py` locally mirrors Colab execution, assuming `human.py` is in the same directory.
@@ -1787,12 +1796,14 @@ class Human:
 # 2. Navigate: cd test
 # 3. Create test.py and human.py (as above)
 # 4. Run: python test.py
-# Input: 67
-# Outputs: Thank you for the number 67
-#          <class '__main__.Human'>
+# Input: Give us a number, please: 67
+# Outputs: 
+# Thank you for the number 67
+# <class 'human.Human'>
 
 # Checking local packages
-# !pip list  # Outputs: Smaller list locally (e.g., pip, setuptools) compared to Colab
+!pip list  
+# Outputs: Minimal local list (e.g., pip, setuptools) compared to Colab extensive list
 
 # ----------------------------------------------------------------------------------
 # 3:07:38 Conclusion
