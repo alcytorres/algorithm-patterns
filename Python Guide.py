@@ -1,6 +1,7 @@
 # Python Guide
 # Tutorial: https://www.youtube.com/watch?v=NakyjvSrTIQ
 # Grok notes: https://grok.com/chat/d75c2885-2cd7-47e5-a46c-37e60661c914
+# Transcript: https://tactiq.io/tools/run/youtube_transcript?yt=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DNakyjvSrTIQ
 # Environment: Examples use Google Colab, but code is compatible with any Python environment (e.g., VS Code)
 # Table of Contents
 # 0:00:00 Introduction
@@ -31,6 +32,11 @@
 # 2:57:52 Python Scripts / Files
 # 3:04:11 Local Python
 # 3:07:38 Conclusion
+
+# Stack
+# Queue 
+# Linked List
+# Linked List
 
 
 # ----------------------------------------------------------------------------------
