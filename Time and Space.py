@@ -1,5 +1,6 @@
-# Comprehensive Guide to Time and Space Complexity with Big O Notation
-# Based on Greg's Tutorial: https://www.youtube.com/watch?v=aWKEBEg55ps&list=PLKYEe2WisBTFEr6laH5bR2J19j7sl5O8R
+# Time and Space Complexity with Big O Notation
+# DSA Course in Python Lecture 1
+# Video: https://www.youtube.com/watch?v=aWKEBEg55ps&list=PLKYEe2WisBTFEr6laH5bR2J19j7sl5O8R
 
 # Overview
 # --------
