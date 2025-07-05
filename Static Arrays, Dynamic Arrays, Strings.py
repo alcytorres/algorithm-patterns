@@ -73,7 +73,7 @@ def delete_element(arr, index):
 # - Access (A[2]): O(1) - Constant time, direct memory access.
 # - Modify (A[0] = 7): O(1) - Constant time, updates value at index.
 # - Search (6 in A): O(n) - Linear time, scans array.
-# - Append (A.append(5)): O(1)***** amortized - Constant time on average, O(n) when resizing.
+# - Append (A.append(5)): O(1) amortized - Constant time on average, O(n) when resizing.
 # - Pop from end (A.pop()): O(1) - Constant time, deallocates last element.
 # - Insert (A.insert(2, 5)): O(n) - Shifts elements to make space.
 # - Delete (A.pop(2)): O(n) - Shifts elements to fill gap.

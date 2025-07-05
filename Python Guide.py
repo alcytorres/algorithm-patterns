@@ -803,20 +803,7 @@ class Human:
 h = Human(age=4, name="greg")  
 print(h)  # Outputs: hi (if redefined)
 
-# Adding __repr__ method --> For Google Colabs 
-# class Human:
-#     def __init__(self, age, name):
-#         self._age = age
-#         self._name = name
-    
-#     def __str__(self):
-#         return "hi"
-    
-#     def __repr__(self):
-#         return "hi"
-# print(h)  # Outputs: hi (in Colab, uses __repr__)
-
-# Updating __str__ and __repr__ with name
+# Updating __str__ with name
 class Human:
     def __init__(self, age, name):
         self._age = age
@@ -828,19 +815,19 @@ class Human:
 h = Human(age=4, name="greg")
 print(h)  # Outputs: A human with name greg.
 
-# Adding age to __str__ and __repr__
+# Adding age to __str__ 
 class Human:
     def __init__(self, age, name):
         self._age = age
         self._name = name
     
     def __str__(self):
-        return f"A human with name {self._name}. their age is {self._age}."
+        return f"A human with name {self._name}. Their age is {self._age}."
     
 h = Human(age=4, name="greg")
-print(h)  # Outputs: A human with name greg. their age is 4.
+print(h)  # Outputs: A human with name greg. Their age is 4.
 
-# Adding age to __str__ and __repr__ w Concatenation
+# Adding age to __str__  w Concatenation
 # With OUT str(self._age) you get:
     # TypeError: can only concatenate str (not "int") to str
     # Fix: Convert age to string
