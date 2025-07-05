@@ -287,6 +287,22 @@ print(len(text))  # Output: 3
 
 
 # BUILT-IN FUNCTION: 
+str()
+# What it does: Converts an object to its string representation.
+# DSA use case: Converts numbers or objects to strings for output formatting or string manipulation (e.g., string concatenation, parsing).
+# Why it’s useful: Enables string operations on non-string data, common in problems requiring text output or type conversion.
+# Time/Space: O(n) time (n = string length or object complexity), O(n) space for the new string.
+# Syntax:
+str(object)  # Returns the string representation of 'object'
+# DSA Example 1 (Number to String):
+num = 123
+print(str(num) + " is a number")  # Output: "123 is a number"
+# DSA Example 2 (List to String):
+lst = [1, 2]
+print(str(lst))  # Output: "[1, 2]"
+
+
+# BUILT-IN FUNCTION: 
 int()
 # What it does: Converts a value (like a string or float) to an integer.
 # DSA use case: Parses numeric strings in problems like atoi or mathematical computations.
@@ -519,3 +535,76 @@ print(sum(numbers))  # Output: 6
 # DSA Example 2 (Subarray Sum):
 subarray = [2, 3]
 print(sum(subarray))  # Output: 5
+
+
+
+# ----------------------------------------------------------------------------------
+# SPECIAL METHODS
+
+__init__()
+# What it does: Initializes a new instance of a class with specified attributes.
+
+# __init__(self, ...): Sets up a new object when created. It’s like filling out a form with initial details (e.g., age, name) for the object.
+
+
+# DSA use case: Sets up objects for data structures (e.g., nodes in trees, linked lists, or custom classes in problems).
+# Why it’s useful: Defines initial state of objects, essential for creating structured data in algorithms.
+# Time/Space: O(1) time (depends on initialization logic), O(1) space (excluding stored attributes).
+# Syntax:
+def __init__(self, *args):  # Constructor; 'self' is instance, '*args' for attributes
+# DSA Example 1 (Basic Class):
+class Human:
+    def __init__(self, name):
+        self.name = name
+h = Human("Alice")
+print(h.name)  # Output: "Alice"
+
+# DSA Example 2 (Node for Linked List):
+class Node:
+    def __init__(self, value):
+        self.value = value
+        self.next = None
+node = Node(5)
+print(node.value)  # Output: 5
+
+
+# SPECIAL METHOD: 
+__str__(self)
+# What it does: Defines the string representation of an object when str() or print() is called.
+
+# __str__(self): Tells Python how to turn the object into a string when printed. It’s like writing a short description of the object.
+
+# The __str__ method is called when the following functions are invoked on the object and return a string:
+    # The print() method
+    # The str() method
+
+
+# DSA use case: Provides readable output for custom objects in debugging or result formatting (e.g., custom data structures).
+# Why it’s useful: Makes objects human-readable, aiding in testing and understanding complex structures.
+# Time/Space: O(n) time (n = string length), O(n) space for the string.
+# Syntax:
+def __str__(self):  # Returns a string describing the instance
+
+# Example 
+num = 123
+string_rep = str(num)
+print(type(string_rep))  # Output: '123'
+
+# DSA Example 1 (Human Class):
+class Human:
+    def __init__(self, age, name):
+        self.age = age
+        self.name = name
+    def __str__(self):
+        return f"{self.name}, {self.age}"
+h = Human(23, "John")
+print(h)  # Output: "John, 23"
+
+# DSA Example 2 (Node String):
+class Node:
+    def __init__(self, value):
+        self.value = value
+    def __str__(self):
+        return f"Node({self.value})"
+node = Node(5)
+print(node)  # Output: "Node(5)"
