@@ -113,6 +113,22 @@ template = "x: {}, y: {}"
 print(template.format(1, 2))  # Output: "x: 1, y: 2"
 
 
+# STRING METHOD: 
+.join()
+# What it does: Concatenates elements of an iterable (e.g., list of strings) into a single string, using a specified separator.
+# DSA use case: Combines list elements into a string for output formatting or string manipulation (e.g., reverse words, string construction).
+# Why it’s useful: Efficiently builds strings from lists, avoiding manual concatenation loops.
+# Time/Space: O(n) time (n = total length of elements), O(n) space for the resulting string.
+# Syntax:
+separator.join(iterable)  # Returns a string; 'separator' is the string to join elements with
+# DSA Example 1 (List to String):
+words = ['hello', 'world']
+print(' '.join(words))  # Output: "hello world"
+# DSA Example 2 (Custom Separator):
+chars = ['a', 'b', 'c']
+print(','.join(chars))  # Output: "a,b,c"
+
+
 
 # ----------------------------------------------------------------------------------
 # LIST METHODS

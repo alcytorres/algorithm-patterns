@@ -27,17 +27,6 @@ print(h)
 
 
 
-class Human:
-    def __init__(self, age ,name):
-        self.age = age
-        self.name = name
-    
-    def __str__(self):
-        return "Hi"
-
-h = Human(25, "John")
-print(h)
-print(str(h))
 
 
 # num = 123
