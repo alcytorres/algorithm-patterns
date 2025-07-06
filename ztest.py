@@ -22,12 +22,22 @@ h.older_younger_than(10)  # Outputs: our age is more than their age.
 print(h.age)              # Outputs: 21
 print(h.name)             # Outputs: John
 print(h)                  # Outputs: A human with name John. Their age is 21.
+h.age = 50
+print(h)
 
 
 
+class Human:
+    def __init__(self, age ,name):
+        self.age = age
+        self.name = name
+    
+    def __str__(self):
+        return "Hi"
 
-
-# Key takeaway: Use the dot (.) to access or invoke methods and attributes of an object, connecting the instance to its class-defined functionality.
+h = Human(25, "John")
+print(h)
+print(str(h))
 
 
 # num = 123

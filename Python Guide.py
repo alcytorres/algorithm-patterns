@@ -926,7 +926,7 @@ class Human:
         else:
             print("our age is less than their age.")
 
-h = Human(21, "John")
+h = Human(25, "John")
 h.older_younger_than(30)
 print(h.age)
 print(h.name)
@@ -938,11 +938,11 @@ class Human:
     # - Defines the initializer method __init__ to set up a new Human object.
     # - __init__: Special method (double underscores __ mark built-in Python methods) called automatically when creating an object.
     # - self: Refers to the object being created (e.g., 'h' later).
-    # - age, name: Parameters passed when creating the object (e.g., 23, "John").
+    # - age, name: Parameters passed when creating the object (e.g., 25, "John").
     def __init__(self, age, name):
         # self.age = age
         # - Assigns the 'age' parameter to the object's 'age' attribute.
-        # - self.age: Creates a variable tied to the object (e.g., h.age = 23).
+        # - self.age: Creates a variable tied to the object (e.g., h.age = 25).
         # - Stores 'age' for later use (e.g., in __str__).
         self.age = age
         # self.name = name
@@ -959,8 +959,8 @@ class Human:
     def __str__(self):
         # return f"A human with name {self.name}. Their age is {self.age}."
         # - Returns a formatted string describing the object.
-        # - self.name, self.age: Access the object’s stored 'name' and 'age' (e.g., "John", 23).
-        # - f-string: Inserts self.name and self.age into the string (e.g., "A human with name John. Their age is 23.").
+        # - self.name, self.age: Access the object’s stored 'name' and 'age' (e.g., "John", 25).
+        # - f-string: Inserts self.name and self.age into the string (e.g., "A human with name John. Their age is 25.").
         return f"A human with name {self.name}. Their age is {self.age}."
 
     # def older_younger_than(self, age):
@@ -969,51 +969,51 @@ class Human:
     # - age: Parameter for the age to compare against (e.g., 30).
     def older_younger_than(self, age):
         # if self.age > age:
-        # - Checks if the object’s age (e.g., h.age = 21) is greater than the given age (e.g., 30).
+        # - Checks if the object’s age (e.g., h.age = 25) is greater than the given age (e.g., 30).
         if self.age > age:
             # print("our age is bigger than their age.")
-            # - Prints message if object’s age is greater (e.g., 21 > 30 is False, so this doesn’t run).
+            # - Prints message if object’s age is greater (e.g., 25 > 30 is False, so this doesn’t run).
             print("our age is bigger than their age.")
         # elif self.age == age:
-        # - Checks if the object’s age equals the given age (e.g., 21 == 30 is False).
+        # - Checks if the object’s age equals the given age (e.g., 25 == 30 is False).
         elif self.age == age:
             # print("our age is equal to their age.")
             # - Prints message if ages are equal (doesn’t run here).
             print("our age is equal to their age.")
         # else:
-        # - Runs if neither condition above is true (e.g., 21 < 30).
+        # - Runs if neither condition above is true (e.g., 25 < 30).
         else:
             # print("our age is less than their age.")
-            # - Prints message if object’s age is less (e.g., 21 < 30 is True, so this runs).
+            # - Prints message if object’s age is less (e.g., 25 < 30 is True, so this runs).
             print("our age is less than their age.")
 
 
 # Creating a Human instance and verifying __str__ behavior
-h = Human(23, "John")
-# - Creates a new Human object, calling __init__(23, "John").
+h = Human(25, "John")
+# - Creates a new Human object, calling __init__(25, "John").
 # - h: Variable storing the object.
-# - Human(23, "John"): Passes 23 as 'age' and "John" as 'name' to __init__.
-# - self in __init__ refers to 'h', so h.age = 23 and h.name = "John".
+# - Human(25, "John"): Passes 25 as 'age' and "John" as 'name' to __init__.
+# - self in __init__ refers to 'h', so h.age = 25 and h.name = "John".
 
 # - Calls h.__str__() to get the string representation of 'h'.
 print(h)
-# - __str__ returns "A human with name John. Their age is 23.".
-# - print() outputs: A human with name John. Their age is 23.
+# - __str__ returns "A human with name John. Their age is 25.".
+# - print() outputs: A human with name John. Their age is 25.
 
 # Explicitly calling str() to verify __str__ behavior
-print(str(h))             # Outputs: A human with name John. Their age is 23.
+print(str(h))             # Outputs: A human with name John. Their age is 25.
 # - str(h) explicitly invokes h.__str__() to get the string representation of 'h'.
-# - __str__ returns "A human with name John. Their age is 23.".
-# - print() outputs: A human with name John. Their age is 23.
+# - __str__ returns "A human with name John. Their age is 25.".
+# - print() outputs: A human with name John. Their age is 25.
 
 
 # Accessing instance attributes directly
-print(h.age)              # Outputs: 21
+print(h.age)              # Outputs: 25
 print(h.name)             # Outputs: John
 
 # Test older_younger_than method with different ages
 h.older_younger_than(30)  # Outputs: our age is less than their age.
-h.older_younger_than(21)  # Outputs: our age is equal to their age.
+h.older_younger_than(25)  # Outputs: our age is equal to their age.
 h.older_younger_than(10)  # Outputs: our age is more than their age.
 
 # Modifying an instance attribute and rechecking behavior
@@ -1037,8 +1037,8 @@ print(h3)                 # Outputs: A human with name Robert. Their age is 30.
 h.older_younger_than(h2.age)  # Outputs: our age is bigger than their age. (40 > 15)
 
 # Reassigning an instance and checking its state
-h = Human(25, "Jane")     # Reassign h to a new Human instance
-print(h)                  # Outputs: A human with name Jane. Their age is 25.
+h = Human(23, "Jane")     # Reassign h to a new Human instance
+print(h)                  # Outputs: A human with name Jane. Their age is 23.
 
 
 
@@ -1048,8 +1048,8 @@ print(h)                  # Outputs: A human with name Jane. Their age is 25.
 
 
 # General, Simple Description of __init__ and __str__:
-# - __init__(self, ...): Sets up a new object when created. It’s like filling out a form for the object (e.g., setting age and name). Runs automatically when you make a new object (e.g., Human(23, "John")).
-# - __str__(self): Defines how the object looks when printed. It’s like giving the object a name tag to show a clear description (e.g., "A human with name John. Their age is 23.").
+# - __init__(self, ...): Sets up a new object when created. It’s like filling out a form for the object (e.g., setting age and name). Runs automatically when you make a new object (e.g., Human(25, "John")).
+# - __str__(self): Defines how the object looks when printed. It’s like giving the object a name tag to show a clear description (e.g., "A human with name John. Their age is 25.").
 
 # Are str() and __str__(self) the same? No.
 # - str(): A built-in Python function that converts an object to a string by calling the object’s __str__ method. It’s used outside the class (e.g., str(h)).
@@ -1062,23 +1062,28 @@ print(h)                  # Outputs: A human with name Jane. Their age is 25.
 
 
 # Explanation of print(h) vs print(str(h)) in the Human class
-# The __str__ method returns a string like "A human with name John. Their age is 21."
+# The __str__ method returns a string like "A human with name John. Their age is 25."
 # It's a special method Python calls automatically when a string representation is needed.
 
 # When you use print(h):
 # - print() needs a string, so Python calls h's __str__ method automatically.
-# - __str__ returns "A human with name John. Their age is 21.", which print() outputs.
+# - __str__ returns "A human with name John. Their age is 25.", which print() outputs.
 # - This implicitly invokes __str__.
 
 # When you use print(str(h)):
 # - str(h) explicitly calls h's __str__ method to get the string.
-# - __str__ returns "A human with name John. Their age is 21.", which print() outputs.
+# - __str__ returns "A human with name John. Their age is 25.", which print() outputs.
 # - This directly triggers __str__.
 
 # Why the same output?
-# Both print(h) and print(str(h)) output "A human with name John. Their age is 21."
+# Both print(h) and print(str(h)) output "A human with name John. Their age is 25."
 # because they both use __str__. print(h) calls it implicitly; str(h) calls it explicitly.
 # Matching outputs confirm print(h) uses __str__, reinforcing how special methods work.
+
+
+
+# Accessing Methods and Attributes with Dot Notation
+    # Use the dot (.) to access or invoke methods and attributes of an object, connecting the instance to its class-defined functionality.
 
 
 # ----------------------------------------------------------------------------------
