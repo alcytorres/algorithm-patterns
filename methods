@@ -1,6 +1,14 @@
 
 # STRING METHODS
+# LIST METHODS
+# DICTIONARY METHODS
+# SET METHODS
+# BUILT-IN FUNCTIONS
+# SPECIAL METHODS
 
+
+
+# ----------------------------------------------------------------------------------
 # STRING METHOD: 
 .upper()
 # What it does: Converts all characters in a string to uppercase.
@@ -386,7 +394,8 @@ unique = {1, 2, 3}
 print(list(unique))  # Output: [1, 2, 3]
 
 
-# BUILT-IN FUNCTION: enumerate()
+# BUILT-IN FUNCTION: 
+enumerate()
 # What it does: Returns an iterator of tuples containing indices and elements from an iterable.
 # DSA use case: Tracks both index and value during iteration (e.g., array traversal, index-based operations).
 # Why it’s useful: Simplifies loops needing both element and position, avoiding manual index tracking.
@@ -401,6 +410,24 @@ for i, val in enumerate(nums):
 chars = ['x', 'y']
 for i, val in enumerate(chars, start=1):
     print(i, val)  # Output: 1 x, 2 y
+
+
+# BUILT-IN FUNCTION: 
+iter()
+# What it does: Creates an iterator from an iterable object (e.g., list, string).
+# DSA use case: Enables manual iteration in problems requiring custom traversal (e.g., array or string processing).
+# Why it’s useful: Allows fine-grained control over iteration, often paired with next() for step-by-step processing.
+# Time/Space: O(1) time to create iterator, O(1) space.
+# Syntax:
+iter(iterable)  # Returns an iterator for 'iterable'
+# DSA Example 1 (List Iterator):
+nums = [1, 2, 3]
+it = iter(nums)
+print(next(it))  # Output: 1
+# DSA Example 2 (String Iterator):
+text = "abc"
+it = iter(text)
+print(next(it))  # Output: 'a'
 
 
 # BUILT-IN FUNCTION: 
@@ -423,7 +450,8 @@ print(list(range(3)))  # Output: [0, 1, 2]
 print(list(range(1, 5, 2)))  # Output: [1, 3]
 
 
-# BUILT-IN FUNCTION: zip()
+# BUILT-IN FUNCTION: 
+zip()
 # What it does: Combines multiple iterables into an iterator of tuples, pairing elements by position.
 # DSA use case: Pairs elements from multiple lists in problems like merging or comparing arrays (e.g., two-pointer, matrix operations).
 # Why it’s useful: Simplifies simultaneous iteration over multiple sequences, reducing manual index management.
@@ -437,6 +465,22 @@ print(list(zip(nums, chars)))  # Output: [(1, 'a'), (2, 'b')]
 # DSA Example 2 (Matrix Transpose Prep):
 matrix = [[1, 2], [3, 4]]
 print(list(zip(*matrix)))  # Output: [(1, 3), (2, 4)]
+
+
+# BUILT-IN FUNCTION: 
+next()
+# What it does: Retrieves the next item from an iterator, with an optional default if the iterator is exhausted.
+# DSA use case: Accesses elements from iterators in problems involving iteration (e.g., custom traversal, generator processing).
+# Why it’s useful: Provides controlled access to iterator elements, useful for single-step iteration or handling finite sequences.
+# Time/Space: O(1) time per call, O(1) space.
+# Syntax:
+next(iterator, default)  # Returns the next item from 'iterator'; returns 'default' if exhausted (optional)
+# DSA Example 1 (Iterator Traversal):
+iter_nums = iter([1, 2, 3])
+print(next(iter_nums))  # Output: 1
+# DSA Example 2 (Default Value):
+iter_empty = iter([])
+print(next(iter_empty, 0))  # Output: 0
 
 
 # BUILT-IN FUNCTION: 
@@ -500,6 +544,8 @@ print(sorted(nums))  # Output: [1, 2, 3]
 # DSA Example 2 (Sort Descending):
 chars = ['b', 'a', 'c']
 print(sorted(chars, reverse=True))  # Output: ['c', 'b', 'a']
+
+
 
 # ----------------------------------------------------------------------------------
 # ADDITIONAL COMMON METHODS/FUNCTIONS FOR LEETCODE

@@ -125,7 +125,7 @@ print(search(head, 7))  # Output: True
 # - Efficient head/tail operations (O(1)).
 # - Constant-time deletion with node reference (unlike singly linked lists).
 
-# Code Example: Doubly Linked List Node and Operations
+# Doubly Linked List Node and Operations
 class DoublyNode:
     def __init__(self, value, next=None, prev=None):
         self.value = value  # Store the value

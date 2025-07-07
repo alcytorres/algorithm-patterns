@@ -1,166 +1,180 @@
-# -----------------------------------------------------------------
-# # Cocise explain the difference 
-
-# # Validating user input with try/except
-# try:
-#     user_input = input("Enter a number: ")  # Gets user input as string
-#     number = int(user_input)  # Tries to convert to integer
-#     print(f"Success! Your number is {number}.")  # Outputs integer
-# except ValueError:
-#     print("Error: Please enter a valid number, not text.")  # Catches non-integer input
-
-# # Validating user input with isnumeric()
-# user_input = input("Enter a number: ")  # Gets user input as string
-# if user_input.isnumeric():  # Checks if input is numeric digits
-#     print(f"Success! Your number is {user_input}.")  # Outputs string
-# else:
-#     print("Error: Please enter a valid number, not text.")  # Handles non-numeric input
+# Breakdown this code
+# Explain each line and the syntax
+# Explain big picture what is happening 
+# Basic exrecise for this 
 
 
+# –––––––––––––––––––––––––––––––––––––––––––––
+# Background on iter() and next():
 
-# -----------------------------------------------------------------
-# Stack Guide: From Zero to Proficiency
-# A beginner-friendly guide to mastering the Stack data structure in Python.
+# Create a list and get its iterator
+nums = [1, 2, 3]
+iterator = iter(nums)
 
-# Definition and Purpose
-# A Stack is a Last In, First Out (LIFO) data structure, like a pile of plates where you add and remove from the top.
-# Used for tasks requiring reversal, backtracking, or tracking recent items (e.g., undo feature, function call stack).
+# Use next() to get items one by one
+print(next(iterator))  # Outputs: 1
+print(next(iterator))  # Outputs: 2
+print(next(iterator))  # Outputs: 3
+print(next(iterator))  # Raises StopIteration (no more items)
+print(next(iterator, "end"))  # Outputs: end
 
-# Key Operations
-# - Push: Add item to top (O(1))
-# - Pop: Remove and return top item (O(1))
-# - Peek: View top item without removing (O(1))
-# - Is Empty: Check if stack is empty (O(1))
-
-# Simple Implementation
-# Uses Python list as a stack with append() for push and pop() for pop.
-class Stack:
-    def __init__(self):  # Initialize empty stack
-        self.items = []
-    
-    def push(self, item):  # Add item to top
-        self.items.append(item)
-    
-    def pop(self):  # Remove and return top item
-        if not self.is_empty():  # Handle empty stack
-            return self.items.pop()
-        raise IndexError("Pop from empty stack")
-    
-    def peek(self):  # View top item
-        if not self.is_empty():  # Handle empty stack
-            return self.items[-1]
-        raise IndexError("Peek from empty stack")
-    
-    def is_empty(self):  # Check if stack is empty
-        return len(self.items) == 0
-
-# Example usage
-stack = Stack()
-stack.push(1)  # Push 1
-stack.push(2)  # Push 2
-print(stack.pop())  # Outputs: 2 (removes top item)
-print(stack.peek())  # Outputs: 1 (views top item)
-print(stack.is_empty())  # Outputs: False (stack not empty)
-stack.pop()  # Remove 1
-print(stack.is_empty())  # Outputs: True (stack now empty)
-
-# DSA Applications
-# Stacks are used in algorithms for:
-# 1. Expression Parsing: Evaluate expressions like "3 + (4 * 5)" using a stack to track parentheses.
-# 2. Backtracking: Solve problems like maze navigation by storing previous steps.
-# Example LeetCode Problems:
-# - Valid Parentheses (LeetCode #20): Check if brackets are balanced.
-#   Solution: Push opening brackets, pop to match closing brackets.
-
-def isValid(s):
-    stack = []
-    brackets = {')': '(', ']': '[', '}': '{'}
-    for c in s:
-        if c in brackets.values():
-            stack.append(c)
-        elif c in brackets and (not stack or stack.pop() != brackets[c]):
-            return False
-    return not stack
-print(isValid("()[]{}"))  # Outputs: True
-
-# - Min Stack (LeetCode #155): Design a stack with O(1) minimum element retrieval.
-#   Solution: Use two stacks—one for values, one for tracking minimums.
-
-# Pros and Cons
-# Pros:
-# - Simple and fast (O(1) for push, pop, peek).
-# - Ideal for LIFO tasks like undo or recursion.
-# Cons:
-# - Limited access (only top item available).
-# - Not suitable for searching or random access (use lists or arrays instead).
-
-# Practice Problems
-# 1. Valid Parentheses (LeetCode #20): Check if a string of brackets is balanced.
-# 2. Min Stack (LeetCode #155): Implement a stack that tracks the minimum element.
-# 3. Reverse Polish Notation (LeetCode #150): Evaluate expressions using a stack.
+# Check the iterator type
+print(type(iterator))  # Output: <class 'list_iterator'>
 
 
+# Create an iterator from a string
+text = "abc"
+iterator = iter(text)
 
-# -----------------------------------------------------------------
-# longest_unique_substring.py
+# Use next() with a default value to avoid StopIteration
+print(next(iterator, "end"))  # Outputs: a
+print(next(iterator, "end"))  # Outputs: b
+print(next(iterator, "end"))  # Outputs: c
+print(next(iterator, "end"))  # Outputs: end (default when iterator is exhausted)
 
-"""
-# Longest Substring with At Most K Distinct Characters
-Task: Given a string s and an integer k, find the length of the longest substring that contains at most k distinct characters. If the string is empty or k is 0, return 0.
-
-Example 1: s = "eceba", k = 2 → 3 (substring "ece" has 2 distinct characters: 'e', 'c')
-
-Example 2: s = "aa", k = 1 → 2 (substring "aa" has 1 distinct character: 'a')
-
-Example 3: s = "aabbcc", k = 2 → 4 (substring "aabb" or "bbcc" has 2 distinct characters: 'a', 'b' or 'b', 'c')
-
-    Generic dynamic sliding-window template.
-    - arr: list of ints (or chars, as numbers)
-    - K: problem parameter (e.g. target sum, max distinct count, etc.)
-    Returns:
-    - result: depends on problem (max window length, min window length, count, sum, etc.)
-"""
-
-# Test cases
-print(longest_substring_k_distinct("eceba", 2))    # Output: 3
-print(longest_substring_k_distinct("aa", 1))       # Output: 2
-print(longest_substring_k_distinct("aabbcc", 2))   # Output: 4
+# Check the iterator type
+print(type(iterator))  # Output: <class 'str_iterator'>
 
 
-
-def length_of_longest_substring(s):
-  
-    # 1️⃣ Initialize pointers & tracking variables
-    left = 0
-    max_len = 0
-    char_count = {}  # freq map: char → how many times it appears in window
-
-    # 2️⃣ Expand window by moving `right`
-    for right in range(len(s)):
-        current_char = s[right]
-        # └── include s[right] in our window
-        char_count[current_char] = char_count.get(current_char, 0) + 1
-
-        # 3️⃣ Shrink window while it’s invalid (we have a duplicate)
-        while char_count[current_char] > 1:
-            # └── remove s[left] before we move left forward
-            left_char = s[left]
-            char_count[left_char] -= 1
-            left += 1
-
-        # 4️⃣ Update result for a max-length problem
-        window_len = right - left + 1
-        if window_len > max_len:
-            max_len = window_len
-
-    # 5️⃣ Return final answer
-    return max_len
+join()
+# Syntax:
+# separator.join(iterable)  # Returns a string; 'separator' is the string to join elements with
+words = ["1", "2", "3", "4"]
+result = " -> ".join(words)
+print(result)
 
 
-print(length_of_longest_substring("abcabccc"))  # Output: 3 ("abc")
-print(length_of_longest_substring("aa"))        # Output: 1 ("a")
-print(length_of_longest_substring("aabbcc"))    # Output: 2 ("ab" or "bc")
-print(length_of_longest_substring("eceba"))     # Output: 4 ("ceba")
+# Big Picture:
+# - This code defines a singly linked list, where each node holds a value and a link to the next node.
+# - It creates a list: 1 -> 3 -> 4 -> 7 -> None.
+# - Three functions: traverse_list prints each node’s value, display shows the list as a string, and search checks if a value exists.
+# - Each function iterates through the list, making them O(n) in time complexity.
+
+
+# The next in SinglyNode is unrelated to the next() iterator function; it’s just a naming coincidence. 
+# It refers to the next node in the linked list, not iteration.
+
+
+# Class definition for a node in a singly linked list
+class SinglyNode:
+    def __init__(self, value, next=None):
+    # Initializes node with value and next (default None).
+    # self: The node. value: Data. next: Link to next node.
+        self.value = value
+        # Sets node’s value (e.g., 1).
+        self.next = next
+        # Sets link to next node or None.
+
+    def __str__(self):
+    # Returns node’s value as string for printing.
+        return str(self.value)
+        # Converts value to string (e.g., "1").
+
+# Create a singly linked list: 1 -> 3 -> 4 -> 7 -> None
+# Creates head node with value 1, next=None.
+head = SinglyNode(1)
+    # - SinglyNode(1): Calls __init__(1, next=None), so head.value = 1, head.next = None.
+# Creates node with value 3, next=None.
+a = SinglyNode(3)
+# Creates node with value 4, next=None.
+b = SinglyNode(4)
+# Creates node with value 7, next=None.
+c = SinglyNode(7)
+
+# Links head to a (1 -> 3).
+head.next = a
+    # - head.next: Sets head’s next to point to a (1 -> 3).
+# Links a to b (3 -> 4).
+a.next = b
+# Links b to c (4 -> 7).
+b.next = c
+# c.next is None (end of list).
+# c.next remains None, indicating the end of the list (7 -> None).
+
+# Each node has two things:
+    # value: The data it holds (like 1 or 3).
+    # next: A slot to point to another node (or None if it’s the last node).
+
+# Why the Syntax head.next?
+    # The . (dot) is how you access a node’s attributes (like value or next).
+    # head.next means “Look at the next slot of the head node.”
+    # head.next = a means “Put the node a into head’s next slot.”
+
+# To see the list, you could print the values by following the next pointers:
+current = head
+while current is not None:
+    print(current.value)  # Prints 1, 3, 4, 7
+    current = current.next
+# It’s like walking through the chain, printing each node’s value until the end.
+
+
+# Traverse and print: O(n)
+# - Defines a function to print each node’s value in the list.
+# - head: The starting node of the list (e.g., head with value 1).
+def traverse_list(head):
+# Prints each node’s value. O(n) time.
+    curr = head
+    # Starts at head node.
+    while curr:
+    # Loops until curr is None.
+        print(curr)
+        # Prints node’s value (e.g., 1, 3, 4, 7).
+        curr = curr.next
+        # Moves to next node.
+
+# Display list as string (e.g., "1 -> 3 -> 4 -> 7"): O(n)
+# - Defines a function to show the list as a string (e.g., "1 -> 3 -> 4 -> 7").
+# - head: The starting node of the list.
+def display(head):
+# Shows list as string (e.g., "1 -> 3 -> 4 -> 7"). O(n) time.
+    elements = []
+    # Creates list to store values as strings.
+    curr = head
+    # Starts at head node.
+    while curr:
+    # Loops until curr is None.
+        elements.append(str(curr.value))
+        # Adds node’s value as string.
+        curr = curr.next
+        # Moves to next node.
+    print(" -> ".join(elements))
+    # Prints values joined by " -> ".
+
+# Search for value: O(n)
+# - Defines a function to check if a value exists in the list.
+# - head: The starting node.
+# - value: The value to find (e.g., 2 or 7).
+def search(head, value):
+# Checks if value exists in list. O(n) time.
+    curr = head
+    # Starts at head node.
+    while curr:
+    # Loops until curr is None.
+        if curr.value == value:
+        # Checks if node’s value matches target.
+            return True
+            # Returns True if value found.
+        curr = curr.next
+        # Moves to next node.
+    return False
+    # Returns False if value not found.
+
+# Prints: 1, 3, 4, 7.
+traverse_list(head)
+# Prints: 1 -> 3 -> 4 -> 7.
+display(head)
+# Prints: False (2 not in list).
+print(search(head, 2))
+# Prints: True (7 in list).
+print(search(head, 7))
+
+# Time and Space Complexity:
+# - traverse_list: O(n) time (visits n nodes), O(1) space (only uses curr).
+# - display: O(n) time (visits n nodes), O(n) space (stores n values in elements).
+# - search: O(n) time (visits up to n nodes), O(1) space (only uses curr).
 
 
 
+
+
+# –––––––––––––––––––––––––––––––––––––––––––––
