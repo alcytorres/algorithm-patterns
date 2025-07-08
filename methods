@@ -137,6 +137,14 @@ chars = ['a', 'b', 'c']
 print(','.join(chars))  # Output: "a,b,c"
 
 
+join()
+# Syntax:
+# separator.join(iterable)  # Returns a string; 'separator' is the string to join elements with
+words = ["1", "2", "3", "4"]
+result = " -> ".join(words)
+print(result)
+
+
 
 # ----------------------------------------------------------------------------------
 # LIST METHODS
@@ -428,6 +436,23 @@ print(next(it))  # Output: 1
 text = "abc"
 it = iter(text)
 print(next(it))  # Output: 'a'
+
+# Create a list and get its iterator
+nums = [1, 2, 3]
+iterator = iter(nums)
+
+# Use next() to get items one by one
+print(next(iterator))  # Outputs: 1
+print(next(iterator))  # Outputs: 2
+print(next(iterator))  # Outputs: 3
+print(next(iterator))  # Raises StopIteration (no more items)
+print(next(iterator, "end"))  # Outputs: end
+
+# Check the iterator type
+print(type(iterator))  # Output: <class 'list_iterator'>
+
+
+
 
 
 # BUILT-IN FUNCTION: 

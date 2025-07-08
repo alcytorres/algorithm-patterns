@@ -1,17 +1,56 @@
 # Big Picture:
-# - This code defines a doubly linked list, where each node holds a value, a link to the next node, and a link to the previous node.
-# - It creates a list: 3 <-> 1 <-> 7.
-# - Three functions: insert_at_beginning adds a node at the start, insert_at_end adds a node at the end, and display shows the list as a string.
-# - Insertions are O(1) as they update pointers directly; display is O(n) as it traverses the list.
+# - Defines a doubly linked list where each node holds a value, a link to the next node, and a link to the previous node.
+# - Creates a list: 3 <-> 1 <-> 7, starting from a single node (1).
+# - Three functions: display shows the list as a string, insert_at_beginning adds a node at the start, insert_at_end adds a node at the end.
+# - Doubly linked lists allow traversal forward (next) and backward (prev), unlike singly linked lists.
 
-# The 'next' and 'prev' in DoublyNode are unrelated to the next() iterator function; they are just naming conventions.
-# They refer to the next and previous nodes in the doubly linked list, not iteration.
+# curr = current node in traversal or operation.
 
+class DoublyNode:
+    def __init__(self, value, next=None, prev=None):
+        self.value = value
+        self.next = next
+        self.prev = prev
+
+    def __str__(self):
+        return str(self.value)
+
+# Display a doubly linked list as a string (e.g., '3 <-> 1 <-> 7'). O(n)
+def display(head):
+    if not head:
+        return "Empty List"
+    result = []
+    curr = head
+    while curr:
+        result.append(str(curr.value))
+        curr = curr.next
+    return " <-> ".join(result)
+
+# Inserts a node at the beginning of a doubly linked list. O(1)
+def insert_at_beginning(head, tail, value):
+    new_node = DoublyNode(value)
+    if not head:  # Empty list
+        return new_node, new_node
+    new_node.next = head
+    head.prev = new_node
+    return new_node, tail
+
+# Inserts a node at the end of a doubly linked list. O(1)
+def insert_at_end(head, tail, value):
+    new_node = DoublyNode(value)
+    if not head:  # Empty list
+        return new_node, new_node
+    tail.next = new_node
+    new_node.prev = tail
+    return head, new_node
+
+
+# –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 # Class definition for a node in a doubly linked list
 class DoublyNode:
     def __init__(self, value, next=None, prev=None):
-    # Initializes node with value, next (default None), and prev (default None).
-    # self: The node. value: Data. next: Link to next node. prev: Link to previous node.
+        # Initializes node with value, next, and prev (default None).
+        # self: The node. value: Data. next: Link to next node. prev: Link to previous node.
         self.value = value
         # Sets node’s value (e.g., 1).
         self.next = next
@@ -20,121 +59,104 @@ class DoublyNode:
         # Sets link to previous node or None.
 
     def __str__(self):
-    # Returns node’s value as string for printing.
+        # Returns node’s value as string for printing.
         return str(self.value)
         # Converts value to string (e.g., "1").
 
-# Create a doubly linked list: 3 <-> 1 <-> 7
-# Creates a single node with value 1, next=None, prev=None.
-# Both head and tail point to this node initially.
-head = tail = DoublyNode(1)
-    # - DoublyNode(1): Calls __init__(1, next=None, prev=None), so head.value = 1, head.next = None, head.prev = None.
-    # - head = tail = this node, as it’s the only node.
-
-# Each node has three things:
-    # value: The data it holds (like 1, 3, or 7).
-    # next: A slot to point to the next node (or None if it’s the last node).
-    # prev: A slot to point to the previous node (or None if it’s the first node).
-
-# Why the Syntax head.next and head.prev?
-    # The . (dot) accesses a node’s attributes (like value, next, or prev).
-    # head.next means “Look at the next slot of the head node.”
-    # head.prev means “Look at the prev slot of the head node.”
-    # head.next = node means “Put node into head’s next slot.”
-
-# Insert at beginning: O(1)
-# - Defines a function to add a new node at the start of the list.
-# - head: Current head node (or None if empty). tail: Current tail node (or None if empty).
-# - value: The value for the new node (e.g., 3).
-def insert_at_beginning(head, tail, value):
-# Adds node with value at start. O(1) time.
-    new_node = DoublyNode(value, next=head)
-    # Creates new node with value, next points to current head.
-    if head:
-        head.prev = new_node
-        # If head exists, its prev points back to new node.
-    head = new_node
-    # Updates head to new node.
-    if not tail:
-        tail = new_node
-        # If list was empty, tail is also new node.
-    return head, tail
-    # Returns updated head and tail.
-
-# Insert at end: O(1)
-# - Defines a function to add a new node at the end of the list.
-# - head: Current head node (or None if empty). tail: Current tail node (or None if empty).
-# - value: The value for the new node (e.g., 7).
-def insert_at_end(head, tail, value):
-# Adds node with value at end. O(1) time.
-    new_node = DoublyNode(value, prev=tail)
-    # Creates new node with value, prev points to current tail.
-    if tail:
-        tail.next = new_node
-        # If tail exists, its next points to new node.
-    tail = new_node
-    # Updates tail to new node.
-    if not head:
-        head = new_node
-        # If list was empty, head is also new node.
-    return head, tail
-    # Returns updated head and tail.
-
-# Display list as string (e.g., "3 <-> 1 <-> 7"): O(n)
-# - Defines a function to show the list as a string (e.g., "3 <-> 1 <-> 7").
-# - head: The starting node of the list.
+# Display list as string: O(n)
+# - Shows the list as a string (e.g., "3 <-> 1 <-> 7").
+# - head: The first node of the list.
 def display(head):
-# Shows list as string (e.g., "3 <-> 1 <-> 7"). O(n) time.
-    elements = []
+    # Checks if list is empty.
+    if not head:
+        return "Empty List"
+        # Returns "Empty List" if no nodes.
+    result = []
     # Creates list to store values as strings.
     curr = head
     # Starts at head node.
     while curr:
-    # Loops until curr is None.
-        elements.append(str(curr.value))
-        # Adds node’s value as string.
+        # Loops until curr is None (end of list).
+        result.append(str(curr.value))
+        # Adds node’s value as string (e.g., "1").
         curr = curr.next
-        # Moves to next node.
-    print(" <-> ".join(elements))
-    # Prints values joined by " <-> ".
+        # Moves to next node using next pointer.
+    return " <-> ".join(result)
+    # Joins values with " <-> " (e.g., "3 <-> 1 <-> 7").
+
+# Insert at beginning: O(1)
+# - Adds a new node with given value at the start of the list.
+# - head: Current first node. tail: Current last node. value: Data for new node.
+def insert_at_beginning(head, tail, value):
+    new_node = DoublyNode(value)
+    # Creates new node with value, next=None, prev=None.
+    if not head:
+        # Handles empty list case.
+        return new_node, new_node
+        # New node is both head and tail (single node).
+    new_node.next = head
+    # Links new node’s next to current head.
+    head.prev = new_node
+    # Links current head’s prev to new node.
+    return new_node, tail
+    # Returns new head (new node) and unchanged tail.
+
+# Insert at end: O(1)
+# - Adds a new node with given value at the end of the list.
+# - head: Current first node. tail: Current last node. value: Data for new node.
+def insert_at_end(head, tail, value):
+    new_node = DoublyNode(value)
+    # Creates new node with value, next=None, prev=None.
+    if not head:
+        # Handles empty list case.
+        return new_node, new_node
+        # New node is both head and tail (single node).
+    tail.next = new_node
+    # Links current tail’s next to new node.
+    new_node.prev = tail
+    # Links new node’s prev to current tail.
+    return head, new_node
+    # Returns unchanged head and new tail (new node).
+
 
 # Example Usage
-# - Starts with: 1 (head and tail are the same node).
-head, tail = insert_at_beginning(head, tail, 3)
-    # - Adds node with value 3 at start.
-    # - New list: 3 <-> 1.
-    # - head points to node(3), tail points to node(1).
-display(head)
-    # - Prints: 3 <-> 1.
-head, tail = insert_at_end(head, tail, 7)
-    # - Adds node with value 7 at end.
-    # - New list: 3 <-> 1 <-> 7.
-    # - head points to node(3), tail points to node(7).
-display(head)
-    # - Prints: 3 <-> 1 <-> 7.
+# - Demonstrates creating and modifying the list: 3 <-> 1 <-> 7.
 
-# To see the list, you could print values by following next pointers:
-current = head
-while current is not None:
-    print(current.value)  # Prints 3, 1, 7
-    current = current.next
-# It’s like walking through the chain forward, printing each node’s value until the end.
-# You could also traverse backward from tail:
-current = tail
-while current is not None:
-    print(current.value)  # Prints 7, 1, 3
-    current = current.prev
-# Walks backward using prev pointers.
+# Creates single node with value 1 (head and tail are same).
+head = tail = DoublyNode(1)
+print("Initial list:", display(head))  # Output: 1
+
+# Insert 3 at the beginning: 3 <-> 1
+head, tail = insert_at_beginning(head, tail, 3)
+print("After inserting 3 at beginning:", display(head))  # Output: 3 <-> 1
+
+# Insert 7 at the end: 3 <-> 1 <-> 7
+head, tail = insert_at_end(head, tail, 7)
+print("After inserting 7 at end:", display(head))  # Output: 3 <-> 1 <-> 7
+
 
 # Time and Space Complexity:
+# - display: O(n) time (visits n nodes), O(n) space (stores n values in result).
 # - insert_at_beginning: O(1) time (updates pointers directly), O(1) space (one new node).
 # - insert_at_end: O(1) time (updates pointers directly), O(1) space (one new node).
-# - display: O(n) time (visits n nodes), O(n) space (stores n values in elements).
 
-# Running the Code:
-# - Save this in a file (e.g., doubly_linked_list.py).
-# - Run: python doubly_linked_list.py
-# - Output:
-#   3 <-> 1
-#   3 <-> 1 <-> 7
+# Traversing the List
+# - Forward traversal using next pointers:
+curr = head
+while curr is not None:
+    print(curr.value)  # Prints 3, 1, 7
+    curr = curr.next
+# Walks forward through the list, printing each node’s value.
 
+# - Backward traversal using prev pointers:
+curr = tail
+while curr is not None:
+    print(curr.value)  # Prints 7, 1, 3
+    curr = curr.prev
+# Walks backward through the list, printing each node’s value.
+
+# Clarifications for Learning:
+# - Why head and tail? Doubly linked lists track both head (first node) and tail (last node) to enable O(1) insertions at either end.
+# - Why return (head, tail)? Insertions may change head or tail, so functions return both to update the list’s references.
+# - prev vs. next: next links to the following node, prev to the previous. Always update both when inserting to maintain list integrity.
+# - Empty list case: When head is None, the list is empty. Inserting a node creates a single node that becomes both head and tail. If the list has nodes, insertions update only head (at beginning) or tail (at end).

@@ -1,60 +1,61 @@
-# Breakdown this code
-# Explain each line and the syntax
-# Explain big picture what is happening 
-# Basic exrecise for this 
-
-
-# –––––––––––––––––––––––––––––––––––––––––––––
-# Background on iter() and next():
-
-# Create a list and get its iterator
-nums = [1, 2, 3]
-iterator = iter(nums)
-
-# Use next() to get items one by one
-print(next(iterator))  # Outputs: 1
-print(next(iterator))  # Outputs: 2
-print(next(iterator))  # Outputs: 3
-print(next(iterator))  # Raises StopIteration (no more items)
-print(next(iterator, "end"))  # Outputs: end
-
-# Check the iterator type
-print(type(iterator))  # Output: <class 'list_iterator'>
-
-
-# Create an iterator from a string
-text = "abc"
-iterator = iter(text)
-
-# Use next() with a default value to avoid StopIteration
-print(next(iterator, "end"))  # Outputs: a
-print(next(iterator, "end"))  # Outputs: b
-print(next(iterator, "end"))  # Outputs: c
-print(next(iterator, "end"))  # Outputs: end (default when iterator is exhausted)
-
-# Check the iterator type
-print(type(iterator))  # Output: <class 'str_iterator'>
-
-
-join()
-# Syntax:
-# separator.join(iterable)  # Returns a string; 'separator' is the string to join elements with
-words = ["1", "2", "3", "4"]
-result = " -> ".join(words)
-print(result)
-
-
 # Big Picture:
 # - This code defines a singly linked list, where each node holds a value and a link to the next node.
 # - It creates a list: 1 -> 3 -> 4 -> 7 -> None.
 # - Three functions: traverse_list prints each node’s value, display shows the list as a string, and search checks if a value exists.
 # - Each function iterates through the list, making them O(n) in time complexity.
 
+# curr = current node
 
 # The next in SinglyNode is unrelated to the next() iterator function; it’s just a naming coincidence. 
 # It refers to the next node in the linked list, not iteration.
 
 
+# Class definition for a node in a singly linked list
+class SinglyNode:
+    def __init__(self, value, next=None):
+        self.value = value
+        self.next = next
+
+    def __str__(self):
+        return str(self.value)
+
+# Create a singly linked list: 1 -> 3 -> 4 -> 7 -> None
+head = SinglyNode(1)
+a = SinglyNode(3)
+b = SinglyNode(4)
+c = SinglyNode(7)
+head.next = a
+a.next = b
+b.next = c
+
+# Traverse and print: O(n)
+def traverse_list(head):
+    curr = head
+    while curr:
+        print(curr)
+        curr = curr.next
+
+# Display list as string: O(n)
+def display(head):
+    elements = []
+    curr = head
+    while curr:
+        elements.append(str(curr.value))
+        curr = curr.next
+    print(" -> ".join(elements))
+
+# Search for value: O(n)
+def search(head, value):
+    curr = head
+    while curr:
+        if curr.value == value:
+            return True
+        curr = curr.next
+    return False
+
+
+
+# –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 # Class definition for a node in a singly linked list
 class SinglyNode:
     def __init__(self, value, next=None):
@@ -101,18 +102,17 @@ b.next = c
     # head.next = a means “Put the node a into head’s next slot.”
 
 # To see the list, you could print the values by following the next pointers:
-current = head
-while current is not None:
-    print(current.value)  # Prints 1, 3, 4, 7
-    current = current.next
+curr = head
+while curr is not None:
+    print(curr.value)  # Prints 1, 3, 4, 7
+    curr = curr.next
 # It’s like walking through the chain, printing each node’s value until the end.
 
 
-# Traverse and print: O(n)
+# Traverse and print: O(n) 
 # - Defines a function to print each node’s value in the list.
 # - head: The starting node of the list (e.g., head with value 1).
 def traverse_list(head):
-# Prints each node’s value. O(n) time.
     curr = head
     # Starts at head node.
     while curr:
@@ -122,11 +122,10 @@ def traverse_list(head):
         curr = curr.next
         # Moves to next node.
 
-# Display list as string (e.g., "1 -> 3 -> 4 -> 7"): O(n)
+# Display list as string: O(n)
 # - Defines a function to show the list as a string (e.g., "1 -> 3 -> 4 -> 7").
 # - head: The starting node of the list.
 def display(head):
-# Shows list as string (e.g., "1 -> 3 -> 4 -> 7"). O(n) time.
     elements = []
     # Creates list to store values as strings.
     curr = head
@@ -137,7 +136,7 @@ def display(head):
         # Adds node’s value as string.
         curr = curr.next
         # Moves to next node.
-    print(" -> ".join(elements))
+    print(" -> ".join(elements))  # ['1', '3', '4', '7'] = '1 -> 3 -> 4 -> 7'
     # Prints values joined by " -> ".
 
 # Search for value: O(n)
@@ -145,7 +144,6 @@ def display(head):
 # - head: The starting node.
 # - value: The value to find (e.g., 2 or 7).
 def search(head, value):
-# Checks if value exists in list. O(n) time.
     curr = head
     # Starts at head node.
     while curr:
@@ -176,5 +174,12 @@ print(search(head, 7))
 
 
 
-
 # –––––––––––––––––––––––––––––––––––––––––––––
+# Background on join():
+
+join()
+# Syntax:
+# separator.join(iterable)  # Returns a string; 'separator' is the string to join elements with
+words = ["1", "2", "3", "4"]
+result = " -> ".join(words)
+print(result)
