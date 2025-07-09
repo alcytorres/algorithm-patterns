@@ -59,7 +59,9 @@ head = SinglyNode(1)  # Head node
 a = SinglyNode(3)
 b = SinglyNode(4)
 c = SinglyNode(7)
-head.next = a  # Link nodes
+
+# Link nodes
+head.next = a  
 a.next = b
 b.next = c
 # c.next is None by default
@@ -92,8 +94,8 @@ def search(head, value):
 # Example Usage
 traverse_list(head)  # Output: 1, 3, 4, 7
 display(head)        # Output: 1 -> 3 -> 4 -> 7
-print(search(head, 2))  # Output: False
-print(search(head, 7))  # Output: True
+print(search(head, 2))  # Output: False (2 not in list)
+print(search(head, 7))  # Output: True (7 in list)
 
 
 # 2. Doubly Linked Lists
@@ -135,43 +137,50 @@ class DoublyNode:
     def __str__(self):
         return str(self.value)  # String representation of node value
 
-# Create a doubly linked list: 3 <-> 1 <-> 7
-head = tail = DoublyNode(1)  # Single node, head and tail are same
-
-# Insert at beginning: O(1)
-def insert_at_beginning(head, tail, value):
-    new_node = DoublyNode(value, next=head)  # New node points to old head
-    if head:
-        head.prev = new_node  # Old head points back to new node
-    head = new_node  # Update head
-    if not tail:  # If list was empty, update tail
-        tail = new_node
-    return head, tail
-
-# Insert at end: O(1)
-def insert_at_end(head, tail, value):
-    new_node = DoublyNode(value, prev=tail)  # New node points back to old tail
-    if tail:
-        tail.next = new_node  # Old tail points to new node
-    tail = new_node  # Update tail
-    if not head:  # If list was empty, update head
-        head = new_node
-    return head, tail
-
-# Display list (e.g., "3 <-> 1 <-> 7"): O(n)
+# Display a doubly linked list as a string (e.g., '3 <-> 1 <-> 7'). O(n)
 def display(head):
+    if not head:
+        return "Empty List"
     elements = []
     curr = head
     while curr:
         elements.append(str(curr.value))
         curr = curr.next
-    print(" <-> ".join(elements))  # Glue with " <-> "
+    return " <-> ".join(elements)
+
+# Inserts a node at the beginning of a doubly linked list. O(1)
+def insert_at_beginning(head, tail, value):
+    new_node = DoublyNode(value)
+    if not head:  # Empty list
+        return new_node, new_node
+    new_node.next = head
+    head.prev = new_node
+    return new_node, tail
+
+# Inserts a node at the end of a doubly linked list. O(1)
+def insert_at_end(head, tail, value):
+    new_node = DoublyNode(value)
+    if not head:  # Empty list
+        return new_node, new_node
+    tail.next = new_node
+    new_node.prev = tail
+    return head, new_node
+
 
 # Example Usage
-head, tail = insert_at_beginning(head, tail, 3)  # Add 3 at start
-display(head)  # Output: 3 <-> 1
-head, tail = insert_at_end(head, tail, 7)  # Add 7 at end
-display(head)  # Output: 3 <-> 1 <-> 7
+
+# Creates single node with value 1 (head and tail are same).
+head = tail = DoublyNode(1)
+
+# Display initial list state
+print("Initial list:", display(head))  # Output: 1
+# Insert 3 at the beginning: 3 <-> 1
+head, tail = insert_at_beginning(head, tail, 3)
+print("After inserting 3 at beginning:", display(head))  # Output: 3 <-> 1
+# Insert 7 at the end: 3 <-> 1 <-> 7
+head, tail = insert_at_end(head, tail, 7)
+print("After inserting 7 at end:", display(head))  # Output: 3 <-> 1 <-> 7
+
 
 # 3. Complexity Summary
 # --------------------
