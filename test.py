@@ -1,16 +1,13 @@
-# Doubly Linked List Node and Operations
-class DoublyNode:
-    def __init__(self, value, next=None, prev=None):
-        self.value = value  # Store the value
-        self.next = next    # Reference to next node or None
-        self.prev = prev    # Reference to previous node or None
 
-    def __str__(self):
-        return str(self.value)  # String representation of node value
 
-# Create a doubly linked list: 3 <-> 1 <-> 7
-head = tail = DoublyNode(1)  # Single node, head and tail are same
-print(head.prev)
+
+
+
+
+
+
+
+
 
 
 
