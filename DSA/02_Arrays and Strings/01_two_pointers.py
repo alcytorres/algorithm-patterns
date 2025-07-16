@@ -1,5 +1,4 @@
 # Two Pointers: Move Pointers from Edges Toward Center
-# Big O: O(n) time (n is array length, pointers meet after n/2 steps), O(1) space
 # Illustrates two-pointer technique with pointers starting at array ends, moving inward.
 def two_pointers_edges(arr):
     left = 0                    # Start left pointer at index 0
@@ -13,12 +12,14 @@ def two_pointers_edges(arr):
         # 3. Both left += 1 and right -= 1
         pass
 
+# Time: O(n) - Pointers start n elements apart and meet after at most n/2 iterations, with O(1) work per iteration.
+# Space: O(1) - Uses only two integer pointers, regardless of input size.
+
 
 
 # Check if a String is a Palindrome
 # Example 1: Given a string s, return true if it is a palindrome, false otherwise.
 
-# Big O: O(n) time (n is string length, checks n/2 pairs), O(1) space
 # Checks if string s is a palindrome by comparing characters from both ends.
 def is_palindrome(s):
     left = 0                    # Start left pointer at index 0
@@ -33,12 +34,14 @@ def is_palindrome(s):
 
 print(is_palindrome("racecar"))  # Output: True
 
+# Time: O(n) - Checks up to n/2 character pairs in a string of length n, with O(1) comparisons per iteration.
+# Space: O(1) - Uses only two integer pointers (left, right), with no additional data structures.
+
 
 
 # Find Pair with Target Sum in Sorted Array
 # Example 2: Given a sorted array of unique integers and a target integer, return true if there exists a pair of numbers that sum to target, false otherwise. This problem is similar to Two Sum. (In Two Sum, the input is not sorted).
 
-# Big O: O(n) time (n is array length, pointers meet after n steps), O(1) space
 # Checks if sorted array has two numbers summing to target using two pointers.
 def find_pair_sum(nums, target):
     left = 0                    # Start left pointer at index 0
@@ -57,11 +60,12 @@ def find_pair_sum(nums, target):
 
 print(find_pair_sum([1, 2, 4, 6, 8, 9, 14, 15], 13))  # Output: True
 
+# Time: O(n) - Pointers traverse a sorted array of length n, meeting after at most n iterations, with O(1) operations per iteration.
+# Space: O(1) - Uses only two integer pointers (left, right) and a constant amount of extra space.
 
 
 
 # Two Pointers: Move Along Two Arrays Simultaneously
-# Big O: O(n + m) time (n, m are array lengths, processes all elements), O(1) space
 # Demonstrates two-pointer technique for two arrays, moving pointers forward.
 def two_pointers_two_arrays(arr1, arr2):
     i = 0                       # Pointer for arr1, starts at index 0
@@ -85,12 +89,14 @@ def two_pointers_two_arrays(arr1, arr2):
         # Problem-specific logic here
         j += 1
 
+# Time: O(n + m) - Processes all elements of two arrays (lengths n and m) in a single pass, with O(1) work per iteration.
+# Space: O(1) - Uses only two integer pointers (i, j), with no additional data structures beyond input/output.
+
 
 
 # Merge Two Sorted Arrays into One Sorted Array
 # Example 3: Given two sorted integer arrays arr1 and arr2, return a new array that combines both of them and is also sorted.
 
-# Big O: O(n + m) time (n, m are array lengths, processes all elements), O(n + m) space (for output)
 # Merges two sorted arrays into a new sorted array using two pointers.
 def merge_sorted_arrays(arr1, arr2):
     ans = []                 # Result array to store merged elements
@@ -118,6 +124,9 @@ def merge_sorted_arrays(arr1, arr2):
     return ans                  # Return merged sorted array
 
 print(merge_sorted_arrays([1, 4, 7, 20], [3, 5, 6]))
+
+# Time: O(n + m) - Iterates through all elements of two arrays (lengths n and m) once, with O(1) operations per iteration.
+# Space: O(n + m) - Stores the merged result in an output array of size n + m, excluding input arrays as per convention.
 
 
 
@@ -147,7 +156,6 @@ print(merge_sorted_arrays([1, 4, 7, 20], [3, 5, 6]))
 # Check if String s is a Subsequence of String t
 # Example 4: Given two strings s and t, return true if s is a subsequence of t, or false otherwise.
 
-# Big O: O(n + m) time (n, m are string lengths, scans t once), O(1) space
 # Checks if s is a subsequence of t by tracking matching characters in order.
 def is_subsequence(s, t):
     i = j = 0            # Pointer for string s, and t starts at index 0
@@ -163,3 +171,6 @@ string1 = "ace"
 string2 = "abcde"
 print(is_subsequence(string1, string2))
 
+
+# Time: O(n + m) - Scans string t (length m) once while checking for characters of s (length n), with O(1) comparisons per iteration.
+# Space: O(1) - Uses only two integer pointers (i, j) for tracking positions in s and t.

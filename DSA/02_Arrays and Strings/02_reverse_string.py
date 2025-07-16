@@ -35,11 +35,8 @@ string = ["h","e","l","l","o"]
 print(reverseString(string))
 
 
-# Complexity
-# Time: O(n) - Performs n/2 swaps to reverse n elements.
-# Space: O(1) - Uses two pointers, modifying list in-place with no extra space used.
-
-
+# Time: O(n) - Performs n/2 swaps for an array of length n, with each swap being O(1).
+# Space: O(1) - Uses only two integer pointers (left, right), modifying the input array in-place with no additional data structures.
 
 
 # ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
@@ -53,8 +50,5 @@ string = ["h","e","l","l","o"]
 print(reverseString(string))
 
 
-# Complexity
-# Time: O(n) - Reverses n elements with n/2 swaps.
-# Space: O(1) - Modifies list in-place with constant extra space.
-
-
+# Time: O(n) - Python's list.reverse() method processes n elements, performing n/2 swaps internally, each O(1).
+# Space: O(1) - Modifies the input array in-place, using only a constant amount of auxiliary space for internal operations.

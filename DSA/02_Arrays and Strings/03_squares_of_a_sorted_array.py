@@ -39,12 +39,11 @@ print(sortedSquares(numbers))
 # Output: [1, 4, 16, 25, 49, 100]
 
 
-# Complexity
-# Time: O(n) - Performs n iterations with constant-time operations per iteration.
-# Space: O(n) - Uses result array of size n, with constant extra space for pointers.
+# Time: O(n) - Iterates through n elements once, with O(1) operations (comparisons, squaring, assignment) per iteration.
+# Space: O(n) - Uses a result array of size n to store squared values, with only two integer pointers (left, right) as constant extra space.
 
-# Space Complexity: O(n) if you take output into account and O(1) otherwise.
 
+# Space: O(n) if you take output into account and O(1) otherwise.
 
 
 
@@ -82,10 +81,8 @@ print(sortedSquares(numbers))
 # Output: [1, 4, 16, 25, 49, 100]
 
 
-# Complexity
-# Time: O(n log n) - Generates n squared values (O(n)) and sorts them (O(n log n)).
-# Space: O(n) - Stores n squared values in the output list, with O(log n) auxiliary space for sorting.
-
+# Time: O(n log n) - Generates n squared values in O(n) time, followed by sorting with Python's Timsort algorithm in O(n log n).
+# Space: O(n) - Stores n squared values in the output list, with O(log n) auxiliary space used by Timsort for sorting operations.
 
 # ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 # Less efficeint solution
@@ -103,6 +100,6 @@ print(sortedSquares(numbers))
 # Output: [1, 4, 16, 25, 49, 100]
 
 
-# Complexity
-# Time: O(n log n) - Iterates n elements for squaring (O(n)) and sorts (O(n log n)).
-# Space: O(n) - Uses result array of size n, with O(log n) auxiliary space for sorting.
+# Time: O(n log n) - Iterates through n elements to square in O(n) time, followed by sorting the result array in O(n log n) using Timsort.
+# Space: O(n) - Uses a result array of size n to store squared values, with O(log n) auxiliary space for Timsort’s sorting process.
+
