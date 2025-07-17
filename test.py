@@ -1,3 +1,14 @@
+# curr = 5
+# ans = 5
+
+# range = 2 to 4 (exclsuive)
+# curr = 6-1 = 5
+
+
+# Check if a String is a Palindrome
+# Find Pair with Target Sum in Sorted Array
+# Merge Two Sorted Arrays into One Sorted Array
+# Check if String s is a Subsequence of String t
 
 
 
@@ -5,6 +16,28 @@
 
 
 
+
+
+# Initial State: left = 0, curr = 0 (count of "0"s), ans = 0 (max length).
+# right = 0: s[0] = "1", curr = 0 (no "0"), no while loop, ans = max(0, 0-0+1) = 1.
+# right = 1: s[1] = "1", curr = 0, no while loop, ans = max(1, 1-0+1) = 2.
+# right = 2: s[2] = "0", curr = 1, no while loop, ans = max(2, 2-0+1) = 3.
+# right = 3: s[3] = "0", curr = 2, while curr > 1:
+# s[0] = "1", left = 1, curr = 2.
+# s[1] = "1", left = 2, curr = 2.
+# s[2] = "0", curr = 1, left = 3.
+# Exit while, ans = max(3, 3-3+1) = 3.
+
+# right = 4: s[4] = "1", curr = 1, no while loop, ans = max(3, 4-3+1) = 3.
+# right = 5: s[5] = "0", curr = 2, while curr > 1:
+# s[3] = "0", curr = 1, left = 4.
+# Exit while, ans = max(3, 5-4+1) = 3.
+
+# right = 6: s[6] = "1", curr = 1, no while loop, ans = max(3, 6-4+1) = 3.
+# right = 7: s[7] = "1", curr = 1, no while loop, ans = max(3, 7-4+1) = 4.
+
+# Final Output
+# ans = 4 (longest substring with at most one "0" is "1011", length 4).
 
 
 

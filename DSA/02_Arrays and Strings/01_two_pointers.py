@@ -16,7 +16,7 @@ def two_pointers_edges(arr):
 # Space: O(1) - Uses only two integer pointers, regardless of input size.
 
 
-
+# ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 # Check if a String is a Palindrome
 # Example 1: Given a string s, return true if it is a palindrome, false otherwise.
 
@@ -39,10 +39,10 @@ print(is_palindrome("racecar"))  # Output: True
 
 
 
+# ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 # Find Pair with Target Sum in Sorted Array
 # Example 2: Given a sorted array of unique integers and a target integer, return true if there exists a pair of numbers that sum to target, false otherwise. This problem is similar to Two Sum. (In Two Sum, the input is not sorted).
 
-# Checks if sorted array has two numbers summing to target using two pointers.
 def find_pair_sum(nums, target):
     left = 0                    # Start left pointer at index 0
     right = len(nums) - 1       # Start right pointer at last index
@@ -65,6 +65,7 @@ print(find_pair_sum([1, 2, 4, 6, 8, 9, 14, 15], 13))  # Output: True
 
 
 
+# ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 # Two Pointers: Move Along Two Arrays Simultaneously
 # Demonstrates two-pointer technique for two arrays, moving pointers forward.
 def two_pointers_two_arrays(arr1, arr2):
@@ -94,6 +95,7 @@ def two_pointers_two_arrays(arr1, arr2):
 
 
 
+# ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 # Merge Two Sorted Arrays into One Sorted Array
 # Example 3: Given two sorted integer arrays arr1 and arr2, return a new array that combines both of them and is also sorted.
 
@@ -153,6 +155,7 @@ print(merge_sorted_arrays([1, 4, 7, 20], [3, 5, 6]))
 
 
 
+# ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 # Check if String s is a Subsequence of String t
 # Example 4: Given two strings s and t, return true if s is a subsequence of t, or false otherwise.
 
