@@ -1,17 +1,8 @@
 
-def runningSum(nums):
-    prefix = [nums[0]]
-    for i in range(1, len(nums)):
-        prefix.append(prefix[-1] + nums[i])
 
-    return prefix
 
-nums = [1,2,3,4]
-print(runningSum(nums))
-# Output: [1,3,6,10]
 
-# Time: O(n) - Iterates through n elements once to build the prefix sum array with O(1) operations per iteration.
-# Space: O(n) - Uses a prefix sum array of size n to store the running sums, excluding input.
+
 
 
 
