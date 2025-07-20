@@ -31,7 +31,7 @@ def is_subsequence(s, t):
             i += 1
         j += 1                  # Always move t pointer
 
-    return i == len(s)          # True if all characters in s were found
+    return i == len(s)          # True if all characters in s were found. Same as saying return True
 
 
 

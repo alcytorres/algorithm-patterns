@@ -1,9 +1,11 @@
 # Example 3: Number of Subarrays with Product Less Than k
 # Counts subarrays where product of elements is strictly less than k.
-# Solution: https://leetcode.com/problems/subarray-product-less-than-k/
 # Example
 # nums = [2, 3], k = 7
 # Output: 3 --> [2], [2, 3], [3]
+
+# Solution: https://leetcode.com/problems/subarray-product-less-than-k/
+
 
 def num_subarrays_product_less_than_k(nums, k):
     if k <= 1:     
@@ -57,6 +59,9 @@ print("After curr //= nums[0]:", curr)  # Output: 20.0
 curr //= nums[1]   # Remove nums[1] (4), curr = 20 / 4
 print("After curr //= nums[1]:", curr)  # Output: 5.0
 
+
+# Why is left += 1 inside of if curr >= k:?
+    # left += 1 is inside if curr >= k: to slide the window only when the product exceeds k, ensuring the window stays valid by removing the leftmost element only when needed.
 
 # ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 # Breakdown

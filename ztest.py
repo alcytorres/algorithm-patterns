@@ -1,7 +1,58 @@
-# ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 
 
 
+
+
+
+
+# give me time and space for the following
+# just reply with time and space. dont give me back my code
+
+# def waysToSplitArray(nums): 
+#     prefix = [nums[0]]
+#     for i in range(1, len(nums)):
+#         prefix.append(prefix[-1] + nums[i])
+
+#     ans = 0
+#     for i in range(len(nums) - 1):
+#         left_section = prefix[i]
+#         right_section = prefix[-1] - prefix[i]
+#         if left_section >= right_section:
+#             ans += 1
+    
+#     return ans
+
+# nums = [10, 4, -8, 7]  # -> [10, 14, 6, 13]
+# print(waysToSplitArray(nums))
+# # Output: 2
+
+# format like this
+# # Time: O(n) - Right pointer moves n times, left pointer moves at most n times (amortized O(1) per iteration).
+# # Space: O(1) - Uses only three integer variables (left, curr, ans).
+
+
+
+# ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+# Give me excellent in line annotations for this code
+
+# ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+# # Prompt for Guides
+# here is a guide based on sliding windows i have based on the section of my dsa course on sliding windows
+
+# give me a guide now for prefix sum that follows the format of the sliding window guide exactly in terms of spacing / format/ etc. Im going to copy and paste your answer into a .py file
+
+# Use of lines to separate example problems
+
+# as you will notice my guide is almost entirely just based of the pseudocode and examples given
+# you can include additional information. if you choose to do this include at a cheatsheet at the bottom of the guide after the examples and only include the absolute. most important info concisely in a simple excellent way for me to quickly understand the most important things you think i should have 
+
+
+# Use this as a guide
+# # Sliding Window Techniques in Python
+
+# here is the section on prefix sum
+
+# ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 
 
 

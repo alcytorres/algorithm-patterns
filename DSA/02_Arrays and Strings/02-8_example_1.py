@@ -14,7 +14,7 @@ def longest_subarray_sum(nums, k):
     
     return ans
 
-print(longest_subarray_sum([3, 1, 2, 7, 4, 2, 1, 1, 5], 8))  # Output: 4
+print(longest_subarray_sum([3, 1, 2, 7, 4, 2, 1, 1, 5], 8))
 # Output: 4  --> Subarray [4, 2, 1, 1] (length 4, sum 8) is the longest subarray with sum <= 8.
 
 # Time: O(n) - Right pointer moves n times, left pointer moves at most n times (amortized O(1) per iteration).
