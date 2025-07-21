@@ -1,4 +1,4 @@
-# 643: Maximum Average Subarray I
+# 643. Maximum Average Subarray I
 # Finds the contiguous subarray of length k with the maximum average value.
 
 # You are given an integer array nums consisting of n elements, and an integer k.
@@ -44,7 +44,7 @@ Note the division operator (/) always returns a float:
 """
 
 
-# ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+# ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 # Breakdown
 def findMaxAverage(nums, k):
     curr = 0          # Tracks sum of current window

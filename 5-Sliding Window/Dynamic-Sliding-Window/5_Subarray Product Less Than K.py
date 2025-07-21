@@ -1,4 +1,6 @@
-# Subarray Product Less Than K
+# 713. Subarray Product Less Than K
+
+# Solution: https://leetcode.com/problems/subarray-product-less-than-k/solutions/4924038/subarray-product-less-than-k/
 
 """
 Task: Given an array of positive integers nums and an integer K, count the number of contiguous subarrays where the product of all elements is less than K.

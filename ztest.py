@@ -2,40 +2,78 @@
 
 
 
+#  min_val = 0
+#  total = 0
+
+# total = -3
+# min_val = -3
+
+# total = -1
+# min_val = -3
+
+# total = -4
+# min_val = -4
+
+# total = 0
+# min_val = -4
+
+# total = 2
+# min_val = -4
+
+# return 4 + 1 = 5
 
 
 
-# give me time and space for the following
-# just reply with time and space. dont give me back my code
+#  min_val = 0
+#  total = 0
 
-# def waysToSplitArray(nums): 
-#     prefix = [nums[0]]
-#     for i in range(1, len(nums)):
-#         prefix.append(prefix[-1] + nums[i])
+# total = 3
+# min_val = 0
 
-#     ans = 0
-#     for i in range(len(nums) - 1):
-#         left_section = prefix[i]
-#         right_section = prefix[-1] - prefix[i]
-#         if left_section >= right_section:
-#             ans += 1
-    
-#     return ans
+# total = 5
+# min_val = 0
 
-# nums = [10, 4, -8, 7]  # -> [10, 14, 6, 13]
-# print(waysToSplitArray(nums))
-# # Output: 2
+# total = 8
+# min_val = 0
 
-# format like this
-# # Time: O(n) - Right pointer moves n times, left pointer moves at most n times (amortized O(1) per iteration).
-# # Space: O(1) - Uses only three integer variables (left, curr, ans).
+# total = 12
+# min_val = 0
+
+# total = 14
+# min_val = 0
+
+# return 0 + 1 = 1
 
 
 
-# ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+
+
+
+
+
+
+
+
+
+# –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+# Give me time and space for the following in this format:
+    # format like this
+    # # Time: O(n) - Right pointer moves n times, left pointer moves at most n times (amortized O(1) per iteration).
+    # # Space: O(1) - Uses only three integer variables (left, curr, ans).
+
+# Just reply with time and space. dont give me back my code
+
+# Also give me a excellent one sentence explanation of the output like this:
+    # Output: 3.5  --> Subarray [3, 4] (length 2, sum 3 + 4 = 7, average 7/2 = 3.5) has the largest average for k=2.
+
+
+
+# –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 # Give me excellent in line annotations for this code
 
-# ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+
+
+# –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 # # Prompt for Guides
 # here is a guide based on sliding windows i have based on the section of my dsa course on sliding windows
 
