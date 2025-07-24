@@ -34,6 +34,26 @@ There are three ways of splitting nums into two non-empty parts:
 Thus, the number of valid splits in nums is 2.
 """
 
+# ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+# Concise Solution I came up with while redoing this problem
+
+def waysToSplitArray(nums): 
+    prefix = [nums[0]]
+    for i in range(1, len(nums)):
+        prefix.append(prefix[-1] + nums[i])
+
+    ans = 0
+    for i in range(len(nums) - 1):
+        if prefix[i] > prefix[-1] - prefix[i]:
+            ans += 1
+
+    return ans
+
+nums = [10, 4, -8, 7]  # -> [10, 14, 6, 13]
+print(waysToSplitArray(nums))
+# Output: 2
+
+
 
 # ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 # Breakdown

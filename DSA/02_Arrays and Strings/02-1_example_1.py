@@ -20,6 +20,9 @@ print(is_palindrome("racecar"))  # Output: True
 # Space: O(1) - Uses only two integer pointers (left, right), with no additional data structures.
 
 
+# Trace Overview
+# left  = 0  1  2  3
+# right = 6  5  4  3
 
 # ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 # Breakdown

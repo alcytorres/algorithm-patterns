@@ -3,10 +3,10 @@
 # Given an integer array nums sorted in non-decreasing order, return an array of the squares of each number sorted in non-decreasing order.
  
 # Example 1:
-# Input: nums = [-4,-1,0,3,10]
-# Output: [0,1,9,16,100]
-# Explanation: After squaring, the array becomes [16,1,0,9,100].
-# After sorting, it becomes [0,1,9,16,100].
+# Input: nums = [-4, -1, 0, 3, 10]
+# Output:       [0, 1, 9, 16, 100]
+# Explanation: After squaring, the array becomes [16, 1, 0, 9, 100].
+# After sorting, it becomes [0, 1, 9, 16, 100].
 
 # Solution: https://leetcode.com/problems/squares-of-a-sorted-array/description/
 
@@ -29,15 +29,28 @@ def sortedSquares(nums):
     return result
 
 
-numbers = [-10, -5, 1, 2, 4, 7]
+numbers = [-4, -1, 0, 3, 10]
 print(sortedSquares(numbers))  
-# Output: [1, 4, 16, 25, 49, 100]
+# Output: [0, 1, 9, 16, 100]
 
 
 # Time: O(n) - Iterates through n elements once, with O(1) operations (comparisons, squaring, assignment) per iteration.
 # Space: O(n) - Uses a result array of size n to store squared values, with only two integer pointers (left, right) as constant extra space.
 
 # Space: O(n) if you take output into account and O(1) otherwise.
+
+
+# Trace Overview
+# i      = 4    3  2  1  0
+# right  = 4 3     2
+# left   = 0    1     2  3
+# square = 10  -4  3 -1  0
+# ans    = [0, 0, 0, 0, 0] 
+#          [0, 0, 0, 0, 100]
+#          [0, 0, 0, 16, 100]
+#          [0, 0, 9, 16, 100]
+#          [0, 1, 9, 16, 100]
+#          [0, 1, 9, 16, 100]
 
 
 # ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
@@ -58,9 +71,7 @@ def sortedSquares(nums):
         result[i] = square * square       # Square the chosen number and store in result
     return result                         # Return sorted array of squares
 
-numbers = [-10, -5, 1, 2, 4, 7]
-print(sortedSquares(numbers))  
-# Output: [1, 4, 16, 25, 49, 100]
+
 
 
 # ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––

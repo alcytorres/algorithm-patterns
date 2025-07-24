@@ -1,6 +1,7 @@
 # Example 2: Longest Substring with At Most One "0"
 # Finds the longest substring with at most one "0" by flipping at most one "0" to "1". 
 # In other words "what is the longest substring that contains at most one "0"?
+
 def longest_substring_one_zero(s):
     left = curr = ans = 0        
         
@@ -22,6 +23,14 @@ print(longest_substring_one_zero("11001011"))
 
 # Time: O(n) - Right pointer moves n times, left pointer moves at most n times (amortized O(1) per iteration).
 # Space: O(1) - Uses only three integer variables (left, curr, ans).
+
+
+# Trace Steps
+# right = 0    1  2  3      4  5    6  7 
+# curr  = 0       1  2 1       2 1
+# ans   = 0 1  2  3      3  3    3  3  4
+# left  = 0          1 2 3       4  
+
 
 # ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 # Breakdown 

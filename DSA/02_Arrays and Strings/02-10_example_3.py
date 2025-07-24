@@ -1,4 +1,4 @@
-# Example 3: Number of Subarrays with Product Less Than k
+# Example 3: 713. Number of Subarrays with Product Less Than k
 # Counts subarrays where product of elements is strictly less than k.
 # Example
 # nums = [2, 3], k = 7
@@ -38,6 +38,13 @@ print(num_subarrays_product_less_than_k([10, 5, 2, 6], 100))
 
 # Time: O(n) - Right pointer moves n times, left pointer moves at most n times (amortized O(1) per iteration).
 # Space: O(1) - Uses only three integer variables (left, curr, ans).
+
+
+# Trace Steps
+# right =  0  0   1   2       3
+# curr  =  1  10  50  100 10  60
+# left  =  0               1
+# ans   =  0  1   3        5  8
 
 
 # Super simple demo of sliding window with multiplication and division

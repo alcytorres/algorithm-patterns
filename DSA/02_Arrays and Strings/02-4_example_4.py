@@ -21,6 +21,11 @@ print(is_subsequence(string1, string2))
 # Space: O(1) - Uses only two integer pointers (i, j) for tracking positions in s and t.
 
 
+# Trace Overview
+# i = 0  1     2     3
+# j = 0  1  2  3  4  5 
+
+
 # ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 # Breakdown 
 def is_subsequence(s, t):

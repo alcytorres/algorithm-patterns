@@ -1,5 +1,12 @@
 # Example 1: Longest Subarray with Sum Less Than or Equal to k
 # Finds the length of the longest subarray with sum <= k using sliding window.
+
+# Example 1: nums = [1, 2, 1, 2, 4, 2], k = 6
+# Output: 4 (subarray [2, 1, 2, 1], sum = 6)
+
+# Example 2: nums = [3, 1, 2, 7, 4, 2, 1, 1, 5], k = 8
+# Output = 4 (subarray [4, 2, 1, 1], sum = 8)
+
 def longest_subarray_sum(nums, k):
     left = curr = ans = 0        
     
@@ -14,12 +21,20 @@ def longest_subarray_sum(nums, k):
     
     return ans
 
-print(longest_subarray_sum([3, 1, 2, 7, 4, 2, 1, 1, 5], 8))
-# Output: 4  --> Subarray [4, 2, 1, 1] (length 4, sum 8) is the longest subarray with sum <= 8.
+
+nums = [1, 2, 1, 2, 4, 2]
+print(longest_subarray_sum(nums, 8))
+# Output: 4  --> Subarray [1, 2, 1, 2] (length 4, sum 6) is the longest subarray with sum <= 6.
 
 # Time: O(n) - Right pointer moves n times, left pointer moves at most n times (amortized O(1) per iteration).
 # Space: O(1) - Uses only three integer variables (left, curr, ans).
 
+
+# Trace Overview
+# right = 0  0  1  2  3  4         5
+# curr  = 0  1  3  4  6  10 9 7 6  8 6
+# ans   = 0  1  2  3  4         4    4 
+# left  = 0                 1 2 3    4
 
 # ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 # Breakdown 

@@ -6,7 +6,7 @@
 
 # Example 1:
 # Input: s = ["h","e","l","l","o"]
-# Output: ["o","l","l","e","h"]
+# Output:    ["o","l","l","e","h"]
  
 # Solution: https://leetcode.com/problems/reverse-string/editorial/
 
@@ -22,7 +22,8 @@ def reverseString(s):
     return s
 
 string = ["h","e","l","l","o"]
-print(reverseString(string))  # Output: ["o","l","l","e","h"]
+print(reverseString(string))  
+# Output: ["o","l","l","e","h"]
 
 # Time: O(n) - Performs n/2 swaps for an array of length n, with each swap being O(1).
 # Space: O(1) - Uses only two integer pointers (left, right), modifying the input array in-place with no additional data structures.
