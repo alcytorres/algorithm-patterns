@@ -46,7 +46,9 @@ print("List:", build_string_list(s))      # Output: forest
 # This is just the start! We’ll build on these ideas (like sliding windows with hash maps) later. Try the quiz next!
 
 
-# Example 344. Reverse String
+# ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+# Arrays and Strings O(n) string building Example
+# 344. Reverse String
 def reverseString(s):
     left = 0
     right = len(s) - 1
