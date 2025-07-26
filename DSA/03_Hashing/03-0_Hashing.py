@@ -1,0 +1,123 @@
+# Hashing Cheat Sheet (Python Focus)
+# Key Points for DSA: Hash Maps (Dicts) and Sets
+
+# === Hashing Basics ===
+# Hash Function: Converts any immutable input (key) to an integer index via hashing.
+# - Deterministic: Same key always hashes to same value.
+# - Used with arrays for O(1) access.
+# - Don't need to implement; Python handles it.
+
+# === Hash Maps (Dictionaries in Python) ===
+# Unordered key-value pairs. Keys must be immutable (e.g., int, str, tuple).
+# Operations: O(1) average case for insert, delete, lookup, update.
+# Pros: Fast lookups, no need for fixed size like arrays.
+# Cons: More overhead than arrays for small sizes; space waste possible.
+
+# Hash Map = Dictionary: Declaration
+hash_map = {}  # Empty dict
+hash_map = {'a': 1, 'b': 2}  # Initialized
+
+# Check if key exists
+print('a' in hash_map)  # True
+print('h' in hash_map)  # False
+
+# Access value
+print(hash_map['a'])  # 1 (KeyError if missing)
+
+# Add/Update
+hash_map['c'] = 3  # Add if new, update if exists
+print(hash_map) # {'a': 1, 'b': 2, 'c': 3}
+
+# Delete
+del hash_map['c']  # KeyError if missing
+print(hash_map) # {'a': 1, 'b': 2}
+
+# Size 
+print(len(hash_map))  # 2 
+
+# Print the Entire Hash Map
+print(hash_map) # {'a': 1, 'b': 2}
+
+
+# Iterate
+for key in hash_map:  # Keys
+    print(key)  # a b
+for val in hash_map.values():  # Values
+    print(val)  # 1 2
+for key, val in hash_map.items():  # Pairs
+    print(key, val)  # a 1 b 2
+
+# ––––––––––––––––––––––––––––––––––––––––––––––––––
+# Get keys as list
+keys = list(hash_map.keys())
+print(keys) # ['a', 'b']
+
+# Get keys: use .keys(). You can iterate over this using a for loop.
+keys = hash_map.keys()
+for key in keys:
+    print(key) # a b
+
+# Get values as list
+values = list(hash_map.values()) 
+print(values) # [1, 2]
+
+# Get values: use .values(). You can iterate over this using a for loop.
+values = hash_map.values()
+for val in values:
+    print(val) # 1 2
+
+
+# ––––––––––––––––––––––––––––––––––––––––––––––––––
+# Iterate over key-value pairs
+for key, val in hash_map.items():
+    print(f"{key}: {val}") # a: 1, b: 2
+
+
+# ––––––––––––––––––––––––––––––––––––––––––––––––––
+# Iterate over keys with index
+print_map = hash_map
+for i, val in enumerate(hash_map):
+    print(i, val)
+# 0 a
+# 1 b
+
+
+
+# === Sets in Python ===
+# Unordered unique elements. Like dict keys only. O(1) add, remove, check.
+# No duplicates; doesn't track frequency.
+
+# Declaration
+my_set = set()  # Empty
+my_set = {1, 2, 3}  # Initialized
+
+# Add
+my_set.add(4)  # Ignores if exists
+
+# Check exists
+print(4 in my_set)  # True
+
+# Remove
+my_set.remove(4)  # KeyError if missing
+# or my_set.discard(4)  # No error if missing
+
+# Size
+print(len(my_set))
+
+# Iterate
+for elem in my_set:
+    print(elem)
+
+# === Arrays as Keys ===
+# Convert mutable list to immutable tuple or string.
+key = tuple([1, 2, 3])  # For dict/set
+hash_map[key] = 'value'
+# Or string: "1,2,3" (use delimiter not in elements)
+
+# === Comparison with Arrays (Lists in Python) ===
+# Lists: O(1) access by index, but O(n) for search/delete.
+# Dicts/Sets: O(1) for search/delete, but keys hashed (slower constant for small n).
+# Use dict when mapping keys to values; set for existence; list for order/index.
+
+# Must-Know: Master dict/set interfaces. Reduces time complexity in many problems.
+# In LeetCode: Use for counting, unique checks, mappings.

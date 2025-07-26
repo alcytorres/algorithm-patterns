@@ -276,6 +276,23 @@ ages = {"Alice": 25}
 print(ages.get("Bob", 0))  # Output: 0
 
 
+# DICTIONARY METHOD: 
+.items()
+# What it does: Returns a view of a dictionary’s key-value pairs as tuples.
+# DSA use case: Iterates over both keys and values in hash map problems (e.g., frequency counting, key-value processing).
+# Why it’s useful: Simplifies simultaneous access to keys and values, avoiding separate key lookups.
+# Time/Space: O(1) time for view, O(n) to convert to list (n = pairs), O(n) space for list.
+# Syntax:
+dict.items()  # Returns a view of (key, value) tuples
+# DSA Example 1 (Key-Value Iteration):
+ages = {"Alice": 25, "Bob": 30}
+print(list(ages.items()))  # Output: [("Alice", 25), ("Bob", 30)]
+# DSA Example 2 (Process Pairs):
+counts = {"a": 2, "b": 1}
+for k, v in counts.items():
+    print(k, v)  # Output: a 2, b 1
+
+
 
 # ----------------------------------------------------------------------------------
 # SET METHODS
