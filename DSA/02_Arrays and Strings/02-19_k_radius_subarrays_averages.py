@@ -9,7 +9,7 @@
 # Output: [-1, -1, -1, 5, 4, 4, -1, -1, -1]
 
 
-# Sliding Window Video Solution
+# Sliding Window Video Solution 1
 # Video https://www.youtube.com/watch?v=L33kbF6Cr_I
     # I think I like this more than the LeetCode official solution
 def getAverages(nums, k):
@@ -40,7 +40,49 @@ print(getAverages(nums, 3))
 
 
 # ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
-# Sliding Window LeetCode Solution
+# Yashasvi Solution 2
+def getAverages(nums, k):
+    """
+    :type nums: List[int]
+    :type k: int
+    :rtype: List[int]
+    """
+    n = len(nums)
+    result = [-1] * n
+    window_size = 2*k + 1;
+    cumm_sum = 0;
+    """
+    Constraints
+    Brute force - O(n^2)
+    optimal - O(n)
+    """
+    """
+    Constraints
+    """
+    if (n < window_size):
+        return result
+    """
+    Approach
+    """
+    cumm_sum = sum(nums[0:window_size])
+    result[k] = cumm_sum/window_size
+    """
+    i = K, K+1, n-k+1 = -1
+    """
+    """
+    Optimal solution
+    """
+    for i in range(k+1, n-k):
+        cumm_sum +=  nums[i+k] - nums[i-k-1]
+        result[i] = cumm_sum/window_size
+    return result
+
+print(getAverages([7,4,3,9,1,8,5,2,6], 3))
+# Output: [-1, -1, -1, 5, 4, 4, -1, -1, -1]
+
+# ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+# Sliding Window LeetCode Solution 3
+# https://leetcode.com/problems/k-radius-subarray-averages/description/
 def getAverages(nums, k):
     averages = [-1] * len(nums)
     if k == 0:
@@ -71,17 +113,6 @@ print(getAverages(nums, 3))
 
 # Time: O(n) - Initializes averages array in O(n) and slides window over n elements with O(1) operations per iteration.
 # Space: O(1) - Uses only a constant number of variables (window_sum, window_size), excluding the output array.
-
-
-
-
-
-
-
-
-
-
-
 
 
 # ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
@@ -116,13 +147,9 @@ def getAverages(nums, k):
     return averages
 
 
-
 # ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
-
-
-
-# ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
-# Prefix Sum Solution:
+# Prefix Sum Solution 4:
+# https://leetcode.com/problems/k-radius-subarray-averages/description/
 
 def getAverages(nums, k):
     # When a single element is considered then its average will be the number itself only.

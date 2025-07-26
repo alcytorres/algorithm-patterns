@@ -21,8 +21,8 @@ def reverseString(s):
     
     return s
 
-string = ["h","e","l","l","o"]
-print(reverseString(string))  
+s = ["h","e","l","l","o"]
+print(reverseString(s))  
 # Output: ["o","l","l","e","h"]
 
 # Time: O(n) - Performs n/2 swaps for an array of length n, with each swap being O(1).
@@ -36,8 +36,8 @@ def reverseString(s):
     s.reverse    
     return s
 
-string = ["h","e","l","l","o"]
-print(reverseString(string))  # Output: ["o","l","l","e","h"]
+s = ["h","e","l","l","o"]
+print(reverseString(s))  # Output: ["o","l","l","e","h"]
 
 # Time: O(n) - Python's list.reverse() method processes n elements, performing n/2 swaps internally, each O(1).
 # Space: O(1) - Modifies the input array in-place, using only a constant amount of auxiliary space for internal operations.
@@ -110,5 +110,5 @@ def reverseString(s):  # Example: s = ["h", "e", "l", "l", "o"]
     return s  # s = ["o", "l", "l", "e", "h"]
 
 
-string = ["h", "e", "l", "l", "o"]
-print(reverseString(string))  # Output: ["o", "l", "l", "e", "h"]
+s = ["h", "e", "l", "l", "o"]
+print(reverseString(s))  # Output: ["o", "l", "l", "e", "h"]

@@ -35,7 +35,7 @@ def numSubarrayProductLessThanK(nums, K):
     # 5️⃣ Return final result
     return count
 
-print(numSubarrayProductLessThanK([10,5,2,6], 100))  # Output: 8
+print(numSubarrayProductLessThanK([10, 5, 2, 6], 100))  # Output: 8
 
 
 # ----------------------------------------------------------------------------------

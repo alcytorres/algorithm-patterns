@@ -4,20 +4,15 @@
 
 
 
+# how to identidy time and space
+# how to know if  aquestion is commonly asked
 
 
 
 
 
 
-
-
-
-
-
-
-
-
+# What is point of this from typing import List
 
 
 # prefix[j] - prefix[i - 1]
