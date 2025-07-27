@@ -420,6 +420,39 @@ print(list(unique))  # Output: [1, 2, 3]
 
 
 # BUILT-IN FUNCTION: 
+tuple()
+# What it does: Creates a tuple from an iterable or converts an object to a tuple.
+# DSA use case: Creates immutable sequences for data storage (e.g., fixed pairs in hash maps, return multiple values).
+# Why it’s useful: Provides immutable collections, safer for keys in dictionaries or constant data.
+# Time/Space: O(n) time (n = iterable length), O(n) space.
+# Syntax:
+tuple(iterable)  # Returns a new tuple; 'iterable' is optional
+# DSA Example 1 (List to Tuple):
+nums = [1, 2, 3]
+print(tuple(nums))  # Output: (1, 2, 3)
+# DSA Example 2 (String to Tuple):
+text = "abc"
+print(tuple(text))  # Output: ('a', 'b', 'c')
+
+
+# BUILT-IN FUNCTION: 
+dict()
+# What it does: Creates a dict from pairs or kwargs.
+# DSA use case: Map keys to values (e.g., counts, caches).
+# Why it’s useful: Fast lookups, flexible keys.
+# Time/Space: O(n) time/space (n = items).
+# Syntax:
+dict(iterable)  # From pairs: dict([('a',1), ('b',2)])
+# DSA Example 1 (From List of Pairs):
+pairs = [('a',1), ('b',2)]
+d = dict(pairs)
+print(d)  # {'a':1, 'b':2}
+# DSA Example 2 (Empty):
+d = dict()
+d['key'] = 'val'
+
+
+# BUILT-IN FUNCTION: 
 enumerate()
 # What it does: Returns an iterator of tuples containing indices and elements from an iterable.
 # DSA use case: Tracks both index and value during iteration (e.g., array traversal, index-based operations).

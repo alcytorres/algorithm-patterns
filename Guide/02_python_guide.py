@@ -1513,6 +1513,44 @@ t[0] = 5  # TypeError: 'tuple' object does not support item assignment
     # Use when you want to make something constant and secure
 
 
+# Single-item tuple
+t_single = (42,)  # Needs trailing comma to be a tuple
+print(t_single)  # Outputs: (42,)
+print(type(t_single))  # Outputs: <class 'tuple'>
+print(type((42)))  # Outputs: <class 'int'> (no comma, not a tuple)
+# Use a trailing comma for single-item tuples to avoid scalar confusion.
+
+# Nested tuples
+nested = ((1, 2), (3, 4))
+print(nested[0])  # Outputs: (1, 2) (first tuple)
+print(nested[0][1])  # Outputs: 2 (second item of first tuple)
+# Use nested tuples to group related data hierarchically, like coordinates.
+
+# Tuples as dictionary keys
+d = {(1, 2): "point A", (3, 4): "point B"}  # Tuples are hashable, so can be keys
+print(d[(1, 2)])  # Outputs: point A
+# Tuples work as dictionary keys because they’re immutable and hashable, unlike lists.
+
+# Common use cases
+# - Coordinates: Store (x, y) pairs, e.g., (10, 20), to ensure unchangeable positions.
+# - Function Returns: Return multiple values, e.g., def get_info(): return (name, age).
+# - Data Integrity: Use tuples for constant data (e.g., days of week) to prevent accidental changes.
+# Example: Store a fixed point and use in a dictionary.
+point = (5, 10)  # Fixed coordinate
+locations = {point: "Home"}
+print(locations[point])  # Outputs: Home
+
+# Practice problems
+# 1. Create a tuple of 3 colors and print the second one.
+# 2. Use a tuple as a dictionary key to map a coordinate to a name.
+# 3. Write a function that returns a tuple of (min, max) from a list of numbers.
+# Example solution for problem 3:
+def min_max(numbers):
+    return (min(numbers), max(numbers))
+print(min_max([1, 5, 3]))  # Outputs: (1, 5)
+
+
+
 # ----------------------------------------------------------------------------------
 # 2:30:35 Sets
 
@@ -1538,7 +1576,7 @@ print(d["Greg"])   # Outputs: 25
 
 # List (mutable, not hashable)
 numbers = [1, 2]
-# d[numbers] = 10  # Error: lists can't be keys because they're not hashable
+d[numbers] = 10  # Error: lists can't be keys because they're not hashable
 
 # Easy Analogy: Think of a hashable object like a labeled, sealed box (e.g., a string like "Greg"). Its label (hash) never changes, so Python can find it fast in a dictionary. A list is like an unsealed box—its contents can change, so it can’t have a reliable label and isn’t hashable.
 
@@ -1566,6 +1604,46 @@ print(type(set()))  # Outputs: <class 'set'> (creates an empty set)
 
 # Sorting an iterable
 print(sorted([2, 1, 4]))  # Outputs: [1, 2, 4] (returns new list, no side effect)
+
+
+# Set operations: Union and Intersection
+s1 = {1, 2, 3}
+s2 = {2, 3, 4}
+print(s1 | s2)  # Outputs: {1, 2, 3, 4} (union: all unique elements)
+print(s1 & s2)  # Outputs: {2, 3} (intersection: common elements)
+# Use | for combining sets, & for finding shared items.
+
+# Adding and removing items
+s = {1, 2}
+s.add(3)  # Adds 3 to set
+print(s)  # Outputs: {1, 2, 3}
+s.remove(2)  # Removes 2; raises KeyError if not found
+print(s)  # Outputs: {1, 3}
+# Use add() to include items, remove() to delete; items must be hashable.
+
+# Membership testing
+s = {1, 2, 3}
+print(2 in s)  # Outputs: True (checks if 2 is in set)
+print(4 in s)  # Outputs: False (4 not in set)
+# Sets are fast for checking if an item exists (O(1) on average).
+
+# Common use cases
+# - Unique Items: Remove duplicates from lists or strings (e.g., unique user IDs).
+# - Membership Testing: Quickly check if an item exists (e.g., valid coupon codes).
+# - Set Operations: Find common or combined elements (e.g., shared tags between users).
+# Example: Find unique words in a sentence.
+sentence = "hello world hello"
+unique_words = set(sentence.split())
+print(unique_words)  # Outputs: {'hello', 'world'}
+
+# Practice problems
+# 1. Create a set of 3 numbers and add a fourth using add().
+# 2. Find the intersection of two sets of names.
+# 3. Remove duplicates from a list of emails using a set.
+# Example solution for problem 2:
+names1 = {"Alice", "Bob"}
+names2 = {"Bob", "Charlie"}
+print(names1 & names2)  # Outputs: {'Bob'} (common names)
 
 
 # -----------------------------------------------------------------------------

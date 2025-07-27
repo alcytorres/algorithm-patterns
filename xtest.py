@@ -2,9 +2,29 @@
 
 
 
-# DSA Example 1 (Key-Value Iteration):
-ages = {"Alice": 25, "Bob": 30}
-print(list(ages.items()))  # Output: [("Alice", 25), ("Bob", 30)]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# fix methods guide
+# make it super clear with simple examples
+
+
+# # DSA Example 1 (Key-Value Iteration):
+# ages = {"Alice": 25, "Bob": 30}
+# print(list(ages.items()))  # Output: [("Alice", 25), ("Bob", 30)]
 
 
 
