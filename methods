@@ -574,7 +574,8 @@ chars = ['a', 'a', 'b']
 print(set(chars))  # Output: {'a', 'b'}
 
 
-# BUILT-IN FUNCTION: isinstance()
+# BUILT-IN FUNCTION: 
+isinstance()
 # What it does: Checks if an object is an instance of a specified type or tuple of types.
 # DSA use case: Validates object types in problems requiring type-specific logic (e.g., input validation, polymorphic handling).
 # Why it’s useful: Provides flexible type checking, ensuring correct data handling in algorithms.
