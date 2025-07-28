@@ -1,3 +1,8 @@
+# DELETE, DELETE DELETE
+
+# Delete this once you determine there is no more value
+# Note I updated to a better version of this guide under methods.py
+
 
 # STRING METHODS
 # LIST METHODS
