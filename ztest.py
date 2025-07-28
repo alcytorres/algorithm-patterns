@@ -1,19 +1,4 @@
 
-# BUILT-IN FUNCTION: 
-dict()
-# What it does: Creates a dict from pairs or kwargs.
-# DSA use case: Map keys to values (e.g., counts, caches).
-# Why it’s useful: Fast lookups, flexible keys.
-# Time/Space: O(n) time/space (n = items).
-# Syntax:
-dict(iterable)  # From pairs: dict([('a',1), ('b',2)])
-# DSA Example 1 (From List of Pairs):
-pairs = [('a',1), ('b',2)]
-d = dict(pairs)
-print(d)  # {'a':1, 'b':2}
-# DSA Example 2 (Empty):
-d = dict()
-d['key'] = 'val'
 
 
 

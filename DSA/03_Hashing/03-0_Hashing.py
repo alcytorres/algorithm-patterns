@@ -82,7 +82,31 @@ for i, val in enumerate(hash_map):
 # 1 b
 
 
+# –––––––––––––––––––––––––––––––––––––––––––––––––––––––
+# Key Difference: items() vs enumerate() for Dictionaries
 
+# items(): Use for dicts to iterate over key-value pairs.
+# - Returns both key and value directly.
+# - Use when you need to access keys AND values.
+
+hash_map = {'a': 1, 'b': 2}
+for key, value in hash_map.items():
+    print(key, value)  # Outputs: a 1, b 2
+
+# enumerate(): Use for iterables (e.g., lists, dict keys) to get index and item.
+# - Returns index and item, not key-value pairs.
+# - Use when you need the position (index) of items.
+
+for index, key in enumerate(hash_map):
+    print(index, key)  # Outputs: 0 a, 1 b
+
+# When to use:
+# - items(): Need key-value pairs from dict.
+# - enumerate(): Need index with items (e.g., dict keys or list elements).
+
+
+
+# –––––––––––––––––––––––––––––––––––––––––––––––––––––––
 # === Sets in Python ===
 # Unordered unique elements. Like dict keys only. O(1) add, remove, check.
 # No duplicates; doesn't track frequency.
@@ -125,135 +149,24 @@ hash_map[key] = 'value'
 
 
 # –––––––––––––––––––––––––––––––––––––––––––––––––––––––
-# Key Difference: items() vs enumerate() for Dicts
+# === Additional Key Hash Map Concepts ===
+# Key-Value Pairs: Store mappings; keys unique, values can duplicate.
+# Mutability: Dicts are mutable (can change after creation).
+# Immutable Keys: Required for hashing; mutable types (lists, dicts, sets) can't be keys as they change hash.
+# Examples: Valid keys: int (42), str ('key'), tuple ((1,2)); Invalid: list [1,2] (use tuple instead).
 
-# items(): Use for dicts to iterate over key-value pairs.
-# - Returns both key and value directly.
-# - Use when you need to access keys AND values.
+# === Most Important Dictionary Methods (Ranked for Interviews) ===
+# 1. get(key, default=None): Safe access; returns value or default if missing.
+# 2. pop(key, default=None): Remove and return value; default if missing.
+# 3. popitem(): Remove and return arbitrary pair (LIFO in Python 3.7+).
+# 4. clear(): Empty the dict.
+# 5. update(other_dict): Merge another dict or pairs.
+# 6. setdefault(key, default=None): Get value; insert default if missing.
+# 7. copy(): Shallow copy of dict.
+# 8. fromkeys(keys, value=None): Create dict from iterable keys.
 
-hash_map = {'a': 1, 'b': 2}
-for key, value in hash_map.items():
-    print(key, value)  # Outputs: a 1, b 2
-
-# enumerate(): Use for iterables (e.g., lists, dict keys) to get index and item.
-# - Returns index and item, not key-value pairs.
-# - Use when you need the position (index) of items.
-
-for index, key in enumerate(hash_map):
-    print(index, key)  # Outputs: 0 a, 1 b
-
-# When to use:
-# - items(): Need key-value pairs from dict.
-# - enumerate(): Need index with items (e.g., dict keys or list elements).
-
-
-
-# –––––––––––––––––––––––––––––––––––––––––––––––––––––––
-# === Key Hash Map Concepts ===
-# Hash Maps (Dictionaries): Store key-value pairs. Unordered, mutable.
-# Keys: Must be immutable (hashable) e.g., int, str, tuple. Can't use lists (mutable).
-# Values: Any type, mutable or immutable.
-# Use case: Fast O(1) lookups, mappings in LeetCode (e.g., counting frequencies).
-
-# BUILT-IN FUNCTION: 
-dict()
-# What it does: Creates a dictionary from key-value pairs or iterables.
-# DSA use case: Initialize mappings for tracking (e.g., char counts in strings).
-# Why it’s useful: Flexible creation; handles dynamic data in algorithms.
-# Time/Space: O(n) time/space (n = number of pairs).
-# Syntax:
-dict()  # Empty dict
-dict(key1=value1, key2=value2)  # From kwargs
-dict([('a', 1), ('b', 2)])  # From iterable of pairs
-# DSA Example 1 (Empty Dict):
-d = dict()
-d['key'] = 'value'  # {'key': 'value'}
-# DSA Example 2 (From List of Pairs):
-pairs = [('x', 10), ('y', 20)]
-d = dict(pairs)  # {'x': 10, 'y': 20}
-
-# METHOD: 
-.items()
-# What it does: Returns view of key-value pairs as tuples.
-# DSA use case: Iterate over mappings (e.g., sum values, find max).
-# Why it’s useful: Access both keys and values efficiently.
-# Time/Space: O(n) time to iterate, O(1) space for view.
-# Syntax:
-d.items()  # Returns dict_items object
-# DSA Example 1 (Iteration):
-d = {'a': 1, 'b': 2}
-for k, v in d.items():
-    print(k, v)  # a 1 \n b 2
-# DSA Example 2 (List Conversion):
-pairs = list(d.items())  # [('a', 1), ('b', 2)]
-
-# METHOD: 
-.get()
-# What it does: Returns value for key if exists, else default (None if omitted).
-# DSA use case: Safe access without KeyError (e.g., default counters).
-# Why it’s useful: Avoids errors in lookups; common in frequency maps.
-# Time/Space: O(1) time.
-# Syntax:
-d.get(key, default=None)
-# DSA Example 1 (Existing Key):
-d = {'a': 1}
-print(d.get('a'))  # 1
-# DSA Example 2 (Missing Key with Default):
-print(d.get('b', 0))  # 0
-
-# METHOD: 
-.keys()
-# What it does: Returns view of all keys.
-# DSA use case: Check or iterate keys (e.g., unique elements).
-# Why it’s useful: Focus on keys for existence checks.
-# Time/Space: O(n) time to iterate, O(1) space for view.
-# Syntax:
-d.keys()  # Returns dict_keys object
-# DSA Example:
-d = {'a': 1, 'b': 2}
-for k in d.keys():
-    print(k)  # a b
-
-# METHOD: 
-.values()
-# What it does: Returns view of all values.
-# DSA use case: Aggregate values (e.g., sum, max).
-# Why it’s useful: Process values without keys.
-# Time/Space: O(n) time to iterate, O(1) space for view.
-# Syntax:
-d.values()  # Returns dict_values object
-# DSA Example:
-d = {'a': 1, 'b': 2}
-print(sum(d.values()))  # 3
-
-# METHOD: 
-.pop()
-# What it does: Removes key and returns its value; default if missing.
-# DSA use case: Remove and use item (e.g., process queue-like).
-# Why it’s useful: Combines delete and get.
-# Time/Space: O(1) time.
-# Syntax:
-d.pop(key, default=None)
-# DSA Example 1:
-d = {'a': 1}
-print(d.pop('a'))  # 1, d now {}
-# DSA Example 2 (Missing):
-print(d.pop('b', 0))  # 0, d unchanged
-
-# METHOD: 
-.clear()
-# What it does: Removes all items.
-# DSA use case: Reset mapping between operations.
-# Why it’s useful: Quick empty without new object.
-# Time/Space: O(1) time (amortized).
-# Syntax:
-d.clear()
-# DSA Example:
-d = {'a': 1}
-d.clear()  # d now {}
-
-# === Comparison with Other DS ===
-# Lists: Mutable, ordered, index access. O(n) search. Use for sequences.
-# Tuples: Immutable, ordered. Hashable as keys. Use for fixed data.
-# Sets: Mutable, unordered, unique keys. O(1) existence. Like dict without values.
-# Dicts vs Others: Dicts for key-value; sets for uniqueness; lists/tuples for order. Keys immutable in dicts/sets.
+# === Comparison with Other Data Structures ===
+# Lists: Mutable, ordered, index access; use for sequences, not mappings. Can't be keys.
+# Tuples: Immutable, ordered; use as dict keys for composite immutable data.
+# Sets: Mutable, unordered uniques; like dicts without values. Use for membership tests; elements must be immutable.
+# Key Use Cases: Dicts for key-value lookups; sets for uniques; lists/tuples for ordered data (tuples as keys when needed).
