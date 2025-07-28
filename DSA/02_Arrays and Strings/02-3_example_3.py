@@ -34,6 +34,11 @@ print(merge_sorted_arrays([1, 4, 7, 20], [3, 5, 6]))
 # Space: O(n + m) - Stores the merged result in an output array of size n + m, excluding input arrays as per convention.
 
 
+# ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+# while vs if: Merging sorted arrays
+    # while: Repeats until condition false, processes all items (e.g., full array merge).
+    # if: Checks once, processes one item (e.g., partial merge).
+    # Use while for loops over multiple items, if for single checks.
 
 # ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 # Breakdown 
