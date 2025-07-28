@@ -1,5 +1,26 @@
+# Example 1: Longest Subarray with Sum Less Than or Equal to k
+# Finds the length of the longest subarray with sum <= k using sliding window.
 
+# Example 1: nums = [1, 2, 1, 2, 4, 2], k = 6
+# Output: 4 (subarray [2, 1, 2, 1], sum = 6)
 
+def longest_subarray_sum(nums, k):
+    left = curr = ans = 0
+
+    for right in range(len(nums)):
+        curr += nums[right]
+
+        if curr > k:
+            curr -= nums[left]
+            left += 1
+
+        ans = max(ans, right - left + 1)
+    
+    return ans
+
+nums = [1, 2, 1, 2, 4, 2]
+print(longest_subarray_sum(nums, 8))
+# Output: 4  --> Subarray [1, 2, 1, 2] (length 4, sum 6) is the longest subarray with sum <= 6.
 
 
 
