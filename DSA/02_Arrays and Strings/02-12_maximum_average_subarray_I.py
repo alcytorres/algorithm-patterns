@@ -7,6 +7,11 @@
 
 # Solution: https://leetcode.com/problems/maximum-average-subarray-i/solutions/127562/maximum-average-subarray-i/
 
+# Example
+# Input: nums = [1, 12, -5, -6, 50, 3], k = 4
+# Output: 12.75000
+# Explanation: Maximum average is (12 - 5 - 6 + 50) / 4 = 51 / 4 = 12.75
+
 class Solution(object):
     def findMaxAverage(self, nums, k):
         """
@@ -33,6 +38,12 @@ print(solution.findMaxAverage([1, 2, 3, 4], 2))
 
 # Time: O(n) - Builds first window in O(k), then slides n-k times with O(1) operations per iteration.
 # Space: O(1) - Uses only two integer variables (curr, ans).
+
+
+# Trace Overview
+# i     = 0    1  2  3  
+# curr  = 0  1 3  5  7
+# ans   = 0    3  5  7  3.5
 
 """
 I verified this solution is correct but it is denied in LeetCode unless I do this for the last line: return float(ans) / k

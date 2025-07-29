@@ -10,6 +10,13 @@
 
 # Video https://www.youtube.com/watch?v=QgRZcbYboxg
 
+# Example
+# Input: nums = [-3, 2, -3, 4, 2]
+# Output: 5
+# Step-by-step sum: startValue + nums[i]
+# Track minimum running total: [-3, -1, -4, 0, 2] (min = -4)
+# Minimum startValue to keep sum ≥ 1: -(-4) + 1 = 5
+
 def minStartValue(nums):
     # We use "total" for current step-by-step total, "min_val" for minimum 
     min_val = 0

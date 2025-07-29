@@ -1,26 +1,46 @@
-# Example 1: Longest Subarray with Sum Less Than or Equal to k
-# Finds the length of the longest subarray with sum <= k using sliding window.
+# 2090. K Radius Subarray Averages
 
-# Example 1: nums = [1, 2, 1, 2, 4, 2], k = 6
-# Output: 4 (subarray [2, 1, 2, 1], sum = 6)
+# Solution: https://leetcode.com/problems/k-radius-subarray-averages/description/
 
-def longest_subarray_sum(nums, k):
-    left = curr = ans = 0
+# Video https://www.youtube.com/watch?v=L33kbF6Cr_I
 
-    for right in range(len(nums)):
-        curr += nums[right]
+# Eaxmple
+# nums = [7, 4, 3, 9, 1, 8, 5, 2, 6]
+# Output: [-1, -1, -1, 5, 4, 4, -1, -1, -1]
 
-        if curr > k:
-            curr -= nums[left]
-            left += 1
+# Sliding Window Video Solution 1
+# Video https://www.youtube.com/watch?v=L33kbF6Cr_I
+    # I think I like this more than the LeetCode official solution
 
-        ans = max(ans, right - left + 1)
+def getAverages(nums, k):
+    n = len(nums)  # 9
+    result = [-1] * n  # [-1, -1, -1, -1, -1, -1, -1, -1, -1]
+    window_size = 2*k + 1  # 7
+    curr_sum = 0
+
+    if (n < window_size):
+        return result
     
-    return ans
+    curr_sum = sum(nums[0:window_size])
+    result[k] = curr_sum//window_size
 
-nums = [1, 2, 1, 2, 4, 2]
-print(longest_subarray_sum(nums, 8))
-# Output: 4  --> Subarray [1, 2, 1, 2] (length 4, sum 6) is the longest subarray with sum <= 6.
+    for i in range(k+1, n-k):
+        curr_sum += nums[i+k] - nums[i-k-1]
+        result[i] = curr_sum // window_size
+    return result
+
+
+nums = [7, 4, 3, 9, 1, 8, 5, 2, 6]
+print(getAverages(nums, 3))
+# Output: [-1, -1, -1, 5, 4, 4, -1, -1, -1]
+
+
+
+
+
+
+
+
 
 
 

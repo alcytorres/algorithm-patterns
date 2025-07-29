@@ -4,7 +4,7 @@
 
 # Video https://www.youtube.com/watch?v=L33kbF6Cr_I
 
-# Eaxmple
+# Example
 # nums = [7, 4, 3, 9, 1, 8, 5, 2, 6]
 # Output: [-1, -1, -1, 5, 4, 4, -1, -1, -1]
 
@@ -30,7 +30,7 @@ def getAverages(nums, k):
     
     return res
 
-nums = [7,4,3,9,1,8,5,2,6]
+nums = [7, 4, 3, 9, 1, 8, 5, 2, 6]
 print(getAverages(nums, 3))
 # Output: [-1, -1, -1, 5, 4, 4, -1, -1, -1]
 

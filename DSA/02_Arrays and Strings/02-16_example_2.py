@@ -4,6 +4,13 @@
 
 # Solution: https://leetcode.com/problems/number-of-ways-to-split-array/solutions/6209795/number-of-ways-to-split-array/
 
+# Example 
+# Input: nums = [10, 4, -8, 7]
+# Output: 2
+# i=0: left=10, right=3 (10>=3) valid
+# i=1: left=14, right=-1 (14>=-1) valid
+# i=2: left=6, right=7 (6<7) invalid
+
 def waysToSplitArray(nums): 
     prefix = [nums[0]]
     for i in range(1, len(nums)):

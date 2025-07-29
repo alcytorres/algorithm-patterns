@@ -180,20 +180,35 @@ print(answer_queries(nums, queries, limit))  # Output: [True, False, True]
 #    - Loop: for x, y in queries
 #    - Calculate sum: curr = prefix[y] - prefix[x] + nums[x]
 #    - Append result: ans.append(curr < limit)
+#
+# Code:
+def prefix_sum_queries(nums, queries, limit):
+    prefix = [nums[0]]
+    for i in range(1, len(nums)):
+        prefix.append(prefix[-1] + nums[i])
+    
+    ans = []
+    for x, y in queries:
+        curr = prefix[y] - prefix[x] + nums[x]
+        ans.append(curr < limit)
+    return ans
 
 # Challenges & Solutions
 # - Challenge: Understanding prefix[y] - prefix[x] + nums[x]:
 #   - Why: prefix[y] - prefix[x] gives sum from x+1 to y. Add nums[x] to include index x.
-#   - Fix: Recognize prefix[x] is sum up to x, so adjust by adding nums[x] for full range.
+#   - Fix: Recognize prefix[x] is sum up to x, so add nums[x] for full range.
 # - Challenge: Unpacking queries in loop (for x, y in queries):
-#   - Why: Each query is a pair [x, y], and x, y unpacks start/end indices.
-#   - Fix: Know this loop assigns x as start, y as end for each query pair.
+#   - Why: Each query is a pair [x, y], unpacking assigns x as start, y as end.
+#   - Fix: Understand x, y represent start/end indices of subarray.
 # - Challenge: Calculating correct subarray sum:
-#   - Why: Confused about why not prefix[y] - prefix[x-1].
-#   - Fix: Use prefix[y] - prefix[x] + nums[x] to include x in the sum, as prefix[x-1] would miss x.
+#   - Why: Using prefix[y] - prefix[x-1] fails when x=0 (invalid index) and requires extra checks.
+#   - Fix: Use prefix[y] - prefix[x] + nums[x] for robust sum from x to y, valid for all x.
 
-# Quick Example Walkthrough
-# - Query [2, 5]:
+# Example Walkthrough
+"""
+# Query [2, 5]:
+#   - nums: [1, 6, 3, 2, 7, 2]
 #   - Prefix: [1, 7, 10, 12, 19, 21]
-#   - curr = prefix[5] - prefix[2] + nums[2] -> 21 - 10 + 3 = 14
+#   - curr = prefix[5] - prefix[2] + nums[2] = 21 - 10 + 3 = 14
 #   - 14 < 13 -> False
+"""

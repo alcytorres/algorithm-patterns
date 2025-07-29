@@ -12,11 +12,13 @@
 
 
 
+# Trace Overview
+# i     = 0    1  2  3  
+# curr  = 0  1 3  5  7
+# ans   = 0    3  5  7  3.5
 
 
-
-
-
+# i = 4
 
 
 
