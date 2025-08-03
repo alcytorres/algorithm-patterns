@@ -1,5 +1,6 @@
 # 2351. First Letter to Appear Twice
 
+# Example 2
 # Given a string s consisting of lowercase English letters, return the first letter to appear twice.
 
 # Note:
@@ -20,7 +21,7 @@ def repeatedCharacter(s):
             return c
         seen.add(c)
 
-    return " "
+    return ""
 
 print(repeatedCharacter("abccbaacz"))
 # Output: c

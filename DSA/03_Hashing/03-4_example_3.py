@@ -2,8 +2,22 @@
 
 # If a valid number x appears multiple times, you only need to include it in the answer once.
 
-
 # Example:
-# Input: nums = [1, 3, 5, 4]
-# Output: [3, 4]
-# Explanation: For x=3, 3+1=4 and 3-1=2 are not in nums. For x=4, 4+1=5 and 4-1=3 are in nums, but 4 satisfies since duplicates are handled. Only unique valid x are included.
+# Input: nums = [2, 4, 6, 8]
+# Output: [2, 4, 6, 8]
+# Explanation: For each x in nums, neither x+1 nor x-1 exists in nums (e.g., for x=2, 3 and 1 are absent; for x=4, 5 and 3 are absent). All numbers satisfy the condition, and duplicates are not an issue here.
+
+def find_numbers(nums):
+    seen = set(nums)  # {8, 2, 4, 6}
+    ans = []
+    for x in set(nums):
+        if x+1 not in seen and x-1 not in seen:
+            ans.append(x)
+    return ans
+
+l = [2, 4, 6, 8]
+print(find_numbers(l))
+
+
+# Time: O(n), where n is the length of nums (set conversion and iteration).
+# Space: O(n) for the seen set and ans list.
