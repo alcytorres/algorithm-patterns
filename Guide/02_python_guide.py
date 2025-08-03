@@ -1669,12 +1669,15 @@ empty_list = []  # Creates an empty list
 
 # Tuple: Ordered, immutable collection
 empty_tuple = ()  # Creates an empty tuple
+t = (1, "hello", 3.5)  # Tuple with basic data
 
 # Dictionary: Key-value pairs, mutable
 empty_dict = {}  # Creates an empty dictionary
+d = {"name": "Alice", "age": 25, "score": 90}  # Dict with basic data
 
 # Set: Unordered, mutable collection of unique elements
 empty_set = set()  # Creates an empty set (note: {} creates a dict)
+s = {1, "hello", 3.5}  # Set with basic data
 
 # Integer: Whole number
 empty_int = 0  # Represents an "empty" or zero integer

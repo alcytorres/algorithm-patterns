@@ -143,6 +143,21 @@ hash_map[key] = 'value'
 # Dicts/Sets: O(1) for search/delete, but keys hashed (slower constant for small n).
 # Use dict when mapping keys to values; set for existence; list for order/index.
 
+
+# Example: Arrays vs Hash Maps for unknown key ranges
+# Array approach (problem: unknown key range)
+max_key = 100  # Guess max key size
+arr = [0] * max_key  # Risk: too small or wastes space
+arr[5] = 10  # Works if key (5) fits
+# arr[1000] = 20  # Error if key exceeds max_key
+
+# Hash map approach (simpler, no size worry)
+hash_map = {}  # No need to predefine size
+hash_map[5] = 10  # Any key works
+hash_map[1000] = 20  # No issue with large keys
+print(hash_map)  # Output: {5: 10, 1000: 20}
+
+
 # Must-Know: Master dict/set interfaces. Reduces time complexity in many problems.
 # In LeetCode: Use for counting, unique checks, mappings.
 

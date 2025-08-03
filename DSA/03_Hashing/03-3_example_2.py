@@ -1,0 +1,61 @@
+# 2351. First Letter to Appear Twice
+
+# Given a string s consisting of lowercase English letters, return the first letter to appear twice.
+
+# Note:
+    # A letter a appears twice before another letter b if the second occurrence of a is before the second occurrence of b.
+
+    # s will contain at least one letter that appears twice.
+
+# Example
+# Input: s = "abccd"
+# Output: "c"
+
+# Solution: https://leetcode.com/problems/first-letter-to-appear-twice/description/
+
+def repeatedCharacter(s):
+    seen = set()
+    for c in s:
+        if c in seen:
+            return c
+        seen.add(c)
+
+    return " "
+
+print(repeatedCharacter("abccbaacz"))
+# Output: c
+
+# Time: O(n) - Single pass through string of length n.
+# Space: O(n) - Set stores up to n unique characters.
+
+
+# My Original Solution
+def repeatedCharacter(s):
+    seen = set()
+    for i in range(len(s)):
+        c = s[i]
+        if c in seen:
+            return c
+        seen.add(c)
+    return ""
+
+print(repeatedCharacter("abccbaacz"))
+# Output: c
+
+# Time: O(n) - Single pass through string of length n.
+# Space: O(n) - Set stores up to n unique characters.
+
+
+# Brute force
+def repeatedCharacter(s):
+    for i in range(len(s)):
+        c = s[i]
+        for j in range(i):
+            if s[j] == c:
+                return c
+    return ""
+
+print(repeatedCharacter("abccbaacz"))
+# Output: c
+# Time: O(n^2)
+# Space: 

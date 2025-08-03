@@ -65,7 +65,7 @@ def getAverages(nums, k):
     Approach
     """
     cumm_sum = sum(nums[0:window_size])
-    result[k] = cumm_sum/window_size
+    result[k] = cumm_sum//window_size
     """
     i = K, K+1, n-k+1 = -1
     """
@@ -74,7 +74,7 @@ def getAverages(nums, k):
     """
     for i in range(k+1, n-k):
         cumm_sum +=  nums[i+k] - nums[i-k-1]
-        result[i] = cumm_sum/window_size
+        result[i] = cumm_sum//window_size
     return result
 
 print(getAverages([7,4,3,9,1,8,5,2,6], 3))
