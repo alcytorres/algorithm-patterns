@@ -1,7 +1,11 @@
 
 
 
-
+# Trace Overview
+# left  = 0  
+# right = 4
+# i     = 4  
+# ans   = 
 
 
 # Trace Overview
@@ -9,6 +13,12 @@
 # curr  = 0
 # ans   = 0
 # left  = 0
+
+# Trace Overview
+# right = 0   1   2        3
+# curr  = 10  50  100  10  60
+# left  = 0   0   1
+# ans   = 1   3        5   8
 
 
 
@@ -18,7 +28,8 @@
 # ans   = 0    3  5  7  3.5
 
 
-# i = 4
+
+
 
 
 

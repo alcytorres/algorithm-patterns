@@ -1,4 +1,32 @@
 
+# Sliding Window LeetCode Solution 3
+# https://leetcode.com/problems/k-radius-subarray-averages/description/
+def getAverages(nums, k):
+    ans = [-1] * len(nums)
+    if k == 0:
+        return nums
+
+    window_size = 2 * k + 1
+    n = len(nums)
+
+    if window_size > n:
+        return ans
+
+    # First get the sum of first window of the 'nums' arrray.
+    window_sum = sum(nums[:window_size])
+    ans[k] = window_sum // window_size
+
+    # Iterate on rest indices which have at least 'k' elements 
+    # on its left and right sides.
+    for i in range(window_size, n):
+        window_sum += nums[i] - nums[i - window_size]
+        ans[i - k] = window_sum // window_size
+
+    return ans
+
+nums = [7, 4, 3, 9, 1, 8, 5, 2, 6]
+print(getAverages(nums, 3))
+# Output: [-1, -1, -1, 5, 4, 4, -1, -1, -1] - Returns averages of k-radius subarrays (k=3) where each valid index i has 2k+1 elements, else -1.
 
 
 
@@ -10,8 +38,9 @@
 
 
 
-#  min_val = 0
-#  total = 0
+
+# min_val = 0
+# total = 0
 
 # total = -3
 # min_val = -3

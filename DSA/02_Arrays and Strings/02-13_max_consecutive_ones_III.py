@@ -6,7 +6,7 @@
 # Output: 6
 # Explanation: [1,1,1,0,0,1,1,1,1,1,1]
 
-# Solution: https://leetcode.com/explore/interview/card/leetcodes-interview-crash-course-data-structures-and-algorithms/703/arraystrings/4595/
+# Solution: https://leetcode.com/problems/max-consecutive-ones-iii/solutions/409192/max-consecutive-ones-iii/
 
 def longestOnes(nums, k):
     left = ans = curr = 0
@@ -24,8 +24,7 @@ def longestOnes(nums, k):
     
     return ans
 
-
-print(longestOnes([1,1,1,0,0,0,1,1,1,1,0], 2))
+print(longestOnes([1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 0], 2))
 # Output: 6
 
 # Time: O(n) - Right pointer moves n times, left moves at most n times (amortized O(1) per iteration).

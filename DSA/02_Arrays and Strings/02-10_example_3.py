@@ -1,4 +1,5 @@
 # Example 3: 713. Number of Subarrays with Product Less Than k
+
 # Counts subarrays where product of elements is strictly less than k.
 # Example
 # nums = [2, 3], k = 7

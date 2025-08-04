@@ -26,7 +26,9 @@ def merge_sorted_arrays(arr1, arr2):
 
     return ans              
 
-print(merge_sorted_arrays([1, 4, 7, 20], [3, 5, 6]))
+arr1 = [1, 4, 7, 20]
+arr2 = [3, 5, 6]
+print(merge_sorted_arrays(arr1, arr2))
 # Output: [1, 3, 4, 5, 6, 7, 20]
 
 
@@ -167,5 +169,7 @@ def merge_sorted_arrays(arr1, arr2):  # Example: arr1 = [1, 4, 7, 20], arr2 = [3
     return ans  # ans = [1, 3, 4, 5, 6, 7, 20]
 
 
+arr1 = [1, 4, 7, 20]
+arr2 = [3, 5, 6]
 print(merge_sorted_arrays([1, 4, 7, 20], [3, 5, 6]))  
 # Output: [1, 3, 4, 5, 6, 7, 20]

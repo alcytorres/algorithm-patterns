@@ -8,14 +8,40 @@
 # nums = [7, 4, 3, 9, 1, 8, 5, 2, 6]
 # Output: [-1, -1, -1, 5, 4, 4, -1, -1, -1]
 
+# Yashasvi Code: My Preferred solution
+def getAverages(nums, k):
+    n = len(nums)
+    ans = [-1] * n
+    window_size = 2*k + 1;
+    cumm_sum = 0;
 
-# Sliding Window Video Solution 1
+    if (n < window_size):
+        return ans
+ 
+    cumm_sum = sum(nums[0:window_size])
+    ans[k] = cumm_sum//window_size
+  
+    for i in range(k+1, n-k): 
+        cumm_sum += nums[i+k] - nums[i-k-1]
+        ans[i] = cumm_sum//window_size
+    return ans
+
+nums = [7, 4, 3, 9, 1, 8, 5, 2, 6]
+print(getAverages(nums, 3))
+# Output: [-1, -1, -1, 5, 4, 4, -1, -1, -1]
+
+# Time: O(n) – O(n) to create the result array, O(k) to compute the first window sum, and O(n) to slide the window (O(1) updates per step).
+# Space: O(n) total due to result array, O(1) auxiliary if excluding it.
+
+
+# ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+# Sliding Window Video Solution 2
 # Video https://www.youtube.com/watch?v=L33kbF6Cr_I
     # I think I like this more than the LeetCode official solution
 def getAverages(nums, k):
     left = 0
     window_size = 2*k + 1
-    res = [-1] * len(nums)
+    ans = [-1] * len(nums)
     total = 0
 
     for right, value in enumerate(nums):
@@ -23,68 +49,25 @@ def getAverages(nums, k):
         #check that my window satisfies some condition
     
         if right - left + 1 == window_size:
-            res[left + k] = total // window_size
+            ans[left + k] = total // window_size
             #check to make sure that I have to move the left pointer
             total -= nums[left]
             left += 1
     
-    return res
+    return ans
 
 nums = [7, 4, 3, 9, 1, 8, 5, 2, 6]
 print(getAverages(nums, 3))
 # Output: [-1, -1, -1, 5, 4, 4, -1, -1, -1]
 
-# Time: O(n) - Initializes averages array in O(n) and slides window over n elements with O(1) operations per iteration.
-# Space: O(1) - Uses only a constant number of variables (window_sum, window_size), excluding the output array.
-
-
-
-# ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
-# Yashasvi Solution 2
-def getAverages(nums, k):
-    """
-    :type nums: List[int]
-    :type k: int
-    :rtype: List[int]
-    """
-    n = len(nums)
-    result = [-1] * n
-    window_size = 2*k + 1;
-    cumm_sum = 0;
-    """
-    Constraints
-    Brute force - O(n^2)
-    optimal - O(n)
-    """
-    """
-    Constraints
-    """
-    if (n < window_size):
-        return result
-    """
-    Approach
-    """
-    cumm_sum = sum(nums[0:window_size])
-    result[k] = cumm_sum//window_size
-    """
-    i = K, K+1, n-k+1 = -1
-    """
-    """
-    Optimal solution
-    """
-    for i in range(k+1, n-k):
-        cumm_sum +=  nums[i+k] - nums[i-k-1]
-        result[i] = cumm_sum//window_size
-    return result
-
-print(getAverages([7,4,3,9,1,8,5,2,6], 3))
-# Output: [-1, -1, -1, 5, 4, 4, -1, -1, -1]
+# Time: O(n) – O(n) to create the result array, plus O(n) to slide the window (each element added and removed once).
+# Space: O(n) total due to result array, O(1) auxiliary if excluding it.
 
 # ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 # Sliding Window LeetCode Solution 3
 # https://leetcode.com/problems/k-radius-subarray-averages/description/
 def getAverages(nums, k):
-    averages = [-1] * len(nums)
+    ans = [-1] * len(nums)
     if k == 0:
         return nums
 
@@ -92,22 +75,21 @@ def getAverages(nums, k):
     n = len(nums)
 
     if window_size > n:
-        return averages
+        return ans
 
     # First get the sum of first window of the 'nums' arrray.
     window_sum = sum(nums[:window_size])
-    averages[k] = window_sum // window_size
+    ans[k] = window_sum // window_size
 
     # Iterate on rest indices which have at least 'k' elements 
     # on its left and right sides.
     for i in range(window_size, n):
-        window_sum = window_sum - nums[i - window_size] + nums[i]
-        averages[i - k] = window_sum // window_size
+        window_sum += nums[i] - nums[i - window_size]
+        ans[i - k] = window_sum // window_size
 
-    return averages
+    return ans
 
-
-nums = [7,4,3,9,1,8,5,2,6]
+nums = [7, 4, 3, 9, 1, 8, 5, 2, 6]
 print(getAverages(nums, 3))
 # Output: [-1, -1, -1, 5, 4, 4, -1, -1, -1] - Returns averages of k-radius subarrays (k=3) where each valid index i has 2k+1 elements, else -1.
 
@@ -180,5 +162,5 @@ def getAverages(nums, k):
 
     return averages
 
-nums = [7,4,3,9,1,8,5,2,6]
+nums = [7, 4, 3, 9, 1, 8, 5, 2, 6]
 print(getAverages(nums, 3))
