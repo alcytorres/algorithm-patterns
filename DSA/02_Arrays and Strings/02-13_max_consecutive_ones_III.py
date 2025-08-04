@@ -27,8 +27,17 @@ def longestOnes(nums, k):
 print(longestOnes([1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 0], 2))
 # Output: 6
 
-# Time: O(n) - Right pointer moves n times, left moves at most n times (amortized O(1) per iteration).
-# Space: O(1) - Uses only three integer variables (left, ans, curr).
+# Time: O(n)
+# - Right pointer moves across the array once.
+# - Left pointer also moves at most n steps in total.
+# - Each element is processed (added/removed from count) at most once.
+# - No nested loops that multiply time.
+
+# Space: O(1)
+# - Only a constant number of variables (left, right, curr, ans) are used.
+# - No additional data structures.
+# - Overall: O(1) space.
+
 
 
 

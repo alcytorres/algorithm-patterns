@@ -28,16 +28,21 @@ def sortedSquares(nums):
     
     return ans
 
-
 numbers = [-4, -1, 0, 3, 10]
 print(sortedSquares(numbers))  
 # Output: [0, 1, 9, 16, 100]
 
 
-# Time: O(n) - Iterates through n elements once, with O(1) operations (comparisons, squaring, assignment) per iteration.
-# Space: O(n) - Uses a ans array of size n to store squared values, with only two integer pointers (left, right) as constant extra space.
+# Time: O(n)
+# - Two pointers (left, right) each move toward the center once.
+# - Each element is processed exactly once and placed into the result array.
+# - No nested loops.
 
-# Space: O(n) if you take output into account and O(1) otherwise.
+# Space: O(n)
+# - Result array 'ans' stores the squared values of all n elements.
+# - Only a constant number of extra variables (left, right, square, i) are used besides the output array.
+# - If we exclude the result array, extra working space is O(1).
+
 
 
 # Trace Overview

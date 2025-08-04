@@ -26,10 +26,32 @@ def repeatedCharacter(s):
 print(repeatedCharacter("abccbaacz"))
 # Output: c
 
-# Time: O(n) - Single pass through string of length n.
-# Space: O(n) - Set stores up to n unique characters.
+# Time: O(n)
+# - Loop through the string once: O(n) iterations.
+# - Set lookups ('if c in seen') and inserts ('seen.add(c)') are O(1) on average.
+# - No nested loops, so total time is O(n).
+
+# Space: O(n)
+# - Set 'seen' can store up to n characters in the worst case (when no repeat is found until the end), O(n) space.
+# - A few variables (c) take O(1) space.
+# - Overall: O(n) total space.
+# - If we exclude the set from consideration, extra working space is O(1).
 
 
+
+# ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+# Breakdown
+def repeatedCharacter(s):
+    seen = set()               # Initialize empty set for seen characters
+    for c in s:                # Iterate over each character in string
+        if c in seen:          # If character already in set
+            return c           # Return first repeated character
+        seen.add(c)            # Add character to set
+    return ""                  # Return empty string if no character repeats
+
+
+
+# ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 # My Original Solution
 def repeatedCharacter(s):
     seen = set()
@@ -47,6 +69,7 @@ print(repeatedCharacter("abccbaacz"))
 # Space: O(n) - Set stores up to n unique characters.
 
 
+# ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 # Brute force
 def repeatedCharacter(s):
     for i in range(len(s)):

@@ -30,8 +30,18 @@ print(answer_queries(nums, queries, limit))
 # [2, 4] = 12
 
 
-# Time: O(n + m) - Builds prefix sum array in O(n) and processes m queries in O(m) with O(1) operations each.
-# Space: O(n) - Uses a prefix sum array of size n and an output array of size m.
+# Time: O(n + q)
+# - Build prefix sum array: O(n).
+# - Answer each query in O(1) using prefix sums, for q queries: O(q).
+# - Overall: O(n + q) time.
+
+# Space: O(n + q)
+# - Prefix sum array stores n values: O(n) space.
+# - Result array 'ans' stores q values: O(q) space.
+# - A few variables (i, x, y, curr) take O(1) space.
+# - Overall: O(n + q) total space.
+# - If we exclude the output array, extra working space is O(n) due to the prefix sum array.
+
 
 # ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 

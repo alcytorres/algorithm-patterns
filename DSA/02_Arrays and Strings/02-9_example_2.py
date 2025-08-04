@@ -22,8 +22,17 @@ def longest_substring_one_zero(s):
 print(longest_substring_one_zero("11001011"))  
 # Output: 4  --> Substring "1011" (length 4, one "0") is the longest with at most one "0".
 
-# Time: O(n) - Right pointer moves n times, left pointer moves at most n times (amortized O(1) per iteration).
-# Space: O(1) - Uses only three integer variables (left, curr, ans).
+# Time: O(n)
+# - Right pointer moves across the string once.
+# - Left pointer also moves at most n steps in total.
+# - Each character is processed (added/removed from count) at most once.
+# - No nested loops that multiply time.
+
+# Space: O(1)
+# - Only a constant number of variables (left, right, curr, ans) are used.
+# - No additional data structures.
+# - Overall: O(1) space.
+
 
 
 # Trace Steps

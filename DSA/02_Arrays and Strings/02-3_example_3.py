@@ -32,8 +32,16 @@ print(merge_sorted_arrays(arr1, arr2))
 # Output: [1, 3, 4, 5, 6, 7, 20]
 
 
-# Time: O(n + m) - Iterates through all elements of two arrays (lengths n and m) once, with O(1) operations per iteration.
-# Space: O(n + m) - Stores the merged result in an output array of size n + m, excluding input arrays as per convention.
+# Time: O(n + m)
+# - Compare elements from both arrays once: O(n + m), where n = len(arr1) and m = len(arr2).
+# - Remaining elements from each array are appended in O(n) or O(m) total.
+# - No nested loops that depend on each other.
+
+# Space: O(n + m)
+# - Result array 'ans' stores all elements from both arrays, O(n + m) space.
+# - Only a constant number of extra variables (i, j) are used besides the output array.
+# - If we exclude the result array, extra working space is O(1).
+
 
 
 # ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––

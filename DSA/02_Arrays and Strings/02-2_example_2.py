@@ -21,8 +21,15 @@ print(find_pair_sum([1, 2, 4, 6, 8, 9, 14, 15], 13))
 # Output: True -> nums[2] + nums[5] = 4 + 9 = 13 matches the target.
 
 
-# Time: O(n) - Pointers traverse a sorted array of length n, meeting after at most n iterations, with O(1) operations per iteration.
-# Space: O(1) - Uses only two integer pointers (left, right) and a constant amount of extra space.
+# Time: O(n)
+# - Two pointers (left, right) each move toward the center once.
+# - Each iteration adjusts one pointer, so at most n steps total.
+# - No nested loops.
+
+# Space: O(1)
+# - Only a constant number of variables (left, right, curr) are used.
+# - No additional data structures.
+# - Overall: O(1) space.
 
 
 

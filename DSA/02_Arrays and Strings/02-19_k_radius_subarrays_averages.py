@@ -12,26 +12,39 @@
 def getAverages(nums, k):
     n = len(nums)
     ans = [-1] * n
-    window_size = 2*k + 1;
-    cumm_sum = 0;
+    window_size = 2*k + 1
+    curr_sum = 0
 
+# Handle case where window can't fit in array
     if (n < window_size):
         return ans
  
-    cumm_sum = sum(nums[0:window_size])
-    ans[k] = cumm_sum//window_size
+# Calculate sum of the first full window 
+    curr_sum = sum(nums[0:window_size])
+    ans[k] = curr_sum // window_size
   
+# Slide window across array and update averages
     for i in range(k+1, n-k): 
-        cumm_sum += nums[i+k] - nums[i-k-1]
-        ans[i] = cumm_sum//window_size
+        curr_sum += nums[i+k] - nums[i-k-1]
+        ans[i] = curr_sum // window_size
     return ans
 
 nums = [7, 4, 3, 9, 1, 8, 5, 2, 6]
 print(getAverages(nums, 3))
 # Output: [-1, -1, -1, 5, 4, 4, -1, -1, -1]
 
-# Time: O(n) – O(n) to create the result array, O(k) to compute the first window sum, and O(n) to slide the window (O(1) updates per step).
-# Space: O(n) total due to result array, O(1) auxiliary if excluding it.
+# Time: O(n)
+# - Create result array 'ans': O(n).
+# - Compute first window sum: O(k).
+# - Slide window across array: O(n) total, since each step adds one element and removes one element in O(1) time.
+# - Overall time is O(n) because O(n) dominates O(k).
+
+# Space: O(n)
+# - Result array 'ans' takes O(n) space.
+# - A few integer variables (n, window_size, curr_sum, i) take O(1) space.
+# - Overall: O(n) total space.
+# - If we exclude the result array from consideration, extra working space is O(1).
+
 
 
 # ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––

@@ -29,8 +29,17 @@ nums = [10, 4, -8, 7]  # -> [10, 14, 6, 13]
 print(waysToSplitArray(nums))
 # Output: 2
 
-# Time: O(n) - Builds prefix sum array in O(n) and iterates n-1 times for comparisons, each O(1).
-# Space: O(n) - Uses a prefix sum array of size n, plus a constant number of variables.
+# Time: O(n)
+# - Build prefix sum array: O(n).
+# - Loop through array once to check split conditions: O(n).
+# - Overall: O(n) time.
+
+# Space: O(n)
+# - Prefix sum array stores n values: O(n) space.
+# - A few variables (i, ans, left_section, right_section) take O(1) space.
+# - Overall: O(n) total space.
+# - If we exclude the prefix sum array, extra working space is O(1).
+
 
 
 """

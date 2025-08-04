@@ -16,8 +16,15 @@ def is_palindrome(s):
 
 print(is_palindrome("racecar"))  # Output: True
 
-# Time: O(n) - Checks up to n/2 character pairs in a string of length n, with O(1) comparisons per iteration.
-# Space: O(1) - Uses only two integer pointers (left, right), with no additional data structures.
+# Time: O(n)
+# - Two pointers (left, right) each move toward the center once.
+# - At most n/2 comparisons are made, which simplifies to O(n).
+# - No nested loops.
+
+# Space: O(1)
+# - Only a constant number of variables (left, right) are used.
+# - No additional data structures.
+# - Overall: O(1) space.
 
 
 # Trace Overview

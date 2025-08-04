@@ -24,8 +24,16 @@ def find_best_subarray(nums, k):
 print(find_best_subarray([1, 4, 6, 2], 2))  
 # Output: 10  --> Subarray [4, 6] (length 2, sum 4 + 6 = 10) is the largest sum for k=2.
 
-# Time: O(n) - Builds first window in O(k), then slides n-k times with O(1) operations per iteration.
-# Space: O(1) - Uses only two integer variables (curr, answer).
+# Time: O(n)
+# - Initial sum of the first k elements: O(k).
+# - Sliding the window across the array: O(n) total, since each step adds one element and removes one element in O(1) time.
+# - Overall time is O(n) because O(n) dominates O(k).
+
+# Space: O(1)
+# - Only a constant number of variables (curr, ans, i) are used.
+# - No additional data structures.
+# - Overall: O(1) space.
+
 
 
 # ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––

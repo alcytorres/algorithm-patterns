@@ -29,8 +29,17 @@ target = 5
 print(twoSum(nums, target))
 # Output: [3, 1] or [1, 3] -> 1 + 4 = 5
 
-# Time: O(n) - Single pass through n elements with O(1) hash operations.
-# Space: O(n) - Stores up to n elements in the hash map.
+# Time: O(n)
+# - Loop through nums once: O(n) iterations.
+# - Dictionary lookups ('if complement in d') and inserts ('d[num] = i') are O(1) on average.
+# - No nested loops, so total time is O(n).
+
+# Space: O(n)
+# - Dictionary 'd' can store up to n elements in the worst case (when no match is found until the end), O(n) space.
+# - A few integer variables (i, num, complement) take O(1) space.
+# - Overall: O(n) total space.
+# - If we exclude the dictionary from consideration (not typical here since it's part of the algorithm), extra space is O(1).
+
 
 
 # Trace Overview
@@ -41,3 +50,15 @@ print(twoSum(nums, target))
 
 # d = {3: 0, 1: 1, 7: 2, 4: 2}
 
+
+# ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+# Breakdown 
+def twoSum(nums, target):
+    d = {}                     # Initialize empty dictionary for number-to-index mapping
+    for i in range(len(nums)): # Iterate over array indices
+        num = nums[i]          # Current number
+        complement = target - num  # Calculate complement needed for target
+        if complement in d:    # If complement exists in dictionary
+            return [i, d[complement]]  # Return current index and complement's index
+        d[num] = i             # Store current number and its index in dictionary
+    return []                  # Return empty list if no solution found

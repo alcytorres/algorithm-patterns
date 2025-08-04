@@ -33,8 +33,14 @@ nums = [-3, 2, -3, 4, 2]
 print(minStartValue(nums))
 # Output: 5 - Returns 5 as the minimum positive startValue ensuring the step-by-step sum starting from nums[0] never falls below 1.
 
-# Time: O(n) - In this method, we just need to traverse the array once, with O(1) operations per iteration for addition and minimum comparison.
-# Space: O(1) - We just need to calculate the step-by-step total of the array and record the minimum step-by-step total, both only require constant space.
+# Time: O(n)
+# - Loop through nums once, updating 'total' and 'min_val' in O(1) per step.
+# - Overall: O(n) time.
+
+# Space: O(1)
+# - Only a constant number of variables (min_val, total, num) are used.
+# - No additional data structures.
+# - Overall: O(1) space.
 
 
 

@@ -18,8 +18,16 @@ print(is_subsequence(string1, string2))
 # Output: True - "ace" appears in order within "abcde" as a subsequence.
 
 
-# Time: O(n + m) - Scans string t (length m) once while checking for characters of s (length n), with O(1) comparisons per iteration.
-# Space: O(1) - Uses only two integer pointers (i, j) for tracking positions in s and t.
+# Time: O(n + m)
+# - Traverse both strings once, where n = len(s) and m = len(t).
+# - Each pointer (i, j) moves forward at most n or m times.
+# - No nested loops that depend on each other.
+
+# Space: O(1)
+# - Only a constant number of variables (i, j) are used.
+# - No additional data structures.
+# - Overall: O(1) space.
+
 
 
 # Trace Overview

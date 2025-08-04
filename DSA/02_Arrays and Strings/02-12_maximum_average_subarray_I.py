@@ -36,8 +36,16 @@ solution = Solution()
 print(solution.findMaxAverage([1, 2, 3, 4], 2)) 
 # Output: 3.5  --> Subarray [3, 4] (length 2, sum 3 + 4 = 7, average 7/2 = 3.5) has the largest average for k=2.
 
-# Time: O(n) - Builds first window in O(k), then slides n-k times with O(1) operations per iteration.
-# Space: O(1) - Uses only two integer variables (curr, ans).
+# Time: O(n)
+# - Initial sum of the first k elements: O(k).
+# - Sliding the window across the array: O(n) total, since each step adds one element and removes one element in O(1) time.
+# - Overall time is O(n) because O(n) dominates O(k).
+
+# Space: O(1)
+# - Only a constant number of variables (curr, ans, i) are used.
+# - No additional data structures.
+# - Overall: O(1) space.
+
 
 
 # Trace Overview

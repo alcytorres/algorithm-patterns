@@ -22,7 +22,14 @@ nums = [1, 2, 3, 4]
 print(runningSum(nums))
 # Output: [1, 3, 6, 10]
 
-# Time: O(n) - Iterates through n elements once to build the prefix sum array with O(1) operations per iteration.
-# Space: O(n) - Uses a prefix sum array of size n to store the running sums, excluding input.
+# Time: O(n)
+# - Loop through nums once to build the prefix sum array: O(n).
+# - Each append is O(1), so total time is O(n).
+
+# Space: O(n)
+# - Prefix sum array stores n values: O(n) space.
+# - A few variables (i) take O(1) space.
+# - Overall: O(n) total space.
+# - If we exclude the output array, extra working space is O(1).
 
 

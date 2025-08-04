@@ -27,8 +27,17 @@ nums = [1, 2, 1, 2, 4, 2]
 print(longest_subarray_sum(nums, 8))
 # Output: 4  --> Subarray [1, 2, 1, 2] (length 4, sum 6) is the longest subarray with sum <= 6.
 
-# Time: O(n) - Right pointer moves n times, left pointer moves at most n times (amortized O(1) per iteration).
-# Space: O(1) - Uses only three integer variables (left, curr, ans).
+# Time: O(n)
+# - Right pointer moves across the array once.
+# - Left pointer also moves at most n steps in total.
+# - Each element is added and removed from 'curr' at most once.
+# - No nested loops that multiply time.
+
+# Space: O(1)
+# - Only a constant number of variables (left, right, curr, ans) are used.
+# - No additional data structures.
+# - Overall: O(1) space.
+
 
 
 # Trace Overview

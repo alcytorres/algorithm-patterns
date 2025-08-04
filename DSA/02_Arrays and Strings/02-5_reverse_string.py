@@ -25,8 +25,16 @@ s = ["h","e","l","l","o"]
 print(reverseString(s))  
 # Output: ["o","l","l","e","h"]
 
-# Time: O(n) - Performs n/2 swaps for an array of length n, with each swap being O(1).
-# Space: O(1) - Uses only two integer pointers (left, right), modifying the input array in-place with no additional data structures.
+# Time: O(n)
+# - Two pointers (left, right) each move toward the center once.
+# - At most n/2 swaps are performed, which simplifies to O(n).
+# - No nested loops.
+
+# Space: O(1)
+# - In-place reversal with only a constant number of variables (left, right).
+# - No additional data structures.
+# - Overall: O(1) space.
+
 
 
 # ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––

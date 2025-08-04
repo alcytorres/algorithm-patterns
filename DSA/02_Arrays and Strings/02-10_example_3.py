@@ -37,8 +37,17 @@ print(num_subarrays_product_less_than_k([10, 5, 2, 6], 100))
 # [2, 6]
 # [6]
 
-# Time: O(n) - Right pointer moves n times, left pointer moves at most n times (amortized O(1) per iteration).
-# Space: O(1) - Uses only three integer variables (left, curr, ans).
+# Time: O(n)
+# - Right pointer moves across the array once.
+# - Left pointer also moves at most n steps in total.
+# - Each element is multiplied into and divided out of 'curr' at most once.
+# - No nested loops that multiply time.
+
+# Space: O(1)
+# - Only a constant number of variables (left, right, curr, ans) are used.
+# - No additional data structures.
+# - Overall: O(1) space.
+
 
 
 # Trace Steps
