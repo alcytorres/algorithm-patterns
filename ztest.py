@@ -20,6 +20,8 @@ print(fn(['a', 'b', 'c', 'd']))
 
 
 
+
+
 # min_val = 0
 # total = 0
 

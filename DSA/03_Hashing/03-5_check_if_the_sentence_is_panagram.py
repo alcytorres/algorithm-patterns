@@ -8,10 +8,31 @@
 
 # Example:
 # Input: sentence = "thequickbrownfoxjumpsoverthelazydog"
-# Output: true
+# Output: True
 # Explanation: sentence contains at least one of every letter of the English alphabet.
 
 
+def checkIfPangram(sentence):
+    seen = set(sentence)
+    return len(seen) == 26
+
+s = "thequickbrownfoxjumpsoverthelazydog"
+print(checkIfPangram(s))
+# Output: True
+
+# Time: O(n)
+# - Creating the set from the sentence: O(n), where n is the length of the sentence.
+# - Checking the length of the set is O(1).
+# - Overall: O(n) time.
+
+# Space: O(1)
+# - Set 'seen' can store at most 26 letters (constant size), so O(1) space.
+# - A few variables (sentence, seen) take O(1) space.
+# - Overall: O(1) space.
+
+
+# ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+# Breakdown
 def checkIfPangram(sentence):
     # Add every letter of 'sentence' to hash set 'seen'.
     seen = set(sentence)
@@ -22,11 +43,8 @@ s = "thequickbrownfoxjumpsoverthelazydog"
 print(checkIfPangram(s))
 # Output: True
 
-# Time: O(n)
-# Space: O
 
-
-
+# ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 # My original solution
 def checkIfPangram(sentence):
     seen = set(sentence)
@@ -42,7 +60,7 @@ print(checkIfPangram(s))
 # Space: O
 
 
-
+# ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 # Robust Pangram Check: Filters Non-Letters, Handles Duplicates and Spaces
 def checkIfPangram(sentence):
     seen = set(c for c in sentence if c.isalpha())
