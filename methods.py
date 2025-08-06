@@ -435,6 +435,34 @@ print(list(ages.keys()))  # Output: ["Alice", "Bob"]
 
 
 # DICTIONARY METHOD: 
+.values()
+# What it does: Returns a view of all values in a dictionary.
+# Why use it: Accesses values for iteration or aggregation.
+# How it works: Dynamic view; updates with dict changes.
+# When to use: Summing or checking values in hash maps.
+# Time/Space: O(1) time for view, O(n) for list conversion (n = values).
+
+# Syntax:
+dict.values()  # Returns a view of dictionary values
+
+# Basic Example 1 (Get Values):
+d = {"a": 1, "b": 2}
+print(list(d.values()))  # Output: [1, 2]
+
+# Basic Example 2 (Empty Dict):
+d = {}
+print(list(d.values()))  # Output: []
+
+# Basic Example 3 (Sum Values):
+d = {"a": 1, "b": 3}
+print(sum(d.values()))  # Output: 4
+
+# DSA Example (Value Iteration):
+ages = {"Alice": 25, "Bob": 30}
+print(list(ages.values()))  # Output: [25, 30]
+
+
+# DICTIONARY METHOD: 
 .get()
 # What it does: Gets value for key, default if missing.
 # Why use it: Safe access without KeyError.
@@ -490,7 +518,6 @@ for k, v in d.items():
 # DSA Example (Key-Value Iteration):
 ages = {"Alice": 25, "Bob": 30}
 print(list(ages.items()))  # Output: [("Alice", 25), ("Bob", 30)]
-
 
 
 

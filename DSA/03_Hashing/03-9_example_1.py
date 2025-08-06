@@ -30,8 +30,8 @@ def find_longest_substring(s, k):
     
     return ans
 
-string = "eceba"
-print(find_longest_substring(string, 2))  
+s = "eceba"
+print(find_longest_substring(s, 2))  
 # Output: 3
 
 
@@ -201,6 +201,6 @@ def find_longest_substring(s, k):  # Example: s = "eceba", k = 2
     return ans  # ans = 3
 
 
-string = "eceba"
-print(find_longest_substring(string, 2))  
+s = "eceba"
+print(find_longest_substring(s, 2))  
 # Output: 3

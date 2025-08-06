@@ -14,10 +14,23 @@
 
 # Solution: https://leetcode.com/problems/intersection-of-multiple-arrays/solutions/
 
+
+from collections import defaultdict
+
 def intersection(nums):
+    counts = defaultdict(int)
+    for arr in nums:
+        for x in arr:
+            counts[x] += 1
 
-
-
+    n = len(nums)
+    ans = []
+    for key in counts:
+        if counts[key] == n:
+            ans.append(key)
+    
+    return sorted(ans)
 
 nums = [[3,1,2,4,5], [1,2,3,4], [3,4,5,6]]
 print(intersection(nums))
+# Output: [3, 4]
