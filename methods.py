@@ -752,6 +752,43 @@ print(dict(pairs))  # Output: {"a": 1, "b": 2}
 
 
 # BUILT-IN FUNCTION: 
+defaultdict()
+# What it does: Creates a dictionary with a default factory for missing keys.
+# Why use it: Simplifies handling missing keys in hash maps.
+# How it works: Calls factory (e.g., int, list) for undefined keys.
+# When to use: Frequency counts or grouping without explicit initialization.
+# Time/Space: O(1) average time for access, O(n) space for n items.
+
+# Syntax:
+from collections import defaultdict
+defaultdict(factory)  # 'factory' provides default value (e.g., int, list)
+
+# Basic Example 1 (Default Zero):
+from collections import defaultdict
+d = defaultdict(int)
+d["a"] += 1
+print(d)  # Output: defaultdict(<class 'int'>, {'a': 1})
+
+# Basic Example 2 (Default List):
+from collections import defaultdict
+d = defaultdict(list)
+d["a"].append(1)
+print(d)  # Output: defaultdict(<class 'list'>, {'a': [1]})
+
+# Basic Example 3 (Empty Access):
+from collections import defaultdict
+d = defaultdict(int)
+print(d["b"])  # Output: 0
+
+# DSA Example (Frequency Count):
+from collections import defaultdict
+counts = defaultdict(int)
+for c in "aba":
+    counts[c] += 1
+print(counts)  # Output: defaultdict(<class 'int'>, {'a': 2, 'b': 1})
+
+
+# BUILT-IN FUNCTION: 
 enumerate()
 # What it does: Pairs indices with iterable elements.
 # Why use it: Tracks position in loops.

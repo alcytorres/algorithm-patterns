@@ -1,8 +1,30 @@
 
 
+# Initialize defaultdict for character counts
+from collections import defaultdict
 
+def find_longest_substring(s, k):
+    counts = defaultdict(int)
+    left = ans = 0
+    
+    # Sliding window: expand right pointer
+    for right in range(len(s)):
+        counts[s[right]] += 1
+        # Shrink window if too many distinct characters
+        while len(counts) > k:
+            counts[s[left]] -= 1
+            if counts[s[left]] == 0:
+                del counts[s[left]]
+            left += 1
+        
+        # Update max substring length
+        ans = max(ans, right - left + 1)
+    
+    return ans
 
-
+string = "eceba"
+print(find_longest_substring(string, 2))  
+# Output: 3
 
 
 # ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
