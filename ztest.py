@@ -1,20 +1,13 @@
-def fn(arr):
-    ans = []
-    for c in arr:
-        ans.append(c)
+# def fn(arr):
+#     ans = []
+#     for c in arr:
+#         ans.append(c)
     
-    return "".join(ans)
+#     return "".join(ans)
 
-print(fn(['a', 'b', 'c', 'd']))
+# print(fn(['a', 'b', 'c', 'd']))
 
 
-def fn(arr):
-    ans = []
-    for c in arr:
-        ans.append(c)
-    return "-".join(ans)
-
-print(fn(['a', 'b', 'c', 'd']))
 
 
 

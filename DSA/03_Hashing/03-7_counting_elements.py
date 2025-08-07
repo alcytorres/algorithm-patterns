@@ -47,6 +47,58 @@ def countElements(arr):
     return count              # Return total count of valid elements
 
 
+# ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+# Task: Count elements x in an array such that x + 1 is also in the array, counting duplicates separately.
+# Example: arr = [1, 2, 3] → Output = 2 (1 and 2 are counted because 2 and 3 are in the array)
+# Why: Practices hash set usage for efficient lookup to check for x + 1.
+
+def countElements(arr):  # Example: arr = [1, 2, 3]
+
+    # 1️⃣ Create a hash set from the array
+    # Convert arr to a set for O(1) lookup
+    # Why? We need to quickly check if x + 1 exists in the array
+    hash_set = set(arr)  # hash_set = {1, 2, 3}
+
+    # 2️⃣ Initialize counter
+    # Initialize count to track elements x where x + 1 is in the array
+    # Why? We need to count each valid x, including duplicates
+    count = 0  # count = 0
+
+    # 3️⃣ Iterate through the array
+    # Check each element to see if x + 1 exists in the hash set
+    # Why? We need to count each x where x + 1 is present
+    for x in arr:  # x takes values [1, 2, 3]
+        # --- Iteration 1: x = 1 ---
+        # Check if x + 1 is in the hash set
+        # Why? If x + 1 exists, x is a valid element to count
+        if x + 1 in hash_set:  # x = 1, x + 1 = 2, hash_set = {1, 2, 3}, 2 in hash_set is True
+            count += 1  # count = 0 + 1 = 1
+        # After Iteration 1: count = 1
+
+        # --- Iteration 2: x = 2 ---
+        if x == 2:
+            if x + 1 in hash_set:  # x = 2, x + 1 = 3, hash_set = {1, 2, 3}, 3 in hash_set is True
+                count += 1  # count = 1 + 1 = 2
+            # After Iteration 2: count = 2
+
+        # --- Iteration 3: x = 3 ---
+        if x == 3:
+            if x + 1 in hash_set:  # x = 3, x + 1 = 4, hash_set = {1, 2, 3}, 4 not in hash_set, False
+                count += 1  # skip
+            # After Iteration 3: count = 2
+
+    # 4️⃣ Return the count
+    # Why? count contains the number of elements x where x + 1 is in the array
+    return count  # count = 2
+
+
+arr = [1, 2, 3]
+print(countElements(arr))  # Output: 2
+
+
+
+
+
 
 # ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 # Brute forece: Approach: Search with Array
@@ -71,5 +123,7 @@ print(countElements(arr))
 # - Only a constant number of variables (count, x) are used.
 # - No additional data structures.
 # - Overall: O(1) space.
+
+
 
 
