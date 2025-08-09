@@ -39,7 +39,7 @@ print(repeatedCharacter("abccbaacz"))
 
 
 
-# ––––––––––––––––––––––––––––––––––––––––––––––– Breakdown
+# ––––––––––––––––––––––––––––––––––––––––––––––– # Breakdown
 def repeatedCharacter(s):
     seen = set()               # Initialize empty set for seen characters
     for c in s:                # Iterate over each character in string

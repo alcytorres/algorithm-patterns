@@ -5,7 +5,11 @@
 # Example
 # Input: s = "eceba" and k = 2, 
 # Output: return 3.
-# The longest substring with at most 2 distinct characters is "ece" or "eba".
+# The longest substring with at most 2 distinct characters is "ece".
+
+# ece (positions 0-2): Characters {e, c} → 2 distinct → valid.
+# ceb (positions 1-3): Characters {c, e, b} → 3 distinct → invalid.
+# eba (positions 2-4): Characters {e, b, a} → 3 distinct → invalid.
 
 
 from collections import defaultdict
@@ -61,7 +65,7 @@ Trace of find_longest_substring("eceba", k=2):
 Output: 3 (e.g., 'ece' or 'eba')
 """
 
-# ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+# ––––––––––––––––––––––––––––––––––––––––––––––––
 # Breakdown 
 from collections import defaultdict  # Initialize defaultdict for character counts
 
@@ -96,7 +100,7 @@ counts = defaultdict(int)
 counts[s[right]] += 1  # No check needed, cleaner
 
 
-# ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+# ––––––––––––––––––––––––––––––––––––––––––––––––
 # Full Breakdown 
 # Task: Find the length of the longest substring with at most k distinct characters.
 # Example: s = "eceba", k = 2 → Output = 3 (substring "ece" has 2 distinct characters: 'e', 'c')

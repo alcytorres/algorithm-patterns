@@ -14,6 +14,7 @@
 def countElements(arr):
     hash_set = set(arr)
     count = 0
+    
     for x in arr:
         if x + 1 in hash_set:
             count += 1
@@ -36,7 +37,7 @@ print(countElements(arr))
 # - Overall: O(n) total space.
 
 
-# ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+# ––––––––––––––––––––––––––––––––––––––––––––––––
 # Breakdown
 def countElements(arr):
     hash_set = set(arr)       # Convert array to set for O(1) lookups
@@ -47,7 +48,7 @@ def countElements(arr):
     return count              # Return total count of valid elements
 
 
-# ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+# ––––––––––––––––––––––––––––––––––––––––––––––––
 # Task: Count elements x in an array such that x + 1 is also in the array, counting duplicates separately.
 # Example: arr = [1, 2, 3] → Output = 2 (1 and 2 are counted because 2 and 3 are in the array)
 # Why: Practices hash set usage for efficient lookup to check for x + 1.

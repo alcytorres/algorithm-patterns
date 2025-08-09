@@ -43,7 +43,7 @@ print(areOccurrencesEqual(s))
 
 
 
-# ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+# ––––––––––––––––––––––––––––––––––––––––––––––––
 # Breakdown 
 from collections import defaultdict
 
@@ -55,7 +55,7 @@ def areOccurrencesEqual(s):
     return len(set(frequencies)) == 1  # Return True if all frequencies are equal
 
 
-# ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+# ––––––––––––––––––––––––––––––––––––––––––––––––
 # Task: Determine if all characters in a string have the same frequency.
 # Example: s = "abacbc" → Output = True (all characters 'a', 'b', 'c' appear twice)
 # Why: Practices hash map usage to count character frequencies and set comparison for equality.

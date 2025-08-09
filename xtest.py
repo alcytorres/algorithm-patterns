@@ -1,10 +1,21 @@
+# 268. Missing Number
 
+# Given an array nums containing n distinct numbers in the range [0, n], return the only number in the range that is missing from the array.
 
+# Solution: https://leetcode.com/problems/missing-number/editorial/
 
+def missingNumber(nums):
+    hash_set = set(nums)
+    n = len(nums) + 1  # n = 4 
 
+    for number in range(n):
+        if number not in hash_set:
+            return number
 
+l = [3, 0, 1]
+print(missingNumber(l))
+# Output: 2
 
-# ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 
 
 

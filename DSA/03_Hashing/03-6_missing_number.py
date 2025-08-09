@@ -4,10 +4,10 @@
 
 # Solution: https://leetcode.com/problems/missing-number/editorial/
 
-
 def missingNumber(nums):
     num_set = set(nums)
     n = len(nums) + 1
+
     for number in range(n):
         if number not in num_set:
             return number
@@ -36,17 +36,18 @@ print(missingNumber(l))
 #
 
 
-# ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+# ––––––––––––––––––––––––––––––––––––––––––––––––
 # Breakdown 
 def missingNumber(nums):
     num_set = set(nums)       # Convert array to set for O(1) lookups
     n = len(nums) + 1         # Range of expected numbers (0 to n)
+    
     for number in range(n):   # Iterate over numbers 0 to n
         if number not in num_set:  # If number missing from set
             return number         # Return first missing number
         
 
-# ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+# ––––––––––––––––––––––––––––––––––––––––––––––––
 # Full Breakdown 
 # Task: Find the missing number in an array of n distinct numbers in the range [0, n].
 # Example: nums = [3, 0, 1] → Output = 2 (2 is missing from the range [0, 3])

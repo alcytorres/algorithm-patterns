@@ -19,9 +19,12 @@ def twoSum(nums, target):
     for i in range(len(nums)):
         num = nums[i]
         complement = target - num
+
         if complement in d:
             return [i, d[complement]]
+        
         d[num] = i
+
     return []
 
 nums = [3, 1, 7, 4, -6]
@@ -58,9 +61,12 @@ def twoSum(nums, target):
     for i in range(len(nums)): # Iterate over array indices
         num = nums[i]          # Current number
         complement = target - num  # Calculate complement needed for target
+
         if complement in d:    # If complement exists in dictionary
             return [i, d[complement]]  # Return current index and complement's index
+        
         d[num] = i             # Store current number and its index in dictionary
+        
     return []                  # Return empty list if no solution found
 
 
