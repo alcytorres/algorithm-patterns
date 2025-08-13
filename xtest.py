@@ -1,41 +1,4 @@
-# Longest Substring with At Most K Distinct Characters
 
-# Example 1: You are given a string s and an integer k. Find the length of the longest substring that contains at most k distinct characters.
-
-# Example
-# Input: s = "eceba" and k = 2, 
-# Output: return 3.
-# The longest substring with at most 2 distinct characters is "ece".
-
-# ece (positions 0-2): Characters {e, c} → 2 distinct → valid.
-# ceb (positions 1-3): Characters {c, e, b} → 3 distinct → invalid.
-# eba (positions 2-4): Characters {e, b, a} → 3 distinct → invalid.
-
-
-from collections import defaultdict
-
-def find_longest_substring(s, k):
-    counts = defaultdict(int)
-    left = ans = 0
-    
-    # Sliding window: expand right pointer
-    for right in range(len(s)):
-        counts[s[right]] += 1
-        # Shrink window if too many distinct characters
-        while len(counts) > k:
-            counts[s[left]] -= 1
-            if counts[s[left]] == 0:
-                del counts[s[left]]
-            left += 1
-
-        # Update max substring length
-        ans = max(ans, right - left + 1)
-    
-    return ans
-
-s = "eceba"
-print(find_longest_substring(s, 2))  
-# Output: 3
 
 
 
