@@ -62,7 +62,7 @@ Trace of find_longest_substring("eceba", k=2):
 | 2 | e    | {e:2,c:1}    | 2   | None         | 0 | 3   |
 | 3 | b    | {e:2,c:1,b:1}| 3   | Drop e,c     | 2 | 3   |
 | 4 | a    | {e:1,b:1,a:1}| 3   | Drop e       | 3 | 3   |
-Output: 3 (e.g., 'ece' or 'eba')
+Output: 3 ('ece')
 """
 
 # ––––––––––––––––––––––––––––––––––––––––––––––––
