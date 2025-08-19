@@ -24,7 +24,8 @@ def longestOnes(nums, k):
     
     return ans
 
-print(longestOnes([1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 0], 2))
+nums = [1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 0]
+print(longestOnes(nums, 2))
 # Output: 6
 
 # Time: O(n)
@@ -241,5 +242,6 @@ def longestOnes(nums, k):  # Example: nums = [1,1,1,0,0,0,1,1,1,1,0], k = 2
     return ans  # ans = 6
 
 
-print(longestOnes([1,1,1,0,0,0,1,1,1,1,0], 2))  
+nums = [1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 0]
+print(longestOnes(nums, 2)) 
 # Output: 6

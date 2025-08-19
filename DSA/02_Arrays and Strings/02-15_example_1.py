@@ -43,8 +43,7 @@ print(answer_queries(nums, queries, limit))
 # - If we exclude the output array, extra working space is O(n) due to the prefix sum array.
 
 
-# ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
-
+# ––––––––––––––––––––––––––––––––––––––––––––––
 # Basic example to show unpacking x, y in a for loop
 nums = [[1, 2], [3, 4], [5, 6]]  # List of pairs
 for x, y in nums:                # Unpack each pair into x and y
@@ -84,7 +83,7 @@ print(fn(nums))  # Output: [[1, 2], [3, 4], [5, 6]]
 
 
 
-# ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+# ––––––––––––––––––––––––––––––––––––––––––––––
 # Breakdown
 def answer_queries(nums, queries, limit):
     prefix = [nums[0]]       # Initialize prefix with first element
@@ -100,7 +99,7 @@ def answer_queries(nums, queries, limit):
 
 
 
-# ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+# ––––––––––––––––––––––––––––––––––––––––––––––
 # Task: Given an array nums, queries [[x, y]], and limit, return a boolean array where each element is True if the subarray sum from x to y is < limit, False otherwise.
 # Example: nums = [1, 6, 3, 2, 7, 2], queries = [[0, 3], [2, 5], [2, 4]], limit = 13 → Output = [True, False, True]
 # Why: Practices prefix sum technique to efficiently compute subarray sums.
@@ -175,7 +174,7 @@ print(answer_queries(nums, queries, limit))  # Output: [True, False, True]
 
 
 
-# ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+# ––––––––––––––––––––––––––––––––––––––––––––––
 # Prefix Sum Query Cheat Sheet
 
 # Problem Overview

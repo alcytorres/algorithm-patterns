@@ -26,7 +26,8 @@ def num_subarrays_product_less_than_k(nums, k):
     
     return ans
 
-print(num_subarrays_product_less_than_k([10, 5, 2, 6], 100))  
+nums = [10, 5, 2, 6]
+print(num_subarrays_product_less_than_k(nums, 100))  
 # Output: 8
 # [10]
 # [10, 5]
@@ -185,7 +186,8 @@ def num_subarrays_product_less_than_k(nums, k):  # Example: nums = [10, 5, 2, 6]
     return ans  # ans = 8
 
 
-print(num_subarrays_product_less_than_k([10, 5, 2, 6], 100))
+nums = [10, 5, 2, 6]
+print(num_subarrays_product_less_than_k(nums, 100))  
 # Output: 8
 # [10]
 # [10, 5]

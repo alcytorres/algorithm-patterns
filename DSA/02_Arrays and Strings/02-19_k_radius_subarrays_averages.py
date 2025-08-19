@@ -13,20 +13,20 @@ def getAverages(nums, k):
     n = len(nums)
     ans = [-1] * n
     window_size = 2*k + 1
-    curr_sum = 0
+    curr = 0
 
 # Handle case where window can't fit in array
     if (n < window_size):
         return ans
  
 # Calculate sum of the first full window 
-    curr_sum = sum(nums[0:window_size])
-    ans[k] = curr_sum // window_size
+    curr = sum(nums[0:window_size])
+    ans[k] = curr // window_size
   
 # Slide window across array and update averages
     for i in range(k+1, n-k): 
-        curr_sum += nums[i+k] - nums[i-k-1]
-        ans[i] = curr_sum // window_size
+        curr += nums[i+k] - nums[i-k-1]
+        ans[i] = curr // window_size
     return ans
 
 nums = [7, 4, 3, 9, 1, 8, 5, 2, 6]
@@ -47,7 +47,107 @@ print(getAverages(nums, 3))
 
 
 
-# ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+# ––––––––––––––––––––––––––––––––––––––––––––––
+# Breakdown 
+def getAverages(nums, k):
+    n = len(nums)             # Length of input array
+    ans = [-1] * n            # Initialize result array with -1
+    window_size = 2*k + 1     # Size of k-radius window
+    curr = 0                  # Initialize window sum
+
+    if n < window_size:       # If array too small for window
+        return ans            # Return array of -1s
+    
+    # Calculate sum of the first full window 
+    curr = sum(nums[:window_size])  # Sum of first window
+    ans[k] = curr // window_size    # Set average for first valid index
+
+    # Slide window across array and update averages
+    for i in range(k+1, n-k): # Slide window for remaining valid indices
+        curr += nums[i+k] - nums[i-k-1]  # Update sum: add new, remove old
+        ans[i] = curr // window_size     # Set average for current index
+
+    return ans                # Return array of k-radius averages
+
+
+
+# ––––––––––––––––––––––––––––––––––––––––––––––
+# Task: Compute the k-radius subarray averages for each index i, where the average is of nums[i-k:i+k+1].
+# If fewer than 2k+1 elements are available, return -1 for that index.
+# Example: nums = [7, 4, 3, 9, 1, 8, 5, 2, 6], k = 3 → Output = [-1, -1, -1, 5, 4, 4, -1, -1, -1]
+# Why: Practices sliding window technique to compute averages efficiently.
+
+def getAverages(nums, k):  # Example: nums = [7, 4, 3, 9, 1, 8, 5, 2, 6], k = 3
+
+    # 1️⃣ Initialize variables
+    # Get the length of the input array
+    # Why? We need the size to check window validity and create the result array
+    n = len(nums)  # n = 9
+
+    # Initialize result array with -1 for all indices
+    # Why? Indices without a full window (2k+1 elements) get -1
+    ans = [-1] * n  # ans = [-1, -1, -1, -1, -1, -1, -1, -1, -1]
+
+    # Calculate window size (2k+1 for k elements on each side plus the center)
+    # Why? Each average includes the center element and k elements on each side
+    window_size = 2 * k + 1  # k = 3, window_size = 2 * 3 + 1 = 7
+
+    # Initialize current sum for the sliding window
+    # Why? We track the sum of the current window to compute averages
+    curr = 0  # curr = 0
+
+    # 2️⃣ Handle case where window can't fit in array
+    # If array length is less than window size, return all -1s
+    # Why? No index can have a full window if n < 2k+1
+    if n < window_size:  # n = 9, window_size = 7, 9 < 7 is false, proceed
+        return ans  # skip
+
+    # 3️⃣ Calculate sum of the first full window
+    # Sum the first 2k+1 elements (indices 0 to 6)
+    # Why? We need the sum of the first window centered at index k
+    curr = sum(nums[0:window_size])  # nums[0:7] = [7, 4, 3, 9, 1, 8, 5], curr = 7 + 4 + 3 + 9 + 1 + 8 + 5 = 37
+
+    # Set the average for the first valid index (k)
+    # Why? Index k is the center of the first window
+    ans[k] = curr // window_size  # k = 3, curr = 37, window_size = 7, ans[3] = 37 // 7 = 5
+    # After first window: ans = [-1, -1, -1, 5, -1, -1, -1, -1, -1]
+
+    # 4️⃣ Slide window across array and update averages
+    # Iterate from k+1 to n-k-1 to compute averages for valid centers
+    # Why? Only indices from k to n-k-1 have full windows of size 2k+1
+    for i in range(k + 1, n - k):  # k = 3, n = 9, i goes from 4 to 5
+        # --- Iteration 1: i = 4 ---
+        # Update sum: add element at i+k, subtract element at i-k-1
+        # Why? This slides the window right, maintaining size 2k+1
+        curr += nums[i + k] - nums[i - k - 1]  # i = 4, i+k = 4+3 = 7, i-k-1 = 4-3-1 = 0
+                                                # nums[7] = 2, nums[0] = 7, curr = 37 + 2 - 7 = 32
+        # Compute average and store in result
+        ans[i] = curr // window_size  # curr = 32, window_size = 7, ans[4] = 32 // 7 = 4
+        # After Iteration 1: curr = 32, ans = [-1, -1, -1, 5, 4, -1, -1, -1, -1]
+        # Current window: [4, 3, 9, 1, 8, 5, 2] (sum = 32, indices 1 to 7)
+
+        # --- Iteration 2: i = 5 ---
+        if i == 5:
+            curr += nums[i + k] - nums[i - k - 1]  # i = 5, i+k = 5+3 = 8, i-k-1 = 5-3-1 = 1
+                                                    # nums[8] = 6, nums[1] = 4, curr = 32 + 6 - 4 = 34
+            ans[i] = curr // window_size  # curr = 34, window_size = 7, ans[5] = 34 // 7 = 4
+            # After Iteration 2: curr = 34, ans = [-1, -1, -1, 5, 4, 4, -1, -1, -1]
+            # Current window: [3, 9, 1, 8, 5, 2, 6] (sum = 34, indices 2 to 8)
+
+    # 5️⃣ Return the result
+    # Why? ans contains the averages for valid indices and -1 for others
+    return ans  # ans = [-1, -1, -1, 5, 4, 4, -1, -1, -1]
+
+
+nums = [7, 4, 3, 9, 1, 8, 5, 2, 6]
+print(getAverages(nums, 3))  # Output: [-1, -1, -1, 5, 4, 4, -1, -1, -1]
+
+
+
+
+
+
+# ––––––––––––––––––––––––––––––––––––––––––––––
 # Sliding Window Video Solution 2
 # Video https://www.youtube.com/watch?v=L33kbF6Cr_I
     # I think I like this more than the LeetCode official solution
@@ -76,7 +176,7 @@ print(getAverages(nums, 3))
 # Time: O(n) – O(n) to create the result array, plus O(n) to slide the window (each element added and removed once).
 # Space: O(n) total due to result array, O(1) auxiliary if excluding it.
 
-# ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+# ––––––––––––––––––––––––––––––––––––––––––––––
 # Sliding Window LeetCode Solution 3
 # https://leetcode.com/problems/k-radius-subarray-averages/description/
 def getAverages(nums, k):
@@ -110,7 +210,7 @@ print(getAverages(nums, 3))
 # Space: O(1) - Uses only a constant number of variables (window_sum, window_size), excluding the output array.
 
 
-# ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+# ––––––––––––––––––––––––––––––––––––––––––––––
 # Breakdown 
 # Sliding Window -> Makes more sense to me than prefix solution
 def getAverages(nums, k):
@@ -142,7 +242,7 @@ def getAverages(nums, k):
     return averages
 
 
-# ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+# ––––––––––––––––––––––––––––––––––––––––––––––
 # Prefix Sum Solution 4:
 # https://leetcode.com/problems/k-radius-subarray-averages/description/
 

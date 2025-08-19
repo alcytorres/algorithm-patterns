@@ -12,14 +12,17 @@
 # i=2: left=6, right=7 (6<7) invalid
 
 def waysToSplitArray(nums): 
+    # Build prefix sum array
     prefix = [nums[0]]
     for i in range(1, len(nums)):
         prefix.append(prefix[-1] + nums[i])
 
+    # Count valid splits where left sum >= right sum
     ans = 0
     for i in range(len(nums) - 1):
         left_section = prefix[i]
         right_section = prefix[-1] - prefix[i]
+
         if left_section >= right_section:
             ans += 1
     
@@ -50,7 +53,7 @@ There are three ways of splitting nums into two non-empty parts:
 Thus, the number of valid splits in nums is 2.
 """
 
-# ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+# ––––––––––––––––––––––––––––––––––––––––––––––
 # Concise Solution I came up with while redoing this problem
 
 def waysToSplitArray(nums): 
@@ -71,7 +74,7 @@ print(waysToSplitArray(nums))
 
 
 
-# ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+# ––––––––––––––––––––––––––––––––––––––––––––––
 # Breakdown
 def waysToSplitArray(nums): 
     prefix = [nums[0]]       # Initialize prefix with first element
@@ -88,12 +91,8 @@ def waysToSplitArray(nums):
     return ans               # Return total number of ways
 
 
-# ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 
-
-
-
-# ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+# ––––––––––––––––––––––––––––––––––––––––––––––
 # Alternative Better Solution: No array needed
 
 def waysToSplitArray(self):

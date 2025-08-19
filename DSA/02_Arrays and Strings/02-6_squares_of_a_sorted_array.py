@@ -58,7 +58,7 @@ print(sortedSquares(numbers))
 #          [0, 1, 9, 16, 100]
 
 
-# ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+# ––––––––––––––––––––––––––––––––––––––––––––––––
 # Breakdown 
 def sortedSquares(nums):
     n = len(nums)            # Get length of input array
@@ -79,7 +79,7 @@ def sortedSquares(nums):
 
 
 
-# ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+# ––––––––––––––––––––––––––––––––––––––––––––––––
 # Task: Given a sorted array of integers, return a new array of squares in non-decreasing order.
 # Example: nums = [-10, -5, 1, 2, 4, 7] → Output = [1, 4, 16, 25, 49, 100]
 # Why: Practices two-pointer technique to efficiently sort squares without sorting the entire ans.
@@ -193,7 +193,7 @@ print(sortedSquares(numbers))  # Output: [1, 4, 16, 25, 49, 100]
 
 
 
-# ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+# ––––––––––––––––––––––––––––––––––––––––––––––––
 # Less efficeint solution
 
 def sortedSquares(A):
@@ -207,7 +207,7 @@ print(sortedSquares(numbers))
 # Time: O(n log n) - Generates n squared values in O(n) time, followed by sorting with Python's Timsort algorithm in O(n log n).
 # Space: O(n) - Stores n squared values in the output list, with O(log n) auxiliary space used by Timsort for sorting operations.
 
-# ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+# ––––––––––––––––––––––––––––––––––––––––––––––––
 # Less efficeint solution
 
 def sortedSquares(nums):

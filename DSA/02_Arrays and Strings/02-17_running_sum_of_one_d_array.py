@@ -8,15 +8,15 @@
 # Explanation: Running sum is obtained as follows: [1, 1+2, 1+2+3, 1+2+3+4].
 
 def runningSum(nums):
-        """
-        :type nums: List[int]
-        :rtype: List[int]
-        """
-        prefix = [nums[0]]
-        for i in range(1, len(nums)):
-            prefix.append(prefix[-1] + nums[i])
+    """
+    :type nums: List[int]
+    :rtype: List[int]
+    """
+    prefix = [nums[0]]
+    for i in range(1, len(nums)):
+        prefix.append(prefix[-1] + nums[i])
 
-        return prefix
+    return prefix
 
 nums = [1, 2, 3, 4]
 print(runningSum(nums))

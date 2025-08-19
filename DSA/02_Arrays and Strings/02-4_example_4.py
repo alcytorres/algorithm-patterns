@@ -35,7 +35,7 @@ print(is_subsequence(string1, string2))
 # j = 0  1  2  3  4  5 
 
 
-# ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+# ––––––––––––––––––––––––––––––––––––––––––––––––
 # Breakdown 
 def is_subsequence(s, t):
     i = j = 0            # Pointer for string s, and t starts at index 0
@@ -49,7 +49,16 @@ def is_subsequence(s, t):
 
 
 
-# ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+# ––––––––––––––––––––––––––––––––––––––––––––––––
+# Why while i < len(s) and j < len(t):
+
+# The loop uses pointers i (for s) and j (for t) to safely iterate until either s is fully matched or t is exhausted, preventing index errors if t is shorter than s. 
+
+
+# If len(t) >= len(s) is guaranteed, while i < len(s) is enough, as j won’t exceed len(t) before i reaches len(s).
+
+
+# ––––––––––––––––––––––––––––––––––––––––––––––––
 # Task: Check if string s is a subsequence of string t (characters of s appear in order in t).
 # Example: s = "ace", t = "abcde" → Output = True (s appears in order within t)
 # Why: Practices two-pointer technique to efficiently check for subsequence.
