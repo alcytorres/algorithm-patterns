@@ -1,11 +1,13 @@
 # 1426. Counting Elements
 
-# Given an integer array arr, count how many elements x there are, such that x + 1 is also in arr. If there are duplicates in arr, count them separately.
+# Given an integer array arr, count how many elements x there are, such that x + 1 is also in arr. 
+
+# If there are duplicates in arr, count them separately.
 
 # Example:
-# Input: arr = [1, 2, 3]
-# Output: 2
-# Explanation: 1 and 2 are counted cause 2 and 3 are in arr.
+# Input: arr = [1, 2, 2, 3]
+# Output: 3
+# Explanation: 1, 2, and 2 are counted cause 2 and 3 are in arr.
 
 # Solution: https://leetcode.com/problems/counting-elements/solutions/567376/counting-elements/
 
@@ -20,9 +22,9 @@ def countElements(arr):
             count += 1
     return count
 
-arr = [1, 2, 3]
+arr = [1, 2, 2, 3]
 print(countElements(arr))
-# Output: 2
+# Output: 3
 
 
 # Time: O(n)
@@ -37,6 +39,11 @@ print(countElements(arr))
 # - Overall: O(n) total space.
 
 
+
+# How is the requirement that if there are duplicates in arr, they be counted seperately in the answer is handled?
+    # The requirement to count duplicates separately is met by iterating over arr directly in for x in arr:, ensuring each occurrence of an element is checked individually for x + 1 in hash_set.
+
+
 # ––––––––––––––––––––––––––––––––––––––––––––––––
 # Breakdown
 def countElements(arr):
@@ -48,12 +55,14 @@ def countElements(arr):
     return count              # Return total count of valid elements
 
 
+
+
 # ––––––––––––––––––––––––––––––––––––––––––––––––
 # Task: Count elements x in an array such that x + 1 is also in the array, counting duplicates separately.
-# Example: arr = [1, 2, 3] → Output = 2 (1 and 2 are counted because 2 and 3 are in the array)
+# Example: arr = [1, 2, 2, 3] → Output = 3 (1 and both 2s are counted because 2 and 3 are in the array)
 # Why: Practices hash set usage for efficient lookup to check for x + 1.
 
-def countElements(arr):  # Example: arr = [1, 2, 3]
+def countElements(arr):  # Example: arr = [1, 2, 2, 3]
 
     # 1️⃣ Create a hash set from the array
     # Convert arr to a set for O(1) lookup
@@ -68,7 +77,7 @@ def countElements(arr):  # Example: arr = [1, 2, 3]
     # 3️⃣ Iterate through the array
     # Check each element to see if x + 1 exists in the hash set
     # Why? We need to count each x where x + 1 is present
-    for x in arr:  # x takes values [1, 2, 3]
+    for x in arr:  # x takes values [1, 2, 2, 3]
         # --- Iteration 1: x = 1 ---
         # Check if x + 1 is in the hash set
         # Why? If x + 1 exists, x is a valid element to count
@@ -77,31 +86,38 @@ def countElements(arr):  # Example: arr = [1, 2, 3]
         # After Iteration 1: count = 1
 
         # --- Iteration 2: x = 2 ---
-        if x == 2:
+        if x == 2 and count == 1:
             if x + 1 in hash_set:  # x = 2, x + 1 = 3, hash_set = {1, 2, 3}, 3 in hash_set is True
                 count += 1  # count = 1 + 1 = 2
             # After Iteration 2: count = 2
 
-        # --- Iteration 3: x = 3 ---
+        # --- Iteration 3: x = 2 ---
+        if x == 2 and count == 2:
+            if x + 1 in hash_set:  # x = 2, x + 1 = 3, hash_set = {1, 2, 3}, 3 in hash_set is True
+                count += 1  # count = 2 + 1 = 3
+            # After Iteration 3: count = 3
+
+        # --- Iteration 4: x = 3 ---
         if x == 3:
             if x + 1 in hash_set:  # x = 3, x + 1 = 4, hash_set = {1, 2, 3}, 4 not in hash_set, False
                 count += 1  # skip
-            # After Iteration 3: count = 2
+            # After Iteration 4: count = 3
 
     # 4️⃣ Return the count
     # Why? count contains the number of elements x where x + 1 is in the array
-    return count  # count = 2
+    return count  # count = 3
 
 
-arr = [1, 2, 3]
-print(countElements(arr))  # Output: 2
-
-
-
+arr = [1, 2, 2, 3]
+print(countElements(arr))  # Output: 3
 
 
 
-# ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+
+
+
+
+# –––––––––––––––––––––––––––––––––––––––––––––––––––––––
 # Brute forece: Approach: Search with Array
 def countElements(arr):
     count = 0

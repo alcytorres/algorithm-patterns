@@ -84,7 +84,7 @@ def find_longest_substring(s, k):
 
 
 
-# ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+# –––––––––––––––––––––––––––––––––––––––––––––––––––––––
 # Why use defaultdict instead of regular dictionary {}?
     # defaultdict is used instead of a dictionary because it automatically initializes new keys with 0, simplifying code by eliminating the need to check for key existence before incrementing counts. 
 
@@ -208,3 +208,52 @@ def find_longest_substring(s, k):  # Example: s = "eceba", k = 2
 s = "eceba"
 print(find_longest_substring(s, 2))  
 # Output: 3
+
+
+
+
+
+# ––––––––––––––––––––––––––––––––––––––––––––––––
+# Playground 
+
+# Basic Usage of defaultdict for DSA
+# defaultdict simplifies dictionary operations by providing default values for new keys
+
+# Regular Dictionary vs defaultdict: Counting Characters
+
+# Regular Dictionary (requires manual key check)
+d = {}
+s = "aabbc"
+for c in s:
+    if c not in d:  # Must check if key exists
+        d[c] = 0
+    d[c] += 1
+print(d)  
+# Output: {'a': 2, 'b': 2, 'c': 1}
+
+# defaultdict (simplifies with auto-default 0)
+from collections import defaultdict
+dd = defaultdict(int)
+for c in s:
+    dd[c] += 1  # No key check needed
+print(dd)  
+# Output: defaultdict(<class 'int'>, {'a': 2, 'b': 2, 'c': 1})
+
+
+
+# Use of defaultdict
+from collections import defaultdict
+
+# Input list of (key, value) tuples
+s = [('yellow', 1), ('blue', 2), ('yellow', 3), ('blue', 4), ('red', 1)]
+
+# Create defaultdict to store lists of values for each key
+d = defaultdict(list)
+
+# Group values by key, appending each value to key's list
+for k, v in s:
+    d[k].append(v)
+
+# Sort key-value pairs by key and print as list of tuples
+print(sorted(d.items()))
+# Output: [('blue', [2, 4]), ('red', [1]), ('yellow', [1, 3])]

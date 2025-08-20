@@ -47,7 +47,7 @@ for val in hash_map.values():  # Values
 for key, val in hash_map.items():  # Pairs
     print(key, val)  # a 1 b 2
 
-# ––––––––––––––––––––––––––––––––––––––––––––––––––
+# ––––––––––––––––––––––––––––––––––––––––––––––
 # Get keys as list
 keys = list(hash_map.keys())
 print(keys) # ['a', 'b']
@@ -67,13 +67,13 @@ for val in values:
     print(val) # 1 2
 
 
-# ––––––––––––––––––––––––––––––––––––––––––––––––––
+# ––––––––––––––––––––––––––––––––––––––––––––––
 # Iterate over key-value pairs
 for key, val in hash_map.items():
     print(f"{key}: {val}") # a: 1, b: 2
 
 
-# ––––––––––––––––––––––––––––––––––––––––––––––––––
+# ––––––––––––––––––––––––––––––––––––––––––––––
 # Iterate over keys with index
 print_map = hash_map
 for i, val in enumerate(hash_map):
@@ -82,7 +82,7 @@ for i, val in enumerate(hash_map):
 # 1 b
 
 
-# –––––––––––––––––––––––––––––––––––––––––––––––––––––––
+# ––––––––––––––––––––––––––––––––––––––––––––––
 # Key Difference: items() vs enumerate() for Dictionaries
 
 # items(): Use for dicts to iterate over key-value pairs.
@@ -106,7 +106,7 @@ for index, key in enumerate(hash_map):
 
 
 
-# –––––––––––––––––––––––––––––––––––––––––––––––––––––––
+# ––––––––––––––––––––––––––––––––––––––––––––––
 # === Sets in Python ===
 # Unordered unique elements. Like dict keys only. O(1) add, remove, check.
 # No duplicates; doesn't track frequency.
@@ -163,7 +163,7 @@ print(hash_map)  # Output: {5: 10, 1000: 20}
 
 
 
-# –––––––––––––––––––––––––––––––––––––––––––––––––––––––
+# ––––––––––––––––––––––––––––––––––––––––––––––
 # === Additional Key Hash Map Concepts ===
 # Key-Value Pairs: Store mappings; keys unique, values can duplicate.
 # Mutability: Dicts are mutable (can change after creation).

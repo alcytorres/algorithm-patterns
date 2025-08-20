@@ -1,14 +1,3 @@
-def fn(nums):
-   prefix = [nums[0]]
-   for i in range(1, len(nums)):
-      prefix.append(prefix[-1] + nums[i])
-
-   return prefix
-    
-
-nums = [1, 6, 3, 2, 7, 2]  # -> [1, 7, 10, 12, 19, 21]
-print(fn(nums))
-
 
 
 

@@ -35,6 +35,13 @@ print(find_numbers(l))
 
 
 
+
+# How is the requirement that each valid number x appears only once in the answer is handled?
+    # By converting nums to a set (seen = set(nums)), which removes duplicates. 
+    # The loop then iterates over unique numbers in seen, ensuring each valid x is added to ans
+    # only once.
+
+
 # Why do we use 'for x in seen'
     # To iterate over unique numbers in nums, ensuring each valid x is processed and added to the result only once, as required by the problem (duplicates are ignored).
 
