@@ -1,3 +1,13 @@
+from collections import defaultdict
+
+def subarraySum(nums, k):
+    counts = defaultdict(int)
+    counts[0] = 1
+    print(counts)
+
+numbers = [1, 2, 3]
+print(subarraySum(numbers, 3))
+
 
 
 

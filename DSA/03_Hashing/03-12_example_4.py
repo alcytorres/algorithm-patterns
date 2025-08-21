@@ -20,8 +20,10 @@ from collections import defaultdict
 def subarraySum(nums, k):
     counts = defaultdict(int)
     counts[0] = 1
+    # Track running sum and count subarrays
     ans = curr = 0
 
+    # Process array to find subarrays with sum k
     for num in nums:
         curr += num
         ans += counts[curr - k]
@@ -29,15 +31,193 @@ def subarraySum(nums, k):
 
     return ans
 
+numbers = [1, 2, 1, 2, 1]
+print(subarraySum(numbers, 3))
+# Output: 4
 
-numbers = [1, 1, 1]
-print(subarraySum(numbers, 2))
+
+# Time: O(n)
+# - Loop through nums once: O(n) iterations.
+# - Dictionary lookups and updates ('counts[curr - k]', 'counts[curr] += 1') are O(1) on average.
+# - No nested loops, so total time is O(n).
+
+# Space: O(n)
+# - Dictionary 'counts' can store up to n different prefix sums in the worst case: O(n) space.
+# - A few variables (curr, ans, num) take O(1) space.
+# - Overall: O(n) total space.
+
+
+# Trace Overview
+# Index = -  0  1  2
+# num   = -  1  2  3
+# curr  = 0  1  3  6
+# ans   = 0  0  1  2
+# counts = {0:1} {0:1, 1:1} {0:1, 1:1, 3:1} {0:1, 1:1, 3:1, 6:1}
+
+
+# ––––––––––––––––––––––––––––––––––––––––––––––––
+# Breakdown 
+from collections import defaultdict
+
+def subarraySum(nums, k):
+    counts = defaultdict(int)  # Track frequency of prefix sums
+    counts[0] = 1             # Initialize for subarrays starting at index 0
+    ans = curr = 0            # Initialize result and running sum
+    for num in nums:          # Iterate over each number
+        curr += num           # Update running sum
+        ans += counts[curr - k]  # Add count of prefix sums that form sum k
+        counts[curr] += 1     # Increment frequency of current sum
+    return ans                # Return total subarrays with sum k
+
+
+
+
+# ––––––––––––––––––––––––––––––––––––––––––––––––
+# Task: Find the number of subarrays with sum equal to k in an integer array.
+# Example: nums = [1, 2, 3], k = 3 → Output = 2 (subarrays: [1, 2], [3])
+# Why: Practices prefix sum technique with a hash map to efficiently count subarrays.
+
+from collections import defaultdict
+
+def subarraySum(nums, k):  # Example: nums = [1, 2, 3], k = 3
+
+    # 1️⃣ Initialize variables
+    # Initialize a defaultdict to store prefix sum counts
+    # Why? We track the frequency of prefix sums to find subarrays with sum k
+    counts = defaultdict(int)  # counts = {}
+    counts[0] = 1  # Initialize with 0 sum having 1 occurrence
+    # Why? A prefix sum of 0 (empty subarray) allows subarrays starting from index 0
+
+    # Initialize answer to count subarrays with sum k
+    # Why? We need to accumulate the number of valid subarrays
+    ans = 0  # ans = 0
+
+    # Initialize current prefix sum
+    # Why? We track the running sum to compute differences
+    curr = 0  # curr = 0
+
+    # 2️⃣ Process array to find subarrays
+    # Iterate through each number to compute prefix sums
+    # Why? We use prefix sums to find subarrays where sum[i:j] = k
+    for num in nums:  # num takes values [1, 2, 3]
+        # --- Iteration 1: num = 1 ---
+        # Update the current prefix sum
+        # Why? We accumulate the sum up to the current index
+        curr += num  # curr = 0 + 1 = 1
+        # Add the number of subarrays ending at the current index with sum k
+        # Why? If curr - k exists in counts, it means there are subarrays summing to k
+        ans += counts[curr - k]  # curr - k = 1 - 3 = -2, counts[-2] = 0 (not in counts), ans = 0
+        # Increment the count of the current prefix sum
+        # Why? We track how many times this prefix sum has occurred
+        counts[curr] += 1  # counts[1] = 0 + 1 = 1
+        # After Iteration 1: curr = 1, ans = 0, counts = {0: 1, 1: 1}
+
+        # --- Iteration 2: num = 2 ---
+        if num == 2:
+            curr += num  # curr = 1 + 2 = 3
+            ans += counts[curr - k]  # curr - k = 3 - 3 = 0, counts[0] = 1, ans = 0 + 1 = 1
+            counts[curr] += 1  # counts[3] = 0 + 1 = 1
+            # After Iteration 2: curr = 3, ans = 1, counts = {0: 1, 1: 1, 3: 1}
+            # Found subarray: [1, 2] (sum = 3, indices 0 to 1)
+
+        # --- Iteration 3: num = 3 ---
+        if num == 3:
+            curr += num  # curr = 3 + 3 = 6
+            ans += counts[curr - k]  # curr - k = 6 - 3 = 3, counts[3] = 1, ans = 1 + 1 = 2
+            counts[curr] += 1  # counts[6] = 0 + 1 = 1
+            # After Iteration 3: curr = 6, ans = 2, counts = {0: 1, 1: 1, 3: 1, 6: 1}
+            # Found subarray: [3] (sum = 3, index 2)
+
+    # 3️⃣ Return the count of valid subarrays
+    # Why? ans contains the number of subarrays with sum equal to k
+    return ans  # ans = 2
+
+
+numbers = [1, 2, 3]
+print(subarraySum(numbers, 3))  
 # Output: 2
 
 
 
-# ––––––––––––––––––––––––––––––––––––––––––––––––
-
 
 
 # ––––––––––––––––––––––––––––––––––––––––––––––––
+# Task: Find the number of subarrays with sum equal to k in an integer array.
+# Example: nums = [1, 2, 1, 2, 1], k = 3 → Output = 4 (subarrays: [1, 2], [2, 1], [1, 2], [2, 1])
+# Why: Practices prefix sum technique with a hash map to efficiently count subarrays.
+
+from collections import defaultdict
+
+def subarraySum(nums, k):  # Example: nums = [1, 2, 1, 2, 1], k = 3
+
+    # 1️⃣ Initialize variables
+    # Initialize a defaultdict to store prefix sum counts
+    # Why? We track the frequency of prefix sums to find subarrays with sum k
+    counts = defaultdict(int)  # counts = {}
+    counts[0] = 1  # Initialize with 0 sum having 1 occurrence
+    # Why? A prefix sum of 0 (empty subarray) allows subarrays starting from index 0
+
+    # Initialize answer to count subarrays with sum k
+    # Why? We need to accumulate the number of valid subarrays
+    ans = 0  # ans = 0
+
+    # Initialize current prefix sum
+    # Why? We track the running sum to compute differences
+    curr = 0  # curr = 0
+
+    # 2️⃣ Process array to find subarrays
+    # Iterate through each number to compute prefix sums
+    # Why? We use prefix sums to find subarrays where sum[i:j] = k
+    for num in nums:  # num takes values [1, 2, 1, 2, 1]
+        # --- Iteration 1: num = 1 ---
+        # Update the current prefix sum
+        # Why? We accumulate the sum up to the current index
+        curr += num  # curr = 0 + 1 = 1
+        # Add the number of subarrays ending at the current index with sum k
+        # Why? If curr - k exists in counts, it means there are subarrays summing to k
+        ans += counts[curr - k]  # curr - k = 1 - 3 = -2, counts[-2] = 0 (not in counts), ans = 0
+        # Increment the count of the current prefix sum
+        # Why? We track how many times this prefix sum has occurred
+        counts[curr] += 1  # counts[1] = 0 + 1 = 1
+        # After Iteration 1: curr = 1, ans = 0, counts = {0: 1, 1: 1}
+
+        # --- Iteration 2: num = 2 ---
+        if num == 2:
+            curr += num  # curr = 1 + 2 = 3
+            ans += counts[curr - k]  # curr - k = 3 - 3 = 0, counts[0] = 1, ans = 0 + 1 = 1
+            counts[curr] += 1  # counts[3] = 0 + 1 = 1
+            # After Iteration 2: curr = 3, ans = 1, counts = {0: 1, 1: 1, 3: 1}
+            # Found subarray: [1, 2] (sum = 3, indices 0 to 1)
+
+        # --- Iteration 3: num = 1 ---
+        if num == 1 and curr == 3:
+            curr += num  # curr = 3 + 1 = 4
+            ans += counts[curr - k]  # curr - k = 4 - 3 = 1, counts[1] = 1, ans = 1 + 1 = 2
+            counts[curr] += 1  # counts[4] = 0 + 1 = 1
+            # After Iteration 3: curr = 4, ans = 2, counts = {0: 1, 1: 1, 3: 1, 4: 1}
+            # Found subarray: [2, 1] (sum = 3, indices 1 to 2)
+
+        # --- Iteration 4: num = 2 ---
+        if num == 2 and curr == 4:
+            curr += num  # curr = 4 + 2 = 6
+            ans += counts[curr - k]  # curr - k = 6 - 3 = 3, counts[3] = 1, ans = 2 + 1 = 3
+            counts[curr] += 1  # counts[6] = 0 + 1 = 1
+            # After Iteration 4: curr = 6, ans = 3, counts = {0: 1, 1: 1, 3: 1, 4: 1, 6: 1}
+            # Found subarray: [1, 2] (sum = 3, indices 2 to 3)
+
+        # --- Iteration 5: num = 1 ---
+        if num == 1 and curr == 6:
+            curr += num  # curr = 6 + 1 = 7
+            ans += counts[curr - k]  # curr - k = 7 - 3 = 4, counts[4] = 1, ans = 3 + 1 = 4
+            counts[curr] += 1  # counts[7] = 0 + 1 = 1
+            # After Iteration 5: curr = 7, ans = 4, counts = {0: 1, 1: 1, 3: 1, 4: 1, 6: 1, 7: 1}
+            # Found subarray: [2, 1] (sum = 3, indices 3 to 4)
+
+    # 3️⃣ Return the count of valid subarrays
+    # Why? ans contains the number of subarrays with sum equal to k
+    return ans  # ans = 4
+
+
+numbers = [1, 2, 1, 2, 1]
+print(subarraySum(numbers, 3))  
+# Output: 4

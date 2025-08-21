@@ -19,9 +19,12 @@ from collections import defaultdict
 
 def areOccurrencesEqual(s):
     counts = defaultdict(int)
+
+    # Count frequency of each character
     for c in s:
         counts[c] += 1
     
+    # Grab all the frequencies
     frequencies = counts.values()
     return len(set(frequencies)) == 1
 
@@ -43,14 +46,22 @@ print(areOccurrencesEqual(s))
 
 
 
+
+# Breakdown: return len(set(frequencies)) == 1
+    # All characters have equal frequency if there's only 1 unique value
+
+
+
 # ––––––––––––––––––––––––––––––––––––––––––––––––
 # Breakdown 
 from collections import defaultdict
 
 def areOccurrencesEqual(s):
     counts = defaultdict(int)  # Initialize dictionary for character frequencies
+
     for c in s:               # Iterate over each character in string
         counts[c] += 1        # Increment count for current character
+
     frequencies = counts.values()  # Get all frequency values
     return len(set(frequencies)) == 1  # Return True if all frequencies are equal
 

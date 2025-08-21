@@ -1,29 +1,38 @@
-# 1941. Check if All Characters Have Equal Number of Occurrences
+# 560. Subarray Sum Equals K
 
-# Example 3: 
-# Given a string s, determine if all characters have the same frequency.
+# Example 4: 
 
-# A string s is good if all the characters that appear in s have the same number of occurrences (i.e., the same frequency).
+# Given an integer array nums and an integer k, find the number of subarrays whose sum is equal to k.
 
-# For example, given s = "abacbc", return true, because all characters appear twice. Given s = "aaabb", return false. "a" appears 3 times, "b" appears 2 times. 3 != 2.
+# Example 1:
+# Input: nums = [1, 1, 1], k = 2
+# Output: 2
 
-# Example:
-# Input: s = "abacbc"
-# Output: True
-# Explanation: The characters that appear in s are 'a', 'b', and 'c'. All characters occur 2 times in s.
+# Example 2:
+# Input: nums = [1, 2, 3], k = 3
+# Output: 2
 
-# Solution: https://leetcode.com/problems/check-if-all-characters-have-equal-number-of-occurrences/solutions/
+# Solution: https://leetcode.com/problems/subarray-sum-equals-k/solutions/127728/subarray-sum-equals-k/
 
 
 from collections import defaultdict
 
-def areOccurrencesEqual(s):
-    
+def subarraySum(nums, k):
+    counts = defaultdict(int)
+    counts[0] = 1
+    ans = curr = 0
+
+    for num in nums:
+        curr += num
+        ans += counts[curr - k]
+        counts[curr] += 1
+
+    return ans
 
 
-s = "abacbc"
-print(areOccurrencesEqual(s))
-# Output: True
+numbers = [1, 2, 3]
+print(subarraySum(numbers, 3))
+# Output: 
 
 
 
