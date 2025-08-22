@@ -6,8 +6,28 @@ def subarraySum(nums, k):
     print(counts)
 
 numbers = [1, 2, 3]
-print(subarraySum(numbers, 3))
+# print(subarraySum(numbers, 3))
 
+
+from collections import defaultdict
+
+def subarraySum(nums, k):
+    counts = defaultdict(int)
+    counts[0] = 1
+    # Track running sum and count subarrays
+    ans = curr = 0
+
+    # Process array to find subarrays with sum k
+    for num in nums:
+        curr += num
+        ans += counts[curr - k]
+        counts[curr] += 1
+
+    return ans
+
+nums = [1, 2, 3]
+print(subarraySum(nums, 3))
+# Output: 2
 
 
 

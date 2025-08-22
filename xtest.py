@@ -1,27 +1,14 @@
-# 560. Subarray Sum Equals K
-
-# Example 4: 
-
-# Given an integer array nums and an integer k, find the number of subarrays whose sum is equal to k.
-
-# Example 1:
-# Input: nums = [1, 1, 1], k = 2
-# Output: 2
-
-# Example 2:
-# Input: nums = [1, 2, 3], k = 3
-# Output: 2
-
-# Solution: https://leetcode.com/problems/subarray-sum-equals-k/solutions/127728/subarray-sum-equals-k/
-
+# Best Solution:
 
 from collections import defaultdict
 
 def subarraySum(nums, k):
     counts = defaultdict(int)
     counts[0] = 1
+    # Track running sum and count subarrays
     ans = curr = 0
 
+    # Process array to find subarrays with sum k
     for num in nums:
         curr += num
         ans += counts[curr - k]
@@ -29,16 +16,13 @@ def subarraySum(nums, k):
 
     return ans
 
-
-numbers = [1, 2, 3]
-print(subarraySum(numbers, 3))
-# Output: 
-
+nums = [1, 2, 3, 4, 6]
+print(subarraySum(nums, 6))
+# Output: 2 (subarrays [1, 2, 3] and [6])
 
 
 
-
-
+# Trace Overview
 
 
 
