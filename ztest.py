@@ -1,33 +1,23 @@
-from collections import defaultdict
-
-def subarraySum(nums, k):
-    counts = defaultdict(int)
-    counts[0] = 1
-    print(counts)
-
-numbers = [1, 2, 3]
-# print(subarraySum(numbers, 3))
 
 
-from collections import defaultdict
 
-def subarraySum(nums, k):
-    counts = defaultdict(int)
-    counts[0] = 1
-    # Track running sum and count subarrays
-    ans = curr = 0
 
-    # Process array to find subarrays with sum k
-    for num in nums:
-        curr += num
-        ans += counts[curr - k]
-        counts[curr] += 1
 
-    return ans
 
-nums = [1, 2, 3]
-print(subarraySum(nums, 3))
-# Output: 2
+
+# d = {'a':1, 'b':2, 'c':30}
+
+# print(d['c'])
+
+
+# nums   = [1, 2, 3, 4, 5, 6]
+# prefix = [1, 3, 6, 10, 15, 21]
+
+# sum [0:3] = prefix[r] - 0           = 10-1+1=10
+# sum [1:3] = prefix[r] - prefix[l-1] = 10-1=9
+# sum [2:4] = prefix[r] - prefix[l-1] = 15-3= 12
+
+
 
 
 

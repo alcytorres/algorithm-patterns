@@ -1,24 +1,27 @@
-# Best Solution:
 
-from collections import defaultdict
 
-def subarraySum(nums, k):
-    counts = defaultdict(int)
-    counts[0] = 1
-    # Track running sum and count subarrays
-    ans = curr = 0
 
-    # Process array to find subarrays with sum k
-    for num in nums:
-        curr += num
-        ans += counts[curr - k]
-        counts[curr] += 1
 
-    return ans
 
-nums = [1, 2, 3, 4, 6]
-print(subarraySum(nums, 6))
-# Output: 2 (subarrays [1, 2, 3] and [6])
+
+
+
+
+
+
+
+
+
+
+
+
+# Why ans += counts[curr - k]?
+
+# curr is the sum from start to current index.
+# If curr - k is in counts, it means a previous sum exists where curr - prev = k, forming a subarray with sum k.
+# counts[curr - k] tells how many such subarrays end at the current index.
+
+
 
 
 
