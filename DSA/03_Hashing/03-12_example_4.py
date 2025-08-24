@@ -95,6 +95,13 @@ print(subarraySum(numbers, 3))
 
 
 
+# Note: The code determines only the total number of subarrays with a sum equal to k, confirming their existence through prefix sum matches without specifying which subarrays they are.
+
+# Most IMPORTANT thing to Understand for this solution:
+# ans += counts[curr - k] works simply because if curr - k (a previous sum, let’s call it prev) is in counts, then curr - prev = k, meaning the subarray between those points sums to k, and counts[curr - k] counts how many such prev sums exist.
+
+
+
 # ––––––––––––––––––––––––––––––––––––––––––––––––
 # Simple Breakdown 
 from collections import defaultdict
@@ -103,10 +110,12 @@ def subarraySum(nums, k):
     counts = defaultdict(int)  # Track frequency of prefix sums
     counts[0] = 1             # Initialize for subarrays starting at index 0
     ans = curr = 0            # ans: counts subarrays, curr: running sum
+
     for num in nums:          # Iterate over each number
         curr += num            # Add current number to running sum
         ans += counts[curr - k]  # Count subarrays where sum = k
         counts[curr] += 1     # Increment frequency of current sum
+        
     return ans                # Return total subarrays with sum k
 
 
@@ -505,3 +514,32 @@ print(subarraySum(nums, 5))
 # Output: 1 (subarray [2, 3])
 
 # counts = {0: 2, 1: 1, 3: 1, 6: 1, 10: 1}
+
+
+# ––––––––––––––––––––––––––––––––––––––––––––––––
+# Best Solution:
+
+from collections import defaultdict
+
+def subarraySum(nums, k):
+    counts = defaultdict(int)
+    counts[0] = 1
+    ans = curr = 0
+    for num in nums:
+        curr += num
+        ans += counts[curr - k]
+        counts[curr] += 1
+    return ans
+
+nums = [3, 4, 7, 2, -3, 1, 4, 2]
+print(subarraySum(nums, 7))
+# Output: 4 
+# (subarrays [3, 4], [7], [7, 2, -3, 1], [1, 4, 2])
+
+# counts =
+# {0:1} -> {0:1,3:1} -> {0:1,3:1,7:1} ->
+# {0:1,3:1,7:1,14:1} -> {0:1,3:1,7:1,14:1,16:1} ->
+# {0:1,3:1,7:1,14:1,16:1,13:1} ->
+# {0:1,3:1,7:1,14:1,16:1,13:1,14:2} ->
+# {0:1,3:1,7:1,14:1,16:1,13:1,14:2,18:1} ->
+# {0:1,3:1,7:1,14:1,16:1,13:1,14:2,18:1,20:1}

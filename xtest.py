@@ -1,4 +1,48 @@
 
+from collections import defaultdict
+
+def subarraySum(nums, k):
+    counts = defaultdict(int)
+    counts[0] = 1
+    # Track running sum and count subarrays
+    ans = curr = 0
+
+    # Process array to find subarrays with sum k
+    for num in nums:
+        curr += num
+        ans += counts[curr - k]
+        counts[curr] += 1
+
+    return ans
+
+nums = [1, 2, 3]
+print(subarraySum(nums, 3))
+# Output: 2 (subarrays [1, 2] and [3])
+
+# counts = {0: 1, 1: 1, 3: 1, 6: 1}
+
+
+# Trace Overview
+# Index = -  0  1  2
+# num   = -  1  2  3
+# curr  = 0  1  3  6
+# ans   = 0  0  1  2
+# counts = {0:1} {0:1, 1:1} {0:1, 1:1, 3:1} {0:1, 1:1, 3:1, 6:1}
+
+
+
+
+
+
+
+
+
+# from collections import defaultdict
+
+# counts = defaultdict(int, {'a': 1, 'b': 2})
+
+# print(counts['a'])
+# print(counts['c'])
 
 
 
