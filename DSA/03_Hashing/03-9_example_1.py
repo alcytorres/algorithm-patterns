@@ -65,6 +65,51 @@ Trace of find_longest_substring("eceba", k=2):
 Output: 3 ('ece')
 """
 
+
+
+# –––––––––––––––––––––––––––––––––––––––––––––––
+# Brute force
+def find_longest_substring(s, k):
+    ans = 0
+    n = len(s)
+
+    for i in range(n):
+        for j in range(i, n):
+            distinct = len(set(s[i:j+1]))
+            if distinct <= k:
+                ans = max(ans, j - i + 1)
+
+    return ans
+
+s = "eceba"
+print(find_longest_substring(s, 2))  
+# Output: 3
+
+
+# Time: O(n^3)
+# - Outer loop picks a start index i: O(n).
+# - Inner loop picks an end index j: O(n).
+# - Creating a set for substring s[i:j+1] costs O(n) in the worst case.
+# - Overall: O(n * n * n) = O(n^3) time.
+
+# Space: O(n)
+# - The set of characters in the substring can store up to n characters in the worst case.
+# - A few variables (i, j, ans, distinct) take O(1) space.
+# - Overall: O(n) total space.
+
+
+
+# Trace Overview 
+# s = "eceba", k = 2
+# i        = 0 -  - -  1 - -  2 - -  3 - -  4 -
+# j        = 0 1 2  1 2 3  2 3 4  3 4  4 -
+# substr   = e ec ece  c ce ceb  e eb eba  b ba  a
+# distinct = 1 2  2    1 2  3    1 2  3    1 2   1
+# ans      = 1 2  3    3 3  3    3 3  3    3 3   3
+
+
+
+
 # ––––––––––––––––––––––––––––––––––––––––––––––––
 # Breakdown 
 from collections import defaultdict  # Initialize defaultdict for character counts
@@ -72,6 +117,7 @@ from collections import defaultdict  # Initialize defaultdict for character coun
 def find_longest_substring(s, k):
     counts = defaultdict(int)  # Track character frequencies in window
     left = ans = 0            # Left bound, max length of substring
+
     for right in range(len(s)):  # Iterate right pointer over string
         counts[s[right]] += 1  # Increment count of current character
         while len(counts) > k: # Shrink window if distinct characters exceed k
@@ -80,6 +126,7 @@ def find_longest_substring(s, k):
                 del counts[s[left]]
             left += 1          # Move left pointer forward
         ans = max(ans, right - left + 1)  # Update max substring length
+
     return ans                # Return longest substring length with <= k distinct characters
 
 

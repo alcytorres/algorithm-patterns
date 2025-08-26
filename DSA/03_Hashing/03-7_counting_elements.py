@@ -12,7 +12,7 @@
 # Solution: https://leetcode.com/problems/counting-elements/solutions/567376/counting-elements/
 
 
-# Optimized Approach: Search with HashSet
+# Optimized Solution: Search with HashSet
 def countElements(arr):
     hash_set = set(arr)
     count = 0
@@ -44,11 +44,42 @@ print(countElements(arr))
     # The requirement to count duplicates separately is met by iterating over arr directly in for x in arr:, ensuring each occurrence of an element is checked individually for x + 1 in hash_set.
 
 
+# –––––––––––––––––––––––––––––––––––––––––––––––––––––––
+# Brute force: Approach: Search with Array
+def countElements(arr):
+    count = 0
+    for x in arr:
+        if x + 1 in arr:
+            count += 1
+    return count
+
+arr = [1, 2, 3]
+print(countElements(arr))
+# Output: 2
+
+
+# Time: O(n^2)
+# - Outer loop iterates over all n elements: O(n).
+# - 'x + 1 in arr' is a list lookup, which takes O(n) in the worst case.
+# - Overall: O(n * n) = O(n^2) time.
+
+# Space: O(1)
+# - Only a constant number of variables (count, x) are used.
+# - No additional data structures.
+# - Overall: O(1) space.
+
+
+
+# Note: Set lookups are O(1) using a hash table for instant access, while array lookups are O(n) as they scan each element sequentially.
+
+
+
 # ––––––––––––––––––––––––––––––––––––––––––––––––
 # Breakdown
 def countElements(arr):
     hash_set = set(arr)       # Convert array to set for O(1) lookups
     count = 0                 # Initialize counter for elements with x+1
+
     for x in arr:             # Iterate over each element in array
         if x + 1 in hash_set: # Check if x+1 exists in set
             count += 1        # Increment counter if x+1 found
@@ -110,36 +141,6 @@ def countElements(arr):  # Example: arr = [1, 2, 2, 3]
 
 arr = [1, 2, 2, 3]
 print(countElements(arr))  # Output: 3
-
-
-
-
-
-
-
-# –––––––––––––––––––––––––––––––––––––––––––––––––––––––
-# Brute forece: Approach: Search with Array
-def countElements(arr):
-    count = 0
-    for x in arr:
-        if x + 1 in arr:
-            count += 1
-    return count
-
-arr = [1, 2, 3]
-print(countElements(arr))
-# Output: 2
-
-
-# Time: O(n^2)
-# - Outer loop iterates over all n elements: O(n).
-# - 'x + 1 in arr' is a list lookup, which takes O(n) in the worst case.
-# - Overall: O(n * n) = O(n^2) time.
-
-# Space: O(1)
-# - Only a constant number of variables (count, x) are used.
-# - No additional data structures.
-# - Overall: O(1) space.
 
 
 

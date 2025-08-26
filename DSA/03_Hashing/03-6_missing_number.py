@@ -8,9 +8,9 @@ def missingNumber(nums):
     num_set = set(nums)
     n = len(nums) + 1
 
-    for number in range(n):
-        if number not in num_set:
-            return number
+    for num in range(n):
+        if num not in num_set:
+            return num
 
 l = [3, 0, 1]
 print(missingNumber(l))
@@ -32,8 +32,8 @@ print(missingNumber(l))
 # Trace Overview
 # num_set = {0, 1, 3}
 # n       = 4
-# number  = 
-#
+# num     = 0  1  2  3
+
 
 
 # ––––––––––––––––––––––––––––––––––––––––––––––––
@@ -42,10 +42,11 @@ def missingNumber(nums):
     num_set = set(nums)       # Convert array to set for O(1) lookups
     n = len(nums) + 1         # Range of expected numbers (0 to n)
     
-    for number in range(n):   # Iterate over numbers 0 to n
-        if number not in num_set:  # If number missing from set
-            return number         # Return first missing number
+    for num in range(n):   # Iterate over numbers 0 to n
+        if num not in num_set:  # If number missing from set
+            return num         # Return first missing number
         
+
 
 # ––––––––––––––––––––––––––––––––––––––––––––––––
 # Full Breakdown 
@@ -68,32 +69,33 @@ def missingNumber(nums):  # Example: nums = [3, 0, 1]
     # 3️⃣ Iterate through the expected range
     # Check each number in [0, n) to find the missing one
     # Why? Exactly one number in the range is missing, so we check each possibility
-    for number in range(n):  # number goes from 0 to 3
-        # --- Iteration 1: number = 0 ---
+    for num in range(n):  # num goes from 0 to 3
+        # --- Iteration 1: num = 0 ---
         # Check if the current number is in the set
         # Why? If a number is not in num_set, it is the missing number
-        if number not in num_set:  # number = 0, num_set = {3, 0, 1}, 0 in num_set, skip
-            return number  # skip
+        if num not in num_set:  # num = 0, num_set = {3, 0, 1}, 0 in num_set, skip
+            return num  # skip
         # After Iteration 1: continue
 
-        # --- Iteration 2: number = 1 ---
-        if number == 1:
-            if number not in num_set:  # number = 1, num_set = {3, 0, 1}, 1 in num_set, skip
-                return number
+        # --- Iteration 2: num = 1 ---
+        if num == 1:
+            if num not in num_set:  # num = 1, num_set = {3, 0, 1}, 1 in num_set, skip
+                return num
             # After Iteration 2: continue
 
-        # --- Iteration 3: number = 2 ---
-        if number == 2:
-            if number not in num_set:  # number = 2, num_set = {3, 0, 1}, 2 not in num_set, true
-                return number  # return 2
+        # --- Iteration 3: num = 2 ---
+        if num == 2:
+            if num not in num_set:  # num = 2, num_set = {3, 0, 1}, 2 not in num_set, true
+                return num  # return 2
             # After Iteration 3: return 2 (loop exits)
 
-        # --- Iteration 4: number = 3 ---
+        # --- Iteration 4: num = 3 ---
         # Not reached due to return in Iteration 3
 
     # Note: The loop is guaranteed to return a value since one number is missing
 
 
 l = [3, 0, 1]
-print(missingNumber(l))  
-# Output: 2
+print(missingNumber(l))  # Output: 2
+
+

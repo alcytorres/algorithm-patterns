@@ -543,3 +543,50 @@ print(subarraySum(nums, 7))
 # {0:1,3:1,7:1,14:1,16:1,13:1,14:2} ->
 # {0:1,3:1,7:1,14:1,16:1,13:1,14:2,18:1} ->
 # {0:1,3:1,7:1,14:1,16:1,13:1,14:2,18:1,20:1}
+
+
+
+# ––––––––––––––––––––––––––––––––––––––––––––––––
+# Best Solution:
+
+from collections import defaultdict
+
+def subarraySum(nums, k):
+    counts = defaultdict(int)
+    counts[0] = 1
+    ans = curr = 0
+    for num in nums:
+        curr += num
+        ans += counts[curr - k]
+        counts[curr] += 1
+    return ans
+
+nums = [13, 1, 2, 3, 1]
+print(subarraySum(nums, 7))
+# Output: 1
+
+
+# ––––––––––––––––––––––––––––––––––––––––––––––––
+# Best Solution:
+
+from collections import defaultdict
+
+def subarraySum(nums, k):
+    counts = defaultdict(int)
+    counts[0] = 1
+    ans = curr = 0
+    for num in nums:
+        curr += num
+        ans += counts[curr - k]
+        counts[curr] += 1
+    return ans
+
+nums = [1, -1, 1, -1]
+print(subarraySum(nums, 0))
+# Output: 4
+
+
+# The prefix sum is [1, 0, 1, 0]. There are two subarrays ending on the final index - [1, -1] and the entire array. Remember that we initialize counts[0] = 1, so after the second index, we have counts[0] = 2. So when we reach the final index and do ans += counts[curr - k] = ans += counts[0], we are adding both subarrays to our answer. 
+
+# When there are non-positive numbers in the input, the same prefix can occur multiple times, and a hash map is needed to count the frequency.
+

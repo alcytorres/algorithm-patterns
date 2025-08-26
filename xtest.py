@@ -1,37 +1,22 @@
+def numberOfSubarrays(self, nums: List[int], k: int) -> int:
+    # keep a prefix count
+    # we will track the number of odd numbers that appear up to and including a certain index
+    # if odds - k appears at an earlier position in the array, then there must be k odds in between that index and this one
+    #   - because the sum of odds - k + k = odds, the amount we currently have
+    # so we will track the frequency that each number of odds appears
+    #   - example: for [1, 2, 3], the prefix count would be [1, 1, 2]
+    #   - frequency would be {1: 2, 2: 1}
+    # we can now add the frequency of odds - k at each index, as that represents all the start points that form a nice subarray with the current index as an end point
 
-from collections import defaultdict
-
-def subarraySum(nums, k):
-    counts = defaultdict(int)
-    counts[0] = 1
-    # Track running sum and count subarrays
-    ans = curr = 0
-
-    # Process array to find subarrays with sum k
+    ans = odds = 0
+    freq = defaultdict(int)
+    freq[0] = 1  # base case so that if we reach k odds for the first time, we add 1 to ans
     for num in nums:
-        curr += num
-        ans += counts[curr - k]
-        counts[curr] += 1
+        odds += num % 2  # odd number % 2 = 1, even % 2 = 0
+        ans += freq[odds - k]
+        freq[odds] += 1
 
     return ans
-
-nums = [1, 2, 3]
-print(subarraySum(nums, 3))
-# Output: 2 (subarrays [1, 2] and [3])
-
-# counts = {0: 1, 1: 1, 3: 1, 6: 1}
-
-
-# Trace Overview
-# Index = -  0  1  2
-# num   = -  1  2  3
-# curr  = 0  1  3  6
-# ans   = 0  0  1  2
-# counts = {0:1} {0:1, 1:1} {0:1, 1:1, 3:1} {0:1, 1:1, 3:1, 6:1}
-
-
-
-
 
 
 
