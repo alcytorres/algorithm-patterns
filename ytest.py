@@ -1,6 +1,87 @@
-curr = 0
-curr += 3 % 2
-print(curr)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# ––––––––––––––– Prompts –––––––––––––––
+# Super simple, beginner-friendly Leetocde breakdown
+
+# I need a super simple, beginner-friendly explanation of how this LeetCode solution works, as if explaining to a 12-year-old who’s just learning to code. Break it down crystal clear, focusing on why the code finds the correct answer for the given problem. 
+
+# Use the provided example input and output to walk through the solution step by step, showing how each part of the code contributes to the final result. Include a simple analogy to make it relatable. If the solution uses a loop, provide a concise iteration overview (like a table) showing key variable changes for each step.
+
+
+
+# –––––––––––––––––––––––––––––––––––––––––––––––
+# Give me time and space for the following in this format:
+    # Format like this
+    # Time: O(n)
+    # - Loop through nums once: O(n) iterations.
+    # - Dictionary lookups and updates ('counts[curr - k]', 'counts[curr] += 1') are O(1) on average.
+    # - No nested loops, so total time is O(n).
+
+    # Space: O(n)
+    # - Dictionary 'counts' can store up to n different prefix sums in the worst case: O(n) space.
+    # - A few variables (curr, ans, num) take O(1) space.
+    # - Overall: O(n) total space.
+
+
+
+# –––––––––––––––––––––––––––––––––––––––––––––––
+# Give me a excellent one sentence explanation of the output like this:
+    # Output: 3.5  --> Subarray [3, 4] (length 2, sum 3 + 4 = 7, average 7/2 = 3.5) has the largest average for k=2.
+
+
+
+# –––––––––––––––––––––––––––––––––––––––––––––––
+# Give me excellent in line annotations for this code
+
+
+
+# –––––––––––––––––––––––––––––––––––––––––––––––
+# Prompt for Guides
+# here is a guide based on sliding windows i have based on the section of my dsa course on sliding windows
+
+# give me a guide now for prefix sum that follows the format of the sliding window guide exactly in terms of spacing / format/ etc. Im going to copy and paste your answer into a .py file
+
+# Use of lines to separate example problems
+
+# as you will notice my guide is almost entirely just based of the pseudocode and examples given
+# you can include additional information. if you choose to do this include at a cheatsheet at the bottom of the guide after the examples and only include the absolute. most important info concisely in a simple excellent way for me to quickly understand the most important things you think i should have 
+
+
+
+
+# –––––––––––––––––––––––––––––––––––––––––––––––
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

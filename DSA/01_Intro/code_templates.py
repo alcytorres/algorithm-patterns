@@ -76,11 +76,23 @@ def fn(arr, k):
     return ans
 
 # ––––––––––––––––––––––––––––––––––––––––––––––
-# Build a prefix sum
+# Build a prefix sum Template 1
 def fn(arr):
     prefix = [arr[0]]
     for i in range(1, len(arr)):
         prefix.append(prefix[-1] + arr[i])
+    
+    return prefix
+
+
+# Build a prefix sum Template 2
+def prefix_sum(arr):
+    prefix = [arr[0]]
+    curr = arr[0]    
+    
+    for i in range(1, len(arr)):  
+        curr += arr[i]
+        prefix.append(curr)
     
     return prefix
 
@@ -95,6 +107,10 @@ def fn(arr):
         ans.append(c)
     
     return "".join(ans)
+
+print(fn(['a', 'b', 'c', 'd']))
+# Output: abcd
+
 
 
 # ––––––––––––––––––––––––––––––––––––––––––––––

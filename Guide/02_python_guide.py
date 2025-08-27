@@ -1839,20 +1839,29 @@ except ValueError:
 l = [x for x in range(5)]
 print(l)  # Outputs: [0, 1, 2, 3, 4]
 
+# Standard For Loop
+l = []
+for x in range(5):
+    l.append(x)
+print(l)  # Outputs: [0, 1, 2, 3, 4]
+
+
 # List comprehension with expression
 l = [x**2 for x in range(5)]
 print(l)  # Outputs: [0, 1, 4, 9, 16]
+
 
 # List comprehension with condition
 l = [x for x in range(5) if x % 2 == 0]
 print(l)  # Outputs: [0, 2, 4]
 
-
 # Error: Invalid syntax (if without else)
-l = [x if x % 2 == 0 for x in range(5)]  # SyntaxError: invalid syntax
+l = [x if x % 2 == 0 for x in range(5)]  
+# SyntaxError: 'if' needs 'else' when before 'for' 
 
 # Error: Invalid syntax (if with else)
-l = [x for x in range(5) if (x%2) == 0 else 5]  # SyntaxError: invalid syntax
+l = [x for x in range(5) if (x%2) == 0 else 5]  
+# SyntaxError: 'else' can't follow 'if' after 'for' 
 
 # List comprehension with if/else
 l = [x if x % 2 == 0 else 5 for x in range(5)]

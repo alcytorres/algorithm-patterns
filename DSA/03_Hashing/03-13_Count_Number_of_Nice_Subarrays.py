@@ -19,12 +19,12 @@ from collections import defaultdict
 def numberOfSubarrays(nums, k):
     counts = defaultdict(int)
     counts[0] = 1
-    ans = curr = 0
+    ans = odd = 0
     
     for num in nums:
-        curr += num % 2
-        ans += counts[curr - k]
-        counts[curr] += 1
+        odd += num % 2
+        ans += counts[odd - k]
+        counts[odd] += 1
 
     return ans
 
@@ -124,14 +124,17 @@ print(numberOfSubarrays_bruteforce(nums, 3))
 # ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 # Breakdown 
 def numberOfSubarrays(nums, k):
-    counts = defaultdict(int)  # Track frequency of odd number counts
-    counts[0] = 1             # Initialize for subarrays with 0 odds
-    ans = curr = 0            # Initialize result and running odd count
+    counts = defaultdict(int)  # Notebook to track counts of odd numbers
+    counts[0] = 1             # Start with "0 odds seen" once
+    odd = ans = 0             # odd: count of odd numbers, ans: number of subarrays
+
     for num in nums:          # Iterate over each number
-        curr += num % 2       # Increment if num is odd (1 if odd, 0 if even)
-        ans += counts[curr - k]  # Add count of subarrays with k odd numbers
-        counts[curr] += 1     # Increment frequency of current odd count
-    return ans                # Return total subarrays with k odd numbers
+        odd += num % 2        # Add 1 if num is odd, 0 if even
+        ans += counts[odd - k] # Check if we can make a subarray with k odds
+        counts[odd] += 1      # Update notebook with current odd count
+    
+    return ans          # Return total subarrays with k odd numbers
+
 
 
 
@@ -159,52 +162,52 @@ def numberOfSubarrays(nums, k):  # Example: nums = [1, 1, 2, 1, 1], k = 3
 
     # Initialize current count of odd numbers
     # Why? We track the running count of odd numbers to compute differences
-    curr = 0  # curr = 0
+    odd = 0  # odd = 0
 
     # 2️⃣ Process array to find subarrays
     # Iterate through each number to count odd numbers
     # Why? We use the count of odd numbers as a prefix sum to find subarrays with k odd numbers
     for num in nums:  # num takes values [1, 1, 2, 1, 1]
         # --- Iteration 1: num = 1 ---
-        # Increment curr if the number is odd (num % 2 == 1)
+        # Increment odd if the number is odd (num % 2 == 1)
         # Why? We count odd numbers to track the prefix sum of odd counts
-        curr += num % 2  # num = 1, 1 % 2 = 1, curr = 0 + 1 = 1
+        odd += num % 2  # num = 1, 1 % 2 = 1, odd = 0 + 1 = 1
         # Add the number of subarrays ending at the current index with k odd numbers
-        # Why? If curr - k exists in counts, it means there are subarrays with k odd numbers
-        ans += counts[curr - k]  # curr - k = 1 - 3 = -2, counts[-2] = 0 (not in counts), ans = 0
+        # Why? If odd - k exists in counts, it means there are subarrays with k odd numbers
+        ans += counts[odd - k]  # odd - k = 1 - 3 = -2, counts[-2] = 0 (not in counts), ans = 0
         # Increment the count of the current odd number prefix sum
         # Why? We track how many times this odd count has occurred
-        counts[curr] += 1  # counts[1] = 0 + 1 = 1
-        # After Iteration 1: curr = 1, ans = 0, counts = {0: 1, 1: 1}
+        counts[odd] += 1  # counts[1] = 0 + 1 = 1
+        # After Iteration 1: odd = 1, ans = 0, counts = {0: 1, 1: 1}
 
         # --- Iteration 2: num = 1 ---
-        if num == 1 and curr == 1:
-            curr += num % 2  # num = 1, 1 % 2 = 1, curr = 1 + 1 = 2
-            ans += counts[curr - k]  # curr - k = 2 - 3 = -1, counts[-1] = 0, ans = 0
-            counts[curr] += 1  # counts[2] = 0 + 1 = 1
-            # After Iteration 2: curr = 2, ans = 0, counts = {0: 1, 1: 1, 2: 1}
+        if num == 1 and odd == 1:
+            odd += num % 2  # num = 1, 1 % 2 = 1, odd = 1 + 1 = 2
+            ans += counts[odd - k]  # odd - k = 2 - 3 = -1, counts[-1] = 0, ans = 0
+            counts[odd] += 1  # counts[2] = 0 + 1 = 1
+            # After Iteration 2: odd = 2, ans = 0, counts = {0: 1, 1: 1, 2: 1}
 
         # --- Iteration 3: num = 2 ---
         if num == 2:
-            curr += num % 2  # num = 2, 2 % 2 = 0, curr = 2 + 0 = 2
-            ans += counts[curr - k]  # curr - k = 2 - 3 = -1, counts[-1] = 0, ans = 0
-            counts[curr] += 1  # counts[2] = 1 + 1 = 2
-            # After Iteration 3: curr = 2, ans = 0, counts = {0: 1, 1: 1, 2: 2}
+            odd += num % 2  # num = 2, 2 % 2 = 0, odd = 2 + 0 = 2
+            ans += counts[odd - k]  # odd - k = 2 - 3 = -1, counts[-1] = 0, ans = 0
+            counts[odd] += 1  # counts[2] = 1 + 1 = 2
+            # After Iteration 3: odd = 2, ans = 0, counts = {0: 1, 1: 1, 2: 2}
 
         # --- Iteration 4: num = 1 ---
-        if num == 1 and curr == 2:
-            curr += num % 2  # num = 1, 1 % 2 = 1, curr = 2 + 1 = 3
-            ans += counts[curr - k]  # curr - k = 3 - 3 = 0, counts[0] = 1, ans = 0 + 1 = 1
-            counts[curr] += 1  # counts[3] = 0 + 1 = 1
-            # After Iteration 4: curr = 3, ans = 1, counts = {0: 1, 1: 1, 2: 2, 3: 1}
+        if num == 1 and odd == 2:
+            odd += num % 2  # num = 1, 1 % 2 = 1, odd = 2 + 1 = 3
+            ans += counts[odd - k]  # odd - k = 3 - 3 = 0, counts[0] = 1, ans = 0 + 1 = 1
+            counts[odd] += 1  # counts[3] = 0 + 1 = 1
+            # After Iteration 4: odd = 3, ans = 1, counts = {0: 1, 1: 1, 2: 2, 3: 1}
             # Found subarray: [1, 1, 2, 1] (3 odd numbers, indices 0 to 3)
 
         # --- Iteration 5: num = 1 ---
-        if num == 1 and curr == 3:
-            curr += num % 2  # num = 1, 1 % 2 = 1, curr = 3 + 1 = 4
-            ans += counts[curr - k]  # curr - k = 4 - 3 = 1, counts[1] = 1, ans = 1 + 1 = 2
-            counts[curr] += 1  # counts[4] = 0 + 1 = 1
-            # After Iteration 5: curr = 4, ans = 2, counts = {0: 1, 1: 1, 2: 2, 3: 1, 4: 1}
+        if num == 1 and odd == 3:
+            odd += num % 2  # num = 1, 1 % 2 = 1, odd = 3 + 1 = 4
+            ans += counts[odd - k]  # odd - k = 4 - 3 = 1, counts[1] = 1, ans = 1 + 1 = 2
+            counts[odd] += 1  # counts[4] = 0 + 1 = 1
+            # After Iteration 5: odd = 4, ans = 2, counts = {0: 1, 1: 1, 2: 2, 3: 1, 4: 1}
             # Found subarray: [1, 2, 1, 1] (3 odd numbers, indices 1 to 4)
 
     # 3️⃣ Return the count of valid subarrays
@@ -229,12 +232,12 @@ from collections import defaultdict
 def numberOfSubarrays(nums, k):
     counts = defaultdict(int)
     counts[0] = 1
-    ans = curr = 0
+    ans = odd = 0
     
     for num in nums:
-        curr += num % 2
-        ans += counts[curr - k]
-        counts[curr] += 1
+        odd += num % 2
+        ans += counts[odd - k]
+        counts[odd] += 1
 
     return ans
 
