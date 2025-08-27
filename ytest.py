@@ -30,6 +30,17 @@
 
 
 # –––––––––––––––––––––––––––––––––––––––––––––––
+# What is the best simple solution, easy to follow for a beginner for this problem that is efficient? Justify your answer
+
+
+
+# –––––––––––––––––––––––––––––––––––––––––––––––
+# What is the best efficient simple solution for a beginner to understand this problem. Justify your answer
+
+# The goal is clarity and learning for a beginner to easily follow along
+
+
+# –––––––––––––––––––––––––––––––––––––––––––––––
 # Give me time and space for the following in this format:
     # Format like this
     # Time: O(n)
@@ -41,6 +52,71 @@
     # - Dictionary 'counts' can store up to n different prefix sums in the worst case: O(n) space.
     # - A few variables (curr, ans, num) take O(1) space.
     # - Overall: O(n) total space.
+
+
+
+
+
+
+# –––––––––––––––––––––––––––––––––––––––––––––––
+# Give me the overview of each iteration of this code
+# Provide your answer in a .py file so i can copy it into the write up for this problem
+# Only reply with the Overview for Each Iteration
+
+
+# Here is a great example.
+# Note you can choose the format you think is best for the overview depending on the problem. You dont always have to do a 2 steps breakdown. In this example it just really made sense. 
+# The goal is clarity and learning for a beginner to easily follow along
+
+
+# from collections import defaultdict
+
+# def largestUniqueNumber(nums):
+#     # Step 1: Count occurrences of each number
+#     counts = defaultdict(int)
+#     for num in nums:
+#         counts[num] += 1
+    
+#     # Step 2: Find the largest number with count 1
+#     max_unique = -1
+#     for num in counts:
+#         if counts[num] == 1 and num > max_unique:
+#             max_unique = num
+    
+#     return max_unique
+
+# nums = [1, 3, 9, 4, 9, 8, 3]
+# print(largestUniqueNumber(nums))
+# Output: 8
+
+# counts = {1:1, 3:2, 9:2, 4:1, 8:1}
+
+
+# Overview for Each Iteration
+# Step 1: Count occurrences
+# Idx | num | counts
+# -   | -   | {}
+# 0   | 1   | {1:1}
+# 1   | 3   | {1:1, 3:1}
+# 2   | 9   | {1:1, 3:1, 9:1}
+# 3   | 4   | {1:1, 3:1, 9:1, 4:1}
+# 4   | 9   | {1:1, 3:1, 9:2, 4:1}
+# 5   | 8   | {1:1, 3:1, 9:2, 4:1, 8:1}
+# 6   | 3   | {1:1, 3:2, 9:2, 4:1, 8:1}
+
+# Step 2: Find largest unique number
+# num | counts[num] | max_unique
+# -   | -           | -1
+# 1   | 1           | 1 (updated)
+# 3   | 2           | 1 (skipped)
+# 9   | 2           | 1 (skipped)
+# 4   | 1           | 4 (updated)
+# 8   | 1           | 8 (updated)
+# Final: 8
+
+
+
+
 
 
 
