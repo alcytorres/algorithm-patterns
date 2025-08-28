@@ -32,14 +32,29 @@ def subarraySum(nums, k):
 
     return ans
 
-numbers = [1, 2, 1, 2, 1]
-print(subarraySum(numbers, 3))
+nums = [1, 2, 1, 2, 1]
+print(subarraySum(nums, 3))
 # Output: 4 (subarrays [1, 2], [2, 1], [1, 2], [2, 1])
 
 # counts = 
-# {0:1} -> {0:1,1:1} -> {0:1,1:1,3:1} -> 
-# {0:1,1:1,3:1,4:1} -> {0:1,1:1,3:1,4:1,6:1} -> 
+# {0:1}
+# {0:1,1:1}
+# {0:1,1:1,3:1} 
+# {0:1,1:1,3:1,4:1}
+# {0:1,1:1,3:1,4:1,6:1}
 # {0:1,1:1,3:1,4:1,6:1,7:1}
+
+# Overview for Each Iteration
+# Input: nums = [1, 2, 1, 2, 1], k = 3
+# Step: Process array to find subarrays with sum k
+# Idx | num | curr | curr - k | counts[curr - k] | ans | counts
+# -   | -   | 0    | -        | -                | 0   | {0:1}
+# 0   | 1   | 1    | 1-3=-2   | 0                | 0   | {0:1, 1:1}
+# 1   | 2   | 3    | 3-3=0    | 1                | 1   | {0:1, 1:1, 3:1}
+# 2   | 1   | 4    | 4-3=1    | 1                | 2   | {0:1, 1:1, 3:1, 4:1}
+# 3   | 2   | 6    | 6-3=3    | 1                | 3   | {0:1, 1:1, 3:1, 4:1, 6:1}
+# 4   | 1   | 7    | 7-3=4    | 1                | 4   | {0:1, 1:1, 3:1, 4:1, 6:1, 7:1}
+# Final: 4 (subarrays [1,2], [2,1], [1,2], [2,1])
 
 
 # Time: O(n)

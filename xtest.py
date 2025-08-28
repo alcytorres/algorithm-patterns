@@ -1,24 +1,27 @@
-# 1189. Maximum Number of Balloons
-
-# Given a string text, you want to use the characters of text to form as many instances of the word "balloon" as possible.
-
-# You can use each character in text at most once. Return the maximum number of instances that can be formed.
-
 from collections import defaultdict
 
-def maxNumberOfBalloons(text):
-    # Step 1: Count characters in text
+def findMaxLength(nums):
+    # Step 1: Initialize variables
     counts = defaultdict(int)
+    counts[0] = -1            
+    diff = 0                 
+    max_length = 0        
     
-    for c in text:
-        counts[c] += 1
+    # Step 2: Process each number
+    for i, num in enumerate(nums):
+        if num == 1:
+            diff += 1         # Add 1 for a 1
+        else:
+            diff -= 1         # Subtract 1 for a 0
+        if diff in counts:    
+            max_length = max(max_length, i - counts[diff])  
+        else:
+            counts[diff] = i  
     
-    # Step 2: Find how many "balloon"s we can make
-    return min(counts['b'], counts['a'], counts['l'] // 2, counts['o'] // 2, counts['n'])
+    return max_length
 
 
-text = "nlaebolko"
-print(maxNumberOfBalloons(text))
-# Output: 1
+nums = [0, 1, 1, 1, 1, 1, 0, 0, 0]
+print(findMaxLength(nums))
 
-# counts = {'n': 1, 'l': 2, 'a': 1, 'e': 1, 'b': 1, 'o': 2, 'k': 1}
+

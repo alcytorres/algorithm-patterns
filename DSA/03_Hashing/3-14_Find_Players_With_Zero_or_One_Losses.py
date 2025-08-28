@@ -62,7 +62,6 @@ print(findWinners(matches))
 # - Overall: O(m) space, where m = number of unique players.
 
 
-
 # Full Trace Overview
 # Index  | Match      | Seen Set               | Losses Dictionary
 # -      | -          | {}                     | {}
