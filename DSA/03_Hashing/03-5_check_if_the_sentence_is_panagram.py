@@ -32,6 +32,7 @@ print(checkIfPangram(s))
 
 
 # ––––––––––––––––––––––––––––––––––––––––––––––– # Breakdown
+
 def checkIfPangram(sentence):
     # Add every letter of 'sentence' to hash set 'seen'.
     seen = set(sentence)

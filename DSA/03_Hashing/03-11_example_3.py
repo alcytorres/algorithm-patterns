@@ -53,7 +53,7 @@ print(areOccurrencesEqual(s))
 
 
 # ––––––––––––––––––––––––––––––––––––––––––––––––
-# Breakdown 
+# Simple Breakdown 
 from collections import defaultdict
 
 def areOccurrencesEqual(s):

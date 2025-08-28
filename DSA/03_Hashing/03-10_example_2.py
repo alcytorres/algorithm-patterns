@@ -64,7 +64,7 @@ print(intersection(nums))  # Output: [3, 4]
 
 
 # ––––––––––––––––––––––––––––––––––––––––––––––––
-# Breakdown 
+# Simple Breakdown 
 def intersection(nums):
     counts = defaultdict(int)  # Initialize dictionary for element frequencies
     for arr in nums:          # Iterate over each subarray

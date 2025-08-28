@@ -33,11 +33,11 @@
 # What is the best simple solution, easy to follow for a beginner for this problem that is efficient? Justify your answer
 
 
-
 # –––––––––––––––––––––––––––––––––––––––––––––––
 # What is the best efficient simple solution for a beginner to understand this problem. Justify your answer
 
 # The goal is clarity and learning for a beginner to easily follow along
+
 
 
 # –––––––––––––––––––––––––––––––––––––––––––––––

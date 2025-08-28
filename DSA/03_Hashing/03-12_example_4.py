@@ -16,47 +16,6 @@
 
 
 # ––––––––––––––––––––––––––––––––––––––––––––––––
-# Brute Force 
-
-def subarraySum(nums, k):
-    ans = 0
-    # Check every possible subarray
-    for i in range(len(nums)):
-        curr = 0
-        # Compute sum of subarray from i to j
-        for j in range(i, len(nums)):
-            curr += nums[j]
-            # If sum equals k, increment count
-            if curr == k:
-                ans += 1
-    return ans
-
-nums = [1, 2, 1, 2, 1]
-print(subarraySum(nums, 3)) 
-# Output: 4 (subarrays [1, 2], [2, 1], [1, 2], [2, 1])
-
-
-# Time: O(n^2)
-# - Outer loop runs n times.
-# - Inner loop runs up to n times for each outer loop, computing subarray sums.
-# - Overall: O(n^2) time.
-
-# Space: O(1)
-# - Only a constant number of variables (ans, curr, i, j) are used.
-# - No additional data structures.
-# - Overall: O(1) space.
-
-
-# Trace Overview
-# i        = 0 -  - -  1 - -  2 - -  3 - -  4 -
-# j        = 0 -  1 2  1 - 2 3  2 - 3 4  3 - 4  4 -
-# curr     = 0 1  3 4  0 2 3 5  0 1 3 5  0 2 4  0 1
-# ans      = 0 0  1 1  1 1 2 2  2 2 3 3  3 3 4  4
-
-
-# ––––––––––––––––––––––––––––––––––––––––––––––––
-# Best Solution:
-
 from collections import defaultdict
 
 def subarraySum(nums, k):
@@ -99,6 +58,47 @@ print(subarraySum(numbers, 3))
 
 # Most IMPORTANT thing to Understand for this solution:
 # ans += counts[curr - k] works simply because if curr - k (a previous sum, let’s call it prev) is in counts, then curr - prev = k, meaning the subarray between those points sums to k, and counts[curr - k] counts how many such prev sums exist.
+
+
+
+
+# ––––––––––––––––––––––––––––––––––––––––––––––––
+# Brute Force 
+
+def subarraySum(nums, k):
+    ans = 0
+    # Check every possible subarray
+    for i in range(len(nums)):
+        curr = 0
+        # Compute sum of subarray from i to j
+        for j in range(i, len(nums)):
+            curr += nums[j]
+            # If sum equals k, increment count
+            if curr == k:
+                ans += 1
+    return ans
+
+nums = [1, 2, 1, 2, 1]
+print(subarraySum(nums, 3)) 
+# Output: 4 (subarrays [1, 2], [2, 1], [1, 2], [2, 1])
+
+
+# Time: O(n^2)
+# - Outer loop runs n times.
+# - Inner loop runs up to n times for each outer loop, computing subarray sums.
+# - Overall: O(n^2) time.
+
+# Space: O(1)
+# - Only a constant number of variables (ans, curr, i, j) are used.
+# - No additional data structures.
+# - Overall: O(1) space.
+
+
+# Trace Overview
+# i        = 0 -  - -  1 - -  2 - -  3 - -  4 -
+# j        = 0 -  1 2  1 - 2 3  2 - 3 4  3 - 4  4 -
+# curr     = 0 1  3 4  0 2 3 5  0 1 3 5  0 2 4  0 1
+# ans      = 0 0  1 1  1 1 2 2  2 2 3 3  3 3 4  4
 
 
 

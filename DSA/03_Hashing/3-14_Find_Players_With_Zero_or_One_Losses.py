@@ -162,7 +162,9 @@ print(findWinners_bruteforce(matches))
 
 
 # –––––––––––––––––––––––––––––––––––––––––––––––––
-# Breakdown 
+# Simple Breakdown 
+from collections import defaultdict
+
 def findWinners(matches):
     losses = defaultdict(int)  # Track number of losses per player
     seen = set()              # Track all players in matches

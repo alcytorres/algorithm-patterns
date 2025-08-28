@@ -111,7 +111,7 @@ print(find_longest_substring(s, 2))
 
 
 # ––––––––––––––––––––––––––––––––––––––––––––––––
-# Breakdown 
+# Simple Breakdown 
 from collections import defaultdict  # Initialize defaultdict for character counts
 
 def find_longest_substring(s, k):

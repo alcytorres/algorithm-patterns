@@ -37,7 +37,8 @@ print(missingNumber(l))
 
 
 # ––––––––––––––––––––––––––––––––––––––––––––––––
-# Breakdown 
+# Simple Breakdown 
+
 def missingNumber(nums):
     num_set = set(nums)       # Convert array to set for O(1) lookups
     n = len(nums) + 1         # Range of expected numbers (0 to n)

@@ -97,12 +97,84 @@ def largestUniqueNumber(nums):
     return max_unique
 
 nums = [1, 3, 9, 4, 9, 8, 3]
-print(largestUniqueNumber(nums))  # Output: 8
+print(largestUniqueNumber(nums))  
+# Output: 8
+
+# Time: O(n^2)
+# - Outer loop iterates over all n elements.
+# - Inner loop scans the entire array for each element → O(n).
+# - Overall: O(n * n) = O(n^2) time.
+
+# Space: O(1)
+# - Only a constant number of variables (max_unique, i, j, num, count) are used.
+# - No additional data structures.
+# - Overall: O(1) space.
+
+# Overview for Each Iteration
+# Step 1: Check each number and count occurrences
+# i | num | j | nums[j] | count | max_unique
+# - | -   | - | -       | -     | -1
+# 0 | 1   | 0 | 1       | 1     | -1
+#   |     | 1 | 3       | 1     | -1
+#   |     | 2 | 9       | 1     | -1
+#   |     | 3 | 4       | 1     | -1
+#   |     | 4 | 9       | 1     | -1
+#   |     | 5 | 8       | 1     | -1
+#   |     | 6 | 3       | 1     | -1
+#   |     | End: count=1, num=1 > -1 | 1 (updated)
+# 1 | 3   | 0 | 1       | 0     | 1
+#   |     | 1 | 3       | 1     | 1
+#   |     | 2 | 9       | 1     | 1
+#   |     | 3 | 4       | 1     | 1
+#   |     | 4 | 9       | 1     | 1
+#   |     | 5 | 8       | 1     | 1
+#   |     | 6 | 3       | 2     | 1
+#   |     | End: count=2, skip | 1
+# 2 | 9   | 0 | 1       | 0     | 1
+#   |     | 1 | 3       | 0     | 1
+#   |     | 2 | 9       | 1     | 1
+#   |     | 3 | 4       | 1     | 1
+#   |     | 4 | 9       | 2     | 1
+#   |     | 5 | 8       | 2     | 1
+#   |     | 6 | 3       | 2     | 1
+#   |     | End: count=2, skip | 1
+# 3 | 4   | 0 | 1       | 0     | 1
+#   |     | 1 | 3       | 0     | 1
+#   |     | 2 | 9       | 0     | 1
+#   |     | 3 | 4       | 1     | 1
+#   |     | 4 | 9       | 1     | 1
+#   |     | 5 | 8       | 1     | 1
+#   |     | 6 | 3       | 1     | 1
+#   |     | End: count=1, num=4 > 1 | 4 (updated)
+# 4 | 9   | 0 | 1       | 0     | 4
+#   |     | 1 | 3       | 0     | 4
+#   |     | 2 | 9       | 1     | 4
+#   |     | 3 | 4       | 1     | 4
+#   |     | 4 | 9       | 2     | 4
+#   |     | 5 | 8       | 2     | 4
+#   |     | 6 | 3       | 2     | 4
+#   |     | End: count=2, skip | 4
+# 5 | 8   | 0 | 1       | 0     | 4
+#   |     | 1 | 3       | 0     | 4
+#   |     | 2 | 9       | 0     | 4
+#   |     | 3 | 4       | 0     | 4
+#   |     | 4 | 9       | 0     | 4
+#   |     | 5 | 8       | 1     | 4
+#   |     | 6 | 3       | 1     | 4
+#   |     | End: count=1, num=8 > 4 | 8 (updated)
+# 6 | 3   | 0 | 1       | 0     | 8
+#   |     | 1 | 3       | 1     | 8
+#   |     | 2 | 9       | 1     | 8
+#   |     | 3 | 4       | 1     | 8
+#   |     | 4 | 9       | 1     | 8
+#   |     | 5 | 8       | 1     | 8
+#   |     | 6 | 3       | 2     | 8
+#   |     | End: count=2, skip | 8
+# Final: 8
 
 
-
-# –––––––––––––––––––––––––––––––––––––––––––––––––––––––
-# Breakdown 
+# –––––––––––––––––––––––––––––––––––––––––––––––––
+# Simple Breakdown 
 from collections import defaultdict
 
 def largestUniqueNumber(nums):
@@ -216,7 +288,6 @@ def largestUniqueNumber(nums):  # Example: nums = [1, 3, 9, 4, 9, 8, 3]
 nums = [1, 3, 9, 4, 9, 8, 3]
 print(largestUniqueNumber(nums))  
 # Output: 8
-
 
 
 

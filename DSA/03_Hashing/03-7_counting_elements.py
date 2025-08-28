@@ -44,7 +44,7 @@ print(countElements(arr))
     # The requirement to count duplicates separately is met by iterating over arr directly in for x in arr:, ensuring each occurrence of an element is checked individually for x + 1 in hash_set.
 
 
-# –––––––––––––––––––––––––––––––––––––––––––––––––––––––
+# –––––––––––––––––––––––––––––––––––––––––––––––––
 # Brute force: Approach: Search with Array
 def countElements(arr):
     count = 0
@@ -75,7 +75,8 @@ print(countElements(arr))
 
 
 # ––––––––––––––––––––––––––––––––––––––––––––––––
-# Breakdown
+# Simple Breakdown
+
 def countElements(arr):
     hash_set = set(arr)       # Convert array to set for O(1) lookups
     count = 0                 # Initialize counter for elements with x+1

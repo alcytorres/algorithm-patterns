@@ -121,8 +121,10 @@ print(numberOfSubarrays_bruteforce(nums, 3))
 
 
 
-# ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
-# Breakdown 
+# –––––––––––––––––––––––––––––––––––––––––––––––
+# Simple Breakdown 
+from collections import defaultdict
+
 def numberOfSubarrays(nums, k):
     counts = defaultdict(int)  # Notebook to track counts of odd numbers
     counts[0] = 1             # Start with "0 odds seen" once
@@ -138,7 +140,7 @@ def numberOfSubarrays(nums, k):
 
 
 
-# ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+# –––––––––––––––––––––––––––––––––––––––––––––––
 # Full Breakdown
 
 # Task: Count the number of subarrays with exactly k odd numbers in a positive integer array.
