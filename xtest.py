@@ -13,6 +13,7 @@ def findMaxLength(nums):
             diff += 1         # Add 1 for a 1
         else:
             diff -= 1         # Subtract 1 for a 0
+
         if diff in counts:    
             max_length = max(max_length, i - counts[diff])  
         else:
@@ -21,7 +22,8 @@ def findMaxLength(nums):
     return max_length
 
 
-nums = [0, 1, 1, 1, 1, 1, 0, 0, 0]
+nums = [0, 1, 1, 1, 1, 0, 0]
 print(findMaxLength(nums))
+# Output 4
 
 

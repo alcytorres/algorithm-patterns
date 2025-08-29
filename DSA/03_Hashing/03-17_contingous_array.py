@@ -62,20 +62,47 @@ print(findMaxLength(nums))
 # Overview for Each Iteration
 # Input: nums = [0, 1, 1, 1, 1, 1, 0, 0, 0]
 # Step: Process array to find longest subarray with equal 0s and 1s
-# Idx | num | diff | counts[diff] | max_length | counts
-# -   | -   | 0    | -1           | 0          | {0:-1}
-# 0   | 0   | -1   | absent       | 0          | {0:-1, -1:0}
-# 1   | 1   | 0    | -1           | 2 (1 - (-1)) | {0:-1, -1:0}
-# 2   | 1   | 1    | absent       | 2          | {0:-1, -1:0, 1:2}
-# 3   | 1   | 2    | absent       | 2          | {0:-1, -1:0, 1:2, 2:3}
-# 4   | 1   | 3    | absent       | 2          | {0:-1, -1:0, 1:2, 2:3, 3:4}
-# 5   | 1   | 4    | absent       | 2          | {0:-1, -1:0, 1:2, 2:3, 3:4, 4:5}
-# 6   | 0   | 3    | 4            | 2          | {0:-1, -1:0, 1:2, 2:3, 3:4, 4:5}
-# 7   | 0   | 2    | 3            | 4 (7 - 3)  | {0:-1, -1:0, 1:2, 2:3, 3:4, 4:5}
-# 8   | 0   | 1    | 2            | 6 (8 - 2)  | {0:-1, -1:0, 1:2, 2:3, 3:4, 4:5}
-# Final: 6 ([1,1,1,0,0,0])
+# i | num | diff | counts[diff] | max_length | counts
+# - | -   | 0    | -1           | 0          | {0:-1}
+# 0 | 0   | -1   | absent       | 0          | {0:-1, -1:0}
+# 1 | 1   | 0    | -1           | 2 (1 - (-1)) | {0:-1, -1:0}
+# 2 | 1   | 1    | absent       | 2          | {0:-1, -1:0, 1:2}
+# 3 | 1   | 2    | absent       | 2          | {0:-1, -1:0, 1:2, 2:3}
+# 4 | 1   | 3    | absent       | 2          | {0:-1, -1:0, 1:2, 2:3, 3:4}
+# 5 | 1   | 4    | absent       | 2          | {0:-1, -1:0, 1:2, 2:3, 3:4, 4:5}
+# 6 | 0   | 3    | 4            | 2          | {0:-1, -1:0, 1:2, 2:3, 3:4, 4:5}
+# 7 | 0   | 2    | 3            | 4 (7 - 3)  | {0:-1, -1:0, 1:2, 2:3, 3:4, 4:5}
+# 8 | 0   | 1    | 2            | 6 (8 - 2)  | {0:-1, -1:0, 1:2, 2:3, 3:4, 4:5}
+# Final: 6 ([1, 1, 1, 0, 0, 0])
 
 
+
+# –––––––––––––––––––––––––––––––––––––––––––––––––––––––
+# Why the Loop Works
+# The loop (for i, num in enumerate(nums):) does this:
+
+    # Update score (diff): Add 1 for a 1 (hill), subtract 1 for a 0 (valley). This tracks the balance of 1s and 0s.
+
+    # Check notebook (if diff in counts:): If we’ve seen this score before, the chunk from that spot to now has equal 1s and 0s (because the score didn’t change). The length is current step - old step.
+
+    # Update notebook (counts[diff] = i): If it’s a new score, write it down with the current step.
+    
+    # Why it finds the answer: Same score twice means the chunk between balances out (equal 1s and 0s). We keep the longest one.
+
+
+
+
+# Why counts[0] = -1?
+
+    # What it does: Sets score 0 at step -1 in the notebook (counts), before the array starts.
+
+    # Why needed: Catches subarrays starting at index 0 with equal 0s and 1s. When diff hits 0, length = i - (-1).
+
+    # Example: In [0, 1], at step 1, diff = 0. counts[0] = -1 gives length 1 - (-1) = 2 for [0, 1].
+    
+    # Why it works: Pretends we start at score 0, so subarrays from the beginning are measured correctly.
+
+    # Without it, we’d miss subarrays starting at 0!
 
 
 # –––––––––––––––––––––––––––––––––––––––––––––––––––––––
@@ -132,18 +159,21 @@ print(findMaxLength_bruteforce(nums))
 from collections import defaultdict
 
 def findMaxLength(nums):
+    # Step 1: Initialize variables
     counts = defaultdict(int)  # Notebook to store difference and index
     counts[0] = -1            # Start with difference 0 at index -1
     diff = 0                  # Running difference (1s count - 0s count)
     max_length = 0            # Longest subarray length
 
-    for i, num in enumerate(nums):
+    # Step 2: Process each number
+    for i, num in enumerate(nums):  # Check each number and step
         if num == 1:
             diff += 1         # Add 1 for a 1
         else:
             diff -= 1         # Subtract 1 for a 0
-        if diff in counts:    # If we've seen this difference before
-            max_length = max(max_length, i - counts[diff])  # Update length
+
+        if diff in counts:    # If we've seen this difference before, Found a balanced chunk!
+            max_length = max(max_length, i - counts[diff])  # Update longest length
         else:
             counts[diff] = i  # Store new difference with current index
 
@@ -307,6 +337,54 @@ def findMaxLength(nums):  # Example: nums = [0, 1, 1, 1, 1, 1, 0, 0, 0]
 nums = [0, 1, 1, 1, 1, 1, 0, 0, 0]
 print(findMaxLength(nums))  
 # Output: 6
+
+
+
+# –––––––––––––––––––––––––––––––––––––––––––––––––––––––
+# Best Solution
+
+from collections import defaultdict
+
+def findMaxLength(nums):
+    # Step 1: Initialize variables
+    counts = defaultdict(int)
+    counts[0] = -1            
+    diff = 0                 
+    max_length = 0        
+    
+    # Step 2: Process each number
+    for i, num in enumerate(nums):
+        if num == 1:
+            diff += 1         # Add 1 for a 1
+        else:
+            diff -= 1         # Subtract 1 for a 0
+
+        if diff in counts:    
+            max_length = max(max_length, i - counts[diff])  
+        else:
+            counts[diff] = i  
+    
+    return max_length
+
+
+nums = [0, 1, 1, 1, 1, 0, 0]
+print(findMaxLength(nums))
+# Output 4
+
+
+# Overview for Each Iteration
+# Input: nums = [0, 1, 1, 1, 1, 0, 0]
+# Step: Process array to find longest subarray with equal 0s and 1s
+# i | num | diff | counts[diff] | max_length   | counts
+# - | -   | 0    | -1           | 0            | {0:-1}
+# 0 | 0   | -1   | absent       | 0            | {0:-1, -1:0}
+# 1 | 1   | 0    | -1           | 2 (1 - (-1)) | {0:-1, -1:0}
+# 2 | 1   | 1    | absent       | 2            | {0:-1, -1:0, 1:2}
+# 3 | 1   | 2    | absent       | 2            | {0:-1, -1:0, 1:2, 2:3}
+# 4 | 1   | 3    | absent       | 2            | {0:-1, -1:0, 1:2, 2:3, 3:4}
+# 5 | 0   | 2    | 3            | 2            | {0:-1, -1:0, 1:2, 2:3, 3:4}
+# 6 | 0   | 1    | 2            | 4 (6 - 2)    | {0:-1, -1:0, 1:2, 2:3, 3:4}
+# Final: 4 ([1, 1, 0, 0])
 
 
 
