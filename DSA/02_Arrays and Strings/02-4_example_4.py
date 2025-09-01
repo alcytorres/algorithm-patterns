@@ -2,6 +2,8 @@
 
 # Example 4: Given two strings s and t, return true if s is a subsequence of t, or false otherwise.
 
+# Assume the len(t) >= len(s) , and both are strings with valid characters.
+
 def is_subsequence(s, t):
     i = j = 0           
 
@@ -12,9 +14,9 @@ def is_subsequence(s, t):
 
     return i == len(s)          
 
-string1 = "ace"
-string2 = "abcde"
-print(is_subsequence(string1, string2))
+s = "ace"
+t = "abcde"
+print(is_subsequence(s, t))
 # Output: True - "ace" appears in order within "abcde" as a subsequence.
 
 
@@ -29,10 +31,17 @@ print(is_subsequence(string1, string2))
 # - Overall: O(1) space.
 
 
-
-# Trace Overview
-# i = 0  1     2     3
-# j = 0  1  2  3  4  5 
+# Overview for Each Iteration
+# Input: s = "ace", t = "abcde"
+# Step: Check if s is a subsequence of t
+# i | j | s[i] | t[j] | Match? | Action
+# - | - | -    | -    | -      | Initialize i=0, j=0
+# 0 | 0 | a    | a    | Yes    | i+=1, j+=1 (i=1, j=1)
+# 1 | 1 | c    | b    | No     | j+=1 (i=1, j=2)
+# 1 | 2 | c    | c    | Yes    | i+=1, j+=1 (i=2, j=3)
+# 2 | 3 | e    | d    | No     | j+=1 (i=2, j=4)
+# 2 | 4 | e    | e    | Yes    | i+=1, j+=1 (i=3, j=5)
+# End: i=3, len(s)=3, return True
 
 
 # ––––––––––––––––––––––––––––––––––––––––––––––––
@@ -52,10 +61,13 @@ def is_subsequence(s, t):
 # ––––––––––––––––––––––––––––––––––––––––––––––––
 # Why while i < len(s) and j < len(t):
 
-# The loop uses pointers i (for s) and j (for t) to safely iterate until either s is fully matched or t is exhausted, preventing index errors if t is shorter than s. 
+    # The loop uses pointers i (for s) and j (for t) to safely iterate until either s is fully matched or t is exhausted, preventing index errors if t is shorter than s. 
 
 
-# If len(t) >= len(s) is guaranteed, while i < len(s) is enough, as j won’t exceed len(t) before i reaches len(s).
+# ––––––––––––––––––––––––––––––––––––––––––––––––
+# If len(t) >= len(s) is guaranteed:
+    # while i < len(s) is enough
+    # as j won’t exceed len(t) before i reaches len(s).
 
 
 # ––––––––––––––––––––––––––––––––––––––––––––––––
@@ -127,7 +139,7 @@ def is_subsequence(s, t):  # Example: s = "ace", t = "abcde"
     return i == len(s)  # i = 3, len(s) = 3, 3 == 3 is True
 
 
-string1 = "ace"
-string2 = "abcde"
-print(is_subsequence(string1, string2)) 
+s = "ace"
+t = "abcde"
+print(is_subsequence(s, t)) 
 # Output: True - "ace" appears in order within "abcde" as a subsequence.

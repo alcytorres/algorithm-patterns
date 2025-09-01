@@ -21,9 +21,9 @@ def reverseString(s):
     
     return s
 
-s = ["h","e","l","l","o"]
+s = ["h", "e", "l", "l", "o"]
 print(reverseString(s))  
-# Output: ["o","l","l","e","h"]
+# Output: ["o", "l", "l", "e", "h"]
 
 # Time: O(n)
 # - Two pointers (left, right) each move toward the center once.

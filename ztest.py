@@ -12,7 +12,12 @@ nums = ['a', 'b', 'c']
 print(fn(nums))
 
 
-
-
+nums = ['a', 'b', 'c']
+for i, num in enumerate(nums):
+    print(i, num)  
+# Prints: 
+# 0 a
+# 1 b
+# 2 c
 
 

@@ -28,8 +28,8 @@ def sortedSquares(nums):
     
     return ans
 
-numbers = [-4, -1, 0, 3, 10]
-print(sortedSquares(numbers))  
+nums = [-4, -1, 0, 3, 10]
+print(sortedSquares(nums))  
 # Output: [0, 1, 9, 16, 100]
 
 
@@ -44,37 +44,35 @@ print(sortedSquares(numbers))
 # - If we exclude the result array, extra working space is O(1).
 
 
-
-# Trace Overview
-# i      = 4    3  2  1  0
-# right  = 4 3     2
-# left   = 0    1     2  3
-# square = 10  -4  3 -1  0
-# ans    = [0, 0, 0, 0, 0] 
-#          [0, 0, 0, 0, 100]
-#          [0, 0, 0, 16, 100]
-#          [0, 0, 9, 16, 100]
-#          [0, 1, 9, 16, 100]
-#          [0, 1, 9, 16, 100]
-
+# Overview for Each Iteration
+# Input: nums = [-4, -1, 0, 3, 10]
+# Step: Square numbers and sort in non-decreasing order
+# i | l | r | abs(nums[l]) | abs(nums[r]) | square | ans
+# - | 0 | 4 | -            | -            | -      | [0, 0, 0, 0, 0]
+# 4 | 0 | 4 | 4            | 10           | 10     | [0, 0, 0, 0, 100]
+# 3 | 0 | 3 | 4            | 3            | -4     | [0, 0, 0, 16, 100]
+# 2 | 1 | 3 | 1            | 3            | 3      | [0, 0, 9, 16, 100]
+# 1 | 1 | 2 | 1            | 0            | -1     | [0, 1, 9, 16, 100]
+# 0 | 2 | 2 | 0            | 0            | 0      | [0, 1, 9, 16, 100]
+# Final: [0, 1, 9, 16, 100]
 
 # ––––––––––––––––––––––––––––––––––––––––––––––––
 # Breakdown 
 def sortedSquares(nums):
-    n = len(nums)            # Get length of input array
+    n = len(nums)         # Get length of input array
     ans = [0] * n         # Initialize ans array of size n with zeros
-    left = 0                 # Left pointer starts at beginning of array
-    right = n - 1            # Right pointer starts at end of array
+    left = 0              # Left pointer starts at beginning of array
+    right = n - 1         # Right pointer starts at end of array
     
     for i in range(n - 1, -1, -1):    # Iterate backwards from n-1 to 0 to fill ans
         if abs(nums[left]) < abs(nums[right]):  # Compare absolute values at pointers
-            square = nums[right]          # Use right element if its absolute value is larger
-            right -= 1                    # Move right pointer inward
+            square = nums[right]      # Use right element if its absolute value is larger
+            right -= 1                # Move right pointer inward
         else:
-            square = nums[left]           # Use left element if its absolute value is larger or equal
-            left += 1                     # Move left pointer inward
-        ans[i] = square * square       # Square the chosen number and store in ans
-    return ans                         # Return sorted array of squares
+            square = nums[left]       # Use left element if its absolute value is larger or equal
+            left += 1                 # Move left pointer inward
+        ans[i] = square * square      # Square the chosen number and store in ans
+    return ans                        # Return sorted array of squares
 
 
 
@@ -186,8 +184,9 @@ def sortedSquares(nums):  # Example: nums = [-10, -5, 1, 2, 4, 7]
     return ans  # ans = [1, 4, 16, 25, 49, 100]
 
 
-numbers = [-10, -5, 1, 2, 4, 7]
-print(sortedSquares(numbers))  # Output: [1, 4, 16, 25, 49, 100]
+nums = [-10, -5, 1, 2, 4, 7]
+print(sortedSquares(nums))  
+# Output: [1, 4, 16, 25, 49, 100]
 
 
 

@@ -35,6 +35,7 @@ def findMaxLength(nums):
             diff += 1         # Add 1 for a 1
         else:
             diff -= 1         # Subtract 1 for a 0
+
         if diff in counts:    
             max_length = max(max_length, i - counts[diff])  
         else:
@@ -99,7 +100,7 @@ print(findMaxLength(nums))
     # Why needed: Catches subarrays starting at index 0 with equal 0s and 1s. When diff hits 0, length = i - (-1).
 
     # Example: In [0, 1], at step 1, diff = 0. counts[0] = -1 gives length 1 - (-1) = 2 for [0, 1].
-    
+
     # Why it works: Pretends we start at score 0, so subarrays from the beginning are measured correctly.
 
     # Without it, we’d miss subarrays starting at 0!
@@ -372,7 +373,7 @@ print(findMaxLength(nums))
 # Output 4
 
 
-# Overview for Each Iteration
+# Full Overview for Each Iteration
 # Input: nums = [0, 1, 1, 1, 1, 0, 0]
 # Step: Process array to find longest subarray with equal 0s and 1s
 # i | num | diff | counts[diff] | max_length   | counts
@@ -387,7 +388,126 @@ print(findMaxLength(nums))
 # Final: 4 ([1, 1, 0, 0])
 
 
+# –––––––––––––––––––––––––––––––––––––––––––––––––––––––
+# Best Solution
 
+from collections import defaultdict
+
+def findMaxLength(nums):
+    # Step 1: Initialize variables
+    counts = defaultdict(int)
+    counts[0] = -1            
+    diff = 0                 
+    max_length = 0        
+    
+    # Step 2: Process each number
+    for i, num in enumerate(nums):
+        if num == 1:
+            diff += 1         # Add 1 for a 1
+        else:
+            diff -= 1         # Subtract 1 for a 0
+
+        if diff in counts:    
+            max_length = max(max_length, i - counts[diff])  
+        else:
+            counts[diff] = i  
+    
+    return max_length
+
+
+nums = [0, 1, 1, 0, 0]
+print(findMaxLength(nums))
+# Output 4
+
+
+# Full Overview for Each Iteration
+# Input: nums = [0, 1, 1, 0, 0]
+# Step: Process array to find longest subarray with equal 0s and 1s
+# i | num | diff | counts[diff] | max_length   | counts
+# - | -   | 0    | -1           | 0            | {0:-1}
+# 0 | 0   | -1   | absent       | 0            | {0:-1, -1:0}
+# 1 | 1   | 0    | -1           | 2 (1 - (-1)) | {0:-1, -1:0}
+# 2 | 1   | 1    | absent       | 2            | {0:-1, -1:0, 1:2}
+# 3 | 0   | 0    | -1           | 2 (3 - (-1)) | {0:-1, -1:0, 1:2}
+# 4 | 0   | -1   | 0            | 4 (4 - 0)    | {0:-1, -1:0, 1:2}
+# Final: 4 ([1, 1, 0, 0])
+
+
+
+
+
+
+# –––––––––––––––––––––––––––––––––––––––––––––––––––––––
+# Best Solution
+
+from collections import defaultdict
+
+def findMaxLength(nums):
+    # Step 1: Initialize variables
+    counts = defaultdict(int)
+    counts[0] = -1            
+    diff = 0                 
+    max_length = 0        
+    
+    # Step 2: Process each number
+    for i, num in enumerate(nums):
+        if num == 1:
+            diff += 1         # Add 1 for a 1
+        else:
+            diff -= 1         # Subtract 1 for a 0
+
+        if diff in counts:    
+            max_length = max(max_length, i - counts[diff])  
+        else:
+            counts[diff] = i  
+    
+    return max_length
+
+
+nums = [0, 1]
+print(findMaxLength(nums))
+# Output 2
+
+
+# Overview for Each Iteration
+# Input: nums = [0, 1]
+# Step: Process array to find longest subarray with equal 0s and 1s
+# i | num | diff | counts[diff] | max_length   | counts
+# - | -   | 0    | -1           | 0            | {0:-1}
+# 0 | 0   | -1   | absent       | 0            | {0:-1, -1:0}
+# 1 | 1   | 0    | -1           | 2 (1 - (-1)) | {0:-1, -1:0}
+# Final: 2 ([0, 1])
+
+
+# Why counts[0] = -1?
+    # What it does: The notebook (counts) tracks our score (diff, which is 1s minus 0s) and where we saw it. Setting counts[0] = -1 means we pretend our score is 0 before the list starts (at step -1).
+
+    # Why needed: We want to find chunks with equal 0s and 1s, including chunks that start at the beginning (index 0). If our score (diff) becomes 0, like after [0, 1], it means the chunk from the start is balanced. counts[0] = -1 lets us measure this chunk’s length correctly: current step - (-1).
+
+# Why “Score is 0 before we start”?
+    # Before we look at any numbers, we haven’t seen any 1s or 0s, so our score (diff = 1s - 0s) is 0 (no hills or valleys yet).
+
+    # We set counts[0] = -1 to say, “At step -1 (before the list), our score was 0.” This helps us catch subarrays starting from index 0.
+
+# Example: nums = [0, 1] (Output: 2)
+# Start: counts = {0: -1}, diff = 0, max_length = 0.
+# Step 0 (num = 0):
+    # diff = 0 - 1 = -1. Not in counts. Add counts[-1] = 0.
+    # max_length = 0.
+
+# Step 1 (num = 1):
+    # diff = -1 + 1 = 0. counts[0] = -1 exists!
+    # Length = 1 - (-1) = 2 (chunk [0, 1] has one 0, one 1).
+    # max_length = 2.
+
+# Why counts[0] = -1 worked: When diff = 0 at step 1, we found a balanced chunk from the start (step -1 to 1), giving length 2.
+
+
+# Analogy
+    # Think of walking a path: 1s are steps up (+1), 0s are steps down (-1). Your score (diff) is your height. Before you start, you’re at ground level (score 0). We write in the notebook, “Ground level at step -1,” so if you hit ground level again (like after [0, 1]), we know the chunk from the start is balanced. Using -1 ensures the length calculation (current step - (-1)) works for chunks starting at 0.
+
+# Why It Works
+    # counts[0] = -1 lets us catch balanced subarrays starting from the beginning. Without it, we’d miss chunks like [0, 1]. Only -1 gives the correct length for these cases!7.1s
 
 
 # –––––––––––––––––––––––––––––––––––––––––––––––––––––––
@@ -412,3 +532,28 @@ def findMaxLength(nums):
 nums = [0, 1, 1, 1, 1, 1, 0, 0, 0]
 print(findMaxLength(nums))
 # Output: 6
+
+
+
+
+# –––––––––––––––––––––––––––––––––––––––––––––––––––––––
+# Playground 
+
+def fn(nums):
+    ans = {}
+    for i, num in enumerate(nums):
+        ans[i] = num
+    return ans
+    
+nums = ['a', 'b', 'c']
+print(fn(nums))
+# Output: {0: 'a', 1: 'b', 2: 'c'}
+
+
+nums = ['a', 'b', 'c']
+for i, num in enumerate(nums):
+    print(i, num)  
+# Output:
+# 0 a
+# 1 b
+# 2 c
