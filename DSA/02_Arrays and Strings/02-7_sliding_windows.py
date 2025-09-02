@@ -19,11 +19,12 @@ def sliding_window(arr):
     return answer  # Return final result
 
 # Time: O(n) - Right and left pointers each move at most n times (amortized O(1) per iteration).
+
 # Space: O(1) - Typically uses a constant number of variables, unless additional data structures are needed.
 
 
 
-# ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+# ––––––––––––––––––––––––––––––––––––––––––––––––––
 # Example 1: Longest Subarray with Sum Less Than or Equal to k
 # Finds the length of the longest subarray with sum <= k using sliding window.
 def longest_subarray_sum(nums, k):
@@ -49,10 +50,12 @@ print(longest_subarray_sum([3, 1, 2, 7, 4, 2, 1, 1, 5], 8))
 # Space: O(1) - Uses only three integer variables (left, curr, ans).
 
 
-# ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+# ––––––––––––––––––––––––––––––––––––––––––––––––––
 # Example 2: Longest Substring with At Most One "0"
 # Finds the longest substring with at most one "0" by flipping at most one "0" to "1". 
+
 # In other words "what is the longest substring that contains at most one "0"?
+
 def longest_substring_one_zero(s):
     left = 0          # Left bound of the window
     curr = 0          # Tracks count of "0"s in current window
@@ -75,13 +78,16 @@ print(longest_substring_one_zero("11001011"))
 # Output: 4  --> Represents substring "1011" (indices 4-7, length 4), with one "0" flipped to "1" for all "1"s.
 
 # Time: O(n) - Right pointer moves n times, left pointer moves at most n times (amortized O(1) per iteration).
+
 # Space: O(1) - Uses only three integer variables (left, curr, ans).
 
 
-# ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+# ––––––––––––––––––––––––––––––––––––––––––––––––––
 # Example 3: Number of Subarrays with Product Less Than k
 # Counts subarrays where product of elements is strictly less than k.
+
 # Link: https://leetcode.com/problems/subarray-product-less-than-k/
+
 def num_subarrays_product_less_than_k(nums, k):
     if k <= 1:        # If k <= 1, no valid subarrays possible (since nums are positive)
         return 0
@@ -117,10 +123,11 @@ print(num_subarrays_product_less_than_k([2, 3], 7))
 # [2], [2, 3], [3]
 
 # Time: O(n) - Right pointer moves n times, left pointer moves at most n times (amortized O(1) per iteration).
+
 # Space: O(1) - Uses only three integer variables (left, curr, ans).
 
 
-
+# ––––––––––––––––––––––––––––––––––––––––––––––––––
 # Super simple demo of sliding window with multiplication and division
 nums = [2, 4, 5]  # Basic array
 curr = 1          # Start with product = 1
@@ -142,7 +149,7 @@ print("After curr //= nums[1]:", curr)  # Output: 5.0
 
 
 
-# ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+# ––––––––––––––––––––––––––––––––––––––––––––––––––
 # Example 4: Largest Sum of Subarray with Fixed Length k
 # Finds the subarray of length k with the largest sum.
 def find_best_subarray(nums, k):
@@ -165,13 +172,14 @@ print(find_best_subarray([1, 4, 6, 2], 2))
 # Output: 10  →  4 + 6 = 10
 
 # Time: O(n) - Builds first window in O(k), then slides n-k times with O(1) operations per iteration.
+
 # Space: O(1) - Uses only two integer variables (curr, answer).
 
 
 
 
 
-# ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+# ––––––––––––––––––––––––––––––––––––––––––––––––––
 """
 How to Know Whether to Use 1 or 2 pointers in a Sliding Window?
 
