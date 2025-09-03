@@ -21,7 +21,9 @@ def find_best_subarray(nums, k):
     
     return ans 
 
-print(find_best_subarray([1, 4, 6, 2], 2))  
+nums = [1, 4, 6, 2]
+k = 2
+print(find_best_subarray(nums, k))  
 # Output: 10  --> Subarray [4, 6] (length 2, sum 4 + 6 = 10) is the largest sum for k=2.
 
 # Time: O(n)
@@ -35,8 +37,23 @@ print(find_best_subarray([1, 4, 6, 2], 2))
 # - Overall: O(1) space.
 
 
+# Overview for Each Iteration
+# Input: nums = [1, 4, 6, 2], k = 2
+# Step 1: Calculate initial sum for first window of size k
+# i | curr    | ans
+# - | 0       | -
+# 0 | 1       | -
+# 1 | 5 (1+4) | 5
 
-# ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+# Step 2: Slide window, maintaining size k
+# i | curr       | nums[i] | nums[i-k] | ans
+# 2 | 10 (5+6-1) | 6       | 1         | 10 (max(5, 10))
+# 3 | 8 (10+2-4) | 2       | 4         | 10 (max(10, 8))
+# Final: 10 ([4, 6])
+
+
+
+# –––––––––––––––––––––––––––––––––––––––––––––––––––
 # Breakdown 
 def find_best_subarray(nums, k):
     curr = 0          # Tracks sum of current window
@@ -55,7 +72,7 @@ def find_best_subarray(nums, k):
     return ans  # Returns the maximum sum
 
 
-# ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+# –––––––––––––––––––––––––––––––––––––––––––––––––––
 # Task: Find the maximum sum of any contiguous subarray of size k in an array.
 # Example: nums = [1, 4, 6, 2], k = 2 → Output = 10 (subarray [4, 6] has sum 4 + 6 = 10)
 # Why: Practices sliding window technique to compute maximum sum efficiently.
@@ -112,5 +129,7 @@ def find_best_subarray(nums, k):  # Example: nums = [1, 4, 6, 2], k = 2
     return ans  # ans = 10
 
 
-print(find_best_subarray([1, 4, 6, 2], 2))  
+nums = [1, 4, 6, 2]
+k = 2
+print(find_best_subarray(nums, k))  
 # Output: 10  --> Subarray [4, 6] (length 2, sum 4 + 6 = 10) is the largest sum for k=2.

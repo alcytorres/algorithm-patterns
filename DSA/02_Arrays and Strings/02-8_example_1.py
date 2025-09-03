@@ -74,6 +74,18 @@ print(longest_subarray_sum(nums, 8))
 
 
 
+# ––––––––––––––––––––––––––––––––––––––––––––––––
+# Why use for right in range(len(nums)) instead of for right in len(nums)?
+
+# for right in range(len(nums)):
+    # Iterates over indices (0 to len(nums)-1).
+    # Enables accessing array elements via nums[right].
+
+# for right in len(nums):
+    # Invalid syntax.
+    # len(nums) is a single integer, not an iterable.
+
+
 
 # ––––––––––––––––––––––––––––––––––––––––––––––––
 # Breakdown 

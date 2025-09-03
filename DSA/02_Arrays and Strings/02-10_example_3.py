@@ -1,6 +1,7 @@
 # Example 3: 713. Number of Subarrays with Product Less Than k
 
 # Counts subarrays where product of elements is strictly less than k.
+
 # Example
 # nums = [2, 3], k = 7
 # Output: 3 --> [2], [2, 3], [3]
@@ -27,16 +28,13 @@ def num_subarrays_product_less_than_k(nums, k):
     return ans
 
 nums = [10, 5, 2, 6]
-print(num_subarrays_product_less_than_k(nums, 100))  
+k = 100
+print(num_subarrays_product_less_than_k(nums, k))  
 # Output: 8
-# [10]
-# [10, 5]
-# [5]
-# [5, 2]
-# [2]
-# [5, 2, 6]
-# [2, 6]
-# [6]
+# r=0: Counted [10]
+# r=1: Counted [10, 5], [5]
+# r=2: After shrinking, counted [5, 2], [2]
+# r=3: Counted [5, 2, 6], [2, 6], [6]
 
 # Time: O(n)
 # - Right pointer moves across the array once.
@@ -50,14 +48,21 @@ print(num_subarrays_product_less_than_k(nums, 100))
 # - Overall: O(1) space.
 
 
+# Overview for Each Iteration
+# Input: nums = [10, 5, 2, 6], k = 100
+# Step: Count subarrays with product < k using sliding window
+# r | nums[r] | curr | l | curr >= k | Action                     | ans
+# - | -       | 1    | 0 | -         | -                          | 0
+# 0 | 10      | 10   | 0 | No        | ans+=0-0+1=1               | 1
+# 1 | 5       | 50   | 0 | No        | ans+=1-0+1=2               | 3
+# 2 | 2       | 100  | 0 | Yes       | curr//=nums[0]=100//10=10  | 3
+#   |         | 10   | 1 | No        | ans+=2-1+1=2               | 5
+# 3 | 6       | 60   | 1 | No        | ans+=3-1+1=3               | 8
+# Final: 8 ([10], [5], [5, 2], [2], [2, 6], [6], [10, 5], [5, 2, 6])
 
-# Trace Steps
-# right =  0  0   1   2       3
-# curr  =  1  10  50  100 10  60
-# left  =  0               1
-# ans   =  0  1   3        5  8
 
 
+# ––––––––––––––––––––––––––––––––––––––––––––––––––
 # Super simple demo of sliding window with multiplication and division
 nums = [2, 4, 5]  # Basic array
 curr = 1          # Start with product = 1
@@ -76,12 +81,15 @@ curr //= nums[0]   # Remove nums[0] (2), curr = 40 / 2
 print("After curr //= nums[0]:", curr)  # Output: 20.0
 curr //= nums[1]   # Remove nums[1] (4), curr = 20 / 4
 print("After curr //= nums[1]:", curr)  # Output: 5.0
+curr //= nums[2]   # Remove nums[2] (5), curr = 20 / 5
+print("After curr //= nums[2]:", curr)  # Output: 1.0
 
 
+# ––––––––––––––––––––––––––––––––––––––––––––––––––
 # Why is left += 1 inside of if curr >= k:?
     # left += 1 is inside if curr >= k: to slide the window only when the product exceeds k, ensuring the window stays valid by removing the leftmost element only when needed.
 
-# ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+# ––––––––––––––––––––––––––––––––––––––––––––––––––
 # Breakdown
 def num_subarrays_product_less_than_k(nums, k):
     if k <= 1:     # If k <= 1, no valid subarrays possible (since nums are positive)
@@ -103,7 +111,7 @@ def num_subarrays_product_less_than_k(nums, k):
     return ans  # Returns the count of valid subarrays
 
 
-# ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+# ––––––––––––––––––––––––––––––––––––––––––––––––––
 # Task: Count the number of contiguous subarrays with a product strictly less than k.
 # Assume nums contains positive integers.
 # Example: nums = [10, 5, 2, 6], k = 100 → Output = 8 (subarrays: [10], [5], [2], [6], [10, 5], [5, 2], [2, 6], [5, 2, 6])
@@ -187,13 +195,10 @@ def num_subarrays_product_less_than_k(nums, k):  # Example: nums = [10, 5, 2, 6]
 
 
 nums = [10, 5, 2, 6]
-print(num_subarrays_product_less_than_k(nums, 100))  
+k = 100
+print(num_subarrays_product_less_than_k(nums, k))  
 # Output: 8
-# [10]
-# [10, 5]
-# [5]
-# [5, 2]
-# [2]
-# [5, 2, 6]
-# [2, 6]
-# [6]
+# r=0: [10]
+# r=1: [10, 5], [5]
+# r=2: [5, 2], [2]
+# r=3: [5, 2, 6], [2, 6], [6]

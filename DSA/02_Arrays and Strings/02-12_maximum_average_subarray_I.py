@@ -33,7 +33,9 @@ class Solution(object):
 
 # Create instance and call method
 solution = Solution()
-print(solution.findMaxAverage([1, 2, 3, 4], 2)) 
+nums = [1, 2, 3, 4]
+k = 2
+print(solution.findMaxAverage(nums, k))  
 # Output: 3.5  --> Subarray [3, 4] (length 2, sum 3 + 4 = 7, average 7/2 = 3.5) has the largest average for k=2.
 
 # Time: O(n)
@@ -47,11 +49,21 @@ print(solution.findMaxAverage([1, 2, 3, 4], 2))
 # - Overall: O(1) space.
 
 
+# Overview for Each Iteration
+# Input: nums = [1, 2, 3, 4], k = 2
+# Step 1: Calculate initial sum for first window of size k
+# i | curr | ans
+# - | 0    | 0
+# 0 | 1    | 1
+# 1 | 3    | 3
 
-# Trace Overview
-# i     = 0    1  2  3  
-# curr  = 0  1 3  5  7
-# ans   = 0    3  5  7  3.5
+# Step 2: Slide window, maintaining size k
+# i | curr      | nums[i] | nums[i-k] | ans
+# 2 | 5 (3+3-1) | 3       | 1         | 5 (max(3, 5))
+# 3 | 7 (5+4-2) | 4       | 2         | 7 (max(5, 7))
+# Final: 7/2 = 3.5 ([3, 4])
+
+
 
 """
 I verified this solution is correct but it is denied in LeetCode unless I do this for the last line: return float(ans) / k
@@ -63,7 +75,7 @@ Note the division operator (/) always returns a float:
 """
 
 
-# ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+# ––––––––––––––––––––––––––––––––––––––––––––––
 # Breakdown
 def findMaxAverage(nums, k):
     curr = 0          # Tracks sum of current window
@@ -83,7 +95,7 @@ def findMaxAverage(nums, k):
 
 
 
-# ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+# ––––––––––––––––––––––––––––––––––––––––––––––
 # Full Breakdown 
 
 # Task: Find the maximum average of any contiguous subarray of length k in an array.
@@ -145,6 +157,8 @@ class Solution(object):
 
 
 solution = Solution()
-print(solution.findMaxAverage([1, 2, 3, 4], 2)) 
+nums = [1, 2, 3, 4]
+k = 2
+print(solution.findMaxAverage(nums, k)) 
 # Output: 3.5  --> Subarray [3, 4] (length 2, sum 3 + 4 = 7, average 7/2 = 3.5) has the largest average for k=2.
 

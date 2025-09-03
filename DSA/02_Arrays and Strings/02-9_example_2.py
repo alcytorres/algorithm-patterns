@@ -1,6 +1,7 @@
 # Example 2: Longest Substring with At Most One "0"
 
 # Finds the longest substring with at most one "0" by flipping at most one "0" to "1". 
+
 # In other words "what is the longest substring that contains at most one "0"?
 
 def longest_substring_one_zero(s):
@@ -42,7 +43,7 @@ print(longest_substring_one_zero("11001011"))
 # left  = 0          1 2 3       4  
 
 
-# ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+# ––––––––––––––––––––––––––––––––––––––––––––––––––
 # Breakdown 
 def longest_substring_one_zero(s):
     left = 0          # Left bound of the window
@@ -63,7 +64,7 @@ def longest_substring_one_zero(s):
     return ans  # Returns the length of the longest substring
 
 
-# ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+# ––––––––––––––––––––––––––––––––––––––––––––––––––
 # Task: Find the length of the longest substring with at most one "0" in a binary string.
 # Example: s = "11001011" → Output = 4 (substring "1011" has one "0", length 4)
 # Why: Practices sliding window technique to maintain a constraint (at most one "0").

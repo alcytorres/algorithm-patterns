@@ -3,10 +3,10 @@
 # Example 1: Given an integer array nums, an array queries where queries[i] = [x, y] and an integer limit, return a boolean array that represents the answer to each query. A query is true if the sum of the subarray from x to y is less than limit, or false otherwise.
 
 # Example:
-# nums = [1, 6, 3, 2, 7, 2]
-# queries = [[0, 3], [2, 5], [2, 4]]
-# limit = 13
-# Output: [True, False, True]
+    # nums = [1, 6, 3, 2, 7, 2]
+    # queries = [[0, 3], [2, 5], [2, 4]]
+    # limit = 13
+    # Output: [True, False, True]
 
 def answer_queries(nums, queries, limit):
     prefix = [nums[0]]
@@ -41,6 +41,42 @@ print(answer_queries(nums, queries, limit))
 # - A few variables (i, x, y, curr) take O(1) space.
 # - Overall: O(n + q) total space.
 # - If we exclude the output array, extra working space is O(n) due to the prefix sum array.
+
+
+# Overview for Each Iteration
+# Input: nums = [1, 6, 3, 2, 7, 2], queries = [[0, 3], [2, 5], [2, 4]], limit = 13
+# Step 1: Build prefix sum array
+# i  | nums[i] | prefix
+# -  | -       | [1]
+# 1  | 6       | [1, 7]
+# 2  | 3       | [1, 7, 10]
+# 3  | 2       | [1, 7, 10, 12]
+# 4  | 7       | [1, 7, 10, 12, 19]
+# 5  | 2       | [1, 7, 10, 12, 19, 21]
+
+# Step 2: Process queries
+# x  | y  | curr             | curr < limit | ans
+# 0  | 3  | 12 (12 - 1 + 1)  | True         | [True]
+# 2  | 5  | 14 (21 - 10 + 3) | False        | [True, False]
+# 2  | 4  | 12 (19 - 10 + 3) | True         | [True, False, True]
+# Final: [True, False, True]
+
+
+
+# ––––––––––––––––––––––––––––––––––––––––––––––
+"""
+Q: Why do we use curr = prefix[y] - prefix[x] + nums[x]?
+    •	prefix[i] stores the sum from index 0 to i.
+    •	prefix[y] - prefix[x] removes everything up to index x, so it gives the sum from x+1 to y.
+    •	To include the element at index x, we add back nums[x].
+    •	This way, the formula correctly captures the full subarray sum from x to y.
+
+Example: Query [2, 5]:
+	•	nums:   [1, 6, 3, 2, 7, 2]
+	•	Prefix: [1, 7, 10, 12, 19, 21]
+	•	curr = prefix[5] - prefix[2] + nums[2] = 21 - 10 + 3 = 14
+	•	14 < 13 → False
+"""
 
 
 # ––––––––––––––––––––––––––––––––––––––––––––––
@@ -222,3 +258,33 @@ def prefix_sum_queries(nums, queries, limit):
 #   - curr = prefix[5] - prefix[2] + nums[2] = 21 - 10 + 3 = 14
 #   - 14 < 13 -> False
 """
+
+
+
+
+
+# ––––––––––––––––––––––––––––––––––––––––––––––
+# Alternative Solution
+
+def answer_queries(nums, queries, limit):
+    # prefix[i] = sum of nums[:i]
+    prefix = [0]
+    for v in nums:
+        prefix.append(prefix[-1] + v)
+
+    ans = []
+    for x, y in queries:
+        curr = prefix[y + 1] - prefix[x]  # safe for x=0
+        ans.append(curr < limit)
+    return ans
+
+
+nums = [1, 6, 3, 2, 7, 2]  # -> [0, 1, 7, 10, 12, 19, 21]
+queries = [[0, 3], [2, 5], [2, 4]]
+limit = 13
+print(answer_queries(nums, queries, limit))
+# Output: [True, False, True] --> Sums: [12, 14, 12], compared to limit 13.
+# [0, 3] = 12
+# [2, 5] = 14
+# [2, 4] = 12
+

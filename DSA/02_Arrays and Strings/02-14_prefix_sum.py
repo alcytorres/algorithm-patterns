@@ -16,7 +16,7 @@ def prefix_sum(arr):
 # Time: O(n) - Single pass to build prefix sum array.
 # Space: O(n) - Stores prefix sum array of size n.
 
-# ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+# ––––––––––––––––––––––––––––––––––––––––––––––––
 # Example 1: Query Subarray Sums with Limit
 # Returns boolean array indicating if subarray sums from x to y are less than limit.
 def check_subarray_sums(nums, queries, limit):
@@ -41,7 +41,7 @@ print(check_subarray_sums([1, 6, 3, 2, 7, 2], [[0, 3], [2, 5], [2, 4]], 13))
 # Time: O(n + m) - O(n) to build prefix, O(m) for m queries.
 # Space: O(n) - Stores prefix sum array.
 
-# ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+# ––––––––––––––––––––––––––––––––––––––––––––––––
 # Example 2: Number of Ways to Split Array
 # Counts ways to split array into two parts where first part sum >= second part sum.
 def ways_to_split_array(nums):
@@ -66,7 +66,7 @@ print(ways_to_split_array([1, 2, 3, 4, 5]))
 # Time: O(n) - Single pass to compute total and left sums.
 # Space: O(1) - Uses only a few variables (total, left, ans).
 
-# ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+# ––––––––––––––––––––––––––––––––––––––––––––––––
 # Cheatsheet
 # - Prefix Sum: Pre-compute array sums for O(1) subarray sum queries.
 # - Build: Start with [0] or [arr[0]], add running sum for each element.

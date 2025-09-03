@@ -41,7 +41,7 @@ def fn(arr1, arr2):
 # ––––––––––––––––––––––––––––––––––––––––––––––
 # Dynamic Sliding Window Template
 def fn(arr):
-    left = ans = curr = 0
+    left = curr = ans = 0
 
     for right in range(len(arr)):
         # do logic here to add arr[right] to curr
@@ -84,9 +84,12 @@ def fn(arr):
     
     return prefix
 
+arr = [1, 2, 3, 4, 5]  # [1, 3, 6, 10, 15]
+print(fn(arr))
+
 
 # Build a prefix sum Template 2
-def prefix_sum(arr):
+def fn(arr):
     prefix = [arr[0]]
     curr = arr[0]    
     
@@ -96,6 +99,8 @@ def prefix_sum(arr):
     
     return prefix
 
+arr = [1, 2, 3, 4, 5]  # [1, 3, 6, 10, 15]
+print(fn(arr))
 
 
 # ––––––––––––––––––––––––––––––––––––––––––––––

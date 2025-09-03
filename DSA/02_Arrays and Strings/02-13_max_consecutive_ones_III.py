@@ -1,10 +1,11 @@
 # 1004. Max Consecutive Ones III 
+
 # Given a binary array nums and an integer k, return the maximum number of consecutive 1's in the array if you can flip at most k 0's.
 
 # Example:
-# Input: nums = [1,1,1,0,0,0,1,1,1,1,0], k = 2
-# Output: 6
-# Explanation: [1,1,1,0,0,1,1,1,1,1,1]
+    # Input: nums = [1,1,1,0,0,0,1,1,1,1,0], k = 2
+    # Output: 6
+    # Explanation: nums[5] and nums[10] were flipped from 0 to 1. We are left with [1, 1, 1, 1, 1, 1] 
 
 # Solution: https://leetcode.com/problems/max-consecutive-ones-iii/solutions/409192/max-consecutive-ones-iii/
 
@@ -25,7 +26,8 @@ def longestOnes(nums, k):
     return ans
 
 nums = [1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 0]
-print(longestOnes(nums, 2))
+k = 2
+print(longestOnes(nums, k))
 # Output: 6
 
 # Time: O(n)
@@ -41,8 +43,39 @@ print(longestOnes(nums, 2))
 
 
 
+# Overview for Each Iteration
+# Input: nums = [1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 0], k = 2
+# Step: Find max consecutive 1's with at most k flips using sliding window
+# r | nums[r] | curr | curr > k | l | nums[l] | Action              | ans
+# - | -       | 0    | -        | 0 | -       | -                   | 0
+# 0 | 1       | 0    | No       | 0 | -       | ans=max(0,0-0+1)=1  | 1
+# 1 | 1       | 0    | No       | 0 | -       | ans=max(1,1-0+1)=2  | 2
+# 2 | 1       | 0    | No       | 0 | -       | ans=max(2,2-0+1)=3  | 3
+# 3 | 0       | 1    | No       | 0 | -       | ans=max(3,3-0+1)=4  | 4
+# 4 | 0       | 2    | No       | 0 | -       | ans=max(4,4-0+1)=5  | 5
+# 5 | 0       | 3    | Yes      | 0 | 1       | l+=1                | 5
+#   |         | 3    | Yes      | 1 | 1       | l+=1                | 5
+#   |         | 3    | Yes      | 2 | 1       | l+=1                | 5
+#   |         | 3    | Yes      | 3 | 0       | curr-=1, l+=1       | 5
+#   |         | 2    | No       | 4 | -       | ans=max(5,5-4+1)=5  | 5
+# 6 | 1       | 2    | No       | 4 | -       | ans=max(5,6-4+1)=5  | 5
+# 7 | 1       | 2    | No       | 4 | -       | ans=max(5,7-4+1)=5  | 5
+# 8 | 1       | 2    | No       | 4 | -       | ans=max(5,8-4+1)=5  | 5
+# 9 | 1       | 2    | No       | 4 | -       | ans=max(6,9-4+1)=6  | 6
+# 10| 0       | 3    | Yes      | 4 | 0       | curr-=1, l+=1       | 6
+#   |         | 2    | No       | 5 | -       | ans=max(6,10-5+1)=6 | 6
+# Final: 6
 
-# ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+
+# ––––––––––––––––––––––––––––––––––––––––––––––
+# Which subarray of length 6 is the final answer?
+    #  Both [4..9] (flip nums[4] & nums[5]) and [5..10] (flip nums[5] & nums[10]) give a streak of 6 ones.
+    #  LeetCode’s official explanation shows [5..10] as the answer (flipping nums[5] and nums[10]).
+	#  The algorithm only returns the max length (6), not which subarray produced it.
+
+
+
+# ––––––––––––––––––––––––––––––––––––––––––––––
 # Breakdown 
 def longestOnes(nums, k):
     left = ans = curr = 0  # Left bound, max length, count of 0's in window
@@ -62,9 +95,9 @@ def longestOnes(nums, k):
 
 
 
-# ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+# ––––––––––––––––––––––––––––––––––––––––––––––
 # Task: Find the maximum length of consecutive 1's in a binary array after flipping at most k 0's.
-# Example: nums = [1,1,1,0,0,0,1,1,1,1,0], k = 2 → Output = 6 (flip two 0's to get [1,1,1,1,1,1,1,1,1,1,0])
+
 # Why: Practices sliding window technique to maximize consecutive 1's with a constraint on flips.
 
 def longestOnes(nums, k):  # Example: nums = [1,1,1,0,0,0,1,1,1,1,0], k = 2
