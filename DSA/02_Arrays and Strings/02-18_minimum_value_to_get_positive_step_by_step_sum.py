@@ -11,11 +11,11 @@
 # Video https://www.youtube.com/watch?v=QgRZcbYboxg
 
 # Example
-# Input: nums = [-3, 2, -3, 4, 2]
-# Output: 5
-# Step-by-step sum: startValue + nums[i]
-# Track minimum running total: [-3, -1, -4, 0, 2] (min = -4)
-# Minimum startValue to keep sum ≥ 1: -(-4) + 1 = 5
+    # Input: nums = [-3, 2, -3, 4, 2]
+    # Output: 5
+    # Step-by-step sum: startValue + nums[i]
+    # Track minimum running total: [-3, -1, -4, 0, 2] (min = -4)
+    # Minimum startValue to keep sum ≥ 1: -(-4) + 1 = 5
 
 def minStartValue(nums):
     # We use "total" for current step-by-step total, "min_val" for minimum 
@@ -41,6 +41,19 @@ print(minStartValue(nums))
 # - Only a constant number of variables (min_val, total, num) are used.
 # - No additional data structures.
 # - Overall: O(1) space.
+
+
+# Overview for Each Iteration
+# Input: nums = [-3, 2, -3, 4, 2]
+# Step: Calculate step-by-step sum and track minimum total
+# i  | num | total | min_val
+# -  | -   | 0     | 0
+# 0  | -3  | -3    | -3 (min(0, -3))
+# 1  | 2   | -1    | -3 (min(-3, -1))
+# 2  | -3  | -4    | -4 (min(-3, -4))
+# 3  | 4   | 0     | -4 (min(-4, 0))
+# 4  | 2   | 2     | -4 (min(-4, 2))
+# Final: -(-4) + 1 = 5
 
 
 

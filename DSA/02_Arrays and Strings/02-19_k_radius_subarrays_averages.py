@@ -5,8 +5,8 @@
 # Video https://www.youtube.com/watch?v=L33kbF6Cr_I
 
 # Example
-# nums = [7, 4, 3, 9, 1, 8, 5, 2, 6]
-# Output: [-1, -1, -1, 5, 4, 4, -1, -1, -1]
+    # nums =  [7, 4, 3, 9, 1, 8, 5, 2, 6]
+    # Output: [-1, -1, -1, 5, 4, 4, -1, -1, -1]
 
 # Yashasvi Code: My Preferred solution
 def getAverages(nums, k):
@@ -25,12 +25,14 @@ def getAverages(nums, k):
   
 # Slide window across array and update averages
     for i in range(k+1, n-k): 
-        curr += nums[i+k] - nums[i-k-1]
+        curr += nums[i+k] - nums[i-k -1]
         ans[i] = curr // window_size
+
     return ans
 
 nums = [7, 4, 3, 9, 1, 8, 5, 2, 6]
-print(getAverages(nums, 3))
+k = 3
+print(getAverages(nums, k))
 # Output: [-1, -1, -1, 5, 4, 4, -1, -1, -1]
 
 # Time: O(n)
@@ -44,6 +46,24 @@ print(getAverages(nums, 3))
 # - A few integer variables (n, window_size, curr_sum, i) take O(1) space.
 # - Overall: O(n) total space.
 # - If we exclude the result array from consideration, extra working space is O(1).
+
+
+
+# Overview for Each Iteration
+# Input: nums = [7, 4, 3, 9, 1, 8, 5, 2, 6], k = 3
+# Step 1: Initialize variables
+# n = 9, window_size = 2*3 + 1 = 7, ans = [-1, -1, -1, -1, -1, -1, -1, -1, -1]
+
+# Step 2: Calculate sum of first full window (indices 0 to 6)
+# curr = sum(nums[0:7]) = 7 + 4 + 3 + 9 + 1 + 8 + 5 = 37
+# ans[3] = 37 // 7 = 5
+# ans = [-1, -1, -1, 5, -1, -1, -1, -1, -1]
+
+# Step 3: Slide window and compute averages
+# i  | curr             | nums[i+k] | nums[i-k-1] | ans[i]    | ans
+# 4  | 32 (37 + 2 - 7)  | 2         | 7           | 4 (32//7) | [-1, -1, -1, 5, 4, -1, -1, -1, -1]
+# 5  | 34 (32 + 6 - 4)  | 6         | 4           | 4 (34//7) | [-1, -1, -1, 5, 4, 4, -1, -1, -1]
+# Final: [-1, -1, -1, 5, 4, 4, -1, -1, -1]
 
 
 
@@ -175,6 +195,7 @@ print(getAverages(nums, 3))
 
 # Time: O(n) – O(n) to create the result array, plus O(n) to slide the window (each element added and removed once).
 # Space: O(n) total due to result array, O(1) auxiliary if excluding it.
+
 
 # ––––––––––––––––––––––––––––––––––––––––––––––
 # Sliding Window LeetCode Solution 3

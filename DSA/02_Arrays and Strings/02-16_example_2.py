@@ -5,11 +5,11 @@
 # Solution: https://leetcode.com/problems/number-of-ways-to-split-array/solutions/6209795/number-of-ways-to-split-array/
 
 # Example 
-# Input: nums = [10, 4, -8, 7]
-# Output: 2
-# i=0: left=10, right=3 (10>=3) valid
-# i=1: left=14, right=-1 (14>=-1) valid
-# i=2: left=6, right=7 (6<7) invalid
+    # Input: nums = [10, 4, -8, 7]
+    # Output: 2
+    # i=0: left=10, right=3 (10>=3) valid
+    # i=1: left=14, right=-1 (14>=-1) valid
+    # i=2: left=6, right=7 (6<7) invalid
 
 def waysToSplitArray(nums): 
     # Build prefix sum array
@@ -44,13 +44,31 @@ print(waysToSplitArray(nums))
 # - If we exclude the prefix sum array, extra working space is O(1).
 
 
+# Overview for Each Iteration
+# Input: nums = [10, 4, -8, 7]
+# Step 1: Build prefix sum array
+# i  | nums[i] | prefix
+# -  | -       | [10]
+# 1  | 4       | [10, 14]
+# 2  | -8      | [10, 14, 6]
+# 3  | 7       | [10, 14, 6, 13]
 
+# Step 2: Count valid splits where left sum >= right sum
+# i  | left_section | right_section (prefix[-1] - prefix[i]) | left >= right | ans
+# 0  | 10           | 3 (13 - 10)                            | True          | 1
+# 1  | 14           | -1 (13 - 14)                           | True          | 2
+# 2  | 6            | 7 (13 - 6)                             | False         | 2
+# Final: 2
+
+
+
+# ––––––––––––––––––––––––––––––––––––––––––––––
 """
-There are three ways of splitting nums into two non-empty parts:
-- Split nums at index 0. Then, the first part is [10], and its sum is 10. The second part is [4,-8,7], and its sum is 3. Since 10 >= 3, i = 0 is a valid split.
-- Split nums at index 1. Then, the first part is [10,4], and its sum is 14. The second part is [-8,7], and its sum is -1. Since 14 >= -1, i = 1 is a valid split.
-- Split nums at index 2. Then, the first part is [10,4,-8], and its sum is 6. The second part is [7], and its sum is 7. Since 6 < 7, i = 2 is not a valid split.
-Thus, the number of valid splits in nums is 2.
+Q: How do we determine the number of valid splits in nums = [10, 4, -8, 7]?
+	•	Split at i = 0 → left [10] = 10, right [4, -8, 7] = 3 → 10 ≥ 3 → valid.
+	•	Split at i = 1 → left [10, 4] = 14, right [-8, 7] = -1 → 14 ≥ -1 → valid.
+	•	Split at i = 2 → left [10, 4, -8] = 6, right [7] = 7 → 6 < 7 → not valid.
+	•	✅ Total valid splits = 2.
 """
 
 # ––––––––––––––––––––––––––––––––––––––––––––––
