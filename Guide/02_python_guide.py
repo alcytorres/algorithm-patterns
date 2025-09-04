@@ -1664,31 +1664,31 @@ print(type(d))
 # -----------------------------------------------------------------------------
 # Empty instances of main Python data types
 
-# List: Ordered, mutable collection
+# List: Ordered collection (mutable)
 empty_list = []  # Creates an empty list
 
-# Tuple: Ordered, immutable collection
+# Tuple: Ordered collection (immutable)
 empty_tuple = ()  # Creates an empty tuple
 t = (1, "hello", 3.5)  # Tuple with basic data
 
-# Dictionary: Key-value pairs, mutable
+# Dictionary: Key-value pairs (mutable)
 empty_dict = {}  # Creates an empty dictionary
 d = {"name": "Alice", "age": 25, "score": 90}  # Dict with basic data
 
-# Set: Unordered, mutable collection of unique elements
+# Set: Unordered collection of unique elements (mutable)
 empty_set = set()  # Creates an empty set (note: {} creates a dict)
 s = {1, "hello", 3.5}  # Set with basic data
 
-# Integer: Whole number
+# Integer: Whole number (immutable)
 empty_int = 0  # Represents an "empty" or zero integer
 
-# Float: Floating-point number
+# Float: Floating-point number (immutable)
 empty_float = 0.0  # Represents an "empty" or zero float
 
-# String: Sequence of characters
+# String: Sequence of characters (immutable)
 empty_string = ""  # Creates an empty string
 
-# Boolean: True or False value
+# Boolean: True/False value (immutable)
 empty_bool = False  # Represents a default "empty" boolean (False is often used)
 
 

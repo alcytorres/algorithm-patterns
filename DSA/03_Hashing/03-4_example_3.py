@@ -5,9 +5,9 @@
 # If a valid number x appears multiple times, you only need to include it in the answer once.
 
 # Example:
-# Input: nums = [2, 4, 4, 6]
-# Output:       [2, 4, 6]
-# Explanation: For each x in nums, neither x+1 nor x-1 exists in nums (e.g., for x=2, 3 and 1 are absent; for x=4, 5 and 3 are absent). All numbers satisfy the condition, and duplicates are not an issue here.
+    # Input: nums = [2, 4, 4, 6]
+    # Output:       [2, 4, 6]
+    # Explanation: For each x in nums, neither x+1 nor x-1 exists in nums (e.g., for x=2, 3 and 1 are absent; for x=4, 5 and 3 are absent). All numbers satisfy the condition, and duplicates are not an issue here.
 
 def find_numbers(nums):
     seen = set(nums)  # {2, 4, 6}
@@ -35,17 +35,30 @@ print(find_numbers(l))
 # - Overall: O(n) total space.
 
 
+# Overview for Each Iteration
+# Input: nums = [2, 4, 4, 6]
+# Step 1: Create set of unique numbers
+# seen = {2, 4, 6}
+
+# Step 2: Check each number for valid conditions (x+1 and x-1 not in seen)
+# x  | x+1 | x-1 | x+1 in seen | x-1 in seen | ans
+# 2  | 3   | 1   | False       | False       | [2]
+# 4  | 5   | 3   | False       | False       | [2, 4]
+# 6  | 7   | 5   | False       | False       | [2, 4, 6]
+# Final: [2, 4, 6]
 
 
-# How is the requirement that each valid number x appears only once in the answer is handled?
-    # By converting nums to a set (seen = set(nums)), which removes duplicates. 
-    # The loop then iterates over unique numbers in seen, ensuring each valid x is added to ans
-    # only once.
+
+# ––––––––––––––––––––––––––––––––––––––––––––––––
+"""
+Q: How is the requirement that each valid number x appears only once in the answer is handled?
+    • By converting nums to a set (seen = set(nums)), which removes duplicates. 
+    • The loop then iterates over unique numbers in seen, ensuring each valid x is added to ans only once.
 
 
-# Why do we use 'for x in seen'
-    # To iterate over unique numbers in nums, ensuring each valid x is processed and added to the result only once, as required by the problem (duplicates are ignored).
-
+Q: Why do we use 'for x in seen'
+    • To iterate over unique numbers in nums, ensuring each valid x is processed and added to the result only once, as required by the problem (duplicates are ignored).
+"""
 
 # ––––––––––––––––––––––––––––––––––––––––––––––––
 # Breakdown 
@@ -106,6 +119,22 @@ def find_numbers(nums):  # Example: nums = [2, 4, 4, 6]
     # Why? ans contains all unique numbers x where x+1 and x-1 are not in the array
     return ans  # ans = [2, 4, 6]
 
+
+l = [2, 4, 4, 6]
+print(find_numbers(l))  
+# Output: [2, 4, 6]
+
+
+
+
+# ––––––––––––––––––––––––––––––––––––––––––––––––
+# Alternative Solution
+
+def find_numbers(nums):
+    nums_set = set(nums)
+    ans = [num for num in nums_set if num + 1 not in nums_set and num - 1 not in nums_set]
+
+    return ans
 
 l = [2, 4, 4, 6]
 print(find_numbers(l))  

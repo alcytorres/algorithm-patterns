@@ -9,8 +9,8 @@
     # s will contain at least one letter that appears twice.
 
 # Example
-# Input: s = "abccd"
-# Output: "c"
+    # Input: s = "abccd"
+    # Output: "c"
 
 # Solution: https://leetcode.com/problems/first-letter-to-appear-twice/description/
 
@@ -23,7 +23,8 @@ def repeatedCharacter(s):
 
     return ""
 
-print(repeatedCharacter("abccbaacz"))
+s = "abccbaacz"
+print(repeatedCharacter(s))
 # Output: c
 
 # Time: O(n)
@@ -38,8 +39,19 @@ print(repeatedCharacter("abccbaacz"))
 # - If we exclude the set from consideration, extra working space is O(1).
 
 
+# Overview for Each Iteration
+# Input: s = "abccbaacz"
+# Step: Find first letter to appear twice
+# i  | c   | seen            | Action
+# 0  | a   | {a}            | Add 'a' to seen
+# 1  | b   | {a, b}         | Add 'b' to seen
+# 2  | c   | {a, b, c}      | Add 'c' to seen
+# 3  | c   | {a, b, c}      | Found 'c' in seen, return 'c'
+# Final: "c"
 
-# ––––––––––––––––––––––––––––––––––––––––––––––– # Breakdown
+
+# ––––––––––––––––––––––––––––––––––––––––––––––– 
+# # Breakdown
 def repeatedCharacter(s):
     seen = set()               # Initialize empty set for seen characters
     for c in s:                # Iterate over each character in string
@@ -112,7 +124,7 @@ print(repeatedCharacter("abccbaacz"))  # Output: "c"
 
 
 
-# ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+# ––––––––––––––––––––––––––––––––––––––––––––––––
 # My Original Solution
 def repeatedCharacter(s):
     seen = set()
@@ -121,6 +133,7 @@ def repeatedCharacter(s):
         if c in seen:
             return c
         seen.add(c)
+
     return ""
 
 print(repeatedCharacter("abccbaacz"))
@@ -130,7 +143,7 @@ print(repeatedCharacter("abccbaacz"))
 # Space: O(n) - Set stores up to n unique characters.
 
 
-# ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+# ––––––––––––––––––––––––––––––––––––––––––––––––
 # Brute force
 def repeatedCharacter(s):
     for i in range(len(s)):
@@ -142,5 +155,6 @@ def repeatedCharacter(s):
 
 print(repeatedCharacter("abccbaacz"))
 # Output: c
+
 # Time: O(n^2)
 # Space: 
