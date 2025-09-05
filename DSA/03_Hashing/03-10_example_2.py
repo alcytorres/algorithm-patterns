@@ -1,16 +1,14 @@
 # 2248. Intersection of Multiple Arrays
 
-# Example 2: 
+# Example 2: Given a 2D array nums that contains n arrays of distinct integers, return a sorted array containing all the numbers that appear in all n arrays.
 
-# Given a 2D array nums that contains n arrays of distinct integers, return a sorted array containing all the numbers that appear in all n arrays.
-
-# For example, given nums = [[3,1,2,4,5],[1,2,3,4],[3,4,5,6]], return [3, 4]. 3 and 4 are the only numbers that are in all arrays.
+# For example, given nums = [[3,1,2,4,5], [1,2,3,4], [3,4,5,6]], return [3, 4]. 3 and 4 are the only numbers that are in all arrays.
 
 # Example:
-# Input: nums = [[3,1,2,4,5], [1,2,3,4], [3,4,5,6]]
-# Output: [3, 4]
-# Explanation: 
-# The only integers present in each of nums[0] = [3,1,2,4,5], nums[1] = [1,2,3,4], and nums[2] = [3,4,5,6] are 3 and 4, so we return [3,4].
+    # Input: nums = [[3,1,2,4,5], [1,2,3,4], [3,4,5,6]]
+    # Output: [3, 4]
+    # Explanation: 
+    # The only integers present in each of nums[0] = [3,1,2,4,5], nums[1] = [1,2,3,4], and nums[2] = [3,4,5,6] are 3 and 4, so we return [3, 4].
 
 # Solution: https://leetcode.com/problems/intersection-of-multiple-arrays/solutions/
 
@@ -40,7 +38,8 @@ def intersection(nums):
     return sorted(ans)
 
 nums = [[3,1,2,4,5], [1,2,3,4], [3,4,5,6]]
-print(intersection(nums))  # Output: [3, 4]
+print(intersection(nums))  
+# Output: [3, 4]
 
 
 # Time: O(n * m)
@@ -58,8 +57,40 @@ print(intersection(nums))  # Output: [3, 4]
 
 
 
-# ––––––––––––––––––––––––––––––––––––––––––––––––
-# After Iteration 3: counts = {3: 3, 1: 2, 2: 2, 4: 3, 5: 2, 6: 1}
+# Overview for Each Iteration
+# Input: nums = [[3,1,2,4,5], [1,2,3,4], [3,4,5,6]]
+# Step 1: Count occurrences of each element across all arrays
+# arr_idx | arr         | x | counts
+# -       | -           | - | {}
+# 0       | [3,1,2,4,5] | 3 | {3: 1}
+# 0       | [3,1,2,4,5] | 1 | {3: 1, 1: 1}
+# 0       | [3,1,2,4,5] | 2 | {3: 1, 1: 1, 2: 1}
+# 0       | [3,1,2,4,5] | 4 | {3: 1, 1: 1, 2: 1, 4: 1}
+# 0       | [3,1,2,4,5] | 5 | {3: 1, 1: 1, 2: 1, 4: 1, 5: 1}
+# 1       | [1,2,3,4]   | 1 | {3: 1, 1: 2, 2: 1, 4: 1, 5: 1}
+# 1       | [1,2,3,4]   | 2 | {3: 1, 1: 2, 2: 2, 4: 1, 5: 1}
+# 1       | [1,2,3,4]   | 3 | {3: 2, 1: 2, 2: 2, 4: 1, 5: 1}
+# 1       | [1,2,3,4]   | 4 | {3: 2, 1: 2, 2: 2, 4: 2, 5: 1}
+# 2       | [3,4,5,6]   | 3 | {3: 3, 1: 2, 2: 2, 4: 2, 5: 1}
+# 2       | [3,4,5,6]   | 4 | {3: 3, 1: 2, 2: 2, 4: 3, 5: 1}
+# 2       | [3,4,5,6]   | 5 | {3: 3, 1: 2, 2: 2, 4: 3, 5: 2}
+# 2       | [3,4,5,6]   | 6 | {3: 3, 1: 2, 2: 2, 4: 3, 5: 2, 6: 1}
+
+# Final counts after processing all arrays: 
+# {3: 3, 1: 2, 2: 2, 4: 3, 5: 2, 6: 1}
+
+
+# Step 2: Collect elements appearing in all arrays (count == n = 3)
+# key | counts[key] | counts[key] == n | ans
+# 1   | 2           | False            | []
+# 2   | 2           | False            | []
+# 3   | 3           | True             | [3]
+# 4   | 3           | True             | [3, 4]
+# 5   | 2           | False            | [3, 4]
+# 6   | 1           | False            | [3, 4]
+# Final: sorted([3, 4]) = [3, 4]
+
+
 
 
 
@@ -72,11 +103,12 @@ def intersection(nums):
             counts[x] += 1    # Increment count for current element
     n = len(nums)             # Number of subarrays
     ans = []                  # Initialize result list
+
     for key in counts:        # Iterate over unique elements
         if counts[key] == n:  # If element appears in all subarrays
             ans.append(key)   # Add element to result
+            
     return sorted(ans)        # Return sorted list of common elements
-
 
 
 
@@ -154,4 +186,5 @@ def intersection(nums):  # Example: nums = [[3,1,2,4,5], [1,2,3,4], [3,4,5,6]]
 
 
 nums = [[3,1,2,4,5], [1,2,3,4], [3,4,5,6]]
-print(intersection(nums))  # Output: [3, 4]
+print(intersection(nums))  
+# Output: [3, 4]

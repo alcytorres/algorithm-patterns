@@ -2,6 +2,11 @@
 
 # Given an array nums containing n distinct numbers in the range [0, n], return the only number in the range that is missing from the array.
 
+# Example
+    # Input: nums = [3, 0, 1]
+    # Output: 2
+    # Explanation: n = 3 since there are 3 numbers, so all numbers are in the range [0, 3]. 2 is the missing number in the range since it does not appear in nums.
+
 # Solution: https://leetcode.com/problems/missing-number/editorial/
 
 def missingNumber(nums):
@@ -12,8 +17,8 @@ def missingNumber(nums):
         if num not in num_set:
             return num
 
-l = [3, 0, 1]
-print(missingNumber(l))
+nums = [3, 0, 1]
+print(missingNumber(nums))
 # Output: 2
 
 
@@ -29,15 +34,23 @@ print(missingNumber(l))
 # - Overall: O(n) total space.
 
 
-# Trace Overview
-# num_set = {0, 1, 3}
-# n       = 4
-# num     = 0  1  2  3
+# Overview for Each Iteration
+# Input: nums = [3, 0, 1]
+# Step 1: Create set and determine range
+# num_set = {3, 0, 1}
+# n = len(nums) + 1 = 4
+
+# Step 2: Check each number in range [0, n)
+# num | num in num_set | Action
+# 0   | True           | Continue
+# 1   | True           | Continue
+# 2   | False          | Return 2
+# Final: 2
 
 
 
 # ––––––––––––––––––––––––––––––––––––––––––––––––
-# Simple Breakdown 
+# Breakdown 
 
 def missingNumber(nums):
     num_set = set(nums)       # Convert array to set for O(1) lookups
@@ -96,7 +109,7 @@ def missingNumber(nums):  # Example: nums = [3, 0, 1]
     # Note: The loop is guaranteed to return a value since one number is missing
 
 
-l = [3, 0, 1]
-print(missingNumber(l))  # Output: 2
-
+nums = [3, 0, 1]
+print(missingNumber(nums))
+# Output: 2
 

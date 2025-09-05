@@ -1,4 +1,6 @@
 
+seen = {3, 3, 3}
+print(len(seen))
 
 
 

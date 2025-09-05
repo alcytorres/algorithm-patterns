@@ -5,9 +5,9 @@
 # If there are duplicates in arr, count them separately.
 
 # Example:
-# Input: arr = [1, 2, 2, 3]
-# Output: 3
-# Explanation: 1, 2, and 2 are counted cause 2 and 3 are in arr.
+    # Input: arr = [1, 2, 2, 3]
+    # Output: 3
+    # Explanation: 1, 2, and 2 are counted cause 2 and 3 are in arr.
 
 # Solution: https://leetcode.com/problems/counting-elements/solutions/567376/counting-elements/
 
@@ -39,9 +39,35 @@ print(countElements(arr))
 # - Overall: O(n) total space.
 
 
+# Overview for Each Iteration
+# Input: arr = [1, 2, 2, 3]
+# Step 1: Create set of unique elements
+# hash_set = {1, 2, 3}
 
-# How is the requirement that if there are duplicates in arr, they be counted seperately in the answer is handled?
-    # The requirement to count duplicates separately is met by iterating over arr directly in for x in arr:, ensuring each occurrence of an element is checked individually for x + 1 in hash_set.
+# Step 2: Count elements x where x + 1 is in hash_set
+# x  | x + 1 | x + 1 in hash_set | count
+# 1  | 2     | True              | 1
+# 2  | 3     | True              | 2
+# 2  | 3     | True              | 3
+# 3  | 4     | False             | 3
+# Final: 3
+
+
+# –––––––––––––––––––––––––––––––––––––––––––––––––
+"""
+Q: Why use a set instead of a array for lookups?
+    • Set lookups are O(1) on average (hash table).
+    • Array lookups are O(n) since they scan sequentially.
+
+Q: What is the key idea of the solution?
+    • Store all numbers in a hash set.
+    • For each number x in arr, check if x+1 exists in the set.
+    • Count it if true.
+
+Q: Why do duplicates count separately?
+    • We iterate through arr directly, so duplicates are checked individually.
+"""
+
 
 
 # –––––––––––––––––––––––––––––––––––––––––––––––––
@@ -69,13 +95,16 @@ print(countElements(arr))
 # - Overall: O(1) space.
 
 
-
 # Note: Set lookups are O(1) using a hash table for instant access, while array lookups are O(n) as they scan each element sequentially.
 
 
 
+
+
+
+
 # ––––––––––––––––––––––––––––––––––––––––––––––––
-# Simple Breakdown
+# Breakdown
 
 def countElements(arr):
     hash_set = set(arr)       # Convert array to set for O(1) lookups
@@ -142,7 +171,5 @@ def countElements(arr):  # Example: arr = [1, 2, 2, 3]
 
 arr = [1, 2, 2, 3]
 print(countElements(arr))  # Output: 3
-
-
 
 

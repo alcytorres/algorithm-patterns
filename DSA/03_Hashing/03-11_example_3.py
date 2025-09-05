@@ -1,16 +1,11 @@
 # 1941. Check if All Characters Have Equal Number of Occurrences
 
-# Example 3: 
-# Given a string s, determine if all characters have the same frequency.
-
-# A string s is good if all the characters that appear in s have the same number of occurrences (i.e., the same frequency).
-
-# For example, given s = "abacbc", return true, because all characters appear twice. Given s = "aaabb", return false. "a" appears 3 times, "b" appears 2 times. 3 != 2.
+# Example 3: Given a string s, determine if all characters have the same number of occurrences (i.e., the same frequency).
 
 # Example:
-# Input: s = "abacbc"
-# Output: True
-# Explanation: The characters that appear in s are 'a', 'b', and 'c'. All characters occur 2 times in s.
+    # Input: s = "abacbc"
+    # Output: True
+    # Explanation: The characters that appear in s are 'a', 'b', and 'c'. All characters occur 2 times in s.
 
 # Solution: https://leetcode.com/problems/check-if-all-characters-have-equal-number-of-occurrences/solutions/
 
@@ -45,15 +40,38 @@ print(areOccurrencesEqual(s))
 # - Overall: O(k) space, which is O(1) if character set is fixed (e.g. lowercase letters).
 
 
+# Overview for Each Iteration
+# Input: s = "abacbc"
+# Step 1: Count frequency of each character
+# i  | c   | counts
+# -  | -   | {}
+# 0  | a   | {a: 1}
+# 1  | b   | {a: 1, b: 1}
+# 2  | a   | {a: 2, b: 1}
+# 3  | c   | {a: 2, b: 1, c: 1}
+# 4  | b   | {a: 2, b: 2, c: 1}
+# 5  | c   | {a: 2, b: 2, c: 2}
+
+# Step 2: Check if all frequencies are equal
+# frequencies = counts.values() = [2, 2, 2]
+# set(frequencies) = {2}
+# len(set(frequencies)) = 1
+# Final: True
 
 
-# Breakdown: return len(set(frequencies)) == 1
-    # All characters have equal frequency if there's only 1 unique value
+
+"""
+Q: How does `return len(set(frequency)) == 1` check if all counts are equal?
+    • Convert the list of frequencies into a set.
+    • A set only keeps unique values.
+    • If all frequencies are the same, the set will have exactly 1 element.
+    • Therefore, len(set(frequency)) == 1 means all characters occur equally often.
+"""
 
 
 
 # ––––––––––––––––––––––––––––––––––––––––––––––––
-# Simple Breakdown 
+# Breakdown 
 from collections import defaultdict
 
 def areOccurrencesEqual(s):
@@ -130,21 +148,9 @@ print(areOccurrencesEqual(s))  # Output: True
 
 
 
-
-
-# ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
-# Thoughts
-
-# frequencies = [2, 2, 2]
-# set(frequencies) = {2}
-# 1
-
-# If all the characters have the same occurences then if you put those values (2) into an array and then use the set method that would make the array from [2, 2, 2] go to a set of {2}. This is bc there are no duplicates in a set. 
-
-# Since you know there should only be one value if all the characters have the same occurence set a conditional equal to 1. If true all characters have the same occurences. 
-
-
+# –––––––––––––––––––––––––––––––––––––––––––––––––––––
 # My attempt at a solution which is wrong
+
 from collections import defaultdict
 
 def areOccurrencesEqual(s):
@@ -159,3 +165,28 @@ def areOccurrencesEqual(s):
 
 string = "abacbc"
 print(areOccurrencesEqual(string))
+
+
+
+# –––––––––––––––––––––––––––––––––––––––––––––––––––––
+# Alternative Less Efficient Solution I came up with
+
+from collections import defaultdict
+
+def areOccurrencesEqual(s):
+    counts = defaultdict(int)
+
+    for c in s:
+        counts[c] += 1
+    
+    set_map = set()
+    for val in counts.values():
+        set_map.add(val)
+    
+    if len(set_map) == 1:
+        return True
+    return False
+
+s = "abacbc"
+print(areOccurrencesEqual(s))
+# Output: True

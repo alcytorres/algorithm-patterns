@@ -1,15 +1,33 @@
-# 268. Missing Number
+# 560. Subarray Sum Equals K
 
-# Given an array nums containing n distinct numbers in the range [0, n], return the only number in the range that is missing from the array.
+# Example 4: Given an integer array nums and an integer k, find the number of subarrays whose sum is equal to k.
 
-# Solution: https://leetcode.com/problems/missing-number/editorial/
+# Example 1:
+    # Input: nums = [1, 1, 1], k = 2
+    # Output: 2
 
-def missingNumber(nums):
-    seen = set(nums)
-    for i in range(len(nums) + 1):
-        if i not in seen:
-            return i
+# Example 2:
+    # Input: nums = [1, 2, 3], k = 3
+    # Output: 2
 
-l = [3, 0, 1]
-print(missingNumber(l))
-# Output: 2
+# Solution: https://leetcode.com/problems/subarray-sum-equals-k/solutions/127728/subarray-sum-equals-k/
+
+
+# ––––––––––––––––––––––––––––––––––––––––––––––––
+from collections import defaultdict
+
+def subarraySum(nums, k):
+    counts = defaultdict(int)
+    counts[0] = 1
+    curr = ans = 0
+
+    for num in nums:
+        curr += num
+        ans += counts[curr - k]
+        counts[curr] += 1
+
+    return ans
+    
+nums = [1, 2, 1, 2, 1]
+print(subarraySum(nums, 3))
+# Output: 4 (subarrays [1, 2], [2, 1], [1, 2], [2, 1])

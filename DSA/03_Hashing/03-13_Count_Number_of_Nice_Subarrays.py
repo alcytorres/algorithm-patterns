@@ -1,7 +1,6 @@
 # 1248. Count Number of Nice Subarrays
 
-# Example 5
-# Given an array of positive integers nums and an integer k. Find the number of subarrays with exactly k odd numbers in them.
+# Example 5: Given an array of positive integers nums and an integer k. Find the number of subarrays with exactly k odd numbers in them.
 
 # A continuous subarray is called nice if there are k odd numbers on it.
 

@@ -3,9 +3,9 @@
 # Example 1: You are given a string s and an integer k. Find the length of the longest substring that contains at most k distinct characters.
 
 # Example
-# Input: s = "eceba" and k = 2, 
-# Output: return 3.
-# The longest substring with at most 2 distinct characters is "ece".
+    # Input: s = "eceba" and k = 2, 
+    # Output: return 3.
+    # The longest substring with at most 2 distinct characters is "ece".
 
 # ece (positions 0-2): Characters {e, c} → 2 distinct → valid.
 # ceb (positions 1-3): Characters {c, e, b} → 3 distinct → invalid.
@@ -52,6 +52,22 @@ print(find_longest_substring(s, 2))
 # - Overall: O(k) space, which is O(1) if k is considered a small constant.
 
 
+# Overview for Each Iteration
+# Input: s = "eceba", k = 2
+# Step: Find longest substring with at most k distinct characters
+# r | s[r] | counts          | len(counts) > k | l | s[l] | Action                                 | ans
+# - | -    | {}              | -               | 0 | -    | -                                      | 0
+# 0 | e    | {e:1}           | No              | 0 | -    | ans=max(0,0-0+1)=1                     | 1
+# 1 | c    | {e:1, c:1}      | No              | 0 | -    | ans=max(1,1-0+1)=2                     | 2
+# 2 | e    | {e:2, c:1}      | No              | 0 | -    | ans=max(2,2-0+1)=3                     | 3
+# 3 | b    | {e:2, c:1, b:1} | Yes             | 0 | e    | counts[e]-=1, counts={e:1, c:1, b:1}   | 3
+#   |      | {e:1, c:1, b:1} | Yes             | 1 | c    | counts[c]-=1, counts={e:1, b:1}        | 3
+#   |      | {e:1, b:1}      | No              | 2 | -    | ans=max(3,3-2+1)=3                     | 3
+# 4 | a    | {e:1, b:1, a:1} | Yes             | 2 | e    | counts[e]-=1, del e, counts={b:1, a:1} | 3
+#   |      | {b:1, a:1}      | No              | 3 | -    | ans=max(3,4-3+1)=3                     | 3
+# Final: 3 ("ece")
+
+
 # Trace Overview
 """
 Trace of find_longest_substring("eceba", k=2):
@@ -63,7 +79,25 @@ Trace of find_longest_substring("eceba", k=2):
 | 3 | b    | {e:2,c:1,b:1}| 3   | Drop e,c     | 2 | 3   |
 | 4 | a    | {e:1,b:1,a:1}| 3   | Drop e       | 3 | 3   |
 Output: 3 ('ece')
+
+
+
+# –––––––––––––––––––––––––––––––––––––––––––––––––––––––
+Q: Why use defaultdict instead of regular dictionary {}?
+    • Automatically initializes missing keys with 0.
+    • Simplifies code by avoiding manual existence checks.
+    • Makes counting operations cleaner and less error-prone.
 """
+# With regular dict
+counts = {}
+if s[right] not in counts:
+    counts[s[right]] = 0
+counts[s[right]] += 1  # Extra check needed
+
+# With defaultdict
+from collections import defaultdict
+counts = defaultdict(int)
+counts[s[right]] += 1  # No check needed, cleaner
 
 
 
@@ -129,22 +163,6 @@ def find_longest_substring(s, k):
 
     return ans                # Return longest substring length with <= k distinct characters
 
-
-
-# –––––––––––––––––––––––––––––––––––––––––––––––––––––––
-# Why use defaultdict instead of regular dictionary {}?
-    # defaultdict is used instead of a dictionary because it automatically initializes new keys with 0, simplifying code by eliminating the need to check for key existence before incrementing counts. 
-
-# With regular dict
-counts = {}
-if s[right] not in counts:
-    counts[s[right]] = 0
-counts[s[right]] += 1  # Extra check needed
-
-# With defaultdict
-from collections import defaultdict
-counts = defaultdict(int)
-counts[s[right]] += 1  # No check needed, cleaner
 
 
 # ––––––––––––––––––––––––––––––––––––––––––––––––
@@ -280,10 +298,11 @@ print(d)
 
 # defaultdict (simplifies with auto-default 0)
 from collections import defaultdict
-dd = defaultdict(int)
+counts = defaultdict(int)
+s = "aabbc"
 for c in s:
-    dd[c] += 1  # No key check needed
-print(dd)  
+    counts[c] += 1  # No key check needed
+print(counts)  
 # Output: defaultdict(<class 'int'>, {'a': 2, 'b': 2, 'c': 1})
 
 
@@ -295,12 +314,12 @@ from collections import defaultdict
 s = [('yellow', 1), ('blue', 2), ('yellow', 3), ('blue', 4), ('red', 1)]
 
 # Create defaultdict to store lists of values for each key
-d = defaultdict(list)
+counts = defaultdict(list)
 
 # Group values by key, appending each value to key's list
 for k, v in s:
-    d[k].append(v)
+    counts[k].append(v)
 
 # Sort key-value pairs by key and print as list of tuples
-print(sorted(d.items()))
+print(sorted(counts.items()))
 # Output: [('blue', [2, 4]), ('red', [1]), ('yellow', [1, 3])]

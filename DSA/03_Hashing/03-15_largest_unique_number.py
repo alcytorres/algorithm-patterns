@@ -2,7 +2,7 @@
 
 # Given an integer array nums, return the largest integer that only occurs once. If no integer occurs once, return -1.
 
-# Exampl 1:
+# Example 1:
     # Input: nums = [1, 3, 9, 4, 9, 8, 3]
     # Output: 8
     # Explanation: The maximum integer in the array is 9 but it is repeated. The number 8 occurs only once, so it is the answer.

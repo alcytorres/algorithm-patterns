@@ -1,16 +1,14 @@
 # 560. Subarray Sum Equals K
 
-# Example 4: 
-
-# Given an integer array nums and an integer k, find the number of subarrays whose sum is equal to k.
+# Example 4: Given an integer array nums and an integer k, find the number of subarrays whose sum is equal to k.
 
 # Example 1:
-# Input: nums = [1, 1, 1], k = 2
-# Output: 2
+    # Input: nums = [1, 1, 1], k = 2
+    # Output: 2
 
 # Example 2:
-# Input: nums = [1, 2, 3], k = 3
-# Output: 2
+    # Input: nums = [1, 2, 3], k = 3
+    # Output: 2
 
 # Solution: https://leetcode.com/problems/subarray-sum-equals-k/solutions/127728/subarray-sum-equals-k/
 
@@ -33,7 +31,8 @@ def subarraySum(nums, k):
     return ans
 
 nums = [1, 2, 1, 2, 1]
-print(subarraySum(nums, 3))
+k = 3
+print(subarraySum(nums, k))
 # Output: 4 (subarrays [1, 2], [2, 1], [1, 2], [2, 1])
 
 # counts = 
@@ -94,7 +93,8 @@ def subarraySum(nums, k):
     return ans
 
 nums = [1, 2, 1, 2, 1]
-print(subarraySum(nums, 3)) 
+k = 3
+print(subarraySum(nums, k)) 
 # Output: 4 (subarrays [1, 2], [2, 1], [1, 2], [2, 1])
 
 
@@ -251,7 +251,8 @@ def subarraySum(nums, k):  # Example: nums = [1, 2, 1, 2, 1], k = 3
 
 
 numbers = [1, 2, 1, 2, 1]
-print(subarraySum(numbers, 3))  
+k = 3
+print(subarraySum(numbers, k))  
 # Output: 4 (subarrays [1, 2], [2, 1], [1, 2], [2, 1])
 
 # counts = {0:1, 1:1, 3:1, 4:1, 6:1, 7:1}
@@ -279,7 +280,8 @@ def subarraySum(nums, k):
     return ans
 
 nums = [1, 2, 3]
-print(subarraySum(nums, 3))
+k = 3
+print(subarraySum(nums, k))
 # Output: 2 (subarrays [1, 2] and [3])
 
 # counts = {0: 1, 1: 1, 3: 1, 6: 1}
@@ -384,7 +386,8 @@ def subarraySum(nums, k):  # Example: nums = [1, 2, 3], k = 3
 
 
 numbers = [1, 2, 3]
-print(subarraySum(numbers, 3))  
+k = 3
+print(subarraySum(numbers, k))  
 # Output: 2 (subarrays [1, 2] and [3])
 
 # counts = {0: 1, 1: 1, 3: 1, 6: 1}
@@ -412,7 +415,8 @@ def subarraySum(nums, k):
     return ans
 
 nums = [1, 2, 3, 4, 6]
-print(subarraySum(nums, 6))
+k = 6
+print(subarraySum(nums, k))
 # Output: 2 (subarrays [1, 2, 3] and [6])
 
 # counts = {0: 1, 1: 1, 3: 1, 6: 1, 10: 1, 16: 1}
@@ -438,7 +442,8 @@ def subarraySum(nums, k):
     return ans
 
 nums = [1, 2, 3, 10, -4, 6]
-print(subarraySum(nums, 6))
+k = 6
+print(subarraySum(nums, k))
 # Output: 3 (subarrays [1, 2, 3], [-10, -4],[6])
 
 # counts = {0: 1, 1: 1, 3: 1, 6: 1, 16: 1, 12: 1, 18: 1}
@@ -464,7 +469,8 @@ def subarraySum(nums, k):
     return ans
 
 nums = [1, -1, 1]
-print(subarraySum(nums, 1))
+k = 1
+print(subarraySum(nums, k))
 # Output: 3 (subarrays [1], [1, -1, 1], [1])
 
 # counts = {0: 2, 1: 2}
@@ -525,7 +531,8 @@ def subarraySum(nums, k):
     return ans
 
 nums = [0, 1, 2, 3, 4]
-print(subarraySum(nums, 5))
+k = 5
+print(subarraySum(nums, k))
 # Output: 1 (subarray [2, 3])
 
 # counts = {0: 2, 1: 1, 3: 1, 6: 1, 10: 1}
@@ -577,7 +584,8 @@ def subarraySum(nums, k):
     return ans
 
 nums = [13, 1, 2, 3, 1]
-print(subarraySum(nums, 7))
+k = 7
+print(subarraySum(nums, k))
 # Output: 1
 
 
@@ -597,7 +605,8 @@ def subarraySum(nums, k):
     return ans
 
 nums = [1, -1, 1, -1]
-print(subarraySum(nums, 0))
+k = 0
+print(subarraySum(nums, k))
 # Output: 4
 
 
@@ -605,3 +614,30 @@ print(subarraySum(nums, 0))
 
 # When there are non-positive numbers in the input, the same prefix can occur multiple times, and a hash map is needed to count the frequency.
 
+
+
+# ––––––––––––––––––––––––––––––––––––––––––––––––
+"""
+Q: Why do we set counts[0] = 1 at the start?
+
+counts[0] = 1
+
+Why do we need this?
+    • It’s a starting point that says:
+      “Before we add any numbers, we already have one way to make a sum of 0.”
+    • This makes it possible to count subarrays that start at the very beginning of the array.
+
+---
+Example: nums = [1, 2], k = 3
+    • Running sum (curr) starts at 0.
+    • First number → curr = 1
+    • Second number → curr = 3
+
+Now check: curr - k = 3 - 3 = 0
+    • If counts[0] wasn’t initialized to 1, the code would miss the subarray [1, 2] because it wouldn’t recognize that the sum from the start equals k.
+
+---
+✅ So counts[0] = 1 is like saying:
+    • “We’ve seen a zero-sum once already, before starting. That way, if the running total hits k, we know we found a valid subarray starting at index 0.”
+    
+"""
