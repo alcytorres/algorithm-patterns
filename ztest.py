@@ -1,6 +1,8 @@
 
-seen = {3, 3, 3}
-print(len(seen))
+"""
+If counts[curr - k] exists -> counts[curr] - prev sum = k
+
+"""
 
 
 

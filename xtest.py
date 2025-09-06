@@ -13,6 +13,7 @@
 # Solution: https://leetcode.com/problems/subarray-sum-equals-k/solutions/127728/subarray-sum-equals-k/
 
 
+
 # ––––––––––––––––––––––––––––––––––––––––––––––––
 from collections import defaultdict
 
@@ -28,6 +29,7 @@ def subarraySum(nums, k):
 
     return ans
     
-nums = [1, 2, 1, 2, 1]
-print(subarraySum(nums, 3))
-# Output: 4 (subarrays [1, 2], [2, 1], [1, 2], [2, 1])
+nums = [1, -1, 1, -1]
+k = 0
+print(subarraySum(nums, k))
+# Output: 4 (subarrays [1, -1], [-1, 1], [1, -1], [1, -1, 1, -1])
