@@ -3,12 +3,12 @@
 # Example 4: Given an integer array nums and an integer k, find the number of subarrays whose sum is equal to k.
 
 # Example 1:
-    # Input: nums = [1, 1, 1], k = 2
-    # Output: 2
+    # Input: nums = [1, 2, 3], k = 3
+    # Output: 2 (subarrays [1, 2] and [3])
 
 # Example 2:
-    # Input: nums = [1, 2, 3], k = 3
-    # Output: 2
+    # Input: nums = [1, 2, 1, 2, 1], k = 3
+    # Output: 4 (subarrays [1, 2], [2, 1], [1, 2], [2, 1])
 
 # Solution: https://leetcode.com/problems/subarray-sum-equals-k/solutions/127728/subarray-sum-equals-k/
 
@@ -35,13 +35,6 @@ k = 3
 print(subarraySum(nums, k))
 # Output: 4 (subarrays [1, 2], [2, 1], [1, 2], [2, 1])
 
-# counts = 
-# {0:1}
-# {0:1,1:1}
-# {0:1,1:1,3:1} 
-# {0:1,1:1,3:1,4:1}
-# {0:1,1:1,3:1,4:1,6:1}
-# {0:1,1:1,3:1,4:1,6:1,7:1}
 
 # Time: O(n)
 # - Loop through nums once: O(n) iterations.
@@ -67,31 +60,46 @@ print(subarraySum(nums, k))
 # Final: 4 (subarrays [1,2], [2,1], [1,2], [2,1])
 
 
-# Explanation for Beginners:
-# - 'curr' is the cumulative sum up to index i.
-# - 'curr - k' checks if there's a previous cumulative sum that, when subtracted from curr, gives sum k (i.e., a subarray with sum k).
-# - counts[curr - k] gives the number of such subarrays ending at index i.
-# - counts[0] = 1 handles cases where the subarray starts from index 0 (e.g., at i=1, curr=3, curr-k=0, counts[0]=1 finds [1, 2]).
-# - Each iteration updates counts[curr] to record the current cumulative sum for future checks.
+"""
+Explanation for Beginners: why this code works
+    • curr = running total = sum of nums[0..i].
+    • If some earlier running total was exactly (curr - k), then the numbers AFTER that point up to i sum to k.
+        • “After that point” is what people mean by “prev_index + 1” — start right after where that earlier total was measured.
+    • counts is a hash map where counts[prefix] = how many times we’ve seen that running total before.
+    • ans += counts[curr - k]: we add the number of earlier totals that create a k-sum subarray ending at i.
+    • counts[0] = 1 seeds the case where a subarray starting at index 0 itself sums to k.
+    • Finally, we record today’s total for future checks: counts[curr] += 1.
+
+Example (quick sanity check):
+    • nums = [1, 2], k = 3
+    • prefix totals: 1, 3
+    • at curr = 3 ⇒ curr - k = 0 ⇒ counts[0] = 1 ⇒ one subarray [1, 2].
+
+
 # Subarrays found:
-# - i=1: curr=3, curr-k=0, counts[0]=1 -> [1, 2] (sum=3)
-# - i=2: curr=4, curr-k=1, counts[1]=1 -> [2, 1] (sum=3)
-# - i=3: curr=6, curr-k=3, counts[3]=1 -> [1, 2] (sum=3)
-# - i=4: curr=7, curr-k=4, counts[4]=1 -> [2, 1] (sum=3)
+    • i=1: curr=3, curr-k=0, counts[0]=1 -> [1, 2] (sum=3)
+    • i=2: curr=4, curr-k=1, counts[1]=1 -> [2, 1] (sum=3)
+    • i=3: curr=6, curr-k=3, counts[3]=1 -> [1, 2] (sum=3)
+    • i=4: curr=7, curr-k=4, counts[4]=1 -> [2, 1] (sum=3)
 
 
-
-# Why it works: 
-    # We track cumulative sums (curr) and use a hash map (counts) to store how many times each cumulative sum has appeared.
-    # If curr - k exists in counts, it means there are subarrays ending at the current index with sum k.
-    # counts[0] = 1 initializes the case where a subarray starting from index 0 sums to k.
-
-
+    
+Most IMPORTANT thing to Understand:
+    • curr is the running total so far.
+    • If curr - k is in counts, it means a previous sum exists where curr - prev = k, forming a subarray with sum k.
+    • counts[curr - k] tells how many such subarrays end at the current index.
+    
+    
 # Note: The code determines only the total number of subarrays with a sum equal to k, confirming their existence through prefix sum matches without specifying which subarrays they are.
 
-# Most IMPORTANT thing to Understand for this solution:
-# ans += counts[curr - k] works simply because if curr - k (a previous sum, let’s call it prev) is in counts, then curr - prev = k, meaning the subarray between those points sums to k, and counts[curr - k] counts how many such prev sums exist.
+"""
 
+# ––––––––––––––––––––––––––––––––––––––––––––––––
+# Note the image that explains this problem in this section: Count the number of subarrays with an "exact" constraint only applies when the subarray sum matches k.
+
+# If the subarray sum does not match k, no count is incremented, and the logic moves to the next prefix sum check.
+
+# https://leetcode.com/explore/interview/card/leetcodes-interview-crash-course-data-structures-and-algorithms/705/hashing/4512/
 
 
 
@@ -128,11 +136,26 @@ print(subarraySum(nums, k))
 # - Overall: O(1) space.
 
 
-# Trace Overview
-# i        = 0 -  - -  1 - -  2 - -  3 - -  4 -
-# j        = 0 -  1 2  1 - 2 3  2 - 3 4  3 - 4  4 -
-# curr     = 0 1  3 4  0 2 3 5  0 1 3 5  0 2 4  0 1
-# ans      = 0 0  1 1  1 1 2 2  2 2 3 3  3 3 4  4
+# Overview for Each Iteration
+# Input: nums = [1, 2, 1, 2, 1], k = 3
+# Step: Find subarrays with sum equal to k
+# i  | j  | curr          | curr == k | ans | Subarray
+# 0  | 0  | 1             | False     | 0   | [1]
+# 0  | 1  | 3 (1+2)       | True      | 1   | [1, 2]
+# 0  | 2  | 4 (3+1)       | False     | 1   | [1, 2, 1]
+# 0  | 3  | 6 (4+2)       | False     | 1   | [1, 2, 1, 2]
+# 0  | 4  | 7 (6+1)       | False     | 1   | [1, 2, 1, 2, 1]
+# 1  | 1  | 2             | False     | 1   | [2]
+# 1  | 2  | 3 (2+1)       | True      | 2   | [2, 1]
+# 1  | 3  | 5 (3+2)       | False     | 2   | [2, 1, 2]
+# 1  | 4  | 6 (5+1)       | False     | 2   | [2, 1, 2, 1]
+# 2  | 2  | 1             | False     | 2   | [1]
+# 2  | 3  | 3 (1+2)       | True      | 3   | [1, 2]
+# 2  | 4  | 4 (3+1)       | False     | 3   | [1, 2, 1]
+# 3  | 3  | 2             | False     | 3   | [2]
+# 3  | 4  | 3 (2+1)       | True      | 4   | [2, 1]
+# 4  | 4  | 1             | False     | 4   | [1]
+# Final: 4 ([1, 2], [2, 1], [1, 2], [2, 1])
 
 
 
@@ -152,44 +175,6 @@ def subarraySum(nums, k):
         
     return ans                # Return total subarrays with sum k
 
-
-
-# ––––––––––––––––––––––––––––––––––––––––––––––––
-# Super Simple Breakdown of LeetCode 560: Subarray Sum Equals K
-# The goal is to count subarrays in nums that sum to k. The code uses a running sum (curr) and a defaultdict (counts) to track prefix sums.
-
-# Why ans += counts[curr - k]?
-# * curr is the sum from start to current index.
-# * If curr - k is in counts, it means a previous sum exists where curr - prev = k, forming a subarray with sum k.
-# * counts[curr - k] tells how many such subarrays end at the current index.
-
-# Walkthrough for nums = [1, 2, 1, 2, 1], k = 3:
-# * Start: counts = {0: 1}, ans = 0, curr = 0
-# * Iteration 1: num = 1:
-#   * curr = 0 + 1 = 1
-#   * curr - k = 1 - 3 = -2. counts[-2] = 0 → ans = 0
-#   * counts[1] += 1 → counts = {0: 1, 1: 1}
-# * Iteration 2: num = 2:
-#   * curr = 1 + 2 = 3
-#   * curr - k = 3 - 3 = 0. counts[0] = 1 → ans = 0 + 1 = 1 (found [1, 2])
-#   * counts[3] += 1 → counts = {0: 1, 1: 1, 3: 1}
-# * Iteration 3: num = 1:
-#   * curr = 3 + 1 = 4
-#   * curr - k = 4 - 3 = 1. counts[1] = 1 → ans = 1 + 1 = 2 (found [2, 1])
-#   * counts[4] += 1 → counts = {0: 1, 1: 1, 3: 1, 4: 1}
-# * Iteration 4: num = 2:
-#   * curr = 4 + 2 = 6
-#   * curr - k = 6 - 3 = 3. counts[3] = 1 → ans = 2 + 1 = 3 (found [1, 2])
-#   * counts[6] += 1 → counts = {0: 1, 1: 1, 3: 1, 4: 1, 6: 1}
-# * Iteration 5: num = 1:
-#   * curr = 6 + 1 = 7
-#   * curr - k = 7 - 3 = 4. counts[4] = 1 → ans = 3 + 1 = 4 (found [2, 1])
-#   * counts[7] += 1 → counts = {0: 1, 1: 1, 3: 1, 4: 1, 6: 1, 7: 1}
-# * Return: ans = 4
-
-# Key Takeaway:
-# * ans += counts[curr - k] counts subarrays by checking if a previous sum makes the current subarray sum to k = 3.
-# * Output: 4 (subarrays [1, 2] at 0-1, [2, 1] at 1-2, [1, 2] at 2-3, [2, 1] at 3-4).
 
 
 # ––––––––––––––––––––––––––––––––––––––––––––––––
@@ -279,6 +264,34 @@ print(subarraySum(numbers, k))
 
 
 
+"""
+Note on defaultdict and "extra" keys (e.g., -2:0)
+
+Why it happens:
+    • defaultdict(int) auto-creates keys with value 0 when you *access* a missing key.
+    • Example: counts[curr - k] → if (curr - k) not in counts, it gets inserted as 0.
+
+What you’ll see:
+    • Tools like Python Tutor may show entries like {-2: 0}.
+    • A manual iteration table might skip these since they don’t affect the result.
+
+Does it matter?
+    • No — these extra 0-entries do NOT affect correctness.
+    • They are harmless placeholders.
+
+How to avoid it:
+    • Use counts.get(curr - k, 0) when you just want to *check* a value.
+    • .get() returns 0 without creating a new key.
+
+Key takeaway:
+    • defaultdict[int] = convenient for counting, but remember it auto-inserts on access.
+    • Extra keys with value 0 are normal and safe to ignore.
+
+
+# counts from table: =             {0:1, 1:1, 3:1, 6:1}
+# counts from python visualizer: = {0:1, -2:0, 1:1, 3:1, 6:1})
+"""
+
 # ––––––––––––––––––––––––––––––––––––––––––––––––
 # Best Solution:
 
@@ -303,8 +316,6 @@ k = 3
 print(subarraySum(nums, k))
 # Output: 2 (subarrays [1, 2] and [3])
 
-# counts = {0:1, 1:1, 3:1, 6:1}
-
 
 # Overview for Each Iteration
 # Input: nums = [1, 2, 3], k = 3
@@ -317,301 +328,16 @@ print(subarraySum(nums, k))
 # Final: 2 (subarrays [1,2], [3])
 
 
-
-# ––––––––––––––––––––––––––––––––––––––––––––––––
-"""
-# 560. Subarray Sum Equals K
-    • Goal: Count subarrays in nums that sum to k using prefix sums and a hash map.
-
-Why `ans += counts[curr - k]`?
-    • curr: sum from start to current index.
-    • If curr - k is in counts, a previous sum exists where curr - prev = k.
-    • counts[curr - k] gives number of such subarrays.
-
-Walkthrough for nums = [1, 2, 3], k = 3:
-# Start: counts = {0: 1}, ans = 0, curr = 0
-# Iteration 1 (num = 1):
-#   - curr = 0 + 1 = 1
-#   - curr - k = 1 - 3 = -2, counts[-2] = 0 → ans = 0
-#   - counts[1] += 1 → counts = {0: 1, 1: 1}
-# Iteration 2 (num = 2):
-#   - curr = 1 + 2 = 3
-#   - curr - k = 3 - 3 = 0, counts[0] = 1 → ans = 0 + 1 = 1 (found [1, 2])
-#   - counts[3] += 1 → counts = {0: 1, 1: 1, 3: 1}
-# Iteration 3 (num = 3):
-#   - curr = 3 + 3 = 6
-#   - curr - k = 6 - 3 = 3, counts[3] = 1 → ans = 1 + 1 = 2 (found [3])
-#   - counts[6] += 1 → counts = {0: 1, 1: 1, 3: 1, 6: 1}
-# Return: ans = 2
-"""
-
-
-# ––––––––––––––––––––––––––––––––––––––––––––––––
-# Task: Find the number of subarrays with sum equal to k in an integer array.
-# Example: nums = [1, 2, 3], k = 3 → Output = 2 (subarrays: [1, 2], [3])
-# Why: Practices prefix sum technique with a hash map to efficiently count subarrays.
-
-from collections import defaultdict
-
-def subarraySum(nums, k):  # Example: nums = [1, 2, 3], k = 3
-
-    # 1️⃣ Initialize variables
-    # Initialize a defaultdict to store prefix sum counts
-    # Why? We track the frequency of prefix sums to find subarrays with sum k
-    counts = defaultdict(int)  # counts = {}
-    counts[0] = 1  # Initialize with 0 sum having 1 occurrence
-    # Why? A prefix sum of 0 (empty subarray) allows subarrays starting from index 0
-
-    # Initialize answer to count subarrays with sum k
-    # Why? We need to accumulate the number of valid subarrays
-    ans = 0  # ans = 0
-
-    # Initialize current prefix sum
-    # Why? We track the running sum to compute differences
-    curr = 0  # curr = 0
-
-    # 2️⃣ Process array to find subarrays
-    # Iterate through each number to compute prefix sums
-    # Why? We use prefix sums to find subarrays where sum[i:j] = k
-    for num in nums:  # num takes values [1, 2, 3]
-        # --- Iteration 1: num = 1 ---
-        # Update the current prefix sum
-        # Why? We accumulate the sum up to the current index
-        curr += num  # curr = 0 + 1 = 1
-        # Add the number of subarrays ending at the current index with sum k
-        # Why? If curr - k exists in counts, it means there are subarrays summing to k
-        ans += counts[curr - k]  # curr - k = 1 - 3 = -2, counts[-2] = 0 (not in counts), ans = 0
-        # Increment the count of the current prefix sum
-        # Why? We track how many times this prefix sum has occurred
-        counts[curr] += 1  # counts[1] = 0 + 1 = 1
-        # After Iteration 1: curr = 1, ans = 0, counts = {0: 1, 1: 1}
-
-        # --- Iteration 2: num = 2 ---
-        if num == 2:
-            curr += num  # curr = 1 + 2 = 3
-            ans += counts[curr - k]  # curr - k = 3 - 3 = 0, counts[0] = 1, ans = 0 + 1 = 1
-            counts[curr] += 1  # counts[3] = 0 + 1 = 1
-            # After Iteration 2: curr = 3, ans = 1, counts = {0: 1, 1: 1, 3: 1}
-            # Found subarray: [1, 2] (sum = 3, indices 0 to 1)
-
-        # --- Iteration 3: num = 3 ---
-        if num == 3:
-            curr += num  # curr = 3 + 3 = 6
-            ans += counts[curr - k]  # curr - k = 6 - 3 = 3, counts[3] = 1, ans = 1 + 1 = 2
-            counts[curr] += 1  # counts[6] = 0 + 1 = 1
-            # After Iteration 3: curr = 6, ans = 2, counts = {0: 1, 1: 1, 3: 1, 6: 1}
-            # Found subarray: [3] (sum = 3, index 2)
-
-    # 3️⃣ Return the count of valid subarrays
-    # Why? ans contains the number of subarrays with sum equal to k
-    return ans  # ans = 2
-
-
-numbers = [1, 2, 3]
-k = 3
-print(subarraySum(numbers, k))  
-# Output: 2 (subarrays [1, 2] and [3])
-
-# counts = {0:1, 1:1, 3:1, 6:1}
-
-
-
-
-# ––––––––––––––––––––––––––––––––––––––––––––––––
-# Best Solution:
-
-from collections import defaultdict
-
-def subarraySum(nums, k):
-    counts = defaultdict(int)
-    counts[0] = 1
-    # Track running sum and count subarrays
-    ans = curr = 0
-
-    # Process array to find subarrays with sum k
-    for num in nums:
-        curr += num
-        ans += counts[curr - k]
-        counts[curr] += 1
-
-    return ans
-
-nums = [1, 2, 3, 4, 6]
-k = 6
-print(subarraySum(nums, k))
-# Output: 2 (subarrays [1, 2, 3] and [6])
-
-# counts = {0: 1, 1: 1, 3: 1, 6: 1, 10: 1, 16: 1}
-
-
-# ––––––––––––––––––––––––––––––––––––––––––––––––
-# Best Solution:
-
-from collections import defaultdict
-
-def subarraySum(nums, k):
-    counts = defaultdict(int)
-    counts[0] = 1
-    # Track running sum and count subarrays
-    ans = curr = 0
-
-    # Process array to find subarrays with sum k
-    for num in nums:
-        curr += num
-        ans += counts[curr - k]
-        counts[curr] += 1
-
-    return ans
-
-nums = [1, 2, 3, 10, -4, 6]
-k = 6
-print(subarraySum(nums, k))
-# Output: 3 (subarrays [1, 2, 3], [-10, -4],[6])
-
-# counts = {0: 1, 1: 1, 3: 1, 6: 1, 16: 1, 12: 1, 18: 1}
-
-
-# ––––––––––––––––––––––––––––––––––––––––––––––––
-# Best Solution:
-
-from collections import defaultdict
-
-def subarraySum(nums, k):
-    counts = defaultdict(int)
-    counts[0] = 1
-    # Track running sum and count subarrays
-    ans = curr = 0
-
-    # Process array to find subarrays with sum k
-    for num in nums:
-        curr += num
-        ans += counts[curr - k]
-        counts[curr] += 1
-
-    return ans
-
-nums = [1, -1, 1]
-k = 1
-print(subarraySum(nums, k))
-# Output: 3 (subarrays [1], [1, -1, 1], [1])
-
-# counts = {0: 2, 1: 2}
-
-
-# ––––––––––––––––––––––––––––––––––––––––––––––––
-# Lesson: Why do I sometimes see "extra" keys like -1:0 in defaultdict?
-    # defaultdict will automatically create a key with value 0 whenever you *access* a missing key using square brackets:
-    #   counts[x]   -> if x not present, insert x with value 0
-    # That’s why you might see something like {-1: 0} at the end.
-
-# Important:
-    # - This does NOT affect your algorithm’s correctness.
-    # - It only changes the final dictionary representation.
-
-# How to avoid it:
-    # - Use counts.get(x, 0) when you just want to *check* a value.
-    #   This will return 0 without inserting a new key.
-
-# Takeaway:
-    # Remember that defaultdict[int] auto-inserts keys on access.
-    # If you don’t want that, use .get() instead.
-
-
-# -------------------------------
-# General Rule:
-# ans += counts[curr - k]
-# If counts[curr - k] = m, then there are m valid subarrays ending here.
-# Because each earlier prefix sum occurrence = a different valid start.
-
-
-
-# ––––––––––––––––––––––––––––––––––––––––––––––––
-# Note the image that explains this problem in this section: Count the number of subarrays with an "exact" constraint only applies when the subarray sum matches k.
-
-# If the subarray sum does not match k, no count is incremented, and the logic moves to the next prefix sum check.
-
-# https://leetcode.com/explore/interview/card/leetcodes-interview-crash-course-data-structures-and-algorithms/705/hashing/4512/
-
-
-# ––––––––––––––––––––––––––––––––––––––––––––––––
-# Best Solution:
-
-from collections import defaultdict
-
-def subarraySum(nums, k):
-    counts = defaultdict(int)
-    counts[0] = 1
-    # Track running sum and count subarrays
-    ans = curr = 0
-
-    # Process array to find subarrays with sum k
-    for num in nums:
-        curr += num
-        ans += counts[curr - k]
-        counts[curr] += 1
-
-    return ans
-
-nums = [0, 1, 2, 3, 4]
-k = 5
-print(subarraySum(nums, k))
-# Output: 1 (subarray [2, 3])
-
-# counts = {0: 2, 1: 1, 3: 1, 6: 1, 10: 1}
-
-
-
-# ––––––––––––––––––––––––––––––––––––––––––––––––
-# Best Solution:
-
-from collections import defaultdict
-
-def subarraySum(nums, k):
-    counts = defaultdict(int)
-    counts[0] = 1
-    ans = curr = 0
-
-    for num in nums:
-        curr += num
-        ans += counts[curr - k]
-        counts[curr] += 1
-    return ans
-
-nums = [3, 4, 7, 2, -3, 1, 4, 2]
-print(subarraySum(nums, 7))
-# Output: 4 
-# (subarrays [3, 4], [7], [7, 2, -3, 1], [1, 4, 2])
-
-# counts =
-# {0:1} -> {0:1,3:1} -> {0:1,3:1,7:1} ->
-# {0:1,3:1,7:1,14:1} -> {0:1,3:1,7:1,14:1,16:1} ->
-# {0:1,3:1,7:1,14:1,16:1,13:1} ->
-# {0:1,3:1,7:1,14:1,16:1,13:1,14:2} ->
-# {0:1,3:1,7:1,14:1,16:1,13:1,14:2,18:1} ->
-# {0:1,3:1,7:1,14:1,16:1,13:1,14:2,18:1,20:1}
-
-
-
-# ––––––––––––––––––––––––––––––––––––––––––––––––
-# Best Solution:
-
-from collections import defaultdict
-
-def subarraySum(nums, k):
-    counts = defaultdict(int)
-    counts[0] = 1
-    ans = curr = 0
-
-    for num in nums:
-        curr += num
-        ans += counts[curr - k]
-        counts[curr] += 1
-    return ans
-
-nums = [13, 1, 2, 3, 1]
-k = 7
-print(subarraySum(nums, k))
-# Output: 1
+# Overview for Each Iteration with the auto-created keys from defaultdict included:
+    # Happens when you *access* a missing key. 
+# Input: nums = [1, 2, 3], k = 3
+# Step: Process array to find subarrays with sum k
+# i | num | curr | curr - k | counts[curr - k] | ans | counts
+# - | -   | 0    | -        | -                | 0   | {0:1}
+# 0 | 1   | 1    | 1-3=-2   | 0                | 0   | {0:1, -2:0, 1:1}
+# 1 | 2   | 3    | 3-3=0    | 1                | 1   | {0:1, -2:0, 1:1, 3:1}
+# 2 | 3   | 6    | 6-3=3    | 1                | 2   | {0:1, -2:0, 1:1, 3:1, 6:1}
+# Final: 2 (subarrays [1,2], [3])
 
 
 
@@ -686,7 +412,6 @@ Key insight:
     • When there are non-positive numbers, the same prefix can occur multiple times, so we need a hash map (dictionary) to keep track of frequencies instead of just storing seen values once.
 """
 
-
 # Example where we increase by more than 1 in a single iteration
 from collections import defaultdict
 
@@ -718,5 +443,238 @@ print(subarraySum(nums, k))
 # 3 | -1  | 0    | 0-0=0    | 2                | 4   | {0:3, 1:2}
 # Final: 4 (subarrays [1,-1], [1,-1,1,-1], [-1,1], [1,-1])
 
-
 # 👉 Notice at i=3, counts[0] = 2, so ans jumps from 2 → 4 in a single step
+
+
+
+# ––––––––––––––––––––––––––––––––––––––––––––––––
+# Best Solution:
+
+from collections import defaultdict
+
+def subarraySum(nums, k):
+    counts = defaultdict(int)
+    counts[0] = 1
+    # Track running sum and count subarrays
+    ans = curr = 0
+
+    # Process array to find subarrays with sum k
+    for num in nums:
+        curr += num
+        ans += counts[curr - k]
+        counts[curr] += 1
+
+    return ans
+
+nums = [1, -1, 1]
+k = 1
+print(subarraySum(nums, k))
+# Output: 3 (subarrays [1], [1, -1, 1], [1])
+
+
+# Overview for Each Iteration
+# Input: nums = [1, -1, 1], k = 1
+# Step: Process array to find subarrays with sum k
+# i | num | curr | curr - k | counts[curr - k] | ans | counts
+# - | -   | 0    | -        | -                | 0   | {0:1}
+# 0 | 1   | 1    | 1-1=0    | 1                | 1   | {0:1, 1:1}
+# 1 | -1  | 0    | 0-1=-1   | 0                | 1   | {0:2, 1:1}
+# 2 | 1   | 1    | 1-1=0    | 2                | 3   | {0:2, 1:2}
+# Final: 3 (subarrays [1], [1, -1, 1], [1])
+
+
+
+
+# ––––––––––––––––––––––––––––––––––––––––––––––––
+# Best Solution:
+
+from collections import defaultdict
+
+def subarraySum(nums, k):
+    counts = defaultdict(int)
+    counts[0] = 1
+    # Track running sum and count subarrays
+    ans = curr = 0
+
+    # Process array to find subarrays with sum k
+    for num in nums:
+        curr += num
+        ans += counts[curr - k]
+        counts[curr] += 1
+
+    return ans
+
+nums = [1, 2, 3, 4, 6]
+k = 6
+print(subarraySum(nums, k))
+# Output: 2 (subarrays [1, 2, 3] and [6])
+
+
+# Overview for Each Iteration
+# Input: nums = [1, 2, 3, 4, 6], k = 6
+# Step: Process array to find subarrays with sum k
+# i | num | curr | curr - k | counts[curr - k] | ans | counts
+# - | -   | 0    | -        | -                | 0   | {0:1}
+# 0 | 1   | 1    | -5       | 0                | 0   | {0:1, 1:1}
+# 1 | 2   | 3    | -3       | 0                | 0   | {0:1, 1:1, 3:1}
+# 2 | 3   | 6    | 0        | 1                | 1   | {0:1, 1:1, 3:1, 6:1}
+# 3 | 4   | 10   | 4        | 0                | 1   | {0:1, 1:1, 3:1, 6:1, 10:1}
+# 4 | 6   | 16   | 10       | 1                | 2   | {0:1, 1:1, 3:1, 6:1, 10:1, 16:1}
+# Final: 2 (subarrays [1,2,3] and [6])
+
+
+
+
+# ––––––––––––––––––––––––––––––––––––––––––––––––
+# Best Solution:
+
+from collections import defaultdict
+
+def subarraySum(nums, k):
+    counts = defaultdict(int)
+    counts[0] = 1
+    # Track running sum and count subarrays
+    ans = curr = 0
+
+    # Process array to find subarrays with sum k
+    for num in nums:
+        curr += num
+        ans += counts[curr - k]
+        counts[curr] += 1
+
+    return ans
+
+nums = [1, 2, 3, 10, -4, 6]
+k = 6
+print(subarraySum(nums, k))
+# Output: 3 (subarrays [1, 2, 3], [-10, -4],[6])
+
+
+# Overview for Each Iteration
+# Input: nums = [1, 2, 3, 10, -4, 6], k = 6
+# Step: Process array to find subarrays with sum k
+# i | num | curr | curr - k | counts[curr - k] | ans | counts
+# - | -   | 0    | -        | -                | 0   | {0:1}
+# 0 | 1   | 1    | -5       | 0                | 0   | {0:1, 1:1}
+# 1 | 2   | 3    | -3       | 0                | 0   | {0:1, 1:1, 3:1}
+# 2 | 3   | 6    | 0        | 1                | 1   | {0:1, 1:1, 3:1, 6:1}
+# 3 | 10  | 16   | 10       | 0                | 1   | {0:1, 1:1, 3:1, 6:1, 16:1}
+# 4 | -4  | 12   | 6        | 1                | 2   | {0:1, 1:1, 3:1, 6:1, 16:1, 12:1}
+# 5 | 6   | 18   | 12       | 1                | 3   | {0:1, 1:1, 3:1, 6:1, 16:1, 12:1, 18:1}
+# Final: 3 (subarrays [1,2,3], [10,-4], [-4,6])
+
+
+
+# ––––––––––––––––––––––––––––––––––––––––––––––––
+# Best Solution:
+
+from collections import defaultdict
+
+def subarraySum(nums, k):
+    counts = defaultdict(int)
+    counts[0] = 1
+    # Track running sum and count subarrays
+    ans = curr = 0
+
+    # Process array to find subarrays with sum k
+    for num in nums:
+        curr += num
+        ans += counts[curr - k]
+        counts[curr] += 1
+
+    return ans
+
+nums = [0, 1, 2, 3, 4]
+k = 5
+print(subarraySum(nums, k))
+# Output: 1 (subarray [2, 3])
+
+
+# Overview for Each Iteration
+# Input: nums = [0, 1, 2, 3, 4], k = 5
+# Step: Process array to find subarrays with sum k
+# i | num | curr | curr - k | counts[curr - k] | ans | counts
+# - | -   | 0    | -        | -                | 0   | {0:1}
+# 0 | 0   | 0    | -5       | 0                | 0   | {0:2}
+# 1 | 1   | 1    | -4       | 0                | 0   | {0:2, 1:1}
+# 2 | 2   | 3    | -2       | 0                | 0   | {0:2, 1:1, 3:1}
+# 3 | 3   | 6    | 1        | 1                | 1   | {0:2, 1:1, 3:1, 6:1}
+# 4 | 4   | 10   | 5        | 0                | 1   | {0:2, 1:1, 3:1, 6:1, 10:1}
+# Final: 1 (subarray [2, 3])
+
+
+
+
+# ––––––––––––––––––––––––––––––––––––––––––––––––
+# Best Solution:
+
+from collections import defaultdict
+
+def subarraySum(nums, k):
+    counts = defaultdict(int)
+    counts[0] = 1
+    ans = curr = 0
+
+    for num in nums:
+        curr += num
+        ans += counts[curr - k]
+        counts[curr] += 1
+    return ans
+
+nums = [3, 4, 7, 2, -3, 1, 4, 2]
+print(subarraySum(nums, 7))
+# Output: 4 (subarrays [3, 4], [7], [7, 2, -3, 1], [1, 4, 2])
+
+
+# Overview for Each Iteration
+# Input: nums = [3, 4, 7, 2, -3, 1, 4, 2], k = 7
+# Step: Process array to find subarrays with sum k
+# i | num | curr | curr - k | counts[curr - k] | ans | counts
+# - | -   | 0    | -        | -                | 0   | {0:1}
+# 0 | 3   | 3    | -4       | 0                | 0   | {0:1, 3:1}
+# 1 | 4   | 7    | 0        | 1                | 1   | {0:1, 3:1, 7:1}
+# 2 | 7   | 14   | 7        | 1                | 2   | {0:1, 3:1, 7:1, 14:1}
+# 3 | 2   | 16   | 9        | 0                | 2   | {0:1, 3:1, 7:1, 14:1, 16:1}
+# 4 | -3  | 13   | 6        | 0                | 2   | {0:1, 3:1, 7:1, 14:1, 16:1, 13:1}
+# 5 | 1   | 14   | 7        | 1                | 3   | {0:1, 3:1, 7:1, 14:2, 16:1, 13:1}
+# 6 | 4   | 18   | 11       | 0                | 3   | {0:1, 3:1, 7:1, 14:2, 16:1, 13:1, 18:1}
+# 7 | 2   | 20   | 13       | 1                | 4   | {0:1, 3:1, 7:1, 14:2, 16:1, 13:1, 18:1, 20:1}
+# Final: 4 (subarrays [3,4], [7], [7,2,-3,1], [1,4,2])
+
+
+
+
+
+# ––––––––––––––––––––––––––––––––––––––––––––––––
+# Best Solution:
+
+from collections import defaultdict
+
+def subarraySum(nums, k):
+    counts = defaultdict(int)
+    counts[0] = 1
+    ans = curr = 0
+
+    for num in nums:
+        curr += num
+        ans += counts[curr - k]
+        counts[curr] += 1
+    return ans
+
+nums = [13, 1, 2, 3, 1]
+k = 7
+print(subarraySum(nums, k))
+# Output: 1 (subarray [1, 2, 3, 1])
+
+
+# Overview for Each Iteration
+# Input: nums = [13, 1, 2, 3, 1], k = 7
+# Step: Process array to find subarrays with sum k
+# i | num | curr | curr - k | counts[curr - k] | ans | counts
+# - | -   | 0    | -        | -                | 0   | {0:1}
+# 0 | 13  | 13   | 6        | 0                | 0   | {0:1, 13:1}
+# 1 | 1   | 14   | 7        | 0                | 0   | {0:1, 13:1, 14:1}
+# 2 | 2   | 16   | 9        | 0                | 0   | {0:1, 13:1, 14:1, 16:1}
+# 3 | 3   | 19   | 12       | 0                | 0   | {0:1, 13:1, 14:1, 16:1, 19:1}
+# 4 | 1   | 20   | 13       | 1                | 1   | {0:1, 13:1, 14:1, 16:1, 19:1, 20:1}
+# Final: 1 (subarray [1, 2, 3, 1])
