@@ -17,19 +17,19 @@
 # ––––––––––––––––––––––––––––––––––––––––––––––––
 from collections import defaultdict
 
-def subarraySum(nums, k):
+def numberOfSubarrays(nums, k):
     counts = defaultdict(int)
     counts[0] = 1
-    curr = ans = 0
+    odd = ans = 0
 
     for num in nums:
-        curr += num
-        ans += counts[curr - k]
-        counts[curr] += 1
-
-    return ans
+        odd += num % 2
+        ans += counts[odd - k]
+        counts[odd] += 1
     
-nums = [1, -1, 1, -1]
-k = 0
-print(subarraySum(nums, k))
-# Output: 4 (subarrays [1, -1], [-1, 1], [1, -1], [1, -1, 1, -1])
+    return ans
+
+    
+nums = [1, 1, 2, 1, 1, 1]
+k = 3
+print(numberOfSubarrays(nums, k))

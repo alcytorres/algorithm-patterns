@@ -4,6 +4,7 @@ If counts[curr - k] exists -> counts[curr] - prev sum = k
 
 """
 
+print(1%2)
 
 
 # print(1//2)
