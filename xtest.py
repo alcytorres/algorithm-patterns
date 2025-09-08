@@ -1,35 +1,50 @@
-# 560. Subarray Sum Equals K
+# 2225 Find Players With Zero or One Losses
 
-# Example 4: Given an integer array nums and an integer k, find the number of subarrays whose sum is equal to k.
+# You are given an integer array matches where matches[i] = [winneri, loseri] indicates that the player winneri defeated player loseri in a match.
 
-# Example 1:
-    # Input: nums = [1, 1, 1], k = 2
-    # Output: 2
+# Return a list answer of size 2 where:
+    # answer[0] is a list of all players that have not lost any matches.
+    # answer[1] is a list of all players that have lost exactly one match.
 
-# Example 2:
-    # Input: nums = [1, 2, 3], k = 3
-    # Output: 2
+# The values in the two lists should be returned in increasing order.
 
-# Solution: https://leetcode.com/problems/subarray-sum-equals-k/solutions/127728/subarray-sum-equals-k/
+# Note:
+    # You should only consider the players that have played at least one match.
+    # The testcases will be generated such that no two matches will have the same outcome.
+
+# Example
+    # Input: matches = [[1,3], [2,3], [3,6], [5,6], [5,7], [4,5], [4,8], [4,9], [10,4], [10,9]]
+    # Output: [[1, 2, 10], [4, 5, 7, 8]]
+
+# Explanation:
+    # Players 1, 2, and 10 have not lost any matches.
+    # Players 4, 5, 7, and 8 each have lost one match.
+    # Players 3, 6, and 9 each have lost two matches.
+# Thus, answer[0] = [1, 2, 10] and answer[1] = [4,5,7,8].
+
+# Solution: https://leetcode.com/problems/find-players-with-zero-or-one-losses/solutions/2655744/find-players-with-zero-or-one-losses/
 
 
-
-# ––––––––––––––––––––––––––––––––––––––––––––––––
 from collections import defaultdict
 
-def numberOfSubarrays(nums, k):
-    counts = defaultdict(int)
-    counts[0] = 1
-    odd = ans = 0
+def findWinners(matches):
+    losses = defaultdict(int)
+    seen = set()
 
-    for num in nums:
-        odd += num % 2
-        ans += counts[odd - k]
-        counts[odd] += 1
-    
-    return ans
+    for winner, loser in matches:
+        seen.add(winner)
+        seen.add(loser)
+        losses[loser] += 1
 
-    
-nums = [1, 1, 2, 1, 1, 1]
-k = 3
-print(numberOfSubarrays(nums, k))
+    # zero-loss players: in seen but not in losses
+    zero_loss = [p for p in seen if losses[p] == 0]
+    # one-loss players: exactly one loss
+    one_loss = [p for p in seen if losses[p] == 1]
+
+    return [sorted(zero_loss), sorted(one_loss)]
+
+
+
+matches = [[1,3], [2,3], [3,6], [5,6], [5,7], [4,5], [4,8], [4,9], [10,4], [10,9]]
+print(findWinners(matches))
+# Output: [[1, 2, 10], [4, 5, 7, 8]]

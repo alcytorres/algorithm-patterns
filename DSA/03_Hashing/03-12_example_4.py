@@ -64,18 +64,25 @@ print(subarraySum(nums, k))
 Most IMPORTANT thing to Understand:
     • curr is the running total so far.
     
-    • If curr - k is in counts, it means a previous sum exists where curr - prev = k, forming a subarray with sum k.
+    • If curr - k is in counts, it means there was an earlier prefix sum (prev) such that curr - prev = k, forming a subarray with sum k. The subarray between prev and curr sums to k.
+
+    • TLDR: If counts[curr - k] exists → curr - prev = k, so that subarray sums to k. 
 
     • counts[curr - k] tells how many such subarrays end at the current index.
 
 
 Explanation for Beginners: Why this code works
     • curr = running total = sum of nums[0..i].
+
     • If some earlier running total was exactly (curr - k), then the numbers AFTER that point up to i sum to k.
         • “After that point” is what people mean by “prev_index + 1” — start right after where that earlier total was measured.
+
     • counts is a hash map where counts[prefix] = how many times we’ve seen that running total before.
+
     • ans += counts[curr - k]: we add the number of earlier totals that create a k-sum subarray ending at i.
+
     • counts[0] = 1 seeds the case where a subarray starting at index 0 itself sums to k.
+
     • Finally, we record today’s total for future checks: counts[curr] += 1.
 
 Example (quick sanity check):

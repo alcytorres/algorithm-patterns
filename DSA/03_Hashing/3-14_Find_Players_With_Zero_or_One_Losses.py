@@ -13,14 +13,14 @@
     # The testcases will be generated such that no two matches will have the same outcome.
 
 # Example
-# Input: matches = [[1,3],[2,3],[3,6],[5,6],[5,7],[4,5],[4,8],[4,9],[10,4],[10,9]]
-# Output: [[1,2,10],[4,5,7,8]]
+    # Input: matches = [[1,3], [2,3], [3,6], [5,6], [5,7], [4,5], [4,8], [4,9], [10,4], [10,9]]
+    # Output: [[1, 2, 10], [4, 5, 7, 8]]
 
 # Explanation:
     # Players 1, 2, and 10 have not lost any matches.
     # Players 4, 5, 7, and 8 each have lost one match.
     # Players 3, 6, and 9 each have lost two matches.
-# Thus, answer[0] = [1 ,2, 10] and answer[1] = [4,5,7,8].
+# Thus, answer[0] = [1, 2, 10] and answer[1] = [4,5,7,8].
 
 # Solution: https://leetcode.com/problems/find-players-with-zero-or-one-losses/solutions/2655744/find-players-with-zero-or-one-losses/
 
@@ -31,6 +31,7 @@ def findWinners(matches):
     losses = defaultdict(int)   # player -> number of losses
     seen   = set()              # players that appeared in at least one match
 
+    # Record all players (winners and losers) and count each loss
     for winner, loser in matches:
         seen.add(winner)
         seen.add(loser)
@@ -44,7 +45,7 @@ def findWinners(matches):
     return [sorted(zero_loss), sorted(one_loss)]
 
 
-matches = [[1,3],[2,3],[3,6],[5,6],[5,7],[4,5],[4,8],[4,9],[10,4],[10,9]]
+matches = [[1,3], [2,3], [3,6], [5,6], [5,7], [4,5], [4,8], [4,9], [10,4], [10,9]]
 print(findWinners(matches))
 # Output: [[1, 2, 10], [4, 5, 7, 8]]
 
@@ -62,42 +63,58 @@ print(findWinners(matches))
 # - Overall: O(m) space, where m = number of unique players.
 
 
-# Full Trace Overview
-# Index  | Match      | Seen Set               | Losses Dictionary
-# -      | -          | {}                     | {}
-# 0      | [1,3]      | {1,3}                  | {3:1}
-# 1      | [2,3]      | {1,2,3}                | {3:2}
-# 2      | [3,6]      | {1,2,3,6}              | {3:2, 6:1}
-# 3      | [5,6]      | {1,2,3,5,6}            | {3:2, 6:2}
-# 4      | [5,7]      | {1,2,3,5,6,7}          | {3:2, 6:2, 7:1}
-# 5      | [4,5]      | {1,2,3,4,5,6,7}        | {3:2, 6:2, 7:1, 5:1}
-# 6      | [4,8]      | {1,2,3,4,5,6,7,8}      | {3:2, 6:2, 7:1, 5:1, 8:1}
-# 7      | [4,9]      | {1,2,3,4,5,6,7,8,9}    | {3:2, 6:2, 7:1, 5:1, 8:1, 9:1}
-# 8      | [10,4]     | {1,2,3,4,5,6,7,8,9,10} | {3:2, 6:2, 7:1, 5:1, 8:1, 9:1, 4:1}
-# 9      | [10,9]     | {1,2,3,4,5,6,7,8,9,10} | {3:2, 6:2, 7:1, 5:1, 8:1, 9:2, 4:1}
 
-# Final:
-# zero_loss = [1, 2, 10]  # Players in seen with losses[p] == 0
+# Overview for Each Iteration
+# Input: matches = [[1,3], [2,3], [3,6], [5,6], [5,7], [4,5], [4,8], [4,9], [10,4], [10,9]]
+# Step 1: Record players and count losses
+# Match   | winner | loser | seen                            | losses
+# [1, 3]  | 1      | 3     | {1, 3}                          | {3:1}
+# [2, 3]  | 2      | 3     | {1, 2, 3}                       | {3:2}
+# [3, 6]  | 3      | 6     | {1, 2, 3, 6}                    | {3:2, 6:1}
+# [5, 6]  | 5      | 6     | {1, 2, 3, 5, 6}                 | {3:2, 6:2}
+# [5, 7]  | 5      | 7     | {1, 2, 3, 5, 6, 7}              | {3:2, 6:2, 7:1}
+# [4, 5]  | 4      | 5     | {1, 2, 3, 4, 5, 6, 7}           | {3:2, 6:2, 7:1, 5:1}
+# [4, 8]  | 4      | 8     | {1, 2, 3, 4, 5, 6, 7, 8}        | {3:2, 6:2, 7:1, 5:1, 8:1}
+# [4, 9]  | 4      | 9     | {1, 2, 3, 4, 5, 6, 7, 8, 9}     | {3:2, 6:2, 7:1, 5:1, 8:1, 9:1}
+# [10, 4] | 10     | 4     | {1, 2, 3, 4, 5, 6, 7, 8, 9, 10} | {3:2, 6:2, 7:1, 5:1, 8:1, 9:1, 4:1}
+# [10, 9] | 10     | 9     | {1, 2, 3, 4, 5, 6, 7, 8, 9, 10} | {3:2, 6:2, 7:1, 5:1, 8:1, 9:2, 4:1}
+
+# Step 2: Identify zero-loss and one-loss players
+# p  | losses[p] | zero_loss  | one_loss
+# 1  | 0         | [1]        | []
+# 2  | 0         | [1, 2]     | []
+# 3  | 2         | [1, 2]     | []
+# 4  | 1         | [1, 2]     | [4]
+# 5  | 1         | [1, 2]     | [4, 5]
+# 6  | 2         | [1, 2]     | [4, 5]
+# 7  | 1         | [1, 2]     | [4, 5, 7]
+# 8  | 1         | [1, 2]     | [4, 5, 7, 8]
+# 9  | 2         | [1, 2]     | [4, 5, 7, 8]
+# 10 | 0         | [1, 2, 10] | [4, 5, 7, 8]
+# Final: [sorted([1, 2, 10]), sorted([4, 5, 7, 8])] = [[1, 2, 10], [4, 5, 7, 8]]
+
+# zero_loss = [1, 2, 10]   # Players in seen with losses[p] == 0
 # one_loss  = [4, 5, 7, 8] # Players in seen with losses[p] == 1
-# Output: [[1, 2, 10], [4, 5, 7, 8]] # Sorted lists
 
 
 
-# Conicse Trace Overview
-# Idx | Match  | Seen (New) | Losses (New/Updated)
-# -   | -      | {}         | {}
-# 0   | [1,3]  | {1,3}      | {3:1}
-# 1   | [2,3]  | {2}        | {3:2}
-# 2   | [3,6]  | {6}        | {6:1}
-# 3   | [5,6]  | {5}        | {6:2}
-# 4   | [5,7]  | {7}        | {7:1}
-# 5   | [4,5]  | {4}        | {5:1}
-# 6   | [4,8]  | {8}        | {8:1}
-# 7   | [4,9]  | {9}        | {9:1}
-# 8   | [10,4] | {10}       | {4:1}
-# 9   | [10,9] | {}         | {9:2}
-#
-# Final: [[1,2,10], [4,5,7,8]] # zero_loss=[1,2,10], one_loss=[4,5,7,8], sorted
+
+
+# Simple Overview for Each Iteration
+# i | Match   | Seen (New) | Losses (New/Updated)
+# - | -       | {}         | {}
+# 0 | [1, 3]  | {1,3}      | {3:1}
+# 1 | [2, 3]  | {2}        | {3:2}
+# 2 | [3, 6]  | {6}        | {6:1}
+# 3 | [5, 6]  | {5}        | {6:2}
+# 4 | [5, 7]  | {7}        | {7:1}
+# 5 | [4, 5]  | {4}        | {5:1}
+# 6 | [4, 8]  | {8}        | {8:1}
+# 7 | [4, 9]  | {9}        | {9:1}
+# 8 | [10, 4] | {10}       | {4:1}
+# 9 | [10, 9] | {}         | {9:2}
+
+# Final: [[1, 2, 10], [4, 5, 7, 8]]
 
 
 
@@ -132,7 +149,7 @@ def findWinners_bruteforce(matches):
     return [zero_loss, one_loss]
 
 
-matches = [[1,3],[2,3],[3,6],[5,6],[5,7],[4,5],[4,8],[4,9],[10,4],[10,9]]
+matches = [[1,3], [2,3], [3,6], [5,6], [5,7], [4,5], [4,8], [4,9], [10,4], [10,9]]
 print(findWinners_bruteforce(matches))
 # Output: [[1, 2, 10], [4, 5, 7, 8]]
 
@@ -159,6 +176,51 @@ print(findWinners_bruteforce(matches))
 # one_loss  (sorted): [4, 5, 7, 8]
 
 
+# Overview for Each Iteration
+# Input: matches = [[1,3], [2,3], [3,6], [5,6], [5,7], [4,5], [4,8], [4,9], [10,4], [10,9]]
+# Step 1: Collect all players
+# w  | l  | players
+# -  | -  | []
+# 1  | 3  | [1, 3]
+# 2  | 3  | [1, 3, 2]
+# 3  | 6  | [1, 3, 2, 6]
+# 5  | 6  | [1, 3, 2, 6, 5]
+# 5  | 7  | [1, 3, 2, 6, 5, 7]
+# 4  | 5  | [1, 3, 2, 6, 5, 7, 4]
+# 4  | 8  | [1, 3, 2, 6, 5, 7, 4, 8]
+# 4  | 9  | [1, 3, 2, 6, 5, 7, 4, 8, 9]
+# 10 | 4  | [1, 3, 2, 6, 5, 7, 4, 8, 9, 10]
+# 10 | 9  | [1, 3, 2, 6, 5, 7, 4, 8, 9, 10]
+
+# Step 2: Count losses for each player
+# p  | loss_count | w  | l  | Action              | zero_loss | one_loss
+# 1  | 0          | *  | *  | Add to zero_loss    | [1]       | []
+# 3  | 0          | 1  | 3  | loss_count+=1       | [1]       | []
+#    | 1          | 2  | 3  | loss_count+=1       | [1]       | []
+#    | 2          | *  | *  | Skip (loss_count=2) | [1]       | []
+# 2  | 0          | *  | *  | Add to zero_loss    | [1, 2]    | []
+# 6  | 0          | 3  | 6  | loss_count+=1       | [1, 2]    | []
+#    | 1          | 5  | 6  | loss_count+=1       | [1, 2]    | []
+#    | 2          | *  | *  | Skip (loss_count=2) | [1, 2]    | []
+# 5  | 0          | 4  | 5  | loss_count+=1       | [1, 2]    | []
+#    | 1          | *  | *  | Add to one_loss     | [1, 2]    | [5]
+# 7  | 0          | 5  | 7  | loss_count+=1       | [1, 2]    | [5]
+#    | 1          | *  | *  | Add to one_loss     | [1, 2]    | [5, 7]
+# 4  | 0          | 10 | 4  | loss_count+=1       | [1, 2]    | [5, 7]
+#    | 1          | *  | *  | Add to one_loss     | [1, 2]    | [5, 7, 4]
+# 8  | 0          | 4  | 8  | loss_count+=1       | [1, 2]    | [5, 7, 4]
+#    | 1          | *  | *  | Add to one_loss     | [1, 2]    | [5, 7, 4, 8]
+# 9  | 0          | 4  | 9  | loss_count+=1       | [1, 2]    | [5, 7, 4, 8]
+#    | 1          | 10 | 9  | loss_count+=1       | [1, 2]    | [5, 7, 4, 8]
+#    | 2          | *  | *  | Skip (loss_count=2) | [1, 2]    | [5, 7, 4, 8]
+# 10 | 0          | *  | *  | Add to zero_loss    | [1, 2, 10]| [5, 7, 4, 8]
+
+# Step 3: Sort results
+# zero_loss = sorted([1, 2, 10]) = [1, 2, 10]
+# one_loss = sorted([5, 7, 4, 8]) = [4, 5, 7, 8]
+# Final: [[1, 2, 10], [4, 5, 7, 8]]
+
+
 
 # –––––––––––––––––––––––––––––––––––––––––––––––––
 # Simple Breakdown 
@@ -166,7 +228,7 @@ from collections import defaultdict
 
 def findWinners(matches):
     losses = defaultdict(int)  # Track number of losses per player
-    seen = set()              # Track all players in matches
+    seen = set()               # Track all players in matches
 
     for winner, loser in matches:  # Iterate over each match
         seen.add(winner)      # Add winner to seen players
@@ -175,6 +237,7 @@ def findWinners(matches):
 
     zero_loss = [p for p in seen if losses[p] == 0]  # Players with no losses
     one_loss = [p for p in seen if losses[p] == 1]   # Players with one loss
+
     return [sorted(zero_loss), sorted(one_loss)]     # Return sorted lists
 
 
@@ -291,7 +354,7 @@ def findWinners(matches):  # Example: matches = [[1,3],[2,3],[3,6],[5,6],[5,7],[
     return [sorted(zero_loss), sorted(one_loss)]  # return [sorted([1, 2, 10]), sorted([4, 5, 7, 8])] = [[1, 2, 10], [4, 5, 7, 8]]
 
 
-matches = [[1,3],[2,3],[3,6],[5,6],[5,7],[4,5],[4,8],[4,9],[10,4],[10,9]]
+matches = [[1,3], [2,3], [3,6], [5,6], [5,7], [4,5], [4,8], [4,9], [10,4], [10,9]]
 print(findWinners(matches))  
 # Output: [[1, 2, 10], [4, 5, 7, 8]]
 
@@ -330,7 +393,7 @@ def findWinners(matches):
     return [sorted(zero_loss), sorted(one_loss)]
 
 
-matches = [[1,3],[2,3],[3,6],[5,6],[5,7],[4,5],[4,8],[4,9],[10,4],[10,9]]
+matches = [[1,3], [2,3], [3,6], [5,6], [5,7], [4,5], [4,8], [4,9], [10,4], [10,9]]
 print(findWinners(matches))
 # Output: [[1, 2, 10], [4, 5, 7, 8]]
 
