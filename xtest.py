@@ -37,11 +37,19 @@ def findWinners(matches):
         losses[loser] += 1
 
     # zero-loss players: in seen but not in losses
-    zero_loss = [p for p in seen if losses[p] == 0]
+    zero_loss = []
+    for p in seen:
+        if losses[p] == 0:
+            zero_loss.append(p)
     # one-loss players: exactly one loss
-    one_loss = [p for p in seen if losses[p] == 1]
+    one_loss = []
+    for p in seen:
+        if losses[p] == 1:
+            one_loss.append(p)
 
     return [sorted(zero_loss), sorted(one_loss)]
+
+
 
 
 

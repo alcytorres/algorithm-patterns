@@ -29,9 +29,11 @@
 
 
 
-
 # ––––––––––––––––––––––––––––
-# Super simple, beginner-friendly Leetocde SIMPLE breakdown
+# I need a super simple, easy to follow, beginner-friendly explanation of how this LeetCode solution works. Break it down into 2 main parts: "Most IMPORTANT thing to Understand:" and "Why this code Works:. Make it crystal clear, focusing on why the code finds the correct answer for the given problem. I should be able to look back at this at any time and quckly follow along and understand it. 
+
+# Here is a great example of what I'm looking for from another Leetcode problem that you can you as a reference. 
+
 """
 Most IMPORTANT thing to Understand:
     • odd is like a running total of how many odd numbers we’ve seen so far.

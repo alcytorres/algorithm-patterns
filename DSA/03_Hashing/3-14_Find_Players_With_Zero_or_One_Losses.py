@@ -99,7 +99,6 @@ print(findWinners(matches))
 
 
 
-
 # Simple Overview for Each Iteration
 # i | Match   | Seen (New) | Losses (New/Updated)
 # - | -       | {}         | {}
@@ -115,6 +114,24 @@ print(findWinners(matches))
 # 9 | [10, 9] | {}         | {9:2}
 
 # Final: [[1, 2, 10], [4, 5, 7, 8]]
+
+
+
+"""
+Most IMPORTANT thing to Understand:
+    • We need to figure out how many times each player lost.
+    • If a player has 0 losses, they go in the first list.
+    • If a player has exactly 1 loss, they go in the second list.
+
+Why this code Works:
+    • We loop through all matches. Every time someone loses, we increase their loss count.
+    • We also keep track of every player who shows up (winner or loser).
+    • After the loop, we check all players:
+        – If their loss count is 0 → they never lost → add to zero_loss.
+        – If their loss count is 1 → they lost exactly once → add to one_loss.
+    • Sorting at the end puts the results in the required order.
+    • This works because the hash map (losses) directly tells us how many times each player lost, and the set (seen) ensures we don’t miss anyone who played.
+"""
 
 
 
@@ -164,18 +181,6 @@ print(findWinners_bruteforce(matches))
 # - Overall: O(p) additional space.
 
 
-
-# Trace Overview
-# matches:
-# [1,3], [2,3], [3,6], [5,6], [5,7], [4,5], [4,8], [4,9], [10,4], [10,9]
-#
-# Loss counts after scanning:
-# 1→0, 2→0, 3→2, 4→1, 5→1, 6→2, 7→1, 8→1, 9→2, 10→0
-#
-# zero_loss (sorted): [1, 2, 10]
-# one_loss  (sorted): [4, 5, 7, 8]
-
-
 # Overview for Each Iteration
 # Input: matches = [[1,3], [2,3], [3,6], [5,6], [5,7], [4,5], [4,8], [4,9], [10,4], [10,9]]
 # Step 1: Collect all players
@@ -223,7 +228,7 @@ print(findWinners_bruteforce(matches))
 
 
 # –––––––––––––––––––––––––––––––––––––––––––––––––
-# Simple Breakdown 
+# Breakdown 
 from collections import defaultdict
 
 def findWinners(matches):
@@ -366,6 +371,7 @@ print(findWinners(matches))
 # –––––––––––––––––––––––––––––––––––––––––––––––––
 # Same Solution with Standard For Loop
     # The Solution up top uses Basic list comprehension
+    # I like this solution
 
 from collections import defaultdict
 
