@@ -119,18 +119,49 @@ print(findWinners(matches))
 
 """
 Most IMPORTANT thing to Understand:
-    • We need to figure out how many times each player lost.
-    • If a player has 0 losses, they go in the first list.
-    • If a player has exactly 1 loss, they go in the second list.
+    • The problem is about counting how many times each player loses.
+
+    • If a player has 0 losses → they belong in the first list (never lost).
+
+    • If a player has exactly 1 loss → they belong in the second list (lost once).
+    
+    • We only care about players who actually appeared in at least one match.
 
 Why this code Works:
-    • We loop through all matches. Every time someone loses, we increase their loss count.
-    • We also keep track of every player who shows up (winner or loser).
-    • After the loop, we check all players:
-        – If their loss count is 0 → they never lost → add to zero_loss.
-        – If their loss count is 1 → they lost exactly once → add to one_loss.
-    • Sorting at the end puts the results in the required order.
-    • This works because the hash map (losses) directly tells us how many times each player lost, and the set (seen) ensures we don’t miss anyone who played.
+    • Hash map (losses): tracks how many losses each player has.
+
+    • Set (seen): records every player that appears, winner or loser, so nobody is missed.
+
+    • After processing all matches:
+        • Players with losses[p] == 0 → never lost → go in zero_loss.
+        • Players with losses[p] == 1 → lost once → go in one_loss.
+
+    • Sorting at the end puts the lists in the required increasing order.
+
+    • Efficiency: We process matches in a single pass (O(n)) and then scan players (O(m)),avoiding any brute force comparisons.
+
+    • Intuition: Think of it like keeping a scoreboard:
+        • Every time a player loses, we add +1 to their “loss count.”
+        • At the end, read the scoreboard:
+            • players with 0 losses → group 1,
+            • players with 1 loss → group 2.
+
+TLDR:
+    • This solution works because we count each player's losses in a hash map, then group players with 0 and 1 losses directly.
+
+Quick Example Walkthrough:
+    Input: matches = [[1,3], [2,3], [3,6], [5,6], [5,7], [4,5], [4,8], [4,9], [10,4], [10,9]]
+
+    Step 1: Tally losses
+        • Player 3, 6, 9 each lose twice
+        • Players 4, 5, 7, 8 each lose once
+        • Players 1, 2, 10 never lose
+
+    Step 2: Build results
+        • zero_loss = [1, 2, 10]
+        • one_loss  = [4, 5, 7, 8]
+
+    Final Answer: [[1, 2, 10], [4, 5, 7, 8]]
 """
 
 

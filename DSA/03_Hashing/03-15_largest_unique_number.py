@@ -51,26 +51,69 @@ print(largestUniqueNumber(nums))
 
 
 # Overview for Each Iteration
-# Step 1: Count occurrences
-# Idx | num | counts
-# -   | -   | {}
-# 0   | 1   | {1:1}
-# 1   | 3   | {1:1, 3:1}
-# 2   | 9   | {1:1, 3:1, 9:1}
-# 3   | 4   | {1:1, 3:1, 9:1, 4:1}
-# 4   | 9   | {1:1, 3:1, 9:2, 4:1}
-# 5   | 8   | {1:1, 3:1, 9:2, 4:1, 8:1}
-# 6   | 3   | {1:1, 3:2, 9:2, 4:1, 8:1}
+# Input: nums = [1, 3, 9, 4, 9, 8, 3]
+# Step 1: Count occurrences of each number
+# i  | num | counts
+# -  | -   | {}
+# 0  | 1   | {1:1}
+# 1  | 3   | {1:1, 3:1}
+# 2  | 9   | {1:1, 3:1, 9:1}
+# 3  | 4   | {1:1, 3:1, 9:1, 41}
+# 4  | 9   | {1:1, 3:1, 9:2, 4:1}
+# 5  | 8   | {1:1, 3:1, 9:2, 4:1, 8:1}
+# 6  | 3   | {1:1, 3:2, 9:2, 4:1, 8:1}
 
-# Step 2: Find largest unique number
+# Step 2: Find largest number with count 1
 # num | counts[num] | max_unique
 # -   | -           | -1
-# 1   | 1           | 1 (updated)
-# 3   | 2           | 1 (skipped)
-# 9   | 2           | 1 (skipped)
-# 4   | 1           | 4 (updated)
-# 8   | 1           | 8 (updated)
+# 1   | 1           | 1 (1 > -1)
+# 3   | 2           | 1 (skip, not unique)
+# 9   | 2           | 1 (skip, not unique)
+# 4   | 1           | 4 (4 > 1)
+# 8   | 1           | 8 (8 > 4)
 # Final: 8
+
+
+
+"""
+Most IMPORTANT thing to Understand:
+    • We need to find the largest number in the array that occurs exactly once.
+
+    • First, we count how many times each number appears.
+
+    • Then we check which numbers are unique (count == 1) and pick the largest one.
+
+    • If no number is unique, we return -1.
+
+Why this code Works:
+    • Hash map (counts): stores how many times each number appears.
+
+    • Scan through counts:
+        • If a number's count == 1 → it's unique.
+        • Compare with current max_unique and update if larger.
+
+    • Efficiency: Instead of checking subarrays or sorting, we just tally counts in O(n) and then make one pass over the results.
+
+    • Intuition: Think of it like a vote tally — each number “gets votes.” We only want numbers that got exactly one vote, and we pick the biggest of those.
+
+TLDR
+    • This solution works because we count how often each number appears, then pick the largest one that occurs exactly once.
+    
+Quick Example Walkthrough:
+    nums = [1, 3, 9, 4, 9, 8, 3]
+
+    Step 1: Count frequencies
+        counts = {1:1, 3:2, 9:2, 4:1, 8:1}
+
+    Step 2: Check unique numbers
+        • 1 → count=1, max_unique = 1
+        • 3 → count=2, skip
+        • 9 → count=2, skip
+        • 4 → count=1, max_unique = 4
+        • 8 → count=1, max_unique = 8
+
+    Final Answer: 8
+"""
 
 
 
@@ -174,7 +217,7 @@ print(largestUniqueNumber(nums))
 
 
 # –––––––––––––––––––––––––––––––––––––––––––––––––
-# Simple Breakdown 
+# Breakdown 
 from collections import defaultdict
 
 def largestUniqueNumber(nums):
@@ -288,7 +331,6 @@ def largestUniqueNumber(nums):  # Example: nums = [1, 3, 9, 4, 9, 8, 3]
 nums = [1, 3, 9, 4, 9, 8, 3]
 print(largestUniqueNumber(nums))  
 # Output: 8
-
 
 
 

@@ -67,22 +67,40 @@ print(numberOfSubarrays(nums, k))
 
 """
 Most IMPORTANT thing to Understand:
-    • odd is like a running total of how many odd numbers we’ve seen so far.
+    • odd is a running total of how many odd numbers we've seen so far.
 
-    • If we’ve seen (odd - k) before, it means the subarray between that earlier point and now contains exactly k odd numbers.
+    • If we've seen (odd - k) before, then the subarray between that earlier point and now has exactly k odd numbers.
 
-    • counts[odd - k] tells us how many such earlier points exist, so we add that to ans.
+    • counts tracks how many times each odd count has appeared, so we can quickly find how many valid subarrays end at the current position.
 
 Why this code Works:
-    • Hash map: counts keeps track of how often each odd count has appeared.
+    • Hash map (counts): stores frequencies of odd counts seen so far.
 
-    • Prefix sum idea: odd works like a prefix sum. A subarray has k odds when odd - prev = k, or equivalently prev = odd - k.
+    • Prefix sum idea: odd works like a prefix sum of “odd numbers seen.” A subarray with k odds exists when odd - prev = k.
 
-    • Efficiency: Instead of checking every subarray, we find valid ones in one pass using the hash map lookups.
+    • Efficiency: We scan nums once (O(n)), using O(1) lookups/updates in counts. Much faster than checking all subarrays (O(n^2)).
 
-    • Intuition: We’re keeping a running tally of odd numbers and “remembering” past tallies, so whenever the difference is k, we instantly know a subarray is valid.
+    • Intuition: Like keeping a running tally of odds and “remembering” past tallies; when the gap is k, we've found a valid subarray.
 
+TLDR:
+    • This works because we track odd counts as we go and use a hash map to instantly count how many earlier prefixes make the difference exactly k.
+
+Quick Example Walkthrough:
+    nums = [1, 2, 1, 1], k = 2
+
+    Step 1: Track odd counts
+        • After [1] → odd=1, no valid subarray
+        • After [1, 2] → odd=1, still no valid subarray
+        • After [1, 2, 1] → odd=2, counts[0]=1 → found [1, 2, 1]
+        • After [1, 2, 1, 1] → odd=3, counts[1]=2 → found [2, 1, 1] and [1, 1]
+
+    Step 2: Total subarrays = 3
+        → [1, 2, 1], [2, 1, 1], [1, 1]
+
+    Final Answer: 3
+    
 """
+
 
 
 

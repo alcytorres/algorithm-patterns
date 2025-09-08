@@ -57,51 +57,92 @@ print(subarraySum(nums, k))
 # 2 | 1   | 4    | 4-3=1    | 1                | 2   | {0:1, 1:1, 3:1, 4:1}
 # 3 | 2   | 6    | 6-3=3    | 1                | 3   | {0:1, 1:1, 3:1, 4:1, 6:1}
 # 4 | 1   | 7    | 7-3=4    | 1                | 4   | {0:1, 1:1, 3:1, 4:1, 6:1, 7:1}
-# Final: 4 (subarrays [1,2], [2,1], [1,2], [2,1])
+# Final: 4 (subarrays [1, 2], [2, 1], [1, 2], [2, 1])
+
+
+# Subarrays found:
+#     • i=1: curr=3, curr-k=0, counts[0]=1 -> [1, 2] (sum=3)
+#     • i=2: curr=4, curr-k=1, counts[1]=1 -> [2, 1] (sum=3)
+#     • i=3: curr=6, curr-k=3, counts[3]=1 -> [1, 2] (sum=3)
+#     • i=4: curr=7, curr-k=4, counts[4]=1 -> [2, 1] (sum=3)
+
 
 
 """
 Most IMPORTANT thing to Understand:
-    • curr is the running total so far.
-    
-    • If curr - k is in counts, it means there was an earlier prefix sum (prev) such that curr - prev = k, forming a subarray with sum k. The subarray between prev and curr sums to k.
+    • curr is the running sum up to the current index.
 
+    • If a previous running sum equals (curr - k), then the numbers after that point up to now sum to k.
+
+    • counts stores how many times each running sum has appeared.
+    
+    • counts[0] = 1 handles subarrays that start at index 0.
+
+Why this code Works:
+    • Hash map (counts): key = running sum value, value = how many times we've seen it so far.
+
+    • Prefix sum idea: a subarray sums to k when curr - prev = k  →  prev = curr - k.
+
+    • counts[curr - k] tells us how many subarrays ending at the current index add up to k, so we add that to ans.
+
+    • counts[curr] += 1 records the current running sum so future elements can check against it.
+
+    • One pass, O(n) time; O(1) average lookups; avoids O(n^2) brute-force checks.
+
+TLDR:
+    • Track running sums and, at each index, add how many earlier sums equal (curr - k) — that gives the number of subarrays ending here whose sum is exactly k.
+
+
+Quick Example Walkthrough:
+    nums = [1, 2, 1, 2, 1], k = 3
+
+    Step 1 (setup): counts = {0:1}, curr = 0, ans = 0
+
+    Step 2 (iterate):
+        • +1 → curr=1 → curr-k=-2 → counts[-2]=0 → ans=0 → counts[1]=1
+
+        • +2 → curr=3 → curr-k=0  → counts[0]=1  → ans=1 → counts[3]=1   # subarray [1, 2]
+
+        • +1 → curr=4 → curr-k=1  → counts[1]=1  → ans=2 → counts[4]=1   # subarray [2, 1]
+
+        • +2 → curr=6 → curr-k=3  → counts[3]=1  → ans=3 → counts[6]=1   # subarray [1, 2]
+
+        • +1 → curr=7 → curr-k=4  → counts[4]=1  → ans=4 → counts[7]=1   # subarray [2, 1]
+
+    Final Answer: 4
+
+
+
+
+
+–––––––––––––––––––OLD BREAKDOWN–––––––––––––––––––
+
+Most IMPORTANT thing to Understand:    
     • TLDR: If counts[curr - k] exists → curr - prev = k, so that subarray sums to k. 
 
     • counts[curr - k] tells how many such subarrays end at the current index.
 
-
+    
 Explanation for Beginners: Why this code works
-    • curr = running total = sum of nums[0..i].
-
     • If some earlier running total was exactly (curr - k), then the numbers AFTER that point up to i sum to k.
         • “After that point” is what people mean by “prev_index + 1” — start right after where that earlier total was measured.
 
-    • counts is a hash map where counts[prefix] = how many times we’ve seen that running total before.
+    • counts is a hash map where counts[prefix] = how many times we've seen that running total before.
 
-    • ans += counts[curr - k]: we add the number of earlier totals that create a k-sum subarray ending at i.
+    • Finally, we record today's total for future checks: counts[curr] += 1.
 
-    • counts[0] = 1 seeds the case where a subarray starting at index 0 itself sums to k.
-
-    • Finally, we record today’s total for future checks: counts[curr] += 1.
 
 Example (quick sanity check):
     • nums = [1, 2], k = 3
     • prefix totals: 1, 3
     • at curr = 3 ⇒ curr - k = 0 ⇒ counts[0] = 1 ⇒ one subarray [1, 2].
 
-
-# Subarrays found:
-    • i=1: curr=3, curr-k=0, counts[0]=1 -> [1, 2] (sum=3)
-    • i=2: curr=4, curr-k=1, counts[1]=1 -> [2, 1] (sum=3)
-    • i=3: curr=6, curr-k=3, counts[3]=1 -> [1, 2] (sum=3)
-    • i=4: curr=7, curr-k=4, counts[4]=1 -> [2, 1] (sum=3)
-
-
     
 # Note: The code determines only the total number of subarrays with a sum equal to k, confirming their existence through prefix sum matches without specifying which subarrays they are.
 
 """
+
+
 
 # ––––––––––––––––––––––––––––––––––––––––––––––––
 # Note the image that explains this problem in this section: Count the number of subarrays with an "exact" constraint only applies when the subarray sum matches k.
