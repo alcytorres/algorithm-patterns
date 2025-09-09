@@ -8,18 +8,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
 # ––––––––––––––– Prompts –––––––––––––––
 # Super simple, beginner-friendly Leetocde FULL breakdown
 
@@ -29,7 +17,7 @@
 
 
 
-# ––––––––––––––––––––––––––––
+# ––––––––––––––––––––––––––––––––––––––––
 # I need a super simple, easy to follow, beginner-friendly explanation of how this LeetCode solution works. Break it down into 4 main parts: "Most IMPORTANT thing to Understand", "Why this code Works, TLDR (why this code works in one sentence), and Quick Example Walkthrough.
 
 # Make it crystal clear, focusing on why the code finds the correct answer for the given problem. I should be able to look back at this at any time and quickly follow along and understand it. 
@@ -134,6 +122,35 @@ Quick Example Walkthrough:
 
 
 
+
+
+# –––––––––––––––––––––––––––––––––––––––––––––––
+"""
+Q: What is the best efficient simple solution for a beginner to understand this problem?
+
+The goal is:
+• Clarity: easy-to-follow explanation.
+• Learning: helps me actually understand the reasoning.
+• Retention: highest probability I remember the solution later.
+
+Instructions for you (the LLM):
+    1. Reflect on 3-4 different possible efficeint approaches. Don't pick brute force that will be done later. Show the code for each solution.
+
+    2. Distill those down into the top 1-2 candidate solutions, and explain why they’re better than the others.
+
+    3. Pick the one solution that you think is best for my use case (beginner-friendly + efficient).
+
+    4. Explain it excellently with:
+        • The key idea in plain language.
+        • Why it works.
+        • Why it's simpler/better for a beginner than the alternatives.
+        • Small example to illustrate.
+
+    5. Justify your choice so I can understand the tradeoffs.
+
+    The solution needs to maximize retention — meaning the highest chance I’ll actually remember it later. For that to work, I prefer the code to stay concise, but never at the expense of simplicity.
+
+"""
 
 
 # –––––––––––––––––––––––––––––––––––––––––––––––

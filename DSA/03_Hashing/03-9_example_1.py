@@ -68,17 +68,53 @@ print(find_longest_substring(s, 2))
 # Final: 3 ("ece")
 
 
-# Trace Overview
+# Simple Overview for Each Iteration
 """
 Trace of find_longest_substring("eceba", k=2):
-| r | s[r] | counts       | len | Action       | l | ans |
-|---|------|--------------|-----|--------------|---|-----|
-| 0 | e    | {e:1}        | 1   | None         | 0 | 1   |
-| 1 | c    | {e:1,c:1}    | 2   | None         | 0 | 2   |
-| 2 | e    | {e:2,c:1}    | 2   | None         | 0 | 3   |
-| 3 | b    | {e:2,c:1,b:1}| 3   | Drop e,c     | 2 | 3   |
-| 4 | a    | {e:1,b:1,a:1}| 3   | Drop e       | 3 | 3   |
+| r | s[r] | counts          | len | Action       | l | ans |
+|---|------|-----------------|-----|--------------|---|-----|
+| 0 | e    | {e:1}           | 1   | None         | 0 | 1   |
+| 1 | c    | {e:1, c:1}      | 2   | None         | 0 | 2   |
+| 2 | e    | {e:2, c:1}      | 2   | None         | 0 | 3   |
+| 3 | b    | {e:2, c:1, b:1} | 3   | Drop e,c     | 2 | 3   |
+| 4 | a    | {e:1, b:1, a:1} | 3   | Drop e       | 3 | 3   |
 Output: 3 ('ece')
+
+
+
+Most IMPORTANT thing to Understand:
+    • We use a sliding window (left → right) to keep track of a substring.  
+
+    • counts stores how many times each character appears inside the window.  
+
+    • If the window has more than k distinct characters, we shrink it from the left until it's valid again.  
+
+    • ans always records the longest valid window length seen so far.  
+
+Why this code Works:
+    • Hash map (counts): keeps track of characters inside the current window and their counts.  
+
+    • Sliding window idea: expand right to include new chars, shrink left if > k distinct chars.  
+
+    • Efficiency: each character is added once and removed once → O(n) total.  
+
+    • Intuition: like stretching a rubber band (window) across the string — make it as long as possible without including more than k distinct characters.  
+
+TLDR:
+    • Grow a window across the string, shrink it when > k distinct characters, and track the max valid window length.  
+
+Quick Example Walkthrough:
+    s = "eceba", k = 2  
+
+    Step 1: right=0 → "e" → counts={e:1}, ans=1  
+    Step 2: right=1 → "ec" → counts={e:1, c:1}, ans=2  
+    Step 3: right=2 → "ece" → counts={e:2, c:1}, ans=3  
+
+    Step 4: right=3 → "eceb" → counts={e:2, c:1, b:1} → too many distinct → shrink left: remove e, then c → window="eb" → ans=3  
+
+    Step 5: right=4 → "eba" → counts={e:1, b:1, a:1} → too many distinct → shrink left: remove e → window="ba" → ans=3  
+
+    Final Answer: 3 ("ece")  
 
 
 
@@ -98,6 +134,27 @@ counts[s[right]] += 1  # Extra check needed
 from collections import defaultdict
 counts = defaultdict(int)
 counts[s[right]] += 1  # No check needed, cleaner
+
+
+
+# ––––––––––––––––––––––––––––––––––––––––––––––––
+# Breakdown 
+from collections import defaultdict  # Initialize defaultdict for character counts
+
+def find_longest_substring(s, k):
+    counts = defaultdict(int)  # Track character frequencies in window
+    left = ans = 0            # Left bound, max length of substring
+
+    for right in range(len(s)):  # Iterate right pointer over string
+        counts[s[right]] += 1  # Increment count of current character
+        while len(counts) > k: # Shrink window if distinct characters exceed k
+            counts[s[left]] -= 1  # Decrement count of leftmost character
+            if counts[s[left]] == 0:  # Remove character if count becomes 0
+                del counts[s[left]]
+            left += 1          # Move left pointer forward
+        ans = max(ans, right - left + 1)  # Update max substring length
+
+    return ans                # Return longest substring length with <= k distinct characters
 
 
 
@@ -132,36 +189,27 @@ print(find_longest_substring(s, 2))
 # - Overall: O(n) total space.
 
 
+# Overview for Each Iteration
+# Input: s = "eceba", k = 2
+# Step: Find longest substring with at most k distinct characters
+# i  | j  | Substring | Distinct Chars   | distinct <= k | ans
+# 0  | 0  | e         | {e} = 1          | True          | 1 (max(0, 0-0+1))
+# 0  | 1  | ec        | {e, c} = 2       | True          | 2 (max(1, 1-0+1))
+# 0  | 2  | ece       | {e, c} = 2       | True          | 3 (max(2, 2-0+1))
+# 0  | 3  | eceb      | {e, c, b} = 3    | False         | 3
+# 0  | 4  | eceba     | {e, c, b, a} = 4 | False         | 3
+# 1  | 1  | c         | {c} = 1          | True          | 3 (max(3, 1-1+1))
+# 1  | 2  | ce        | {c, e} = 2       | True          | 3 (max(3, 2-1+1))
+# 1  | 3  | ceb       | {c, e, b} = 3    | False         | 3
+# 1  | 4  | ceba      | {c, e, b, a} = 4 | False         | 3
+# 2  | 2  | e         | {e} = 1          | True          | 3 (max(3, 2-2+1))
+# 2  | 3  | eb        | {e, b} = 2       | True          | 3 (max(3, 3-2+1))
+# 2  | 4  | eba       | {e, b, a} = 3    | False         | 3
+# 3  | 3  | b         | {b} = 1          | True          | 3 (max(3, 3-3+1))
+# 3  | 4  | ba        | {b, a} = 2       | True          | 3 (max(3, 4-3+1))
+# 4  | 4  | a         | {a} = 1          | True          | 3 (max(3, 4-4+1))
+# Final: 3 ("ece")
 
-# Trace Overview 
-# s = "eceba", k = 2
-# i        = 0 -  - -  1 - -  2 - -  3 - -  4 -
-# j        = 0 1 2  1 2 3  2 3 4  3 4  4 -
-# substr   = e ec ece  c ce ceb  e eb eba  b ba  a
-# distinct = 1 2  2    1 2  3    1 2  3    1 2   1
-# ans      = 1 2  3    3 3  3    3 3  3    3 3   3
-
-
-
-
-# ––––––––––––––––––––––––––––––––––––––––––––––––
-# Simple Breakdown 
-from collections import defaultdict  # Initialize defaultdict for character counts
-
-def find_longest_substring(s, k):
-    counts = defaultdict(int)  # Track character frequencies in window
-    left = ans = 0            # Left bound, max length of substring
-
-    for right in range(len(s)):  # Iterate right pointer over string
-        counts[s[right]] += 1  # Increment count of current character
-        while len(counts) > k: # Shrink window if distinct characters exceed k
-            counts[s[left]] -= 1  # Decrement count of leftmost character
-            if counts[s[left]] == 0:  # Remove character if count becomes 0
-                del counts[s[left]]
-            left += 1          # Move left pointer forward
-        ans = max(ans, right - left + 1)  # Update max substring length
-
-    return ans                # Return longest substring length with <= k distinct characters
 
 
 

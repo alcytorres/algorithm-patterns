@@ -5,16 +5,16 @@
 # You can use each character in text at most once. Return the maximum number of instances that can be formed.
 
 # Example 1:
-# Input: text = "nlaebolko"
-# Output: 1
+    # Input: text = "nlaebolko"
+    # Output: 1
 
 # Example 2:
-# Input: text = "loonbalxballpoon"
-# Output: 2
+    # Input: text = "loonbalxballpoon"
+    # Output: 2
 
 # Example 3:
-# Input: text = "leetcode"
-# Output: 0
+    # Input: text = "leetcode"
+    # Output: 0
 
 # Solution: https://leetcode.com/problems/maximum-number-of-balloons/editorial/
 
@@ -34,7 +34,7 @@ text = "nlaebolko"
 print(maxNumberOfBalloons(text))
 # Output: 1
 
-# counts = {'n': 1, 'l': 2, 'a': 1, 'e': 1, 'b': 1, 'o': 2, 'k': 1}
+# counts = {'n':1, 'l':2, 'a':1, 'e':1, 'b':1, 'o':2, 'k':1}
 
 
 # Time: O(n)
@@ -73,6 +73,60 @@ print(maxNumberOfBalloons(text))
 # Final: min(1, 1, 1, 1, 1) = 1
 
 
+"""
+Most IMPORTANT thing to Understand:
+    • We need to check how many full copies of the word "balloon" can be built from the letters in text.  
+
+    • Each "balloon" requires: b=1, a=1, l=2, o=2, n=1.  
+
+    • The answer is limited by whichever letter runs out first.  
+
+Why this code Works:
+    • Hash map (counts): stores how many times each character appears in text.  
+
+    • Core idea: For each required letter, check how many times it can contribute. For 'l' and 'o', divide by 2 because they're needed twice.  
+
+    • Efficiency: One pass to count letters (O(n)) and one fixed check over 5 letters (O(1)).  
+
+    • Intuition: Like making “balloon kits” — the letter with the smallest supply (after dividing for repeats) determines how many kits you can make.  
+
+TLDR:
+    • Count each letter in text, then take the minimum possible full "balloon"s across {b, a, l//2, o//2, n}.  
+
+Quick Example Walkthrough:
+    text = "nlaebolko"  
+
+    Step 1: Count letters  
+        counts = {n:1, l:2, a:1, e:1, b:1, o:2, k:1}  
+
+    Step 2: Compute max balloons  
+        b → 1 available  
+        a → 1 available  
+        l → 2 available → 2 // 2 = 1  
+        o → 2 available → 2 // 2 = 1  
+        n → 1 available  
+        min(1,1,1,1,1) = 1  
+
+    Final Answer: 1  
+
+"""
+
+
+# –––––––––––––––––––––––––––––––––––––––––––––––––––––––
+# Breakdown
+
+from collections import defaultdict
+
+def maxNumberOfBalloons(text):
+    counts = defaultdict(int)  # Notebook to count each character's occurrences
+
+    for c in text:            # Go through each character in the string
+        counts[c] += 1        # Add 1 to the count of this character
+
+    # Return min count of 'b', 'a', 'l'/2, 'o'/2, 'n' for complete "balloon"s
+    return min(counts['b'], counts['a'], counts['l'] // 2, counts['o'] // 2, counts['n']) 
+
+
 
 
 # –––––––––––––––––––––––––––––––––––––––––––––––––––––––
@@ -82,6 +136,7 @@ def maxNumberOfBalloons_bruteforce(text):
     letters = list(text)
     target = "balloon"
     count = 0
+
     while True:
         for c in target:
             if c in letters:
@@ -105,7 +160,7 @@ print(maxNumberOfBalloons_bruteforce(text))
 # - Overall: O(n) space.
 
 
-# Trace Overview
+# Simple Overview
 # text = "nlaebolko"
 # letters start: [n, l, a, e, b, o, l, k, o]
 # Build #1 needs: b a l l o o n
@@ -120,22 +175,20 @@ print(maxNumberOfBalloons_bruteforce(text))
 # Next build: need 'b' but not present → stop → answer = 1
 
 
-
-
-
-# –––––––––––––––––––––––––––––––––––––––––––––––––––––––
-# Simple Breakdown
-
-from collections import defaultdict
-
-def maxNumberOfBalloons(text):
-    counts = defaultdict(int)  # Notebook to count each character's occurrences
-
-    for c in text:            # Go through each character in the string
-        counts[c] += 1        # Add 1 to the count of this character
-
-    # Return min count of 'b', 'a', 'l'/2, 'o'/2, 'n' for complete "balloon"s
-    return min(counts['b'], counts['a'], counts['l'] // 2, counts['o'] // 2, counts['n']) 
+# Overview for Each Iteration
+# Input: text = "nlaebolko"
+# Step: Build "balloon" by removing letters
+# count | c   | letters                     | c in letters | Action                             | count after
+# 0     | -   | [n, l, a, e, b, o, l, k, o] | -            | Start                              | 0
+# 0     | b   | [n, l, a, e, b, o, l, k, o] | True         | Remove b: [n, l, a, e, o, l, k, o] | 0
+# 0     | a   | [n, l, a, e, o, l, k, o]    | True         | Remove a: [n, l, e, o, l, k, o]    | 0
+# 0     | l   | [n, l, e, o, l, k, o]       | True         | Remove l: [n, e, o, l, k, o]       | 0
+# 0     | l   | [n, e, o, l, k, o]          | True         | Remove l: [n, e, o, k, o]          | 0
+# 0     | o   | [n, e, o, k, o]             | True         | Remove o: [n, e, k, o]             | 0
+# 0     | o   | [n, e, k, o]                | True         | Remove o: [n, e, k]                | 0
+# 0     | n   | [n, e, k]                   | True         | Remove n: [e, k]                   | 1
+# 1     | b   | [e, k]                      | False        | Return count=1                     | 1
+# Final: 1
 
 
 

@@ -78,6 +78,17 @@ print(findMaxLength(nums))
 
 
 
+
+
+
+
+
+
+
+
+
+
+
 # –––––––––––––––––––––––––––––––––––––––––––––––––––––––
 # Why the Loop Works
 # The loop (for i, num in enumerate(nums):) does this:
@@ -92,7 +103,6 @@ print(findMaxLength(nums))
 
 
 
-
 # Why counts[0] = -1?
 
     # What it does: Sets score 0 at step -1 in the notebook (counts), before the array starts.
@@ -104,6 +114,34 @@ print(findMaxLength(nums))
     # Why it works: Pretends we start at score 0, so subarrays from the beginning are measured correctly.
 
     # Without it, we’d miss subarrays starting at 0!
+
+
+
+# –––––––––––––––––––––––––––––––––––––––––––––––––––––––
+# Breakdown
+from collections import defaultdict
+
+def findMaxLength(nums):
+    # Step 1: Initialize variables
+    counts = defaultdict(int)  # Notebook to store difference and index
+    counts[0] = -1            # Start with difference 0 at index -1
+    diff = 0                  # Running difference (1s count - 0s count)
+    max_length = 0            # Longest subarray length
+
+    # Step 2: Process each number
+    for i, num in enumerate(nums):  # Check each number and step
+        if num == 1:
+            diff += 1         # Add 1 for a 1
+        else:
+            diff -= 1         # Subtract 1 for a 0
+
+        if diff in counts:    # If we've seen this difference before, Found a balanced chunk!
+            max_length = max(max_length, i - counts[diff])  # Update longest length
+        else:
+            counts[diff] = i  # Store new difference with current index
+
+    return max_length
+
 
 
 # –––––––––––––––––––––––––––––––––––––––––––––––––––––––
@@ -151,34 +189,6 @@ print(findMaxLength_bruteforce(nums))
 # i=5: j=6 → [1,0] → len=2 (ans stays 6)
 # i=6..8: only 0s remain → no equal-length updates
 # Final ans = 6
-
-
-
-
-# –––––––––––––––––––––––––––––––––––––––––––––––––––––––
-# Breakdown
-from collections import defaultdict
-
-def findMaxLength(nums):
-    # Step 1: Initialize variables
-    counts = defaultdict(int)  # Notebook to store difference and index
-    counts[0] = -1            # Start with difference 0 at index -1
-    diff = 0                  # Running difference (1s count - 0s count)
-    max_length = 0            # Longest subarray length
-
-    # Step 2: Process each number
-    for i, num in enumerate(nums):  # Check each number and step
-        if num == 1:
-            diff += 1         # Add 1 for a 1
-        else:
-            diff -= 1         # Subtract 1 for a 0
-
-        if diff in counts:    # If we've seen this difference before, Found a balanced chunk!
-            max_length = max(max_length, i - counts[diff])  # Update longest length
-        else:
-            counts[diff] = i  # Store new difference with current index
-
-    return max_length
 
 
 
