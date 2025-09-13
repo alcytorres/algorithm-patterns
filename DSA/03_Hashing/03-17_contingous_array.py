@@ -17,6 +17,8 @@
     # Output: 6
     # Explanation: [1, 1, 1, 0, 0, 0] is the longest contiguous subarray with equal number of 0 and 1.
 
+# WARNGING: Do NOT try to do the iterations in you head. View the iterations table
+
 # Solution: https://leetcode.com/problems/contiguous-array/editorial/
 
 
@@ -60,6 +62,7 @@ print(findMaxLength(nums))
 # - Overall: O(n) total space.
 
 
+"""
 # Overview for Each Iteration
 # Input: nums = [0, 1, 1, 1, 1, 1, 0, 0, 0]
 # Step: Process array to find longest subarray with equal 0s and 1s
@@ -71,7 +74,7 @@ print(findMaxLength(nums))
 # 3 | 1   | 2    | absent       | 2            | {0:-1, -1:0, 1:2, 2:3}
 # 4 | 1   | 3    | absent       | 2            | {0:-1, -1:0, 1:2, 2:3, 3:4}
 # 5 | 1   | 4    | absent       | 2            | {0:-1, -1:0, 1:2, 2:3, 3:4, 4:5}
-# 6 | 0   | 3    | 4            | 2            | {0:-1, -1:0, 1:2, 2:3, 3:4, 4:5}
+# 6 | 0   | 3    | 4            | 2 (6 - 4)    | {0:-1, -1:0, 1:2, 2:3, 3:4, 4:5}
 # 7 | 0   | 2    | 3            | 4 (7 - 3)    | {0:-1, -1:0, 1:2, 2:3, 3:4, 4:5}
 # 8 | 0   | 1    | 2            | 6 (8 - 2)    | {0:-1, -1:0, 1:2, 2:3, 3:4, 4:5}
 # Final: 6 ([1, 1, 1, 0, 0, 0])
@@ -79,7 +82,20 @@ print(findMaxLength(nums))
 
 
 
-"""
+Q: What are the key and value of the hash table?
+    • Key (diff): the current score = (# of 1s so far) - (# of 0s so far).
+    • Value (index): the earliest position where that score was seen.
+
+
+Q: How is the hash map in the Contiguous Array problem different from the ones we usually use in LeetCode?
+
+    • A: In most problems, the hash map tracks frequencies (how many times a number or character appears).
+
+    • Here, the hash map tracks first-seen indices for each running balance (diff).
+
+    • 👉 Instead of “how many times something appears,” we store “where we first saw this score,” so we can later measure the length of subarrays with equal 0s and 1s.
+
+
 Most IMPORTANT thing to Understand:
     • We want the longest subarray where 0s and 1s are equal.  
 
@@ -93,7 +109,7 @@ Most IMPORTANT thing to Understand:
 Why this code Works:
     • Hash map (counts): stores the first index where each diff value was seen.  
 
-    • Prefix sum idea: diff acts like a prefix sum of (+1 for 1, –1 for 0).  
+    • Prefix sum idea: diff acts like a prefix sum of (+1 for 1, -1 for 0).  
       → If diff repeats at index i and j, the subarray between i+1 and j has net zero difference → equal 0s and 1s.  
 
     • Efficiency: O(n) because we only scan once and use O(1) lookups in the map.  
