@@ -18,7 +18,7 @@
 
 
 # ––––––––––––––––––––––––––––––––––––––––
-# I need a super simple, easy to follow, beginner-friendly explanation of how this LeetCode solution works. Break it down into 4 main parts: "Most IMPORTANT thing to Understand", "Why this code Works, TLDR (why this code works in one sentence), and Quick Example Walkthrough.
+# I need a super simple, easy to follow, very beginner-friendly explanation of how this LeetCode solution works. Break it down into 4 main parts: "Most IMPORTANT thing to Understand", "Why this code Works, TLDR (why this code works in one sentence), and Quick Example Walkthrough.
 
 # Make it crystal clear, focusing on why the code finds the correct answer for the given problem. I should be able to look back at this at any time and quickly follow along and understand it. 
 
@@ -26,7 +26,7 @@
 
 # Between each bullet point skip a line to space out the breakdown and make it more easy to scan
 
-# Here is a great template with more detail of what I'm looking that you can you as a reference. While I want you to generanlly follow this template it is not rigit. If you think adding a little more detail to a specific problem is necessary for me to fully understand make sure to do that.
+# Here is a great template with more detail of what I'm looking that you can you as a reference. While I want you to generally follow this template it is not rigid. If you think adding a little more detail to a specific problem is necessary for me to fully understand make sure to do that.
 
 """
 Most IMPORTANT thing to Understand:
@@ -118,7 +118,7 @@ Quick Example Walkthrough:
 """
 
 
-# Leetcode problem for you to breakdown
+# LeetCode problem for you to breakdown
 
 
 

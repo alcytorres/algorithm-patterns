@@ -3,8 +3,8 @@
 # Finds the subarray of length k with the largest sum.
 
 # Example:
-# Input: [1, 4, 6, 2]
-# Output: 10  --> Subarray [4, 6] (length 2, sum 4 + 6 = 10) is the largest sum for k=2.
+    # Input: [1, 4, 6, 2]
+    # Output: 10  --> Subarray [4, 6] (length 2, sum 4 + 6 = 10) is the largest sum for k=2.
 
 def find_best_subarray(nums, k):
     curr = 0    
@@ -36,7 +36,7 @@ print(find_best_subarray(nums, k))
 # - No additional data structures.
 # - Overall: O(1) space.
 
-
+"""
 # Overview for Each Iteration
 # Input: nums = [1, 4, 6, 2], k = 2
 # Step 1: Calculate initial sum for first window of size k
@@ -51,7 +51,7 @@ print(find_best_subarray(nums, k))
 # 3 | 8 (10+2-4) | 2       | 4         | 10 (max(10, 8))
 # Final: 10 ([4, 6])
 
-
+"""
 
 # –––––––––––––––––––––––––––––––––––––––––––––––––––
 # Breakdown 

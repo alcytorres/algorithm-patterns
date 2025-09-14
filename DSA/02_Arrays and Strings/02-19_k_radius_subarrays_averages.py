@@ -49,6 +49,7 @@ print(getAverages(nums, k))
 
 
 
+"""
 # Overview for Each Iteration
 # Input: nums = [7, 4, 3, 9, 1, 8, 5, 2, 6], k = 3
 # Step 1: Initialize variables
@@ -60,11 +61,57 @@ print(getAverages(nums, k))
 # ans = [-1, -1, -1, 5, -1, -1, -1, -1, -1]
 
 # Step 3: Slide window and compute averages
-# i  | curr             | nums[i+k] | nums[i-k-1] | ans[i]    | ans
-# 4  | 32 (37 + 2 - 7)  | 2         | 7           | 4 (32//7) | [-1, -1, -1, 5, 4, -1, -1, -1, -1]
-# 5  | 34 (32 + 6 - 4)  | 6         | 4           | 4 (34//7) | [-1, -1, -1, 5, 4, 4, -1, -1, -1]
+# i  | curr            | nums[i+k] | nums[i-k-1] | ans[i]    | ans
+# 4  | 32 (37 + 2 - 7) | 2         | 7           | 4 (32//7) | [-1, -1, -1, 5, 4, -1, -1, -1, -1]
+# 5  | 34 (32 + 6 - 4) | 6         | 4           | 4 (34//7) | [-1, -1, -1, 5, 4, 4, -1, -1, -1]
 # Final: [-1, -1, -1, 5, 4, 4, -1, -1, -1]
 
+
+
+Most IMPORTANT thing to Understand:
+    • A valid average at index i needs a window of size 2k+1 (k elements before + k after + the element itself).
+
+    • If the window doesn't fit (too close to edges), answer is -1.
+
+    • We use a sliding window sum: instead of recalculating the sum from scratch, update it by adding the new element and removing the old one.
+
+    
+Why this code Works:
+    • Hash map not needed here. Just a running sum (curr).
+
+    • Sliding window idea: each new window is built from the previous by adding one element (entering the window) and subtracting one element (leaving the window).
+
+    • Efficiency: avoids recomputing each window in O(k), so the whole array is processed in O(n).
+
+    • Intuition: Like moving a magnifying glass across the array, you don't re-count everything, you just update the view.
+
+TLDR
+    • This works because we keep a running sum of the current window and update it in O(1) as the window slides, giving the averages in one pass.
+
+
+Quick Example Walkthrough:
+    nums = [7, 4, 3, 9, 1, 8, 5, 2, 6], k = 3
+
+    Setup: window_size = 7, ans = [-1,-1,-1,-1,-1,-1,-1,-1,-1]
+
+    First full window (indices 0-6):
+    sum = 7+4+3+9+1+8+5 = 37
+    ans[3] = 37 // 7 = 5
+    → ans = [-1,-1,-1,5,-1,-1,-1,-1,-1]
+
+    Slide to center 4 (indices 1-7):
+    sum = 37 - 7 (drop left) + 2 (add right) = 32
+    ans[4] = 32 // 7 = 4
+    → ans = [-1,-1,-1,5,4,-1,-1,-1,-1]
+
+    Slide to center 5 (indices 2-8):
+    sum = 32 - 4 + 6 = 34
+    ans[5] = 34 // 7 = 4
+    → ans = [-1,-1,-1,5,4,4,-1,-1,-1]
+
+    Final Answer: [-1, -1, -1, 5, 4, 4, -1, -1, -1]
+
+"""
 
 
 # ––––––––––––––––––––––––––––––––––––––––––––––

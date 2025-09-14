@@ -39,43 +39,44 @@ print(longest_subarray_sum(nums, 8))
 # - Overall: O(1) space.
 
 
-# Full Overview for Each Iteration
-# Input: nums = [1, 2, 1, 2, 4, 2], k = 8
-# Step: Find longest subarray with sum <= k using sliding window
-# r | nums[r] | curr | l | curr > k | Action               | ans
-# - | -       | 0    | 0 | -        | -                    | 0
-# 0 | 1       | 1    | 0 | No       | ans=max(0,0-0+1)=1   | 1
-# 1 | 2       | 3    | 0 | No       | ans=max(1,1-0+1)=2   | 2
-# 2 | 1       | 4    | 0 | No       | ans=max(2,2-0+1)=3   | 3
-# 3 | 2       | 6    | 0 | No       | ans=max(3,3-0+1)=4   | 4
-# 4 | 4       | 10   | 0 | Yes      | curr-=nums[0]=10-1=9 | 4
-#   |         | 9    | 1 | Yes      | curr-=nums[1]=9-2=7  | 4
-#   |         | 7    | 2 | No       | ans=max(4,4-2+1)=4   | 4
-# 5 | 2       | 9    | 2 | Yes      | curr-=nums[2]=9-1=8  | 4
-#   |         | 8    | 3 | No       | ans=max(4,5-3+1)=4   | 4
+"""
+Full Overview for Each Iteration
+Input: nums = [1, 2, 1, 2, 4, 2], k = 8
+Step: Find longest subarray with sum <= k using sliding window
+r | nums[r] | curr | l | curr > k | Action               | ans
+- | -       | 0    | 0 | -        | -                    | 0
+0 | 1       | 1    | 0 | No       | ans=max(0,0-0+1)=1   | 1
+1 | 2       | 3    | 0 | No       | ans=max(1,1-0+1)=2   | 2
+2 | 1       | 4    | 0 | No       | ans=max(2,2-0+1)=3   | 3
+3 | 2       | 6    | 0 | No       | ans=max(3,3-0+1)=4   | 4
+4 | 4       | 10   | 0 | Yes      | curr-=nums[0]=10-1=9 | 4
+  |         | 9    | 1 | Yes      | curr-=nums[1]=9-2=7  | 4
+  |         | 7    | 2 | No       | ans=max(4,4-2+1)=4   | 4
+5 | 2       | 9    | 2 | Yes      | curr-=nums[2]=9-1=8  | 4
+  |         | 8    | 3 | No       | ans=max(4,5-3+1)=4   | 4
 # Final: 4 ([1, 2, 1, 2])
 
 
-# Overview for Each Iteration
-# Input: nums = [1, 2, 1, 2, 4, 2], k = 8
-# Step: Find longest subarray with sum <= k using sliding window
-# r | nums[r] | curr | l | curr > k | ans
-# - | -       | 0    | 0 | -        | 0
-# 0 | 1       | 1    | 0 | No       | 1
-# 1 | 2       | 3    | 0 | No       | 2
-# 2 | 1       | 4    | 0 | No       | 3
-# 3 | 2       | 6    | 0 | No       | 4
-# 4 | 4       | 10   | 0 | Yes      | 4
-#   |         | 9    | 1 | Yes      | 4
-#   |         | 7    | 2 | No       | 4
-# 5 | 2       | 9    | 2 | Yes      | 4
-#   |         | 8    | 3 | No       | 4
+Overview for Each Iteration
+Input: nums = [1, 2, 1, 2, 4, 2], k = 8
+Step: Find longest subarray with sum <= k using sliding window
+r | nums[r] | curr | l | curr > k | ans
+- | -       | 0    | 0 | -        | 0
+0 | 1       | 1    | 0 | No       | 1
+1 | 2       | 3    | 0 | No       | 2
+2 | 1       | 4    | 0 | No       | 3
+3 | 2       | 6    | 0 | No       | 4
+4 | 4       | 10   | 0 | Yes      | 4
+  |         | 9    | 1 | Yes      | 4
+  |         | 7    | 2 | No       | 4
+5 | 2       | 9    | 2 | Yes      | 4
+  |         | 8    | 3 | No       | 4
 # Final: 4 ([1, 2, 1, 2])
 
 
 
 # ––––––––––––––––––––––––––––––––––––––––––––––––
-# Why use for right in range(len(nums)) instead of for right in len(nums)?
+Q: Why use for right in range(len(nums)) instead of for right in len(nums)?
 
 # for right in range(len(nums)):
     # Iterates over indices (0 to len(nums)-1).
@@ -85,6 +86,8 @@ print(longest_subarray_sum(nums, 8))
     # Invalid syntax.
     # len(nums) is a single integer, not an iterable.
 
+
+"""
 
 
 # ––––––––––––––––––––––––––––––––––––––––––––––––
