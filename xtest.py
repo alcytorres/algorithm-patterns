@@ -1,33 +1,33 @@
-# 152. Maximum Product Subarray
+# 49. Group Anagrams
 
-# Given an integer array nums, find a subarray that has the largest product, and return the product.
-
-# The test cases are generated so that the answer will fit in a 32-bit integer.
+# Given an array of strings strs, group the anagrams together. You can return the answer in any order.
 
 # Example 1:
-    # Input: nums = [2, 3, -2, 4]
-    # Output: 6
-    # Explanation: [2,3] has the largest product 6.
+    # Input: strs = ["eat", "tea", "tan", "ate", "nat", "bat"]
+    # Output: [["bat"], ["nat","tan"], ["ate","eat","tea"]]
 
-# Example 2:
-    # Input: nums = [-2, 0, -1]
-    # Output: 0
-    # Explanation: The result cannot be 2, because [-2,-1] is not a subarray.
+# Explanation:
+    # There is no string in strs that can be rearranged to form "bat".
+    # The strings "nat" and "tan" are anagrams as they can be rearranged to form each other.
+    # The strings "ate", "eat", and "tea" are anagrams as they can be rearranged to form each other.
 
-
-# Solution: https://leetcode.com/problems/maximum-product-subarray/solutions/738529/maximum-product-subarray/
+# Solution: https://leetcode.com/problems/group-anagrams/description/
 
 
+from collections import defaultdict
 
-def maxProduct(nums):
-    hi = lo = best = nums[0]
-    for x in nums[1:]:
-        if x < 0: hi, lo = lo, hi
-        hi = max(x, hi * x)
-        lo = min(x, lo * x)
-        best = max(best, hi)
-    return best
+def groupAnagrams(strs):
+    buckets = defaultdict(list)
+    
+    for s in strs:
+        key = ''.join(sorted(s))
+        buckets[key].append(s)
+    
+    return list(buckets.values())
 
-nums = [2, 3, -2, 4]
-print(maxProduct(nums))
-# Output: 6
+strs = ["eat", "tea", "tan", "ate", "nat", "bat"]
+print(groupAnagrams(strs))
+# Output: [['eat', 'tea', 'ate'], ['tan', 'nat'], ['bat']]
+
+
+# buckets = {'aet': ['eat', 'tea', 'ate'], 'ant': ['tan', 'nat'], 'abt': ['bat']}

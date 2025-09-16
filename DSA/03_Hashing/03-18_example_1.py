@@ -13,21 +13,41 @@
 
 # Solution: https://leetcode.com/problems/group-anagrams/description/
 
+# –––––––––––––––––––––––––––––––––––––––––––––––––––
+# Soltuion: Using ''.join(sorted(s)) as key
 
 from collections import defaultdict
 
 def groupAnagrams(strs):
-    groups = defaultdict(list)  # Notebook to group anagrams
+    buckets = defaultdict(list) 
 
     for s in strs:
-        sorted_s = ''.join(sorted(s))  
-        groups[sorted_s].append(s)     
+        key = ''.join(sorted(s))   # canonical form
+        buckets[key].append(s)
 
-    return list(groups.values())       
-
+    return list(buckets.values())
 
 strs = ["eat", "tea", "tan", "ate", "nat", "bat"]
 print(groupAnagrams(strs))
+# Output: [['eat', 'tea', 'ate'], ['tan', 'nat'], ['bat']]
+
+
+
+# from collections import defaultdict
+
+# def groupAnagrams(strs):
+#     groups = defaultdict(list)  # Notebook to group anagrams
+
+#     for s in strs:
+#         sorted_s = ''.join(sorted(s))  
+#         groups[sorted_s].append(s)     
+
+#     return list(groups.values())       
+
+
+# strs = ["eat", "tea", "tan", "ate", "nat", "bat"]
+# print(groupAnagrams(strs))
+
 
 
 # Time: O(n * k log k)
@@ -36,27 +56,28 @@ print(groupAnagrams(strs))
 # - Overall: O(n * k log k) time.
 
 # Space: O(n * k)
-# - Dictionary 'groups' stores up to n strings, grouped by their sorted key.
+# - Dictionary 'buckets' stores up to n strings, grouped by their sorted key.
 # - Each string (length k) is stored once in the dictionary lists → O(n * k) space.
-# - A few variables (s, sorted_s) take O(1) space.
+# - A few variables (s, key) take O(1) space.
 # - Overall: O(n * k) space.
 
 
+"""
 # Overview for Each Iteration
 # Input: strs = ["eat", "tea", "tan", "ate", "nat", "bat"]
 # Step: Group anagrams by sorted string key
-# s     | sorted_s | groups
-# -     | -        | {}
-# eat   | aet      | {aet: [eat]}
-# tea   | aet      | {aet: [eat, tea]}
-# tan   | ant      | {aet: [eat, tea], ant: [tan]}
-# ate   | aet      | {aet: [eat, tea, ate], ant: [tan]}
-# nat   | ant      | {aet: [eat, tea, ate], ant: [tan, nat]}
-# bat   | abt      | {aet: [eat, tea, ate], ant: [tan, nat], abt: [bat]}
+# s     | key | buckets
+# -     | -   | {}
+# eat   | aet | {aet: [eat]}
+# tea   | aet | {aet: [eat, tea]}
+# tan   | ant | {aet: [eat, tea], ant: [tan]}
+# ate   | aet | {aet: [eat, tea, ate], ant: [tan]}
+# nat   | ant | {aet: [eat, tea, ate], ant: [tan, nat]}
+# bat   | abt | {aet: [eat, tea, ate], ant: [tan, nat], abt: [bat]}
 # Final: [[bat], [tan, nat], [eat, tea, ate]]
 
 
-"""
+
 Most IMPORTANT thing to Understand:
     • Anagrams become the same string when their letters are sorted.  
 
@@ -65,13 +86,13 @@ Most IMPORTANT thing to Understand:
     • The dictionary groups all words that share the same sorted key.  
 
 Why this code Works:
-    • Hash map (groups): key = sorted word, value = list of words with that key.  
+    • Hash map (buckets): key = sorted word, value = list of words with that key.  
 
     • Sorting step: ensures all anagrams collapse to the same key.  
 
     • Efficiency: O(n * k log k) because each of n words of length k is sorted once. Far faster than comparing every pair (O(n^2)).  
 
-    • Intuition: Like sorting letters in names — if two names look identical after sorting, they’re anagrams, so they go in the same bucket.  
+    • Intuition: Like sorting letters in names — if two names look identical after sorting, they're anagrams, so they go in the same bucket.  
 
 TLDR:
     • Sort each word to create a key, then group words with the same key together.  
@@ -92,6 +113,16 @@ Quick Example Walkthrough:
 
     Final Answer: [["bat"], ["tan","nat"], ["eat","tea","ate"]]  
 
+    
+
+
+Why defaultdict(list)?
+
+
+
+
+
+
 """
 
 
@@ -102,11 +133,11 @@ Quick Example Walkthrough:
 from collections import defaultdict
 
 def groupAnagrams(strs):
-    groups = defaultdict(list)  # Notebook to group anagrams
+    groups = defaultdict(list)    # Notebook to group anagrams
 
     for s in strs:
-        sorted_s = ''.join(sorted(s))  # Sort letters to make key
-        groups[sorted_s].append(s)     # Add string to its group
+        key = ''.join(sorted(s))  # Sort letters to make key
+        groups[key].append(s)     # Add string to its group
 
     return list(groups.values())       # Return all groups
 
@@ -114,6 +145,8 @@ def groupAnagrams(strs):
 
 # –––––––––––––––––––––––––––––––––––––––––––––––––––––––
 # Brute force 
+
+
 
 
 
@@ -190,32 +223,16 @@ print(groupAnagrams(strs))
 
 
 # –––––––––––––––––––––––––––––––––––––––––––––––––––
-# Soltuion: Using ''.join(sorted(s)) as key
+# Playground
 
-from collections import defaultdict
+s = "bat"
+print(sorted(s))
+# ['a', 'b', 't']
 
-def groupAnagrams(strs):
-    buckets = defaultdict(list)
+s = ['c', 'b', 'a']
+print(sorted(s))
+# Output: ['a', 'b', 'c']
 
-    for s in strs:
-        key = ''.join(sorted(s))   # canonical form
-        buckets[key].append(s)
-
-    return list(buckets.values())
-
-strs = ["eat", "tea", "tan", "ate", "nat", "bat"]
-print(groupAnagrams(strs))
-# Output: [['eat', 'tea', 'ate'], ['tan', 'nat'], ['bat']]
-
-
-# Time: O(n * k log k)
-# - Same as above: sorting each string takes O(k log k).
-# - Dictionary insert/append is O(1).
-# - Overall: O(n * k log k) time.
-
-# Space: O(n * k)
-# - Dictionary stores up to n strings in grouped lists.
-# - Each string of length k is stored once → O(n * k).
-# - Keys are sorted strings (length k), but O(n * k) still dominates.
-# - Overall: O(n * k) space.
-
+s = [3, 2, 1]
+print(sorted(s))
+# Output: [1, 2, 3]

@@ -19,9 +19,8 @@
 
 
 
-
 # ––––––––––––––––––––––––––––––––––––––––––––––
-
+# Option 1
 def maxProduct(nums):
     hi = lo = best = nums[0]
     for x in nums[1:]:
@@ -38,7 +37,7 @@ print(maxProduct(nums))
 
 
 # ––––––––––––––––––––––––––––––––––––––––––––––
-# Option 1
+# Option 2
 
 def maxProduct(nums):
     if not nums:
@@ -74,7 +73,7 @@ print(maxProduct(nums))
 
 
 # ––––––––––––––––––––––––––––––––––––––––––––––
-# Option 2
+# Option 3
 
 def maxProduct(nums):
     if len(nums) == 0:

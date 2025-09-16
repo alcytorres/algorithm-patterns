@@ -232,12 +232,24 @@ print("".join(chars))  # Output: "ab"
 
 # Basic Example 4 (Arrow Separator):
 words = ["1", "2", "3", "4"]
-print(" -> ".join(words))
+print(" -> ".join(words)) # Output: 1 -> 2 -> 3 -> 4
 
 # DSA Example (List to String):
 words = ["hello", "world"]
 print(" ".join(words))  # Output: "hello world"
 
+
+# Efficient string building
+# arr is a list of characters
+def fn(arr):
+    ans = []
+    for c in arr:
+        ans.append(c)
+    
+    return "".join(ans)
+
+print(fn(['a', 'b', 'c', 'd']))
+# Output: abcd
 
 
 
