@@ -18,9 +18,9 @@ from collections import defaultdict
 
 def groupAnagrams(strs):
     buckets = defaultdict(list)
-    
+
     for s in strs:
-        key = ''.join(sorted(s))
+        key = " ".join(sorted(s))
         buckets[key].append(s)
     
     return list(buckets.values())

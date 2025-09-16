@@ -22,7 +22,7 @@ def groupAnagrams(strs):
     buckets = defaultdict(list) 
 
     for s in strs:
-        key = ''.join(sorted(s))   # canonical form
+        key = ''.join(sorted(s))  
         buckets[key].append(s)
 
     return list(buckets.values())
@@ -30,24 +30,6 @@ def groupAnagrams(strs):
 strs = ["eat", "tea", "tan", "ate", "nat", "bat"]
 print(groupAnagrams(strs))
 # Output: [['eat', 'tea', 'ate'], ['tan', 'nat'], ['bat']]
-
-
-
-# from collections import defaultdict
-
-# def groupAnagrams(strs):
-#     groups = defaultdict(list)  # Notebook to group anagrams
-
-#     for s in strs:
-#         sorted_s = ''.join(sorted(s))  
-#         groups[sorted_s].append(s)     
-
-#     return list(groups.values())       
-
-
-# strs = ["eat", "tea", "tan", "ate", "nat", "bat"]
-# print(groupAnagrams(strs))
-
 
 
 # Time: O(n * k log k)
@@ -63,18 +45,33 @@ print(groupAnagrams(strs))
 
 
 """
-# Overview for Each Iteration
-# Input: strs = ["eat", "tea", "tan", "ate", "nat", "bat"]
-# Step: Group anagrams by sorted string key
-# s     | key | buckets
-# -     | -   | {}
-# eat   | aet | {aet: [eat]}
-# tea   | aet | {aet: [eat, tea]}
-# tan   | ant | {aet: [eat, tea], ant: [tan]}
-# ate   | aet | {aet: [eat, tea, ate], ant: [tan]}
-# nat   | ant | {aet: [eat, tea, ate], ant: [tan, nat]}
-# bat   | abt | {aet: [eat, tea, ate], ant: [tan, nat], abt: [bat]}
-# Final: [[bat], [tan, nat], [eat, tea, ate]]
+Overview for Each Iteration
+Input: strs = ["eat", "tea", "tan", "ate", "nat", "bat"]
+Step: Group anagrams by sorted string key
+s     | key | buckets
+-     | -   | {}
+eat   | aet | {aet: [eat]}
+tea   | aet | {aet: [eat, tea]}
+tan   | ant | {aet: [eat, tea], ant: [tan]}
+ate   | aet | {aet: [eat, tea, ate], ant: [tan]}
+nat   | ant | {aet: [eat, tea, ate], ant: [tan, nat]}
+bat   | abt | {aet: [eat, tea, ate], ant: [tan, nat], abt: [bat]}
+Final: [[bat], [tan, nat], [eat, tea, ate]]
+
+
+Step-by-Step Walkthrough:
+For strs = ["eat", "tea", "tan", "ate", "nat", "bat"]:
+  • Start: buckets = {} (empty notebook).
+
+  • Process each word:
+    "eat": sorted("eat") = ['a', 'e', 't'], ''.join(['a', 'e', 't']) = "aet", buckets["aet"] = ["eat"].
+    "tea": sorted("tea") = ['a', 'e', 't'], ''.join(['a', 'e', 't']) = "aet", buckets["aet"] = ["eat", "tea"].
+    "tan": sorted("tan") = ['a', 'n', 't'], ''.join(['a', 'n', 't']) = "ant", buckets["ant"] = ["tan"].
+    "ate": sorted("ate") = ['a', 'e', 't'], ''.join(['a', 'e', 't']) = "aet", buckets["aet"] = ["eat", "tea", "ate"].
+    "nat": sorted("nat") = ['a', 'n', 't'], ''.join(['a', 'n', 't']) = "ant", buckets["ant"] = ["tan", "nat"].
+    "bat": sorted("bat") = ['a', 'b', 't'], ''.join(['a', 'b', 't']) = "abt", buckets["abt"] = ["bat"].
+
+Return: list(buckets.values()) = [["eat", "tea", "ate"], ["tan", "nat"], ["bat"]].
 
 
 
@@ -92,7 +89,7 @@ Why this code Works:
 
     • Efficiency: O(n * k log k) because each of n words of length k is sorted once. Far faster than comparing every pair (O(n^2)).  
 
-    • Intuition: Like sorting letters in names — if two names look identical after sorting, they're anagrams, so they go in the same bucket.  
+    Intuition: If two words look the same after sorting their letters, they must be anagrams → group them together.
 
 TLDR:
     • Sort each word to create a key, then group words with the same key together.  
@@ -115,13 +112,16 @@ Quick Example Walkthrough:
 
     
 
+Q: Why defaultdict(list)?
+    • defaultdict(list) gives [] for new keys (good for grouping)
+        • defaultdict(int) gives 0 for new keys (good for counting)
+    • Here it means we can always do buckets[key].append(word) without checking if the key exists first
 
-Why defaultdict(list)?
-
-
-
-
-
+    
+Q: Why sort the string to make the key?
+    • Because sorting makes all anagrams look identical
+    • "eat", "tea", "ate" all become "aet". 
+    • This guarantees that anagrams collapse into the same dictionary bucket.
 
 """
 
@@ -133,13 +133,13 @@ Why defaultdict(list)?
 from collections import defaultdict
 
 def groupAnagrams(strs):
-    groups = defaultdict(list)    # Notebook to group anagrams
+    buckets = defaultdict(list)    # Notebook to group anagrams
 
-    for s in strs:
-        key = ''.join(sorted(s))  # Sort letters to make key
-        groups[key].append(s)     # Add string to its group
+    for s in strs:                 # Go through each word in the list
+        key = ''.join(sorted(s))   # Sort the letters and join them back into a string so anagrams (same letters, different order) share the same key
+        buckets[key].append(s)     # Add the original word into the correct group (bucket)
 
-    return list(groups.values())       # Return all groups
+    return list(buckets.values())  # Return just the grouped words (ignore the keys)
 
 
 
@@ -225,6 +225,7 @@ print(groupAnagrams(strs))
 # –––––––––––––––––––––––––––––––––––––––––––––––––––
 # Playground
 
+# Sorted
 s = "bat"
 print(sorted(s))
 # ['a', 'b', 't']
@@ -236,3 +237,21 @@ print(sorted(s))
 s = [3, 2, 1]
 print(sorted(s))
 # Output: [1, 2, 3]
+
+
+# .join
+# Example 1: Joining words with a space separator
+def fn(words):
+    return " ".join(words)
+
+words = ["Hello", "world", "from", "Python"]
+print(fn(words))  # Output: Hello world from Python
+
+
+# Example 2: Joining characters with no separator
+def fn(c):
+    return "".join(c)
+
+c = ["P", "y", "t", "h", "o", "n"]
+print(fn(c))  # Output: Python
+
