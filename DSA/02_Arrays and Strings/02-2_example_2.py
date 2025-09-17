@@ -17,8 +17,10 @@ def find_pair_sum(nums, target):
 
     return False   
 
-print(find_pair_sum([1, 2, 4, 6, 8, 9, 14, 15], 13))  
-# Output: True -> nums[2] + nums[5] = 4 + 9 = 13 matches the target.
+nums = [1, 3, 4, 6, 8, 10, 12]
+target = 14
+print(find_pair_sum(nums, target))  
+# Output: True -> nums[2] + nums[5] = 4 + 10 = 14 matches the target.
 
 
 # Time: O(n)
@@ -32,8 +34,33 @@ print(find_pair_sum([1, 2, 4, 6, 8, 9, 14, 15], 13))
 # - Overall: O(1) space.
 
 
+"""
+Overview for Each Iteration
+Input: nums = [1, 3, 4, 6, 8, 10, 12], target = 14
+Step: Find pair summing to target using two pointers
+l  | r | nums[l] | nums[r] | curr      | curr vs target | Action      | Result
+---|---|---------|---------|-------- --|----------------|-------------|--------
+0  | 6 | 1       | 12      | 13 (1+12) | < 14           | l+=1        | -
+1  | 6 | 3       | 12      | 15 (3+12) | > 14           | r-=1        | -
+1  | 5 | 3       | 10      | 13 (3+10) | < 14           | l+=1        | -
+2  | 5 | 4       | 10      | 14 (4+10) | == 14          | Return True | True
+Final: True ([4, 10])
 
-# ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+
+
+Q: When does the loop stop and return True?
+    • When nums[left] + nums[right] == target.
+    • At that moment, the function immediately returns True and exits — no further pairs are checked.
+
+Q: When does the loop stop and return False?
+    • When the left and right pointers cross (left >= right).
+    • This means every possible pair has been checked, and no pair sums to the target.
+
+"""
+
+
+
+# ––––––––––––––––––––––––––––––––––––––––––––––––––
 # Breakdown
   
 def find_pair_sum(nums, target):
@@ -49,12 +76,39 @@ def find_pair_sum(nums, target):
             left += 1
         else:                # Sum too large, need smaller number
             right -= 1
+
     return False             # No pair found
 
 
 
 
-# ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+
+# ––––––––––––––––––––––––––––––––––––––––––––––––––
+# Best Solution
+
+def find_pair_sum(nums, target):
+    left = 0                    
+    right = len(nums) - 1       
+
+    while left < right:         
+        curr = nums[left] + nums[right]  
+        if curr == target:   
+            return True
+        elif curr < target:  
+            left += 1
+        else:                
+            right -= 1
+
+    return False   
+
+nums = [1, 2, 4, 6, 8, 9, 14, 15]
+target = 13
+print(find_pair_sum(nums, target))  
+# Output: True -> nums[2] + nums[5] = 4 + 9 = 13 matches the target.
+
+
+
+# ––––––––––––––––––––––––––––––––––––––––––––––––––
 # Task: Given a sorted array of unique integers and a target, return True if a pair sums to the target, False otherwise.
 # Example: nums = [1, 2, 4, 6, 8, 9, 14, 15], target = 13 → Output = True (nums[2] + nums[5] = 4 + 9 = 13)
 # Why: Practices two-pointer technique on a sorted array to efficiently find a pair with a specific sum.
@@ -146,6 +200,7 @@ def find_pair_sum(nums, target):  # Example: nums = [1, 2, 4, 6, 8, 9, 14, 15], 
     return False  # skip
 
 
-print(find_pair_sum([1, 2, 4, 6, 8, 9, 14, 15], 13))  
+nums = [1, 2, 4, 6, 8, 9, 14, 15]
+target = 13
+print(find_pair_sum(nums, target))  
 # Output: True -> nums[2] + nums[5] = 4 + 9 = 13 matches the target.
-

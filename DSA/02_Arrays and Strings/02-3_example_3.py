@@ -44,14 +44,53 @@ print(merge_sorted_arrays(arr1, arr2))
 # - If we exclude the result array, extra working space is O(1).
 
 
+"""
 
-# ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
-# while vs if: Merging sorted arrays
-    # while: Repeats until condition false, processes all items (e.g., full array merge).
-    # if: Checks once, processes one item (e.g., partial merge).
-    # Use while for loops over multiple items, if for single checks.
+Overview for Each Iteration
+Input: arr1 = [1, 4, 7, 20], arr2 = [3, 5, 6]
+Step 1: Merge arrays while both have elements
+i  | j | arr1[i] | arr2[j] | arr1[i] <= arr2[j] | Action         | ans
+---|---|---------|---------|--------------------|----------------|-----------------
+0  | 0 | 1       | 3       | True               | Append 1, i+=1 | [1]
+1  | 0 | 4       | 3       | False              | Append 3, j+=1 | [1, 3]
+1  | 1 | 4       | 5       | True               | Append 4, i+=1 | [1, 3, 4]
+2  | 1 | 7       | 5       | False              | Append 5, j+=1 | [1, 3, 4, 5]
+2  | 2 | 7       | 6       | False              | Append 6, j+=1 | [1, 3, 4, 5, 6]
 
-# ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+Step 2: Add remaining elements from arr1
+i  | arr1[i] | Action         | ans
+---|---------|----------------|-------------------
+2  | 7       | Append 7, i+=1 | [1, 3, 4, 5, 6, 7]
+3  | 20      | Append 20, i+=1| [1, 3, 4, 5, 6, 7, 20]
+
+Step 3: Add remaining elements from arr2
+j  | arr2[j] | Action         | ans
+---|---------|----------------|-------------------
+-  | -       | None (j=3)     | [1, 3, 4, 5, 6, 7, 20]
+Final: [1, 3, 4, 5, 6, 7, 20]
+
+
+
+
+Q: Why does j=3 in Step 3?
+    • The last action in step 1 is j+=1 -> 2+=1=3
+
+
+Q: Why use while i < len(arr1) and j < len(arr2) to loop thru the array?
+    • Only compare while both arrays have elements (prevents index out of range).
+    • Once one array is exhausted, stop comparing and append the rest from the other.
+    • This “two-pointer + cleanup” pattern is common in merge sort, merging linked lists, and other two-pointer problems.
+
+
+Q: while vs if: Merging sorted arrays
+    • while: Repeats until condition false, processes all items (e.g., full array merge).
+    • if: Checks once, processes one item (e.g., partial merge).
+    • Use while for loops over multiple items, if for single checks.
+
+"""
+
+
+# ––––––––––––––––––––––––––––––––––––––––––––––––––
 # Breakdown 
 def merge_sorted_arrays(arr1, arr2):
     ans = []                 # Result array to store merged elements
@@ -79,7 +118,8 @@ def merge_sorted_arrays(arr1, arr2):
     return ans                  # Return merged sorted array
 
 
-# ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+
+# ––––––––––––––––––––––––––––––––––––––––––––––––––
 # Task: Merge two sorted integer arrays into a new sorted array.
 # Example: arr1 = [1, 4, 7, 20], arr2 = [3, 5, 6] → Output = [1, 3, 4, 5, 6, 7, 20]
 # Why: Practices two-pointer technique to efficiently combine sorted arrays.

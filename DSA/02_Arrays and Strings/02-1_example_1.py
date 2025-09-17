@@ -31,16 +31,16 @@ print(is_palindrome("racecar"))
 
 
 """
-# Overview for Each Iteration
-# Input: s = "racecar"
-# Step: Check if string is a palindrome using two pointers
-# l | r | s[l] | s[r] | l < r | Action      | Result
-# --|---|------|------|-------|-------------|--------
-# 0 | 6 | r    | r    | True  | l+=1, r-=1  | -
-# 1 | 5 | a    | a    | True  | l+=1, r-=1  | -
-# 2 | 4 | c    | c    | True  | l+=1, r-=1  | -
-# 3 | 3 | e    | e    | False | Exit loop   | True
-# Final: True
+Overview for Each Iteration
+Input: s = "racecar"
+Step: Check if string is a palindrome using two pointers
+l | r | s[l] | s[r] | l < r | Action      | Result
+--|---|------|------|-------|-------------|--------
+0 | 6 | r    | r    | True  | l+=1, r-=1  | -
+1 | 5 | a    | a    | True  | l+=1, r-=1  | -
+2 | 4 | c    | c    | True  | l+=1, r-=1  | -
+3 | 3 | e    | e    | False | Exit loop   | True
+Final: True
 
 """
 
