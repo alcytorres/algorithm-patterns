@@ -44,17 +44,20 @@ print(sortedSquares(nums))
 # - If we exclude the result array, extra working space is O(1).
 
 
-# Overview for Each Iteration
-# Input: nums = [-4, -1, 0, 3, 10]
-# Step: Square numbers and sort in non-decreasing order
-# i | l | r | abs(nums[l]) | abs(nums[r]) | square | ans
-# - | 0 | 4 | -            | -            | -      | [0, 0, 0, 0, 0]
-# 4 | 0 | 4 | 4            | 10           | 10     | [0, 0, 0, 0, 100]
-# 3 | 0 | 3 | 4            | 3            | -4     | [0, 0, 0, 16, 100]
-# 2 | 1 | 3 | 1            | 3            | 3      | [0, 0, 9, 16, 100]
-# 1 | 1 | 2 | 1            | 0            | -1     | [0, 1, 9, 16, 100]
-# 0 | 2 | 2 | 0            | 0            | 0      | [0, 1, 9, 16, 100]
-# Final: [0, 1, 9, 16, 100]
+"""
+Overview for Each Iteration
+Input: nums = [-4, -1, 0, 3, 10]
+Step: Square numbers and sort in non-decreasing order
+i | l | r | abs(nums[l]) | abs(nums[r]) | square | ans
+- | 0 | 4 | -            | -            | -      | [0, 0, 0, 0, 0]
+4 | 0 | 4 | 4            | 10           | 10     | [0, 0, 0, 0, 100]
+3 | 0 | 3 | 4            | 3            | -4     | [0, 0, 0, 16, 100]
+2 | 1 | 3 | 1            | 3            | 3      | [0, 0, 9, 16, 100]
+1 | 1 | 2 | 1            | 0            | -1     | [0, 1, 9, 16, 100]
+0 | 2 | 2 | 0            | 0            | 0      | [0, 1, 9, 16, 100]
+Final: [0, 1, 9, 16, 100]
+
+"""
 
 
 

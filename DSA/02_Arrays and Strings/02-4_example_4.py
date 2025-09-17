@@ -31,6 +31,7 @@ print(is_subsequence(s, t))
 # - Overall: O(1) space.
 
 
+"""
 # Overview for Each Iteration
 # Input: s = "ace", t = "abcde"
 # Step: Check if s is a subsequence of t
@@ -42,6 +43,18 @@ print(is_subsequence(s, t))
 # 2 | 3 | e    | d    | No     | j+=1 (i=2, j=4)
 # 2 | 4 | e    | e    | Yes    | i+=1, j+=1 (i=3, j=5)
 # End: i=3, len(s)=3, return True
+
+
+
+Q: Why while i < len(s) and j < len(t):
+    • The loop uses pointers i (for s) and j (for t) to safely iterate until either s is fully matched or t is exhausted, preventing index errors if t is shorter than s. 
+
+
+Q: If len(t) >= len(s) is guaranteed:
+    • while i < len(s) is enough
+    • as j won't exceed len(t) before i reaches len(s).
+
+"""
 
 
 # ––––––––––––––––––––––––––––––––––––––––––––––––
@@ -57,17 +70,6 @@ def is_subsequence(s, t):
     return i == len(s)          # True if all characters in s were found. Same as saying return True
 
 
-
-# ––––––––––––––––––––––––––––––––––––––––––––––––
-# Why while i < len(s) and j < len(t):
-
-    # The loop uses pointers i (for s) and j (for t) to safely iterate until either s is fully matched or t is exhausted, preventing index errors if t is shorter than s. 
-
-
-# ––––––––––––––––––––––––––––––––––––––––––––––––
-# If len(t) >= len(s) is guaranteed:
-    # while i < len(s) is enough
-    # as j won’t exceed len(t) before i reaches len(s).
 
 
 # ––––––––––––––––––––––––––––––––––––––––––––––––

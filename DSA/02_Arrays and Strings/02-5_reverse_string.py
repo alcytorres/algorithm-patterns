@@ -5,8 +5,8 @@
 # You must do this by modifying the input array in-place with O(1) extra memory.
 
 # Example 1:
-# Input: s = ["h","e","l","l","o"]
-# Output:    ["o","l","l","e","h"]
+    # Input: s = ["h","e","l","l","o"]
+    # Output:    ["o","l","l","e","h"]
  
 # Solution: https://leetcode.com/problems/reverse-string/editorial/
 
@@ -36,8 +36,21 @@ print(reverseString(s))
 # - Overall: O(1) space.
 
 
+"""
+Overview for Each Iteration
+Input: s = ["h", "e", "l", "l", "o"]
+Step: Reverse string in-place using two pointers
+l   | r   | s[l] | s[r] | l < r | Action          | s
+----|-----|------|------|-------|-----------------|---------------
+0   | 4   | h    | o    | True  | Swap s[0], s[4] | [o, e, l, l, h]
+1   | 3   | e    | l    | True  | Swap s[1], s[3] | [o, l, l, e, h]
+2   | 2   | l    | l    | False | Exit loop       | [o, l, l, e, h]
+Final: ["o", "l", "l", "e", "h"]
 
-# ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+"""
+
+
+# ––––––––––––––––––––––––––––––––––––––––––––––––
 # Shortcut solution
 
 def reverseString(s):
@@ -70,6 +83,7 @@ def reverseString(s):
 # Space: O(1) - Uses two pointers, modifying list in-place.
 
 # Output: ["o","l","l","e","h"] - Returns the list with characters reversed in-place.
+
 
 
 # ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––

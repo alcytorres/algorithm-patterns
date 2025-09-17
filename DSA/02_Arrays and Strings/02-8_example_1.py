@@ -24,7 +24,8 @@ def longest_subarray_sum(nums, k):
 
 
 nums = [1, 2, 1, 2, 4, 2]
-print(longest_subarray_sum(nums, 8))
+k = 8
+print(longest_subarray_sum(nums, k))
 # Output: 4  --> Subarray [1, 2, 1, 2] (length 4, sum 6) is the longest subarray with sum <= 6.
 
 # Time: O(n)
@@ -40,7 +41,7 @@ print(longest_subarray_sum(nums, 8))
 
 
 """
-Full Overview for Each Iteration
+Overview for Each Iteration
 Input: nums = [1, 2, 1, 2, 4, 2], k = 8
 Step: Find longest subarray with sum <= k using sliding window
 r | nums[r] | curr | l | curr > k | Action               | ans
@@ -54,10 +55,10 @@ r | nums[r] | curr | l | curr > k | Action               | ans
   |         | 7    | 2 | No       | ans=max(4,4-2+1)=4   | 4
 5 | 2       | 9    | 2 | Yes      | curr-=nums[2]=9-1=8  | 4
   |         | 8    | 3 | No       | ans=max(4,5-3+1)=4   | 4
-# Final: 4 ([1, 2, 1, 2])
+Final: 4 ([1, 2, 1, 2])
 
 
-Overview for Each Iteration
+Simple Overview for Each Iteration
 Input: nums = [1, 2, 1, 2, 4, 2], k = 8
 Step: Find longest subarray with sum <= k using sliding window
 r | nums[r] | curr | l | curr > k | ans
@@ -71,21 +72,57 @@ r | nums[r] | curr | l | curr > k | ans
   |         | 7    | 2 | No       | 4
 5 | 2       | 9    | 2 | Yes      | 4
   |         | 8    | 3 | No       | 4
-# Final: 4 ([1, 2, 1, 2])
+Final: 4 ([1, 2, 1, 2])
 
 
 
-# ––––––––––––––––––––––––––––––––––––––––––––––––
-Q: Why use for right in range(len(nums)) instead of for right in len(nums)?
+Most IMPORTANT thing to Understand:
+    • We want the longest stretch of numbers where the sum ≤ k.
 
-# for right in range(len(nums)):
-    # Iterates over indices (0 to len(nums)-1).
-    # Enables accessing array elements via nums[right].
+    • Use a sliding window: expand with right, shrink with left when sum goes over k.
 
-# for right in len(nums):
-    # Invalid syntax.
-    # len(nums) is a single integer, not an iterable.
+    • Condition: whenever curr <= k, the window [left..right] is valid.
 
+Why this code Works:
+    • No hash map needed — just track current window sum (curr).
+
+    • Sliding window idea: add the new element on the right, and if sum is too big, subtract elements from the left until valid.
+
+    • Efficiency: each number is added once and removed once → O(n) total.
+
+    • Intuition: like pouring water into a glass — if it overflows (sum > k), you pour some out from the left until it fits again.
+
+TLDR:
+    • This works because we grow a window until the sum breaks the rule, then shrink it until valid again, always keeping track of the longest valid window.
+
+    
+Quick Example Walkthrough:
+nums = [1, 2, 1, 2, 4, 2], k = 8
+
+    Start: left=0, curr=0, ans=0.
+    Right=0 → curr=1 ≤ 8 → ans=1.
+    Right=1 → curr=3 ≤ 8 → ans=2.
+    Right=2 → curr=4 ≤ 8 → ans=3.
+    Right=3 → curr=6 ≤ 8 → ans=4.
+    
+    Right=4 → curr=10 > 8 → shrink: subtract 1 (curr=9), subtract 2 (curr=7). Valid again, ans stays 4.
+   
+    Right=5 → curr=9 > 8 → subtract 1 → curr=8, valid, ans=4.
+
+Final Answer: 4 → longest subarray is [1, 2, 1, 2] or [2, 1, 2, 1].
+
+
+
+
+Q: Why use for right in range(len(nums)) and not for right in len(nums) ?
+
+    • for right in range(len(nums)):
+        Iterates over indices (0 to len(nums)-1).
+        Enables accessing array elements via nums[right].
+
+    • for right in len(nums):
+        Invalid syntax.
+        len(nums) is a single integer, not an iterable.
 
 """
 
@@ -214,7 +251,8 @@ def longest_subarray_sum(nums, k):  # Example: nums = [1, 2, 1, 2, 4, 2], k = 6
 
 
 nums = [1, 2, 1, 2, 4, 2]
-print(longest_subarray_sum(nums, 6))  # Output: 4
+k = 6
+print(longest_subarray_sum(nums, k))  # Output: 4
 
 
 
@@ -239,21 +277,24 @@ def longest_subarray_sum(nums, k):
     return ans
 
 nums = [1, 2, 3]
-print(longest_subarray_sum(nums, 5))
+k = 5
+print(longest_subarray_sum(nums, k))
 # Output: 2  --> Subarray [2, 3] (length 2, sum 5) is the longest subarray with sum <= 6.
 
 
-# Overview for Each Iteration
-# Input: nums = [1, 2, 3], k = 5
-# Step: Find longest subarray with sum <= k using sliding window
-# r | nums[r] | curr | l | curr > k | ans
-# - | -       | 0    | 0 | -        | 0
-# 0 | 1       | 1    | 0 | No       | 1
-# 1 | 2       | 3    | 0 | No       | 2
-# 2 | 3       | 6    | 1 | Yes      | 2
-#   |         | 5    | 2 | No       | 2
-# Final: 2 ([2, 3])
+"""
+Overview for Each Iteration
+Input: nums = [1, 2, 3], k = 5
+Step: Find longest subarray with sum <= k using sliding window
+r | nums[r] | curr | l | curr > k | ans
+- | -       | 0    | 0 | -        | 0
+0 | 1       | 1    | 0 | No       | 1
+1 | 2       | 3    | 0 | No       | 2
+2 | 3       | 6    | 1 | Yes      | 2
+  |         | 5    | 2 | No       | 2
+Final: 2 ([2, 3])
 
+"""
 
 
 # ––––––––––––––––––––––––––––––––––––––––––––––––
@@ -270,25 +311,28 @@ def longest_subarray_sum(nums, k):
         while curr >= k:
             curr -= nums[l]
 
-        l += 1
+        l += 1  # Error, should be inside while loop
 
         ans = max(ans, r - l + 1)
     
     return ans
 
 nums = [1, 2, 3]
-print(longest_subarray_sum(nums, 5))
+k = 5
+print(longest_subarray_sum(nums, k))
 # Output: 0
 
 
-# Overview for Each Iteration
-# Input: nums = [1, 2, 3], k = 5
-# Step: Find longest subarray with sum <= k using sliding window
-# r | nums[r] | curr | l | curr >= k | ans
-# - | -       | 0    | 0 | -         | 0
-# 0 | 1       | 1    | 1 | No        | 0
-# 1 | 2       | 3    | 2 | No        | 0
-# 2 | 3       | 6    | 2 | Yes       | 0
-#   |         | 3    | 3 | No        | 0
-# Final: 0
+"""
+Overview for Each Iteration
+Input: nums = [1, 2, 3], k = 5
+Step: Find longest subarray with sum <= k using sliding window
+r | nums[r] | curr | l | curr >= k | ans
+- | -       | 0    | 0 | -         | 0
+0 | 1       | 1    | 1 | No        | 0
+1 | 2       | 3    | 2 | No        | 0
+2 | 3       | 6    | 2 | Yes       | 0
+  |         | 3    | 3 | No        | 0
+Final: 0
 
+"""
