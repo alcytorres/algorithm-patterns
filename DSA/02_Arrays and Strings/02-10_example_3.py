@@ -1,10 +1,10 @@
-# Example 3: 713. Number of Subarrays with Product Less Than k
+# Example 3: 713. Subarray Product Less Than K
 
-# Counts subarrays where product of elements is strictly less than k.
+# Counts subarrays where product of all elements is strictly less than k.
 
 # Example
-# nums = [2, 3], k = 7
-# Output: 3 --> [2], [2, 3], [3]
+    # nums = [2, 3], k = 7
+    # Output: 3 --> [2], [2, 3], [3]
 
 # Solution: https://leetcode.com/problems/subarray-product-less-than-k/
 
