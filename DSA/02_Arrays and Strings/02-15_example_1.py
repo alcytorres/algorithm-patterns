@@ -43,6 +43,7 @@ print(answer_queries(nums, queries, limit))
 # - If we exclude the output array, extra working space is O(n) due to the prefix sum array.
 
 
+"""
 # Overview for Each Iteration
 # Input: nums = [1, 6, 3, 2, 7, 2], queries = [[0, 3], [2, 5], [2, 4]], limit = 13
 # Step 1: Build prefix sum array
@@ -63,8 +64,7 @@ print(answer_queries(nums, queries, limit))
 
 
 
-# ––––––––––––––––––––––––––––––––––––––––––––––
-"""
+
 Q: Why do we use curr = prefix[y] - prefix[x] + nums[x]?
     •	prefix[i] stores the sum from index 0 to i.
     •	prefix[y] - prefix[x] removes everything up to index x, so it gives the sum from x+1 to y.

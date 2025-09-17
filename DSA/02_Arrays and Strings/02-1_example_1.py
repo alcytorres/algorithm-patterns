@@ -1,7 +1,9 @@
 # Check if a String is a Palindrome
+
 # Example 1: Given a string s, return true if it is a palindrome, false otherwise.
 
 # Checks if string s is a palindrome by comparing characters from both ends.
+
 def is_palindrome(s):
     left = 0                    
     right = len(s) - 1          
@@ -14,7 +16,8 @@ def is_palindrome(s):
 
     return True                
 
-print(is_palindrome("racecar"))  # Output: True
+print(is_palindrome("racecar"))  
+# Output: True
 
 # Time: O(n)
 # - Two pointers (left, right) each move toward the center once.
@@ -27,11 +30,22 @@ print(is_palindrome("racecar"))  # Output: True
 # - Overall: O(1) space.
 
 
-# Trace Overview
-# left  = 0  1  2  3
-# right = 6  5  4  3
+"""
+# Overview for Each Iteration
+# Input: s = "racecar"
+# Step: Check if string is a palindrome using two pointers
+# l | r | s[l] | s[r] | l < r | Action      | Result
+# --|---|------|------|-------|-------------|--------
+# 0 | 6 | r    | r    | True  | l+=1, r-=1  | -
+# 1 | 5 | a    | a    | True  | l+=1, r-=1  | -
+# 2 | 4 | c    | c    | True  | l+=1, r-=1  | -
+# 3 | 3 | e    | e    | False | Exit loop   | True
+# Final: True
 
-# ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+"""
+
+
+# ––––––––––––––––––––––––––––––––––––––––––––––––––
 # Breakdown
 
 def is_palindrome(s):
@@ -48,7 +62,7 @@ def is_palindrome(s):
 
 
 
-# ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+# ––––––––––––––––––––––––––––––––––––––––––––––––––
 # Task: Check if a string is a palindrome (reads the same forward and backward).
 # Example: s = "racecar" → Output = True (same when reversed)
 # Why: Practices two-pointer technique to efficiently compare characters from both ends.

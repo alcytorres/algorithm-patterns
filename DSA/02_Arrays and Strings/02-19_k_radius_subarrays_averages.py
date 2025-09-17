@@ -16,7 +16,7 @@ def getAverages(nums, k):
     curr = 0
 
 # Handle case where window can't fit in array
-    if (n < window_size):
+    if n < window_size:
         return ans
  
 # Calculate sum of the first full window 
