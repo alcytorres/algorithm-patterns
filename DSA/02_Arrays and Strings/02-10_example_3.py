@@ -48,18 +48,74 @@ print(num_subarrays_product_less_than_k(nums, k))
 # - Overall: O(1) space.
 
 
-# Overview for Each Iteration
-# Input: nums = [10, 5, 2, 6], k = 100
-# Step: Count subarrays with product < k using sliding window
-# r | nums[r] | curr | l | curr >= k | Action                     | ans
-# - | -       | 1    | 0 | -         | -                          | 0
-# 0 | 10      | 10   | 0 | No        | ans+=0-0+1=1               | 1
-# 1 | 5       | 50   | 0 | No        | ans+=1-0+1=2               | 3
-# 2 | 2       | 100  | 0 | Yes       | curr//=nums[0]=100//10=10  | 3
-#   |         | 10   | 1 | No        | ans+=2-1+1=2               | 5
-# 3 | 6       | 60   | 1 | No        | ans+=3-1+1=3               | 8
-# Final: 8 ([10], [5], [5, 2], [2], [2, 6], [6], [10, 5], [5, 2, 6])
+"""
+Overview for Each Iteration
+Input: nums = [10, 5, 2, 6], k = 100
+Step: Count subarrays with product < k using sliding window
+r | nums[r] | curr | l | curr >= k | Action                    | ans
+- | -       | 1    | 0 | -         | -                         | 0
+0 | 10      | 10   | 0 | No        | ans+=0-0+1=1              | 1
+1 | 5       | 50   | 0 | No        | ans+=1-0+1=2              | 3
+2 | 2       | 100  | 0 | Yes       | curr//=nums[0]=100//10=10 | 3
+  |         | 10   | 1 | No        | ans+=2-1+1=2              | 5
+3 | 6       | 60   | 1 | No        | ans+=3-1+1=3              | 8
+Final: 8 ([10], [5], [5, 2], [2], [2, 6], [6], [10, 5], [5, 2, 6])
 
+
+
+
+Most IMPORTANT thing to Understand:
+    We want to count all subarrays where the product of numbers is < k.
+
+    Use two pointers (left and right) to keep a sliding window. The product curr is the product of everything inside the window.
+
+    Key rule: if curr < k, then all subarrays ending at right are valid → count them in one step.
+
+    
+Why this code Works:
+    • Hash map not needed — we just keep a running product curr.
+
+    • Sliding window: multiply in the new number at right; while product is too big (≥ k), shrink from left until it's valid.
+
+    • Counting trick: once valid, add right - left + 1 (all tails ending at right are guaranteed valid).
+
+    • Efficiency: each number is multiplied in and divided out at most once → O(n) time, O(1) space.
+
+    • Intuition: like stretching a rubber band (window). If it's too tight (product too big), loosen it from the left until it fits.
+
+    
+TLDR
+    • Grow the window with right; shrink from left if product ≥ k; every valid window adds right - left + 1 new subarrays.
+
+
+Quick Example Walkthrough:
+    nums = [10, 5, 2, 6], k = 100
+
+    Start: left=0, curr=1, ans=0
+
+    right=0 → curr=10 (<100) → add 0-0+1=1 → ans=1 ([10])
+
+    right=1 → curr=50 (<100) → add 1-0+1=2 → ans=3 ([10,5], [5])
+
+    right=2 → curr=100 (≥100) → shrink: divide by 10 → curr=10, left=1 → now valid → add 2-1+1=2 → ans=5 ([5,2], [2])
+
+    right=3 → curr=60 (<100) → add 3-1+1=3 → ans=8 ([5,2,6], [2,6], [6])
+
+Final Answer: 8
+
+
+
+
+Q: Why does left += 1 occur inside the if curr >= k: condition?
+    • Only adjust when product is too big (curr >= k)
+
+    • Divide out nums[left] to drop the leftmost element.
+    
+    • Move left forward to shrink the window.
+    
+    • Ensures the window's product stays < k so all valid subarrays are counted.
+
+"""
 
 
 # ––––––––––––––––––––––––––––––––––––––––––––––––––
@@ -85,9 +141,6 @@ curr //= nums[2]   # Remove nums[2] (5), curr = 20 / 5
 print("After curr //= nums[2]:", curr)  # Output: 1.0
 
 
-# ––––––––––––––––––––––––––––––––––––––––––––––––––
-# Why is left += 1 inside of if curr >= k:?
-    # left += 1 is inside if curr >= k: to slide the window only when the product exceeds k, ensuring the window stays valid by removing the leftmost element only when needed.
 
 # ––––––––––––––––––––––––––––––––––––––––––––––––––
 # Breakdown
@@ -109,6 +162,7 @@ def num_subarrays_product_less_than_k(nums, k):
         ans += right - left + 1  # Add number of valid subarrays ending at right
     
     return ans  # Returns the count of valid subarrays
+
 
 
 # ––––––––––––––––––––––––––––––––––––––––––––––––––

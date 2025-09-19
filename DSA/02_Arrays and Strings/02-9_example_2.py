@@ -36,11 +36,28 @@ print(longest_substring_one_zero("11001011"))
 
 
 
-# Trace Steps
-# right = 0    1  2  3      4  5    6  7 
-# curr  = 0       1  2 1       2 1
-# ans   = 0 1  2  3      3  3    3  3  4
-# left  = 0          1 2 3       4  
+"""
+Overview for Each Iteration
+Input: s = "11001011"
+Step: Find longest substring with at most one "0" using sliding window
+r   | s[r] | curr | curr > 1 | l  | s[l] | Action              | ans
+----|------|------|----------|----|------|---------------------|----
+0   | 1    | 0    | No       | 0  | -    | ans=max(0,0-0+1)=1  | 1
+1   | 1    | 0    | No       | 0  | -    | ans=max(1,1-0+1)=2  | 2
+2   | 0    | 1    | No       | 0  | -    | ans=max(2,2-0+1)=3  | 3
+3   | 0    | 2    | Yes      | 0  | 1    | l+=1                | 3
+    |      | 2    | Yes      | 1  | 1    | l+=1                | 3
+    |      | 2    | Yes      | 2  | 0    | curr-=1, l+=1       | 3
+    |      | 1    | No       | 3  | -    | ans=max(3,3-3+1)=3  | 3
+4   | 1    | 1    | No       | 3  | -    | ans=max(3,4-3+1)=3  | 3
+5   | 0    | 2    | Yes      | 3  | 0    | curr-=1, l+=1       | 3
+    |      | 1    | No       | 4  | -    | ans=max(3,5-4+1)=3  | 3
+6   | 1    | 1    | No       | 4  | -    | ans=max(3,6-4+1)=3  | 3
+7   | 1    | 1    | No       | 4  | -    | ans=max(3,7-4+1)=4  | 4
+Final: 4 ("1011")
+
+"""
+
 
 
 # ––––––––––––––––––––––––––––––––––––––––––––––––––
