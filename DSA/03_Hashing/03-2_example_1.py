@@ -14,8 +14,12 @@
 
 # Solution: https://leetcode.com/problems/two-sum/description/
 
+# ––––––––––––––––––––––––––––––––––––––––––––––––
+# Index-First Dictionary Approach
+
 def twoSum(nums, target):
     d = {}
+
     for i in range(len(nums)):
         num = nums[i]
         diff = target - num
@@ -44,17 +48,22 @@ print(twoSum(nums, target))
 # - If we exclude the dictionary from consideration (not typical here since it's part of the algorithm), extra space is O(1).
 
 
-# Overview for Each Iteration
-# Input: nums = [3, 1, 7, 4, -6], target = 5
-# Step: Find indices of two numbers summing to target
-# i  | num | diff (target - num) | d                  | Action
-# 0  | 3   | 2 (5 - 3)           | {3: 0}             | Store 3 at index 0
-# 1  | 1   | 4 (5 - 1)           | {3: 0, 1: 1}       | Store 1 at index 1
-# 2  | 7   | -2 (5 - 7)          | {3: 0, 1: 1, 7: 2} | Store 7 at index 2
-# 3  | 4   | 1 (5 - 4)           | {3: 0, 1: 1, 7: 2} | Found 1 in d, return [3, 1]
-# Final: [3, 1] (nums[1] + nums[3] = 1 + 4 = 5)
+"""
+Overview for Each Iteration
+Input: nums = [3, 1, 7, 4, -6], target = 5
+Step: Find indices of two numbers summing to target
+i   | num  | diff (target - num) | d                 | Action
+----|------|---------------------|-------------------|----------------
+0   | 3    | 2 (5 - 3)          | {3: 0}             | Store 3 at index 0
+1   | 1    | 4 (5 - 1)          | {3: 0, 1: 1}       | Store 1 at index 1
+2   | 7    | -2 (5 - 7)         | {3: 0, 1: 1, 7: 2} | Store 7 at index 2
+3   | 4    | 1 (5 - 4)          | {3: 0, 1: 1, 7: 2} | Found 1 in d, return [3, 1]
+Final: [3, 1] (nums[1] + nums[3] = 1 + 4 = 5)
 
-# As soon as a difference matches a num you found the answer. In this case that difference is 1. 
+As soon as a difference matches a num you found the answer. In this case that difference is 1. 
+
+"""
+
 
 
 # ––––––––––––––––––––––––––––––––––––––––––––––––
@@ -71,6 +80,32 @@ def twoSum(nums, target):
         d[num] = i             # Store current number and its index in dictionary
         
     return []                  # Return empty list if no solution found
+
+
+
+# ––––––––––––––––––––––––––––––––––––––––––––––––
+# Enumerate-Based One-Pass Hash Map Solution
+
+def twoSum(nums, target):
+    d = {}
+
+    for i, num in enumerate(nums):
+        diff = target - num
+
+        if diff in d:   # O(1) check
+            return [d[diff], i]
+        d[num] = i      # Store number and index
+
+    return []
+
+nums = [3, 1, 7, 4, -6]
+target = 5
+print(twoSum(nums, target))  
+# Output: [3, 1]
+
+# Time: O(n) - Single pass through n elements with O(1) hash operations.
+# Space: O(n) - Stores up to n elements in the hash map.
+
 
 
 
@@ -147,26 +182,3 @@ print(twoSum(nums, target))  # Output: [3, 1]
 
 
 
-
-# ––––––––––––––––––––––––––––––––––––––––––––––––
-# Alternative One-Pass Hash Table Solution
-
-def twoSum(nums, target):
-    d = {}
-
-    for i, num in enumerate(nums):
-        diff = target - num
-
-        if diff in d:   # O(1) check
-            return [d[diff], i]
-        d[num] = i      # Store number and index
-
-    return []
-
-nums = [3, 1, 7, 4, -6]
-target = 5
-print(twoSum(nums, target))  
-# Output: [3, 1]
-
-# Time: O(n) - Single pass through n elements with O(1) hash operations.
-# Space: O(n) - Stores up to n elements in the hash map.
