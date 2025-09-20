@@ -16,7 +16,7 @@ def runningSum(nums):
 
 nums = [1, 2, 3, 4, 5]
 print(runningSum(nums))
-# Output: [1, 3, 6, 10]
+# Output: [1, 3, 6, 10, 15]
 
 # Time: O(n)
 # - Loop through nums once to build the prefix sum array: O(n).

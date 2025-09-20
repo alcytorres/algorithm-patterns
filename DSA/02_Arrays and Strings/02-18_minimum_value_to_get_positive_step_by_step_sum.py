@@ -10,19 +10,25 @@
 
 # Video https://www.youtube.com/watch?v=QgRZcbYboxg
 
-# Example
+# Example 1
     # Input: nums = [-3, 2, -3, 4, 2]
     # Output: 5
     # Step-by-step sum: startValue + nums[i]
     # Track minimum running total: [-3, -1, -4, 0, 2] (min = -4)
     # Minimum startValue to keep sum ≥ 1: -(-4) + 1 = 5
 
+# Example 2
+    # Input: nums = [3, 2, 1]
+    # Output: 1
+
+# Example 3
+    # Input: nums = [-1, -2, -3]
+    # Output: 7
+
 def minStartValue(nums):
-    # We use "total" for current step-by-step total, "min_val" for minimum 
     min_val = 0
     total = 0
 
-    # Iterate over the array and get the minimum step-by-step total.
     for num in nums:
         total += num
         min_val = min(min_val, total)
@@ -43,17 +49,60 @@ print(minStartValue(nums))
 # - Overall: O(1) space.
 
 
-# Overview for Each Iteration
-# Input: nums = [-3, 2, -3, 4, 2]
-# Step: Calculate step-by-step sum and track minimum total
-# i  | num | total | min_val
-# -  | -   | 0     | 0
-# 0  | -3  | -3    | -3 (min(0, -3))
-# 1  | 2   | -1    | -3 (min(-3, -1))
-# 2  | -3  | -4    | -4 (min(-3, -4))
-# 3  | 4   | 0     | -4 (min(-4, 0))
-# 4  | 2   | 2     | -4 (min(-4, 2))
-# Final: -(-4) + 1 = 5
+"""
+Overview for Each Iteration
+Input: nums = [-3, 2, -3, 4, 2]
+Step: Calculate step-by-step sum and track minimum total
+i   | num  | total | min_val
+----|------|-------|-----------------
+-   | -    | 0     | 0
+0   | -3   | -3    | -3 (min(0, -3))
+1   | 2    | -1    | -3 (min(-3, -1))
+2   | -3   | -4    | -4 (min(-3, -4))
+3   | 4    | 0     | -4 (min(-4, 0))
+4   | 2    | 2     | -4 (min(-4, 2))
+Final: -(-4) + 1 = 5
+
+
+
+Most IMPORTANT thing to Understand:
+    We track the running total as we move through the array.
+
+    If the running total ever dips too low, we'll need a higher starting value to keep it ≥ 1.
+
+    The answer comes from the lowest point (minimum running total) we reach.
+
+    
+Why this code Works:
+    total tracks the running sum.
+
+    min_val records the lowest total ever goes.
+
+    If min_val is negative, we need to offset it so the lowest point becomes 1 → formula: -min_val + 1.
+
+    Efficiency: one pass through the array, O(n) time, O(1) space.
+
+    Intuition: It's like walking on uneven ground — you add a “boost” at the start so your lowest dip is still above level 1.
+
+    
+TLDR
+    • Keep a running sum, track its lowest dip, then return 1 - min_val to keep the sum always ≥ 1.
+
+    
+Quick Example Walkthrough:
+nums = [-3, 2, -3, 4, 2]
+
+    Start: total=0, min_val=0
+    Add -3 → total=-3, min_val=-3
+    Add +2 → total=-1, min_val=-3
+    Add -3 → total=-4, min_val=-4
+    Add +4 → total=0, min_val=-4
+    Add +2 → total=2, min_val=-4
+    Lowest dip = -4 → need -(-4)+1 = 5.
+
+Final Answer: 5
+
+"""
 
 
 
@@ -74,6 +123,42 @@ def minStartValue(nums):
 
     # We have to change the minimum step-by-step total to 1, by increasing the startValue from 0 to -min_val + 1, which is just the minimum startValue we want.
     return -min_val + 1
+
+
+
+# –––––––––––––––––––––––––––––––––––––––––––––––––––––––
+# Best Solution
+
+def minStartValue(nums):
+    total = 0
+    min_val = 0
+
+    for num in nums:
+        total += num
+        min_val = min(min_val, total)
+    
+    return -min_val + 1
+
+nums = [3, 2, 1]
+print(minStartValue(nums))
+# Output: 1
+
+
+
+def minStartValue(nums):
+    total = 0
+    min_val = 0
+
+    for num in nums:
+        total += num
+        min_val = min(min_val, total)
+    
+    return -min_val + 1
+
+nums = [-1, -2, -3]
+print(minStartValue(nums))
+# Output: 7
+
 
 
 
@@ -175,6 +260,3 @@ def minStartValue(nums):
             return start_value
         else:
             start_value += 1
-
-
-
