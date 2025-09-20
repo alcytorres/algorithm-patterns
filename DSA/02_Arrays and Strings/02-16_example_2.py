@@ -44,6 +44,8 @@ print(waysToSplitArray(nums))
 # - If we exclude the prefix sum array, extra working space is O(1).
 
 
+
+"""
 # Overview for Each Iteration
 # Input: nums = [10, 4, -8, 7]
 # Step 1: Build prefix sum array
@@ -62,8 +64,7 @@ print(waysToSplitArray(nums))
 
 
 
-# ––––––––––––––––––––––––––––––––––––––––––––––
-"""
+
 Q: How do we determine the number of valid splits in nums = [10, 4, -8, 7]?
 	•	Split at i = 0 → left [10] = 10, right [4, -8, 7] = 3 → 10 ≥ 3 → valid.
 	•	Split at i = 1 → left [10, 4] = 14, right [-8, 7] = -1 → 14 ≥ -1 → valid.
@@ -89,6 +90,7 @@ def waysToSplitArray(nums):
 nums = [10, 4, -8, 7]  # -> [10, 14, 6, 13]
 print(waysToSplitArray(nums))
 # Output: 2
+
 
 
 

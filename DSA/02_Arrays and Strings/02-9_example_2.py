@@ -20,7 +20,8 @@ def longest_substring_one_zero(s):
     
     return ans
 
-print(longest_substring_one_zero("11001011"))  
+s = "11001011"
+print(longest_substring_one_zero(s))  
 # Output: 4  --> Substring "1011" (length 4, one "0") is the longest with at most one "0".
 
 # Time: O(n)
@@ -221,5 +222,7 @@ def longest_substring_one_zero(s):  # Example: s = "11001011"
     return ans  # ans = 4
 
 
-print(longest_substring_one_zero("11001011"))  # Output: 4 
+s = "11001011"
+print(longest_substring_one_zero(s))  
+# Output: 4 
 # Substring "1011" (length 4, one "0") is the longest with at most one "0".

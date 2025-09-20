@@ -3,7 +3,7 @@
 # Given a binary array nums and an integer k, return the maximum number of consecutive 1's in the array if you can flip at most k 0's.
 
 # Example:
-    # Input: nums = [1,1,1,0,0,0,1,1,1,1,0], k = 2
+    # Input: nums = [1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 0], k = 2
     # Output: 6
     # Explanation: nums[5] and nums[10] were flipped from 0 to 1. We are left with [1, 1, 1, 1, 1, 1] 
 
@@ -42,37 +42,78 @@ print(longestOnes(nums, k))
 # - Overall: O(1) space.
 
 
+"""
+Overview for Each Iteration
+Input: nums = [1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 0], k = 2
+Step: Find max consecutive 1's with at most k flips using sliding window
+r | nums[r] | curr | curr > k | l | nums[l] | Action              | ans
+- | -       | 0    | -        | 0 | -       | -                   | 0
+0 | 1       | 0    | No       | 0 | -       | ans=max(0,0-0+1)=1  | 1
+1 | 1       | 0    | No       | 0 | -       | ans=max(1,1-0+1)=2  | 2
+2 | 1       | 0    | No       | 0 | -       | ans=max(2,2-0+1)=3  | 3
+3 | 0       | 1    | No       | 0 | -       | ans=max(3,3-0+1)=4  | 4
+4 | 0       | 2    | No       | 0 | -       | ans=max(4,4-0+1)=5  | 5
+5 | 0       | 3    | Yes      | 0 | 1       | l+=1                | 5
+  |         | 3    | Yes      | 1 | 1       | l+=1                | 5
+  |         | 3    | Yes      | 2 | 1       | l+=1                | 5
+  |         | 3    | Yes      | 3 | 0       | curr-=1, l+=1       | 5
+  |         | 2    | No       | 4 | -       | ans=max(5,5-4+1)=5  | 5
+6 | 1       | 2    | No       | 4 | -       | ans=max(5,6-4+1)=5  | 5
+7 | 1       | 2    | No       | 4 | -       | ans=max(5,7-4+1)=5  | 5
+8 | 1       | 2    | No       | 4 | -       | ans=max(5,8-4+1)=5  | 5
+9 | 1       | 2    | No       | 4 | -       | ans=max(6,9-4+1)=6  | 6
+10| 0       | 3    | Yes      | 4 | 0       | curr-=1, l+=1       | 6
+  |         | 2    | No       | 5 | -       | ans=max(6,10-5+1)=6 | 6
+Final: 6
 
-# Overview for Each Iteration
-# Input: nums = [1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 0], k = 2
-# Step: Find max consecutive 1's with at most k flips using sliding window
-# r | nums[r] | curr | curr > k | l | nums[l] | Action              | ans
-# - | -       | 0    | -        | 0 | -       | -                   | 0
-# 0 | 1       | 0    | No       | 0 | -       | ans=max(0,0-0+1)=1  | 1
-# 1 | 1       | 0    | No       | 0 | -       | ans=max(1,1-0+1)=2  | 2
-# 2 | 1       | 0    | No       | 0 | -       | ans=max(2,2-0+1)=3  | 3
-# 3 | 0       | 1    | No       | 0 | -       | ans=max(3,3-0+1)=4  | 4
-# 4 | 0       | 2    | No       | 0 | -       | ans=max(4,4-0+1)=5  | 5
-# 5 | 0       | 3    | Yes      | 0 | 1       | l+=1                | 5
-#   |         | 3    | Yes      | 1 | 1       | l+=1                | 5
-#   |         | 3    | Yes      | 2 | 1       | l+=1                | 5
-#   |         | 3    | Yes      | 3 | 0       | curr-=1, l+=1       | 5
-#   |         | 2    | No       | 4 | -       | ans=max(5,5-4+1)=5  | 5
-# 6 | 1       | 2    | No       | 4 | -       | ans=max(5,6-4+1)=5  | 5
-# 7 | 1       | 2    | No       | 4 | -       | ans=max(5,7-4+1)=5  | 5
-# 8 | 1       | 2    | No       | 4 | -       | ans=max(5,8-4+1)=5  | 5
-# 9 | 1       | 2    | No       | 4 | -       | ans=max(6,9-4+1)=6  | 6
-# 10| 0       | 3    | Yes      | 4 | 0       | curr-=1, l+=1       | 6
-#   |         | 2    | No       | 5 | -       | ans=max(6,10-5+1)=6 | 6
-# Final: 6
 
 
-# ––––––––––––––––––––––––––––––––––––––––––––––
-# Which subarray of length 6 is the final answer?
-    #  Both [4..9] (flip nums[4] & nums[5]) and [5..10] (flip nums[5] & nums[10]) give a streak of 6 ones.
-    #  LeetCode’s official explanation shows [5..10] as the answer (flipping nums[5] and nums[10]).
-	#  The algorithm only returns the max length (6), not which subarray produced it.
+Most IMPORTANT thing to Understand:
+    • We want the longest stretch of 1s, but we can flip at most k zeros into 1s.
 
+    • We use a sliding window: expand with right, shrink with left if too many zeros are inside.
+
+    • The current window is always valid (≤ k zeros), and we track the maximum length.
+
+    
+Why this code Works:
+    • curr: counts how many zeros are in the current window.
+
+    • Sliding window: grow window by moving right; if curr > k, shrink window from the left until valid.
+
+    • Efficiency: each element is added/removed once → O(n) time, O(1) space.
+
+    • Intuition: Like stretching a rubber band over the array — expand until it breaks the “≤ k zeros” rule, then pull in the left side to fix it.
+
+    
+TLDR
+    • Keep a window with at most k zeros. Expand right, shrink left if needed. Track the largest valid window size.
+
+    
+Quick Example Walkthrough:
+    nums = [1,1,1,0,0,0,1,1,1,1,0], k = 2
+
+    Step 1: Expand → [1,1,1,0,0], zeros = 2 → window length = 5.
+
+    Step 2: Add next 0 → zeros = 3 → shrink left until zeros = 2.
+
+    Step 3: Expand with [1,1,1,1] → zeros = 2 → window length = 6 (best).
+
+    Step 4: Add final 0 → zeros = 3 → shrink again, still best = 6.
+
+Final Answer: 6 (subarray [1,1,1,1,1,1]).
+
+
+
+
+Q: Which subarray of length 6 is the final answer?
+    • Both [4..9] (flip nums[4] & nums[5]) and [5..10] (flip nums[5] & nums[10]) give a streak of 6 ones.
+
+    • LeetCode's official explanation shows [5..10] as the answer (flipping nums[5] and nums[10]).
+
+	• The algorithm only returns the max length (6), not which subarray produced it.
+
+"""
 
 
 # ––––––––––––––––––––––––––––––––––––––––––––––

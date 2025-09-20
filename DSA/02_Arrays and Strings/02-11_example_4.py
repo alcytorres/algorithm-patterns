@@ -37,21 +37,58 @@ print(find_best_subarray(nums, k))
 # - Overall: O(1) space.
 
 """
-# Overview for Each Iteration
-# Input: nums = [1, 4, 6, 2], k = 2
-# Step 1: Calculate initial sum for first window of size k
-# i | curr    | ans
-# - | 0       | -
-# 0 | 1       | -
-# 1 | 5 (1+4) | 5
+Overview for Each Iteration
+Input: nums = [1, 4, 6, 2], k = 2
+Step 1: Calculate initial sum for first window of size k
+i | curr    | ans
+- | 0       | -
+0 | 1       | -
+1 | 5 (1+4) | 5
 
-# Step 2: Slide window, maintaining size k
-# i | curr       | nums[i] | nums[i-k] | ans
-# 2 | 10 (5+6-1) | 6       | 1         | 10 (max(5, 10))
-# 3 | 8 (10+2-4) | 2       | 4         | 10 (max(10, 8))
-# Final: 10 ([4, 6])
+Step 2: Slide window, maintaining size k
+i | curr       | nums[i] | nums[i-k] | ans
+2 | 10 (5+6-1) | 6       | 1         | 10 (max(5, 10))
+3 | 8 (10+2-4) | 2       | 4         | 10 (max(10, 8))
+Final: 10 ([4, 6])
+
+
+
+Most IMPORTANT thing to Understand:
+    • We want the maximum sum of any subarray of size k.
+
+    • Instead of recalculating sums every time, we keep a running sum of the current window of size k.
+
+    • When we slide the window forward, subtract the element leaving and add the new one coming in.
+
+    
+Why this code Works:
+    • Running sum curr tracks the sum of the current window.
+
+    • Sliding window: update sum in O(1) per step by adding the new element and removing the old one.
+
+    • Efficiency: avoids recomputing each window in O(k). Total time = O(n), space = O(1).
+
+    • Intuition: Like moving a window over text — you don’t reread all letters, just swap one out and add one in.
+
+    
+TLDR
+    • Keep a rolling sum of size k, slide it across the array, and track the maximum.
+
+    
+Quick Example Walkthrough:
+    nums = [1, 4, 6, 2], k = 2
+
+    Step 1: First window = [1,4], sum = 5 → ans=5
+
+    Step 2: Slide to [4,6], update sum = 5 - 1 + 6 = 10 → ans=10
+
+    Step 3: Slide to [6,2], update sum = 10 - 4 + 2 = 8 → ans=10
+
+Final Answer: 10 (best subarray is [4,6])
 
 """
+
+
 
 # –––––––––––––––––––––––––––––––––––––––––––––––––––
 # Breakdown 
@@ -70,6 +107,7 @@ def find_best_subarray(nums, k):
         ans = max(ans, curr)  # Update max sum
     
     return ans  # Returns the maximum sum
+
 
 
 # –––––––––––––––––––––––––––––––––––––––––––––––––––
