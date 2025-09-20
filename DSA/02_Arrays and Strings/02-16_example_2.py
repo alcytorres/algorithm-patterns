@@ -11,6 +11,127 @@
     # i=1: left=14, right=-1 (14>=-1) valid
     # i=2: left=6, right=7 (6<7) invalid
 
+# ––––––––––––––––––––––––––––––––––––––––––––––
+# Best Solution: No array needed
+
+def waysToSplitArray(self):
+    total = sum(nums)
+    left = count = 0
+
+    n = len(nums)
+
+    for i in range(n - 1):   # Ensure right part non-empty
+        left += nums[i]
+        right = total - left
+
+        if left >= right:
+            count += 1
+
+    return count
+
+nums = [10, 4, -8, 7]  
+print(waysToSplitArray(nums))
+# Output: 2
+
+# Time: O(n)
+# - Compute total sum once: O(n).
+# - Loop through array once (n - 1 iterations), updating left and right sums in O(1) each step.
+# - Overall: O(n) time.
+
+# Space: O(1)
+# - Only a constant number of variables (total, l, r, count, i) are used.
+# - No additional data structures.
+# - Overall: O(1) space.
+
+"""
+Overview for Each Iteration
+Input: nums = [10, 4, -8, 7]
+Step 1: Compute total sum
+total = sum(nums) = 10 + 4 + (-8) + 7 = 13
+
+Step 2: Count valid splits where left sum >= right sum
+i   | nums[i] | l         | r (total - l) | l >= r | count
+----|---------|-----------|---------------|--------|-------
+0   | 10      | 10        | 3 (13 - 10)   | True   | 1
+1   | 4       | 14 (10+4) | -1 (13 - 14)  | True   | 2
+2   | -8      | 6 (14-8)  | 7 (13 - 6)    | False  | 2
+Final: 2
+
+
+Most IMPORTANT thing to Understand:
+    • We split the array into left and right parts.
+
+    • A split is valid if sum(left) >= sum(right).
+
+    • The right side must have at least one number → we stop at n-1.
+
+
+Why this code Works:
+
+    • total: total sum of all numbers.
+
+    • l: running sum of the left part.
+
+    • r: right sum = total - l.
+
+    • At each split, check if l >= r. If yes, count it.
+
+    • Efficiency: one pass, O(n) time, O(1) space.
+
+    • Intuition: Like walking through the array while carrying a “left bag.” At each step, compare your bag vs. the rest.
+
+
+TLDR
+    • Keep a running left sum, compute right as total - left, and count how many times left ≥ right.
+
+    
+Quick Example Walkthrough:
+nums = [10, 4, -8, 7]
+
+    Total = 13
+
+    i=0 → left=10, right=3 → valid ✅
+
+    i=1 → left=14, right=-1 → valid ✅
+
+    i=2 → left=6, right=7 → not valid ❌
+
+Final Answer: 2
+
+
+
+Q: How do we determine the number of valid splits in nums = [10, 4, -8, 7]?
+	•	Split at i = 0 → left [10] = 10, right [4, -8, 7] = 3 → 10 ≥ 3 → valid.
+
+	•	Split at i = 1 → left [10, 4] = 14, right [-8, 7] = -1 → 14 ≥ -1 → valid.
+
+	•	Split at i = 2 → left [10, 4, -8] = 6, right [7] = 7 → 6 < 7 → not valid.
+
+	•	✅ Total valid splits = 2.
+
+"""
+
+
+# ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+# Breakdown 
+def waysToSplitArray(nums):
+    total = sum(nums)         # Calculate total sum of array
+    left = count = 0          # Initialize left sum and valid split counter
+    n = len(nums)             # Length of array
+   
+    for i in range(n - 1):    # Iterate up to second-to-last index
+        left += nums[i]       # Add current number to left sum
+        right = total - left  # Calculate right sum
+        if left >= right:     # If left sum is at least as large as right sum
+            count += 1        # Increment valid split counter
+    
+    return count              # Return total number of valid splits
+
+
+
+# ––––––––––––––––––––––––––––––––––––––––––––––
+# Solution 2: Prefix Sum Array
+
 def waysToSplitArray(nums): 
     # Build prefix sum array
     prefix = [nums[0]]
@@ -19,11 +140,13 @@ def waysToSplitArray(nums):
 
     # Count valid splits where left sum >= right sum
     ans = 0
-    for i in range(len(nums) - 1):
-        left_section = prefix[i]
-        right_section = prefix[-1] - prefix[i]
+    n = len(nums)
 
-        if left_section >= right_section:
+    for i in range(n - 1):
+        left = prefix[i]
+        right = prefix[-1] - prefix[i]
+
+        if left >= right:
             ans += 1
     
     return ans
@@ -39,38 +162,52 @@ print(waysToSplitArray(nums))
 
 # Space: O(n)
 # - Prefix sum array stores n values: O(n) space.
-# - A few variables (i, ans, left_section, right_section) take O(1) space.
+# - A few variables (i, ans, left, right) take O(1) space.
 # - Overall: O(n) total space.
 # - If we exclude the prefix sum array, extra working space is O(1).
 
 
+"""
+Overview for Each Iteration
+Input: nums = [10, 4, -8, 7]
+Step 1: Build prefix sum array
+i  | nums[i] | prefix
+-  | -       | [10]
+1  | 4       | [10, 14]
+2  | -8      | [10, 14, 6]
+3  | 7       | [10, 14, 6, 13]
+
+Step 2: Count valid splits where left sum >= right sum
+i  | l  | r (prefix[-1] - prefix[i]) | left >= right | ans
+0  | 10 | 3 (13 - 10)                | True          | 1
+1  | 14 | -1 (13 - 14)               | True          | 2
+2  | 6  | 7 (13 - 6)                 | False         | 2
+Final: 2
+
 
 """
-# Overview for Each Iteration
-# Input: nums = [10, 4, -8, 7]
-# Step 1: Build prefix sum array
-# i  | nums[i] | prefix
-# -  | -       | [10]
-# 1  | 4       | [10, 14]
-# 2  | -8      | [10, 14, 6]
-# 3  | 7       | [10, 14, 6, 13]
-
-# Step 2: Count valid splits where left sum >= right sum
-# i  | left_section | right_section (prefix[-1] - prefix[i]) | left >= right | ans
-# 0  | 10           | 3 (13 - 10)                            | True          | 1
-# 1  | 14           | -1 (13 - 14)                           | True          | 2
-# 2  | 6            | 7 (13 - 6)                             | False         | 2
-# Final: 2
 
 
+# ––––––––––––––––––––––––––––––––––––––––––––––
+# Breakdown
+def waysToSplitArray(nums): 
+    prefix = [nums[0]]       # Initialize prefix with first element
+    for i in range(1, len(nums)):  # Iterate from index 1
+        prefix.append(prefix[-1] + nums[i])  # Add current element to previous sum
+    
+    ans = 0                  # Count of valid splits
+    for i in range(len(nums) - 1):  # Iterate up to second-to-last index
+        left = prefix[i]    # Sum of left section up to i
+        right = prefix[-1] - prefix[i]  # Sum of right section from i+1 to end
+        if left >= right:  # Check if left sum >= right sum
+            ans += 1         # Increment count for valid split
+    
+    return ans               # Return total number of ways
 
 
-Q: How do we determine the number of valid splits in nums = [10, 4, -8, 7]?
-	•	Split at i = 0 → left [10] = 10, right [4, -8, 7] = 3 → 10 ≥ 3 → valid.
-	•	Split at i = 1 → left [10, 4] = 14, right [-8, 7] = -1 → 14 ≥ -1 → valid.
-	•	Split at i = 2 → left [10, 4, -8] = 6, right [7] = 7 → 6 < 7 → not valid.
-	•	✅ Total valid splits = 2.
-"""
+
+
+
 
 # ––––––––––––––––––––––––––––––––––––––––––––––
 # Concise Solution I came up with while redoing this problem
@@ -90,46 +227,3 @@ def waysToSplitArray(nums):
 nums = [10, 4, -8, 7]  # -> [10, 14, 6, 13]
 print(waysToSplitArray(nums))
 # Output: 2
-
-
-
-
-# ––––––––––––––––––––––––––––––––––––––––––––––
-# Breakdown
-def waysToSplitArray(nums): 
-    prefix = [nums[0]]       # Initialize prefix with first element
-    for i in range(1, len(nums)):  # Iterate from index 1
-        prefix.append(prefix[-1] + nums[i])  # Add current element to previous sum
-    
-    ans = 0                  # Count of valid splits
-    for i in range(len(nums) - 1):  # Iterate up to second-to-last index
-        left_section = prefix[i]    # Sum of left section up to i
-        right_section = prefix[-1] - prefix[i]  # Sum of right section from i+1 to end
-        if left_section >= right_section:  # Check if left sum >= right sum
-            ans += 1         # Increment count for valid split
-    
-    return ans               # Return total number of ways
-
-
-
-# ––––––––––––––––––––––––––––––––––––––––––––––
-# Alternative Better Solution: No array needed
-
-def waysToSplitArray(self):
-    ans = left_section = 0
-    total = sum(nums)
-
-    for i in range(len(nums) - 1):
-        left_section += nums[i]
-        right_section = total - left_section
-        if left_section >= right_section:
-            ans += 1
-
-    return ans
-
-nums = [10, 4, -8, 7]  
-print(waysToSplitArray(nums))
-# Output: 2
-
-# Time: O(n) - Computes total sum in O(n) and iterates n-1 times with O(1) operations per iteration.
-# Space: O(1) - Uses only three integer variables (ans, left_section, right_section), excluding input.
