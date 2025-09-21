@@ -1,6 +1,7 @@
 # Numbers Without Adjacent Values
 
-# Example 3: Given an integer array nums, find all the numbers x in nums that satisfy the following: x + 1 is not in nums, and x - 1 is not in nums.
+# Example 3: 
+    # Given an integer array nums, find all the numbers x in nums that satisfy the following: x + 1 is not in nums, and x - 1 is not in nums.
 
 # If a valid number x appears multiple times, you only need to include it in the answer once.
 
@@ -35,30 +36,90 @@ print(find_numbers(l))
 # - Overall: O(n) total space.
 
 
-# Overview for Each Iteration
-# Input: nums = [2, 4, 4, 6]
-# Step 1: Create set of unique numbers
-# seen = {2, 4, 6}
-
-# Step 2: Check each number for valid conditions (x+1 and x-1 not in seen)
-# x  | x+1 | x-1 | x+1 in seen | x-1 in seen | ans
-# 2  | 3   | 1   | False       | False       | [2]
-# 4  | 5   | 3   | False       | False       | [2, 4]
-# 6  | 7   | 5   | False       | False       | [2, 4, 6]
-# Final: [2, 4, 6]
-
-
-
-# ––––––––––––––––––––––––––––––––––––––––––––––––
 """
-Q: How is the requirement that each valid number x appears only once in the answer is handled?
-    • By converting nums to a set (seen = set(nums)), which removes duplicates. 
-    • The loop then iterates over unique numbers in seen, ensuring each valid x is added to ans only once.
+Overview for Each Iteration
+Input: nums = [2, 4, 4, 6]
+Step 1: Create set of unique numbers
+seen = {2, 4, 6}
+
+Step 2: Check each number for valid conditions (x+1 and x-1 not in seen)
+x   | x+1 | x-1 | x+1 in seen | x-1 in seen | ans
+----|-----|-----|-------------|-------------|----------
+2   | 3   | 1   | False       | False       | [2]
+4   | 5   | 3   | False       | False       | [2, 4]
+6   | 7   | 5   | False       | False       | [2, 4, 6]
+Final: [2, 4, 6]
 
 
-Q: Why do we use 'for x in seen'
-    • To iterate over unique numbers in nums, ensuring each valid x is processed and added to the result only once, as required by the problem (duplicates are ignored).
+Most IMPORTANT thing to Understand:
+    • We want numbers where neither neighbor (x+1 or x-1) is present in the array.
+
+    • Using a set removes duplicates and makes lookups using `in` fast O(1).
+
+    • The result only includes each valid number once, even if it appears multiple times.
+
+    
+Why this code Works:
+    • seen (a set) holds all unique numbers so we don't double-count.
+
+    • For each number x, check if both x+1 and x-1 are missing. If so, add x.
+
+    • Efficiency: O(n) because building the set and checking neighbors are constant-time on average.
+
+    • Intuition: Think of it like neighbors on a street — we only keep the houses with no one living next door.
+
+TLDR
+    • Build a set of numbers, keep only those with no neighbors (x+1 or x-1) in the set.
+
+    
+Quick Example Walkthrough:
+nums = [2, 4, 4, 6]
+
+    Step 1: Make set → seen = {2, 4, 6}
+
+    Step 2: Check each number:
+        2: 1 and 3 not in set → keep 2.
+        4: 3 and 5 not in set → keep 4.
+        6: 5 and 7 not in set → keep 6.
+
+Final Answer: [2, 4, 6]
+
+
+---------------------------------------------------
+Q: How is the requirement that each valid number x appears only once in the answer handled?
+    • Converting nums to a set (seen = set(nums)), removes duplicates. 
+
+    • The for loop then iterates over unique numbers in seen, ensuring each valid x is added to ans only once.
+
+
+Q: Why do we use 'for x in seen' ?   
+    • Lets us directly test each unique number against the condition (x+1 not in seen and x-1 not in seen).
+
+    • Avoids wasted checks on duplicates.
+
+    • Ensures only valid, unique numbers get added.
+
 """
+
+
+# 🔑 Set vs List Lookup (Why in is Faster with Sets)
+
+# Set Lookup → O(1)
+    # 👉 Uses hashing, jumps straight to where 4 would be stored.
+s = {2, 4, 6}
+print(4 in s)   # True, found instantly (O(1))
+print(5 in s)   # False, checked instantly (O(1))
+
+
+# List Lookup → O(n)
+    # 👉 Has to check each element one by one until done.
+l = [2, 4, 6]
+print(4 in l)   # True, but Python may scan up to index 1 (O(n))
+print(5 in l)   # False, Python scans all elements (O(n))
+
+
+
+
 
 # ––––––––––––––––––––––––––––––––––––––––––––––––
 # Breakdown 
@@ -69,6 +130,21 @@ def find_numbers(nums):
         if x+1 not in seen and x-1 not in seen:  # Check if x+1 and x-1 absent
             ans.append(x)     # Add x to result if condition met
     return ans                # Return list of numbers without adjacent values
+
+
+
+# ––––––––––––––––––––––––––––––––––––––––––––––––
+# Alternative Solution
+
+def find_numbers(nums):
+    nums_set = set(nums)
+    ans = [num for num in nums_set if num + 1 not in nums_set and num - 1 not in nums_set]
+
+    return ans
+
+l = [2, 4, 4, 6]
+print(find_numbers(l))  
+# Output: [2, 4, 6]
 
 
 
@@ -119,22 +195,6 @@ def find_numbers(nums):  # Example: nums = [2, 4, 4, 6]
     # Why? ans contains all unique numbers x where x+1 and x-1 are not in the array
     return ans  # ans = [2, 4, 6]
 
-
-l = [2, 4, 4, 6]
-print(find_numbers(l))  
-# Output: [2, 4, 6]
-
-
-
-
-# ––––––––––––––––––––––––––––––––––––––––––––––––
-# Alternative Solution
-
-def find_numbers(nums):
-    nums_set = set(nums)
-    ans = [num for num in nums_set if num + 1 not in nums_set and num - 1 not in nums_set]
-
-    return ans
 
 l = [2, 4, 4, 6]
 print(find_numbers(l))  

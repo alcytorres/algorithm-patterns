@@ -46,12 +46,14 @@ print(is_subsequence(s, t))
 
 
 
+---------------------------------------------------
 Q: Why while i < len(s) and j < len(t):
     • The loop uses pointers i (for s) and j (for t) to safely iterate until either s is fully matched or t is exhausted, preventing index errors if t is shorter than s. 
 
 
 Q: If len(t) >= len(s) is guaranteed:
     • while i < len(s) is enough
+    
     • as j won't exceed len(t) before i reaches len(s).
 
 """

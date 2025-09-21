@@ -47,13 +47,16 @@ l  | r | nums[l] | nums[r] | curr      | curr vs target | Action      | Result
 Final: True ([4, 10])
 
 
-
+---------------------------------------------------
 Q: When does the loop stop and return True?
     • When nums[left] + nums[right] == target.
+
     • At that moment, the function immediately returns True and exits — no further pairs are checked.
 
+    
 Q: When does the loop stop and return False?
     • When the left and right pointers cross (left >= right).
+
     • This means every possible pair has been checked, and no pair sums to the target.
 
 """

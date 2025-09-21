@@ -1,7 +1,7 @@
 # 2351. First Letter to Appear Twice
 
 # Example 2
-# Given a string s consisting of lowercase English letters, return the first letter to appear twice.
+    # Given a string s consisting of lowercase English letters, return the first letter to appear twice.
 
 # Note:
     # A letter a appears twice before another letter b if the second occurrence of a is before the second occurrence of b.
@@ -39,15 +39,54 @@ print(repeatedCharacter(s))
 # - If we exclude the set from consideration, extra working space is O(1).
 
 
-# Overview for Each Iteration
-# Input: s = "abccbaacz"
-# Step: Find first letter to appear twice
-# i  | c   | seen            | Action
-# 0  | a   | {a}            | Add 'a' to seen
-# 1  | b   | {a, b}         | Add 'b' to seen
-# 2  | c   | {a, b, c}      | Add 'c' to seen
-# 3  | c   | {a, b, c}      | Found 'c' in seen, return 'c'
-# Final: "c"
+"""
+Overview for Each Iteration
+Input: s = "abccbaacz"
+Step: Find first letter to appear twice
+i   | c   | seen            | c in seen | Action
+----|-----|-----------------|-----------|----------------
+0   | a   | {a}             | False     | Add 'a' to seen
+1   | b   | {a, b}          | False     | Add 'b' to seen
+2   | c   | {a, b, c}       | False     | Add 'c' to seen
+3   | c   | {a, b, c}       | True      | Return 'c'
+Final: "c"
+
+
+
+Most IMPORTANT thing to Understand:
+    • We need the first character that repeats in the string.
+
+    • A repeat means: we see the same letter twice as we scan left to right.
+
+    • Once we find a letter already seen before, we return it immediately.
+
+    
+Why this code Works:
+    • seen (a set) stores letters we've already visited.
+
+    • As soon as a letter is already in seen, that's the first repeat (because we're going left to right).
+
+    • Efficiency: one pass through the string, O(n) time, O(n) space.
+
+    • Intuition: Like checking off names on a guest list — the first person who shows up twice is the answer.
+
+    
+TLDR
+    • Keep a set of letters, return the first one that shows up twice while scanning.
+
+    
+Quick Example Walkthrough:
+s = "abccbaacz"
+
+    See 'a' → not in set, add → seen = {a}
+    See 'b' → not in set, add → seen = {a, b}
+    See 'c' → not in set, add → seen = {a, b, c}
+    See 'c' again → already in set → return 'c'
+
+Final Answer: "c"
+
+"""
+
 
 
 # ––––––––––––––––––––––––––––––––––––––––––––––– 
@@ -59,6 +98,62 @@ def repeatedCharacter(s):
             return c           # Return first repeated character
         seen.add(c)            # Add character to set
     return ""                  # Return empty string if no character repeats
+
+
+
+# ––––––––––––––––––––––––––––––––––––––––––––––––
+# Brute force
+def repeatedCharacter(s):
+    for i in range(len(s)):
+        c = s[i]
+
+        for j in range(i):
+            if s[j] == c:
+                return c
+    return ""
+
+print(repeatedCharacter("abccbaacz"))
+# Output: c
+
+# Time: O(n^2)
+# Space: 
+
+"""
+Overview for Each Iteration
+Input: s = "abccbaacz"
+Step: Find first letter to appear twice using brute force
+i   | c   | j   | s[j] | s[j] == c | Action
+----|-----|-----|------|-----------|----------------
+0   | a   | -   | -    | -         | No comparison
+1   | b   | 0   | a    | False     | Continue
+2   | c   | 0   | a    | False     | Continue
+2   | c   | 1   | b    | False     | Continue
+3   | c   | 0   | a    | False     | Continue
+3   | c   | 1   | b    | False     | Continue
+3   | c   | 2   | c    | True      | Return 'c'
+Final: "c"
+
+"""
+
+
+# ––––––––––––––––––––––––––––––––––––––––––––––––
+# My Original Solution
+def repeatedCharacter(s):
+    seen = set()
+    for i in range(len(s)):
+        c = s[i]
+        if c in seen:
+            return c
+        seen.add(c)
+
+    return ""
+
+print(repeatedCharacter("abccbaacz"))
+# Output: c
+
+# Time: O(n) - Single pass through string of length n.
+# Space: O(n) - Set stores up to n unique characters.
+
 
 
 
@@ -118,43 +213,3 @@ def repeatedCharacter(s):  # Example: s = "abccbaacz"
 
 
 print(repeatedCharacter("abccbaacz"))  # Output: "c"
-
-
-
-
-
-
-# ––––––––––––––––––––––––––––––––––––––––––––––––
-# My Original Solution
-def repeatedCharacter(s):
-    seen = set()
-    for i in range(len(s)):
-        c = s[i]
-        if c in seen:
-            return c
-        seen.add(c)
-
-    return ""
-
-print(repeatedCharacter("abccbaacz"))
-# Output: c
-
-# Time: O(n) - Single pass through string of length n.
-# Space: O(n) - Set stores up to n unique characters.
-
-
-# ––––––––––––––––––––––––––––––––––––––––––––––––
-# Brute force
-def repeatedCharacter(s):
-    for i in range(len(s)):
-        c = s[i]
-        for j in range(i):
-            if s[j] == c:
-                return c
-    return ""
-
-print(repeatedCharacter("abccbaacz"))
-# Output: c
-
-# Time: O(n^2)
-# Space: 

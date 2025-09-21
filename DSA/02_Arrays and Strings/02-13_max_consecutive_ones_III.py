@@ -105,7 +105,7 @@ Final Answer: 6 (subarray [1,1,1,1,1,1]).
 
 
 
-
+---------------------------------------------------
 Q: Which subarray of length 6 is the final answer?
     • Both [4..9] (flip nums[4] & nums[5]) and [5..10] (flip nums[5] & nums[10]) give a streak of 6 ones.
 

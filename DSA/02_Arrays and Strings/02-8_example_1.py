@@ -113,7 +113,7 @@ Final Answer: 4 → longest subarray is [1, 2, 1, 2] or [2, 1, 2, 1].
 
 
 
-
+---------------------------------------------------
 Q: Why use for right in range(len(nums)) and not for right in len(nums) ?
 
     • for right in range(len(nums)):

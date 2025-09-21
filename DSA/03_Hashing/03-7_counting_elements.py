@@ -39,68 +39,38 @@ print(countElements(arr))
 # - Overall: O(n) total space.
 
 
-# Overview for Each Iteration
-# Input: arr = [1, 2, 2, 3]
-# Step 1: Create set of unique elements
-# hash_set = {1, 2, 3}
-
-# Step 2: Count elements x where x + 1 is in hash_set
-# x  | x + 1 | x + 1 in hash_set | count
-# 1  | 2     | True              | 1
-# 2  | 3     | True              | 2
-# 2  | 3     | True              | 3
-# 3  | 4     | False             | 3
-# Final: 3
-
-
-# –––––––––––––––––––––––––––––––––––––––––––––––––
 """
+Overview for Each Iteration
+Input: arr = [1, 2, 2, 3]
+Step 1: Create set of unique elements
+hash_set = {1, 2, 3}
+
+Step 2: Count elements x where x + 1 is in hash_set
+x  | x + 1 | x + 1 in hash_set | count
+1  | 2     | True              | 1
+2  | 3     | True              | 2
+2  | 3     | True              | 3
+3  | 4     | False             | 3
+Final: 3
+
+
+
+---------------------------------------------------
 Q: Why use a set instead of a array for lookups?
     • Set lookups are O(1) on average (hash table).
     • Array lookups are O(n) since they scan sequentially.
 
+    
 Q: What is the key idea of the solution?
     • Store all numbers in a hash set.
     • For each number x in arr, check if x+1 exists in the set.
     • Count it if true.
 
+    
 Q: Why do duplicates count separately?
     • We iterate through arr directly, so duplicates are checked individually.
+
 """
-
-
-
-# –––––––––––––––––––––––––––––––––––––––––––––––––
-# Brute force: Approach: Search with Array
-def countElements(arr):
-    count = 0
-    for x in arr:
-        if x + 1 in arr:
-            count += 1
-    return count
-
-arr = [1, 2, 3]
-print(countElements(arr))
-# Output: 2
-
-
-# Time: O(n^2)
-# - Outer loop iterates over all n elements: O(n).
-# - 'x + 1 in arr' is a list lookup, which takes O(n) in the worst case.
-# - Overall: O(n * n) = O(n^2) time.
-
-# Space: O(1)
-# - Only a constant number of variables (count, x) are used.
-# - No additional data structures.
-# - Overall: O(1) space.
-
-
-# Note: Set lookups are O(1) using a hash table for instant access, while array lookups are O(n) as they scan each element sequentially.
-
-
-
-
-
 
 
 # ––––––––––––––––––––––––––––––––––––––––––––––––
@@ -115,6 +85,82 @@ def countElements(arr):
             count += 1        # Increment counter if x+1 found
     return count              # Return total count of valid elements
 
+
+
+# ––––––––––––––––––––––––––––––––––––––––––––––––
+# Counting Elements – Naive List Lookup Approach
+    # This is valid but inefficient
+
+def countElements(arr):
+    seen = set(arr)
+    count = 0
+    
+    for x in arr:
+        if x+1 in arr:
+            count += 1
+    return count
+
+
+arr = [1, 2, 2, 3]
+print(countElements(arr))
+# Output: 3
+
+# Time: O(n^2)
+# - Outer loop iterates over all n elements.
+# - Each 'x + 1 in arr' check is a list lookup, which takes O(n) in the worst case.
+# - Overall: O(n * n) = O(n^2) time.
+
+# Space: O(n)
+# - Set 'seen' stores up to n elements: O(n) space.
+# - A few variables (x, count) take O(1) space.
+# - Overall: O(n) total space.
+
+
+"""
+⚠️ Why This Solution is Inefficient
+    • Each x+1 in arr lookup is O(n) because arr is a list.
+
+    • You do this for every element (n iterations).
+
+    • Total time complexity = O(n²).
+
+    • For small inputs, fine. For large arr (like 10⁵ elements), this will time out on LeetCode.
+
+"""
+
+
+
+# –––––––––––––––––––––––––––––––––––––––––––––––––
+# Brute force: Approach: Search with Array
+
+def countElements(arr):
+    count = 0
+    for x in arr:
+        if x + 1 in arr:
+            count += 1
+    return count
+
+arr = [1, 2, 3]
+print(countElements(arr))
+# Output: 2
+
+# Time: O(n^2)
+# - Outer loop iterates over all n elements: O(n).
+# - 'x + 1 in arr' is a list lookup, which takes O(n) in the worst case.
+# - Overall: O(n * n) = O(n^2) time.
+
+# Space: O(1)
+# - Only a constant number of variables (count, x) are used.
+# - No additional data structures.
+# - Overall: O(1) space.
+
+"""
+🔑 Key Difference: Set vs. List Lookup Complexity
+    • Set lookup: O(1) on average — uses a hash table for near-instant access.
+
+    • List lookup: O(n) — requires scanning elements sequentially until a match is found.
+
+"""
 
 
 
@@ -171,5 +217,4 @@ def countElements(arr):  # Example: arr = [1, 2, 2, 3]
 
 arr = [1, 2, 2, 3]
 print(countElements(arr))  # Output: 3
-
 

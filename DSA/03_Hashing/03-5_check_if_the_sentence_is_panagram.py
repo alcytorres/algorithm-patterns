@@ -4,7 +4,8 @@
 
 # Given a string sentence containing only lowercase English letters, return true if sentence is a pangram, or false otherwise.
 
-# Solution: https://leetcode.com/explore/featured/card/leetcodes-interview-crash-course-data-structures-and-algorithms/705/hashing/4601/
+# Solution: https://leetcode.com/problems/check-if-the-sentence-is-pangram/editorial/
+
 
 # Example:
     # Input: sentence = "thequickbrownfoxjumpsoverthelazydog"
@@ -31,14 +32,18 @@ print(checkIfPangram(s))
 # - Overall: O(1) space.
 
 
-# Overview for Each Iteration
-# Input: sentence = "thequickbrownfoxjumpsoverthelazydog"
-# Step: Create set of unique characters and check length
-# seen = set(sentence)
-# seen = {'t', 'h', 'e', 'q', 'u', 'i', 'c', 'k', 'b', 'r', 'o', 'w', 'n', 'f', 'x', 'j', 'm', 'p', 's', 'v', 'l', 'a', 'z', 'y', 'd', 'g'}
-# len(seen) = 26
-# Final: True (26 unique letters, including all alphabet letters)
+"""
+Overview for Each Iteration
+Input: sentence = "thequickbrownfoxjumpsoverthelazydog"
 
+Step: Create set of unique characters and check length
+seen = set(sentence)
+seen = {'t', 'h', 'e', 'q', 'u', 'i', 'c', 'k', 'b', 'r', 'o', 'w', 'n', 'f', 'x', 'j', 'm', 'p', 's', 'v', 'l', 'a', 'z', 'y', 'd', 'g'}
+len(seen) = 26
+
+Final: True (26 unique letters, including all alphabet letters)
+
+"""
 
 
 # ––––––––––––––––––––––––––––––––––––––––––––––– 

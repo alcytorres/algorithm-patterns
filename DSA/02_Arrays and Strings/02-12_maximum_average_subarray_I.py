@@ -105,13 +105,15 @@ Final Answer: 8 ÷ 2 = 4 (best subarray = [1,7])
 
 
 
-    
+---------------------------------------------------
 ⚠️ Caution:
     • I verified this solution is correct, but LeetCode may deny it unless the last line is: return float(ans) / k
 
 Why?
-    • In Python 2, "ans / k" does integer division if both are ints.
-    • In Python 3, "/" always returns a float (e.g., 12 / 4 = 3.0).
+    • In Python 2, "ans / k" does integer division if both are ints
+
+    • In Python 3, "/" always returns a float (e.g., 12 / 4 = 3.0)
+    
     • LeetCode sometimes runs code with Python 2 by default, so explicitly casting to float ensures the result matches the expected floating-point output.
 
 """

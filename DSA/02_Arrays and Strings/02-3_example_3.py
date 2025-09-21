@@ -72,19 +72,24 @@ Final: [1, 3, 4, 5, 6, 7, 20]
 
 
 
+---------------------------------------------------
 Q: Why does j=3 in Step 3?
     • The last action in step 1 is j+=1 -> 2+=1=3
 
 
 Q: Why use while i < len(arr1) and j < len(arr2) to loop thru the array?
     • Only compare while both arrays have elements (prevents index out of range).
+
     • Once one array is exhausted, stop comparing and append the rest from the other.
+
     • This “two-pointer + cleanup” pattern is common in merge sort, merging linked lists, and other two-pointer problems.
 
 
 Q: while vs if: Merging sorted arrays
     • while: Repeats until condition false, processes all items (e.g., full array merge).
-    • if: Checks once, processes one item (e.g., partial merge).
+
+    • if: Checks once, processes one item (e.g., partial merge)
+    
     • Use while for loops over multiple items, if for single checks.
 
 """

@@ -100,6 +100,7 @@ Final Answer: 2
 
 
 
+---------------------------------------------------
 Q: How do we determine the number of valid splits in nums = [10, 4, -8, 7]?
 	•	Split at i = 0 → left [10] = 10, right [4, -8, 7] = 3 → 10 ≥ 3 → valid.
 

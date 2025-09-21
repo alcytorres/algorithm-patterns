@@ -10,42 +10,46 @@
 # Solution: https://leetcode.com/problems/missing-number/editorial/
 
 def missingNumber(nums):
-    num_set = set(nums)
+    seen = set(nums)
     n = len(nums) + 1
 
     for num in range(n):
-        if num not in num_set:
+        if num not in seen:
             return num
 
 nums = [3, 0, 1]
 print(missingNumber(nums))
 # Output: 2
 
-
 # Time: O(n)
 # - Creating the set from nums: O(n).
 # - Looping through numbers from 0 to n: O(n) iterations.
-# - Set lookups ('number not in num_set') are O(1) on average.
+# - Set lookups ('number not in seen') are O(1) on average.
 # - Overall: O(n) time.
 
 # Space: O(n)
-# - Set 'num_set' stores up to n elements: O(n) space.
+# - Set 'seen' stores up to n elements: O(n) space.
 # - A few variables (n, number) take O(1) space.
 # - Overall: O(n) total space.
 
 
-# Overview for Each Iteration
-# Input: nums = [3, 0, 1]
-# Step 1: Create set and determine range
-# num_set = {3, 0, 1}
-# n = len(nums) + 1 = 4
+"""
+Overview for Each Iteration
+Input: nums = [3, 0, 1]
+Step 1: Create set and determine range
+seen = {3, 0, 1}
+n = len(nums) + 1 = 4
 
-# Step 2: Check each number in range [0, n)
-# num | num in num_set | Action
-# 0   | True           | Continue
-# 1   | True           | Continue
-# 2   | False          | Return 2
-# Final: 2
+Step 2: Check each number in range [0, n)
+num | num in seen | Action
+----|-------------|--------
+0   | True        | Continue
+1   | True        | Continue
+2   | False       | Return 2
+Final: 2
+
+"""
+
 
 
 
@@ -53,13 +57,14 @@ print(missingNumber(nums))
 # Breakdown 
 
 def missingNumber(nums):
-    num_set = set(nums)       # Convert array to set for O(1) lookups
+    seen = set(nums)       # Convert array to set for O(1) lookups
     n = len(nums) + 1         # Range of expected numbers (0 to n)
     
     for num in range(n):   # Iterate over numbers 0 to n
-        if num not in num_set:  # If number missing from set
+        if num not in seen:  # If number missing from set
             return num         # Return first missing number
         
+
 
 
 # ––––––––––––––––––––––––––––––––––––––––––––––––
@@ -112,4 +117,3 @@ def missingNumber(nums):  # Example: nums = [3, 0, 1]
 nums = [3, 0, 1]
 print(missingNumber(nums))
 # Output: 2
-
