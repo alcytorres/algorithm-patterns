@@ -38,47 +38,54 @@ s = "eceba"
 print(find_longest_substring(s, 2))  
 # Output: 3
 
-
-# Time: O(n)
-# - Right pointer moves across the string once.
-# - Left pointer also moves at most n steps in total.
-# - Each character is added to and removed from the dictionary at most once.
-# - Dictionary operations (add, update, delete) are O(1) on average.
-# - Overall: O(n) time.
-
-# Space: O(k)
-# - Dictionary 'counts' stores at most k distinct characters at any time.
-# - A few variables (left, right, ans) take O(1) space.
-# - Overall: O(k) space, which is O(1) if k is considered a small constant.
-
-
-# Overview for Each Iteration
-# Input: s = "eceba", k = 2
-# Step: Find longest substring with at most k distinct characters
-# r | s[r] | counts          | len(counts) > k | l | s[l] | Action                                 | ans
-# - | -    | {}              | -               | 0 | -    | -                                      | 0
-# 0 | e    | {e:1}           | No              | 0 | -    | ans=max(0,0-0+1)=1                     | 1
-# 1 | c    | {e:1, c:1}      | No              | 0 | -    | ans=max(1,1-0+1)=2                     | 2
-# 2 | e    | {e:2, c:1}      | No              | 0 | -    | ans=max(2,2-0+1)=3                     | 3
-# 3 | b    | {e:2, c:1, b:1} | Yes             | 0 | e    | counts[e]-=1, counts={e:1, c:1, b:1}   | 3
-#   |      | {e:1, c:1, b:1} | Yes             | 1 | c    | counts[c]-=1, counts={e:1, b:1}        | 3
-#   |      | {e:1, b:1}      | No              | 2 | -    | ans=max(3,3-2+1)=3                     | 3
-# 4 | a    | {e:1, b:1, a:1} | Yes             | 2 | e    | counts[e]-=1, del e, counts={b:1, a:1} | 3
-#   |      | {b:1, a:1}      | No              | 3 | -    | ans=max(3,4-3+1)=3                     | 3
-# Final: 3 ("ece")
-
-
-# Simple Overview for Each Iteration
 """
-Trace of find_longest_substring("eceba", k=2):
-| r | s[r] | counts          | len | Action       | l | ans |
-|---|------|-----------------|-----|--------------|---|-----|
-| 0 | e    | {e:1}           | 1   | None         | 0 | 1   |
-| 1 | c    | {e:1, c:1}      | 2   | None         | 0 | 2   |
-| 2 | e    | {e:2, c:1}      | 2   | None         | 0 | 3   |
-| 3 | b    | {e:2, c:1, b:1} | 3   | Drop e,c     | 2 | 3   |
-| 4 | a    | {e:1, b:1, a:1} | 3   | Drop e       | 3 | 3   |
-Output: 3 ('ece')
+Time: O(n)
+  - Right pointer moves across the string once.
+  - Left pointer also moves at most n steps in total.
+  - Each character is added to and removed from the dictionary at most once.
+  - Dictionary operations (add, update, delete) are O(1) on average.
+  - Overall: O(n) time.
+
+Space: O(k)
+  - Dictionary 'counts' stores at most k distinct characters at any time.
+  - A few variables (left, right, ans) take O(1) space.
+  - Overall: O(k) space, which is O(1) if k is considered a small constant.
+
+
+Overview for Each Iteration
+Input: s = "eceba", k = 2
+Step: Find longest substring with at most k distinct characters
+r  | s[r] | counts          | len(counts) > k | l | s[l] | Action                                 | ans
+---|------|-----------------|-----------------|---|------|----------------------------------------|----
+-  | -    | {}              | -               | 0 | -    | -                                      | 0
+0  | e    | {e:1}           | False           | 0 | -    | ans=max(0,0-0+1)=1                     | 1
+1  | c    | {e:1, c:1}      | False           | 0 | -    | ans=max(1,1-0+1)=2                     | 2
+2  | e    | {e:2, c:1}      | False           | 0 | -    | ans=max(2,2-0+1)=3                     | 3
+3  | b    | {e:2, c:1, b:1} | True            | 0 | e    | counts[e]-=1, counts={e:1, c:1, b:1}   | 3
+   |      | {e:1, c:1, b:1} | True            | 1 | c    | counts[c]-=1, counts={e:1, b:1}        | 3
+   |      | {e:1, b:1}      | False           | 2 | -    | ans=max(3,3-2+1)=3                     | 3
+4  | a    | {e:1, b:1, a:1} | True            | 2 | e    | counts[e]-=1, del e, counts={b:1, a:1} | 3
+   |      | {b:1, a:1}      | False           | 3 | -    | ans=max(3,4-3+1)=3                     | 3
+Final: 3 ("ece")
+
+
+
+Simple Overview for Each Iteration
+Input: s = "eceba", k = 2
+Step: Find longest substring with at most k distinct characters
+r  | s[r] | counts        | len>k | l | s[l] | Action       | ans
+---|------|---------------|-------|---|------|--------------|----
+-  | -    | {}            | -     | 0 | -    | -            | 0
+0  | e    | {e:1}         | F     | 0 | -    | ans=1        | 1
+1  | c    | {e:1,c:1}     | F     | 0 | -    | ans=2        | 2
+2  | e    | {e:2,c:1}     | F     | 0 | -    | ans=3        | 3
+3  | b    | {e:2,c:1,b:1} | T     | 0 | e    | e:2→1        | 3
+   |      | {e:1,c:1,b:1} | T     | 1 | c    | c:1→0, del c | 3
+   |      | {e:1,b:1}     | F     | 2 | -    | ans=3        | 3
+4  | a    | {e:1,b:1,a:1} | T     | 2 | e    | e:1→0, del e | 3
+   |      | {b:1,a:1}     | F     | 3 | -    | ans=3        | 3
+Final: 3 ("ece")
+
 
 
 
@@ -118,7 +125,7 @@ Quick Example Walkthrough:
 
 
 
-# –––––––––––––––––––––––––––––––––––––––––––––––––––––––
+---------------------------------------------------
 Q: Why use defaultdict instead of regular dictionary {}?
     • Automatically initializes missing keys with 0.
     • Simplifies code by avoiding manual existence checks.
@@ -177,38 +184,107 @@ print(find_longest_substring(s, 2))
 # Output: 3
 
 
-# Time: O(n^3)
-# - Outer loop picks a start index i: O(n).
-# - Inner loop picks an end index j: O(n).
-# - Creating a set for substring s[i:j+1] costs O(n) in the worst case.
-# - Overall: O(n * n * n) = O(n^3) time.
+"""
+Time: O(n^3)
+  - Outer loop picks a start index i: O(n).
+  - Inner loop picks an end index j: O(n).
+  - Creating a set for substring s[i:j+1] costs O(n) in the worst case.
+  - Overall: O(n * n * n) = O(n^3) time.
 
-# Space: O(n)
-# - The set of characters in the substring can store up to n characters in the worst case.
-# - A few variables (i, j, ans, distinct) take O(1) space.
-# - Overall: O(n) total space.
+Space: O(n)
+  - The set of characters in the substring can store up to n characters in the worst case.
+  - A few variables (i, j, ans, distinct) take O(1) space.
+  - Overall: O(n) total space.
 
 
-# Overview for Each Iteration
-# Input: s = "eceba", k = 2
-# Step: Find longest substring with at most k distinct characters
-# i  | j  | Substring | Distinct Chars   | distinct <= k | ans
-# 0  | 0  | e         | {e} = 1          | True          | 1 (max(0, 0-0+1))
-# 0  | 1  | ec        | {e, c} = 2       | True          | 2 (max(1, 1-0+1))
-# 0  | 2  | ece       | {e, c} = 2       | True          | 3 (max(2, 2-0+1))
-# 0  | 3  | eceb      | {e, c, b} = 3    | False         | 3
-# 0  | 4  | eceba     | {e, c, b, a} = 4 | False         | 3
-# 1  | 1  | c         | {c} = 1          | True          | 3 (max(3, 1-1+1))
-# 1  | 2  | ce        | {c, e} = 2       | True          | 3 (max(3, 2-1+1))
-# 1  | 3  | ceb       | {c, e, b} = 3    | False         | 3
-# 1  | 4  | ceba      | {c, e, b, a} = 4 | False         | 3
-# 2  | 2  | e         | {e} = 1          | True          | 3 (max(3, 2-2+1))
-# 2  | 3  | eb        | {e, b} = 2       | True          | 3 (max(3, 3-2+1))
-# 2  | 4  | eba       | {e, b, a} = 3    | False         | 3
-# 3  | 3  | b         | {b} = 1          | True          | 3 (max(3, 3-3+1))
-# 3  | 4  | ba        | {b, a} = 2       | True          | 3 (max(3, 4-3+1))
-# 4  | 4  | a         | {a} = 1          | True          | 3 (max(3, 4-4+1))
-# Final: 3 ("ece")
+Overview for Each Iteration
+Input: s = "eceba", k = 2
+Step: Find longest substring with at most k distinct characters
+i  | j  | Substring | Distinct Chars   | distinct <= k | ans
+---|----|-----------|------------------|---------------|------------------
+0  | 0  | e         | {e} = 1          | True          | 1 (max(0, 0-0+1))
+0  | 1  | ec        | {e, c} = 2       | True          | 2 (max(1, 1-0+1))
+0  | 2  | ece       | {e, c} = 2       | True          | 3 (max(2, 2-0+1))
+0  | 3  | eceb      | {e, c, b} = 3    | False         | 3
+0  | 4  | eceba     | {e, c, b, a} = 4 | False         | 3
+1  | 1  | c         | {c} = 1          | True          | 3 (max(3, 1-1+1))
+1  | 2  | ce        | {c, e} = 2       | True          | 3 (max(3, 2-1+1))
+1  | 3  | ceb       | {c, e, b} = 3    | False         | 3
+1  | 4  | ceba      | {c, e, b, a} = 4 | False         | 3
+2  | 2  | e         | {e} = 1          | True          | 3 (max(3, 2-2+1))
+2  | 3  | eb        | {e, b} = 2       | True          | 3 (max(3, 3-2+1))
+2  | 4  | eba       | {e, b, a} = 3    | False         | 3
+3  | 3  | b         | {b} = 1          | True          | 3 (max(3, 3-3+1))
+3  | 4  | ba        | {b, a} = 2       | True          | 3 (max(3, 4-3+1))
+4  | 4  | a         | {a} = 1          | True          | 3 (max(3, 4-4+1))
+Final: 3 ("ece")
+
+"""
+
+
+
+# ––––––––––––––––––––––––––––––––––––––––––––––––
+# Playground 
+
+# Basic Usage of defaultdict for DSA
+# defaultdict simplifies dictionary operations by providing default values for new keys
+
+# Regular Dictionary vs defaultdict: Counting Characters
+
+# Regular Dictionary (requires manual key check)
+d = {}
+s = "aabbc"
+for c in s:
+    if c not in d:  # Must check if key exists
+        d[c] = 0
+    d[c] += 1
+print(d)  
+# Output: {'a': 2, 'b': 2, 'c': 1}
+
+# defaultdict (simplifies with auto-default 0)
+from collections import defaultdict
+counts = defaultdict(int)
+s = "aabbc"
+for c in s:
+    counts[c] += 1  # No key check needed
+print(counts)  
+# Output: defaultdict(<class 'int'>, {'a': 2, 'b': 2, 'c': 1})
+
+
+
+# Use of defaultdict
+from collections import defaultdict
+
+# Input list of (key, value) tuples
+s = [('yellow', 1), ('blue', 2), ('yellow', 3), ('blue', 4), ('red', 1)]
+
+# Create defaultdict to store lists of values for each key
+counts = defaultdict(list)
+
+# Group values by key, appending each value to key's list
+for k, v in s:
+    counts[k].append(v)
+
+# Sort key-value pairs by key and print as list of tuples
+print(sorted(counts.items()))
+# Output: [('blue', [2, 4]), ('red', [1]), ('yellow', [1, 3])]
+
+"""
+Overview for Each Iteration
+Input: s = [('yellow', 1), ('blue', 2), ('yellow', 3), ('blue', 4), ('red', 1)]
+Step: Group values by key using defaultdict
+k       | v   | counts
+--------|-----|--------------------
+-       | -   | {}
+yellow  | 1   | {yellow: [1]}
+blue    | 2   | {yellow: [1], blue: [2]}
+yellow  | 3   | {yellow: [1, 3], blue: [2]}
+blue    | 4   | {yellow: [1, 3], blue: [2, 4]}
+red     | 1   | {yellow: [1, 3], blue: [2, 4], red: [1]}
+Final: sorted(counts.items()) = [('blue', [2, 4]), ('red', [1]), ('yellow', [1, 3])]
+
+"""
+
 
 
 
@@ -321,53 +397,3 @@ def find_longest_substring(s, k):  # Example: s = "eceba", k = 2
 s = "eceba"
 print(find_longest_substring(s, 2))  
 # Output: 3
-
-
-
-
-
-# ––––––––––––––––––––––––––––––––––––––––––––––––
-# Playground 
-
-# Basic Usage of defaultdict for DSA
-# defaultdict simplifies dictionary operations by providing default values for new keys
-
-# Regular Dictionary vs defaultdict: Counting Characters
-
-# Regular Dictionary (requires manual key check)
-d = {}
-s = "aabbc"
-for c in s:
-    if c not in d:  # Must check if key exists
-        d[c] = 0
-    d[c] += 1
-print(d)  
-# Output: {'a': 2, 'b': 2, 'c': 1}
-
-# defaultdict (simplifies with auto-default 0)
-from collections import defaultdict
-counts = defaultdict(int)
-s = "aabbc"
-for c in s:
-    counts[c] += 1  # No key check needed
-print(counts)  
-# Output: defaultdict(<class 'int'>, {'a': 2, 'b': 2, 'c': 1})
-
-
-
-# Use of defaultdict
-from collections import defaultdict
-
-# Input list of (key, value) tuples
-s = [('yellow', 1), ('blue', 2), ('yellow', 3), ('blue', 4), ('red', 1)]
-
-# Create defaultdict to store lists of values for each key
-counts = defaultdict(list)
-
-# Group values by key, appending each value to key's list
-for k, v in s:
-    counts[k].append(v)
-
-# Sort key-value pairs by key and print as list of tuples
-print(sorted(counts.items()))
-# Output: [('blue', [2, 4]), ('red', [1]), ('yellow', [1, 3])]

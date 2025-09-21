@@ -43,12 +43,12 @@ print(repeatedCharacter(s))
 Overview for Each Iteration
 Input: s = "abccbaacz"
 Step: Find first letter to appear twice
-i   | c   | seen            | c in seen | Action
-----|-----|-----------------|-----------|----------------
-0   | a   | {a}             | False     | Add 'a' to seen
-1   | b   | {a, b}          | False     | Add 'b' to seen
-2   | c   | {a, b, c}       | False     | Add 'c' to seen
-3   | c   | {a, b, c}       | True      | Return 'c'
+i  | c  | seen       | c in seen | Action
+---|----|------------|-----------|----------------
+0  | a  | {a}        | False     | Add 'a' to seen
+1  | b  | {a, b}     | False     | Add 'b' to seen
+2  | c  | {a, b, c}  | False     | Add 'c' to seen
+3  | c  | {a, b, c}  | True      | Return 'c'
 Final: "c"
 
 

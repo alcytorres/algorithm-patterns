@@ -27,32 +27,32 @@ print(countElements(arr))
 # Output: 3
 
 
-# Time: O(n)
-# - Creating the set from arr: O(n).
-# - Loop through arr once: O(n) iterations.
-# - Set lookups ('x + 1 in hash_set') are O(1) on average.
-# - Overall: O(n) time.
-
-# Space: O(n)
-# - Set 'hash_set' stores up to n elements: O(n) space.
-# - A few variables (count, x) take O(1) space.
-# - Overall: O(n) total space.
-
-
 """
+Time: O(n)
+  - Creating the set from arr: O(n).
+  - Loop through arr once: O(n) iterations.
+  - Set lookups ('x + 1 in hash_set') are O(1) on average.
+  - Overall: O(n) time.
+
+Space: O(n)
+  - Set 'hash_set' stores up to n elements: O(n) space.
+  - A few variables (count, x) take O(1) space.
+  - Overall: O(n) total space.
+
+
 Overview for Each Iteration
 Input: arr = [1, 2, 2, 3]
 Step 1: Create set of unique elements
 hash_set = {1, 2, 3}
 
 Step 2: Count elements x where x + 1 is in hash_set
-x  | x + 1 | x + 1 in hash_set | count
-1  | 2     | True              | 1
-2  | 3     | True              | 2
-2  | 3     | True              | 3
-3  | 4     | False             | 3
+x   | x + 1 | x + 1 in hash_set | count
+----|-------|-------------------|------
+1   | 2     | True              | 1
+2   | 3     | True              | 2
+2   | 3     | True              | 3
+3   | 4     | False             | 3
 Final: 3
-
 
 
 ---------------------------------------------------
@@ -104,6 +104,7 @@ def countElements(arr):
 arr = [1, 2, 2, 3]
 print(countElements(arr))
 # Output: 3
+
 
 # Time: O(n^2)
 # - Outer loop iterates over all n elements.
@@ -217,4 +218,3 @@ def countElements(arr):  # Example: arr = [1, 2, 2, 3]
 
 arr = [1, 2, 2, 3]
 print(countElements(arr))  # Output: 3
-
