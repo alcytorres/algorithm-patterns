@@ -3,10 +3,7 @@ Add to notes if a hash table used what is the x and y values represent?
 
 """
 
-
-s = "ace"
-print(len(s))
-
+print(1%2)
 
 
 

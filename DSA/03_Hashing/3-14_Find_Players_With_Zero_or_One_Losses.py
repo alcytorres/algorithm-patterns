@@ -278,6 +278,72 @@ def findWinners(matches):
 
 
 
+
+# –––––––––––––––––––––––––––––––––––––––––––––––––
+# Same Solution with Standard For Loop
+    # The Solution up top uses Basic list comprehension
+    # I like this solution
+
+from collections import defaultdict
+
+def findWinners(matches):
+    losses = defaultdict(int)   # player -> number of losses
+    seen   = set()              # players that appeared in at least one match
+
+    for winner, loser in matches:
+        seen.add(winner)
+        seen.add(loser)
+        losses[loser] += 1
+
+    # zero-loss players: in seen but not in losses
+    zero_loss = []
+    for p in seen:
+        if losses[p] == 0:
+            zero_loss.append(p) 
+
+    # one-loss players: exactly one loss
+    one_loss = []
+    for p in seen:
+        if losses[p] == 1:
+            one_loss.append(p)
+
+    return [sorted(zero_loss), sorted(one_loss)]
+
+
+matches = [[1,3], [2,3], [3,6], [5,6], [5,7], [4,5], [4,8], [4,9], [10,4], [10,9]]
+print(findWinners(matches))
+# Output: [[1, 2, 10], [4, 5, 7, 8]]
+
+
+
+# –––––––––––––––––––––––––––––––––––––––––––––––––
+# Basic list comprehension
+l = [x for x in range(5)]
+print(l)  # Outputs: [0, 1, 2, 3, 4]
+
+# Standard For Loop
+l = []
+for x in range(5):
+    l.append(x)
+print(l)  # Outputs: [0, 1, 2, 3, 4]
+
+
+
+
+# –––––––––––––––––––––––––––––––––––––––––––––––––
+# Playground
+
+# Simple code to play with
+seen = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10}
+losses = {3: 2, 6: 2, 7: 1, 5: 1, 8: 1, 9: 2, 4: 1}
+
+zero_loss = [p for p in seen if losses.get(p, 0) == 0]
+print(zero_loss)  # Output: [1, 2, 10]
+
+
+
+
+
 # –––––––––––––––––––––––––––––––––––––––––––––––––
 # Full Breakdown 
 
@@ -393,69 +459,3 @@ def findWinners(matches):  # Example: matches = [[1,3],[2,3],[3,6],[5,6],[5,7],[
 matches = [[1,3], [2,3], [3,6], [5,6], [5,7], [4,5], [4,8], [4,9], [10,4], [10,9]]
 print(findWinners(matches))  
 # Output: [[1, 2, 10], [4, 5, 7, 8]]
-
-
-
-
-
-
-# –––––––––––––––––––––––––––––––––––––––––––––––––
-# Same Solution with Standard For Loop
-    # The Solution up top uses Basic list comprehension
-    # I like this solution
-
-from collections import defaultdict
-
-def findWinners(matches):
-    losses = defaultdict(int)   # player -> number of losses
-    seen   = set()              # players that appeared in at least one match
-
-    for winner, loser in matches:
-        seen.add(winner)
-        seen.add(loser)
-        losses[loser] += 1
-
-    # zero-loss players: in seen but not in losses
-    zero_loss = []
-    for p in seen:
-        if losses[p] == 0:
-            zero_loss.append(p) 
-
-    # one-loss players: exactly one loss
-    one_loss = []
-    for p in seen:
-        if losses[p] == 1:
-            one_loss.append(p)
-
-    return [sorted(zero_loss), sorted(one_loss)]
-
-
-matches = [[1,3], [2,3], [3,6], [5,6], [5,7], [4,5], [4,8], [4,9], [10,4], [10,9]]
-print(findWinners(matches))
-# Output: [[1, 2, 10], [4, 5, 7, 8]]
-
-
-
-# –––––––––––––––––––––––––––––––––––––––––––––––––
-# Basic list comprehension
-l = [x for x in range(5)]
-print(l)  # Outputs: [0, 1, 2, 3, 4]
-
-# Standard For Loop
-l = []
-for x in range(5):
-    l.append(x)
-print(l)  # Outputs: [0, 1, 2, 3, 4]
-
-
-
-
-# –––––––––––––––––––––––––––––––––––––––––––––––––
-# Playground
-
-# Simple code to play with
-seen = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10}
-losses = {3: 2, 6: 2, 7: 1, 5: 1, 8: 1, 9: 2, 4: 1}
-
-zero_loss = [p for p in seen if losses.get(p, 0) == 0]
-print(zero_loss)  # Output: [1, 2, 10]
