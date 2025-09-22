@@ -44,58 +44,55 @@ nums = [[3, 1, 2, 4, 5], [1, 2, 3, 4], [3, 4, 5, 6]]
 print(intersection(nums))  
 # Output: [3, 4]
 
-
-# Time: O(n * m)
-# - Iterate through each of the m arrays in nums: O(m).
-# - Each array may contain up to n elements, so filling the counts dictionary is O(n * m).
-# - Final loop over all unique keys (up to n * m elements in worst case) is also O(n * m) in worst case.
-# - Sorting the result list takes O(r log r), where r is the number of common elements (r ≤ n).
-# - Overall: O(n * m + r log r) time.
-
-# Space: O(n)
-# - Dictionary 'counts' stores all unique elements across all arrays: O(n * m) in worst case but typically much less if values overlap.
-# - Result list 'ans' stores up to n elements: O(n) space.
-# - A few variables (key, arr, x) take O(1) space.
-# - Overall: O(n) total space assuming n is the total number of unique values.
-
-
-
-# Overview for Each Iteration
-# Input: nums = [[3,1,2,4,5], [1,2,3,4], [3,4,5,6]]
-# Step 1: Count occurrences of each element across all arrays
-# arr_idx | arr         | x | counts
-# -       | -           | - | {}
-# 0       | [3,1,2,4,5] | 3 | {3:1}
-# 0       | [3,1,2,4,5] | 1 | {3:1, 1:1}
-# 0       | [3,1,2,4,5] | 2 | {3:1, 1:1, 2:1}
-# 0       | [3,1,2,4,5] | 4 | {3:1, 1:1, 2:1, 4:1}
-# 0       | [3,1,2,4,5] | 5 | {3:1, 1:1, 2:1, 4:1, 5:1}
-# 1       | [1,2,3,4]   | 1 | {3:1, 1:2, 2:1, 4:1, 5:1}
-# 1       | [1,2,3,4]   | 2 | {3:1, 1:2, 2:2, 4:1, 5:1}
-# 1       | [1,2,3,4]   | 3 | {3:2, 1:2, 2:2, 4:1, 5:1}
-# 1       | [1,2,3,4]   | 4 | {3:2, 1:2, 2:2, 4:2, 5:1}
-# 2       | [3,4,5,6]   | 3 | {3:3, 1:2, 2:2, 4:2, 5:1}
-# 2       | [3,4,5,6]   | 4 | {3:3, 1:2, 2:2, 4:3, 5:1}
-# 2       | [3,4,5,6]   | 5 | {3:3, 1:2, 2:2, 4:3, 5:2}
-# 2       | [3,4,5,6]   | 6 | {3:3, 1:2, 2:2, 4:3, 5:2, 6:1}
-
-# Final counts after processing all arrays: 
-# {3:3, 1:2, 2:2, 4:3, 5:2, 6:1}
-
-
-# Step 2: Collect elements appearing in all arrays (count == n = 3)
-# key | counts[key] | counts[key] == n | ans
-# 1   | 2           | False            | []
-# 2   | 2           | False            | []
-# 3   | 3           | True             | [3]
-# 4   | 3           | True             | [3, 4]
-# 5   | 2           | False            | [3, 4]
-# 6   | 1           | False            | [3, 4]
-# Final: sorted([3, 4]) = [3, 4]
-
-
-
 """
+Time: O(N + k log k)
+  - Counting all elements across arrays into a hash map: O(N), where N is the total number of elements.
+  - Scanning the map to filter elements with frequency equal to number of arrays: O(U), where U is number of distinct elements (≤ N).
+  - Sorting the intersection result: O(k log k), where k is the size of the intersection.
+  - Overall: O(N + k log k) (upper bound O(N + U log U) if k ≈ U).
+
+Space: O(U) ≈ O(N)
+  - Hash map stores counts for up to U distinct elements.
+  - Result list takes O(k), but that's usually not counted as extra.
+  - Overall: O(U) auxiliary space, which in the worst case is O(N).
+
+
+Overview for Each Iteration
+Input: nums = [[3, 1, 2, 4, 5], [1, 2, 3, 4], [3, 4, 5, 6]]
+Step 1: Count occurrences of each element across all arrays
+arr_idx | arr         | x | counts
+--------|-------------|---|--------------------------------
+-       | -           | - | {}
+0       | [3,1,2,4,5] | 3 | {3:1}
+0       | [3,1,2,4,5] | 1 | {3:1, 1:1}
+0       | [3,1,2,4,5] | 2 | {3:1, 1:1, 2:1}
+0       | [3,1,2,4,5] | 4 | {3:1, 1:1, 2:1, 4:1}
+0       | [3,1,2,4,5] | 5 | {3:1, 1:1, 2:1, 4:1, 5:1}
+1       | [1,2,3,4]   | 1 | {3:1, 1:2, 2:1, 4:1, 5:1}
+1       | [1,2,3,4]   | 2 | {3:1, 1:2, 2:2, 4:1, 5:1}
+1       | [1,2,3,4]   | 3 | {3:2, 1:2, 2:2, 4:1, 5:1}
+1       | [1,2,3,4]   | 4 | {3:2, 1:2, 2:2, 4:2, 5:1}
+2       | [3,4,5,6]   | 3 | {3:3, 1:2, 2:2, 4:2, 5:1}
+2       | [3,4,5,6]   | 4 | {3:3, 1:2, 2:2, 4:3, 5:1}
+2       | [3,4,5,6]   | 5 | {3:3, 1:2, 2:2, 4:3, 5:2}
+2       | [3,4,5,6]   | 6 | {3:3, 1:2, 2:2, 4:3, 5:2, 6:1}
+
+Final counts after processing all arrays: 
+{3:3, 1:2, 2:2, 4:3, 5:2, 6:1}
+
+Step 2: Collect elements appearing in all arrays (count == n = 3)
+key | counts[key] | counts[key] == n | ans
+----|-------------|------------------|----
+1   | 2           | False            | []
+2   | 2           | False            | []
+3   | 3           | True             | [3]
+4   | 3           | True             | [3, 4]
+5   | 2           | False            | [3, 4]
+6   | 1           | False            | [3, 4]
+Final: sorted([3, 4]) = [3, 4]
+
+
+
 Most IMPORTANT thing to Understand:
     • We're counting how many arrays each number appears in.
 
@@ -126,7 +123,60 @@ Quick Example Walkthrough:
         • Keep keys with count == 3 → [3, 4]
         • Sorted result → [3, 4]
 
-    Final Answer: [3, 4]
+    Final Answer: [3, 4]    
+
+"""
+
+
+# ––––––––––––––––––––––––––––––––––––––––––––––––
+# Intersection of Arrays: Sorted vs Unsorted Result (Impact on Time Complexity)
+
+from collections import defaultdict
+
+def intersection(nums):
+    counts = defaultdict(int)
+    
+    for arr in nums:
+        for x in arr:
+            counts[x] += 1
+
+    n = len(nums)
+    ans = []
+    
+    for key in counts:
+        if counts[key] == n:
+            ans.append(key)
+    
+    # Return list of common elements: NO SORTING 
+    return ans
+
+nums = [[3, 1, 2, 4, 5], [1, 2, 3, 4], [3, 4, 5, 6]]
+print(intersection(nums))  
+# Output: [3, 4]
+
+"""
+Time: O(N)
+  - Count occurrences: O(N), where N is the total number of elements across all arrays.
+  - Loop through dictionary keys (U unique numbers): O(U), and U ≤ N.
+  - No sorting here, so overall: O(N) time.
+
+Space: O(U) ≈ O(N)
+  - same as before
+
+  
+----------------------------------------------
+Q: Why was the original time complexity O(N + k log k), but now it's only O(N)?
+
+A: Because of the sorting step in the earlier version:
+   • return sorted(ans) sorts the intersection result.
+   • Sorting k elements costs O(k log k).
+   • That's why the total time was O(N + k log k).
+
+In this new version:
+   • We just return ans without sorting.
+   • No k log k cost → only the counting and scanning remain.
+   • Total time is O(N).
+
 """
 
 
@@ -174,35 +224,40 @@ print(intersection_bruteforce(nums))
 # Output: [3, 4]
 
 
-# Time: O(n * m * k)
-# - For each element in the first array (n elements), check presence in all other m-1 arrays.
-# - Each "x not in arr" is a linear scan, up to O(k) where k = length of an array.
-# - Overall: O(n * m * k) time. In the worst case (all arrays ~ length n), this is O(n^2 * m).
+"""
+Time: O(n * m * k + r log r)
+  - For each element x in the first array (n elements), check presence in each of the other m-1 arrays.
+  - Each "x not in arr" is a linear scan up to k elements → O(k).
+  - Total scanning: O(n * m * k).
+  - Sorting the result list of size r adds O(r log r).
+  - Overall: O(n * m * k + r log r) time.
 
-# Space: O(n)
-# - Result list 'ans' can store up to n elements (all from the first array).
-# - A few variables (x, in_all, arr) take O(1) space.
-# - No extra data structures used.
-# - Overall: O(n) space.
+Space: O(n)
+  - Result list 'ans' can store up to n elements (all from the first array).
+  - A few variables (x, in_all, arr) take O(1) space.
+  - No extra data structures used.
+  - Overall: O(n) space.
 
 
+Overview for Each Iteration
+Input: nums = [[3, 1, 2, 4, 5], [1, 2, 3, 4], [3, 4, 5, 6]]
+Step 1: Check each candidate from nums[0] for presence in all other arrays
+x  | arr          | x in arr | in_all | ans
+---|--------------|----------|--------|-------
+3  | [1, 2, 3, 4] | True     | True   | []
+3  | [3, 4, 5, 6] | True     | True   | [3]
+1  | [1, 2, 3, 4] | True     | True   | [3]
+1  | [3, 4, 5, 6] | False    | False  | [3]
+2  | [1, 2, 3, 4] | True     | True   | [3]
+2  | [3, 4, 5, 6] | False    | False  | [3]
+4  | [1, 2, 3, 4] | True     | True   | [3]
+4  | [3, 4, 5, 6] | True     | True   | [3, 4]
+5  | [1, 2, 3, 4] | False    | False  | [3, 4]
 
-# Overview for Each Iteration
-# Input: nums = [[3, 1, 2, 4, 5], [1, 2, 3, 4], [3, 4, 5, 6]]
-# Step 1: Check each candidate from nums[0] for presence in all other arrays
-# x  | arr          | x in arr | in_all | ans
-# 3  | [1, 2, 3, 4] | True     | True   | []
-# 3  | [3, 4, 5, 6] | True     | True   | [3]
-# 1  | [1, 2, 3, 4] | True     | True   | [3]
-# 1  | [3, 4, 5, 6] | False    | False  | [3]
-# 2  | [1, 2, 3, 4] | True     | True   | [3]
-# 2  | [3, 4, 5, 6] | False    | False  | [3]
-# 4  | [1, 2, 3, 4] | True     | True   | [3]
-# 4  | [3, 4, 5, 6] | True     | True   | [3, 4]
-# 5  | [1, 2, 3, 4] | False    | False  | [3, 4]
+Step 2: Sort result
+Final: sorted([3, 4]) = [3, 4]
 
-# Step 2: Sort result
-# Final: sorted([3, 4]) = [3, 4]
+"""
 
 
 

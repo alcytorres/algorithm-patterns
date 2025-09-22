@@ -144,3 +144,68 @@ print(fn(nums1, nums2))
 # [[8], [12]]
 
 
+
+
+# ––––––––––––––––––––––––––––––––––––––––––––––––
+"""
+
+Time Complexity (best → worst)
+------------------------------
+O(1)      | Constant      | Array index access, hash lookup
+O(log n)  | Logarithmic   | Binary search, balanced BST lookup
+O(n)      | Linear        | Single scan, counting, hashing
+O(n log n)| Linearithmic  | Merge sort, quicksort (avg), divide & conquer
+O(n^2)    | Quadratic     | Nested loops, pair comparisons
+O(n^3)    | Cubic         | Triple nested loops, triplet checks
+O(2^n)    | Exponential   | Subset generation, naive recursion
+O(n!)     | Factorial     | Permutations of n elements
+
+Space Complexity (best → worst)
+-------------------------------
+O(1)      | Constant      | Few variables, in-place operations
+O(log n)  | Logarithmic   | Recursion depth (binary search, mergesort)
+O(n)      | Linear        | Arrays, hash maps, recursion depth
+O(n^2)    | Quadratic     | 2D grids, adjacency matrices
+O(2^n)    | Exponential   | All subsets stored
+O(n!)     | Factorial     | All permutations stored
+
+
+
+
+
+--------------------------------------------------------------
+📊 Time & Space Complexity Symbols Cheat Sheet
+
+Symbol  | Meaning / When it Appears                          | Example
+--------|----------------------------------------------------|----------------------------------
+n       | Main input size (length of array, string, etc.)    | Traverse array of n elements → O(n)
+m       | Second input size (two arrays, grid dimensions)    | Merge arrays of size n and m → O(n + m)
+k       | Special size (window length, substring length)     | Sliding window of size k → O(n * k)
+1       | Constant work, independent of input size           | Swap two variables → O(1)
+log n   | Input is halved each step                          | Binary search on n elements → O(log n)
+n², n³  | Nested loops (2 or 3 levels)                       | Double loop over n × n grid → O(n²)
+n!      | Factorial growth (all permutations)                | Generate all permutations of n → O(n!)
+
+
+
+--------------------------------------------------------------
+Q: “What's the difference between O(U) and O(N) in time/space complexity analysis?”
+
+O(U) vs O(N)
+    N = total number of elements.
+    U = number of unique elements.
+    Always: U ≤ N.
+
+Worst case: if all elements are unique, then U = N → O(U) = O(N).
+
+Best case: if there are many duplicates, U ≪ N → O(U) is tighter and more efficient.
+
+Interview tip:
+    • Saying O(N) is always safe.
+    
+    • Saying O(U) is more precise — just explain that in the worst case it's O(N), but in practice U may be much smaller.
+    
+    • Rule of thumb: use O(N) for clarity, use O(U) when you want to impress with precision.
+
+    
+"""
