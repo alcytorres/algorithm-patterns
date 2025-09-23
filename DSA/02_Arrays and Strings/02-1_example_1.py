@@ -19,18 +19,29 @@ def is_palindrome(s):
 print(is_palindrome("racecar"))  
 # Output: True
 
-# Time: O(n)
-# - Two pointers (left, right) each move toward the center once.
-# - At most n/2 comparisons are made, which simplifies to O(n).
-# - No nested loops.
-
-# Space: O(1)
-# - Only a constant number of variables (left, right) are used.
-# - No additional data structures.
-# - Overall: O(1) space.
-
-
 """
+Time: O(N)
+  - Two pointers (left, right) scan string from both ends.
+  - Each character is checked once (at most N/2 comparisons).
+  - No nested loops.
+  - Overall: O(N).
+
+Space: O(1)
+  - Only a few integer variables (left, right).
+  - No extra data structures.
+  - Overall: O(1).
+
+  
+Interview Answer
+
+Time: O(N)
+  - Single pass with two pointers.
+
+Space: O(1)
+  - Constant extra space.
+
+
+
 Overview for Each Iteration
 Input: s = "racecar"
 Step: Check if string is a palindrome using two pointers

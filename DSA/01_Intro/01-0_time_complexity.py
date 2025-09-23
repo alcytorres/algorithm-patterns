@@ -188,7 +188,7 @@ n!      | Factorial growth (all permutations)                | Generate all perm
 
 
 
---------------------------------------------------------------
+-------------------------------------------------------------
 Q: “What's the difference between O(U) and O(N) in time/space complexity analysis?”
 
 O(U) vs O(N)
@@ -209,3 +209,143 @@ Interview tip:
 
     
 """
+
+
+
+
+"""
+-------------------------------------------------------------
+COMPLEXITY TEMPLATE — STUDY + INTERVIEW FORMAT
+
+Instructions:
+- Sometimes the exact TIME and SPACE are the same as what you say in an interview.  
+- Always use CAPS for complexity: O(N), O(1), not o(n).  
+- Only add the necessary bullets:
+  * Don't overdo it with too many details.  
+  * Don't swing too far into being overly concise.  
+  * Use the optimal amount so you can quickly understand and recall.  
+- Rare cases (like #2225 Find Players With Zero or One Losses) may need more bullets because more is going on.  
+- Typical problems should use fewer bullets.  
+- STUDY ANSWER = thorough, with step breakdowns and worst-case reasoning.  
+- INTERVIEW ANSWER = simplified to worst-case, with 1-2 bullets explaining “why” directly.  
+
+------------------------------------------------
+TEMPLATE:
+
+Time: O(...)
+  - Define variables (e.g., N = input size, P = unique players).
+  - List main steps and their costs.
+  - Show the combined overall time complexity.
+  - Add worst-case relationship if relevant (e.g., P ≤ N).
+
+Space: O(...)
+  - State main structures and their sizes.
+  - Mention output if relevant.
+  - Give overall space complexity.
+  - Add worst-case tie-back if relevant.
+
+Interview Answer
+
+Time: O(...)
+  - 1-2 bullets highlighting the dominant step(s).
+
+Space: O(...)
+  - 1-2 bullets summarizing memory usage at a high level.
+
+------------------------------------------------
+EXAMPLE 1: #2225 Find Players With Zero or One Losses
+"""
+
+from collections import defaultdict
+
+def findWinners(matches):
+    losses = defaultdict(int)   # player -> number of losses
+    seen   = set()              # players that appeared in at least one match
+
+    # Record all players (winners and losers) and count each loss
+    for winner, loser in matches:
+        seen.add(winner)
+        seen.add(loser)
+        losses[loser] += 1
+
+    # zero-loss players: in seen but not in losses
+    zero_loss = [p for p in seen if losses[p] == 0]
+    # one-loss players: exactly one loss
+    one_loss  = [p for p in seen if losses[p] == 1]
+
+    return [sorted(zero_loss), sorted(one_loss)]
+
+
+matches = [[1,3], [2,3], [3,6], [5,6], [5,7], [4,5], [4,8], [4,9], [10,4], [10,9]]
+print(findWinners(matches))
+# Output: [[1, 2, 10], [4, 5, 7, 8]]
+
+"""
+Time: O(N + P log P)
+  - Let N = number of matches, P = number of unique players.
+  - Process all matches once to update dict + set → O(N).
+  - Scan players to build zero_loss and one_loss → O(P).
+  - Sort both lists → O(P log P).
+  - Overall: O(N + P log P).
+  - Since P ≤ 2N, worst case is O(N log N).
+
+Space: O(P) ≈ O(N)
+  - Dict 'losses' stores up to P players.
+  - Set 'seen' stores up to P players.
+  - Output lists (zero_loss, one_loss) store up to P players.
+  - Overall: O(P).
+  - Since P ≤ 2N, worst case O(P) = O(N).
+
+Interview Answer
+
+Time: O(N log N)
+  - Process matches in O(N).
+  - Sorting dominates → O(N log N).
+
+Space: O(N)
+  - Dictionary and set track up to N players.
+  - Extra space is linear.
+"""
+
+------------------------------------------------
+"""
+EXAMPLE 2: is_palindrome
+"""
+
+def is_palindrome(s):
+    left = 0                    
+    right = len(s) - 1          
+
+    while left < right:         
+        if s[left] != s[right]: 
+            return False
+        left += 1               
+        right -= 1             
+
+    return True                
+
+print(is_palindrome("racecar"))  
+# Output: True
+
+"""
+Time: O(N)
+  - Two pointers (left, right) scan string from both ends.
+  - Each character is checked once (at most N/2 comparisons).
+  - No nested loops.
+  - Overall: O(N).
+
+Space: O(1)
+  - Only a few integer variables (left, right).
+  - No extra data structures.
+  - Overall: O(1).
+
+Interview Answer
+
+Time: O(N)
+  - Single pass with two pointers.
+
+Space: O(1)
+  - Constant extra space.
+
+"""
+

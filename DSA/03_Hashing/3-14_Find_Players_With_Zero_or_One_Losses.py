@@ -50,17 +50,30 @@ print(findWinners(matches))
 # Output: [[1, 2, 10], [4, 5, 7, 8]]
 
 """
-Time: O(n log n)
-  - Loop through matches once to fill losses and seen: O(n), where n = number of matches.
-  - Build zero_loss and one_loss lists: O(m), where m = number of unique players.
-  - Sorting both lists: O(m log m).
-  - Overall: O(n + m log m). Since sorting dominates, it's often written as O(n log n).
+Time: O(N + P log P)
+  - Let N = number of matches, P = number of unique players.
+  - Process all matches once to update dict + set → O(N).
+  - Scan players to build zero_loss and one_loss → O(P).
+  - Sort both lists → O(P log P).
+  - Overall: O(N + P log P).
+  - Since P ≤ 2N, worst case is O(N log N).
 
-Space: O(m)
-  - Dictionary 'losses' stores up to m players: O(m).
-  - Set 'seen' stores up to m players: O(m).
-  - Lists zero_loss and one_loss can together store up to m players: O(m).
-  - Overall: O(m) space, where m = number of unique players.
+Space: O(P) ≈ O(N)
+  - Dict 'losses' stores up to P players.
+  - Set 'seen' stores up to P players.
+  - Output lists (zero_loss, one_loss) store up to P players.
+  - Overall: O(P).
+  - Since P ≤ 2N, worst case O(P) = O(N).
+
+Interview Answer
+
+Time: O(N log N)
+  - Process matches in O(N).
+  - Sorting dominates → O(N log N).
+
+Space: O(N)
+  - Dictionary and set track up to N players.
+  - Extra space is linear.
 
 
 
@@ -105,7 +118,7 @@ Simple Overview for Each Iteration
 i | Match   | Seen (New) | Losses (New/Updated)
 --|---------|------------|---------------------
 - | -       | {}         | {}
-0 | [1, 3]  | {1,3}      | {3:1}
+0 | [1, 3]  | {1, 3}     | {3:1}
 1 | [2, 3]  | {2}        | {3:2}
 2 | [3, 6]  | {6}        | {6:1}
 3 | [5, 6]  | {5}        | {6:2}
@@ -167,7 +180,6 @@ Quick Example Walkthrough:
     Final Answer: [[1, 2, 10], [4, 5, 7, 8]]
 
 """
-
 
 
 
