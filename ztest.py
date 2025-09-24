@@ -1,23 +1,34 @@
 """
 Add to notes if a hash table used what is the x and y values represent?
-
 """
 
-print(1%2)
-
-
-
-
-
-
-
-
-
+# print(1%2)
 # print(1//2)
-# 0
 
 
-# print(102//2)
+
+# .join
+# Example 1: Joining words with a space separator
+def fn(words):
+    return ' '.join(words)
+
+words = ["Hello", "world", "from", "Python"]
+print(fn(words))  # Output: Hello world from Python
+
+
+# Example 2: Joining characters with no separator
+def fn(c):
+    return ''.join(c)
+
+c = ["P", "y", "t", "h", "o", "n"]
+print(fn(c))  # Output: Python
+
+
+
+
+
+
+
 
 
 

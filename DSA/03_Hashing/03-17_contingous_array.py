@@ -50,18 +50,33 @@ nums = [0, 1, 1, 1, 1, 0, 0]
 print(findMaxLength(nums))
 # Output 4
 
+# Key (diff): the current score = (# of 1s so far) - (# of 0s so far)
+# Value (index): the earliest position where that score was seen.
+
 
 """
-# Time: O(n)
-# - Loop through nums once: O(n) iterations.
-# - Dictionary lookups ('diff in counts') and updates are O(1) on average.
-# - Overall: O(n) time.
+Time: O(N)
+  - Let N = length of nums.
+  - Step 1: Initialize dictionary and variables → O(1).
+  - Step 2: Single pass over nums → O(N).
+      • Update diff in O(1).
+      • Dictionary lookup and update in O(1) average.
+  - Overall: O(N).
 
-# Space: O(n)
-# - Dictionary 'counts' can store up to n different diff values in the worst case: O(n).
-# - A few variables (diff, max_length, i, num) take O(1) space.
-# - Overall: O(n) total space.
+Space: O(N)
+  - Dictionary 'counts' stores first index for each diff value.
+  - In worst case, diff takes a new value at each index → O(N).
+  - Extra variables (diff, max_length, loop index) are O(1).
+  - Overall: O(N).
 
+  
+Interview Answer: Worst Case
+
+Time: O(N)
+  - Single pass, dictionary lookups are O(1).
+
+Space: O(N)
+  - Dictionary may hold up to N different diff values.
 
 
 Overview for Each Iteration
@@ -81,6 +96,7 @@ Final: 4 ([1, 1, 0, 0])
 
 
 
+# -------------------------------------------------------
 Q: What are the key and value of the hash table?
     • Key (diff): the current score = (# of 1s so far) - (# of 0s so far).
     • Value (index): the earliest position where that score was seen.

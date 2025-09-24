@@ -32,19 +32,37 @@ print(groupAnagrams(strs))
 # Output: [['eat', 'tea', 'ate'], ['tan', 'nat'], ['bat']]
 
 
-# Time: O(n * k log k)
-# - For each of the n strings, sort it (O(k log k), where k = average length of a string).
-# - Appending to the dictionary groups is O(1).
-# - Overall: O(n * k log k) time.
-
-# Space: O(n * k)
-# - Dictionary 'buckets' stores up to n strings, grouped by their sorted key.
-# - Each string (length k) is stored once in the dictionary lists → O(n * k) space.
-# - A few variables (s, key) take O(1) space.
-# - Overall: O(n * k) space.
-
-
 """
+Time: O(N * K log K)
+  - Let N = number of strings, K = average length of a string.
+  - Step 1: For each string (N of them):
+      • Sorting characters costs O(K log K).
+      • Joining the sorted characters into a string is O(K).
+      • Inserting into dictionary bucket is O(1).
+      → Total per string ≈ O(K log K).
+  - Step 2: Convert dictionary values to a list → O(N).
+  - Combined overall: O(N * K log K + N).
+  - Since N * K log K dominates, final complexity is O(N * K log K).
+
+Space: O(N * K)
+  - Dictionary 'buckets':
+      • Keys are sorted strings, each up to length K → O(N * K) in total.
+      • Values are lists holding all original strings (total characters across all strings = N * K).
+  - Output is a list containing all N strings grouped → O(N * K).
+  - Extra variables (loop variables, temporary sorted strings) are O(K).
+  - Overall: O(N * K).
+
+
+Interview Answer: Worst Case
+
+Time: O(N * K log K)
+  - Sorting each string dominates.
+
+Space: O(N * K)
+  - Dictionary stores all strings and their sorted keys.
+
+
+  
 Overview for Each Iteration
 Input: strs = ["eat", "tea", "tan", "ate", "nat", "bat"]
 Step: Group anagrams by sorted string key
@@ -82,6 +100,7 @@ Most IMPORTANT thing to Understand:
 
     • The dictionary groups all words that share the same sorted key.  
 
+    
 Why this code Works:
     • Hash map (buckets): key = sorted word, value = list of words with that key.  
 
@@ -91,9 +110,11 @@ Why this code Works:
 
     Intuition: If two words look the same after sorting their letters, they must be anagrams → group them together.
 
+    
 TLDR:
     • Sort each word to create a key, then group words with the same key together.  
 
+    
 Quick Example Walkthrough:
     strs = ["eat", "tea", "tan", "ate", "nat", "bat"]  
 
@@ -111,17 +132,42 @@ Quick Example Walkthrough:
     Final Answer: [["bat"], ["tan","nat"], ["eat","tea","ate"]]  
 
     
-
+# -------------------------------------------------------
 Q: Why defaultdict(list)?
     • defaultdict(list) gives [] for new keys (good for grouping)
-        • defaultdict(int) gives 0 for new keys (good for counting)
+
+    • defaultdict(int) gives 0 for new keys (good for counting)
+    
     • Here it means we can always do buckets[key].append(word) without checking if the key exists first
 
     
 Q: Why sort the string to make the key?
     • Because sorting makes all anagrams look identical
+   
     • "eat", "tea", "ate" all become "aet". 
+    
     • This guarantees that anagrams collapse into the same dictionary bucket.
+
+    
+# -------------------------------------------------------
+Q: Why is the space O(N * K) instead of O(N)?
+    • We store all the strings twice: once as sorted keys and once as originals in the lists.
+
+    • Since each string can be up to length K and there are N strings total, space = O(N * K).
+    
+    • Extra variables (loop variables, temp sorted string) are only O(K).
+
+    • Overall: O(N * K).
+
+
+A simple analogy:
+    Imagine we had ["abc", "de", "f"].
+
+    That's 3 strings, but total of 6 characters in memory.
+
+    If we only said O(N), we'd be ignoring the fact that strings can get long.
+
+    Correct analysis: O(N * K), since both the number of strings and their length matter.
 
 """
 
@@ -246,7 +292,7 @@ print(sorted(s))
 # .join
 # Example 1: Joining words with a space separator
 def fn(words):
-    return " ".join(words)
+    return ' '.join(words)
 
 words = ["Hello", "world", "from", "Python"]
 print(fn(words))  # Output: Hello world from Python
@@ -254,8 +300,7 @@ print(fn(words))  # Output: Hello world from Python
 
 # Example 2: Joining characters with no separator
 def fn(c):
-    return "".join(c)
+    return ''.join(c)
 
 c = ["P", "y", "t", "h", "o", "n"]
 print(fn(c))  # Output: Python
-
