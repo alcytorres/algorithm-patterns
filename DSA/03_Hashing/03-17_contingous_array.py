@@ -46,12 +46,12 @@ def findMaxLength(nums):
     return max_length
 
 
-nums = [0, 1, 1, 1, 1, 1, 0, 0, 0]
+nums = [0, 1, 1, 1, 1, 0, 0]
 print(findMaxLength(nums))
-# Output: 6
+# Output 4
 
 
-
+"""
 # Time: O(n)
 # - Loop through nums once: O(n) iterations.
 # - Dictionary lookups ('diff in counts') and updates are O(1) on average.
@@ -63,22 +63,21 @@ print(findMaxLength(nums))
 # - Overall: O(n) total space.
 
 
-"""
+
 Overview for Each Iteration
-Input: nums = [0, 1, 1, 1, 1, 1, 0, 0, 0]
+Input: nums = [0, 1, 1, 1, 1, 0, 0]
 Step: Process array to find longest subarray with equal 0s and 1s
 i | num | diff | counts[diff] | max_length   | counts
+--|-----|------|--------------|--------------|-----------------------------
 - | -   | 0    | -1           | 0            | {0:-1}
 0 | 0   | -1   | absent       | 0            | {0:-1, -1:0}
 1 | 1   | 0    | -1           | 2 (1 - (-1)) | {0:-1, -1:0}
 2 | 1   | 1    | absent       | 2            | {0:-1, -1:0, 1:2}
 3 | 1   | 2    | absent       | 2            | {0:-1, -1:0, 1:2, 2:3}
 4 | 1   | 3    | absent       | 2            | {0:-1, -1:0, 1:2, 2:3, 3:4}
-5 | 1   | 4    | absent       | 2            | {0:-1, -1:0, 1:2, 2:3, 3:4, 4:5}
-6 | 0   | 3    | 4            | 2 (6 - 4)    | {0:-1, -1:0, 1:2, 2:3, 3:4, 4:5}
-7 | 0   | 2    | 3            | 4 (7 - 3)    | {0:-1, -1:0, 1:2, 2:3, 3:4, 4:5}
-8 | 0   | 1    | 2            | 6 (8 - 2)    | {0:-1, -1:0, 1:2, 2:3, 3:4, 4:5}
-Final: 6 ([1, 1, 1, 0, 0, 0])
+5 | 0   | 2    | 3            | 2            | {0:-1, -1:0, 1:2, 2:3, 3:4}
+6 | 0   | 1    | 2            | 4 (6 - 2)    | {0:-1, -1:0, 1:2, 2:3, 3:4}
+Final: 4 ([1, 1, 0, 0])
 
 
 
@@ -96,6 +95,32 @@ Q: How is the hash map in the Contiguous Array problem different from the ones w
     • 👉 Instead of “how many times something appears,” we store “where we first saw this score,” so we can later measure the length of subarrays with equal 0s and 1s.
 
 
+# -------------------------------------------------------
+Q: WHY the FOR LOOP WORKS 
+
+     • Loop structure:  for i, num in enumerate(nums):
+        We need both the element (num) and its position (i), because the index tells us where a score first happened and lets us calculate subarray lengths.
+
+    • Update score  (diff):
+        Add +1 for a 1, subtract -1 for a 0.
+        → This running score shows how many more 1s than 0s we've seen so far.
+
+    • Check notebook:  if diff in counts:
+        If this score was seen before, the subarray between then and now must balance out (same number of 0s and 1s).
+        → Length = current index - first index of this score.
+
+    • Update max length: max_length = max(max_length, i - counts[diff]):
+        Compare the current balanced subarray length with the best one so far and keep the maximum.
+
+    • Update notebook (counts[diff] = i):
+        If this score hasn't been seen yet, record the index where it first appeared.
+        → Important: only store the earliest index, since that gives the longest subarray later.
+
+    • Why it finds the answer:
+        Same score twice = balance in between. By always comparing with the first time that score appeared, we guarantee we find the longest balanced chunk.
+
+
+# -------------------------------------------------------
 Most IMPORTANT thing to Understand:
     • We want the longest subarray where 0s and 1s are equal.  
 
@@ -106,66 +131,44 @@ Most IMPORTANT thing to Understand:
 
     • If the same diff value shows up again, everything between those two indices must have balanced out (equal 0s and 1s).  
 
+    
 Why this code Works:
     • Hash map (counts): stores the first index where each diff value was seen.  
 
     • Prefix sum idea: diff acts like a prefix sum of (+1 for 1, -1 for 0).  
       → If diff repeats at index i and j, the subarray between i+1 and j has net zero difference → equal 0s and 1s.  
 
-    • Efficiency: O(n) because we only scan once and use O(1) lookups in the map.  
-      Brute force would check every subarray in O(n²).  
+    • Efficiency: O(n) because we only scan once and use O(1) lookups in the map.Brute force would check every subarray in O(n²).  
 
-    • Intuition: Think of diff as your "scoreboard." If you're at the same score twice, everything in between must have tied up perfectly.  
+    • Intuition: Treat diff like a scoreboard. If you see the same score at two indices, the segment between them sums to 0 → equal 0s and 1s.
 
+    
 TLDR:
     • Track the balance of 1s and 0s with diff; if diff repeats, the subarray between those two points is balanced.  
 
+    
 Quick Example Walkthrough:
-    nums = [0, 1, 1, 1, 1, 1, 0, 0, 0]  
+    nums = [0, 1, 1, 1, 1, 0, 0]
 
     Step 1: Initialize counts = {0:-1} (diff=0 seen before the array starts).  
             This lets us catch subarrays starting at index 0.  
 
-    Step 2: Process elements one by one:  
+    Step 2: Process each element:
 
-        i=0, num=0 → diff=-1 (first time) → save counts[-1]=0.  
-        i=1, num=1 → diff=0 (seen at -1) → subarray length = 1 - (-1) = 2.  
-        i=2, num=1 → diff=1 (first time) → save counts[1]=2.  
-        i=3, num=1 → diff=2 (first time) → save counts[2]=3.  
-        i=4, num=1 → diff=3 (first time) → save counts[3]=4.  
-        i=5, num=1 → diff=4 (first time) → save counts[4]=5.  
-        i=6, num=0 → diff=3 (seen at 4) → subarray length = 6 - 4 = 2.  
-        i=7, num=0 → diff=2 (seen at 3) → subarray length = 7 - 3 = 4.  
-        i=8, num=0 → diff=1 (seen at 2) → subarray length = 8 - 2 = 6.  
+    i=0, num=0 → diff=-1 (first time) → save counts[-1]=0.  
+    i=1, num=1 → diff=0 (seen at -1) → subarray length = 1 - (-1) = 2.  
+    i=2, num=1 → diff=1 (first time) → save counts[1]=2.  
+    i=3, num=1 → diff=2 (first time) → save counts[2]=3.  
+    i=4, num=1 → diff=3 (first time) → save counts[3]=4.  
+    i=5, num=0 → diff=2 (seen at 3) → subarray length = 5 - 3 = 2.  
+    i=6, num=0 → diff=1 (seen at 2) → subarray length = 6 - 2 = 4.  
 
-    Step 3: Maximum length found = 6.  
+    Step 3: Maximum length found = 4.  
 
-    Final Answer: 6 → subarray [1, 1, 1, 0, 0, 0].  
+    Final Answer: 4 → Longest balanced subarray is [1, 1, 0, 0] (indices 3-6).
 
 
 
-# -------------------------------------------------------
-Q: Why the Loop Works
-
-     • Loop structure (for i, num in enumerate(nums):):
-       We need both the element (num) and its position (i), because the index tells us where a score first happened and lets us calculate subarray lengths.
-
-    • Update score (diff):
-      Add +1 for a 1, subtract -1 for a 0.
-      → This running score shows how many more 1s than 0s we've seen so far.
-
-    • Check notebook (if diff in counts):
-       If this score was seen before, the subarray between then and now must balance out (same number of 0s and 1s).
-       → Length = current index - first index of this score.
-
-    • Update notebook (counts[diff] = i):
-       If this score hasn't been seen yet, record the index where it first appeared.
-       → Important: only store the earliest index, since that gives the longest subarray later.
-
-    • Why it finds the answer:
-      Same score twice = balance in between. By always comparing with the first time that score appeared, we guarantee we find the longest balanced chunk.
-
-      
 
 # -------------------------------------------------------
 Q: Why counts[0] = -1?
@@ -184,7 +187,44 @@ Q: Why counts[0] = -1?
 
     Without it: Subarrays beginning at index 0 would never be recognized as balanced.
 
+
+# -------------------------------------------------------
+Why “Score is 0 before we start”?
+    • Before we look at any numbers, we haven't seen any 1s or 0s, so our score (diff = 1s - 0s) is 0 (no hills or valleys yet).
+
+    • We set counts[0] = -1 to say, “At step -1 (before the list), our score was 0.” This helps us catch subarrays starting from index 0.
+
+    Example: nums = [0, 1] (Output: 2)
+    Start: counts = {0: -1}, diff = 0, max_length = 0.
+
+    Step 0 (num = 0):
+        diff = 0 - 1 = -1. Not in counts. Add counts[-1] = 0.
+        max_length = 0.
+
+    Step 1 (num = 1):
+        diff = -1 + 1 = 0. counts[0] = -1 exists!
+        Length = 1 - (-1) = 2 (chunk [0, 1] has one 0, one 1).
+        max_length = 2.
+
+Why counts[0] = -1 worked: When diff = 0 at step 1, we found a balanced chunk from the start (step -1 to 1), giving length 2.
+
+
+Analogy
+    • Imagine walking along a path.
+    • Each 1 = step up (+1).
+    • Each 0 = step down (-1).
+    • Your running score (diff) = your current height.
+    • At the start, you’re at ground level (diff = 0).
+    • We record: “Ground level first seen at index -1.”
+    • Why -1? So if we return to ground level later (like after [0, 1]), the subarray length is current_index - (-1) → includes the whole chunk starting at index 0.
+
+Why It Works
+    • counts[0] = -1 lets us catch balanced subarrays starting from the beginning. 
+    • Without it, we'd miss chunks like [0, 1]. Only -1 gives the correct length for these cases!
+
 """
+
+
 
 
 # –––––––––––––––––––––––––––––––––––––––––––––––––––––––
@@ -307,37 +347,6 @@ i | num | diff | counts[diff] | max_length   | counts
 Final: 2 ([0, 1])
 
 
-
-Why counts[0] = -1?
-    # What it does: The notebook (counts) tracks our score (diff, which is 1s minus 0s) and where we saw it. Setting counts[0] = -1 means we pretend our score is 0 before the list starts (at step -1).
-
-    # Why needed: We want to find chunks with equal 0s and 1s, including chunks that start at the beginning (index 0). If our score (diff) becomes 0, like after [0, 1], it means the chunk from the start is balanced. counts[0] = -1 lets us measure this chunk's length correctly: current step - (-1).
-
-Why “Score is 0 before we start”?
-    # Before we look at any numbers, we haven't seen any 1s or 0s, so our score (diff = 1s - 0s) is 0 (no hills or valleys yet).
-
-    # We set counts[0] = -1 to say, “At step -1 (before the list), our score was 0.” This helps us catch subarrays starting from index 0.
-
-    Example: nums = [0, 1] (Output: 2)
-    Start: counts = {0: -1}, diff = 0, max_length = 0.
-    Step 0 (num = 0):
-        diff = 0 - 1 = -1. Not in counts. Add counts[-1] = 0.
-        max_length = 0.
-
-    Step 1 (num = 1):
-        diff = -1 + 1 = 0. counts[0] = -1 exists!
-        Length = 1 - (-1) = 2 (chunk [0, 1] has one 0, one 1).
-        max_length = 2.
-
-Why counts[0] = -1 worked: When diff = 0 at step 1, we found a balanced chunk from the start (step -1 to 1), giving length 2.
-
-
-Analogy
-    # Think of walking a path: 1s are steps up (+1), 0s are steps down (-1). Your score (diff) is your height. Before you start, you're at ground level (score 0). We write in the notebook, “Ground level at step -1,” so if you hit ground level again (like after [0, 1]), we know the chunk from the start is balanced. Using -1 ensures the length calculation (current step - (-1)) works for chunks starting at 0.
-
-Why It Works
-    # counts[0] = -1 lets us catch balanced subarrays starting from the beginning. Without it, we'd miss chunks like [0, 1]. Only -1 gives the correct length for these cases!7.1s
-
 """
 
 
@@ -368,25 +377,50 @@ def findMaxLength(nums):
     return max_length
 
 
-nums = [0, 1, 1, 1, 1, 0, 0]
+nums = [0, 1, 1, 1, 1, 1, 0, 0, 0]
 print(findMaxLength(nums))
-# Output 4
+# Output: 6
 
 """
-Full Overview for Each Iteration
-Input: nums = [0, 1, 1, 1, 1, 0, 0]
+Overview for Each Iteration
+Input: nums = [0, 1, 1, 1, 1, 1, 0, 0, 0]
 Step: Process array to find longest subarray with equal 0s and 1s
 i | num | diff | counts[diff] | max_length   | counts
---|-----|------|--------------|--------------|-----------------------------
+--|-----|------|--------------|--------------|---------------------------------
 - | -   | 0    | -1           | 0            | {0:-1}
 0 | 0   | -1   | absent       | 0            | {0:-1, -1:0}
 1 | 1   | 0    | -1           | 2 (1 - (-1)) | {0:-1, -1:0}
 2 | 1   | 1    | absent       | 2            | {0:-1, -1:0, 1:2}
 3 | 1   | 2    | absent       | 2            | {0:-1, -1:0, 1:2, 2:3}
 4 | 1   | 3    | absent       | 2            | {0:-1, -1:0, 1:2, 2:3, 3:4}
-5 | 0   | 2    | 3            | 2            | {0:-1, -1:0, 1:2, 2:3, 3:4}
-6 | 0   | 1    | 2            | 4 (6 - 2)    | {0:-1, -1:0, 1:2, 2:3, 3:4}
-Final: 4 ([1, 1, 0, 0])
+5 | 1   | 4    | absent       | 2            | {0:-1, -1:0, 1:2, 2:3, 3:4, 4:5}
+6 | 0   | 3    | 4            | 2 (6 - 4)    | {0:-1, -1:0, 1:2, 2:3, 3:4, 4:5}
+7 | 0   | 2    | 3            | 4 (7 - 3)    | {0:-1, -1:0, 1:2, 2:3, 3:4, 4:5}
+8 | 0   | 1    | 2            | 6 (8 - 2)    | {0:-1, -1:0, 1:2, 2:3, 3:4, 4:5}
+Final: 6 ([1, 1, 1, 0, 0, 0])
+
+
+Quick Example Walkthrough:
+    nums = [0, 1, 1, 1, 1, 1, 0, 0, 0]  
+
+    Step 1: Initialize counts = {0:-1} (diff=0 seen before the array starts).  
+            This lets us catch subarrays starting at index 0.  
+
+    Step 2: Process elements one by one:  
+
+        i=0, num=0 → diff=-1 (first time) → save counts[-1]=0.  
+        i=1, num=1 → diff=0 (seen at -1) → subarray length = 1 - (-1) = 2.  
+        i=2, num=1 → diff=1 (first time) → save counts[1]=2.  
+        i=3, num=1 → diff=2 (first time) → save counts[2]=3.  
+        i=4, num=1 → diff=3 (first time) → save counts[3]=4.  
+        i=5, num=1 → diff=4 (first time) → save counts[4]=5.  
+        i=6, num=0 → diff=3 (seen at 4) → subarray length = 6 - 4 = 2.  
+        i=7, num=0 → diff=2 (seen at 3) → subarray length = 7 - 3 = 4.  
+        i=8, num=0 → diff=1 (seen at 2) → subarray length = 8 - 2 = 6.  
+
+    Step 3: Maximum length found = 6.  
+
+    Final Answer: 6 → subarray [1, 1, 1, 0, 0, 0].  
 
 """
 
