@@ -51,6 +51,7 @@ print(findMaxLength(nums))
 # Output: 6
 
 
+
 # Time: O(n)
 # - Loop through nums once: O(n) iterations.
 # - Dictionary lookups ('diff in counts') and updates are O(1) on average.
@@ -63,22 +64,21 @@ print(findMaxLength(nums))
 
 
 """
-# Overview for Each Iteration
-# Input: nums = [0, 1, 1, 1, 1, 1, 0, 0, 0]
-# Step: Process array to find longest subarray with equal 0s and 1s
-# i | num | diff | counts[diff] | max_length   | counts
-# - | -   | 0    | -1           | 0            | {0:-1}
-# 0 | 0   | -1   | absent       | 0            | {0:-1, -1:0}
-# 1 | 1   | 0    | -1           | 2 (1 - (-1)) | {0:-1, -1:0}
-# 2 | 1   | 1    | absent       | 2            | {0:-1, -1:0, 1:2}
-# 3 | 1   | 2    | absent       | 2            | {0:-1, -1:0, 1:2, 2:3}
-# 4 | 1   | 3    | absent       | 2            | {0:-1, -1:0, 1:2, 2:3, 3:4}
-# 5 | 1   | 4    | absent       | 2            | {0:-1, -1:0, 1:2, 2:3, 3:4, 4:5}
-# 6 | 0   | 3    | 4            | 2 (6 - 4)    | {0:-1, -1:0, 1:2, 2:3, 3:4, 4:5}
-# 7 | 0   | 2    | 3            | 4 (7 - 3)    | {0:-1, -1:0, 1:2, 2:3, 3:4, 4:5}
-# 8 | 0   | 1    | 2            | 6 (8 - 2)    | {0:-1, -1:0, 1:2, 2:3, 3:4, 4:5}
-# Final: 6 ([1, 1, 1, 0, 0, 0])
-
+Overview for Each Iteration
+Input: nums = [0, 1, 1, 1, 1, 1, 0, 0, 0]
+Step: Process array to find longest subarray with equal 0s and 1s
+i | num | diff | counts[diff] | max_length   | counts
+- | -   | 0    | -1           | 0            | {0:-1}
+0 | 0   | -1   | absent       | 0            | {0:-1, -1:0}
+1 | 1   | 0    | -1           | 2 (1 - (-1)) | {0:-1, -1:0}
+2 | 1   | 1    | absent       | 2            | {0:-1, -1:0, 1:2}
+3 | 1   | 2    | absent       | 2            | {0:-1, -1:0, 1:2, 2:3}
+4 | 1   | 3    | absent       | 2            | {0:-1, -1:0, 1:2, 2:3, 3:4}
+5 | 1   | 4    | absent       | 2            | {0:-1, -1:0, 1:2, 2:3, 3:4, 4:5}
+6 | 0   | 3    | 4            | 2 (6 - 4)    | {0:-1, -1:0, 1:2, 2:3, 3:4, 4:5}
+7 | 0   | 2    | 3            | 4 (7 - 3)    | {0:-1, -1:0, 1:2, 2:3, 3:4, 4:5}
+8 | 0   | 1    | 2            | 6 (8 - 2)    | {0:-1, -1:0, 1:2, 2:3, 3:4, 4:5}
+Final: 6 ([1, 1, 1, 0, 0, 0])
 
 
 
@@ -144,8 +144,7 @@ Quick Example Walkthrough:
 
 
 
-
-# –––––––––––––––––––––––––––––––––––––––––––––––––––––––
+# -------------------------------------------------------
 Q: Why the Loop Works
 
      • Loop structure (for i, num in enumerate(nums):):
@@ -168,7 +167,7 @@ Q: Why the Loop Works
 
       
 
-# –––––––––––––––––––––––––––––––––––––––––––––––––––––––
+# -------------------------------------------------------
 Q: Why counts[0] = -1?
 
     What it does: Pretends the score 0 happened at index -1 (before the array starts).
@@ -238,29 +237,31 @@ print(findMaxLength_bruteforce(nums))
 # Output: 6
 
 
-# Time: O(n^2)
-# - Outer loop picks a start index i: O(n).
-# - Inner loop extends subarray to j: O(n).
-# - Each step updates counts and compares zeros/ones in O(1).
-# - Overall: O(n * n) = O(n^2) time.
+"""
+Time: O(n^2)
+  - Outer loop picks a start index i: O(n).
+  - Inner loop extends subarray to j: O(n).
+  - Each step updates counts and compares zeros/ones in O(1).
+  - Overall: O(n * n) = O(n^2) time.
 
-# Space: O(1)
-# - Only a constant number of variables (ans, i, j, zeros, ones) are used.
-# - No additional data structures.
-# - Overall: O(1) space.
+Space: O(1)
+  - Only a constant number of variables (ans, i, j, zeros, ones) are used.
+  - No additional data structures.
+  - Overall: O(1) space.
 
 
-# Trace Overview
-# nums = [0,1,1,1,1,1,0,0,0]
-# i=0: j=1 → zeros=1, ones=1 → len=2 (ans=2)
-# i=1: (no equal-length found; more 1s than 0s ahead)
-# i=2: (no equal-length found)
-# i=3: j=8 → subarray [1,1,1,0,0,0] → zeros=3, ones=3 → len=6 (ans=6)
-# i=4: j=7 → [1,1,0,0] → len=4 (ans stays 6)
-# i=5: j=6 → [1,0] → len=2 (ans stays 6)
-# i=6..8: only 0s remain → no equal-length updates
-# Final ans = 6
+Trace Overview
+nums = [0,1,1,1,1,1,0,0,0]
+i=0: j=1 → zeros=1, ones=1 → len=2 (ans=2)
+i=1: (no equal-length found; more 1s than 0s ahead)
+i=2: (no equal-length found)
+i=3: j=8 → subarray [1,1,1,0,0,0] → zeros=3, ones=3 → len=6 (ans=6)
+i=4: j=7 → [1,1,0,0] → len=4 (ans stays 6)
+i=5: j=6 → [1,0] → len=2 (ans stays 6)
+i=6..8: only 0s remain → no equal-length updates
+Final ans = 6
 
+"""
 
 
 # –––––––––––––––––––––––––––––––––––––––––––––––––––––––
@@ -294,24 +295,25 @@ nums = [0, 1]
 print(findMaxLength(nums))
 # Output 2
 
-
-# Overview for Each Iteration
-# Input: nums = [0, 1]
-# Step: Process array to find longest subarray with equal 0s and 1s
-# i | num | diff | counts[diff] | max_length   | counts
-# - | -   | 0    | -1           | 0            | {0:-1}
-# 0 | 0   | -1   | absent       | 0            | {0:-1, -1:0}
-# 1 | 1   | 0    | -1           | 2 (1 - (-1)) | {0:-1, -1:0}
-# Final: 2 ([0, 1])
-
-
 """
-# Why counts[0] = -1?
+Overview for Each Iteration
+Input: nums = [0, 1]
+Step: Process array to find longest subarray with equal 0s and 1s
+i | num | diff | counts[diff] | max_length   | counts
+--|-----|------|--------------|--------------|-------------
+- | -   | 0    | -1           | 0            | {0:-1}
+0 | 0   | -1   | absent       | 0            | {0:-1, -1:0}
+1 | 1   | 0    | -1           | 2 (1 - (-1)) | {0:-1, -1:0}
+Final: 2 ([0, 1])
+
+
+
+Why counts[0] = -1?
     # What it does: The notebook (counts) tracks our score (diff, which is 1s minus 0s) and where we saw it. Setting counts[0] = -1 means we pretend our score is 0 before the list starts (at step -1).
 
     # Why needed: We want to find chunks with equal 0s and 1s, including chunks that start at the beginning (index 0). If our score (diff) becomes 0, like after [0, 1], it means the chunk from the start is balanced. counts[0] = -1 lets us measure this chunk's length correctly: current step - (-1).
 
-# Why “Score is 0 before we start”?
+Why “Score is 0 before we start”?
     # Before we look at any numbers, we haven't seen any 1s or 0s, so our score (diff = 1s - 0s) is 0 (no hills or valleys yet).
 
     # We set counts[0] = -1 to say, “At step -1 (before the list), our score was 0.” This helps us catch subarrays starting from index 0.
@@ -327,13 +329,13 @@ print(findMaxLength(nums))
         Length = 1 - (-1) = 2 (chunk [0, 1] has one 0, one 1).
         max_length = 2.
 
-# Why counts[0] = -1 worked: When diff = 0 at step 1, we found a balanced chunk from the start (step -1 to 1), giving length 2.
+Why counts[0] = -1 worked: When diff = 0 at step 1, we found a balanced chunk from the start (step -1 to 1), giving length 2.
 
 
-# Analogy
+Analogy
     # Think of walking a path: 1s are steps up (+1), 0s are steps down (-1). Your score (diff) is your height. Before you start, you're at ground level (score 0). We write in the notebook, “Ground level at step -1,” so if you hit ground level again (like after [0, 1]), we know the chunk from the start is balanced. Using -1 ensures the length calculation (current step - (-1)) works for chunks starting at 0.
 
-# Why It Works
+Why It Works
     # counts[0] = -1 lets us catch balanced subarrays starting from the beginning. Without it, we'd miss chunks like [0, 1]. Only -1 gives the correct length for these cases!7.1s
 
 """
@@ -370,20 +372,24 @@ nums = [0, 1, 1, 1, 1, 0, 0]
 print(findMaxLength(nums))
 # Output 4
 
+"""
+Full Overview for Each Iteration
+Input: nums = [0, 1, 1, 1, 1, 0, 0]
+Step: Process array to find longest subarray with equal 0s and 1s
+i | num | diff | counts[diff] | max_length   | counts
+--|-----|------|--------------|--------------|-----------------------------
+- | -   | 0    | -1           | 0            | {0:-1}
+0 | 0   | -1   | absent       | 0            | {0:-1, -1:0}
+1 | 1   | 0    | -1           | 2 (1 - (-1)) | {0:-1, -1:0}
+2 | 1   | 1    | absent       | 2            | {0:-1, -1:0, 1:2}
+3 | 1   | 2    | absent       | 2            | {0:-1, -1:0, 1:2, 2:3}
+4 | 1   | 3    | absent       | 2            | {0:-1, -1:0, 1:2, 2:3, 3:4}
+5 | 0   | 2    | 3            | 2            | {0:-1, -1:0, 1:2, 2:3, 3:4}
+6 | 0   | 1    | 2            | 4 (6 - 2)    | {0:-1, -1:0, 1:2, 2:3, 3:4}
+Final: 4 ([1, 1, 0, 0])
 
-# Full Overview for Each Iteration
-# Input: nums = [0, 1, 1, 1, 1, 0, 0]
-# Step: Process array to find longest subarray with equal 0s and 1s
-# i | num | diff | counts[diff] | max_length   | counts
-# - | -   | 0    | -1           | 0            | {0:-1}
-# 0 | 0   | -1   | absent       | 0            | {0:-1, -1:0}
-# 1 | 1   | 0    | -1           | 2 (1 - (-1)) | {0:-1, -1:0}
-# 2 | 1   | 1    | absent       | 2            | {0:-1, -1:0, 1:2}
-# 3 | 1   | 2    | absent       | 2            | {0:-1, -1:0, 1:2, 2:3}
-# 4 | 1   | 3    | absent       | 2            | {0:-1, -1:0, 1:2, 2:3, 3:4}
-# 5 | 0   | 2    | 3            | 2            | {0:-1, -1:0, 1:2, 2:3, 3:4}
-# 6 | 0   | 1    | 2            | 4 (6 - 2)    | {0:-1, -1:0, 1:2, 2:3, 3:4}
-# Final: 4 ([1, 1, 0, 0])
+"""
+
 
 
 # –––––––––––––––––––––––––––––––––––––––––––––––––––––––
@@ -418,19 +424,21 @@ print(findMaxLength(nums))
 # Output 4
 
 
-# Full Overview for Each Iteration
-# Input: nums = [0, 1, 1, 0, 0]
-# Step: Process array to find longest subarray with equal 0s and 1s
-# i | num | diff | counts[diff] | max_length   | counts
-# - | -   | 0    | -1           | 0            | {0:-1}
-# 0 | 0   | -1   | absent       | 0            | {0:-1, -1:0}
-# 1 | 1   | 0    | -1           | 2 (1 - (-1)) | {0:-1, -1:0}
-# 2 | 1   | 1    | absent       | 2            | {0:-1, -1:0, 1:2}
-# 3 | 0   | 0    | -1           | 2 (3 - (-1)) | {0:-1, -1:0, 1:2}
-# 4 | 0   | -1   | 0            | 4 (4 - 0)    | {0:-1, -1:0, 1:2}
-# Final: 4 ([1, 1, 0, 0])
+"""
+Full Overview for Each Iteration
+Input: nums = [0, 1, 1, 0, 0]
+Step: Process array to find longest subarray with equal 0s and 1s
+i | num | diff | counts[diff] | max_length   | counts
+--|-----|------|--------------|--------------|------------------
+- | -   | 0    | -1           | 0            | {0:-1}
+0 | 0   | -1   | absent       | 0            | {0:-1, -1:0}
+1 | 1   | 0    | -1           | 2 (1 - (-1)) | {0:-1, -1:0}
+2 | 1   | 1    | absent       | 2            | {0:-1, -1:0, 1:2}
+3 | 0   | 0    | -1           | 2 (3 - (-1)) | {0:-1, -1:0, 1:2}
+4 | 0   | -1   | 0            | 4 (4 - 0)    | {0:-1, -1:0, 1:2}
+Final: 4 ([1, 1, 0, 0])
 
-
+"""
 
 
 # –––––––––––––––––––––––––––––––––––––––––––––––––––––––

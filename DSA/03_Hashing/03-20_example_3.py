@@ -1,4 +1,5 @@
 # 2342. Max Sum of a Pair With Equal Sum of Digits
+    # SKIP UNTIL HEAP (Priority Queue) CHAPTER
 
 # You are given a 0-indexed array nums consisting of positive integers. You can choose two indices i and j, such that i != j, and the sum of digits of the number nums[i] is equal to that of nums[j].
 
@@ -27,7 +28,7 @@
 
 
 
-# –––––––––––––––––––––––––––––––––––––––––––––––––––––––
+# –––––––––––––––––––––––––––––––––––––––––––––––––
 # Breakdown
 
 
@@ -36,14 +37,14 @@
 
 
 
-# –––––––––––––––––––––––––––––––––––––––––––––––––––––––
+# –––––––––––––––––––––––––––––––––––––––––––––––––
 # Brute force 
 
 
 
 
 
-# –––––––––––––––––––––––––––––––––––––––––––––––––––––––
+# –––––––––––––––––––––––––––––––––––––––––––––––––
 # Alternate Solution
 
 
@@ -75,7 +76,7 @@ print(maximumSum(nums))
 
 
 
-# –––––––––––––––––––––––––––––––––––––––––––––––––––––––
+# –––––––––––––––––––––––––––––––––––––––––––––––––
 def maximumSum(nums):
     mp = [-1] * 82  # Fixed size array
     ans = -1
@@ -99,4 +100,4 @@ print(maximumSum(nums))
 
 
 
-# –––––––––––––––––––––––––––––––––––––––––––––––––––––––
+# –––––––––––––––––––––––––––––––––––––––––––––––––

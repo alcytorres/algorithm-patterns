@@ -37,43 +37,57 @@ print(maxNumberOfBalloons(text))
 # counts = {'n':1, 'l':2, 'a':1, 'e':1, 'b':1, 'o':2, 'k':1}
 
 
-# Time: O(n)
-# - Loop through text once to count characters: O(n).
-# - Compute the minimum over fixed letters 'b', 'a', 'l', 'o', 'n': O(1).
-# - Overall: O(n) time.
-
-# Space: O(n)
-# - Dictionary 'counts' can store up to n entries in the worst case (all characters unique).
-# - A few variables (char, text) take O(1) space.
-# - Overall: O(n) total space.
-# - Since the alphabet size is bounded (26 lowercase letters), practical space can also be considered O(1).
-
-
-# Overview for Each Iteration
-# Step 1: Count characters in text
-# Idx | char | counts
-# -   | -    | {}
-# 0   | n    | {n:1}
-# 1   | l    | {n:1, l:1}
-# 2   | a    | {n:1, l:1, a:1}
-# 3   | e    | {n:1, l:1, a:1, e:1}
-# 4   | b    | {n:1, l:1, a:1, e:1, b:1}
-# 5   | o    | {n:1, l:1, a:1, e:1, b:1, o:1}
-# 6   | l    | {n:1, l:2, a:1, e:1, b:1, o:1}
-# 7   | k    | {n:1, l:2, a:1, e:1, b:1, o:1, k:1}
-# 8   | o    | {n:1, l:2, a:1, e:1, b:1, o:2, k:1}
-
-# Step 2: Calculate max "balloon"s
-# Char | Count | Required      | Available
-# b    | 1     | 1 per balloon | 1
-# a    | 1     | 1 per balloon | 1
-# l    | 2     | 2 per balloon | 2 // 2 = 1
-# o    | 2     | 2 per balloon | 2 // 2 = 1
-# n    | 1     | 1 per balloon | 1
-# Final: min(1, 1, 1, 1, 1) = 1
-
-
 """
+Time: O(N)
+  - Let N = length of text.
+  - Step 1: Count all characters in text → O(N).
+  - Step 2: Compute min() over 5 letters 'b', 'a', 'l', 'o', 'n': → O(1).
+  - Overall: O(N).
+
+Space: O(1)
+  - Dictionary 'counts' can at most hold 26 lowercase letters.
+  - Fixed size regardless of input length.
+    - Since the alphabet size is bounded (26 lowercase letters), practical space can also be considered O(1).
+  - Overall: O(1).
+
+  
+Interview Answer: Worst Case
+
+Time: O(N)
+  - Single pass to count characters.
+
+Space: O(1)
+  - Only stores counts for a fixed alphabet size.
+
+
+
+Overview for Each Iteration
+Step 1: Count characters in text
+Idx | char | counts
+----|------|------------------------------------
+-   | -    | {}
+0   | n    | {n:1}
+1   | l    | {n:1, l:1}
+2   | a    | {n:1, l:1, a:1}
+3   | e    | {n:1, l:1, a:1, e:1}
+4   | b    | {n:1, l:1, a:1, e:1, b:1}
+5   | o    | {n:1, l:1, a:1, e:1, b:1, o:1}
+6   | l    | {n:1, l:2, a:1, e:1, b:1, o:1}
+7   | k    | {n:1, l:2, a:1, e:1, b:1, o:1, k:1}
+8   | o    | {n:1, l:2, a:1, e:1, b:1, o:2, k:1}
+
+Step 2: Calculate max "balloon"s
+Char | Count | Required      | Available
+-----|-------|---------------|-------------
+b    | 1     | 1 per balloon | 1
+a    | 1     | 1 per balloon | 1
+l    | 2     | 2 per balloon | 2 // 2 = 1
+o    | 2     | 2 per balloon | 2 // 2 = 1
+n    | 1     | 1 per balloon | 1
+Final: min(1, 1, 1, 1, 1) = 1
+
+
+
 Most IMPORTANT thing to Understand:
     • We need to check how many full copies of the word "balloon" can be built from the letters in text.  
 
@@ -150,45 +164,49 @@ print(maxNumberOfBalloons_bruteforce(text))
 # Output: 1
 
 
-# Time: O(n^2)
-# - Each attempt to build "balloon" does ~7 `in` + `remove` operations on a list.
-# - `in`/`remove` are O(n) (scan + delete shift), so each balloon costs O(n).
-# - You can build at most O(n) balloons → O(n^2) overall.
+"""
+Time: O(n^2)
+  - Each attempt to build "balloon" does ~7 `in` + `remove` operations on a list.
+  - `in`/`remove` are O(n) (scan + delete shift), so each balloon costs O(n).
+  - You can build at most O(n) balloons → O(n^2) overall.
 
-# Space: O(n)
-# - Stores the characters in a list, plus a few scalars.
-# - Overall: O(n) space.
-
-
-# Simple Overview
-# text = "nlaebolko"
-# letters start: [n, l, a, e, b, o, l, k, o]
-# Build #1 needs: b a l l o o n
-# - remove b → [n, l, a, e, o, l, k, o]
-# - remove a → [n, l, e, o, l, k, o]
-# - remove l → [n, e, o, l, k, o]
-# - remove l → [n, e, o, k, o]
-# - remove o → [n, e, k, o]
-# - remove o → [n, e, k]
-# - remove n → [e, k]
-# count = 1
-# Next build: need 'b' but not present → stop → answer = 1
+Space: O(n)
+  - Stores the characters in a list, plus a few scalars.
+  - Overall: O(n) space.
 
 
-# Overview for Each Iteration
-# Input: text = "nlaebolko"
-# Step: Build "balloon" by removing letters
-# count | c   | letters                     | c in letters | Action                             | count after
-# 0     | -   | [n, l, a, e, b, o, l, k, o] | -            | Start                              | 0
-# 0     | b   | [n, l, a, e, b, o, l, k, o] | True         | Remove b: [n, l, a, e, o, l, k, o] | 0
-# 0     | a   | [n, l, a, e, o, l, k, o]    | True         | Remove a: [n, l, e, o, l, k, o]    | 0
-# 0     | l   | [n, l, e, o, l, k, o]       | True         | Remove l: [n, e, o, l, k, o]       | 0
-# 0     | l   | [n, e, o, l, k, o]          | True         | Remove l: [n, e, o, k, o]          | 0
-# 0     | o   | [n, e, o, k, o]             | True         | Remove o: [n, e, k, o]             | 0
-# 0     | o   | [n, e, k, o]                | True         | Remove o: [n, e, k]                | 0
-# 0     | n   | [n, e, k]                   | True         | Remove n: [e, k]                   | 1
-# 1     | b   | [e, k]                      | False        | Return count=1                     | 1
-# Final: 1
+Simple Overview
+text = "nlaebolko"
+letters start: [n, l, a, e, b, o, l, k, o]
+Build #1 needs: b a l l o o n
+  - remove b → [n, l, a, e, o, l, k, o]
+  - remove a → [n, l, e, o, l, k, o]
+  - remove l → [n, e, o, l, k, o]
+  - remove l → [n, e, o, k, o]
+  - remove o → [n, e, k, o]
+  - remove o → [n, e, k]
+  - remove n → [e, k]
+count = 1
+Next build: need 'b' but not present → stop → answer = 1
+
+
+Overview for Each Iteration
+Input: text = "nlaebolko"
+Step: Build "balloon" by removing letters
+count | c   | letters                     | c in letters | Action                             | count after
+------|-----|-----------------------------|--------------|------------------------------------|-------------
+0     | -   | [n, l, a, e, b, o, l, k, o] | -            | Start                              | 0
+0     | b   | [n, l, a, e, b, o, l, k, o] | True         | Remove b: [n, l, a, e, o, l, k, o] | 0
+0     | a   | [n, l, a, e, o, l, k, o]    | True         | Remove a: [n, l, e, o, l, k, o]    | 0
+0     | l   | [n, l, e, o, l, k, o]       | True         | Remove l: [n, e, o, l, k, o]       | 0
+0     | l   | [n, e, o, l, k, o]          | True         | Remove l: [n, e, o, k, o]          | 0
+0     | o   | [n, e, o, k, o]             | True         | Remove o: [n, e, k, o]             | 0
+0     | o   | [n, e, k, o]                | True         | Remove o: [n, e, k]                | 0
+0     | n   | [n, e, k]                   | True         | Remove n: [e, k]                   | 1
+1     | b   | [e, k]                      | False        | Return count=1                     | 1
+Final: 1
+
+"""
 
 
 

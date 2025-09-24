@@ -8,7 +8,7 @@
     # Explanation: The maximum integer in the array is 9 but it is repeated. The number 8 occurs only once, so it is the answer.
 
 # Example 2:
-    # Input: nums = [9, 9 ,8, 8]
+    # Input: nums = [9, 9, 8, 8]
     # Output: -1
     # Explanation: There is no number that occurs only once.
 

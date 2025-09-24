@@ -178,17 +178,19 @@ print(groupAnagrams(strs))
 # Output: [['eat', 'tea', 'ate'], ['tan', 'nat'], ['bat']]
 
 
-# Time: O(n * k)
-# - For each string of length k, build a 26-length count array in O(k).
-# - Using this tuple of counts as the dictionary key is O(1).
-# - Overall: O(n * k) time (faster than sorting).
+"""
+Time: O(n * k)
+  - For each string of length k, build a 26-length count array in O(k).
+  - Using this tuple of counts as the dictionary key is O(1).
+  - Overall: O(n * k) time (faster than sorting).
 
-# Space: O(n * k)
-# - Dictionary stores up to n strings in grouped lists.
-# - Each string of length k is stored once → O(n * k).
-# - Keys are 26-length tuples (constant size), so O(n) extra.
-# - Overall: O(n * k) space.
+Space: O(n * k)
+  - Dictionary stores up to n strings in grouped lists.
+  - Each string of length k is stored once → O(n * k).
+  - Keys are 26-length tuples (constant size), so O(n) extra.
+  - Overall: O(n * k) space.
 
+"""
 
 
 # –––––––––––––––––––––––––––––––––––––––––––––––––––
@@ -209,17 +211,19 @@ print(groupAnagrams(strs))
 # Output: [['eat', 'tea', 'ate'], ['tan', 'nat'], ['bat']]
 
 
-# Time: O(n * k log k)
-# - For each of the n strings, sort it (O(k log k), where k = average string length).
-# - Dictionary insert/append is O(1).
-# - Overall: O(n * k log k) time.
+"""
+Time: O(n * k log k)
+  - For each of the n strings, sort it (O(k log k), where k = average string length).
+  - Dictionary insert/append is O(1).
+  - Overall: O(n * k log k) time.
 
-# Space: O(n * k)
-# - Dictionary stores up to n strings in grouped lists.
-# - Each string of length k is stored once → O(n * k).
-# - Keys are sorted tuples of length k, but reused, so O(n * k) dominates.
-# - Overall: O(n * k) space.
+Space: O(n * k)
+  - Dictionary stores up to n strings in grouped lists.
+  - Each string of length k is stored once → O(n * k).
+  - Keys are sorted tuples of length k, but reused, so O(n * k) dominates.
+  - Overall: O(n * k) space.
 
+"""
 
 
 # –––––––––––––––––––––––––––––––––––––––––––––––––––
