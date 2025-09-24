@@ -39,43 +39,57 @@ print(largestUniqueNumber(nums))
 # counts = {1:1, 3:2, 9:2, 4:1, 8:1}
 
 
-# Time: O(n)
-# - Loop through nums once to count occurrences: O(n).
-# - Loop through dictionary keys to find the largest unique number: O(u), where u = number of unique numbers (≤ n).
-# - Overall: O(n) time.
-
-# Space: O(n)
-# - Dictionary 'counts' can store up to n elements in the worst case (all numbers unique).
-# - A few variables (num, max_unique) take O(1) space.
-# - Overall: O(n) total space.
-
-
-# Overview for Each Iteration
-# Input: nums = [1, 3, 9, 4, 9, 8, 3]
-# Step 1: Count occurrences of each number
-# i  | num | counts
-# -  | -   | {}
-# 0  | 1   | {1:1}
-# 1  | 3   | {1:1, 3:1}
-# 2  | 9   | {1:1, 3:1, 9:1}
-# 3  | 4   | {1:1, 3:1, 9:1, 41}
-# 4  | 9   | {1:1, 3:1, 9:2, 4:1}
-# 5  | 8   | {1:1, 3:1, 9:2, 4:1, 8:1}
-# 6  | 3   | {1:1, 3:2, 9:2, 4:1, 8:1}
-
-# Step 2: Find largest number with count 1
-# num | counts[num] | max_unique
-# -   | -           | -1
-# 1   | 1           | 1 (1 > -1)
-# 3   | 2           | 1 (skip, not unique)
-# 9   | 2           | 1 (skip, not unique)
-# 4   | 1           | 4 (4 > 1)
-# 8   | 1           | 8 (8 > 4)
-# Final: 8
-
-
-
 """
+Time: O(N)
+  - Let N = length of nums.
+  - Step 1: Count frequencies by scanning nums once → O(N).
+  - Step 2: Scan dictionary keys (≤ N unique numbers) → O(N).
+  - Overall: O(N + N) = O(N).
+
+Space: O(U) ≈ O(N)
+  - Dictionary 'counts' stores up to U unique numbers.
+  - A few integer variables for tracking (max_unique, num) use O(1).
+  - Overall: O(U).
+  - Worst case: U = N (all numbers unique), so O(N).
+
+  
+Interview Answer: Worst Case
+
+Time: O(N)
+  - Count numbers in one pass.
+  - Scan frequencies in another pass.
+
+Space: O(N)
+  - Dictionary stores up to N unique numbers.
+
+
+Overview for Each Iteration
+Input: nums = [1, 3, 9, 4, 9, 8, 3]
+Step 1: Count occurrences of each number
+i  | num | counts
+---|-----|---------------------------
+-  | -   | {}
+0  | 1   | {1:1}
+1  | 3   | {1:1, 3:1}
+2  | 9   | {1:1, 3:1, 9:1}
+3  | 4   | {1:1, 3:1, 9:1, 41}
+4  | 9   | {1:1, 3:1, 9:2, 4:1}
+5  | 8   | {1:1, 3:1, 9:2, 4:1, 8:1}
+6  | 3   | {1:1, 3:2, 9:2, 4:1, 8:1}
+
+Step 2: Find largest number with count 1
+num | counts[num] | max_unique
+----|-------------|---------------------
+-   | -           | -1
+1   | 1           | 1 (1 > -1)
+3   | 2           | 1 (skip, not unique)
+9   | 2           | 1 (skip, not unique)
+4   | 1           | 4 (4 > 1)
+8   | 1           | 8 (8 > 4)
+Final: 8
+
+
+
 Most IMPORTANT thing to Understand:
     • We need to find the largest number in the array that occurs exactly once.
 
@@ -117,6 +131,24 @@ Quick Example Walkthrough:
 
 
 
+# –––––––––––––––––––––––––––––––––––––––––––––––––
+# Breakdown 
+from collections import defaultdict
+
+def largestUniqueNumber(nums):
+    counts = defaultdict(int)  # Notebook to count how many times each number appears
+    for num in nums:          # Go through each number in the list
+        counts[num] += 1      # Add 1 to the count of this number in the notebook
+    
+    max_unique = -1           # Start with -1 (return this if no number appears once)
+    for num in counts:        # Check each number in the notebook
+        if counts[num] == 1 and num > max_unique:  # If number appears once and is bigger
+            max_unique = num  # Update to this bigger number
+    
+    return max_unique         # Return the biggest number that appears once
+
+
+
 # –––––––––––––––––––––––––––––––––––––––––––––––––––––––
 # Brute force 
 
@@ -143,94 +175,101 @@ nums = [1, 3, 9, 4, 9, 8, 3]
 print(largestUniqueNumber(nums))  
 # Output: 8
 
-# Time: O(n^2)
-# - Outer loop iterates over all n elements.
-# - Inner loop scans the entire array for each element → O(n).
-# - Overall: O(n * n) = O(n^2) time.
+"""
+Time: O(n^2)
+  - Outer loop iterates over all n elements.
+  - Inner loop scans the entire array for each element → O(n).
+  - Overall: O(n * n) = O(n^2) time.
 
-# Space: O(1)
-# - Only a constant number of variables (max_unique, i, j, num, count) are used.
-# - No additional data structures.
-# - Overall: O(1) space.
+Space: O(1)
+  - Only a constant number of variables (max_unique, i, j, num, count) are used.
+  - No additional data structures.
+  - Overall: O(1) space.
 
-# Overview for Each Iteration
-# Step 1: Check each number and count occurrences
-# i | num | j | nums[j] | count | max_unique
-# - | -   | - | -       | -     | -1
-# 0 | 1   | 0 | 1       | 1     | -1
-#   |     | 1 | 3       | 1     | -1
-#   |     | 2 | 9       | 1     | -1
-#   |     | 3 | 4       | 1     | -1
-#   |     | 4 | 9       | 1     | -1
-#   |     | 5 | 8       | 1     | -1
-#   |     | 6 | 3       | 1     | -1
-#   |     | End: count=1, num=1 > -1 | 1 (updated)
-# 1 | 3   | 0 | 1       | 0     | 1
-#   |     | 1 | 3       | 1     | 1
-#   |     | 2 | 9       | 1     | 1
-#   |     | 3 | 4       | 1     | 1
-#   |     | 4 | 9       | 1     | 1
-#   |     | 5 | 8       | 1     | 1
-#   |     | 6 | 3       | 2     | 1
-#   |     | End: count=2, skip | 1
-# 2 | 9   | 0 | 1       | 0     | 1
-#   |     | 1 | 3       | 0     | 1
-#   |     | 2 | 9       | 1     | 1
-#   |     | 3 | 4       | 1     | 1
-#   |     | 4 | 9       | 2     | 1
-#   |     | 5 | 8       | 2     | 1
-#   |     | 6 | 3       | 2     | 1
-#   |     | End: count=2, skip | 1
-# 3 | 4   | 0 | 1       | 0     | 1
-#   |     | 1 | 3       | 0     | 1
-#   |     | 2 | 9       | 0     | 1
-#   |     | 3 | 4       | 1     | 1
-#   |     | 4 | 9       | 1     | 1
-#   |     | 5 | 8       | 1     | 1
-#   |     | 6 | 3       | 1     | 1
-#   |     | End: count=1, num=4 > 1 | 4 (updated)
-# 4 | 9   | 0 | 1       | 0     | 4
-#   |     | 1 | 3       | 0     | 4
-#   |     | 2 | 9       | 1     | 4
-#   |     | 3 | 4       | 1     | 4
-#   |     | 4 | 9       | 2     | 4
-#   |     | 5 | 8       | 2     | 4
-#   |     | 6 | 3       | 2     | 4
-#   |     | End: count=2, skip | 4
-# 5 | 8   | 0 | 1       | 0     | 4
-#   |     | 1 | 3       | 0     | 4
-#   |     | 2 | 9       | 0     | 4
-#   |     | 3 | 4       | 0     | 4
-#   |     | 4 | 9       | 0     | 4
-#   |     | 5 | 8       | 1     | 4
-#   |     | 6 | 3       | 1     | 4
-#   |     | End: count=1, num=8 > 4 | 8 (updated)
-# 6 | 3   | 0 | 1       | 0     | 8
-#   |     | 1 | 3       | 1     | 8
-#   |     | 2 | 9       | 1     | 8
-#   |     | 3 | 4       | 1     | 8
-#   |     | 4 | 9       | 1     | 8
-#   |     | 5 | 8       | 1     | 8
-#   |     | 6 | 3       | 2     | 8
-#   |     | End: count=2, skip | 8
-# Final: 8
+Overview for Each Iteration
+Step 1: Check each number and count occurrences
+i | num | j | nums[j] | count | max_unique
+- | -   | - | -       | -     | -1
+0 | 1   | 0 | 1       | 1     | -1
+  |     | 1 | 3       | 1     | -1
+  |     | 2 | 9       | 1     | -1
+  |     | 3 | 4       | 1     | -1
+  |     | 4 | 9       | 1     | -1
+  |     | 5 | 8       | 1     | -1
+  |     | 6 | 3       | 1     | -1
+  |     | End: count=1, num=1 > -1 | 1 (updated)
+1 | 3   | 0 | 1       | 0     | 1
+  |     | 1 | 3       | 1     | 1
+  |     | 2 | 9       | 1     | 1
+  |     | 3 | 4       | 1     | 1
+  |     | 4 | 9       | 1     | 1
+  |     | 5 | 8       | 1     | 1
+  |     | 6 | 3       | 2     | 1
+  |     | End: count=2, skip | 1
+2 | 9   | 0 | 1       | 0     | 1
+  |     | 1 | 3       | 0     | 1
+  |     | 2 | 9       | 1     | 1
+  |     | 3 | 4       | 1     | 1
+  |     | 4 | 9       | 2     | 1
+  |     | 5 | 8       | 2     | 1
+  |     | 6 | 3       | 2     | 1
+  |     | End: count=2, skip | 1
+3 | 4   | 0 | 1       | 0     | 1
+  |     | 1 | 3       | 0     | 1
+  |     | 2 | 9       | 0     | 1
+  |     | 3 | 4       | 1     | 1
+  |     | 4 | 9       | 1     | 1
+  |     | 5 | 8       | 1     | 1
+  |     | 6 | 3       | 1     | 1
+  |     | End: count=1, num=4 > 1 | 4 (updated)
+4 | 9   | 0 | 1       | 0     | 4
+  |     | 1 | 3       | 0     | 4
+  |     | 2 | 9       | 1     | 4
+  |     | 3 | 4       | 1     | 4
+  |     | 4 | 9       | 2     | 4
+  |     | 5 | 8       | 2     | 4
+  |     | 6 | 3       | 2     | 4
+  |     | End: count=2, skip | 4
+5 | 8   | 0 | 1       | 0     | 4
+  |     | 1 | 3       | 0     | 4
+  |     | 2 | 9       | 0     | 4
+  |     | 3 | 4       | 0     | 4
+  |     | 4 | 9       | 0     | 4
+  |     | 5 | 8       | 1     | 4
+  |     | 6 | 3       | 1     | 4
+  |     | End: count=1, num=8 > 4 | 8 (updated)
+6 | 3   | 0 | 1       | 0     | 8
+  |     | 1 | 3       | 1     | 8
+  |     | 2 | 9       | 1     | 8
+  |     | 3 | 4       | 1     | 8
+  |     | 4 | 9       | 1     | 8
+  |     | 5 | 8       | 1     | 8
+  |     | 6 | 3       | 2     | 8
+  |     | End: count=2, skip | 8
+Final: 8
+
+"""
 
 
-# –––––––––––––––––––––––––––––––––––––––––––––––––
-# Breakdown 
-from collections import defaultdict
+
+# –––––––––––––––––––––––––––––––––––––––––––––––––––––––
+# Alternative Solution
+
+from collections import Counter
 
 def largestUniqueNumber(nums):
-    counts = defaultdict(int)  # Notebook to count how many times each number appears
-    for num in nums:          # Go through each number in the list
-        counts[num] += 1      # Add 1 to the count of this number in the notebook
-    
-    max_unique = -1           # Start with -1 (return this if no number appears once)
-    for num in counts:        # Check each number in the notebook
-        if counts[num] == 1 and num > max_unique:  # If number appears once and is bigger
-            max_unique = num  # Update to this bigger number
-    
-    return max_unique         # Return the biggest number that appears once
+    # Use Counter to count frequencies of numbers
+    frequency_map = Counter(nums)
+
+    # Find the largest number with frequency 1, or -1 if none found
+    return max(
+        (num for num, freq in frequency_map.items() if freq == 1),
+        default=-1,
+    )
+
+nums = [3, 9, 4, 9, 8, 3]
+print(largestUniqueNumber(nums))
+# Output: 8
 
 
 
@@ -330,26 +369,4 @@ def largestUniqueNumber(nums):  # Example: nums = [1, 3, 9, 4, 9, 8, 3]
 
 nums = [1, 3, 9, 4, 9, 8, 3]
 print(largestUniqueNumber(nums))  
-# Output: 8
-
-
-
-
-# –––––––––––––––––––––––––––––––––––––––––––––––––––––––
-# Alternative Solution
-
-from collections import Counter
-
-def largestUniqueNumber(nums):
-    # Use Counter to count frequencies of numbers
-    frequency_map = Counter(nums)
-
-    # Find the largest number with frequency 1, or -1 if none found
-    return max(
-        (num for num, freq in frequency_map.items() if freq == 1),
-        default=-1,
-    )
-
-nums = [3, 9, 4, 9, 8, 3]
-print(largestUniqueNumber(nums))
 # Output: 8

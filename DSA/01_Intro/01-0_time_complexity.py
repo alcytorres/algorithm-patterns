@@ -223,17 +223,19 @@ Instructions:
 - Only add the necessary bullets:
   * Don't overdo it with too many details.  
   * Don't swing too far into being overly concise.  
-  * Use the optimal amount so you can quickly understand and recall.  
-- Rare cases (like #2225 Find Players With Zero or One Losses) may need more bullets because more is going on.  
+  * Use the optimal amount so a beginner can quickly understand and recall.  
+- Some cases (like #2225 Find Players With Zero or One Losses) may need more bullets because more is going on.  
 - Typical problems should use fewer bullets.  
 - STUDY ANSWER = thorough, with step breakdowns and worst-case reasoning.  
-- INTERVIEW ANSWER = simplified to worst-case, with 1-2 bullets explaining “why” directly.  
+- INTERVIEW ANSWER = simplified to worst-case, with 1-2 bullets explaining “why” directly.
+- REMEMBER I'm a beginner so the bullet explanations for the Study Answer should be very simple and easy to follow. If you need more bullets or to make them a little longer because you think that will make it easier for me follow do so
+Place your answer inside """ """ in a .py file with a code block. Don't include the code; just the time and space template.
 
 ------------------------------------------------
 TEMPLATE:
 
 Time: O(...)
-  - Define variables (e.g., N = input size, P = unique players).
+  - Define variables (e.g., N = input size, U = unique numbers, P = unique players, etc).
   - List main steps and their costs.
   - Show the combined overall time complexity.
   - Add worst-case relationship if relevant (e.g., P ≤ N).
@@ -244,7 +246,8 @@ Space: O(...)
   - Give overall space complexity.
   - Add worst-case tie-back if relevant.
 
-Interview Answer
+  
+Interview Answer: Worst Case
 
 Time: O(...)
   - 1-2 bullets highlighting the dominant step(s).
@@ -296,7 +299,8 @@ Space: O(P) ≈ O(N)
   - Overall: O(P).
   - Since P ≤ 2N, worst case O(P) = O(N).
 
-Interview Answer
+  
+Interview Answer: Worse Case
 
 Time: O(N log N)
   - Process matches in O(N).
@@ -339,6 +343,7 @@ Space: O(1)
   - No extra data structures.
   - Overall: O(1).
 
+  
 Interview Answer
 
 Time: O(N)
