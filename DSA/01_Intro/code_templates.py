@@ -119,7 +119,69 @@ print(fn(['a', 'b', 'c', 'd']))
 
 
 # ––––––––––––––––––––––––––––––––––––––––––––––
+"""
+📘 Quick Tutorial: defaultdict(list)
 
+defaultdict(list) is a dictionary that automatically creates
+an empty list [] for any missing key.
+
+Main use case: grouping items by a key.
+
+Example: Group words by their first letter.
+"""
+
+from collections import defaultdict
+
+# Create defaultdict where each value starts as []
+groups = defaultdict(list)
+
+words = ["apple", "ant", "banana", "bat", "car"]
+
+for w in words:
+    key = w[0]            # key = first letter
+    groups[key].append(w) # no need to check if key exists
+
+print(groups)
+# Output:
+# defaultdict(<class 'list'>,
+#   {'a': ['apple', 'ant'], 'b': ['banana', 'bat'], 'c': ['car']})
+
+
+
+# ––––––––––––––––––––––––––––––––––––––––––––––
+"""
+📘 Quick Tutorial: collections.Counter
+
+Counter is a dictionary subclass for counting hashable objects.
+It automatically tallies how many times each item appears.
+
+Main use case: counting characters, words, or elements.
+"""
+
+from collections import Counter
+
+# Example: Count letters in a word
+word = "mississippi"
+letter_counts = Counter(word)
+
+print(letter_counts)
+# Output:
+# Counter({'i':4, 's':4, 'p':2, 'm':1})
+
+# Example: Count words in a list
+words = ["apple", "banana", "apple", "orange", "banana", "apple"]
+word_counts = Counter(words)
+
+print(word_counts)
+# Output:
+# Counter({'apple':3, 'banana':2, 'orange':1})
+
+
+# ––––––––––––––––––––––––––––––––––––––––––––––
+
+
+
+# ––––––––––––––––––––––––––––––––––––––––––––––
 
 
 

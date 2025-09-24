@@ -304,3 +304,32 @@ def fn(c):
 
 c = ["P", "y", "t", "h", "o", "n"]
 print(fn(c))  # Output: Python
+
+
+
+"""
+📘 Quick Tutorial: defaultdict(list)
+
+defaultdict(list) is a dictionary that automatically creates
+an empty list [] for any missing key.
+
+Main use case: grouping items by a key.
+
+Example: Group words by their first letter.
+"""
+
+from collections import defaultdict
+
+# Create defaultdict where each value starts as []
+groups = defaultdict(list)
+
+words = ["apple", "ant", "banana", "bat", "car"]
+
+for w in words:
+    key = w[0]            # key = first letter
+    groups[key].append(w) # no need to check if key exists
+
+print(groups)
+# Output:
+# defaultdict(<class 'list'>,
+#   {'a': ['apple', 'ant'], 'b': ['banana', 'bat'], 'c': ['car']})
