@@ -4,6 +4,8 @@
 
 # Letters are case sensitive, so "a" is considered a different type of stone from "A".
 
+# Solution: https://leetcode.com/problems/jewels-and-stones/solutions/127766/jewels-and-stones/
+
 # Example 1:
     # Input: jewels = "aA", stones = "aAAbbbb"
     # Output: 3
@@ -12,7 +14,11 @@
     # Input: jewels = "z", stones = "ZZ"
     # Output: 0
 
-# Solution: https://leetcode.com/problems/jewels-and-stones/solutions/127766/jewels-and-stones/
+# Constraints:
+    # 1 <= jewels.length, stones.length <= 50
+    # jewels and stones consist of only English letters.
+    # All the characters of jewels are unique.
+
 
 
 
@@ -46,6 +52,7 @@ print(numJewelsInStones(jewels, stones))
 # –––––––––––––––––––––––––––––––––––––––––––––––––––––––
 # Alternate Solutions
 
+# Hash Set 
 
 def numJewelsInStones(J, S):
     Jset = set(J)

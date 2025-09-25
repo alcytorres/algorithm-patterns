@@ -19,7 +19,7 @@
     # Output: true
 
 
-import collections
+from collections import Counter
 
 def canConstruct(ransomNote, magazine):
     
@@ -27,7 +27,7 @@ def canConstruct(ransomNote, magazine):
     if len(ransomNote) > len(magazine):
         return False
 
-    letters = collections.Counter(magazine)
+    letters = Counter(magazine)
     
     # For each character, c, in the ransom note:
     for c in ransomNote:
@@ -39,8 +39,8 @@ def canConstruct(ransomNote, magazine):
     # If we got this far, we can successfully build the note.
     return True
 
-ransomNote = "aa"
-magazine = "aab"
+ransomNote = "aac"
+magazine = "aabc"
 print(canConstruct(ransomNote, magazine))
 # Output: True
 
@@ -146,13 +146,13 @@ A:
 
 # –––––––––––––––––––––––––––––––––––––––––––––––––––––––
 # Breakdown
-import collections
+from collections import Counter
 
 def canConstruct(ransomNote: str, magazine: str):
     if len(ransomNote) > len(magazine): return False  # Early exit if note longer than magazine
 
     # In Python, we can use the Counter class. It does all the work that the makeCountsMap(...) function in our pseudocode did!
-    letters = collections.Counter(magazine)  # Count frequencies in magazine
+    letters = Counter(magazine)  # Count frequencies in magazine
 
     # For each character, c, in the ransom note:
     for c in ransomNote:       # Iterate over each character in note
@@ -228,12 +228,12 @@ print(canConstruct(ransomNote, magazine))
 
 # –––––––––––––––––––––––––––––––––––––––––––––––––––––––
 # Best Solution Using 'letters[c] <= 0'
-import collections
+from collections import Counter
 def canConstruct(ransomNote, magazine):
 
     if len(ransomNote) > len(magazine):
         return False
-    letters = collections.Counter(magazine)
+    letters = Counter(magazine)
 
     for c in ransomNote:
         if letters[c] <= 0:  # <-- checking for <= 0
