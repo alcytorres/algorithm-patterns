@@ -178,11 +178,43 @@ print(word_counts)
 
 
 # ––––––––––––––––––––––––––––––––––––––––––––––
+"""
+📘 Tutorial 1: True = 1 and False = 0 in Python
+
+- In Python, booleans are a subclass of integers.
+- True behaves like 1, False behaves like 0.
+"""
+
+# Example:
+print(True + True)    # 2
+print(False + True)   # 1
+print(3 * True)       # 3
+print(3 * False)      # 0
+
 
 
 
 # ––––––––––––––––––––––––––––––––––––––––––––––
+"""
+📘 Tutorial 2: sum(condition for x in items)
 
+- You can use sum() with a generator expression to count matches.
+- Each condition produces True (1) or False (0).
+- sum() adds them up → count of items where condition is True.
+"""
+
+# Example: condition for x in items:
+nums = [1, 2, 3, 4]
+evens = sum(x % 2 == 0 for x in nums)
+print(evens)   # Output 2 (since 2 and 4 are even)
+
+
+# Example: condition for x in items:
+def fn(nums):
+    return sum(num % 2 == 0 for num in nums)
+
+nums = [1, 2, 3, 4]
+print(fn(nums))   # Output 2 (since 2 and 4 are even)
 
 
 # ––––––––––––––––––––––––––––––––––––––––––––––

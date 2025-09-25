@@ -19,6 +19,44 @@
     # jewels and stones consist of only English letters.
     # All the characters of jewels are unique.
 
+# -----------------------------------------------
+# Hash Set 
+
+def numJewelsInStones(J, S):
+    Jset = set(J)
+    count = 0
+
+    for s in S:
+        if s in Jset:
+            count += 1
+    return count
+
+
+jewels = "aA"
+stones = "aAAbbbb"
+print(numJewelsInStones(jewels, stones))
+# Output 3
+
+# -----------------------------------------------
+# Same solution rewritten in one line: 
+
+def numJewelsInStones(J, S):
+    Jset = set(J)
+    return sum(s in Jset for s in S)
+
+jewels = "aA"
+stones = "aAAbbbb"
+print(numJewelsInStones(jewels, stones))
+# Output 3
+
+
+# Time Complexity: O(J.length+S.length). The O(J.length) part comes from creating J. The O(S.length) part comes from searching S.
+
+# Space Complexity: O(J.length)
+
+
+
+
 
 
 
@@ -52,11 +90,15 @@ print(numJewelsInStones(jewels, stones))
 # –––––––––––––––––––––––––––––––––––––––––––––––––––––––
 # Alternate Solutions
 
-# Hash Set 
+from collections import Counter
 
 def numJewelsInStones(J, S):
-    Jset = set(J)
-    return sum(s in Jset for s in S)
+    letters = Counter(S)
+    curr = 0
+
+    for c in J:
+        curr += letters[c]
+    return curr
 
 
 jewels = "aA"
@@ -64,7 +106,4 @@ stones = "aAAbbbb"
 print(numJewelsInStones(jewels, stones))
 # Output 3
 
-
-# Time Complexity: O(J.length+S.length). The O(J.length) part comes from creating J. The O(S.length) part comes from searching S.
-
-# Space Complexity: O(J.length)
+# Counter({'b': 4, 'A': 2, 'a': 1})

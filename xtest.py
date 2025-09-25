@@ -1,12 +1,16 @@
-from collections import Counter
+
+
+# Hash Set 
 
 def numJewelsInStones(J, S):
-    letters = Counter(S)
-    curr = 0
+    Jset = set(J)
+    count = 0
 
-    for c in J:
-        curr += letters[c]
-    return curr
+    for s in S:
+        if s in Jset:
+            count += 1
+    
+    return count
 
 
 jewels = "aA"
@@ -14,4 +18,7 @@ stones = "aAAbbbb"
 print(numJewelsInStones(jewels, stones))
 # Output 3
 
-# Counter({'b': 4, 'A': 2, 'a': 1})
+# Jset = {'a', 'A'}
+
+
+

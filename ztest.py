@@ -6,6 +6,8 @@ Add to notes if a hash table used what is the x and y values represent?
 # print(1//2)
 
 
+print(True + True + False + True)    # 2
+
 
 # .join
 # Example 1: Joining words with a space separator
