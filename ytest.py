@@ -30,18 +30,18 @@
 
 """
 Most IMPORTANT thing to Understand:
-    • [Key intuition in 2–3 bullets — e.g., what the main variable tracks or what the core idea is]
+    • [Key intuition in 2-3 bullets — e.g., what the main variable tracks or what the core idea is]
 
-    • [State the condition that guarantees we’ve found a valid answer, in plain words]
+    • [State the condition that guarantees we've found a valid answer, in plain words]
 
     • [If applicable, point out what the hash map / set / pointer is doing in simple terms]
 
 Why this code Works:
-    • Hash map / data structure role: [Explain what it stores and why it’s useful]
+    • Hash map / data structure role: [Explain what it stores and why it's useful]
 
     • Prefix sum / sliding window / two pointers idea: [Explain how the technique applies here]
 
-    • Efficiency: [1–2 bullets on why this avoids brute force, O(n) vs O(n^2)]
+    • Efficiency: [1-2 bullets on why this avoids brute force, O(n) vs O(n^2)]
 
     • Intuition: [Beginner analogy — “like tallying votes”, “like keeping a running score”, etc.]
 
@@ -50,7 +50,7 @@ Quick Example Walkthrough:
 
     Step 1: [Describe what happens as you process elements one by one, how key variables (like curr, odd, counts, etc.) change]
 
-    Step 2: [Show the subarrays / result as they’re discovered]
+    Step 2: [Show the subarrays / result as they're discovered]
 
     Final Answer: [Result]
 """
@@ -253,6 +253,9 @@ Instructions for you (the LLM):
 # –––––––––––––––––––––––––––––––––––––––––––––––
 # Give me excellent in line annotations for this code
 
+
+# –––––––––––––––––––––––––––––––––––––––––––––––
+# Which of the following is more easy to understand and remember and follow along for a beginner
 
 
 # –––––––––––––––––––––––––––––––––––––––––––––––
