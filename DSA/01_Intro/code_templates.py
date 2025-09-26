@@ -120,7 +120,7 @@ print(fn(['a', 'b', 'c', 'd']))
 
 # ––––––––––––––––––––––––––––––––––––––––––––––
 """
-📘 Quick Tutorial: defaultdict(list)
+📘 Tutorial: defaultdict(list)
 
 defaultdict(list) is a dictionary that automatically creates
 an empty list [] for any missing key.
@@ -150,7 +150,7 @@ print(groups)
 
 # ––––––––––––––––––––––––––––––––––––––––––––––
 """
-📘 Quick Tutorial: collections.Counter
+📘 Tutorial: collections.Counter
 
 Counter is a dictionary subclass for counting hashable objects.
 It automatically tallies how many times each item appears.
@@ -179,7 +179,7 @@ print(word_counts)
 
 # ––––––––––––––––––––––––––––––––––––––––––––––
 """
-📘 Tutorial 1: True = 1 and False = 0 in Python
+📘 Tutorial: True = 1 and False = 0 in Python
 
 - In Python, booleans are a subclass of integers.
 - True behaves like 1, False behaves like 0.
@@ -196,7 +196,7 @@ print(3 * False)      # 0
 
 # ––––––––––––––––––––––––––––––––––––––––––––––
 """
-📘 Tutorial 2: sum(condition for x in items)
+📘 Tutorial: sum(condition for x in items)
 
 - You can use sum() with a generator expression to count matches.
 - Each condition produces True (1) or False (0).

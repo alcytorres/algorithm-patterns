@@ -171,28 +171,6 @@ r   | s[r] | seen before | s[r] in seen | l   | seen after remove | seen after a
     |      | {b}         | True         | 6   | {}                | {b}            | 3
 Final: 3 ("abc")
 
-
-Overview for Each Iteration
-Input: s = "abbabcb"
-Step: Find longest substring without repeating characters using sliding window
-r   | s[r] | seen        | s[r] in seen | l   | Action                 | max_len
-----|------|-------------|--------------|-----|------------------------|--------
-0   | a    | {}          | False        | 0   | Add 'a'                | 1 (0-0+1)
-1   | b    | {a}         | False        | 0   | Add 'b'                | 2 (1-0+1)
-2   | b    | {a, b}      | True         | 0   | Remove 'a', l+=1       | 2
-    |      | {b}         | True         | 1   | Remove 'b', l+=1       | 2
-    |      | {}          | False        | 2   | Add 'b'                | 2 (2-2+1)
-3   | a    | {b}         | False        | 2   | Add 'a'                | 2 (3-2+1)
-4   | b    | {b, a}      | True         | 2   | Remove 'b', l+=1       | 2
-    |      | {a}         | False        | 3   | Add 'b'                | 2 (4-3+1)
-5   | c    | {a, b}      | False        | 3   | Add 'c'                | 3 (5-3+1)
-6   | b    | {a, b, c}   | True         | 3   | Remove 'a', l+=1       | 3
-    |      | {b, c}      | True         | 4   | Remove 'b', l+=1       | 3
-    |      | {c}         | False        | 5   | Add 'b'                | 3 (6-5+1)
-Final: 3 ("abc")
-  
-
-
 """
 
 
@@ -215,7 +193,6 @@ def lengthOfLongestSubstring(s):
 
 # –––––––––––––––––––––––––––––––––––––––––––––––––––––––
 # Brute force 
-
 
 def lengthOfLongestSubstring(s):
     def check(start, end):
@@ -241,6 +218,49 @@ print(lengthOfLongestSubstring(s))
 # Output: 3
 
 
+
+# –––––––––––––––––––––––––––––––––––––––––––––––––––––––
+# Playground
+
+"""
+📘 Tutorial: set.add() and set.remove()
+    • Sets in Python are collections of unique elements.
+    • .add(x) inserts an element into the set.
+    • .remove(x) deletes an element from the set (raises an error if x not present).
+    • Very useful for sliding window problems where we track what's inside the window.
+"""
+
+# Basic Example
+fruits = set()
+fruits.add("apple")
+fruits.add("banana")
+print(fruits)   # Output: {'apple', 'banana'}
+
+fruits.remove("apple")
+print(fruits)   # Output: {'banana'}
+
+
+# Example with .add(): count unique numbers
+def unique_count(nums):
+    seen = set()
+    for n in nums:
+        seen.add(n)   # add each number
+    return len(seen)  # number of unique items
+
+nums = [1, 2, 2, 3]
+print(unique_count(nums))  
+# Output: 3 (unique numbers are 1, 2, 3)
+
+
+# Example with .remove(): filter duplicates out
+def remove_duplicates(nums):
+    seen = set(nums)   # keep only unique items
+    seen.remove(min(seen))  # remove the smallest one
+    return seen
+
+nums = [4, 2, 2, 5]
+print(remove_duplicates(nums))  
+# Output: {4, 5} (unique set {2, 4, 5} minus the smallest element 2)
 
 
 
