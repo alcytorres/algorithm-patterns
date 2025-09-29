@@ -6,24 +6,24 @@ Add to notes if a hash table used what is the x and y values represent?
 # print(1//2)
 
 
-print(True + True + False + True)    # 2
 
 
-# .join
-# Example 1: Joining words with a space separator
-def fn(words):
-    return ' '.join(words)
 
-words = ["Hello", "world", "from", "Python"]
-print(fn(words))  # Output: Hello world from Python
+# # .join
+# # Example 1: Joining words with a space separator
+# def fn(words):
+#     return ' '.join(words)
+
+# words = ["Hello", "world", "from", "Python"]
+# print(fn(words))  # Output: Hello world from Python
 
 
-# Example 2: Joining characters with no separator
-def fn(c):
-    return ''.join(c)
+# # Example 2: Joining characters with no separator
+# def fn(c):
+#     return ''.join(c)
 
-c = ["P", "y", "t", "h", "o", "n"]
-print(fn(c))  # Output: Python
+# c = ["P", "y", "t", "h", "o", "n"]
+# print(fn(c))  # Output: Python
 
 
 

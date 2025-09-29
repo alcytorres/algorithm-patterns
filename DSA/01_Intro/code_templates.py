@@ -122,8 +122,7 @@ print(fn(['a', 'b', 'c', 'd']))
 """
 📘 Tutorial: defaultdict(list)
 
-defaultdict(list) is a dictionary that automatically creates
-an empty list [] for any missing key.
+defaultdict(list) is a dictionary that automatically creates an empty list [] for any missing key.
 
 Main use case: grouping items by a key.
 
@@ -153,6 +152,7 @@ print(groups)
 📘 Tutorial: collections.Counter
 
 Counter is a dictionary subclass for counting hashable objects.
+
 It automatically tallies how many times each item appears.
 
 Main use case: counting characters, words, or elements.
@@ -199,7 +199,9 @@ print(3 * False)      # 0
 📘 Tutorial: sum(condition for x in items)
 
 - You can use sum() with a generator expression to count matches.
+
 - Each condition produces True (1) or False (0).
+
 - sum() adds them up → count of items where condition is True.
 """
 
@@ -215,6 +217,235 @@ def fn(nums):
 
 nums = [1, 2, 3, 4]
 print(fn(nums))   # Output 2 (since 2 and 4 are even)
+
+
+# ––––––––––––––––––––––––––––––––––––––––––––––
+"""
+🔥 LeetCode Python Patterns — Ranked (most useful → least)
+"""
+
+# 0) CORE LOOPS + ITERATION BASICS
+# --------------------------------
+# range(n): range object; list(range(5)) -> [0,1,2,3,4]
+# len(lst): number of items
+# enumerate(lst): (index, item) pairs
+for i in range(len(a)): ...
+for i, x in enumerate(a): ...
+for x in a: ...
+
+
+# 1) HASH SET / HASH MAP (presence + counting)
+# --------------------------------------------
+from collections import defaultdict, Counter
+
+seen = set();  seen.add(x);  if y in seen: ...
+freq = defaultdict(int)
+for x in nums: freq[x] += 1
+cnt = Counter(nums);  cnt['a']  # frequency
+
+
+# 2) SLIDING WINDOW (Two Pointers on string/array)
+# ------------------------------------------------
+def longest_no_repeat(s):
+    seen = set(); left = 0; best = 0
+    for right in range(len(s)):
+        while s[right] in seen:
+            seen.remove(s[left]); left += 1
+        seen.add(s[right])
+        best = max(best, right - left + 1)
+    return best
+
+
+# Count condition in window (>= K distinct, etc.)
+from collections import defaultdict
+def at_most_k_distinct(nums, K):
+    count = defaultdict(int); left = 0; res = 0
+    for right, x in enumerate(nums):
+        count[x] += 1
+        while len(count) > K:
+            count[nums[left]] -= 1
+            if count[nums[left]] == 0: del count[nums[left]]
+            left += 1
+        res += right - left + 1
+    return res
+
+
+# 3) TWO POINTERS (sorted arrays / linked lists)
+# ----------------------------------------------
+i = j = 0
+while i < len(A) and j < len(B):
+    if A[i] < B[j]: i += 1
+    elif A[i] > B[j]: j += 1
+    else:  # equal
+        i += 1; j += 1
+
+
+# 4) PREFIX SUM / DIFF ARR / RUNNING COUNT
+# ----------------------------------------
+pref = [0]
+for x in nums: pref.append(pref[-1] + x)  # prefix sum
+# Subarray sum(i..j) = pref[j+1] - pref[i]
+
+# Running balance example
+first = {0: -1}; bal = 0; best = 0
+for i, x in enumerate(nums):
+    bal += 1 if x == 1 else -1
+    if bal in first: best = max(best, i - first[bal])
+    else: first[bal] = i
+
+
+# 5) STACK PATTERNS (monotonic, parentheses)
+# ------------------------------------------
+# Valid parentheses
+stack = []
+pairs = {')':'(', ']':'[', '}':'{'}
+for c in s:
+    if c in '([{': stack.append(c)
+    elif not stack or stack.pop() != pairs[c]: 
+        return False
+    return not stack
+
+# Monotonic stack (next greater)
+res = [-1]*len(nums); st = []
+for i, x in enumerate(nums):
+    while st and nums[st[-1]] < x:
+        res[st.pop()] = x
+    st.append(i)
+
+
+# 6) BINARY SEARCH (bisect)
+# --------------------------
+import bisect
+i = bisect.bisect_left(a, x)
+j = bisect.bisect_right(a, x)
+
+# Search answer space
+lo, hi = 0, 10**9
+while lo < hi:
+    mid = (lo + hi)//2
+    if feasible(mid):
+        hi = mid
+    else:
+        lo = mid + 1
+
+
+# 7) SORTING & CUSTOM KEYS
+# -------------------------
+arr.sort(key=lambda t: (t[0], -t[1]))
+
+
+# 8) HEAP (Top-K, K-way merge)
+# ----------------------------
+import heapq
+heap = []
+for x in nums:
+    heapq.heappush(heap, x)
+    if len(heap) > K: heapq.heappop(heap)
+
+
+# 9) COMPREHENSIONS + ANY/ALL + SUM(conditions)
+# ----------------------------------------------
+# Collect
+evens = [x for x in nums if x % 2 == 0]
+# Transform
+squares = [x*x for x in nums]
+# Count matches
+even_count = sum(x % 2 == 0 for x in nums)
+# Existence / universal checks
+has_dup = any(freq[x] > 1 for x in freq)
+all_pos  = all(x > 0 for x in nums)
+
+
+# 10) SET OPS (intersection/union/diff)
+# -------------------------------------
+A, B = set(a), set(b)
+both = A & B; either = A | B; onlyA = A - B
+
+
+# 11) MATRIX TRAVERSAL (grid)
+# ---------------------------
+dirs = [(1,0),(-1,0),(0,1),(0,-1)]
+for r in range(R):
+    for c in range(C):
+        for dr, dc in dirs:
+            nr, nc = r+dr, c+dc
+            if 0 <= nr < R and 0 <= nc < C:
+                ...
+
+
+# 12) DEQUE (sliding window max, BFS)
+# -----------------------------------
+from collections import deque
+dq = deque()
+for i, x in enumerate(nums):
+    while dq and nums[dq[-1]] <= x: dq.pop()
+    dq.append(i)
+    if dq[0] <= i - k: dq.popleft()
+    if i >= k-1: window_max = nums[dq[0]]
+
+# BFS queue
+q = deque([start])
+visited = {start}
+while q:
+    u = q.popleft()
+    for v in graph[u]:
+        if v not in visited:
+            visited.add(v); q.append(v)
+
+
+# 13) DICT TRICKS: get / setdefault
+# ---------------------------------
+d = {}
+d[x] = d.get(x, 0) + 1
+adj = {}
+adj.setdefault(u, []).append(v)
+
+
+# 14) EDGE-SAFE LIST INIT + COPY
+# ------------------------------
+grid = [[0]*C for _ in range(R)]  # avoid shared rows
+b = a[:]  # shallow copy
+import copy; deep = copy.deepcopy(obj)
+
+
+# 15) SMALL BUT CLUTCH
+# --------------------
+mx = max(arr, default=float('-inf'))
+mn = min(arr, default=float('inf'))
+
+pairs = sorted(pairs)  # tuples sort lexicographically
+
+for x in arr:
+    if bad(x): break
+else:
+    # no break occurred
+    pass
+
+
+"""
+Mini Cheats you asked about
+---------------------------
+- Counting with sum:
+  sum(cond(x) for x in items)
+
+- Collecting with list-comprehension:
+  [x for x in items if cond(x)]
+
+- Basics you listed:
+  print(range(5))              # range(0,5)
+  print(list(range(5)))        # [0,1,2,3,4]
+  print(len(grocery_list))     # size
+  for i, item in enumerate(grocery_list): ...
+  [0]*5                        # list repeat
+  [1,2] + [5,4,7]              # concat
+"""
+
+
+
+
+# ––––––––––––––––––––––––––––––––––––––––––––––
+
+
 
 
 # ––––––––––––––––––––––––––––––––––––––––––––––

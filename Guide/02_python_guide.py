@@ -1301,6 +1301,17 @@ for k in d.keys():
     v = d[k]
     print(k, v)  # Outputs: apple it's a fruit..., cucumber this is a long...
 
+# Iterating through dictionary
+d = {'a':1, 'b':2, 'c':3}
+for k in d.keys():
+    v = d[k]
+    print(k, v)  # Output: a 1 b 2 c 3
+
+# Iterating through dictionary
+d = {'a':1, 'b':2, 'c':3}
+for k, v in d.items():
+    print(k, v)  # Output: a 1 b 2 c 3
+
 # Hashable in Python: 
     # An object is hashable if it’s immutable (like int, str, or tuple) and can be assigned a unique, fixed number (hash) for quick lookup.
 
@@ -1497,10 +1508,10 @@ print(s)  # Outputs: hello (original unchanged)
 # - Example: Tuples demonstrate indexing and iteration; immutability parallels strings, contrasting with mutable lists (see Integer vs. List Immutability example).
 
 # Creating and accessing tuples
-t = (0, 1)
-print(t)  # Outputs: (0, 1)
-print(t[0])  # Outputs: 0
-print(t[1])  # Outputs: 1
+t = (30, 40)
+print(t)  # Outputs: (30, 40)
+print(t[0])  # Outputs: 30
+print(t[1])  # Outputs: 40
 
 # Iterating over tuple
 for item in t:
@@ -1649,16 +1660,16 @@ print(names1 & names2)  # Outputs: {'Bob'} (common names)
 # -----------------------------------------------------------------------------
 # Types Review
 s = {1, 1, 2, -4}
-print(type(s))
+print(type(s))   # Output: class 'set'
 
 t = (1, 1, 2, -4)
-print(type(t))
+print(type(t))   # Ouput: class 'tuple'
 
 l = [1, 1, 2, -4]
-print(type(l))
+print(type(l))   # class 'list' 
 
 d = {1: 'a', 2: 'b', 3: 'c'}
-print(type(d))
+print(type(d))   # class 'dict'
 
 
 # -----------------------------------------------------------------------------
