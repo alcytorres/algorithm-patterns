@@ -29,8 +29,7 @@ def numJewelsInStones(jewels, stones):
 jewels = "aA"
 stones = "aAAbbbb"
 print(numJewelsInStones(jewels, stones))
-# Output 3
-
+# Output 3: You have 3 stones (a, A, A) that are also jewels.
 
 """
 Time: O(J + S)
@@ -234,3 +233,31 @@ print(numJewelsInStones(jewels, stones))
 # Output 3
 
 # Counter({'b': 4, 'A': 2, 'a': 1})
+
+
+
+# –––––––––––––––––––––––––––––––––––––––––––––––––––––––
+# Playground
+
+"""
+📘 Tutorial: sum(condition for x in items)
+
+- You can use sum() with a generator expression to count matches.
+
+- Each condition produces True (1) or False (0).
+
+- sum() adds them up → count of items where condition is True.
+"""
+
+# Example: condition for x in items:
+nums = [1, 2, 3, 4]
+evens = sum(x % 2 == 0 for x in nums)
+print(evens)   # Output 2 (since 2 and 4 are even)
+
+
+# Example: condition for x in items:
+def fn(nums):
+    return sum(num % 2 == 0 for num in nums)
+
+nums = [1, 2, 3, 4]
+print(fn(nums))   # Output 2 (since 2 and 4 are even)

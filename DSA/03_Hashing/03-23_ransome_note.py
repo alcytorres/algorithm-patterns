@@ -27,6 +27,7 @@ def canConstruct(ransomNote, magazine):
     if len(ransomNote) > len(magazine):
         return False
 
+    # Count frequency of each character in magazine
     letters = Counter(magazine)
     
     # For each character, c, in the ransom note:
@@ -152,7 +153,9 @@ def canConstruct(ransomNote: str, magazine: str):
     if len(ransomNote) > len(magazine): return False  # Early exit if note longer than magazine
 
     # In Python, we can use the Counter class. It does all the work that the makeCountsMap(...) function in our pseudocode did!
-    letters = Counter(magazine)  # Count frequencies in magazine
+
+    # Count frequency of each character in magazine
+    letters = Counter(magazine)  
 
     # For each character, c, in the ransom note:
     for c in ransomNote:       # Iterate over each character in note

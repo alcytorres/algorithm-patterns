@@ -263,6 +263,80 @@ print(remove_duplicates(nums))
 # Output: {4, 5} (unique set {2, 4, 5} minus the smallest element 2)
 
 
+# ––––––––––––––––––––––––––––––––––––––––––––––
+# Playground
+
+"""
+🔥 Dynamic Sliding Window Templates (2 Types)
+Use these for LeetCode substring/subarray problems.
+
+========================================================
+🧠 TYPE 1 — "Add First, Then Shrink"
+When to use:
+- Condition is about counts, sums, distinct count ≤ K, etc.
+- You add arr[right] first, then check if window breaks.
+- Example: "Longest Subarray with Sum ≤ K" or "At most K distinct chars"
+
+Why:
+- Adding a new element may cause violation (sum > K, count > K)
+- So you shrink AFTER adding.
+"""
+
+def sliding_window_add_first(arr):
+    left = curr = ans = 0
+
+    for right in range(len(arr)):
+        # ✅ Step 1: Add current element
+        curr += arr[right]
+
+        # 🚨 Step 2: Shrink while window is invalid
+        while curr > SOME_LIMIT:   # example condition
+            curr -= arr[left]
+            left += 1
+
+        # ✅ Step 3: Update answer
+        ans = max(ans, right - left + 1)
+    
+    return ans
+
+"""
+========================================================
+🧩 TYPE 2 — "Shrink Before Add"
+When to use:
+- Condition is about uniqueness (no duplicates)
+- You must ensure the element you add doesn’t break the rule.
+- Example: "Longest Substring Without Repeating Characters"
+
+Why:
+- Adding s[right] itself could break the rule.
+- So you shrink BEFORE adding it.
+"""
+
+def sliding_window_shrink_before_add(s):
+    seen = set()
+    left = ans = 0
+
+    for right in range(len(s)):
+        # 🚨 Step 1: Shrink until s[right] can safely enter
+        while s[right] in seen:
+            seen.remove(s[left])
+            left += 1
+
+        # ✅ Step 2: Add current element (now window is valid)
+        seen.add(s[right])
+
+        # ✅ Step 3: Update answer
+        ans = max(ans, right - left + 1)
+    
+    return ans
+
+"""
+✅ Quick Summary:
+- Use "Add First, Then Shrink" → when condition depends on totals/counts (e.g., sum > K, distinct > K)
+- Use "Shrink Before Add" → when condition depends on current element validity (e.g., duplicates)
+"""
+
+
 
 # –––––––––––––––––––––––––––––––––––––––––––––––––––––––
 # Alternate Solutions
@@ -320,4 +394,3 @@ def lengthOfLongestSubstring(s):
 s = "abcabcbb"
 print(lengthOfLongestSubstring(s))
 # Output: 3
-
