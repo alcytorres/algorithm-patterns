@@ -9,6 +9,9 @@
 
 
 # ––––––––––––––– Prompts –––––––––––––––
+# Explain this in a simple, very easy to understand, intuitive, memorable way so that in future I can quickly read/scan through and understand
+
+
 # Super simple, beginner-friendly Leetocde FULL breakdown
 
 # I need a super simple, beginner-friendly explanation of how this LeetCode solution works, as if explaining to a 12-year-old who’s just learning to code. Break it down crystal clear, focusing on why the code finds the correct answer for the given problem. 
