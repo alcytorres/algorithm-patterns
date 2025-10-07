@@ -90,7 +90,9 @@ Final: True
 
 Most IMPORTANT thing to Understand:
     We just need to check if magazine has at least as many of each letter as ransomNote needs.
+
     If any letter in ransomNote is missing or runs out in magazine, answer is False.
+
     A Counter (hash map) stores how many of each letter magazine provides; we decrement as we “use” letters.
 
     
@@ -164,8 +166,6 @@ def canConstruct(ransomNote: str, magazine: str):
             return False       # Cannot construct note
         # Remove one of c from the Counter.
         letters[c] -= 1        # Decrement count for used character
-                
-
 
     return True                # All characters available, can construct
 

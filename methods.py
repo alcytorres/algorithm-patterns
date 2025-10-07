@@ -251,6 +251,24 @@ def fn(arr):
 print(fn(['a', 'b', 'c', 'd']))
 # Output: abcd
 
+# Example 1: Joining characters with no separator
+def fn(arr):
+    return ''.join(arr)
+
+arr = ["P", "y", "t", "h", "o", "n"]
+print(fn(arr))  # Output: Python
+
+
+# Example 2: Joining words with a space separator
+def fn(words):
+    return ''.join(words)
+
+words = ["Hello", "world", "from", "Python"]
+print(fn(words))  # Output: Hello world from Python
+
+
+
+
 
 
 # LIST METHODS
