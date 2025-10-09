@@ -38,8 +38,7 @@ def lengthOfLongestSubstring(s):
 
 s = "abbabcb"
 print(lengthOfLongestSubstring(s))  
-# Output: 3
-
+# Output: 3 → "abc" is the Longest substring without repeats in "abbabcb".
 
 """
 Time: O(N)

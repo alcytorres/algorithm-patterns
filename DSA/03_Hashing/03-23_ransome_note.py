@@ -43,7 +43,7 @@ def canConstruct(ransomNote, magazine):
 ransomNote = "aac"
 magazine = "aabc"
 print(canConstruct(ransomNote, magazine))
-# Output: True
+# Output: True → "aac" can be built from "aabc" (magazine has enough letters: 2 'a' and 1 'c', with 'b' unused).
 
 
 """

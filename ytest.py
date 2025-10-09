@@ -19,7 +19,8 @@
 # Use the provided example input and output to walk through the solution step by step, showing how each part of the code contributes to the final result. Include a simple analogy to make it relatable. If the solution uses a loop, provide a concise iteration overview (like a table) showing key variable changes for each step.
 
 
-
+# ––––––––––––––––––––––––––––––––––––––––
+# LEETCODE SOLUTIONS EXPLANATIONS
 # ––––––––––––––––––––––––––––––––––––––––
 # I need a super simple, easy to follow, very beginner-friendly explanation of how this LeetCode solution works. Break it down into 4 main parts: "Most IMPORTANT thing to Understand", "Why this code Works, TLDR (why this code works in one sentence), and Quick Example Walkthrough.
 
@@ -126,7 +127,8 @@ Quick Example Walkthrough:
 
 
 
-
+# –––––––––––––––––––––––––––––––––––––––––––––––
+# What is the best efficient simple solution 
 # –––––––––––––––––––––––––––––––––––––––––––––––
 """
 Q: What is the best efficient simple solution for a beginner to understand this problem?
@@ -155,20 +157,17 @@ Instructions for you (the LLM):
 
 """
 
-
 # –––––––––––––––––––––––––––––––––––––––––––––––
 # What is the best simple solution, easy to follow for a beginner for this problem that is efficient? Justify your answer
-
-
-# –––––––––––––––––––––––––––––––––––––––––––––––
-# What is the best efficient simple solution for a beginner to understand this problem. Justify your answer
 
 # The goal is clarity and learning for a beginner to easily follow along
 
 
 
 # –––––––––––––––––––––––––––––––––––––––––––––––
-# Give me time and space for the following in this format:
+# TIME AND SPACE SOLUTION
+# –––––––––––––––––––––––––––––––––––––––––––––––
+# Give me the time and space for the following in this format:
     # Format like this
     # Time: O(n)
     # - Loop through nums once: O(n) iterations.
@@ -183,8 +182,8 @@ Instructions for you (the LLM):
 
 
 
-
-
+# –––––––––––––––––––––––––––––––––––––––––––––––
+# Overview for Each Iteration
 # –––––––––––––––––––––––––––––––––––––––––––––––
 # Give me the overview of each iteration of this code
 # Provide your answer in a .py file so i can copy it into the write up for this problem
@@ -196,32 +195,33 @@ Instructions for you (the LLM):
 # The goal is clarity and learning for a beginner to easily follow along
 
 
-# from collections import defaultdict
+from collections import defaultdict
 
-# def largestUniqueNumber(nums):
-#     # Step 1: Count occurrences of each number
-#     counts = defaultdict(int)
-#     for num in nums:
-#         counts[num] += 1
+def largestUniqueNumber(nums):
+    # Step 1: Count occurrences of each number
+    counts = defaultdict(int)
+    for num in nums:
+        counts[num] += 1
     
-#     # Step 2: Find the largest number with count 1
-#     max_unique = -1
-#     for num in counts:
-#         if counts[num] == 1 and num > max_unique:
-#             max_unique = num
+    # Step 2: Find the largest number with count 1
+    max_unique = -1
+    for num in counts:
+        if counts[num] == 1 and num > max_unique:
+            max_unique = num
     
-#     return max_unique
+    return max_unique
 
-# nums = [1, 3, 9, 4, 9, 8, 3]
-# print(largestUniqueNumber(nums))
-# Output: 8
+nums = [1, 3, 9, 4, 9, 8, 3]
+print(largestUniqueNumber(nums))
+Output: 8
 
-# counts = {1:1, 3:2, 9:2, 4:1, 8:1}
+counts = {1:1, 3:2, 9:2, 4:1, 8:1}
 
 
 # Overview for Each Iteration
 # Step 1: Count occurrences
-# Idx | num | counts
+# i   | num | counts
+# ----|-----|----------------------------
 # -   | -   | {}
 # 0   | 1   | {1:1}
 # 1   | 3   | {1:1, 3:1}
@@ -233,6 +233,7 @@ Instructions for you (the LLM):
 
 # Step 2: Find largest unique number
 # num | counts[num] | max_unique
+# ----|-------------|-------------
 # -   | -           | -1
 # 1   | 1           | 1 (updated)
 # 3   | 2           | 1 (skipped)
@@ -245,12 +246,9 @@ Instructions for you (the LLM):
 
 
 
-
-
 # –––––––––––––––––––––––––––––––––––––––––––––––
 # Give me a excellent one sentence explanation of the output like this:
-    # Output: 3.5  --> Subarray [3, 4] (length 2, sum 3 + 4 = 7, average 7/2 = 3.5) has the largest average for k=2.
-
+    # Output: 3.5 → Subarray [3, 4] (length 2, sum 3 + 4 = 7, average 7/2 = 3.5) has the largest average for k=2.
 
 
 # –––––––––––––––––––––––––––––––––––––––––––––––
@@ -263,7 +261,8 @@ Instructions for you (the LLM):
 
 # –––––––––––––––––––––––––––––––––––––––––––––––
 # Prompt for Guides
-# here is a guide based on sliding windows i have based on the section of my dsa course on sliding windows
+# –––––––––––––––––––––––––––––––––––––––––––––––
+# Here is a guide based on sliding windows i have based on the section of my dsa course on sliding windows
 
 # give me a guide now for prefix sum that follows the format of the sliding window guide exactly in terms of spacing / format/ etc. Im going to copy and paste your answer into a .py file
 
@@ -281,7 +280,8 @@ Instructions for you (the LLM):
 
 
 
-
+# –––––––––––––––––––––––––––––––––––––––––––––––
+# Give me a conicse GUIDE on XYZ 
 # –––––––––––––––––––––––––––––––––––––––––––––––
 # Give me a conicse GUIDE on XYZ as was used in this LeetCode problem. Show a basic example and then an example within a function
 
@@ -312,10 +312,22 @@ print(fn(nums))   # Output 2 (since 2 and 4 are even)
 
 
 
+"""
+My Preferences for my Guides:
 
+- Structured, readable, and visually clear — with clear section headers (🧩, 📦, 💡, 🔁, etc.).
 
+- Intuitive and beginner-friendly, written in plain English with simple analogies (like boxes or train cars).
 
+- Formatted for scanning — tables, bullet points, and “mental picture” sections.
 
+- Concise but complete — no jargon, no redundancy, every section should feel necessary and educational.
+
+- Chronological and visual — you like seeing the flow of code execution (step-by-step or line-by-line).
+
+- Repeat key takeaways at the end (like the TL;DR cheat sheet) for quick future review.
+
+"""
 
 
 

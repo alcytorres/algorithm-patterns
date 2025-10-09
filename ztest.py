@@ -1,36 +1,65 @@
-
-
-
-
-
-
-
-
-
-class ListNode:
-    def __init__(self, val):
-        self.val = val
-        self.next = None
+# class SinglyNode:
+#     def __init__(self, val):
+#         self.val = val
+#         self.next = None
     
-    def get_sum(head):
-        if not head:
-            return 0
-        
-        return head.val + ListNode.get_sum(head.next)
+#     def add_node(prev_node, node_to_add):
+#         node_to_add.next = prev_node.next
+#         prev_node.next = node_to_add
 
-one = ListNode(1)
-two = ListNode(2)
-three = ListNode(3)
-one.next = two
-two.next = three
-head = one
-# print(head.val)
-# print(head.next.val)
-# print(head.next.next.val)
+# a = SinglyNode(1)
+# b = SinglyNode(2)
+# c = SinglyNode(3)
 
-result = ListNode.get_sum(head)
-# print(result)  # Output: 6
-# print(head)
+# # Link them: a → b → c
+# a.next = b
+# b.next = c
+
+# head = a
+# # print(head.val)
+# # print(head.next.val)
+# # print(head.next.next.val)
+
+
+
+# x = SinglyNode(99)
+
+# SinglyNode.add_node(head, x)
+
+
+# # Print the full list to verify
+# curr = head
+# while curr:
+#     print(curr.val)
+#     curr = curr.next
+# # Output: 1  99  2  3
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -60,6 +89,20 @@ class Human:
 
 
 # print(h1.age)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

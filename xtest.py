@@ -517,7 +517,6 @@ How it works:
 
 
 """
-
 💡 Summary (memorize this)
     • .next stores a reference to the next node.
 
@@ -526,11 +525,15 @@ How it works:
     • That's how you traverse a linked list — follow each .next until it's None.
 
 When .next is None, it means there's no more node — end of the list.
+
 """
 
 
+# FINAL SUMMARY
 
-
+# ----------------------------
+# 🔁 Traversal (Iterating)
+# ----------------------------
 def get_sum(head):
     ans = 0
     while head:
@@ -542,7 +545,9 @@ def get_sum(head):
 result = get_sum(head)
 print(result)  # Output: 6
 
-
+# ----------------------------
+# 🔂 Recursive Traversal
+# ----------------------------
 def get_sum(head):
     if not head:
         return 0
@@ -555,13 +560,42 @@ print(result)  # Output: 6
 
 
 
+"""
+============================
+TYPES OF LINKED LISTS
+============================
 
+🧩 Singly Linked List — The Standard Type
+-----------------------------------------
+This is the type we've been working with so far.
 
+Each node has:
+  • a value (val)
+  • a pointer to the next node (.next)
 
+That means we can only move FORWARD through the list.
+There are no links pointing backward.
+"""
 
+class ListNode:
+    def __init__(self, val):
+        self.val  = val
+        self.next = None
+
+"""
+📦 Visual Diagram (mental picture)
+----------------------------------
+head
+ ↓
+[1] → [2] → [3] → None
+
+- Each node points only to the next node.
+- No “previous” link exists.
+- Traversal moves one way → forward only.
+"""
 
 # ----------------------------------------------
-# Singly Linked List: Insert node
+# Singly Linked List: Insert & Delete a node
 class ListNode:
     def __init__(self, val):
         self.val = val
@@ -571,6 +605,10 @@ class ListNode:
 def add_node(prev_node, node_to_add):
     node_to_add.next = prev_node.next
     prev_node.next = node_to_add
+
+# Delete the node right after prev_node
+def delete_node(prev_node):
+    prev_node.next = prev_node.next.next
 
 # Example: Insert 99 after 1 in list [1 → 2 → 3] → [1 → 99 → 2 → 3]
 a = ListNode(1)
@@ -584,51 +622,148 @@ b.next = c
 # Create a new node
 x = ListNode(99)
 
+# --------------------------------------------
 # Insert x after a (so list becomes: 1 → 99 → 2 → 3)
 add_node(a, x)
 
 # Print the full list to verify
+print("Forward:")
 curr = a
 while curr:
     print(curr.val)
     curr = curr.next
 # Output: 1  99  2  3
 
+# --------------------------------------------
+# Delete node after 'a' (this removes node 99)
+delete_node(a)
 
-# ----------------------------------------------
-# Singly Linked List: Delete node
-class ListNode:
-    def __init__(self, val):
-        self.val = val
-        self.next = None
+# Print the list after deletion
+print("Forward:")
+curr = a
+while curr:
+    print(curr.val)
+    curr = curr.next
+# Output: 1  2  3
+
+
+# ----------------------------
+# ➕ Inserting a Node
+# ----------------------------
+"""
+Let's say you want to insert a new node so it becomes the element at position i.
+
+You need a pointer to the node currently at position (i - 1).
+  • We'll call it prev_node.
+
+Steps:
+  1️⃣ Point the new node's .next to the node after prev_node.
+  2️⃣ Then make prev_node's .next point to the new node.
+"""
+
+# Let prev_node be the node at position i - 1
+def add_node(prev_node, node_to_add):
+    node_to_add.next = prev_node.next
+    prev_node.next = node_to_add
+
+"""
+📊 Example:
+Original chain:  [1] → [2] → [3] → None
+
+Insert [99] after [1]:
+  node_to_add = [99]
+  prev_node = [1]
+
+After:
+  [1] → [99] → [2] → [3] → None
+
+🧠 Time Complexity:
+  • O(1) if you already have prev_node
+  • O(n) if you must iterate from head to find it
+"""
+
+
+# ----------------------------
+# ➖ Deleting a Node
+# ----------------------------
+"""
+To delete the node at position i, you also need a pointer to the node at position (i - 1).
+
+Steps:
+  1️⃣ Skip the unwanted node by changing pointers.
+  2️⃣ prev_node.next should now point to prev_node.next.next
+"""
 
 # Delete the node right after prev_node
 def delete_node(prev_node):
     prev_node.next = prev_node.next.next
 
-# Example: Delete 2 from [1 → 2 → 3 → 4] → [1 → 3 → 4]
-a = ListNode(1)
-b = ListNode(2)
-c = ListNode(3)
-d = ListNode(4)
+"""
+📊 Example:
+Original chain:  [1] → [99] → [2] → [3] → None
 
-a.next = b
-b.next = c
-c.next = d
+Delete [99]:
+  prev_node = [1]
 
-# Delete node after 'a' (this removes node 2)
-delete_node(a)
+After:
+  [1] → [2] → [3] → None
 
-# Print the list after deletion
-curr = a
-while curr:
-    print(curr.val)
-    curr = curr.next
-# Output: 1  3  4
+💡 What happened:
+  • prev_node.next (which was [99]) got replaced by [99].next (which is [2])
+  • Node [99] is no longer connected → effectively removed
+
+🧠 Time Complexity:
+  • O(1) if you already have prev_node
+  • O(n) if you must iterate from head to reach it
+
+
+✅ Recap — Singly Linked List
+-----------------------------
+- Each node only points forward (via .next).
+- You can traverse only in one direction.
+- Insertion and deletion are O(1) **if** you already know where to do it.
+- Otherwise, finding the spot to insert/delete is O(n).
+
+💡 Memory Hook:
+  • “Each node says: 'Here's my value — and here's who comes next.’”
+
+
+  
+
+============================
+DOUBLY LINKED LIST — RECAP
+============================
+
+🧠 Big Picture
+--------------
+Like a singly list, but each node has:
+  • val
+  • next  → who comes after me
+  • prev  → who comes before me
+
+This lets you iterate in BOTH directions.
+"""
+
+class ListNode:
+    def __init__(self, val):
+        self.val  = val
+        self.next = None
+        self.prev = None
+
+"""
+📦 Visual Diagram (mental picture)
+----------------------------------
+head                         tail
+ ↓                            ↓
+[1] ⇄ [2] ⇄ [3] ⇄ [4] ⇄ None
+
+- Each node points forward (.next) and backward (.prev).
+- You can move left or right across the chain.
+"""
 
 
 # ----------------------------------------------
-# Doubly linked list
+# Doubly linked list: Insert & Delete a node
 class ListNode:
     def __init__(self, val):
         self.val = val
@@ -651,31 +786,22 @@ def delete_node(node):
     next_node.prev = prev_node
 
 
-# Example setup: 1 ⇄ 2 ⇄ 3 ⇄ 4
+# Example setup: 1 ⇄ 2 ⇄ 3
 a = ListNode(1)
 b = ListNode(2)
 c = ListNode(3)
-d = ListNode(4)
 
 # Link them together
 a.next = b
 b.prev = a
 b.next = c
 c.prev = b
-c.next = d
-d.prev = c
 
-
+# --------------------------------------------
 # ✅ Insert a new node (99) BEFORE node c
 x = ListNode(99)
 add_node(c, x)
-# List becomes: 1 ⇄ 2 ⇄ 99 ⇄ 3 ⇄ 4
-
-
-# ✅ Delete node b (value = 2)
-delete_node(b)
-# List becomes: 1 ⇄ 99 ⇄ 3 ⇄ 4
-
+# List becomes: 1 ⇄ 2 ⇄ 99 ⇄ 3
 
 # Print the list forward
 print("Forward:")
@@ -684,12 +810,156 @@ while curr:
     print(curr.val)
     curr = curr.next
 
-# Print the list backward
-print("\nBackward:")
-curr = d
+
+# --------------------------------------------
+# ✅ Delete node b (value = 2)
+delete_node(b)
+# List becomes: 1 ⇄ 99 ⇄ 3
+
+# Print the list forward
+print("\nForward:")
+curr = a
 while curr:
     print(curr.val)
-    curr = curr.prev
+    curr = curr.next  # 1 ⇄ 99 ⇄ 3
+
+# Print the list backward
+print("Backward:")
+curr = c
+while curr:
+    print(curr.val)
+    curr = curr.prev  # 3 ⇄ 99 ⇄ 1
+
+
+# ----------------------------
+# ➕ Inserting BEFORE a node at position i
+# ----------------------------
+"""
+You only need a reference to the node AT position i (call it 'node').
+  • We'll insert 'node_to_add' BEFORE it.
+
+Steps (update 4 pointers total):
+  1) prev_node = node.prev
+  2) node_to_add.next = node
+  3) node_to_add.prev = prev_node
+  4) prev_node.next = node_to_add
+  5) node.prev = node_to_add
+"""
+
+def add_node(node, node_to_add):
+    prev_node = node.prev
+    node_to_add.next = node
+    node_to_add.prev = prev_node
+    prev_node.next = node_to_add
+    node.prev = node_to_add
+
+"""
+📊 Example:
+Original:  [1] ⇄ [2] ⇄ [3]
+Insert [99] before [3] (node = [3]):
+
+After:     [1] ⇄ [2] ⇄ [99] ⇄ [3]
+
+🧠 Why we don't need (i - 1):
+- In a singly list, you needed the previous node.
+- Here, you can get it with node.prev.
+- Same O(1) insert once you have 'node'.
+"""
+
+
+# ----------------------------
+# ➖ Deleting the node at position i
+# ----------------------------
+"""
+Given a reference to the node AT i (call it 'node'), unlink it.
+
+Steps (update 2 neighbor pointers + conceptually drop 'node'):
+  1) prev_node = node.prev
+  2) next_node = node.next
+  3) prev_node.next = next_node
+  4) next_node.prev = prev_node
+"""
+
+def delete_node(node):
+    prev_node = node.prev
+    next_node = node.next
+    prev_node.next = next_node
+    next_node.prev = prev_node
+
+"""
+📊 Example:
+Original:  [1] ⇄ [2] ⇄ [99] ⇄ [3]
+Delete [2] (node = [2]):
+
+After:     [1] ⇄ [99] ⇄ [3]
+
+💡 What happened:
+- We “bridged around” [2] by connecting its neighbors.
+- [2] has no incoming links now → effectively removed.
+"""
+
+
+# ----------------------------
+# 🔁 Traversal (both ways)
+# ----------------------------
+
+# Forward:
+curr = a
+while curr:
+    print(curr.val)
+    curr = curr.next  # 1 ⇄ 99 ⇄ 3
+
+# Backward:
+curr = c
+while curr:
+    print(curr.val)
+    curr = curr.prev  # 3 ⇄ 99 ⇄ 1
+
+
+# ----------------------------
+# ⚠️ Edge Cases (important)
+# ----------------------------
+"""
+- Inserting at the HEAD:
+    • prev_node is None — set new_node.prev = None and update head.
+- Inserting at the TAIL:
+    • node is None if appending after tail — handle separately.
+- Deleting the HEAD:
+    • After removal, new head.prev must be None.
+- Deleting the TAIL:
+    • After removal, new tail.next must be None.
+
+Rule of thumb: In DLL ops, you usually touch FOUR pointers.
+  • Miss one → bugs.
+"""
+
+
+# ----------------------------
+# ⏱️ Complexity
+# ----------------------------
+"""
+- Once you have 'node' (position i):
+    • Insert/delete: O(1)
+- If you must find position i first:
+    • O(n) traversal from head or tail
+
+Tip: DLLs are great when you frequently insert/remove in the middle and need to move in both directions.
+
+
+💡 Memory Hook
+--------------
+“Each node knows its neighbor on BOTH sides:
+  • 'Here's who's next, and here's who came before.’”
+"""
+
+
+
+
+
+
+
+
+
 
 
 

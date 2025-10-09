@@ -519,6 +519,60 @@ Mini Cheats you asked about
 
 
 # ––––––––––––––––––––––––––––––––––––––––––––––
+"""
+📘 Tutorial: @staticmethod in Python
+
+- @staticmethod defines a regular function that lives inside a class.
+- It does NOT take or use 'self' (no access to instance attributes).
+- You can call it directly from the class OR from an instance.
+- The key difference: instance calls fail without @staticmethod.
+
+When to use:
+- The method logically belongs to the class but doesn’t depend on instance data.
+"""
+
+# Example 1: Dog class
+class Dog:
+    def __init__(self, age):
+        self.age = age
+
+
+    def bark_times(n):
+        print("Woof! " * n)
+
+d1 = Dog(3)
+
+# ✅ Works with or without @staticmethod
+Dog.bark_times(3)     # class call — works either way
+
+# ✅ Works ONLY with @staticmethod
+d1.bark_times(3)      # instance call — fails without @staticmethod
+# Output: TypeError: Dog.bark_times() takes 1 positional argument but 2 were given
+
+"""
+- Without @staticmethod, Python automatically passes `d1` (the instance) as the first argument (self). 
+- The method only expects 1 argument (n),
+- so Python ends up giving it 2 → TypeError:
+"""
+
+# Example 2: Math class
+class Math:
+
+    def add(a, b):
+        return a + b
+
+# Works both ways:
+print(Math.add(2, 3))   # ✅ class call (works with or without @staticmethod)
+
+m1 = Math()
+print(m1.add(2, 3))     # ✅ instance call (fails without @staticmethod)
+# Output: TypeError: Math.add() takes 2 positional arguments but 3 were given
+
+"""
+- Without @staticmethod, Python automatically passes `m1` (the instance) as the first argument (self).
+- The method only expects 2 arguments (a, b),
+- so Python ends up giving it 3 → TypeError.
+"""
 
 
 
