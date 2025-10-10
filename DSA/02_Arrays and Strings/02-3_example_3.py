@@ -123,6 +123,59 @@ def merge_sorted_arrays(arr1, arr2):
     return ans                  # Return merged sorted array
 
 
+# ––––––––––––––––––––––––––––––––––––––––––––––––––
+# Solution: Merge Two Sorted Arrays (Two-Pointer + Extend Optimization)
+
+def merge_sorted_arrays(arr1, arr2):
+    ans = []
+    i = j = 0
+
+    while i < len(arr1) and j < len(arr2):
+        if arr1[i] <= arr2[j]:
+            ans.append(arr1[i])
+            i += 1
+        else:
+            ans.append(arr2[j])
+            j += 1
+        
+    ans.extend(arr1[i:])
+
+    ans.extend(arr2[j:])
+
+    return ans
+
+arr1 = [1, 4, 7, 20]
+arr2 = [3, 5, 6]
+print(merge_sorted_arrays(arr1, arr2))
+# Output: [1, 3, 4, 5, 6, 7, 20]
+
+"""
+Time: O(M + N)
+  - Let M = length of arr1, N = length of arr2.
+  - Step 1: Compare elements one by one using two pointers → O(M + N) total.
+      • Each element from both arrays is processed once.
+  - Step 2: Extend remaining elements from arr1 or arr2 → O(M + N) total in worst case.
+  - Overall: O(M + N).
+
+Space: O(M + N)
+  - The output list 'ans' stores all elements from both arrays.
+  - A few pointer variables (i, j) use O(1) space.
+  - Overall: O(M + N).
+
+  
+Interview Answer: Worst Case
+
+Time: O(M + N)
+  - Each element is compared and appended once.
+
+Space: O(M + N)
+  - Output list contains all merged elements.
+"""
+
+
+
+
+
 
 # ––––––––––––––––––––––––––––––––––––––––––––––––––
 # Task: Merge two sorted integer arrays into a new sorted array.

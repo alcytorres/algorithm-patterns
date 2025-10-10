@@ -16,7 +16,8 @@ def is_palindrome(s):
 
     return True                
 
-print(is_palindrome("racecar"))  
+s = "racecar"
+print(is_palindrome(s))  
 # Output: True
 
 """

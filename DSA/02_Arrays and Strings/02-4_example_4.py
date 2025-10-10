@@ -20,41 +20,59 @@ print(is_subsequence(s, t))
 # Output: True - "ace" appears in order within "abcde" as a subsequence.
 
 
-# Time: O(n + m)
-# - Traverse both strings once, where n = len(s) and m = len(t).
-# - Each pointer (i, j) moves forward at most n or m times.
-# - No nested loops that depend on each other.
-
-# Space: O(1)
-# - Only a constant number of variables (i, j) are used.
-# - No additional data structures.
-# - Overall: O(1) space.
-
-
 """
-# Overview for Each Iteration
-# Input: s = "ace", t = "abcde"
-# Step: Check if s is a subsequence of t
-# i | j | s[i] | t[j] | Match? | Action
-# - | - | -    | -    | -      | Initialize i=0, j=0
-# 0 | 0 | a    | a    | Yes    | i+=1, j+=1 (i=1, j=1)
-# 1 | 1 | c    | b    | No     | j+=1 (i=1, j=2)
-# 1 | 2 | c    | c    | Yes    | i+=1, j+=1 (i=2, j=3)
-# 2 | 3 | e    | d    | No     | j+=1 (i=2, j=4)
-# 2 | 4 | e    | e    | Yes    | i+=1, j+=1 (i=3, j=5)
-# End: i=3, len(s)=3, return True
+Time: O(T)
+  - Let S = length of s, T = length of t.
+  - Two pointers (i for s, j for t) traverse both strings.
+  - Each iteration advances j by 1 → total T iterations.
+  - Pointer i only advances when characters match (≤ S times).
+  - Overall: O(T).
+
+Space: O(1)
+  - Only uses a few integer variables (i, j).
+  - No additional data structures are created.
+  - Overall: O(1).
+
+  
+Interview Answer: Worst Case
+
+Time: O(T)
+  - Single pass through t while checking each character of s.
+
+Space: O(1)
+  - Constant extra memory (just two pointers).
+
+
+
+Overview for Each Iteration
+Input: s = "ace", t = "abcde"
+Step: Check if s is a subsequence of t
+i | j | s[i] | t[j] | Match? | Action
+- | - | -    | -    | -      | Initialize i=0, j=0
+0 | 0 | a    | a    | Yes    | i+=1, j+=1 (i=1, j=1)
+1 | 1 | c    | b    | No     | j+=1 (i=1, j=2)
+1 | 2 | c    | c    | Yes    | i+=1, j+=1 (i=2, j=3)
+2 | 3 | e    | d    | No     | j+=1 (i=2, j=4)
+2 | 4 | e    | e    | Yes    | i+=1, j+=1 (i=3, j=5)
+End: i=3, len(s)=3, return True
 
 
 
 ---------------------------------------------------
-Q: Why while i < len(s) and j < len(t):
-    • The loop uses pointers i (for s) and j (for t) to safely iterate until either s is fully matched or t is exhausted, preventing index errors if t is shorter than s. 
+Q: Why do we use while i < len(s) and j < len(t):?
+    👉 To make sure we never go out of range for either string.
+
+    • We stop when we've checked all characters in s (success) or all in t (failure).
+
+    • It's a safe condition that keeps both pointers within bounds.
 
 
-Q: If len(t) >= len(s) is guaranteed:
-    • while i < len(s) is enough
-    
-    • as j won't exceed len(t) before i reaches len(s).
+Q: What if we already know len(t) >= len(s)?
+    👉 Then while i < len(s) alone would technically work — because t will never run out before s.
+
+    • But we still use and j < len(t) as good practice, in case that assumption changes.
+
+    • It makes the function more robust and reusable.
 
 """
 

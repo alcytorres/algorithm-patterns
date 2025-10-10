@@ -25,18 +25,29 @@ s = ["h", "e", "l", "l", "o"]
 print(reverseString(s))  
 # Output: ["o", "l", "l", "e", "h"]
 
-# Time: O(n)
-# - Two pointers (left, right) each move toward the center once.
-# - At most n/2 swaps are performed, which simplifies to O(n).
-# - No nested loops.
-
-# Space: O(1)
-# - In-place reversal with only a constant number of variables (left, right).
-# - No additional data structures.
-# - Overall: O(1) space.
-
 
 """
+Time: O(N)
+  - Let N = length of the input list s.
+  - Two pointers (left, right) move toward each other from both ends.
+  - Each pair of characters is swapped once → O(1) per swap.
+  - Total of N/2 swaps → O(N) overall.
+
+Space: O(1)
+  - The reversal is done in-place using only two pointer variables.
+  - No additional data structures are created.
+  - Overall: O(1).
+
+  
+Interview Answer: Worst Case
+
+Time: O(N)
+  - Each character is swapped once in a single pass.
+
+Space: O(1)
+  - In-place reversal, constant extra space.
+
+  
 Overview for Each Iteration
 Input: s = ["h", "e", "l", "l", "o"]
 Step: Reverse string in-place using two pointers
@@ -45,6 +56,7 @@ l   | r   | s[l] | s[r] | l < r | Action          | s
 0   | 4   | h    | o    | True  | Swap s[0], s[4] | [o, e, l, l, h]
 1   | 3   | e    | l    | True  | Swap s[1], s[3] | [o, l, l, e, h]
 2   | 2   | l    | l    | False | Exit loop       | [o, l, l, e, h]
+
 Final: ["o", "l", "l", "e", "h"]
 
 """
