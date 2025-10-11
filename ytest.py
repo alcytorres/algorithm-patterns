@@ -248,7 +248,13 @@ counts = {1:1, 3:2, 9:2, 4:1, 8:1}
 
 # –––––––––––––––––––––––––––––––––––––––––––––––
 # Give me a excellent one sentence explanation of the output like this:
+
     # Output: 3.5 → Subarray [3, 4] (length 2, sum 3 + 4 = 7, average 7/2 = 3.5) has the largest average for k=2.
+
+    # Output: 2 → Valid splits after indices [0, 1]:
+    # - Split 0 → left = 10, right = 3 ✅
+    # - Split 1 → left = 14, right = -1 ✅
+    # - Split 2 → left = 6, right = 7 ❌
 
 
 # –––––––––––––––––––––––––––––––––––––––––––––––

@@ -31,21 +31,40 @@ def waysToSplitArray(self):
 
 nums = [10, 4, -8, 7]  
 print(waysToSplitArray(nums))
-# Output: 2
-
-# Time: O(n)
-# - Compute total sum once: O(n).
-# - Loop through array once (n - 1 iterations), updating left and right sums in O(1) each step.
-# - Overall: O(n) time.
-
-# Space: O(1)
-# - Only a constant number of variables (total, l, r, count, i) are used.
-# - No additional data structures.
-# - Overall: O(1) space.
+# Output: 2 → Valid splits after indices [0, 1]:
+# - Split 0 → left = 10, right = 3 ✅
+# - Split 1 → left = 14, right = -1 ✅
+# - Split 2 → left = 6, right = 7 ❌
 
 """
+Time: O(N)
+  - Let N = length of nums.
+  - Step 1: Compute total sum of array → O(N).
+  - Step 2: Iterate through nums (except last index) → O(N - 1).
+      • Update running left sum in O(1).
+      • Compute right sum as total - left in O(1).
+      • Check condition (left >= right) in O(1).
+  - Overall: O(N + N) = O(N).
+
+Space: O(1)
+  - Only a few scalar variables used: total, left, right, count.
+  - No additional data structures are created.
+  - Overall: O(1).
+
+  
+Interview Answer: Worst Case
+
+Time: O(N)
+  - Single pass computes total and evaluates each split.
+
+Space: O(1)
+  - Constant extra space for running sums and counter.
+
+
+
 Overview for Each Iteration
 Input: nums = [10, 4, -8, 7]
+
 Step 1: Compute total sum
 total = sum(nums) = 10 + 4 + (-8) + 7 = 13
 
@@ -55,7 +74,9 @@ i   | nums[i] | l         | r (total - l) | l >= r | count
 0   | 10      | 10        | 3 (13 - 10)   | True   | 1
 1   | 4       | 14 (10+4) | -1 (13 - 14)  | True   | 2
 2   | -8      | 6 (14-8)  | 7 (13 - 6)    | False  | 2
+
 Final: 2
+
 
 
 Most IMPORTANT thing to Understand:
@@ -102,18 +123,18 @@ Final Answer: 2
 
 ---------------------------------------------------
 Q: How do we determine the number of valid splits in nums = [10, 4, -8, 7]?
-	•	Split at i = 0 → left [10] = 10, right [4, -8, 7] = 3 → 10 ≥ 3 → valid.
+	•  Split at i = 0 → left [10] = 10, right [4, -8, 7] = 3 → 10 ≥ 3 → valid.
 
-	•	Split at i = 1 → left [10, 4] = 14, right [-8, 7] = -1 → 14 ≥ -1 → valid.
+	•  Split at i = 1 → left [10, 4] = 14, right [-8, 7] = -1 → 14 ≥ -1 → valid.
 
-	•	Split at i = 2 → left [10, 4, -8] = 6, right [7] = 7 → 6 < 7 → not valid.
+	•  Split at i = 2 → left [10, 4, -8] = 6, right [7] = 7 → 6 < 7 → not valid.
 
-	•	✅ Total valid splits = 2.
+	•  ✅ Total valid splits = 2.
 
 """
 
 
-# ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+# ––––––––––––––––––––––––––––––––––––––––––––––
 # Breakdown 
 def waysToSplitArray(nums):
     total = sum(nums)         # Calculate total sum of array
@@ -156,23 +177,24 @@ nums = [10, 4, -8, 7]  # -> [10, 14, 6, 13]
 print(waysToSplitArray(nums))
 # Output: 2
 
-# Time: O(n)
-# - Build prefix sum array: O(n).
-# - Loop through array once to check split conditions: O(n).
-# - Overall: O(n) time.
-
-# Space: O(n)
-# - Prefix sum array stores n values: O(n) space.
-# - A few variables (i, ans, left, right) take O(1) space.
-# - Overall: O(n) total space.
-# - If we exclude the prefix sum array, extra working space is O(1).
-
-
 """
+Time: O(N)
+  - Build prefix sum array: O(n).
+  - Loop through array once to check split conditions: O(n).
+  - Overall: O(n) time.
+
+Space: O(N)
+  - Prefix sum array stores n values: O(n) space.
+  - A few variables (i, ans, left, right) take O(1) space.
+  - Overall: O(n) total space.
+  - If we exclude the prefix sum array, extra working space is O(1).
+
+
 Overview for Each Iteration
 Input: nums = [10, 4, -8, 7]
 Step 1: Build prefix sum array
 i  | nums[i] | prefix
+---|---------|----------------
 -  | -       | [10]
 1  | 4       | [10, 14]
 2  | -8      | [10, 14, 6]
@@ -180,6 +202,7 @@ i  | nums[i] | prefix
 
 Step 2: Count valid splits where left sum >= right sum
 i  | l  | r (prefix[-1] - prefix[i]) | left >= right | ans
+---|----|----------------------------|---------------|-----
 0  | 10 | 3 (13 - 10)                | True          | 1
 1  | 14 | -1 (13 - 14)               | True          | 2
 2  | 6  | 7 (13 - 6)                 | False         | 2
@@ -204,8 +227,6 @@ def waysToSplitArray(nums):
             ans += 1         # Increment count for valid split
     
     return ans               # Return total number of ways
-
-
 
 
 

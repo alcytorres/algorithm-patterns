@@ -18,15 +18,29 @@ nums = [1, 2, 3, 4, 5]
 print(runningSum(nums))
 # Output: [1, 3, 6, 10, 15]
 
-# Time: O(n)
-# - Loop through nums once to build the prefix sum array: O(n).
-# - Each append is O(1), so total time is O(n).
 
-# Space: O(n)
-# - Prefix sum array stores n values: O(n) space.
-# - A few variables (i) take O(1) space.
-# - Overall: O(n) total space.
-# - If we exclude the output array, extra working space is O(1).
+"""
+Time: O(N)
+  - Let N = length of nums.
+  - Step 1: Initialize prefix array with the first element → O(1).
+  - Step 2: Iterate through the remaining N - 1 elements.
+      • For each i, compute prefix[i] = prefix[i - 1] + nums[i] → O(1) per element.
+  - Overall: O(N).
+
+Space: O(N)
+  - The prefix list stores N running sums.
+  - Only a few loop variables and temporary values use O(1) space.
+  - Overall: O(N).
+
+  
+Interview Answer: Worst Case
+
+Time: O(N)
+  - Single pass builds running sum array.
+
+Space: O(N)
+  - Output array of size N stores cumulative sums.
+"""
 
 
 

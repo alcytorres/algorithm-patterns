@@ -30,37 +30,52 @@ print(answer_queries(nums, queries, limit))
 # [2, 4] = 12
 
 
-# Time: O(n + q)
-# - Build prefix sum array: O(n).
-# - Answer each query in O(1) using prefix sums, for q queries: O(q).
-# - Overall: O(n + q) time.
-
-# Space: O(n + q)
-# - Prefix sum array stores n values: O(n) space.
-# - Result array 'ans' stores q values: O(q) space.
-# - A few variables (i, x, y, curr) take O(1) space.
-# - Overall: O(n + q) total space.
-# - If we exclude the output array, extra working space is O(n) due to the prefix sum array.
-
-
 """
-# Overview for Each Iteration
-# Input: nums = [1, 6, 3, 2, 7, 2], queries = [[0, 3], [2, 5], [2, 4]], limit = 13
-# Step 1: Build prefix sum array
-# i  | nums[i] | prefix
-# -  | -       | [1]
-# 1  | 6       | [1, 7]
-# 2  | 3       | [1, 7, 10]
-# 3  | 2       | [1, 7, 10, 12]
-# 4  | 7       | [1, 7, 10, 12, 19]
-# 5  | 2       | [1, 7, 10, 12, 19, 21]
+Time: O(N + Q)
+  - Let N = length of nums, Q = number of queries.
+  - Step 1: Build prefix sum array → O(N).
+      • Each prefix[i] stores the sum of nums[0...i].
+  - Step 2: Process each query [x, y] → O(Q).
+      • Each query is answered in O(1) using prefix sums: prefix[y] - prefix[x] + nums[x].
+  - Overall: O(N + Q).
 
-# Step 2: Process queries
-# x  | y  | curr             | curr < limit | ans
-# 0  | 3  | 12 (12 - 1 + 1)  | True         | [True]
-# 2  | 5  | 14 (21 - 10 + 3) | False        | [True, False]
-# 2  | 4  | 12 (19 - 10 + 3) | True         | [True, False, True]
-# Final: [True, False, True]
+Space: O(N)
+  - Prefix sum array stores N cumulative sums.
+  - Answer list stores Q boolean values.
+  - A few variables used for iteration and temporary calculations → O(1).
+  - Overall: O(N + Q), dominated by O(N) if Q ≤ N.
+
+  
+Interview Answer: Worst Case
+
+Time: O(N + Q)
+  - Build prefix sums once, then O(1) per query.
+
+Space: O(N)
+  - Prefix array needed to compute range sums efficiently.
+
+
+Overview for Each Iteration
+Input: nums = [1, 6, 3, 2, 7, 2], queries = [[0, 3], [2, 5], [2, 4]], limit = 13
+
+Step 1: Build prefix sum array
+i  | nums[i] | prefix
+---|---------|------------------------
+-  | -       | [1]
+1  | 6       | [1, 7]
+2  | 3       | [1, 7, 10]
+3  | 2       | [1, 7, 10, 12]
+4  | 7       | [1, 7, 10, 12, 19]
+5  | 2       | [1, 7, 10, 12, 19, 21]
+
+Step 2: Process queries
+x  | y  | curr             | curr < limit | ans
+---|----|------------------|--------------|--------------------
+0  | 3  | 12 (12 - 1 + 1)  | True         | [True]
+2  | 5  | 14 (21 - 10 + 3) | False        | [True, False]
+2  | 4  | 12 (19 - 10 + 3) | True         | [True, False, True]
+
+Final: [True, False, True]
 
 
 
@@ -136,6 +151,93 @@ def answer_queries(nums, queries, limit):
 
 
 # ––––––––––––––––––––––––––––––––––––––––––––––
+"""
+Prefix Sum Query Cheat Sheet
+
+Problem Overview
+ - Input: Array nums, queries [[x, y]], limit
+ - Output: Boolean array, True if subarray sum from x to y < limit, else False
+ - Example: nums = [1, 6, 3, 2, 7, 2], queries = [[0, 3], [2, 5], [2, 4]], limit = 13 -> [True, False, True]
+
+Key Code Logic
+ 1. Build Prefix Sum:
+   - Initialize: prefix = [nums[0]]
+   - Loop: for i in range(1, len(nums)): prefix.append(prefix[-1] + nums[i])
+2. Process Queries:
+   - Loop: for x, y in queries
+   - Calculate sum: curr = prefix[y] - prefix[x] + nums[x]
+   - Append result: ans.append(curr < limit)
+"""
+
+# Code:
+def prefix_sum_queries(nums, queries, limit):
+    prefix = [nums[0]]
+    for i in range(1, len(nums)):
+        prefix.append(prefix[-1] + nums[i])
+    
+    ans = []
+    for x, y in queries:
+        curr = prefix[y] - prefix[x] + nums[x]
+        ans.append(curr < limit)
+    return ans
+
+"""
+Challenges & Solutions
+  - Challenge: Understanding prefix[y] - prefix[x] + nums[x]:
+  - Why: prefix[y] - prefix[x] gives sum from x+1 to y. Add nums[x] to include index x.
+  - Fix: Recognize prefix[x] is sum up to x, so add nums[x] for full range.
+
+  - Challenge: Unpacking queries in loop (for x, y in queries):
+  - Why: Each query is a pair [x, y], unpacking assigns x as start, y as end.
+  - Fix: Understand x, y represent start/end indices of subarray.
+
+  - Challenge: Calculating correct subarray sum:
+  - Why: Using prefix[y] - prefix[x-1] fails when x=0 (invalid index) and requires extra checks.
+  - Fix: Use prefix[y] - prefix[x] + nums[x] for robust sum from x to y, valid for all x.
+
+Example Walkthrough
+  Query [2, 5]:
+    - nums: [1, 6, 3, 2, 7, 2]
+    - Prefix: [1, 7, 10, 12, 19, 21]
+    - curr = prefix[5] - prefix[2] + nums[2] = 21 - 10 + 3 = 14
+    - 14 < 13 -> False
+"""
+
+
+
+
+
+# ––––––––––––––––––––––––––––––––––––––––––––––
+# Alternative Solution
+
+def answer_queries(nums, queries, limit):
+    # prefix[i] = sum of nums[:i]
+    prefix = [0]
+    for v in nums:
+        prefix.append(prefix[-1] + v)
+
+    ans = []
+    for x, y in queries:
+        curr = prefix[y + 1] - prefix[x]  # safe for x=0
+        ans.append(curr < limit)
+    return ans
+
+
+nums = [1, 6, 3, 2, 7, 2]  # -> [0, 1, 7, 10, 12, 19, 21]
+queries = [[0, 3], [2, 5], [2, 4]]
+limit = 13
+print(answer_queries(nums, queries, limit))
+# Output: [True, False, True] --> Sums: [12, 14, 12], compared to limit 13.
+# [0, 3] = 12
+# [2, 5] = 14
+# [2, 4] = 12
+
+
+
+
+
+
+# ––––––––––––––––––––––––––––––––––––––––––––––
 # Task: Given an array nums, queries [[x, y]], and limit, return a boolean array where each element is True if the subarray sum from x to y is < limit, False otherwise.
 # Example: nums = [1, 6, 3, 2, 7, 2], queries = [[0, 3], [2, 5], [2, 4]], limit = 13 → Output = [True, False, True]
 # Why: Practices prefix sum technique to efficiently compute subarray sums.
@@ -207,84 +309,3 @@ nums = [1, 6, 3, 2, 7, 2]
 queries = [[0, 3], [2, 5], [2, 4]]
 limit = 13
 print(answer_queries(nums, queries, limit))  # Output: [True, False, True]
-
-
-
-# ––––––––––––––––––––––––––––––––––––––––––––––
-# Prefix Sum Query Cheat Sheet
-
-# Problem Overview
-# - Input: Array nums, queries [[x, y]], limit
-# - Output: Boolean array, True if subarray sum from x to y < limit, else False
-# - Example: nums = [1, 6, 3, 2, 7, 2], queries = [[0, 3], [2, 5], [2, 4]], limit = 13 -> [True, False, True]
-
-# Key Code Logic
-# 1. Build Prefix Sum:
-#    - Initialize: prefix = [nums[0]]
-#    - Loop: for i in range(1, len(nums)): prefix.append(prefix[-1] + nums[i])
-# 2. Process Queries:
-#    - Loop: for x, y in queries
-#    - Calculate sum: curr = prefix[y] - prefix[x] + nums[x]
-#    - Append result: ans.append(curr < limit)
-#
-# Code:
-def prefix_sum_queries(nums, queries, limit):
-    prefix = [nums[0]]
-    for i in range(1, len(nums)):
-        prefix.append(prefix[-1] + nums[i])
-    
-    ans = []
-    for x, y in queries:
-        curr = prefix[y] - prefix[x] + nums[x]
-        ans.append(curr < limit)
-    return ans
-
-# Challenges & Solutions
-# - Challenge: Understanding prefix[y] - prefix[x] + nums[x]:
-#   - Why: prefix[y] - prefix[x] gives sum from x+1 to y. Add nums[x] to include index x.
-#   - Fix: Recognize prefix[x] is sum up to x, so add nums[x] for full range.
-# - Challenge: Unpacking queries in loop (for x, y in queries):
-#   - Why: Each query is a pair [x, y], unpacking assigns x as start, y as end.
-#   - Fix: Understand x, y represent start/end indices of subarray.
-# - Challenge: Calculating correct subarray sum:
-#   - Why: Using prefix[y] - prefix[x-1] fails when x=0 (invalid index) and requires extra checks.
-#   - Fix: Use prefix[y] - prefix[x] + nums[x] for robust sum from x to y, valid for all x.
-
-# Example Walkthrough
-"""
-# Query [2, 5]:
-#   - nums: [1, 6, 3, 2, 7, 2]
-#   - Prefix: [1, 7, 10, 12, 19, 21]
-#   - curr = prefix[5] - prefix[2] + nums[2] = 21 - 10 + 3 = 14
-#   - 14 < 13 -> False
-"""
-
-
-
-
-
-# ––––––––––––––––––––––––––––––––––––––––––––––
-# Alternative Solution
-
-def answer_queries(nums, queries, limit):
-    # prefix[i] = sum of nums[:i]
-    prefix = [0]
-    for v in nums:
-        prefix.append(prefix[-1] + v)
-
-    ans = []
-    for x, y in queries:
-        curr = prefix[y + 1] - prefix[x]  # safe for x=0
-        ans.append(curr < limit)
-    return ans
-
-
-nums = [1, 6, 3, 2, 7, 2]  # -> [0, 1, 7, 10, 12, 19, 21]
-queries = [[0, 3], [2, 5], [2, 4]]
-limit = 13
-print(answer_queries(nums, queries, limit))
-# Output: [True, False, True] --> Sums: [12, 14, 12], compared to limit 13.
-# [0, 3] = 12
-# [2, 5] = 14
-# [2, 4] = 12
-

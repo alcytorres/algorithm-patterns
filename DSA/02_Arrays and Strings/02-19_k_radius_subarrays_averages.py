@@ -35,36 +35,52 @@ k = 3
 print(getAverages(nums, k))
 # Output: [-1, -1, -1, 5, 4, 4, -1, -1, -1]
 
-# Time: O(n)
-# - Create result array 'ans': O(n).
-# - Compute first window sum: O(k).
-# - Slide window across array: O(n) total, since each step adds one element and removes one element in O(1) time.
-# - Overall time is O(n) because O(n) dominates O(k).
-
-# Space: O(n)
-# - Result array 'ans' takes O(n) space.
-# - A few integer variables (n, window_size, curr_sum, i) take O(1) space.
-# - Overall: O(n) total space.
-# - If we exclude the result array from consideration, extra working space is O(1).
-
-
 
 """
-# Overview for Each Iteration
-# Input: nums = [7, 4, 3, 9, 1, 8, 5, 2, 6], k = 3
-# Step 1: Initialize variables
-# n = 9, window_size = 2*3 + 1 = 7, ans = [-1, -1, -1, -1, -1, -1, -1, -1, -1]
+Time: O(N)
+  - Let N = length of nums, K = given radius, and W = 2K + 1 (window size).
+  - If N < W, return the default answer in O(1) aside from initialization.
+  - Compute the first window sum over W elements → O(W) ≤ O(N).
+  - Slide the window for each valid center index i from K to N - K - 1:
+      • Update sum by adding nums[i+K] and subtracting nums[i-K-1] → O(1) per step.
+      • Store average with integer division → O(1).
+  - Total sliding steps are (N - 2K) = O(N).
+  - Overall: O(N).
 
-# Step 2: Calculate sum of first full window (indices 0 to 6)
-# curr = sum(nums[0:7]) = 7 + 4 + 3 + 9 + 1 + 8 + 5 = 37
-# ans[3] = 37 // 7 = 5
-# ans = [-1, -1, -1, 5, -1, -1, -1, -1, -1]
+Space: O(N)
+  - Output array 'ans' of size N to store each index's average or -1.
+  - A few scalars for running sum and indices (curr, i, n, W) → O(1).
+  - Overall: O(N).
 
-# Step 3: Slide window and compute averages
-# i  | curr            | nums[i+k] | nums[i-k-1] | ans[i]    | ans
-# 4  | 32 (37 + 2 - 7) | 2         | 7           | 4 (32//7) | [-1, -1, -1, 5, 4, -1, -1, -1, -1]
-# 5  | 34 (32 + 6 - 4) | 6         | 4           | 4 (34//7) | [-1, -1, -1, 5, 4, 4, -1, -1, -1]
-# Final: [-1, -1, -1, 5, 4, 4, -1, -1, -1]
+  
+Interview Answer: Worst Case
+
+Time: O(N)
+  - Build first window in O(W), then slide across array with O(1) updates per index.
+
+Space: O(N)
+  - Output array of length N; otherwise constant extra space.
+
+
+
+Overview for Each Iteration
+Input: nums = [7, 4, 3, 9, 1, 8, 5, 2, 6], k = 3
+
+Step 1: Initialize variables
+n = 9, window_size = 2*3 + 1 = 7, ans = [-1, -1, -1, -1, -1, -1, -1, -1, -1]
+
+Step 2: Calculate sum of first full window (indices 0 to 6)
+curr = sum(nums[0:7]) = 7 + 4 + 3 + 9 + 1 + 8 + 5 = 37
+ans[3] = 37 // 7 = 5
+ans = [-1, -1, -1, 5, -1, -1, -1, -1, -1]
+
+Step 3: Slide window and compute averages
+i  | curr            | nums[i+k] | nums[i-k-1] | ans[i]    | ans
+---|-----------------|-----------|-------------|-----------|------------------------------------
+4  | 32 (37 + 2 - 7) | 2         | 7           | 4 (32//7) | [-1, -1, -1, 5, 4, -1, -1, -1, -1]
+5  | 34 (32 + 6 - 4) | 6         | 4           | 4 (34//7) | [-1, -1, -1, 5, 4, 4, -1, -1, -1]
+
+Final: [-1, -1, -1, 5, 4, 4, -1, -1, -1]
 
 
 

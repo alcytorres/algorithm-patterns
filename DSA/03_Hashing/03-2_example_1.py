@@ -36,6 +36,7 @@ target = 5
 print(twoSum(nums, target))
 # Output: [3, 1] or [1, 3] -> 1 + 4 = 5
 
+"""
 # Time: O(n)
 # - Loop through nums once: O(n) iterations.
 # - Dictionary lookups ('if complement in d') and inserts ('d[num] = i') are O(1) on average.
@@ -48,9 +49,10 @@ print(twoSum(nums, target))
 # - If we exclude the dictionary from consideration (not typical here since it's part of the algorithm), extra space is O(1).
 
 
-"""
+
 Overview for Each Iteration
 Input: nums = [3, 1, 7, 4, -6], target = 5
+
 Step: Find indices of two numbers summing to target
 i   | num  | diff (target - num) | d                 | Action
 ----|------|---------------------|-------------------|----------------
@@ -58,6 +60,7 @@ i   | num  | diff (target - num) | d                 | Action
 1   | 1    | 4 (5 - 1)          | {3: 0, 1: 1}       | Store 1 at index 1
 2   | 7    | -2 (5 - 7)         | {3: 0, 1: 1, 7: 2} | Store 7 at index 2
 3   | 4    | 1 (5 - 4)          | {3: 0, 1: 1, 7: 2} | Found 1 in d, return [3, 1]
+
 Final: [3, 1] (nums[1] + nums[3] = 1 + 4 = 5)
 
 As soon as a difference matches a num you found the answer. In this case that difference is 1. 
@@ -93,7 +96,7 @@ def twoSum(nums, target):
         diff = target - num
 
         if diff in d:   # O(1) check
-            return [d[diff], i]
+            return [i, d[diff]]
         d[num] = i      # Store number and index
 
     return []
@@ -101,10 +104,56 @@ def twoSum(nums, target):
 nums = [3, 1, 7, 4, -6]
 target = 5
 print(twoSum(nums, target))  
-# Output: [3, 1]
+# Output: [1, 3]
 
-# Time: O(n) - Single pass through n elements with O(1) hash operations.
-# Space: O(n) - Stores up to n elements in the hash map.
+"""
+Time: O(N)
+  - Let N = length of nums.
+  - Loop through nums once → O(N).
+      • For each num, check if (target - num) exists in dictionary → O(1) average.
+      • Insert current num into dictionary → O(1).
+  - Each element is processed exactly once.
+  - Overall: O(N).
+
+Space: O(N)
+  - Dictionary 'd' stores up to N key-value pairs (num → index).
+  - A few variables (i, num, diff) use O(1) space.
+  - Overall: O(N).
+
+  
+Interview Answer: Worst Case
+
+Time: O(N)
+  - Single pass with constant-time hash lookups.
+
+Space: O(N)
+  - Dictionary stores previously seen numbers.
+
+
+
+Overview for Each Iteration
+Input: nums = [3, 1, 7, 4, -6], target = 5
+
+Step: Find indices of two numbers summing to target
+i   | num  | diff (target - num) | d                     | Action
+----|------|---------------------|-----------------------|----------------
+0   | 3    | 2 (5 - 3)          | {3: 0}               | Store 3 at index 0
+1   | 1    | 4 (5 - 1)          | {3: 0, 1: 1}         | Store 1 at index 1
+2   | 7    | -2 (5 - 7)         | {3: 0, 1: 1, 7: 2}   | Store 7 at index 2
+3   | 4    | 1 (5 - 4)          | {3: 0, 1: 1, 7: 2}   | Found 1 in d, return [3, 1]
+
+Final: [3, 1] (nums[1] + nums[3] = 1 + 4 = 5)
+"""
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -179,6 +228,3 @@ def twoSum(nums, target):  # Example: nums = [3, 1, 7, 4, -6], target = 5
 nums = [3, 1, 7, 4, -6]
 target = 5
 print(twoSum(nums, target))  # Output: [3, 1]
-
-
-

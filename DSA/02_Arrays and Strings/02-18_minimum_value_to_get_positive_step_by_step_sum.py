@@ -37,21 +37,37 @@ def minStartValue(nums):
 
 nums = [-3, 2, -3, 4, 2]
 print(minStartValue(nums))
-# Output: 5 - Returns 5 as the minimum positive startValue ensuring the step-by-step sum starting from nums[0] never falls below 1.
-
-# Time: O(n)
-# - Loop through nums once, updating 'total' and 'min_val' in O(1) per step.
-# - Overall: O(n) time.
-
-# Space: O(1)
-# - Only a constant number of variables (min_val, total, num) are used.
-# - No additional data structures.
-# - Overall: O(1) space.
-
+# Output: 5 → Returns 5 as the minimum positive startValue ensuring the step-by-step sum starting from nums[0] never falls below 1.
 
 """
+Time: O(N)
+  - Let N = length of nums.
+  - Step 1: Initialize running total and track minimum prefix sum.
+  - Step 2: Iterate through nums once → O(N).
+      • For each num, update total in O(1).
+      • Update min_val in O(1).
+  - Final calculation (-min_val + 1) is O(1).
+  - Overall: O(N).
+
+Space: O(1)
+  - Only scalar variables used: total and min_val.
+  - No additional data structures are created.
+  - Overall: O(1).
+
+  
+Interview Answer: Worst Case
+
+Time: O(N)
+  - Single pass computes prefix sums and tracks the minimum.
+
+Space: O(1)
+  - Constant space for running total and minimum value.
+
+
+
 Overview for Each Iteration
 Input: nums = [-3, 2, -3, 4, 2]
+
 Step: Calculate step-by-step sum and track minimum total
 i   | num  | total | min_val
 ----|------|-------|-----------------
@@ -61,6 +77,7 @@ i   | num  | total | min_val
 2   | -3   | -4    | -4 (min(-3, -4))
 3   | 4    | 0     | -4 (min(-4, 0))
 4   | 2    | 2     | -4 (min(-4, 2))
+
 Final: -(-4) + 1 = 5
 
 
