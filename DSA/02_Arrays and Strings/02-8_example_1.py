@@ -26,35 +26,50 @@ def longest_subarray_sum(nums, k):
 nums = [1, 2, 1, 2, 4, 2]
 k = 8
 print(longest_subarray_sum(nums, k))
-# Output: 4  --> Subarray [1, 2, 1, 2] (length 4, sum 6) is the longest subarray with sum <= 6.
-
-# Time: O(n)
-# - Right pointer moves across the array once.
-# - Left pointer also moves at most n steps in total.
-# - Each element is added and removed from 'curr' at most once.
-# - No nested loops that multiply time.
-
-# Space: O(1)
-# - Only a constant number of variables (left, right, curr, ans) are used.
-# - No additional data structures.
-# - Overall: O(1) space.
+# Output: 4  →  Subarray [1, 2, 1, 2] (length 4, sum 6) is the longest subarray with sum <= 6.
 
 
 """
+Time: O(N)
+  - Let N = length of nums.
+  - The right pointer expands the window once per element → O(N).
+  - The left pointer only moves forward when sum exceeds k, and never moves backward → total O(N) steps.
+  - Each element is added and removed from the running sum at most once.
+  - Overall: O(N).
+
+Space: O(1)
+  - Only a few integer variables used: left, right, curr, ans.
+  - No additional data structures are created.
+  - Overall: O(1).
+
+  
+Interview Answer: Worst Case
+
+Time: O(N)
+  - Sliding window processes each element at most twice (once added, once removed).
+
+Space: O(1)
+  - Constant extra space for variables.
+
+  
+
 Overview for Each Iteration
 Input: nums = [1, 2, 1, 2, 4, 2], k = 8
+
 Step: Find longest subarray with sum <= k using sliding window
-r | nums[r] | curr | l | curr > k | Action               | ans
-- | -       | 0    | 0 | -        | -                    | 0
-0 | 1       | 1    | 0 | No       | ans=max(0,0-0+1)=1   | 1
-1 | 2       | 3    | 0 | No       | ans=max(1,1-0+1)=2   | 2
-2 | 1       | 4    | 0 | No       | ans=max(2,2-0+1)=3   | 3
-3 | 2       | 6    | 0 | No       | ans=max(3,3-0+1)=4   | 4
-4 | 4       | 10   | 0 | Yes      | curr-=nums[0]=10-1=9 | 4
-  |         | 9    | 1 | Yes      | curr-=nums[1]=9-2=7  | 4
-  |         | 7    | 2 | No       | ans=max(4,4-2+1)=4   | 4
-5 | 2       | 9    | 2 | Yes      | curr-=nums[2]=9-1=8  | 4
-  |         | 8    | 3 | No       | ans=max(4,5-3+1)=4   | 4
+r | nums[r] | curr | l | curr > k | Action                | ans
+--|---------|------|---|----------|-----------------------|-----
+- | -       | 0    | 0 | -        | -                     | 0
+0 | 1       | 1    | 0 | No       | ans=max(0, 0-0+1)=1   | 1
+1 | 2       | 3    | 0 | No       | ans=max(1, 1-0+1)=2   | 2
+2 | 1       | 4    | 0 | No       | ans=max(2, 2-0+1)=3   | 3
+3 | 2       | 6    | 0 | No       | ans=max(3, 3-0+1)=4   | 4
+4 | 4       | 10   | 0 | Yes      | curr-=nums[0]=10-1=9  | 4
+  |         | 9    | 1 | Yes      | curr-=nums[1]=9-2=7   | 4
+  |         | 7    | 2 | No       | ans=max(4, 4-2+1)=4   | 4
+5 | 2       | 9    | 2 | Yes      | curr-=nums[2]=9-1=8   | 4
+  |         | 8    | 3 | No       | ans=max(4, 5-3+1)=4   | 4
+
 Final: 4 ([1, 2, 1, 2])
 
 
@@ -144,6 +159,89 @@ def longest_subarray_sum(nums, k):
         ans = max(ans, right - left + 1)  # Update max window size
     
     return ans   # Return length of longest subarray
+
+
+
+# ––––––––––––––––––––––––––––––––––––––––––––––––
+# Best Solution
+# Compare this to code below
+
+def longest_subarray_sum(nums, k):
+    l = curr = ans = 0
+
+    for r in range(len(nums)):
+        curr += nums[r]
+
+        while curr >= k:
+            curr -= nums[l]
+            l += 1
+
+        ans = max(ans, r - l + 1)
+    
+    return ans
+
+nums = [1, 2, 3]
+k = 5
+print(longest_subarray_sum(nums, k))
+# Output: 2  --> Subarray [2, 3] (length 2, sum 5) is the longest subarray with sum <= 6.
+
+
+"""
+Overview for Each Iteration
+Input: nums = [1, 2, 3], k = 5
+Step: Find longest subarray with sum <= k using sliding window
+r | nums[r] | curr | l | curr > k | ans
+- | -       | 0    | 0 | -        | 0
+0 | 1       | 1    | 0 | No       | 1
+1 | 2       | 3    | 0 | No       | 2
+2 | 3       | 6    | 1 | Yes      | 2
+  |         | 5    | 2 | No       | 2
+Final: 2 ([2, 3])
+
+"""
+
+
+# ––––––––––––––––––––––––––––––––––––––––––––––––
+# Why must l += 1 be inside the while loop to update the left pointer correctly?
+
+# THIS CODE IS INCORRECT
+# DEMONSTRATES ISSUE WHEN l += 1 IS OUTSIDE THE WHILE LOOP
+def longest_subarray_sum(nums, k):
+    l = curr = ans = 0
+
+    for r in range(len(nums)):
+        curr += nums[r]
+
+        while curr >= k:
+            curr -= nums[l]
+
+        l += 1  # Error, should be inside while loop
+
+        ans = max(ans, r - l + 1)
+    
+    return ans
+
+nums = [1, 2, 3]
+k = 5
+print(longest_subarray_sum(nums, k))
+# Output: 0
+
+
+"""
+Overview for Each Iteration
+Input: nums = [1, 2, 3], k = 5
+Step: Find longest subarray with sum <= k using sliding window
+r | nums[r] | curr | l | curr >= k | ans
+- | -       | 0    | 0 | -         | 0
+0 | 1       | 1    | 1 | No        | 0
+1 | 2       | 3    | 2 | No        | 0
+2 | 3       | 6    | 2 | Yes       | 0
+  |         | 3    | 3 | No        | 0
+Final: 0
+
+"""
+
+
 
 
 
@@ -253,86 +351,3 @@ def longest_subarray_sum(nums, k):  # Example: nums = [1, 2, 1, 2, 4, 2], k = 6
 nums = [1, 2, 1, 2, 4, 2]
 k = 6
 print(longest_subarray_sum(nums, k))  # Output: 4
-
-
-
-
-
-# ––––––––––––––––––––––––––––––––––––––––––––––––
-# Best Solution
-# Compare this to code below
-
-def longest_subarray_sum(nums, k):
-    l = curr = ans = 0
-
-    for r in range(len(nums)):
-        curr += nums[r]
-
-        while curr >= k:
-            curr -= nums[l]
-            l += 1
-
-        ans = max(ans, r - l + 1)
-    
-    return ans
-
-nums = [1, 2, 3]
-k = 5
-print(longest_subarray_sum(nums, k))
-# Output: 2  --> Subarray [2, 3] (length 2, sum 5) is the longest subarray with sum <= 6.
-
-
-"""
-Overview for Each Iteration
-Input: nums = [1, 2, 3], k = 5
-Step: Find longest subarray with sum <= k using sliding window
-r | nums[r] | curr | l | curr > k | ans
-- | -       | 0    | 0 | -        | 0
-0 | 1       | 1    | 0 | No       | 1
-1 | 2       | 3    | 0 | No       | 2
-2 | 3       | 6    | 1 | Yes      | 2
-  |         | 5    | 2 | No       | 2
-Final: 2 ([2, 3])
-
-"""
-
-
-# ––––––––––––––––––––––––––––––––––––––––––––––––
-# Why must l += 1 be inside the while loop to update the left pointer correctly?
-
-# THIS CODE IS INCORRECT
-# DEMONSTRATES ISSUE WHEN l += 1 IS OUTSIDE THE WHILE LOOP
-def longest_subarray_sum(nums, k):
-    l = curr = ans = 0
-
-    for r in range(len(nums)):
-        curr += nums[r]
-
-        while curr >= k:
-            curr -= nums[l]
-
-        l += 1  # Error, should be inside while loop
-
-        ans = max(ans, r - l + 1)
-    
-    return ans
-
-nums = [1, 2, 3]
-k = 5
-print(longest_subarray_sum(nums, k))
-# Output: 0
-
-
-"""
-Overview for Each Iteration
-Input: nums = [1, 2, 3], k = 5
-Step: Find longest subarray with sum <= k using sliding window
-r | nums[r] | curr | l | curr >= k | ans
-- | -       | 0    | 0 | -         | 0
-0 | 1       | 1    | 1 | No        | 0
-1 | 2       | 3    | 2 | No        | 0
-2 | 3       | 6    | 2 | Yes       | 0
-  |         | 3    | 3 | No        | 0
-Final: 0
-
-"""

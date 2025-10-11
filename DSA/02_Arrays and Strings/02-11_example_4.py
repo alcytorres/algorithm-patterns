@@ -24,31 +24,49 @@ def find_best_subarray(nums, k):
 nums = [1, 4, 6, 2]
 k = 2
 print(find_best_subarray(nums, k))  
-# Output: 10  --> Subarray [4, 6] (length 2, sum 4 + 6 = 10) is the largest sum for k=2.
-
-# Time: O(n)
-# - Initial sum of the first k elements: O(k).
-# - Sliding the window across the array: O(n) total, since each step adds one element and removes one element in O(1) time.
-# - Overall time is O(n) because O(n) dominates O(k).
-
-# Space: O(1)
-# - Only a constant number of variables (curr, ans, i) are used.
-# - No additional data structures.
-# - Overall: O(1) space.
+# Output: 10  →  Subarray [4, 6] (length 2, sum 4 + 6 = 10) is the largest sum for k=2.
 
 """
+Time: O(N)
+  - Let N = length of nums.
+  - Step 1: Compute the initial sum of the first k elements → O(k).
+  - Step 2: Slide the window across the array → O(N - k).
+      • For each new element, add one and remove one → O(1) per step.
+  - Each element is processed a constant number of times.
+  - Overall: O(N).
+
+Space: O(1)
+  - Only a few integer variables are used: curr, ans, and loop counters.
+  - No extra data structures are created.
+  - Overall: O(1).
+
+  
+Interview Answer: Worst Case
+
+Time: O(N)
+  - Fixed-size sliding window, single pass through array.
+
+Space: O(1)
+  - Constant space for running sum and best value.
+  
+
+
 Overview for Each Iteration
 Input: nums = [1, 4, 6, 2], k = 2
+
 Step 1: Calculate initial sum for first window of size k
 i | curr    | ans
+--|---------|-----
 - | 0       | -
 0 | 1       | -
 1 | 5 (1+4) | 5
 
 Step 2: Slide window, maintaining size k
 i | curr       | nums[i] | nums[i-k] | ans
+--|------------|---------|-----------|----------------
 2 | 10 (5+6-1) | 6       | 1         | 10 (max(5, 10))
 3 | 8 (10+2-4) | 2       | 4         | 10 (max(10, 8))
+
 Final: 10 ([4, 6])
 
 

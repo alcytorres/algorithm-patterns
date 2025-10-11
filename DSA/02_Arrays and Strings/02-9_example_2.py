@@ -22,24 +22,35 @@ def longest_substring_one_zero(s):
 
 s = "11001011"
 print(longest_substring_one_zero(s))  
-# Output: 4  --> Substring "1011" (length 4, one "0") is the longest with at most one "0".
-
-# Time: O(n)
-# - Right pointer moves across the string once.
-# - Left pointer also moves at most n steps in total.
-# - Each character is processed (added/removed from count) at most once.
-# - No nested loops that multiply time.
-
-# Space: O(1)
-# - Only a constant number of variables (left, right, curr, ans) are used.
-# - No additional data structures.
-# - Overall: O(1) space.
-
-
+# Output: 4  →  Substring "1011" (length 4, one "0") is the longest with at most one "0".
 
 """
+Time: O(N)
+  - Let N = length of string s.
+  - The right pointer (r) expands the window one character at a time → O(N).
+  - The left pointer (l) only moves forward when more than one '0' is in the window.
+  - Each character is processed (added and possibly removed) at most once.
+  - Overall: O(N).
+
+Space: O(1)
+  - Only integer counters (l, r, curr, ans) are used.
+  - No extra data structures are created.
+  - Overall: O(1).
+
+  
+Interview Answer: Worst Case
+
+Time: O(N)
+  - Sliding window scans each character once.
+
+Space: O(1)
+  - Constant extra space for pointers and counters.
+
+
+
 Overview for Each Iteration
 Input: s = "11001011"
+
 Step: Find longest substring with at most one "0" using sliding window
 r   | s[r] | curr | curr > 1 | l  | s[l] | Action              | ans
 ----|------|------|----------|----|------|---------------------|----
@@ -55,7 +66,21 @@ r   | s[r] | curr | curr > 1 | l  | s[l] | Action              | ans
     |      | 1    | No       | 4  | -    | ans=max(3,5-4+1)=3  | 3
 6   | 1    | 1    | No       | 4  | -    | ans=max(3,6-4+1)=3  | 3
 7   | 1    | 1    | No       | 4  | -    | ans=max(3,7-4+1)=4  | 4
+
 Final: 4 ("1011")
+
+
+
+
+Q: Why is l += 1 outside the if s[l] == "0": block?
+
+  👉 Because we always need to move the left pointer (l) forward when shrinking the window — whether the character is "0" or "1".
+
+  • If it's a "0", we also reduce curr (since that zero leaves the window).
+
+  • If it's a "1", we still move l because we're shrinking the window until it's valid again (curr <= 1).
+
+  • Putting l += 1 outside ensures that the left side always moves, one step at a time.
 
 """
 
@@ -80,6 +105,8 @@ def longest_substring_one_zero(s):
         ans = max(ans, right - left + 1)  # Update max window size
     
     return ans  # Returns the length of the longest substring
+
+
 
 
 # ––––––––––––––––––––––––––––––––––––––––––––––––––

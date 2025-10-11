@@ -33,28 +33,43 @@ print(sortedSquares(nums))
 # Output: [0, 1, 9, 16, 100]
 
 
-# Time: O(n)
-# - Two pointers (left, right) each move toward the center once.
-# - Each element is processed exactly once and placed into the result array.
-# - No nested loops.
-
-# Space: O(n)
-# - Result array 'ans' stores the squared values of all n elements.
-# - Only a constant number of extra variables (left, right, square, i) are used besides the output array.
-# - If we exclude the result array, extra working space is O(1).
-
-
 """
+Time: O(N)
+  - Let N = length of nums.
+  - Two-pointer approach scans from both ends toward the center.
+  - Each element is visited and squared exactly once → O(N).
+  - No additional sorting step is needed (sorted automatically during construction).
+  - Overall: O(N).
+
+Space: O(N)
+  - The output array 'ans' holds N squared values.
+  - Only a few pointer variables (l, r, i, square) use O(1) space.
+  - Overall: O(N).
+
+  
+Interview Answer: Worst Case
+
+Time: O(N)
+  - Two-pointer sweep processes each number once.
+
+Space: O(N)
+  - Output array stores squared results.
+
+
+
 Overview for Each Iteration
 Input: nums = [-4, -1, 0, 3, 10]
+
 Step: Square numbers and sort in non-decreasing order
 i | l | r | abs(nums[l]) | abs(nums[r]) | square | ans
+--|---|---|--------------|--------------|--------|-------------------
 - | 0 | 4 | -            | -            | -      | [0, 0, 0, 0, 0]
 4 | 0 | 4 | 4            | 10           | 10     | [0, 0, 0, 0, 100]
 3 | 0 | 3 | 4            | 3            | -4     | [0, 0, 0, 16, 100]
 2 | 1 | 3 | 1            | 3            | 3      | [0, 0, 9, 16, 100]
 1 | 1 | 2 | 1            | 0            | -1     | [0, 1, 9, 16, 100]
 0 | 2 | 2 | 0            | 0            | 0      | [0, 1, 9, 16, 100]
+
 Final: [0, 1, 9, 16, 100]
 
 """

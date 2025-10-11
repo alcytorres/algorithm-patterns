@@ -36,23 +36,36 @@ print(num_subarrays_product_less_than_k(nums, k))
 # r=2: After shrinking, counted [5, 2], [2]
 # r=3: Counted [5, 2, 6], [2, 6], [6]
 
-# Time: O(n)
-# - Right pointer moves across the array once.
-# - Left pointer also moves at most n steps in total.
-# - Each element is multiplied into and divided out of 'curr' at most once.
-# - No nested loops that multiply time.
-
-# Space: O(1)
-# - Only a constant number of variables (left, right, curr, ans) are used.
-# - No additional data structures.
-# - Overall: O(1) space.
-
-
 """
+Time: O(N)
+  - Let N = length of nums.
+  - The right pointer (r) expands the window across the array → O(N).
+  - The left pointer (l) only moves forward when product >= k, never backward.
+  - Each element is multiplied into and divided out of 'curr' at most once.
+  - Counting subarrays (ans += r - l + 1) is O(1) per iteration.
+  - Overall: O(N).
+
+Space: O(1)
+  - Only a few scalar variables (l, r, curr, ans) are used.
+  - No additional data structures are created.
+  - Overall: O(1).
+
+  
+Interview Answer: Worst Case
+
+Time: O(N)
+  - Sliding window adjusts boundaries at most twice per element.
+
+Space: O(1)
+  - Constant space for counters and product tracking.
+  
+
+
 Overview for Each Iteration
 Input: nums = [10, 5, 2, 6], k = 100
 Step: Count subarrays with product < k using sliding window
 r | nums[r] | curr | l | curr >= k | Action                    | ans
+--|---------|------|---|-----------|---------------------------|-----
 - | -       | 1    | 0 | -         | -                         | 0
 0 | 10      | 10   | 0 | No        | ans+=0-0+1=1              | 1
 1 | 5       | 50   | 0 | No        | ans+=1-0+1=2              | 3
