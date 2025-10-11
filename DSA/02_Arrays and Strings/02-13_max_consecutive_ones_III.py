@@ -30,23 +30,36 @@ k = 2
 print(longestOnes(nums, k))
 # Output: 6
 
-# Time: O(n)
-# - Right pointer moves across the array once.
-# - Left pointer also moves at most n steps in total.
-# - Each element is processed (added/removed from count) at most once.
-# - No nested loops that multiply time.
-
-# Space: O(1)
-# - Only a constant number of variables (left, right, curr, ans) are used.
-# - No additional data structures.
-# - Overall: O(1) space.
-
-
 """
+Time: O(N)
+  - Let N = length of nums.
+  - The right pointer expands the window across the array → O(N).
+  - The left pointer only moves forward when more than k zeros are in the window.
+  - Each element is visited at most twice (once added, once removed).
+  - Overall: O(N).
+
+Space: O(1)
+  - Only a few integer variables (left, right, curr, ans) are used.
+  - No extra data structures are needed.
+  - Overall: O(1).
+
+  
+Interview Answer: Worst Case
+
+Time: O(N)
+  - Sliding window examines each element at most twice.
+
+Space: O(1)
+  - Constant space for pointers and zero counter.
+
+
+
 Overview for Each Iteration
 Input: nums = [1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 0], k = 2
+
 Step: Find max consecutive 1's with at most k flips using sliding window
 r | nums[r] | curr | curr > k | l | nums[l] | Action              | ans
+--|---------|------|----------|---|---------|---------------------|------
 - | -       | 0    | -        | 0 | -       | -                   | 0
 0 | 1       | 0    | No       | 0 | -       | ans=max(0,0-0+1)=1  | 1
 1 | 1       | 0    | No       | 0 | -       | ans=max(1,1-0+1)=2  | 2
@@ -64,6 +77,7 @@ r | nums[r] | curr | curr > k | l | nums[l] | Action              | ans
 9 | 1       | 2    | No       | 4 | -       | ans=max(6,9-4+1)=6  | 6
 10| 0       | 3    | Yes      | 4 | 0       | curr-=1, l+=1       | 6
   |         | 2    | No       | 5 | -       | ans=max(6,10-5+1)=6 | 6
+
 Final: 6
 
 
@@ -133,6 +147,8 @@ def longestOnes(nums, k):
         ans = max(ans, right - left + 1)  # Update max window size
     
     return ans   # Return the maximum length of consecutive 1's possible
+
+
 
 
 

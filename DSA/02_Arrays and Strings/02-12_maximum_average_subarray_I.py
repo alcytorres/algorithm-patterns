@@ -37,22 +37,36 @@ solution = Solution()
 nums = [4, -2, 1, 7, -1]
 k = 2
 print(solution.findMaxAverage(nums, k))  
-# Output: 4  --> Subarray [1, 7] (length 2, sum 1 + 7 = 8, average 8/2 = 4) has the largest average for k=2.
-
-# Time: O(n)
-# - Initial sum of the first k elements: O(k).
-# - Sliding the window across the array: O(n) total, since each step adds one element and removes one element in O(1) time.
-# - Overall time is O(n) because O(n) dominates O(k).
-
-# Space: O(1)
-# - Only a constant number of variables (curr, ans, i) are used.
-# - No additional data structures.
-# - Overall: O(1) space.
-
+# Output: 4  →  Subarray [1, 7] (length 2, sum 1 + 7 = 8, average 8/2 = 4) has the largest average for k=2
 
 """
+Time: O(N)
+  - Let N = length of nums.
+  - Step 1: Compute the sum of the first k elements → O(k).
+  - Step 2: Slide the window across the array → O(N - k).
+      • Add the next element and remove the element leaving the window → O(1) per step.
+  - Each element is processed at most twice (once added, once subtracted).
+  - Overall: O(N).
+
+Space: O(1)
+  - Only integer and float variables are used (curr, ans, loop counters).
+  - No additional data structures are created.
+  - Overall: O(1).
+
+  
+Interview Answer: Worst Case
+
+Time: O(N)
+  - Sliding window computes all subarray sums in one pass.
+
+Space: O(1)
+  - Constant space for running total and average calculation.
+
+
+
 Overview for Each Iteration
 Input: nums = [4, -2, 1, 7, -1], k = 2
+
 Step 1: Calculate initial sum for first window of size k
 i   | curr    | ans
 ----|---------|----
@@ -66,6 +80,7 @@ i   | curr          | nums[i] | nums[i-k] | ans
 2   | -1 (2+1-4)    | 1       | 4         | 2 (max(2, -1))
 3   | 8 (-1+7-(-2)) | 7       | -2        | 8 (max(2, 8))
 4   | 6 (8-1-7)     | -1      | 1         | 8 (max(8, 6))
+
 Final: 8/2 = 4 ([1, 7])
 
 
