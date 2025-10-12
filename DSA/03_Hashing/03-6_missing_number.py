@@ -19,38 +19,50 @@ def missingNumber(nums):
 
 nums = [3, 0, 1]
 print(missingNumber(nums))
-# Output: 2
-
-# Time: O(n)
-# - Creating the set from nums: O(n).
-# - Looping through numbers from 0 to n: O(n) iterations.
-# - Set lookups ('number not in seen') are O(1) on average.
-# - Overall: O(n) time.
-
-# Space: O(n)
-# - Set 'seen' stores up to n elements: O(n) space.
-# - A few variables (n, number) take O(1) space.
-# - Overall: O(n) total space.
-
+# Output: 2 → In the range [0, 3], the numbers present are [0, 1, 3], so 2 is the only missing number.
 
 """
+Time: O(N)
+  - Let N = length of nums.
+  - Step 1: Build a set from nums → O(N).
+      • Each insertion into the set takes O(1) average time.
+  - Step 2: Iterate from 0 to N → O(N).
+      • For each number, check membership in the set → O(1) average.
+  - Overall: O(N + N) = O(N).
+
+Space: O(N)
+  - The set 'seen' stores all N numbers from nums.
+  - A few scalar variables (n, num, loop counter) use O(1).
+  - Overall: O(N).
+
+  
+Interview Answer: Worst Case
+
+Time: O(N)
+  - Build set and check each number in range [0, N].
+
+Space: O(N)
+  - Set stores all numbers in the input.
+
+
+  
 Overview for Each Iteration
 Input: nums = [3, 0, 1]
+
 Step 1: Create set and determine range
 seen = {3, 0, 1}
 n = len(nums) + 1 = 4
 
 Step 2: Check each number in range [0, n)
 num | num in seen | Action
-----|-------------|--------
+----|-------------|----------
 0   | True        | Continue
 1   | True        | Continue
 2   | False       | Return 2
+
 Final: 2
 
 """
-
-
 
 
 # ––––––––––––––––––––––––––––––––––––––––––––––––
@@ -64,6 +76,8 @@ def missingNumber(nums):
         if num not in seen:  # If number missing from set
             return num         # Return first missing number
         
+
+
 
 
 

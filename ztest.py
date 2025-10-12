@@ -1,39 +1,14 @@
-# 1. Two Sum
 
-# Example 1
-    # Given an array of integers nums and an integer target, return indices of the two numbers such that they add up to target.
 
-# You may assume that each input would have exactly one solution, and you may not use the same element twice.
 
-# You can return the answer in any order.
 
-# Example:
-    # Input: nums = [3, 1, 7, 4, -6], target = 5
-    # Output: [1, 3]
-    # Explanation: Because nums[1] + nums[3] == 5, we return [1, 3] or [3, 1].
 
-# Solution: https://leetcode.com/problems/two-sum/description/
 
-# ––––––––––––––––––––––––––––––––––––––––––––––––
-# Index-First Dictionary Approach
 
-def twoSum(nums, target):
-    
-    d = {}
 
-    for i, num in enumerate(nums):
-        diff = target - num
 
-        if diff in d:
-            return [i, d[diff]]
-        d[num] = i
-    
-    return []
 
-nums = [3, 1, 7, 4, -6]
-target = 5
-print(twoSum(nums, target))
-# Output: [3, 1] or [1, 3] -> 1 + 4 = 5
+
 
 
 

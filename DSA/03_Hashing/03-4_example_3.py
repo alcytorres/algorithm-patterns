@@ -23,22 +23,35 @@ l = [2, 4, 4, 6]
 print(find_numbers(l))
 # Output: [2, 4, 6]
 
-# Time: O(n)
-# - Creating the set from nums: O(n).
-# - Looping through 'seen': O(n) in the worst case.
-# - Set lookups ('x+1 not in seen', 'x-1 not in seen') are O(1) on average.
-# - Overall: O(n) time.
-
-# Space: O(n)
-# - Set 'seen' stores up to n elements: O(n) space.
-# - List 'ans' can store up to n elements in the worst case: O(n) space.
-# - A few variables (x) take O(1) space.
-# - Overall: O(n) total space.
-
-
 """
+Time: O(N)
+  - Let N = length of nums.
+  - Step 1: Build a set from nums → O(N).
+      • Removes duplicates and allows O(1) membership checks.
+  - Step 2: Loop through each unique number x in the set → O(U), where U ≤ N.
+      • For each x, check if (x+1) and (x-1) exist in set → O(1) average per lookup.
+  - Overall: O(N + U) = O(N).
+
+Space: O(U) ≈ O(N)
+  - Set 'seen' stores up to U unique numbers.
+  - List 'ans' stores all numbers that meet the condition (≤ U).
+  - A few variables (x, loop counter) use O(1).
+  - Overall: O(U), worst case O(N).
+
+  
+Interview Answer: Worst Case
+
+Time: O(N)
+  - Build set and scan all unique elements once.
+
+Space: O(N)
+  - Set and result list hold up to all unique numbers.
+
+
+
 Overview for Each Iteration
 Input: nums = [2, 4, 4, 6]
+
 Step 1: Create set of unique numbers
 seen = {2, 4, 6}
 

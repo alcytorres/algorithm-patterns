@@ -25,30 +25,43 @@ def repeatedCharacter(s):
 
 s = "abccbaacz"
 print(repeatedCharacter(s))
-# Output: c
-
-# Time: O(n)
-# - Loop through the string once: O(n) iterations.
-# - Set lookups ('if c in seen') and inserts ('seen.add(c)') are O(1) on average.
-# - No nested loops, so total time is O(n).
-
-# Space: O(n)
-# - Set 'seen' can store up to n characters in the worst case (when no repeat is found until the end), O(n) space.
-# - A few variables (c) take O(1) space.
-# - Overall: O(n) total space.
-# - If we exclude the set from consideration, extra working space is O(1).
-
+# Output: "c" → The letter 'c' is the first to appear twice
 
 """
+Time: O(N)
+  - Let N = length of string s.
+  - Loop through s once → O(N).
+      • Check if each character is in the set → O(1) average.
+      • Add character to set if not seen → O(1).
+  - Stops early once a duplicate is found, but worst case still O(N).
+  - Overall: O(N).
+
+Space: O(1)
+  - The set 'seen' can store at most 26 lowercase English letters (constant bound).
+  - A few variables (loop variable c) use O(1) space.
+  - Overall: O(1).
+
+  
+Interview Answer: Worst Case
+
+Time: O(N)
+  - Each character checked once with O(1) set operations.
+
+Space: O(1)
+  - Set stores at most 26 letters, constant space.
+
+
 Overview for Each Iteration
 Input: s = "abccbaacz"
-Step: Find first letter to appear twice
+
+Step 1: Find first letter to appear twice
 i  | c  | seen       | c in seen | Action
 ---|----|------------|-----------|----------------
 0  | a  | {a}        | False     | Add 'a' to seen
 1  | b  | {a, b}     | False     | Add 'b' to seen
 2  | c  | {a, b, c}  | False     | Add 'c' to seen
 3  | c  | {a, b, c}  | True      | Return 'c'
+
 Final: "c"
 
 
@@ -121,6 +134,7 @@ print(repeatedCharacter("abccbaacz"))
 """
 Overview for Each Iteration
 Input: s = "abccbaacz"
+
 Step: Find first letter to appear twice using brute force
 i   | c   | j   | s[j] | s[j] == c | Action
 ----|-----|-----|------|-----------|----------------

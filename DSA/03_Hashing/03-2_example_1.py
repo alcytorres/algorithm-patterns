@@ -15,78 +15,6 @@
 # Solution: https://leetcode.com/problems/two-sum/description/
 
 # ––––––––––––––––––––––––––––––––––––––––––––––––
-# Index-First Dictionary Approach
-
-def twoSum(nums, target):
-    d = {}
-
-    for i in range(len(nums)):
-        num = nums[i]
-        diff = target - num
-
-        if diff in d:
-            return [i, d[diff]]
-        
-        d[num] = i
-
-    return []
-
-nums = [3, 1, 7, 4, -6]
-target = 5
-print(twoSum(nums, target))
-# Output: [3, 1] or [1, 3] -> 1 + 4 = 5
-
-"""
-# Time: O(n)
-# - Loop through nums once: O(n) iterations.
-# - Dictionary lookups ('if complement in d') and inserts ('d[num] = i') are O(1) on average.
-# - No nested loops, so total time is O(n).
-
-# Space: O(n)
-# - Dictionary 'd' can store up to n elements in the worst case (when no match is found until the end), O(n) space.
-# - A few integer variables (i, num, complement) take O(1) space.
-# - Overall: O(n) total space.
-# - If we exclude the dictionary from consideration (not typical here since it's part of the algorithm), extra space is O(1).
-
-
-
-Overview for Each Iteration
-Input: nums = [3, 1, 7, 4, -6], target = 5
-
-Step: Find indices of two numbers summing to target
-i   | num  | diff (target - num) | d                 | Action
-----|------|---------------------|-------------------|----------------
-0   | 3    | 2 (5 - 3)          | {3: 0}             | Store 3 at index 0
-1   | 1    | 4 (5 - 1)          | {3: 0, 1: 1}       | Store 1 at index 1
-2   | 7    | -2 (5 - 7)         | {3: 0, 1: 1, 7: 2} | Store 7 at index 2
-3   | 4    | 1 (5 - 4)          | {3: 0, 1: 1, 7: 2} | Found 1 in d, return [3, 1]
-
-Final: [3, 1] (nums[1] + nums[3] = 1 + 4 = 5)
-
-As soon as a difference matches a num you found the answer. In this case that difference is 1. 
-
-"""
-
-
-
-# ––––––––––––––––––––––––––––––––––––––––––––––––
-# Breakdown 
-def twoSum(nums, target):
-    d = {}                     # Initialize empty dictionary for number-to-index mapping
-    for i in range(len(nums)): # Iterate over array indices
-        num = nums[i]          # Current number
-        diff = target - num  # Calculate difference needed for target
-
-        if diff in d:    # If difference exists in dictionary
-            return [i, d[diff]]  # Return current index and difference's index
-        
-        d[num] = i             # Store current number and its index in dictionary
-        
-    return []                  # Return empty list if no solution found
-
-
-
-# ––––––––––––––––––––––––––––––––––––––––––––––––
 # Enumerate-Based One-Pass Hash Map Solution
 
 def twoSum(nums, target):
@@ -104,7 +32,8 @@ def twoSum(nums, target):
 nums = [3, 1, 7, 4, -6]
 target = 5
 print(twoSum(nums, target))  
-# Output: [1, 3]
+# Output: [3, 1] → Indices [3, 1] correspond to numbers [4, 1], and 4 + 1 = 5 matches the target.
+
 
 """
 Time: O(N)
@@ -135,20 +64,118 @@ Overview for Each Iteration
 Input: nums = [3, 1, 7, 4, -6], target = 5
 
 Step: Find indices of two numbers summing to target
-i   | num  | diff (target - num) | d                     | Action
-----|------|---------------------|-----------------------|----------------
-0   | 3    | 2 (5 - 3)          | {3: 0}               | Store 3 at index 0
-1   | 1    | 4 (5 - 1)          | {3: 0, 1: 1}         | Store 1 at index 1
-2   | 7    | -2 (5 - 7)         | {3: 0, 1: 1, 7: 2}   | Store 7 at index 2
-3   | 4    | 1 (5 - 4)          | {3: 0, 1: 1, 7: 2}   | Found 1 in d, return [3, 1]
+i  | num  | diff (target - num) | d                   | Action
+---|------|---------------------|---------------------|--------------------
+0  | 3    | 2 (5 - 3)           | {3: 0}              | Store 3 at index 0
+1  | 1    | 4 (5 - 1)           | {3: 0, 1: 1}        | Store 1 at index 1
+2  | 7    | -2 (5 - 7)          | {3: 0, 1: 1, 7: 2}  | Store 7 at index 2
+3  | 4    | 1 (5 - 4)           | {3: 0, 1: 1, 7: 2}  | Found 1 in d, return [3, 1]
 
 Final: [3, 1] (nums[1] + nums[3] = 1 + 4 = 5)
+
+
+
+-------------------------------------------------
+Q: Why do we use `d[num] = i` instead of `d[diff] = i`?
+
+  • d is a lookup table of numbers we've already seen.
+
+  • We store what we have (num), not what we need (diff).
+
+  • When we see a new number, we check if its complement (diff) was seen before.
+
+  • If yes → diff is already in d, meaning we've found the pair.
+
+  • If no → we store the current number (num) so future numbers can find it later.
+
+  👉 d[num] = i keeps track of “I've seen this number at this index.”
+  👉 Using d[diff] = i would wrongly store what we don't have yet.
+
 """
 
 
+# ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+# Breakdown 
+def twoSum(nums, target):
+    d = {}                    # Initialize dictionary for number-to-index mapping
+    
+    for i, num in enumerate(nums):  # Iterate with index and number
+        diff = target - num   # Calculate complement needed for target
+        if diff in d:         # If complement exists in dictionary
+            return [i, d[diff]]  # Return current and complement's indices
+        d[num] = i            # Store current number and its index
+
+    return []                 # Return empty list if no solution found
 
 
 
+# ––––––––––––––––––––––––––––––––––––––––––––––––
+# Index-First Dictionary Approach
+
+def twoSum(nums, target):
+    d = {}
+
+    for i in range(len(nums)):
+        num = nums[i]
+        diff = target - num
+
+        if diff in d:
+            return [i, d[diff]]
+        
+        d[num] = i
+
+    return []
+
+nums = [3, 1, 7, 4, -6]
+target = 5
+print(twoSum(nums, target))
+# Output: [3, 1] or [1, 3] -> 1 + 4 = 5
+
+"""
+Time: O(n)
+  - Loop through nums once: O(n) iterations.
+  - Dictionary lookups ('if complement in d') and inserts ('d[num] = i') are O(1) on average.
+  - No nested loops, so total time is O(n).
+
+Space: O(n)
+  - Dictionary 'd' can store up to n elements in the worst case (when no match is found until the end), O(n) space.
+  - A few integer variables (i, num, complement) take O(1) space.
+  - Overall: O(n) total space.
+  - If we exclude the dictionary from consideration (not typical here since it's part of the algorithm), extra space is O(1).
+
+
+
+Overview for Each Iteration
+Input: nums = [3, 1, 7, 4, -6], target = 5
+
+Step: Find indices of two numbers summing to target
+i   | num  | diff (target - num) | d                 | Action
+----|------|---------------------|-------------------|----------------
+0   | 3    | 2 (5 - 3)          | {3: 0}             | Store 3 at index 0
+1   | 1    | 4 (5 - 1)          | {3: 0, 1: 1}       | Store 1 at index 1
+2   | 7    | -2 (5 - 7)         | {3: 0, 1: 1, 7: 2} | Store 7 at index 2
+3   | 4    | 1 (5 - 4)          | {3: 0, 1: 1, 7: 2} | Found 1 in d, return [3, 1]
+
+Final: [3, 1] (nums[1] + nums[3] = 1 + 4 = 5)
+
+As soon as a difference matches a num you found the answer. In this case that difference is 1. 
+
+"""
+
+# ––––––––––––––––––––––––––––––––––––––––––––––––
+# Breakdown 
+def twoSum(nums, target):
+    d = {}                     # Initialize empty dictionary for number-to-index mapping
+    for i in range(len(nums)): # Iterate over array indices
+        num = nums[i]          # Current number
+        diff = target - num  # Calculate difference needed for target
+
+        if diff in d:    # If difference exists in dictionary
+            return [i, d[diff]]  # Return current index and difference's index
+        
+        d[num] = i             # Store current number and its index in dictionary
+        
+    return []                  # Return empty list if no solution found
 
 
 

@@ -28,20 +28,32 @@ print(countElements(arr))
 
 
 """
-Time: O(n)
-  - Creating the set from arr: O(n).
-  - Loop through arr once: O(n) iterations.
-  - Set lookups ('x + 1 in hash_set') are O(1) on average.
-  - Overall: O(n) time.
+Time: O(N)
+  - Let N = length of arr.
+  - Step 1: Build a set from arr → O(N).
+      • Each insertion takes O(1) average.
+  - Step 2: Loop through arr → O(N).
+      • For each element x, check if x + 1 is in the set → O(1) average.
+  - Overall: O(N + N) = O(N).
 
-Space: O(n)
-  - Set 'hash_set' stores up to n elements: O(n) space.
-  - A few variables (count, x) take O(1) space.
-  - Overall: O(n) total space.
+Space: O(N)
+  - The set 'hash_set' stores up to N unique numbers.
+  - A few scalar variables (count, x) use O(1).
+  - Overall: O(N).
+
+  
+Interview Answer: Worst Case
+
+Time: O(N)
+  - Build hash set and scan all elements once.
+
+Space: O(N)
+  - Hash set holds all unique values from arr.
 
 
 Overview for Each Iteration
 Input: arr = [1, 2, 2, 3]
+
 Step 1: Create set of unique elements
 hash_set = {1, 2, 3}
 
@@ -52,6 +64,7 @@ x   | x + 1 | x + 1 in hash_set | count
 2   | 3     | True              | 2
 2   | 3     | True              | 3
 3   | 4     | False             | 3
+
 Final: 3
 
 
@@ -105,19 +118,19 @@ arr = [1, 2, 2, 3]
 print(countElements(arr))
 # Output: 3
 
-
-# Time: O(n^2)
-# - Outer loop iterates over all n elements.
-# - Each 'x + 1 in arr' check is a list lookup, which takes O(n) in the worst case.
-# - Overall: O(n * n) = O(n^2) time.
-
-# Space: O(n)
-# - Set 'seen' stores up to n elements: O(n) space.
-# - A few variables (x, count) take O(1) space.
-# - Overall: O(n) total space.
-
-
 """
+Time: O(n^2)
+  - Outer loop iterates over all n elements.
+  - Each 'x + 1 in arr' check is a list lookup, which takes O(n) in the worst case.
+  - Overall: O(n * n) = O(n^2) time.
+
+Space: O(n)
+  - Set 'seen' stores up to n elements: O(n) space.
+  - A few variables (x, count) take O(1) space.
+  - Overall: O(n) total space.
+
+
+
 ⚠️ Why This Solution is Inefficient
     • Each x+1 in arr lookup is O(n) because arr is a list.
 
@@ -145,23 +158,24 @@ arr = [1, 2, 3]
 print(countElements(arr))
 # Output: 2
 
-# Time: O(n^2)
-# - Outer loop iterates over all n elements: O(n).
-# - 'x + 1 in arr' is a list lookup, which takes O(n) in the worst case.
-# - Overall: O(n * n) = O(n^2) time.
-
-# Space: O(1)
-# - Only a constant number of variables (count, x) are used.
-# - No additional data structures.
-# - Overall: O(1) space.
-
 """
+Time: O(n^2)
+  - Outer loop iterates over all n elements: O(n).
+  - 'x + 1 in arr' is a list lookup, which takes O(n) in the worst case.
+  - Overall: O(n * n) = O(n^2) time.
+
+Space: O(1)
+  - Only a constant number of variables (count, x) are used.
+  - No additional data structures.
+  - Overall: O(1) space.
+
 🔑 Key Difference: Set vs. List Lookup Complexity
     • Set lookup: O(1) on average — uses a hash table for near-instant access.
 
     • List lookup: O(n) — requires scanning elements sequentially until a match is found.
 
 """
+
 
 
 
