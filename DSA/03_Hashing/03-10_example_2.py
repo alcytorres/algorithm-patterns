@@ -44,21 +44,40 @@ nums = [[3, 1, 2, 4, 5], [1, 2, 3, 4], [3, 4, 5, 6]]
 print(intersection(nums))  
 # Output: [3, 4]
 
-"""
-Time: O(N + k log k)
-  - Counting all elements across arrays into a hash map: O(N), where N is the total number of elements.
-  - Scanning the map to filter elements with frequency equal to number of arrays: O(U), where U is number of distinct elements (≤ N).
-  - Sorting the intersection result: O(k log k), where k is the size of the intersection.
-  - Overall: O(N + k log k) (upper bound O(N + U log U) if k ≈ U).
+# Output: [3, 4] → 3 and 4 are the only nums that appear in all three arrays.
 
-Space: O(U) ≈ O(N)
-  - Hash map stores counts for up to U distinct elements.
-  - Result list takes O(k), but that's usually not counted as extra.
-  - Overall: O(U) auxiliary space, which in the worst case is O(N).
+
+"""
+Time: O(T log T)
+  - Let N = number of arrays, and T = total number of elements across all arrays.
+  - Step 1: Count occurrences of all numbers → O(T).
+      • Each element is processed once and added to dictionary in O(1) average.
+  - Step 2: Iterate through dictionary keys → O(U), where U ≤ T.
+      • Collect elements appearing in all N arrays → O(U).
+  - Step 3: Sort final result → O(M log M), where M = number of common elements.
+  - Overall: O(T + M log M).  
+    - In worst case (many common elements), M ≤ T → O(T log T).
+
+Space: O(U)
+  - Dictionary 'counts' stores up to U unique numbers.
+  - Result list 'ans' holds up to U elements.
+  - A few scalar variables (n, key) use O(1).
+  - Overall: O(U), worst case O(T).
+
+  
+Interview Answer: Worst Case
+
+Time: O(T log T)
+  - Count all elements once, sort final result.
+
+Space: O(T)
+  - Dictionary and result list store all unique elements.
+
 
 
 Overview for Each Iteration
 Input: nums = [[3, 1, 2, 4, 5], [1, 2, 3, 4], [3, 4, 5, 6]]
+
 Step 1: Count occurrences of each element across all arrays
 arr_idx | arr         | x | counts
 --------|-------------|---|--------------------------------
@@ -89,6 +108,7 @@ key | counts[key] | counts[key] == n | ans
 4   | 3           | True             | [3, 4]
 5   | 2           | False            | [3, 4]
 6   | 1           | False            | [3, 4]
+
 Final: sorted([3, 4]) = [3, 4]
 
 
@@ -124,6 +144,15 @@ Quick Example Walkthrough:
         • Sorted result → [3, 4]
 
     Final Answer: [3, 4]    
+
+
+
+# ---------------------------------------------------
+Q: What would be time and space if we do NOT sort the final ans?
+
+  • ✅ Time: O(T) — counting and collecting elements only (no sorting).
+
+  • ✅ Space: O(T) — dictionary + result list for unique elements.
 
 """
 

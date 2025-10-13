@@ -25,24 +25,37 @@ def areOccurrencesEqual(s):
 
 s = "abacbc"
 print(areOccurrencesEqual(s))
-# Output: True
+# Output: True → Each character in "abacbc" appears exactly twice.
+
 
 """
-Time: O(n)
-  - Loop through string once to count characters: O(n).
-  - Creating the set of frequencies from the count values: O(k), where k is the number of unique characters (≤ 26 for lowercase).
-  - Overall: O(n) time.
+Time: O(N)
+  - Let N = length of the string s.
+  - Step 1: Count occurrences of each character → O(N).
+      • Each character is added/updated in the dictionary in O(1) average.
+  - Step 2: Get all frequency values → O(U), where U ≤ 26 for lowercase letters.
+  - Step 3: Convert frequencies to a set and check its size → O(U).
+  - Overall: O(N).
 
-Space: O(U) ≈ O(N)
-  - Dictionary counts stores up to u unique characters.
-  - Set of frequencies stores up to u values.
-  - Extra variables (c, frequencies) take O(1) space.
-  - Overall: O(u), which in the worst case is O(n).
-  - If the alphabet is fixed (e.g., 26 lowercase letters), space can be treated as O(1).  
+Space: O(U)
+  - Dictionary 'counts' stores up to U unique characters (≤ 26).
+  - Set of frequencies also stores up to U elements.
+  - A few scalar variables (c, loop counter) use O(1).
+  - Overall: O(U), worst case O(1) since U ≤ 26.
+
+  
+Interview Answer: Worst Case
+
+Time: O(N)
+  - Count all characters and verify equal frequencies.
+
+Space: O(1)
+  - Constant space since there are at most 26 lowercase letters.
 
 
 Overview for Each Iteration
 Input: s = "abacbc"
+
 Step 1: Count frequency of each character
 i  | c   | counts
 ---|-----|---------------------
@@ -58,6 +71,7 @@ Step 2: Check if all frequencies are equal
 frequencies = counts.values() = [2, 2, 2]
 set(frequencies) = {2}
 len(set(frequencies)) = 1
+
 Final: True
 
 
@@ -87,6 +101,32 @@ def areOccurrencesEqual(s):
 
     frequencies = counts.values()  # Get all frequency values
     return len(set(frequencies)) == 1  # Return True if all frequencies are equal
+
+
+# –––––––––––––––––––––––––––––––––––––––––––––––––––––
+# Alternative Solution I came up with 
+
+from collections import defaultdict
+
+def areOccurrencesEqual(s):
+    counts = defaultdict(int)
+
+    for c in s:
+        counts[c] += 1
+
+    seen = set()
+    for value in counts.values():
+        seen.add(value)
+    
+    return len(seen) == 1
+
+
+s = "abacbc"
+print(areOccurrencesEqual(s))
+# Output: True
+
+# {'a': 2, 'b': 2, 'c': 2}
+
 
 
 

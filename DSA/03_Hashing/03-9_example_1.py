@@ -25,6 +25,7 @@ def find_longest_substring(s, k):
         # Shrink window if too many distinct characters
         while len(counts) > k:
             counts[s[left]] -= 1
+
             if counts[s[left]] == 0:
                 del counts[s[left]]
             left += 1
@@ -35,25 +36,41 @@ def find_longest_substring(s, k):
     return ans
 
 s = "eceba"
-print(find_longest_substring(s, 2))  
-# Output: 3
+k = 2
+print(find_longest_substring(s, k))  
+# Output: 3 → The longest substring with at most 2 distinct characters is "ece" (length 3, distinct chars = {e, c}).
+
+# Counts = {3: 3, 1: 2, 2: 2, 4: 3, 5: 2, 6: 1}
+
 
 """
-Time: O(n)
-  - Right pointer moves across the string once.
-  - Left pointer also moves at most n steps in total.
-  - Each character is added to and removed from the dictionary at most once.
-  - Dictionary operations (add, update, delete) are O(1) on average.
-  - Overall: O(n) time.
+Time: O(N)
+  - Let N = length of string s.
+  - Right pointer expands window once per character → O(N).
+  - Left pointer only moves forward when the window exceeds k distinct characters.
+  - Each character is added and removed from the window at most once.
+  - Dictionary operations (add, delete, count update) are O(1) average.
+  - Overall: O(N).
 
-Space: O(k)
-  - Dictionary 'counts' stores at most k distinct characters at any time.
-  - A few variables (left, right, ans) take O(1) space.
-  - Overall: O(k) space, which is O(1) if k is considered a small constant.
+Space: O(K)
+  - Dictionary 'counts' stores up to K distinct characters at a time.
+  - A few scalar variables (left, right, ans) use O(1).
+  - Overall: O(K).
+
+  
+Interview Answer: Worst Case
+
+Time: O(N)
+  - Sliding window processes each character at most twice.
+
+Space: O(K)
+  - Dictionary holds at most K distinct characters.
+
 
 
 Overview for Each Iteration
 Input: s = "eceba", k = 2
+
 Step: Find longest substring with at most k distinct characters
 r  | s[r] | counts          | len(counts) > k | l | s[l] | Action                                 | ans
 ---|------|-----------------|-----------------|---|------|----------------------------------------|----
@@ -66,12 +83,15 @@ r  | s[r] | counts          | len(counts) > k | l | s[l] | Action               
    |      | {e:1, b:1}      | False           | 2 | -    | ans=max(3,3-2+1)=3                     | 3
 4  | a    | {e:1, b:1, a:1} | True            | 2 | e    | counts[e]-=1, del e, counts={b:1, a:1} | 3
    |      | {b:1, a:1}      | False           | 3 | -    | ans=max(3,4-3+1)=3                     | 3
+
 Final: 3 ("ece")
+
 
 
 
 Simple Overview for Each Iteration
 Input: s = "eceba", k = 2
+
 Step: Find longest substring with at most k distinct characters
 r  | s[r] | counts        | len>k | l | s[l] | Action       | ans
 ---|------|---------------|-------|---|------|--------------|----
@@ -84,6 +104,7 @@ r  | s[r] | counts        | len>k | l | s[l] | Action       | ans
    |      | {e:1,b:1}     | F     | 2 | -    | ans=3        | 3
 4  | a    | {e:1,b:1,a:1} | T     | 2 | e    | e:1→0, del e | 3
    |      | {b:1,a:1}     | F     | 3 | -    | ans=3        | 3
+
 Final: 3 ("ece")
 
 
@@ -153,12 +174,15 @@ def find_longest_substring(s, k):
     left = ans = 0            # Left bound, max length of substring
 
     for right in range(len(s)):  # Iterate right pointer over string
-        counts[s[right]] += 1  # Increment count of current character
-        while len(counts) > k: # Shrink window if distinct characters exceed k
+        counts[s[right]] += 1    # Increment count of current character
+
+        while len(counts) > k:    # Shrink window if distinct characters exceed k
             counts[s[left]] -= 1  # Decrement count of leftmost character
+
             if counts[s[left]] == 0:  # Remove character if count becomes 0
                 del counts[s[left]]
             left += 1          # Move left pointer forward
+
         ans = max(ans, right - left + 1)  # Update max substring length
 
     return ans                # Return longest substring length with <= k distinct characters
@@ -180,7 +204,8 @@ def find_longest_substring(s, k):
     return ans
 
 s = "eceba"
-print(find_longest_substring(s, 2))  
+k = 2
+print(find_longest_substring(s, k))  
 # Output: 3
 
 
@@ -395,5 +420,6 @@ def find_longest_substring(s, k):  # Example: s = "eceba", k = 2
 
 
 s = "eceba"
-print(find_longest_substring(s, 2))  
+k = 2
+print(find_longest_substring(s, k))  
 # Output: 3

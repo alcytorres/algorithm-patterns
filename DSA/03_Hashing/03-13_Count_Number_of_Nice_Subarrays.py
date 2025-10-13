@@ -102,6 +102,22 @@ Quick Example Walkthrough:
 """
 
 
+# -----------------------------------------------------
+# Breakdown 
+from collections import defaultdict
+
+def numberOfSubarrays(nums, k):
+    counts = defaultdict(int)  # Notebook to track counts of odd numbers
+    counts[0] = 1              # Start with "0 odds seen" once
+    odd = ans = 0              # odd: count of odd numbers, ans: number of subarrays
+
+    for num in nums:           # Iterate over each number
+        odd += num % 2         # Add 1 if num is odd, 0 if even
+        ans += counts[odd - k] # Check if we can make a subarray with k odds
+        counts[odd] += 1       # Update notebook with current odd count
+    
+    return ans          # Return total subarrays with k odd numbers
+
 
 
 # –––––––––––––––––––––––––––––––––––––––––––––––––––––––
@@ -158,24 +174,6 @@ i | j | subarray     | odd_count | ans
 Final: 3 (subarrays [1, 2, 1], [2, 1, 1], [1, 1])
 
 """
-
-
-# -----------------------------------------------------
-# Breakdown 
-from collections import defaultdict
-
-def numberOfSubarrays(nums, k):
-    counts = defaultdict(int)  # Notebook to track counts of odd numbers
-    counts[0] = 1              # Start with "0 odds seen" once
-    odd = ans = 0              # odd: count of odd numbers, ans: number of subarrays
-
-    for num in nums:           # Iterate over each number
-        odd += num % 2         # Add 1 if num is odd, 0 if even
-        ans += counts[odd - k] # Check if we can make a subarray with k odds
-        counts[odd] += 1       # Update notebook with current odd count
-    
-    return ans          # Return total subarrays with k odd numbers
-
 
 
 
