@@ -1,6 +1,8 @@
 # 560. Subarray Sum Equals K
 
-# Example 4: Given an integer array nums and an integer k, find the number of subarrays whose sum is equal to k.
+# Example 4: Given an array of integers nums and an integer k, return the total number of subarrays whose sum equals to k.
+
+# A subarray is a contiguous non-empty sequence of elements within an array.
 
 # Example 1:
     # Input: nums = [1, 2, 3], k = 3
@@ -46,9 +48,20 @@ Space: O(n)
   - A few variables (curr, ans, num) take O(1) space.
   - Overall: O(n) total space.
 
+  
+Q: What is the key and value of counts?
+
+  • Key: running prefix sum (sum of elements up to current index).
+
+  • Value: how many prefixes have had that exact sum so far.
+
+  • Why counts[0] = 1: seeds the empty prefix (sum 0) so subarrays starting at index 0 are counted.
+
+
 
 Overview for Each Iteration
 Input: nums = [1, 2, 1, 2, 1], k = 3
+
 Step: Process array to find subarrays with sum k
 i | num | curr | curr - k | counts[curr - k] | ans | counts
 --|-----|------|----------|------------------|-----|------------------------------
@@ -58,6 +71,7 @@ i | num | curr | curr - k | counts[curr - k] | ans | counts
 2 | 1   | 4    | 4-3=1    | 1                | 2   | {0:1, 1:1, 3:1, 4:1}
 3 | 2   | 6    | 6-3=3    | 1                | 3   | {0:1, 1:1, 3:1, 4:1, 6:1}
 4 | 1   | 7    | 7-3=4    | 1                | 4   | {0:1, 1:1, 3:1, 4:1, 6:1, 7:1}
+
 Final: 4 (subarrays [1, 2], [2, 1], [1, 2], [2, 1])
 
 
@@ -73,7 +87,7 @@ Subarrays found:
 Most IMPORTANT thing to Understand:
     • curr is the running sum up to the current index.
 
-    • If a previous running sum equals (curr - k), then the numbers after that point up to now sum to k.
+    • If a previous running sum equals (curr - k), then the numbers after that point up to now sum to k. 
 
     • counts stores how many times each running sum has appeared.
     
@@ -111,6 +125,54 @@ Quick Example Walkthrough:
         • +1 → curr=7 → curr-k=4  → counts[4]=1  → ans=4 → counts[7]=1   # subarray [2, 1]
 
     Final Answer: 4
+
+
+
+    
+
+Subarray Sum Equals K — Why `counts[0] = 1` and how (curr - k) works
+-------------------------------------------------------------------
+
+Core idea (prefix-sum logic):
+  - Let `curr` be the running sum up to the current index.
+  - If there exists a previous running sum equal to `curr - k`, then the subarray after that previous point up to now sums to k.
+
+Reason:
+    previous_sum = curr - k  ⟺  k = curr - previous_sum 
+
+    The difference between two prefix sums is the sum of the elements between them.
+
+
+Ultra-simple numeric example:
+------------------------------------------------
+nums = [2, 1, 3], k = 3
+
+Running sums as we scan (include the initial 0 because of counts[0] = 1):
+    prefix_sums = [0,   2,  3,  6]
+                   ^    ^   ^   ^
+                   |    |   |   |
+    Indices:      (-1)  0   1   2   (conceptual -1 before the array starts)
+
+Check differences to find subarrays summing to k:
+- At curr = 3 (after seeing [2, 1]):
+    curr - k = 3 - 3 = 0
+    Have we seen a prefix sum of 0 before? Yes (the seeded one).
+    → Subarray (after that 0) is [2, 1], and its sum is 3. ✅
+
+- At curr = 6 (after seeing [2, 1, 3]):
+    curr - k = 6 - 3 = 3
+    Have we seen a prefix sum of 3 before? Yes (after [2, 1]).
+    → Subarray (after that 3) is [3], and its sum is 3. ✅
+
+Mental picture with just numbers:
+    prefix_sums: [0, 2, 3, 6]
+    differences: (3 - 0) = 3  → subarray [2, 1]
+                 (6 - 3) = 3  → subarray [3]
+
+Takeaway:
+  • Every time you can find an earlier prefix sum exactly k smaller than the current prefix sum, the chunk between them totals k.
+
+
 
 
 
@@ -312,8 +374,18 @@ Q: Why do we set counts[0] = 1 at the start?
 
 counts[0] = 1
 
+  • We conceptually include a "prefix sum before the array starts" with value 0.
+
+  • This seeds the count so that if `curr == k` at some index i,
+  the subarray from 0..i is correctly counted (because curr - k = 0 is “already seen” once).
+
+  In other words, we start with a single occurrence of prefix sum 0 to allow subarrays starting at index 0.
+
+  • Seeding `counts[0] = 1` makes sure subarrays starting at the very beginning are counted.
+
+
 Why do we need this?
-    • It’s a starting point that says:
+    • It's a starting point that says:
       “Before we add any numbers, we already have one way to make a sum of 0.”
     • This makes it possible to count subarrays that start at the very beginning of the array.
 
@@ -324,7 +396,7 @@ Example 1: nums = [1, 2], k = 3
     • Second number → curr = 3
 
 Now check: curr - k = 3 - 3 = 0
-    • If counts[0] wasn’t initialized to 1, the code would miss the subarray [1, 2] because it wouldn’t recognize that the sum from the start equals k.
+    • If counts[0] wasn't initialized to 1, the code would miss the subarray [1, 2] because it wouldn't recognize that the sum from the start equals k.
 
 ---
 Example 2: nums = [3, 2, 1], k = 3
@@ -349,7 +421,7 @@ Example 2: nums = [3, 2, 1], k = 3
 
 ---
 ✅ So counts[0] = 1 is like saying:
-    • “We’ve seen a zero-sum once already, before starting. That way, if the running total hits k, we know we found a valid subarray starting at index 0.”
+    • “We've seen a zero-sum once already, before starting. That way, if the running total hits k, we know we found a valid subarray starting at index 0.”
 
 
 

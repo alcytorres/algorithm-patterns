@@ -52,8 +52,23 @@ Space: O(n)
   - Overall: O(n) total space.
 
 
+
+Q: What is the key and value for counts?
+
+  • Key: running count of odd numbers so far (prefix “odd-count”).
+
+  • Value: how many prefixes have had that exact odd-count so far.
+
+  • Why counts[0] = 1: seeds the empty prefix (zero odds) so subarrays starting at index 0 are counted.
+
+counts[x] tells you:
+  • “How many times have we seen x odd numbers up to this point in the array?”
+
+
+
 Overview for Each Iteration
 Input: nums = [1, 2, 1, 1], k = 2
+
 Step: Count subarrays with exactly k odd numbers using prefix count of odds
 i | num | odd | odd - k | counts[odd - k] | ans | counts
 --|-----|-----|---------|-----------------|-----|----------------------
@@ -62,6 +77,7 @@ i | num | odd | odd - k | counts[odd - k] | ans | counts
 1 | 2   | 1   | 1-2=-1  | 0               | 0   | {0:1, 1:2}
 2 | 1   | 2   | 2-2=0   | 1               | 1   | {0:1, 1:2, 2:1}
 3 | 1   | 3   | 3-2=1   | 2               | 3   | {0:1, 1:2, 2:1, 3:1}
+
 Final: 3 (subarrays [1, 2, 1], [2, 1, 1], [1, 1])
 
 
@@ -98,6 +114,7 @@ Quick Example Walkthrough:
         → [1, 2, 1], [2, 1, 1], [1, 1]
 
     Final Answer: 3
+
 
 """
 
@@ -171,6 +188,7 @@ i | j | subarray     | odd_count | ans
 2 | 2 | [1]          | 1         | 2
 2 | 3 | [1,1]        | 2         | 3   (valid)
 3 | 3 | [1]          | 1         | 3
+
 Final: 3 (subarrays [1, 2, 1], [2, 1, 1], [1, 1])
 
 """
@@ -211,6 +229,7 @@ i | num | odd | odd - k  | counts[odd - k] | ans | counts
 2 | 2   | 2   | 2-3=-1   | 0               | 0   | {0:1, 1:1, 2:2}
 3 | 1   | 3   | 3-3=0    | 1               | 1   | {0:1, 1:1, 2:2, 3:1}
 4 | 1   | 4   | 4-3=1    | 1               | 2   | {0:1, 1:1, 2:2, 3:1, 4:1}
+
 Final: 2 (subarrays [1, 1, 2, 1] and [1, 2, 1, 1])
 
 
@@ -225,8 +244,8 @@ What happens:
     • Update counts[3] += 1.
 
 Why ans becomes 1:
-    • odd = 3 means we’ve seen 3 odd numbers up to index 3: [1, 1, 2, 1].
-    • odd - k = 0 means we’re looking for a previous point where we had 0 odd numbers.
+    • odd = 3 means we've seen 3 odd numbers up to index 3: [1, 1, 2, 1].
+    • odd - k = 0 means we're looking for a previous point where we had 0 odd numbers.
     • counts[0] = 1 because before the array started (empty subarray), we had 0 odd numbers.
     • This tells us the subarray from the start (index -1, 0 odds) to index 3 (3 odds) has 3 - 0 = 3 odd numbers, which is exactly k. That’s the subarray [1, 1, 2, 1].
 
