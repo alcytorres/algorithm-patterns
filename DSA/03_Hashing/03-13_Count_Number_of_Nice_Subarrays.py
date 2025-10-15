@@ -220,6 +220,7 @@ print(numberOfSubarrays(nums, k))
 """
 Overview for Each Iteration
 Input: nums = [1, 1, 2, 1, 1], k = 3
+
 Step: Count subarrays with exactly k odd numbers using prefix count of odds
 i | num | odd | odd - k  | counts[odd - k] | ans | counts
 --|-----|-----|----------|-----------------|-----|--------------------------
