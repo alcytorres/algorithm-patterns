@@ -25,12 +25,12 @@ from collections import defaultdict
 def numberOfSubarrays(nums, k):
     counts = defaultdict(int)
     counts[0] = 1
-    ans = odd = 0
+    ans = prefix_odds = 0
     
     for num in nums:
-        odd += num % 2
-        ans += counts[odd - k]
-        counts[odd] += 1
+        prefix_odds += num % 2
+        ans += counts[prefix_odds - k]
+        counts[prefix_odds] += 1
 
     return ans
 
@@ -40,16 +40,29 @@ print(numberOfSubarrays(nums, k))
 # Output: 3 (subarrays [1, 2, 1], [2, 1, 1], [1, 1])
 
 """
-Time: O(n)
-  - Loop through nums once: O(n) iterations.
-  - Dictionary lookups ('counts[odd - k]') and updates ('counts[odd] += 1') are O(1) on average.
-  - Each element is processed once, no nested loops.
-  - Overall: O(n) time.
+Time: O(N)
+  - Let N = length of nums.
+  - Step 1: Iterate through nums once → O(N).
+      • For each num, compute parity (num % 2) in O(1).
+      • Maintain running count of odd numbers in O(1).
+      • Lookup and update prefix counts in dictionary → O(1) average.
+  - Each element is processed exactly once.
+  - Overall: O(N).
 
-Space: O(n)
-  - Dictionary 'counts' can store up to n different prefix sums in the worst case: O(n) space.
-  - A few variables (odd, ans, num) take O(1) space.
-  - Overall: O(n) total space.
+Space: O(N)
+  - Dictionary 'counts' stores the number of times each odd-count prefix appears.
+  - In the worst case (many distinct odd counts), it holds up to N entries.
+  - A few scalar variables (ans, odd, num) use O(1).
+  - Overall: O(N).
+
+  
+Interview Answer: Worst Case
+
+Time: O(N)
+  - Single pass using prefix counts and hash lookups.
+
+Space: O(N)
+  - Hashmap tracks prefix sums of odd counts.
 
 
 
@@ -83,7 +96,7 @@ Final: 3 (subarrays [1, 2, 1], [2, 1, 1], [1, 1])
 
 
 Most IMPORTANT thing to Understand:
-    • odd is a running total of how many odd numbers we've seen so far.
+    • prefix_odds is a running total of how many odd numbers we've seen so far.
 
     • If we've seen (odd - k) before, then the subarray between that earlier point and now has exactly k odd numbers.
 
@@ -92,7 +105,7 @@ Most IMPORTANT thing to Understand:
 Why this code Works:
     • Hash map (counts): stores frequencies of odd counts seen so far.
 
-    • Prefix sum idea: odd works like a prefix sum of “odd numbers seen.” A subarray with k odds exists when odd - prev = k.
+    • Prefix sum idea: prefix_odds works like a prefix sum of “odd numbers seen.” A subarray with k odds exists when odd - prev = k.
 
     • Efficiency: We scan nums once (O(n)), using O(1) lookups/updates in counts. Much faster than checking all subarrays (O(n^2)).
 
@@ -175,6 +188,7 @@ Space: O(1)
 
 Overview for Each Iteration (Brute Force)
 Input: nums = [1, 2, 1, 1], k = 2
+
 Step: Check every subarray, count odds, stop early if odds > k
 i | j | subarray     | odd_count | ans
 --|---|--------------|-----------|-----------------
