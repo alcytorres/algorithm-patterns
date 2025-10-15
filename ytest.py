@@ -5,9 +5,6 @@
 
 
 
-
-
-
 # ––––––––––––––– Prompts –––––––––––––––
 # Explain this in a simple, very easy to understand, intuitive, memorable way so that in future I can quickly read/scan through and understand
 

@@ -13,8 +13,6 @@
 
 
 
-
-
 # class SinglyNode:
 #     def __init__(self, val):
 #         self.val = val
@@ -113,35 +111,12 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 # """
 # Add to notes if a hash table used what is the x and y values represent?
 # """
 
 # # print(3%2)
 # # print(11//2)
-
-
-
 
 
 
