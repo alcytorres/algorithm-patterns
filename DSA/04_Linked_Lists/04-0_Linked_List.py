@@ -83,6 +83,8 @@ class Node:
 a = Node(1)
 b = Node(2)
 c = Node(3)
+
+# Link them together
 a.next = b
 b.next = c
 
@@ -176,23 +178,23 @@ class ListNode:
         self.next = None    # start unlinked; will later point to next node
 
 # Build nodes
-one = ListNode(1)
-two = ListNode(2)
-three = ListNode(3)
+a = ListNode(1)
+b = ListNode(2)
+c = ListNode(3)
 
 """
 🧩 Overview — Node Creation
 -----------------------------------------
-| Step | Code Line          | Node(s) Affected | val | next (points to) | 
-|------|--------------------|------------------|-----|------------------|
-| 1    | one = ListNode(1)  | one              | 1   | None             | 
-| 2    | two = ListNode(2)  | two              | 2   | None             |
-| 3    | three = ListNode(3)| three            | 3   | None             |
+| Step | Code Line        | Node(s) Affected | val | next (points to) | 
+|------|------------------|------------------|-----|------------------|
+| 1    | a = ListNode(1)  | a                | 1   | None             | 
+| 2    | b = ListNode(2)  | b                | 2   | None             |
+| 3    | c = ListNode(3)  | c                | 3   | None             |
 
 Summary:
-    Step 1: Created node one with value 1; not linked yet 
-    Step 2: Created node two with value 2; not linked yet 
-    Step 3: Created node three with value 3; not linked yet 
+    Step 1: Created node a with value 1; not linked yet 
+    Step 2: Created node b with value 2; not linked yet 
+    Step 3: Created node c with value 3; not linked yet 
 
 
 📦 Visual Diagram (mental picture)
@@ -202,7 +204,7 @@ Summary:
 None   None   None
 
 💡 Explanation:
-    • Three separate nodes created (one, two, three).
+    • Three separate nodes created (a, b, c).
     • Each has a value (1, 2, 3) 
     • None are linked yet since their .next pointer still point to None.
 
@@ -233,16 +235,16 @@ class ListNode:
         self.next = None    # start unlinked; will later point to next node
 
 # Build nodes
-one = ListNode(1)
-two = ListNode(2)
-three = ListNode(3)
+a = ListNode(1)
+b = ListNode(2)
+c = ListNode(3)
 
 # Link them together
-one.next = two
-two.next = three
+a.next = b
+b.next = c
 
 # Mark the start of the list
-head = one
+head = a
 
 print(head.val)            # 1
 print(head.next.val)       # 2
@@ -252,24 +254,24 @@ print(head.next.next.val)  # 3
 """
 🧩 Overview — Node Creation & Pointer Linking
 -----------------------------------------
-| Step | Code Line          | Node(s) Affected | val | next (points to) | 
-|------|--------------------|------------------|-----|------------------|
-| 1    | one = ListNode(1)  | one              | 1   | None             | 
-| 2    | two = ListNode(2)  | two              | 2   | None             |
-| 3    | three = ListNode(3)| three            | 3   | None             |
-| 4    | one.next = two     | one              | 1   | two              | 
-| 5    | two.next = three   | two              | 2   | three            | 
-| 6    | head = one         | head pointer     | -   | one              | 
+| Step | Code Line        | Node(s) Affected | val | next (points to) | 
+|------|------------------|------------------|-----|------------------|
+| 1    | a = ListNode(1)  | a                | 1   | None             | 
+| 2    | b = ListNode(2)  | b                | 2   | None             |
+| 3    | c = ListNode(3)  | c                | 3   | None             |
+| 4    | a.next = b       | a                | 1   | b                | 
+| 5    | b.next = c       | b                | 2   | c                | 
+| 6    | head = a         | head pointer     | -   | a                | 
 
 Summary:
-    Step 1: Created node one with value 1; not linked yet 
-    Step 2: Created node two with value 2; not linked yet 
-    Step 3: Created node three with value 3; not linked yet 
-    Step 4: Linked node one to node two 
-    Step 5: Linked node two to node three
-    Step 6: head points to the first node (one)
+    Step 1: Created node a with value 1; not linked yet 
+    Step 2: Created node b with value 2; not linked yet 
+    Step 3: Created node c with value 3; not linked yet 
+    Step 4: Linked node a to node b 
+    Step 5: Linked node b to node c
+    Step 6: head points to the first node (a)
 
-    * Note the last node (three) still points to None
+    * Note the last node (c) still points to None
 
 ✅ Final chain: head → [1] → [2] → [3] → None
 
@@ -368,20 +370,21 @@ Example:
 💡 Key idea:
     'ptr' still points to the original head.
     Variables only change if you reassign them (ptr = something).
+
+
+Visualization:
+  Before:
+    head → [1] → [2] → [3]
+
+  After `ptr = head` and `head = head.next`:
+    ptr → [1] → [2] → [3]
+    head → [2] → [3]
+
+  After `head = None`:
+    ptr → [1] → [2] → [3]
+    head → None
+
 """
-
-# Visualization:
-# Before:
-#   head → [1] → [2] → [3]
-
-# After `head = head.next`:
-#   ptr → [1] → [2] → [3]
-#   head → [2] → [3]
-
-# After `head = None`:
-#   ptr → [1] → [2] → [3]
-#   head → None
-
 
 """
 In C/C++, you have to manually use pointers — you see symbols like `*` and `&` to control memory directly.
@@ -437,14 +440,15 @@ class ListNode:
         return ans
 
 # Build nodes
-one = ListNode(1)
-two = ListNode(2)
-three = ListNode(3)
+a = ListNode(1)
+b = ListNode(2)
+c = ListNode(3)
 # Link them together
-one.next = two
-two.next = three
+a.next = b
+b.next = c
+
 # Mark the start of the list
-head = one
+head = a
 
 result = ListNode.get_sum(head)
 print(result)  # Output: 6
@@ -476,10 +480,8 @@ Summary:
     • `head = head.next` means "step to the next node."
     • When head becomes None, loop ends and returns ans. This happens at the last node since its .next is None.
 
-
     • Think of `head = head.next` as “move to the next train car.”
 
-    
 
 Truthy vs Falsy in Loops
     • In Python, 'while head:' keeps looping as long as head is truthy.
@@ -510,16 +512,17 @@ class ListNode:
         return head.val + ListNode.get_sum_recursive(head.next)
 
 # Build nodes
-one = ListNode(1)
-two = ListNode(2)
-three = ListNode(3)
+a = ListNode(1)
+b = ListNode(2)
+c = ListNode(3)
 # Link them together
-one.next = two
-two.next = three
-# Mark the start of the list
-head = one
+a.next = b
+b.next = c
 
-result = ListNode.get_sum(head)
+# Mark the start of the list
+head = a
+
+result = ListNode.get_sum_recursive(head)
 print(result)  # Output: 6
 
 
@@ -655,7 +658,6 @@ How it works:
     1. If there are no boxes left (head = None) → return 0
     2. Otherwise → take my value + the sum of everything after me.
 
-
 """
 
 
@@ -680,10 +682,9 @@ How it works:
 - Analogy:
   Each node is a train car. .next is the coupler.
   Moving head = head.next means stepping into the next car.
-"""
 
 
-"""
+
 💡 Summary (memorize this)
     • .next stores a reference to the next node.
 
@@ -756,9 +757,9 @@ head
  ↓
 [1] → [2] → [3] → None
 
-- Each node points only to the next node.
-- No “previous” link exists.
-- Traversal moves one way → forward only.
+  - Each node points only to the next node.
+  - No “previous” link exists.
+  - Traversal moves one way → forward only.
 """
 
 # ----------------------------------------------
@@ -886,13 +887,11 @@ After:
 
 ✅ Recap — Singly Linked List
 -----------------------------
-- Each node only points forward (via .next).
-- You can traverse only in one direction.
-- Insertion and deletion are O(1) **if** you already know where to do it.
-- Otherwise, finding the spot to insert/delete is O(n).
+  • Each node only points forward (via .next).
+  • You can traverse only in one direction.
+  • Insertion and deletion are O(1) if you already know where to do it.
+  • Otherwise, finding the spot to insert/delete is O(n).
 
-💡 Memory Hook:
-  • “Each node says: 'Here's my value — and here's who comes next.’”
 
 
   
@@ -1006,13 +1005,7 @@ You only need a reference to the node AT position i (call it 'node').
   • We'll insert 'node_to_add' BEFORE it.
 
 Steps (update 4 pointers total):
-  1) prev_node = node.prev
-  2) node_to_add.next = node
-  3) node_to_add.prev = prev_node
-  4) prev_node.next = node_to_add
-  5) node.prev = node_to_add
 """
-
 def add_node(node, node_to_add):
     prev_node = node.prev
     node_to_add.next = node
@@ -1023,14 +1016,42 @@ def add_node(node, node_to_add):
 """
 📊 Example:
 Original:  [1] ⇄ [2] ⇄ [3]
-Insert [99] before [3] (node = [3]):
+Insert [99] BEFORE node c (node c = [3]):
 
 After:     [1] ⇄ [2] ⇄ [99] ⇄ [3]
 
+Let:
+    node = 3
+    node_to_add = 99
+    prev_node = node.prev = 2
+
+Step-by-step pointer links (each line shows the new arrow added/updated):
+
+1) node_to_add.next = node
+    1 ⇄ 2    99 ──▶ 3
+                ▲
+
+2) node_to_add.prev = prev_node
+    1 ⇄ 2 ◀── 99  3
+           ▲
+
+3) prev_node.next = node_to_add
+    1 ⇄ 2 ──▶ 99  3
+           ▲
+
+4) node.prev = node_to_add
+    1 ⇄ 2 ⇄ 99 ◀── 3
+                ▲
+
+Final list:
+    1 ⇄ 2 ⇄ 99 ⇄ 3
+
+
+
 🧠 Why we don't need (i - 1):
-- In a singly list, you needed the previous node.
-- Here, you can get it with node.prev.
-- Same O(1) insert once you have 'node'.
+  • In a singly list, you needed the previous node.
+  • Here, you can get it with node.prev.
+  • Same O(1) insert once you have 'node'.
 """
 
 
@@ -1372,4 +1393,3 @@ b.next = c
 result = get_sum(a)
 print(result)  
 # Output: 6
-
