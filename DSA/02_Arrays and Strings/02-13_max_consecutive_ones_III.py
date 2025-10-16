@@ -28,7 +28,12 @@ def longestOnes(nums, k):
 nums = [1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 0]
 k = 2
 print(longestOnes(nums, k))
-# Output: 6
+# Output: 6 → The longest stretch of 1s after flipping at most 2 zeros is 6:
+
+# 2 Valid Subarrays:
+    #  [0, 0, 1, 1, 1, 1], formed by flipping the zeros at indices 4 and 5
+    #  [0, 1, 1, 1, 1, 0], formed by flipping the zeros at indices 5 and 10
+
 
 """
 Time: O(N)
@@ -80,6 +85,9 @@ r | nums[r] | curr | curr > k | l | nums[l] | Action              | ans
 
 Final: 6
 
+2 Valid Subarrays:
+    • [0, 0, 1, 1, 1, 1] → formed by flipping the zeros at indices 4 and 5
+    • [0, 1, 1, 1, 1, 0] → formed by flipping the zeros at indices 5 and 10
 
 
 Most IMPORTANT thing to Understand:
@@ -115,7 +123,7 @@ Quick Example Walkthrough:
 
     Step 4: Add final 0 → zeros = 3 → shrink again, still best = 6.
 
-Final Answer: 6 (subarray [1,1,1,1,1,1]).
+Final Answer: 6 (subarray [1, 1, 1, 1, 1, 1]).
 
 
 
@@ -149,6 +157,59 @@ def longestOnes(nums, k):
     return ans   # Return the maximum length of consecutive 1's possible
 
 
+
+# ––––––––––––––––––––––––––––––––––––––––––––––
+# Best Solution
+
+def longestOnes(nums, k):
+    left = ans = curr = 0
+
+    for right in range(len(nums)):
+        if nums[right] == 0:
+            curr += 1
+        
+        while curr > k:
+            if nums[left] == 0:
+                curr -= 1
+            left += 1
+        
+        ans = max(ans, right - left + 1)
+    
+    return ans
+
+nums = [1, 0, 0, 1, 1, 0, 1]
+k = 2
+print(longestOnes(nums, k))
+# Output: 5 → The longest stretch of 1s after flipping at most 2 zeros is 5:
+
+# 2 valid Subarrays:
+    #  [1, 0, 0, 1, 1] → formed by flipping the zeros at indices 1 and 2
+    #  [0, 1, 1, 0, 1] → formed by flipping the zeros at indices 2 and 5
+
+
+"""
+Overview for Each Iteration
+Input: nums = [1, 0, 0, 1, 1, 0, 1], k = 2
+
+Step: Find max consecutive 1's with at most k flips using sliding window
+r  | nums[r] | curr | curr > k | l  | nums[l] | Action              | ans
+---|---------|------|----------|----|---------|---------------------|----
+0  | 1       | 0    | False    | 0  | -       | ans=max(0,0-0+1)=1  | 1
+1  | 0       | 1    | False    | 0  | -       | ans=max(1,1-0+1)=2  | 2
+2  | 0       | 2    | False    | 0  | -       | ans=max(2,2-0+1)=3  | 3
+3  | 1       | 2    | False    | 0  | -       | ans=max(3,3-0+1)=4  | 4
+4  | 1       | 2    | False    | 0  | -       | ans=max(4,4-0+1)=5  | 5
+5  | 0       | 3    | True     | 0  | 1       | l+=1                | 5
+   |         | 3    | True     | 1  | 0       | curr-=1, l+=1       | 5
+   |         | 2    | False    | 2  | -       | ans=max(5,5-2+1)=5  | 5
+6  | 1       | 2    | False    | 2  | -       | ans=max(5,6-2+1)=5  | 5
+
+Final: 5
+
+2 valid Subarrays:
+    [1, 0, 0, 1, 1] → formed by flipping the zeros at indices 1 and 2
+    [0, 1, 1, 0, 1] → formed by flipping the zeros at indices 2 and 5
+"""
 
 
 

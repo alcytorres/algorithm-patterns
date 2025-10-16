@@ -159,7 +159,7 @@ def sliding_window_add_first(arr):
 🧩 TYPE 2 — "Shrink Before Add"
 When to use:
 - Condition is about uniqueness (no duplicates)
-- You must ensure the element you add doesn’t break the rule.
+- You must ensure the element you add doesn't break the rule.
 - Example: "Longest Substring Without Repeating Characters"
 
 Why:
@@ -185,11 +185,86 @@ def sliding_window_shrink_before_add(s):
     
     return ans
 
+s = "abbabcb"
+print(sliding_window_shrink_before_add(s))  
+# Output: 3 → "abc" is the Longest substring without repeats in "abbabcb".
+
 """
 ✅ Quick Summary:
 - Use "Add First, Then Shrink" → when condition depends on totals/counts (e.g., sum > K, distinct > K)
 - Use "Shrink Before Add" → when condition depends on current element validity (e.g., duplicates)
 """
+
+
+# ––––––––––––––––––––––––––––––––––––––––––––––
+# Find number of subarrays that fit an exact criteria
+from collections import defaultdict
+
+def fn(arr, k):
+    counts = defaultdict(int)
+    counts[0] = 1
+    ans = curr = 0
+
+    for num in arr:
+        # do logic to change curr
+        ans += counts[curr - k]
+        counts[curr] += 1
+    
+    return ans
+
+
+# ––––––––––––––––––––––––––––––––––––––––––––––
+# Linked list: fast and slow pointer
+def fn(head):
+    slow = head
+    fast = head
+    ans = 0
+
+    while fast and fast.next:
+        # do logic
+        slow = slow.next
+        fast = fast.next.next
+    
+    return ans
+
+
+# ––––––––––––––––––––––––––––––––––––––––––––––
+# Reversing a linked list
+
+def fn(head):
+    curr = head
+    prev = None
+    while curr:
+        next_node = curr.next
+        curr.next = prev
+        prev = curr
+        curr = next_node 
+        
+    return prev
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
