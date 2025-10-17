@@ -94,7 +94,7 @@ Q: Why do we use `d[num] = i` instead of `d[diff] = i`?
 """
 
 
-# ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+# ––––––––––––––––––––––––––––––––––––––––––––––––––
 # Breakdown 
 def twoSum(nums, target):
     d = {}                    # Initialize dictionary for number-to-index mapping

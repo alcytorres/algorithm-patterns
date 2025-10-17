@@ -876,6 +876,28 @@ for i, val in enumerate(nums):
     print(i, val)  # Output: 0 a, 1 b
 
 
+# DICTIONARY BUILDING from LIST
+def fn(nums):
+    ans = {}
+    for i, num in enumerate(nums):
+        ans[i] = num
+    return ans
+    
+nums = ['a', 'b', 'c']
+print(fn(nums))
+# Output: {0:'a', 1:'b', 2:'c'}
+
+# PRINT INDEX + VALUE PAIRS
+nums = ['a', 'b', 'c']
+for i, num in enumerate(nums):
+    print(i, num)  
+# Output:
+# 0 a
+# 1 b
+# 2 c
+
+
+
 # BUILT-IN FUNCTION: 
 iter()
 # What it does: Creates iterator from iterable.

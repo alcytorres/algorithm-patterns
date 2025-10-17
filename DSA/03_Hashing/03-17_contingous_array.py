@@ -526,7 +526,7 @@ def fn(nums):
     
 nums = ['a', 'b', 'c']
 print(fn(nums))
-# Output: {0: 'a', 1: 'b', 2: 'c'}
+# Output: {0:'a', 1:'b', 2:'c'}
 
 
 nums = ['a', 'b', 'c']
