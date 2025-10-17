@@ -1006,6 +1006,7 @@ You only need a reference to the node AT position i (call it 'node').
 
 Steps (update 4 pointers total):
 """
+
 def add_node(node, node_to_add):
     prev_node = node.prev
     node_to_add.next = node
@@ -1030,22 +1031,25 @@ Step-by-step pointer links (each line shows the new arrow added/updated):
 1) node_to_add.next = node
     1 ⇄ 2    99 ──▶ 3
                 ▲
-
 2) node_to_add.prev = prev_node
     1 ⇄ 2 ◀── 99  3
            ▲
-
 3) prev_node.next = node_to_add
     1 ⇄ 2 ──▶ 99  3
            ▲
-
 4) node.prev = node_to_add
     1 ⇄ 2 ⇄ 99 ◀── 3
                 ▲
-
 Final list:
     1 ⇄ 2 ⇄ 99 ⇄ 3
 
+
+Simple Breakdown:
+    prev_node = node.prev         = 2
+    node_to_add.next = node       = 3
+    node_to_add.prev = prev_node  = 2
+    prev_node.next = node_to_add  = 99
+    node.prev = node_to_add       = 99
 
 
 🧠 Why we don't need (i - 1):
@@ -1062,10 +1066,6 @@ Final list:
 Given a reference to the node AT i (call it 'node'), unlink it.
 
 Steps (update 2 neighbor pointers + conceptually drop 'node'):
-  1) prev_node = node.prev
-  2) next_node = node.next
-  3) prev_node.next = next_node
-  4) next_node.prev = prev_node
 """
 
 def delete_node(node):
@@ -1077,14 +1077,44 @@ def delete_node(node):
 """
 📊 Example:
 Original:  [1] ⇄ [2] ⇄ [99] ⇄ [3]
-Delete [2] (node = [2]):
+Delete [2], node b (node b = [2]):
 
 After:     [1] ⇄ [99] ⇄ [3]
 
+Let:
+    node = [2]
+    prev_node = [1]
+    next_node = [99]
+
+Step-by-step pointer updates:
+
+1) prev_node.next = next_node
+    [1] ──▶ [99] ⇄ [3]
+          ▲
+          [2] still points to [99]
+
+2) next_node.prev = prev_node
+    [1] ◀── [99] ⇄ [3]
+          ↑
+          [2] is now detached
+
+Final list:
+    [1] ⇄ [99] ⇄ [3]
+
+
+Simple Breakdown:
+  1) prev_node = node.prev       = 1
+  2) next_node = node.next       = 99
+  3) prev_node.next = next_node  = 99
+  4) next_node.prev = prev_node  = 1
+
+
 💡 What happened:
-- We “bridged around” [2] by connecting its neighbors.
-- [2] has no incoming links now → effectively removed.
+  • We “bridged around” [2] by connecting its neighbors.
+  • [2] has no incoming links now → effectively removed.
+
 """
+
 
 
 # ----------------------------
@@ -1129,7 +1159,7 @@ Rule of thumb: In DLL ops, you usually touch FOUR pointers.
 - Once you have 'node' (position i):
     • Insert/delete: O(1)
 - If you must find position i first:
-    • O(n) traversal from head or tail
+    • O(N) traversal from head or tail
 
 Tip: DLLs are great when you frequently insert/remove in the middle and need to move in both directions.
 
@@ -1196,14 +1226,6 @@ def add_to_end(node_to_add):
     tail.prev.next   = node_to_add
     tail.prev        = node_to_add
 
-"""
-Pointer changes (4 touches):
-- new.prev = old_last
-- new.next = tail
-- old_last.next = new
-- tail.prev = new
-"""
-
 
 # ----------------------------
 # ➕ Add to START (O(1))
@@ -1261,9 +1283,8 @@ def remove_from_start():
   - add_to_start / add_to_end / remove_from_start / remove_from_end: O(1)
   - Finding a position by value/index still costs O(N) (you must walk).
   - Space: O(1) extra for sentinels — a tiny, fixed overhead.
-"""
 
-"""
+  
 💡 Memory Hook
 --------------
 “Sentinels are bumpers at both ends:
@@ -1271,7 +1292,9 @@ def remove_from_start():
   • so links never fall off the edge.”
 """
 
-# FULL Linked lists with sentinel nodes
+# --------------------------------------------
+# Doubly Linked List with Sentinel Nodes
+# --------------------------------------------
 class ListNode:
     def __init__(self, val):
         self.val = val
@@ -1313,48 +1336,67 @@ head.next = tail
 tail.prev = head
 
 
-# ----- TEST INPUT DATA -----
+# Example setup: 1 ⇄ 2 ⇄ 3
+a = ListNode(1)
+b = ListNode(2)
+c = ListNode(3)
 
-# Create a few sample nodes
-a = ListNode(10)
-b = ListNode(20)
-c = ListNode(30)
-d = ListNode(40)
+# Link them together
+head.next = a
+a.prev = head
+a.next = b
+b.prev = a
+b.next = c
+c.prev = b
+c.next = tail
+tail.prev = c
 
-# Add to end
-add_to_end(a)
-add_to_end(b)
-print("After adding to end: 10 → 20")
-# Output: 10 → 20
 
-# Add to start
-add_to_start(c)
-print("After adding to start: 30 → 10 → 20")
-# Output: 30 → 10 → 20
-
-# Add another to end
-add_to_end(d)
-print("After adding to end again: 30 → 10 → 20 → 40")
-# Output: 30 → 10 → 20 → 40
-
-# Remove from start
-remove_from_start()
-print("After removing from start: 10 → 20 → 40")
-# Output: 10 → 20 → 40
-
-# Remove from end
-remove_from_end()
-print("After removing from end: 10 → 20")
-# Output: 10 → 20
-
-# Print final list contents to verify
-print("\nFinal linked list:")
+# --------------------------------------------
+# INITIAL LIST TRAVERSAL 
+print("\nForward:")
 curr = head.next
-while curr != tail:
-    print(curr.val, end=" ")
+while curr is not tail:
+    print(curr.val)
     curr = curr.next
-print()  # newline
-# Output: 10 20 
+# Output: 1 ⇄ 2 ⇄ 3
+
+# --------------------------------------------
+# ✅ INSERTING AT THE TAIL (ADD NODE TO END)
+y = ListNode(77)
+add_to_end(y)
+# List: 1 ⇄ 2 ⇄ 3 ⇄ 77
+
+# --------------------------------------------
+# 🗑️ DELETING THE TAIL (REMOVE LAST NODE)
+if tail.prev is not head:
+    remove_from_end()
+# List now: 1 ⇄ 2 ⇄ 3
+
+# # --------------------------------------------
+# ✅ INSERTING AT THE HEAD (ADD NODE TO START)
+x = ListNode(99)
+add_to_start(x)
+# List: 99 ⇄ 1 ⇄ 2 ⇄ 3
+
+# --------------------------------------------
+# 🗑️ DELETING THE HEAD (REMOVE FIRST NODE)
+if head.next is not tail:
+    remove_from_start()
+# List now: 1 ⇄ 2 ⇄ 3
+
+# --------------------------------------------
+# 🔁 FINAL LIST TRAVERSAL (PRINT RESULT)
+print("Forward:")
+curr = head.next
+while curr is not tail:
+    print(curr.val)
+    curr = curr.next
+# Expected:
+# 1
+# 2
+# 3
+
 
 
 
@@ -1381,15 +1423,18 @@ def get_sum(head):
     # same as before, but we still have a pointer at the head
     return ans
 
-# Example: create a linked list 1 → 2 → 3
+# Example setup: 1 ⇄ 2 ⇄ 3
 a = ListNode(1)
 b = ListNode(2)
 c = ListNode(3)
 
+# Link them together
 a.next = b
 b.next = c
 
+# Mark the start of the list 
+head = a
+
 # Print total sum
-result = get_sum(a)
-print(result)  
+print(get_sum(a))
 # Output: 6
