@@ -15,3 +15,19 @@
     # Output: []
 
 # Solution: https://leetcode.com/problems/reverse-linked-list/description/
+
+
+
+ 
+
+
+
+
+def reverseList(self, head):
+    if (not head) or (not head.next):
+        return head
+    
+    p = self.reverseList(head.next)
+    head.next.next = head
+    head.next = None
+    return p

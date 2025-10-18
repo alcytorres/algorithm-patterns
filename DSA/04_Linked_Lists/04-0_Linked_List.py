@@ -1438,3 +1438,40 @@ head = a
 # Print total sum
 print(get_sum(a))
 # Output: 6
+
+
+
+
+
+
+
+
+# –––––––––––––––––––––––––––––––
+# Comparing ListNode Class Initializations: Mandatory vs. Optional Parameters
+# –––––––––––––––––––––––––––––––
+
+# First ListNode class
+class ListNode1:
+    def __init__(self, val):
+        self.val = val
+        self.next = None
+
+# Second ListNode class
+class ListNode2:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
+
+# Initialize nodes to show differences
+# ListNode1: Requires val, next is always None
+node1 = ListNode1(5)  # Works: val=5, next=None
+# node1 = ListNode1()  # Error: val is required
+print("ListNode1:", node1.val, node1.next)  # Output: ListNode1: 5 None
+
+# ListNode2: val optional (defaults to 0), next optional
+node2a = ListNode2()  # Works: val=0, next=None
+node2b = ListNode2(10)  # Works: val=10, next=None
+node2c = ListNode2(20, node2b)  # Works: val=20, next=node2b
+print("ListNode2a:", node2a.val, node2a.next)  # Output: ListNode2a: 0 None
+print("ListNode2b:", node2b.val, node2b.next)  # Output: ListNode2b: 10 None
+print("ListNode2c:", node2c.val, node2c.next.val if node2c.next else None)  # Output: ListNode2c: 20 10

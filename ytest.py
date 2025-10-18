@@ -6,9 +6,13 @@
 
 
 # ––––––––––––––– Prompts –––––––––––––––
+
+# ––––––––––––––––––––––––––––––––––––––––
+# LEETCODE SOLUTIONS EXPLANATIONS CONCISE
+# ––––––––––––––––––––––––––––––––––––––––
 # Explain this in a simple, very easy to understand, intuitive, memorable way so that in future I can quickly read/scan through and understand
 
-
+# ---
 # Super simple, beginner-friendly Leetocde FULL breakdown
 
 # I need a super simple, beginner-friendly explanation of how this LeetCode solution works, as if explaining to a 12-year-old who’s just learning to code. Break it down crystal clear, focusing on why the code finds the correct answer for the given problem. 
@@ -16,8 +20,10 @@
 # Use the provided example input and output to walk through the solution step by step, showing how each part of the code contributes to the final result. Include a simple analogy to make it relatable. If the solution uses a loop, provide a concise iteration overview (like a table) showing key variable changes for each step.
 
 
+
+
 # ––––––––––––––––––––––––––––––––––––––––
-# LEETCODE SOLUTIONS EXPLANATIONS
+# LEETCODE SOLUTIONS EXPLANATIONS FULL
 # ––––––––––––––––––––––––––––––––––––––––
 # I need a super simple, easy to follow, very beginner-friendly explanation of how this LeetCode solution works. Break it down into 4 main parts: "Most IMPORTANT thing to Understand", "Why this code Works, TLDR (why this code works in one sentence), and Quick Example Walkthrough.
 
@@ -123,9 +129,32 @@ Quick Example Walkthrough:
 
 
 
+# ––––––––––––––––––––––––––––––––––––––––
+# LEETCODE SOLUTIONS
+# –––––––––––––––––––––––––––––––––––––––
+
+# –––––––––––––––––––––––––––––––––––––––
+#  What is the best efficient simple solution? 
+# –––––––––––––––––––––––––––––––––––––––
+# Give me the top 2 most basic, simple, easy to follow for a beginner solutions to this problem as a ranked list. Make sure it is efficient. Justify your answer and explain you reasoning
+
+# What is the best simple solution, easy to follow for a beginner for this problem that is efficient? Justify your answer
+
+# The goal is clarity and learning for a beginner to easily follow along
+
+
+# ––––––––––––––––––––––––––––––––––––––––
+# Which of the following is more easy to understand and remember and follow along for a beginner
+
+
+# ––––––––––––––––––––––––––––––––––––––––
+# Give me excellent in line annotations for this code
+
+
+
 
 # –––––––––––––––––––––––––––––––––––––––––––––––
-# What is the best efficient simple solution 
+# FULL: What is the best efficient simple solution? 
 # –––––––––––––––––––––––––––––––––––––––––––––––
 """
 Q: What is the best efficient simple solution for a beginner to understand this problem?
@@ -155,9 +184,7 @@ Instructions for you (the LLM):
 """
 
 # –––––––––––––––––––––––––––––––––––––––––––––––
-# What is the best simple solution, easy to follow for a beginner for this problem that is efficient? Justify your answer
 
-# The goal is clarity and learning for a beginner to easily follow along
 
 
 
@@ -186,7 +213,6 @@ Instructions for you (the LLM):
 # Provide your answer in a .py file so i can copy it into the write up for this problem
 # Only reply with the Overview for Each Iteration
 
-
 # Here is a great example.
 # Note you can choose the format you think is best for the overview depending on the problem. You dont always have to do a 2 steps breakdown. In this example it just really made sense. 
 # The goal is clarity and learning for a beginner to easily follow along
@@ -210,9 +236,9 @@ def largestUniqueNumber(nums):
 
 nums = [1, 3, 9, 4, 9, 8, 3]
 print(largestUniqueNumber(nums))
-Output: 8
+# Output: 8
 
-counts = {1:1, 3:2, 9:2, 4:1, 8:1}
+# counts = {1:1, 3:2, 9:2, 4:1, 8:1}
 
 
 # Overview for Each Iteration
@@ -242,9 +268,9 @@ counts = {1:1, 3:2, 9:2, 4:1, 8:1}
 
 
 
-
 # –––––––––––––––––––––––––––––––––––––––––––––––
 # Give me a excellent one sentence explanation of the output like this:
+# –––––––––––––––––––––––––––––––––––––––––––––––
 
     # Output: 3.5 → Subarray [3, 4] (length 2, sum 3 + 4 = 7, average 7/2 = 3.5) has the largest average for k=2.
 
@@ -256,20 +282,13 @@ counts = {1:1, 3:2, 9:2, 4:1, 8:1}
 # for this code
 
 
-# –––––––––––––––––––––––––––––––––––––––––––––––
-# Give me excellent in line annotations for this code
-
-
-# –––––––––––––––––––––––––––––––––––––––––––––––
-# Which of the following is more easy to understand and remember and follow along for a beginner
-
 
 # –––––––––––––––––––––––––––––––––––––––––––––––
 # Prompt for Guides
 # –––––––––––––––––––––––––––––––––––––––––––––––
-# Here is a guide based on sliding windows i have based on the section of my dsa course on sliding windows
+# Here is a guide on sliding windows I have based on the section of my dsa course on sliding windows
 
-# give me a guide now for prefix sum that follows the format of the sliding window guide exactly in terms of spacing / format/ etc. Im going to copy and paste your answer into a .py file
+# Give me a guide now for prefix sum that follows the format of the sliding window guide exactly in terms of spacing / format/ etc. Im going to copy and paste your answer into a .py file
 
 # Use of lines to separate example problems
 
@@ -317,6 +336,9 @@ print(fn(nums))   # Output 2 (since 2 and 4 are even)
 
 
 
+# –––––––––––––––––––––––––––––––––––––––––––––––
+# My TOP PREFERENCES FOR GUIDES
+# –––––––––––––––––––––––––––––––––––––––––––––––
 """
 My Preferences for my Guides:
 

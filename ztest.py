@@ -1,52 +1,40 @@
-class ListNode:
-    def __init__(self, val):
-        self.val = val
-        self.next = None
+# 206. Reverse Linked List
 
-def middleNode(head):
-    slow = fast = head
+# Given the head of a singly linked list, reverse the list, and return the reversed list.
 
-    while fast and fast.next:
-        slow = slow.next
-        fast = fast.next.next
-    
-    return slow
+# Example 1:
+    # Input: head = [1, 2, 3, 4, 5]
+    # Output: [5, 4, 3, 2, 1]
 
-# --------------------------------------------
-# ✅ EXAMPLE 1: Linked list: 1 → 2 → 3 → 4 → 5
-a = ListNode(1)
-b = ListNode(2)
-c = ListNode(3)
-d = ListNode(4)
-e = ListNode(5)
-a.next = b; b.next = c; c.next = d; d.next = e
+# Example 2:
+    # Input: head = [1, 2]
+    # Output: [2, 1]
 
-result = middleNode(a)
-curr = result
-output1 = []
-while curr:
-    output1.append(curr.val)
-    curr = curr.next
-print("Output 1:", output1)   # [3, 4, 5]
+# Example 3:
+    # Input: head = []
+    # Output: []
+
+# Solution: https://leetcode.com/problems/reverse-linked-list/description/
 
 
-# --------------------------------------------
-# ✅ EXAMPLE 2: Linked list: 1 → 2 → 3 → 4 → 5 → 6
-a = ListNode(1)
-b = ListNode(2)
-c = ListNode(3)
-d = ListNode(4)
-e = ListNode(5)
-f = ListNode(6)
-a.next = b; b.next = c; c.next = d; d.next = e; e.next = f
+def __init__(self, val=0, next=None):
+    self.val = val
+    self.next = next
 
-result = middleNode(a)
-curr = result
-output2 = []
-while curr:
-    output2.append(curr.val)
-    curr = curr.next
-print("Output 2:", output2)   # [4, 5, 6]
+def reverseList(head):
+    prev = None
+    curr = head
+    while curr:
+        next_temp = curr.next
+        curr.next = prev
+        prev = curr
+        curr = next_temp
+        
+    return prev
+
+
+
+
 
 
 
@@ -59,5 +47,3 @@ print("Output 2:", output2)   # [4, 5, 6]
 # """
 # Add to notes if a hash table used what is the x and y values represent?
 # """
-
-
