@@ -20,6 +20,12 @@
 # Use the provided example input and output to walk through the solution step by step, showing how each part of the code contributes to the final result. Include a simple analogy to make it relatable. If the solution uses a loop, provide a concise iteration overview (like a table) showing key variable changes for each step.
 
 
+# ––––––––––––––––––––––––––––––––––––––––
+# GET OUTPUT FOR LEETCODE SOLUTIONS
+# ––––––––––––––––––––––––––––––––––––––––
+# For this code provide the additional code required so that I can run and verify the output of the examples provided
+
+# For this code provide the additional code required so that I can run and verify the output of a basic simple example you recommend that fully shows all funcitonality of the code
 
 
 # ––––––––––––––––––––––––––––––––––––––––
