@@ -18,46 +18,60 @@ class ListNode:
         self.val = val
         self.next = next
 
+def reverseBetween(head, left, right):
+    if left == right: 
+        return head
+
+    dummy = ListNode(0, head)
+    prev = dummy
+
+    # 1) move prev to node BEFORE 'left'
+    for _ in range(left - 1):
+        prev = prev.next
+
+    # 2) reverse by repeatedly moving the node after 'curr' to the front
+    curr = prev.next
+    for _ in range(right - left):
+        nxt = curr.next           # node to relocate
+        curr.next = nxt.next      # detach nxt
+        nxt.next = prev.next      # put nxt at front of the sublist
+        prev.next = nxt           # reconnect front
+
+    return dummy.next
 
 
-
-
-
+# Helper to convert linked list to Python list for easy printing
+def to_list(head):
+    res = []
+    while head:
+        res.append(head.val)
+        head = head.next
+    return res
 
 
 # --------------------------------------------
-# ✅ EXAMPLE 1: Linked list: head = [1 → 2 → 3 → 4 → 5]
+# ✅ EXAMPLE 1: head = [1, 2, 3, 4, 5], left = 2, right = 4
 a = ListNode(1)
 b = ListNode(2)
 c = ListNode(3)
 d = ListNode(4)
 e = ListNode(5)
-
 a.next = b; b.next = c; c.next = d; d.next = e
 
-# Reverse and collect output
-result = reverseList(a)
-ans = []
-curr = result
-while curr:
-    ans.append(curr.val)
-    curr = curr.next
-print("Output 1:", ans)   # [5, 4, 3, 2, 1]
+result = reverseBetween(a, 2, 4)
+print("Output 1:", to_list(result))   # [1, 4, 3, 2, 5]
 
 
 # --------------------------------------------
-# ✅ EXAMPLE 2: Linked list: head = [1 → 2]
-a = ListNode(1)
-b = ListNode(2)
-a.next = b
+# ✅ EXAMPLE 2: head = [5], left = 1, right = 1
+a = ListNode(5)
 
-result = reverseList(a)
-ans = []
-curr = result
-while curr:
-    ans.append(curr.val)
-    curr = curr.next
-print("Output 2:", ans)   # [2, 1]
+result = reverseBetween(a, 1, 1)
+print("Output 2:", to_list(result))   # [5]
+
+
+
+
 
 
 
