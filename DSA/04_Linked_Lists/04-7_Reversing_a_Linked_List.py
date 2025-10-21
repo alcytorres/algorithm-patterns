@@ -102,6 +102,7 @@ class Solution:
 
         dummy = head.next               # Step 5
         prev = None                     # Initialize for step 3
+        
         while head and head.next:
             if prev:
                 prev.next = head.next   # Step 4
