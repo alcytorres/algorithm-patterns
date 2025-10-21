@@ -48,7 +48,8 @@ def findMaxLength(nums):
 
 nums = [0, 1, 1, 1, 1, 0, 0]
 print(findMaxLength(nums))
-# Output 4
+# Output: 4 → The longest contiguous subarray with equal numbers of 0s and 1s is [1, 1, 0, 0], which has a length of 4.
+
 
 # Key (diff): the current score = (# of 1s so far) - (# of 0s so far)
 # Value (index): the earliest position where that score was seen.
@@ -90,8 +91,9 @@ i | num | diff | counts[diff] | max_length   | counts
 2 | 1   | 1    | absent       | 2            | {0:-1, -1:0, 1:2}
 3 | 1   | 2    | absent       | 2            | {0:-1, -1:0, 1:2, 2:3}
 4 | 1   | 3    | absent       | 2            | {0:-1, -1:0, 1:2, 2:3, 3:4}
-5 | 0   | 2    | 3            | 2            | {0:-1, -1:0, 1:2, 2:3, 3:4}
+5 | 0   | 2    | 3            | 2 (5 - 3)    | {0:-1, -1:0, 1:2, 2:3, 3:4}
 6 | 0   | 1    | 2            | 4 (6 - 2)    | {0:-1, -1:0, 1:2, 2:3, 3:4}
+
 Final: 4 ([1, 1, 0, 0])
 
 
@@ -154,7 +156,7 @@ Why this code Works:
     • Prefix sum idea: diff acts like a prefix sum of (+1 for 1, -1 for 0).  
       → If diff repeats at index i and j, the subarray between i+1 and j has net zero difference → equal 0s and 1s.  
 
-    • Efficiency: O(n) because we only scan once and use O(1) lookups in the map.Brute force would check every subarray in O(n²).  
+    • Efficiency: O(n) because we only scan once and use O(1) lookups in the map. Brute force would check every subarray in O(n²).  
 
     • Intuition: Treat diff like a scoreboard. If you see the same score at two indices, the segment between them sums to 0 → equal 0s and 1s.
 

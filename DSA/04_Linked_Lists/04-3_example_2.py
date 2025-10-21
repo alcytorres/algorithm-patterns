@@ -35,6 +35,7 @@ class ListNode:
 def hasCycle(head):
     slow = head
     fast = head
+
     while fast and fast.next:
         slow = slow.next
         fast = fast.next.next
@@ -149,16 +150,16 @@ TLDR (one sentence):
 ---
 Quick Example Walkthrough:
 
-Example: 1 → 2 → 3 → 4 → back to 2
+    Example: 1 → 2 → 3 → 4 → back to 2
 
-Step 1: slow = 1, fast = 1  
-Step 2: slow = 2, fast = 3  
-Step 3: slow = 3, fast = 2  
-Step 4: slow = 4, fast = 4  → met → cycle found ✅  
+    Step 1: slow = 1, fast = 1  
+    Step 2: slow = 2, fast = 3  
+    Step 3: slow = 3, fast = 2  
+    Step 4: slow = 4, fast = 4  → met → cycle found ✅  
 
-Example (no cycle): 1 → 2 → None  
-Step 1: slow = 1, fast = 1  
-Step 2: slow = 2, fast = None → stop → no cycle ❌  
+    Example (no cycle): 1 → 2 → None  
+    Step 1: slow = 1, fast = 1  
+    Step 2: slow = 2, fast = None → stop → no cycle ❌  
 
 Final Answers:
 • First list → True (has cycle)  
@@ -170,7 +171,7 @@ Final Answers:
 
 
 
-# ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+# ––––––––––––––––––––––––––––––––––––––––––––––– 
 # Breakdown 
 def hasCycle(head):
     slow = head               # Start slow pointer at head
@@ -183,12 +184,6 @@ def hasCycle(head):
             return True       # Return True for cycle
         
     return False              # Return False if no cycle found
-
-
-
-
-
-
 
 
 

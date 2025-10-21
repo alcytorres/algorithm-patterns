@@ -11,6 +11,7 @@ At any given node curr, we can set curr.next = prev to switch the direction of t
 def reverse_list(head):
     prev = None
     curr = head
+
     while curr:
         next_node = curr.next # first, make sure we don't lose the next node
         curr.next = prev      # reverse the direction of the pointer
@@ -78,12 +79,17 @@ Again, let's break down what we need to do step by step, and how we can accompli
 
 To summarize the steps:
 
-1. Performs an edge swap from A -> B -> C -> ... to A <-> B C -> ....
-2. Make sure we can still access the rest of the list beyond the current pair (saves C).
-3. Now that A <-> B is isolated from the rest of the list, save a pointer to A to connect it with the rest of the list later. Move to the next pair.
-4. Connect the previous pair to the rest of the list. In this case connecting A -> D.
-5. Use a dummy pointer to keep a reference to what we want to return.
-6. Handle the case when there's an odd number of nodes.
+    1. Performs an edge swap from A -> B -> C -> ... to A <-> B C -> ....
+
+    2. Make sure we can still access the rest of the list beyond the current pair (saves C).
+
+    3. Now that A <-> B is isolated from the rest of the list, save a pointer to A to connect it with the rest of the list later. Move to the next pair.
+
+    4. Connect the previous pair to the rest of the list. In this case connecting A -> D.
+
+    5. Use a dummy pointer to keep a reference to what we want to return.
+
+    6. Handle the case when there's an odd number of nodes.
 
 The order of the steps here is not chronological. It's just an order that we might think of when we are trying to consider the requirements of the problem.
 """
@@ -125,10 +131,13 @@ We mentioned that reversing a linked list is "also a technique that can be a ste
 
 The trivial solution would be to convert the linked list into an array, that way you can access the pairs easily by indexing. The more elegant O(1) space solution is as follows:
 
-1. Find the middle of the linked list using the fast and slow pointer technique from the previous article.
-2. Once at the middle of the linked list, perform a reversal. Basically, reverse only the second half of the list.
-3. After reversing the second half, every node is spaced n / 2 apart from its pair node, where n is the number of nodes in the list which we can find from step 1.
-4. With that in mind, create another fast pointer n / 2 ahead of slow. Now, just iterate n / 2 times from head to find every pair sum slow.val + fast.val.
+    1. Find the middle of the linked list using the fast and slow pointer technique from the previous article.
+
+    2. Once at the middle of the linked list, perform a reversal. Basically, reverse only the second half of the list.
+
+    3. After reversing the second half, every node is spaced n / 2 apart from its pair node, where n is the number of nodes in the list which we can find from step 1.
+
+    4. With that in mind, create another fast pointer n / 2 ahead of slow. Now, just iterate n / 2 times from head to find every pair sum slow.val + fast.val.
 
 
 Try to implement the code for this algorithm yourself as an exercise.

@@ -340,6 +340,12 @@ nums = [1, 2, 3, 4]
 print(fn(nums))   # Output 2 (since 2 and 4 are even)
 
 
+# –––––––––––––––––––––––––––––––––––––––––––––––
+# Give me a concise reply in bullets and set up with a question as the header for how this code   XYZ. 
+
+# Provide your reply in a .py file with """"
+
+
 
 
 # –––––––––––––––––––––––––––––––––––––––––––––––

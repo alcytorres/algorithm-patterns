@@ -34,7 +34,7 @@ def largestUniqueNumber(nums):
 
 nums = [1, 3, 9, 4, 9, 8, 3]
 print(largestUniqueNumber(nums))
-# Output: 8
+# Output: 8 → Number 9 is largest but appears twice, so 8 is the next largest number that occurs only once.
 
 # counts = {1:1, 3:2, 9:2, 4:1, 8:1}
 

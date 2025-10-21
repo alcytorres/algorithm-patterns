@@ -32,7 +32,8 @@ def maxNumberOfBalloons(text):
 
 text = "nlaebolko"
 print(maxNumberOfBalloons(text))
-# Output: 1
+# Output: 1 → The text has just enough letters to form one instance of "balloon" using b, a, l (×2), o (×2), and n exactly once.
+
 
 # counts = {'n':1, 'l':2, 'a':1, 'e':1, 'b':1, 'o':2, 'k':1}
 
@@ -140,6 +141,24 @@ def maxNumberOfBalloons(text):
     # Return min count of 'b', 'a', 'l'/2, 'o'/2, 'n' for complete "balloon"s
     return min(counts['b'], counts['a'], counts['l'] // 2, counts['o'] // 2, counts['n']) 
 
+
+# –––––––––––––––––––––––––––––––––––––––––––––––––––––––
+# Best Solution
+
+from collections import defaultdict
+
+def maxNumberOfBalloons(text):
+    # Step 1: Count characters in text
+    counts = defaultdict(int)
+    for c in text:
+        counts[c] += 1
+    
+    return min(counts['b'], counts['a'], counts['l'] // 2, counts['o'] // 2, counts['n'])
+
+
+text = "balloonsballoons"
+print(maxNumberOfBalloons(text))
+# Output: 2 → The text contains enough letters to form the word "balloon" twice, since there are 4 l’s and 4 o’s, which limit the count to 2 complete words.
 
 
 

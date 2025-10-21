@@ -33,9 +33,11 @@ a = ListNode(1)
 b = ListNode(1)
 c = ListNode(2)
 
+# Link them together
 a.next = b
 b.next = c
 
+# Run
 result = deleteDuplicates(a)
 ans = []
 curr = result
@@ -53,8 +55,10 @@ c = ListNode(2)
 d = ListNode(3)
 e = ListNode(3)
 
+# Link them together
 a.next = b; b.next = c; c.next = d; d.next = e
 
+# Run
 result = deleteDuplicates(a)
 ans = []
 curr = result
@@ -92,13 +96,12 @@ Input: head = [1, 1, 2]
 
 Step: Remove duplicates from sorted linked list
 curr.val | curr.next.val | curr.val == curr.next.val | Action
----------|---------------|---------------------------|--------------------
+---------|---------------|---------------------------|------------------------------
 1        | 1             | True                      | Skip duplicate, curr.next = 2
 1        | 2             | False                     | Move curr to 2
 2        | None          | -                         | Exit loop
 
 Final: [1, 2]
-
 
 
 ---
@@ -107,7 +110,7 @@ Input: head = [1, 1, 2, 3, 3]
 
 Step: Remove duplicates from sorted linked list
 curr.val | curr.next.val | curr.val == curr.next.val | Action
----------|---------------|---------------------------|--------------------
+---------|---------------|---------------------------|---------------------------------
 1        | 1             | True                      | Skip duplicate, curr.next = 2
 1        | 2             | False                     | Move curr to 2
 2        | 3             | False                     | Move curr to 3
@@ -115,6 +118,23 @@ curr.val | curr.next.val | curr.val == curr.next.val | Action
 3        | None          | -                         | Exit loop
 
 Final: [1, 2, 3]
+
+
+---
+Overview for Each Iteration
+Input: head = [1, 1, 1, 2, 3]
+
+Step: Remove duplicates from sorted linked list
+curr.val | curr.next.val | curr.val == curr.next.val | Action                       | Linked List
+---------|---------------|---------------------------|------------------------------|-------------
+1        | 1             | True                      | Skip duplicate, curr.next=1  | [1→1→2→3]
+1        | 1             | True                      | Skip duplicate, curr.next=2  | [1→2→3]
+1        | 2             | False                     | Move curr to 2               | [1→2→3]
+2        | 3             | False                     | Move curr to 3               | [1→2→3]
+3        | None          | -                         | Exit loop                    | [1→2→3]
+
+Final: [1, 2, 3]
+
 
 
 
@@ -157,7 +177,7 @@ Final Answer: [1, 2, 3]
 
 
 ---
-Q: ❓ Where do we set `head` to point to the first node?
+Q: Where do we set `head` to point to the first node?
 
 - When we call the function like this:
     result = deleteDuplicates(a)
@@ -179,7 +199,7 @@ Q: ❓ Where do we set `head` to point to the first node?
 
 
 ---
-Q: ❓ Why do we return `head` at the end of the solution?
+Q: Why do we return `head` at the end of the solution?
 
 - `head` points to the start of the linked list.
     • Even though we move `curr` through the list during the loop,
@@ -213,7 +233,7 @@ def deleteDuplicates(head):
 
 
 
-# ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+# ––––––––––––––––––––––––––––––––––––––––––––––– 
 # Breakdown 
 def deleteDuplicates(head):
     curr = head               # Start at head of list

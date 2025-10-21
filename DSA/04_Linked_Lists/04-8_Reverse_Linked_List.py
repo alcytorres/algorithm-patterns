@@ -60,6 +60,7 @@ a = ListNode(1)
 b = ListNode(2)
 a.next = b
 
+# Reverse and collect output
 result = reverseList(a)
 ans = []
 curr = result
@@ -174,8 +175,7 @@ Final Answer: [5, 4, 3, 2, 1]
 
 
 
-
-# ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+# ––––––––––––––––––––––––––––––––––––––––––––––– 
 # Breakdown 
 def reverseList(head):
     prev = None               # Initialize previous pointer as None

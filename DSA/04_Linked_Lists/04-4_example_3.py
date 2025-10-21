@@ -24,7 +24,7 @@ def find_node(head, k):
     return slow
 
 # --------------------------------------------
-# ✅ EXAMPLE 1: Linked list: 1 → 2 → 3 → 4 → 5
+# EXAMPLE 1: Linked list: 1 → 2 → 3 → 4 → 5
 a = ListNode(1)
 b = ListNode(2)
 c = ListNode(3)
@@ -32,16 +32,22 @@ d = ListNode(4)
 e = ListNode(5)
 
 # Link them together
-a.next = b
-b.next = c
-c.next = d
-d.next = e
+a.next = b; b.next = c; c.next = d; d.next = e
 
 # Print Result
 k = 2
 node = find_node(a, k)
 print(node.val)
 # Output: 4
+
+# --------------------------------------------
+# EXAMPLE 2: Linked list: 1 → 2 → 3 → 4 → 5
+
+# Print Result
+k = 3
+node = find_node(a, k)
+print(node.val)
+# Output: 3
 
 
 """
@@ -81,9 +87,8 @@ i   | fast.val
 Step 2: Move slow and fast pointers until fast reaches end
 slow.val | fast.val | fast exists
 ---------|----------|------------
-2        | 3        | True
-3        | 4        | True
-4        | 5        | True
+2        | 4        | True
+3        | 5        | True
 4        | None     | False
 
 Final: 4 (slow.val)
@@ -138,7 +143,7 @@ In this problem's context:
 
 
 
-# ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+# ––––––––––––––––––––––––––––––––––––––––––––––– 
 # Breakdown 
 def find_node(head, k):
     slow = head               # Slow pointer starts at head
