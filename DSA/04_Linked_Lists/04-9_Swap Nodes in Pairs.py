@@ -64,7 +64,6 @@ def to_list(head):
         head = head.next
     return result
 
-
 # --------------------------------------------
 # EXAMPLE 1: head = [1, 2, 3, 4]
 a = ListNode(1)
@@ -94,15 +93,112 @@ result = swapPairs(a)
 print("Output 3:", to_list(result))  # [2, 1, 3]
 
 
+"""
+Time: O(N)
+  - Count occurrences of all numbers → O(N).
+  - Loop through dictionary of U unique numbers → O(U), where U ≤ N.
+  - Overall: O(N).
+
+Space: O(U) ≈ O(N)
+  - Dictionary 'counts' stores up to U unique numbers.
+  - A few variables (max_unique, num) use O(1).
+  - Overall: O(U), which in the worst case is O(N).
+
+  
+Interview Answer
+
+Time: O(N)
+  - Count elements and scan counts once.
+
+Space: O(N)
+  - Dictionary stores up to N unique numbers.
 
 
 
+Overview for Each Iteration
+Input: head = [1, 2, 3, 4]
+
+Step: Swap pairs of nodes in linked list
+prev.val | head.val | first.val | second.val | Action                                       | Linked List
+---------|----------|-----------|------------|----------------------------------------------|-------------
+-1       | 1        | 1         | 2          | prev.next=2, first.next=3, second.next=1     | [-1→2→1→3→4]
+1        | 3        | 3         | 4          | prev.next=4, first.next=None, second.next=3  | [-1→2→1→4→3]
+
+Final: [2, 1, 4, 3]
 
 
 
+---
+Most IMPORTANT thing to Understand:
+    • We're swapping *pairs of nodes* (not just their values).
+
+    • Use a dummy node to simplify handling the head swap — it points to the start of the list.
+
+    • For each pair, reconnect pointers so their order flips: first ↔ second → rest of list.
+
+---
+Why this code Works:
+    • Data structure: singly linked list.
+
+    • Technique: pointer manipulation using a dummy node.
+        - `prev_node` tracks the node before the current pair.
+        - Swap two nodes by updating `.next` pointers:
+            prev → second → first → next pair.
+        - Move `prev_node` and `head` forward by two nodes for the next swap.
+
+    • Efficiency: O(N) time — each node visited once; O(1) space — swaps done in place.
+
+    • Intuition: Think of walking through the list and flipping every two adjacent cards while keeping the rest intact.
+
+---
+TLDR:
+    • Use a dummy node and pointer updates to swap every two nodes without losing connections.
+
+---
+Quick Example Walkthrough:
+
+Input: [1 → 2 → 3 → 4]
+
+    Step 0: dummy → 1 → 2 → 3 → 4  
+            prev = dummy, head = 1
+
+    Step 1: Swap (1, 2)
+        prev.next = 2  
+        1.next = 3  
+        2.next = 1  
+    List: dummy → 2 → 1 → 3 → 4  
+    Move prev = 1, head = 3
+
+    Step 2: Swap (3, 4)
+        prev.next = 4  
+        3.next = None  
+        4.next = 3  
+    List: dummy → 2 → 1 → 4 → 3  
+
+Final Output: [2, 1, 4, 3] ✅
+
+"""
 
 
+# –––––––––––––––––––––––––––––––––––––––––––––––
+# Breakdown 
+def swapPairs(head):
+    dummy = ListNode(-1)      # Create dummy node pointing to head
+    dummy.next = head         # Link dummy to head
+    prev_node = dummy         # Initialize prev_node at dummy
 
+    while head and head.next: # Continue while at least two nodes remain
+        first_node = head     # First node to swap
+        second_node = head.next  # Second node to swap
+
+        prev_node.next = second_node  # Link prev to second
+        first_node.next = second_node.next  # Link first to node after second
+        second_node.next = first_node  # Link second to first
+
+        prev_node = first_node  # Update prev to first for next iteration
+        head = first_node.next  # Move head to next pair
+
+    return dummy.next         # Return head of modified list
 
 
 

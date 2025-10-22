@@ -2,7 +2,10 @@
 
 # Example 1: Given the head of a linked list with an odd number of nodes head, return the value of the node in the middle.
 
-# For example, given a linked list that represents 1 -> 2 -> 3 -> 4 -> 5, return 3.
+# Example:
+    # Input linked list: 1 → 2 → 3 → 4 → 5
+    # Output: 3
+    # Explanation: 3 is the value of the node in the middle.
 
 # --------------------------------------------
 # FIND MIDDLE NODE OF A LINKED LIST
@@ -19,11 +22,11 @@ def get_middle(head):
     while fast and fast.next:
         slow = slow.next
         fast = fast.next.next
-        
+
     return slow.val
 
 # --------------------------------------------
-# ✅ EXAMPLE Linked list: 1 → 2 → 3 → 4 → 5
+# EXAMPLE Linked list: 1 → 2 → 3 → 4 → 5
 a = ListNode(1)
 b = ListNode(2)
 c = ListNode(3)
@@ -85,7 +88,7 @@ Most IMPORTANT thing to Understand:
 
     • When `fast` reaches the end, `slow` will be at the middle.
 
-    • Works for both even and odd lengths — for even, it returns the *second* middle node.
+    • Works for both even and odd lengths — for even, it returns the second middle node.
 
 ---
 Why this code Works:

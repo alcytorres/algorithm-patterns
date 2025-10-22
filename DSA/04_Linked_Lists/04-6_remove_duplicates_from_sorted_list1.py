@@ -28,7 +28,7 @@ def deleteDuplicates(head):
     return head
 
 # --------------------------------------------
-# ✅ EXAMPLE 1: Linked list: head = [1 → 1 → 2]
+# EXAMPLE 1: Linked list: head = [1 → 1 → 2]
 a = ListNode(1)
 b = ListNode(1)
 c = ListNode(2)
@@ -48,12 +48,9 @@ print("Output 1:", ans)   # [1, 2]
 
 
 # --------------------------------------------
-# ✅ EXAMPLE 2: Linked list: head = [1 → 1 → 2 → 3 → 3]
-a = ListNode(1)
-b = ListNode(1)
-c = ListNode(2)
-d = ListNode(3)
-e = ListNode(3)
+# EXAMPLE 2: Linked list: head = [1 → 1 → 2 → 3 → 3]
+a = ListNode(1); b = ListNode(1); c = ListNode(2)
+d = ListNode(3); e = ListNode(3)
 
 # Link them together
 a.next = b; b.next = c; c.next = d; d.next = e

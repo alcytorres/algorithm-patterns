@@ -234,6 +234,7 @@ def fn(head):
 def fn(head):
     curr = head
     prev = None
+
     while curr:
         next_node = curr.next
         curr.next = prev
@@ -242,7 +243,12 @@ def fn(head):
         
     return prev
 
-
+"""
+Trick to remember:
+  • In the while loop
+  • Each line picks up where the last one left off
+  • curr.next → prev → curr
+"""
 
 
 

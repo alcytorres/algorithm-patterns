@@ -94,7 +94,6 @@ Space: O(1)
   - Constant extra space for pointer manipulation.
 
 
-
 ---
 Overview for Each Iteration
 Input: head = [1, 2, 3, 4, 5], left = 2, right = 4
@@ -137,7 +136,9 @@ Why this code Works:
 
     • Technique: One-pass "head insertion".
         1. Move `prev` to the node right before `left`.
+        
         2. Repeatedly take the next node (`nxt`) after `curr` and insert it at the front of the sublist.
+
         3. Each step grows the reversed portion while keeping connections intact.
 
     • Efficiency: O(N) time — one full pass, O(1) space — reversal happens in place.

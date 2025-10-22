@@ -1,8 +1,6 @@
 # 141. Linked List Cycle
 
-# Example 2
-
-# Given the head of a linked list, determine if the linked list has a cycle.
+# Example 2: Given the head of a linked list, determine if the linked list has a cycle.
 
 # There is a cycle in a linked list if there is some node in the list that can be reached again by continuously following the next pointer.
 
@@ -39,13 +37,14 @@ def hasCycle(head):
     while fast and fast.next:
         slow = slow.next
         fast = fast.next.next
+        
         if slow == fast:
             return True
 
     return False
 
 # --------------------------------------------
-# ✅ EXAMPLE 1: Create a cycle (1 → 2 → 3 → 4 → back to 2)
+# EXAMPLE 1: Create a cycle (1 → 2 → 3 → 4 → back to 2)
 a = ListNode(1)
 b = ListNode(2)
 c = ListNode(3)
@@ -60,7 +59,7 @@ d.next = b   # cycle here
 print(hasCycle(a))  # Output: True
 
 # --------------------------------------------
-# ✅ EXAMPLE 2: No cycle (1 → 2 → None)
+# EXAMPLE 2: No cycle (1 → 2 → None)
 x = ListNode(1)
 y = ListNode(2)
 

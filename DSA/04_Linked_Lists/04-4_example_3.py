@@ -2,10 +2,11 @@
 
 # Example 3: Given the head of a linked list and an integer k, return the kth node from the end.
 
-# For example, given the linked list that represents 1 -> 2 -> 3 -> 4 -> 5 and k = 2, return the node with value 4, as it is the 2nd node from the end.
+# Example:
+    # Input linked list: 1 → 2 → 3 → 4 → 5, k = 2
+    # Output: 4
+    # Explanation: Return the node with value 4, as it is the 2nd node from the end.
 
-
-# FIND THE KTH NODE FROM THE END OF A LINKED LIST
 class ListNode:
     def __init__(self, val):
         self.val = val
@@ -14,6 +15,7 @@ class ListNode:
 def find_node(head, k):
     slow = head
     fast = head
+    
     for _ in range(k):
         fast = fast.next
     
@@ -137,7 +139,19 @@ In this problem's context:
 - Purpose: to position `fast` k nodes ahead of `slow`
   so when `fast` reaches the end, `slow` will be at the kth node from the end.
 
+  
+---
+Q: Why does one solution use `while fast:` and the others use `while fast and fast.next:`?
 
+- In the "Kth node from end" problem:
+  • `fast` moves k steps ahead first.
+  • Then both pointers move together until `fast` becomes None.
+  • So we only need `while fast:` (we stop exactly when `fast` runs off the list).
+
+- In the "Middle node" problem:
+  • `fast` moves two steps at a time.
+  • We must check both `fast` and `fast.next` to avoid trying to access `fast.next.next` on a None node.
+  • That's why we use `while fast and fast.next:`.
 
 """
 
