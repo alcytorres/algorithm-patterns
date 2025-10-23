@@ -144,7 +144,7 @@ Quick Example Walkthrough:
 # –––––––––––––––––––––––––––––––––––––––
 # Give me the top 2 most basic, simple, memorable, easy to follow for a beginner solutions to this problem as a ranked list. Make sure it is efficient. Justify your answer and explain you reasoning
 
-# What is the best basic, simple, memorable, easy to follow for a beginner solution for this problem that is efficient? Justify your answer
+# What is the absolute best, basic, simple, memorable, easy to follow for a beginner solution for this problem that is efficient? Justify your answer
 
 # The goal is clarity and learning for a beginner to easily follow along
 

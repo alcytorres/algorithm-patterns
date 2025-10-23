@@ -21,6 +21,9 @@
     # Input: head = [1, 2, 3]
     # Output: [2, 1, 3]
 
+
+# HINT: Draw the linked list at each iteration to see how the pointers change
+
 # ––––––––––––––––––––––––––––––––––––––––––––––– 
 # Approach 1: Swap Nodes in Pairs (Dummy Node Version)
 
@@ -70,6 +73,7 @@ a = ListNode(1)
 b = ListNode(2)
 c = ListNode(3)
 d = ListNode(4)
+
 a.next = b; b.next = c; c.next = d
 
 result = swapPairs(a)
@@ -119,10 +123,15 @@ Overview for Each Iteration
 Input: head = [1, 2, 3, 4]
 
 Step: Swap pairs of nodes in linked list
-prev.val | head.val | first.val | second.val | Action                                       | Linked List
----------|----------|-----------|------------|----------------------------------------------|-------------
--1       | 1        | 1         | 2          | prev.next=2, first.next=3, second.next=1     | [-1→2→1→3→4]
-1        | 3        | 3         | 4          | prev.next=4, first.next=None, second.next=3  | [-1→2→1→4→3]
+prev.val | head.val | first.val | second.val | Action                                       
+---------|----------|-----------|------------|--------------------------------------------
+-1       | 1        | 1         | 2          | prev.next=2, first.next=3, second.next=1    
+1        | 3        | 3         | 4          | prev.next=4, first.next=None, second.next=3
+
+Linked List
+-------------
+[-1 → 2 → 1 → 3 → 4]
+[-1 → 2 → 1 → 4 → 3]
 
 Final: [2, 1, 4, 3]
 
@@ -162,20 +171,49 @@ Input: [1 → 2 → 3 → 4]
     Step 0: dummy → 1 → 2 → 3 → 4  
             prev = dummy, head = 1
 
+---
     Step 1: Swap (1, 2)
+        first_node = 1
+        second_node = 2
+
         prev.next = 2  
         1.next = 3  
         2.next = 1  
+
     List: dummy → 2 → 1 → 3 → 4  
     Move prev = 1, head = 3
 
+---
     Step 2: Swap (3, 4)
+        first_node = 3
+        second_node = 4
+
         prev.next = 4  
         3.next = None  
         4.next = 3  
+
     List: dummy → 2 → 1 → 4 → 3  
+    Move prev = 3, head = None
 
 Final Output: [2, 1, 4, 3] ✅
+
+
+
+
+
+
+Q: Why do we return dummy.next? (Example-based explanation)
+  • Imagine the input list: [1 → 2 → 3 → 4]
+  • We add a dummy node before it: [-1 → 1 → 2 → 3 → 4]
+
+  • After swapping pairs:
+      dummy → 2 → 1 → 4 → 3
+
+  • The dummy's next pointer now points to the true new head (2).
+  • If we returned dummy, we'd include the fake -1 node.
+
+  • Returning dummy.next skips the dummy and returns the real swapped list:
+      ✅ [2 → 1 → 4 → 3]
 
 """
 
@@ -187,14 +225,18 @@ def swapPairs(head):
     dummy.next = head         # Link dummy to head
     prev_node = dummy         # Initialize prev_node at dummy
 
-    while head and head.next: # Continue while at least two nodes remain
-        first_node = head     # First node to swap
+    while head and head.next:    # Continue while at least two nodes remain
+
+        # Nodes to be swapped
+        first_node = head        # First node to swap
         second_node = head.next  # Second node to swap
 
+        # Swapping
         prev_node.next = second_node  # Link prev to second
         first_node.next = second_node.next  # Link first to node after second
         second_node.next = first_node  # Link second to first
 
+        # Reinitializing the head and prev_node for next swap
         prev_node = first_node  # Update prev to first for next iteration
         head = first_node.next  # Move head to next pair
 
