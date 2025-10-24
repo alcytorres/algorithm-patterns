@@ -212,6 +212,19 @@ Q: Why do we return `head` at the end of the solution?
   • We return `head` because it represents the entry point
   • to the new, duplicate-free linked list.
 
+
+
+---
+Q: Why does 'while curr and curr.next:' work, but 'while curr:' does NOT?
+
+    - Because 'while curr and curr.next:' checks that both the current node and the next node exist before comparing values.
+
+    - This prevents accessing curr.next.val when curr.next is None (at the end of the list).
+
+    - In contrast, 'while curr:' keeps looping even when curr.next is None, causing an AttributeError.
+
+    - So the safe version stops before the end, while the broken one tries to read past it.
+
 """
 
 

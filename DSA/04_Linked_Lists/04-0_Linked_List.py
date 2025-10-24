@@ -1,4 +1,17 @@
 """
+🚨 LINKED LIST CODE RED 🚨
+Always DRAW the linked list with pen and paper before coding.
+
+For each iteration, sketch:
+    1. What the list looks like before the change.
+    2. Which nodes (prev, curr, next) the pointers refer to.
+    3. What should happen after the current operation.
+
+    This helps you *see* pointer movement, avoid confusion, and debug logically.
+"""
+
+
+"""
 ============================
 ARRAYS vs LINKED LISTS — Simple Guide
 ============================

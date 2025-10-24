@@ -34,10 +34,10 @@ def reverseBetween(head, left, right):
     # 2) Reverse by repeatedly moving curr.next to the FRONT of the sublist
     curr = prev.next
     for _ in range(right - left):
-        next_node = curr.next           # node to relocate
-        curr.next = next_node.next      # detach next_node
-        next_node.next = prev.next      # put next_node at front of the sublist
-        prev.next = next_node           # reconnect front
+        next_temp = curr.next           # node to relocate
+        curr.next = next_temp.next      # detach next_temp
+        next_temp.next = prev.next      # put next_temp at front of the sublist
+        prev.next = next_temp           # reconnect front
 
     return dummy.next
 
@@ -86,7 +86,7 @@ Time: O(N)
   - Overall: O(N).
 
 Space: O(1)
-  - Uses only a few pointers (dummy, prev, curr, next_node).
+  - Uses only a few pointers (dummy, prev, curr, next_temp).
   - Reversal is done in place, without extra data structures.
   - Overall: O(1).
 
@@ -111,10 +111,10 @@ i   | prev.val
 0   | 1
 
 Step 2: Reverse sublist from position 2 to 4
-i   | curr.val | nxt_node.val | curr.nxt.val | nxt_node.next.val | prev.nxt.val  | Action                                    
+i   | curr.val | nxt_temp.val | curr.nxt.val | nxt_temp.next.val | prev.nxt.val  | Action                                    
 ----|----------|--------------|--------------|-------------------|---------------|-------------------------------------------
-0   | 2        | 3            | 3            | 4                 | 2             | curr.next=4, next_node.next=2, prev.next=3 
-1   | 2        | 4            | 4            | 5                 | 3             | curr.next=5, next_node.next=3, prev.next=4 
+0   | 2        | 3            | 3            | 4                 | 2             | curr.next=4, next_temp.next=2, prev.next=3 
+1   | 2        | 4            | 4            | 5                 | 3             | curr.next=5, next_temp.next=3, prev.next=4 
 
 
 Linked List
@@ -207,13 +207,104 @@ def reverseBetween(head, left, right):
 
     # 3) Reverse by repeatedly moving curr.next to the FRONT of the sublist
     for _ in range(right - left):   # Reverse sublist right-left times
-        next_node = curr.next       # Store next node to relocate
-        curr.next = next_node.next  # Detach next_node
-        next_node.next = prev.next  # Insert next_node at front of sublist
-        prev.next = next_node       # Reconnect prev to new front
+        next_temp = curr.next       # Store next node to relocate
+        curr.next = next_temp.next  # Detach next_temp
+        next_temp.next = prev.next  # Insert next_temp at front of sublist
+        prev.next = next_temp       # Reconnect prev to new front
 
     # 4) Return the real head (skip dummy)
     return dummy.next               # Return head of modified list
+
+
+
+
+
+
+
+# ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+# Task: Reverse nodes in a singly linked list from position left to right and return the modified list.
+# Example: head = [1, 2, 3, 4, 5], left = 2, right = 4 → Output = [1, 4, 3, 2, 5]
+
+class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
+
+def reverseBetween(head, left, right):  # Example: head = 1->2->3->4->5, left = 2, right = 4
+
+    # 0️⃣ Early exit — empty list or no-op range
+    # Check if list is empty or left equals right
+    # Why? No reversal is needed if list is empty or range is a single node
+    if not head or left == right:  # head exists, left = 2, right = 4, 2 == 4 is false, proceed
+        return head  # skip
+
+    # 1️⃣ Setup — add dummy before head; start prev at dummy
+    # Create a dummy node pointing to head
+    # Why? Simplifies handling edge cases, like reversing from the head
+    dummy = ListNode(-1)  # dummy = -1->None
+    dummy.next = head     # dummy = -1->1->2->3->4->5
+    prev = dummy          # prev points to dummy (-1)
+
+    # 2️⃣ Move prev to the node BEFORE position 'left'
+    # Move prev left-1 steps to reach the node before position left
+    # Why? We need to connect prev to the reversed sublist
+    for _ in range(left - 1):  # left = 2, range(2-1) = [0], 1 iteration
+        prev = prev.next       # prev = dummy.next = 1
+    # After loop: prev points to node 1
+    curr = prev.next           # curr points to node 2 (position left = 2)
+    # After setup: prev = 1, curr = 2, list = -1->1->2->3->4->5
+
+    # 3️⃣ Reverse by repeatedly moving curr.next to the FRONT of the sublist
+    # Reverse right-left times to cover the sublist
+    # Why? We move nodes one by one to the front of the sublist to reverse it
+    for _ in range(right - left):  # right = 4, left = 2, range(4-2) = [0, 1], 2 iterations
+        # --- Iteration 1 ---
+        # Store the next node to relocate
+        next_temp = curr.next      # curr = 2, next_temp = 3
+        # Detach next_temp from the list
+        curr.next = next_temp.next # curr.next = 3.next = 4, list = -1->1->2->4->5
+        # Insert next_temp at the front of the sublist (after prev)
+        next_temp.next = prev.next # next_temp = 3, prev.next = 2, 3.next = 2
+        prev.next = next_temp      # prev.next = 3, list = -1->1->3->2->4->5
+        # After Iteration 1: prev = 1, curr = 2, list = -1->1->3->2->4->5
+
+        # --- Iteration 2 ---
+        if _ == 1:
+            next_temp = curr.next      # curr = 2, next_temp = 4
+            curr.next = next_temp.next # curr.next = 4.next = 5, list = -1->1->3->2->5
+            next_temp.next = prev.next # next_temp = 4, prev.next = 3, 4.next = 3
+            prev.next = next_temp      # prev.next = 4, list = -1->1->4->3->2->5
+        # After Iteration 2: prev = 1, curr = 2, list = -1->1->4->3->2->5
+
+    # 4️⃣ Return the real head (skip dummy)
+    # Why? The list is modified, and we return the head after the dummy
+    return dummy.next  # dummy.next = 1->4->3->2->5
+
+
+# Helper to convert linked list to Python list for easy printing
+def to_list(head):
+    res = []
+    while head:
+        res.append(head.val)
+        head = head.next
+    return res
+
+
+# Test the function
+a = ListNode(1)
+b = ListNode(2)
+c = ListNode(3)
+d = ListNode(4)
+e = ListNode(5)
+a.next = b
+b.next = c
+c.next = d
+d.next = e
+result = reverseBetween(a, 2, 4)
+print(to_list(result))  # Output: [1, 4, 3, 2, 5]
+
+
+
 
 
 
