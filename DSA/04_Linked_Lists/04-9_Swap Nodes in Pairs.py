@@ -33,12 +33,11 @@ class ListNode(object):
         self.next = next
 
 def swapPairs(head):
-    # Dummy node acts as the prevNode for the head node
+    # Dummy node acts as the prev node for the head node
     # of the list and hence stores pointer to the head node.
     dummy = ListNode(-1)
     dummy.next = head
-
-    prev_node = dummy
+    prev = dummy
 
     while head and head.next:
 
@@ -47,12 +46,12 @@ def swapPairs(head):
         second_node = head.next
 
         # Swapping
-        prev_node.next = second_node
+        prev.next = second_node
         first_node.next = second_node.next
         second_node.next = first_node
 
-        # Reinitializing the head and prev_node for next swap
-        prev_node = first_node
+        # Reinitializing the head and prev for next swap
+        prev = first_node
         head = first_node.next
 
     # Return the new head node.
@@ -150,10 +149,10 @@ Why this code Works:
     • Data structure: singly linked list.
 
     • Technique: pointer manipulation using a dummy node.
-        - `prev_node` tracks the node before the current pair.
+        - `prev` tracks the node before the current pair.
         - Swap two nodes by updating `.next` pointers:
             prev → second → first → next pair.
-        - Move `prev_node` and `head` forward by two nodes for the next swap.
+        - Move `prev` and `head` forward by two nodes for the next swap.
 
     • Efficiency: O(N) time — each node visited once; O(1) space — swaps done in place.
 
@@ -223,7 +222,7 @@ Q: Why do we return dummy.next? (Example-based explanation)
 def swapPairs(head):
     dummy = ListNode(-1)      # Create dummy node pointing to head
     dummy.next = head         # Link dummy to head
-    prev_node = dummy         # Initialize prev_node at dummy
+    prev = dummy         # Initialize prev at dummy
 
     while head and head.next:    # Continue while at least two nodes remain
 
@@ -232,12 +231,12 @@ def swapPairs(head):
         second_node = head.next  # Second node to swap
 
         # Swapping
-        prev_node.next = second_node  # Link prev to second
+        prev.next = second_node  # Link prev to second
         first_node.next = second_node.next  # Link first to node after second
         second_node.next = first_node  # Link second to first
 
-        # Reinitializing the head and prev_node for next swap
-        prev_node = first_node  # Update prev to first for next iteration
+        # Reinitializing the head and prev for next swap
+        prev = first_node  # Update prev to first for next iteration
         head = first_node.next  # Move head to next pair
 
     return dummy.next         # Return head of modified list

@@ -153,6 +153,18 @@ Q: Why does one solution use `while fast:` and the others use `while fast and fa
   • We must check both `fast` and `fast.next` to avoid trying to access `fast.next.next` on a None node.
   • That's why we use `while fast and fast.next:`.
 
+  
+
+
+Q: Why does returning 'slow' work but returning 'slow.val' can cause an error?
+    - Returning 'slow.val' tries to access the value of the node.
+
+    - If 'slow' is None (e.g., when the list is shorter than k), this causes an AttributeError.
+
+    - Returning 'slow' just gives back the node itself, which is safe even if it's None.
+
+    - In short: accessing '.val' assumes the node exists — returning the node itself does not.
+
 """
 
 
@@ -170,3 +182,56 @@ def find_node(head, k):
         slow = slow.next      # Advance slow pointer
         fast = fast.next      # Advance fast pointer
     return slow               # Slow is at kth node from end
+
+
+
+
+
+# ––––––––––––––––––––––––––––––––––––––––––––––– 
+# Best Solution with Safeguard
+
+def find_node(head, k):
+    slow = head
+    fast = head
+
+    for _ in range(k):
+        if not fast:     # if list is shorter than k nodes
+            return None  # safeguard: stop and return None
+        fast = fast.next
+
+    while fast:
+        slow = slow.next
+        fast = fast.next
+
+    return slow
+
+
+# --------------------------------------------
+# Example 1
+x = ListNode(1)
+k = 1
+node = find_node(x, k)
+print(node.val)
+# Output: 1
+
+# --------------------------------------------
+# Example 2
+x = ListNode(1)
+k = 2
+node = find_node(x, k)
+
+if node:
+    print(node.val)
+else:
+    print("List shorter than k nodes")
+# Output: "List shorter than k nodes"
+
+
+"""
+Q: What does 'if node:' check for?
+
+    - It checks whether the variable 'node' exists (is not None).
+    - In Python, objects like a ListNode are truthy, while None is falsy.
+    - So: if node exists → run print(node.val)
+    - If node is None → run the else block instead.
+"""

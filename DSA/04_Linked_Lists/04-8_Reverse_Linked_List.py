@@ -26,10 +26,10 @@ def reverseList(head):
     curr = head
 
     while curr:
-        next_temp = curr.next
+        temp = curr.next
         curr.next = prev
         prev = curr
-        curr = next_temp
+        curr = temp
         
     return prev
 
@@ -78,7 +78,7 @@ Time: O(N)
   - Overall: O(N).
 
 Space: O(1)
-  - Uses only three pointers: prev, curr, and next_temp.
+  - Uses only three pointers: prev, curr, and temp.
   - No additional data structures are created.
   - Overall: O(1).
 
@@ -97,12 +97,12 @@ Overview for Each Iteration
 Input: head = [1, 2, 3, 4]
 
 Step: Reverse linked list by updating pointers
-curr.val | next_temp.val | prev.val | Action                         | Linked List
----------|---------------|----------|--------------------------------|-----------------
-1        | 2             | None     | curr.next=None, prev=1, curr=2 | [1→None, 2→3→4]
-2        | 3             | 1        | curr.next=1, prev=2, curr=3    | [2→1→None, 3→4]
-3        | 4             | 2        | curr.next=2, prev=3, curr=4    | [3→2→1→None, 4]
-4        | None          | 3        | curr.next=3, prev=4, curr=None | [4→3→2→1→None]
+curr.val | temp.val | prev.val | Action                         | Linked List
+---------|----------|----------|--------------------------------|-----------------
+1        | 2        | None     | curr.next=None, prev=1, curr=2 | [1→None, 2→3→4]
+2        | 3        | 1        | curr.next=1, prev=2, curr=3    | [2→1→None, 3→4]
+3        | 4        | 2        | curr.next=2, prev=3, curr=4    | [3→2→1→None, 4]
+4        | None     | 3        | curr.next=3, prev=4, curr=None | [4→3→2→1→None]
 
 Final: [4, 3, 2, 1]
 
@@ -112,10 +112,10 @@ Overview for Each Iteration
 Input: head = [1, 2]
 
 Step: Reverse linked list by updating pointers
-curr.val | next_temp.val | prev.val | Action
----------|---------------|----------|------------------
-1        | 2             | None     | curr.next=None, prev=1, curr=2
-2        | None          | 1        | curr.next=1, prev=2, curr=None
+curr.val | temp.val | prev.val | Action
+---------|----------|----------|------------------
+1        | 2        | None     | curr.next=None, prev=1, curr=2
+2        | None     | 1        | curr.next=1, prev=2, curr=None
 
 Final: [2, 1]
 
@@ -125,7 +125,7 @@ Final: [2, 1]
 Most IMPORTANT thing to Understand:
     • We reverse the direction of every link in the list — each node points to the one before it.
 
-    • We track three things: the current node (curr), the one before it (prev), and the next one (next_temp).
+    • We track three things: the current node (curr), the one before it (prev), and the next one (temp).
 
     • When done, the old tail (last node) becomes the new head.
 
@@ -134,9 +134,9 @@ Why this code Works:
     • Data structure: Linked list with `.next` pointers connecting nodes.
 
     • Technique: Iterative reversal.
-        • Save the next node (next_temp).
+        • Save the next node (temp).
         • Reverse the link → curr.next = prev.
-        • Move forward → prev = curr, curr = next_temp.
+        • Move forward → prev = curr, curr = temp.
 
     • Efficiency: O(N) time (each node processed once), O(1) space (only 3 pointers).
 
@@ -154,28 +154,28 @@ Input: [1 → 2 → 3 → 4]
     Step 0: prev = None, curr = 1
 
     Iteration 1:
-        next_temp = 2
+        temp = 2
         curr.next = None  (1→None)
         prev = 1
         curr = 2
     List so far: 1→None
 
     Iteration 2:
-        next_temp = 3
+        temp = 3
         curr.next = 1  (2→1)
         prev = 2
         curr = 3
     List so far: 2→1→None
 
     Iteration 3:
-        next_temp = 4
+        temp = 4
         curr.next = 2  (3→2)
         prev = 3
         curr = 4
     List so far: 3→2→1→None
 
     Iteration 4:
-        next_temp = None
+        temp = None
         curr.next = 3  (4→3)
         prev = 4
         curr = None
@@ -204,16 +204,16 @@ Q: Why do we return 'prev' instead of 'curr' or 'head'?
 # ––––––––––––––––––––––––––––––––––––––––––––––– 
 # Breakdown 
 def reverseList(head):
-    prev = None               # Initialize previous pointer as None
-    curr = head               # Start at head of list
+    prev = None             # Initialize previous pointer as None
+    curr = head             # Start at head of list
 
-    while curr:               # Iterate until end of list
-        next_temp = curr.next # Store next node temporarily
-        curr.next = prev      # Reverse link to point to previous node
-        prev = curr           # Move prev to current node
-        curr = next_temp      # Move curr to next node
+    while curr:             # Iterate until end of list
+        temp = curr.next    # Store next node temporarily
+        curr.next = prev    # Reverse link to point to previous node
+        prev = curr         # Move prev to current node
+        curr = temp         # Move curr to next node
 
-    return prev               # Return new head of reversed list
+    return prev             # Return new head of reversed list
 
 
 

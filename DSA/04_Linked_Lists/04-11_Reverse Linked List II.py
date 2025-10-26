@@ -30,25 +30,25 @@ def reverseBetween(head, left, right):
     # 1) Move prev to the node BEFORE position 'left'
     for _ in range(left - 1):
         prev = prev.next
+    curr = prev.next
 
     # 2) Reverse by repeatedly moving curr.next to the FRONT of the sublist
-    curr = prev.next
     for _ in range(right - left):
-        next_temp = curr.next           # node to relocate
-        curr.next = next_temp.next      # detach next_temp
-        next_temp.next = prev.next      # put next_temp at front of the sublist
-        prev.next = next_temp           # reconnect front
+        temp = curr.next          # node to relocate
+        curr.next = temp.next     # detach temp
+        temp.next = prev.next     # put temp at front of the sublist
+        prev.next = temp          # reconnect front
 
     return dummy.next
 
 
 # Helper to convert linked list to Python list for easy printing
 def to_list(head):
-    res = []
+    ans = []
     while head:
-        res.append(head.val)
+        ans.append(head.val)
         head = head.next
-    return res
+    return ans
 
 
 # --------------------------------------------
@@ -73,6 +73,19 @@ result = reverseBetween(a, 1, 1)
 print("Output 2:", to_list(result))   # [5]
 
 
+# --------------------------------------------
+# EXAMPLE 3: head = [10, 20, 30, 40, 50], left = 2, right = 4
+a = ListNode(10)
+b = ListNode(20)
+c = ListNode(30)
+d = ListNode(40)
+e = ListNode(50)
+
+a.next = b; b.next = c; c.next = d; d.next = e
+
+result = reverseBetween(a, 2, 4)
+print("Output 2:", to_list(result))   # [10, 40, 30, 20, 50]
+
 
 
 
@@ -86,7 +99,7 @@ Time: O(N)
   - Overall: O(N).
 
 Space: O(1)
-  - Uses only a few pointers (dummy, prev, curr, next_temp).
+  - Uses only a few pointers (dummy, prev, curr, temp).
   - Reversal is done in place, without extra data structures.
   - Overall: O(1).
 
@@ -111,10 +124,10 @@ i   | prev.val
 0   | 1
 
 Step 2: Reverse sublist from position 2 to 4
-i   | curr.val | nxt_temp.val | curr.nxt.val | nxt_temp.next.val | prev.nxt.val  | Action                                    
-----|----------|--------------|--------------|-------------------|---------------|-------------------------------------------
-0   | 2        | 3            | 3            | 4                 | 2             | curr.next=4, next_temp.next=2, prev.next=3 
-1   | 2        | 4            | 4            | 5                 | 3             | curr.next=5, next_temp.next=3, prev.next=4 
+i   | curr.val | temp.val | curr.nxt.val | temp.next.val | prev.nxt.val  | Action                                    
+----|----------|----------|--------------|---------------|---------------|--------------------------------------
+0   | 2        | 3        | 3            | 4             | 2             | curr.next=4, temp.next=2, prev.next=3 
+1   | 2        | 4        | 4            | 5             | 3             | curr.next=5, temp.next=3, prev.next=4 
 
 
 Linked List
@@ -169,19 +182,77 @@ Quick Example Walkthrough:
         curr = prev.next = node(2)
 
     Iteration 1 (bring 3 to front of sublist):
-        next = curr.next = 3
+        temp = curr.next = 3
         curr.next = 4              (2 → 4 → 5)
-        next.next = prev.next = 2  (3 → 2 → 4 → 5)
-        prev.next = next           (1 → 3 → 2 → 4 → 5)
+        temp.next = prev.next = 2  (3 → 2 → 4 → 5)
+        prev.next = temp           (1 → 3 → 2 → 4 → 5)
 
     Iteration 2 (bring 4 to front of sublist):
-        next = curr.next = 4
+        temp = curr.next = 4
         curr.next = 5              (2 → 5)
-        next.next = prev.next = 3  (4 → 3 → 2 → 5)
-        prev.next = next           (1 → 4 → 3 → 2 → 5)
+        temp.next = prev.next = 3  (4 → 3 → 2 → 5)
+        prev.next = temp           (1 → 4 → 3 → 2 → 5)
 
     Result:
         [1, 4, 3, 2, 5]
+
+
+---  
+Q: How does 3 → 2 happen in the reversal (4 → 3 → 2 → 5)?
+
+Example:
+    head = [1, 2, 3, 4, 5], left = 2, right = 4
+
+Iteration 1 (bring 3 to front):
+    Before: 1 → 2 → 3 → 4 → 5
+    After:  1 → 3 → 2 → 4 → 5   # 3 → 2 created here
+
+Iteration 2 (bring 4 to front):
+    Before: 1 → 3 → 2 → 4 → 5
+    Steps:
+        temp = 4
+        curr.next = 5              (2 → 5)
+        temp.next = prev.next = 3  (4 → 3 → 2 → 5)
+        prev.next = temp           (1 → 4 → 3 → 2 → 5)
+
+Notes:
+    - 3 → 2 comes from Iteration 1.
+    - That link stays intact.
+    - Iteration 2 simply puts 4 at the front, giving 4 → 3 → 2.
+
+        
+
+    
+---
+Why do we need 'for _ in range(right - left):'?
+
+  • It tells us how many pointer swaps are needed to reverse the chosen section.
+  
+  • Each loop takes one node from after 'curr' and moves it to the front of the sublist.
+  
+  • To fully reverse N nodes, you need N-1 moves — that's what (right - left) represents.
+  
+  Example: left=2, right=4 means 3 nodes (2,3,4); we need 2 moves:
+    1st move: 3 → front  → [1,3,2,4,5]
+    2nd move: 4 → front  → [1,4,3,2,5]
+
+
+---
+Q: Why do we pass 2 and 4 instead of b and d?
+
+    • The function uses positions, not node variables.
+
+    • left=2 and right=4 mean "reverse nodes at positions 2 through 4."
+
+    • You can't pass b or d because those are node objects, not positions.
+
+    
+---
+Q: Why was it confusing with [1, 2, 3, 4, 5]?
+
+    • The numbers looked like both values and positions.
+
+    • Using values like [10, 20, 30, 40, 50] makes it clear they're just positions, not node values.
 
 
 """
@@ -207,10 +278,10 @@ def reverseBetween(head, left, right):
 
     # 3) Reverse by repeatedly moving curr.next to the FRONT of the sublist
     for _ in range(right - left):   # Reverse sublist right-left times
-        next_temp = curr.next       # Store next node to relocate
-        curr.next = next_temp.next  # Detach next_temp
-        next_temp.next = prev.next  # Insert next_temp at front of sublist
-        prev.next = next_temp       # Reconnect prev to new front
+        temp = curr.next       # Store next node to relocate
+        curr.next = temp.next  # Detach temp
+        temp.next = prev.next  # Insert temp at front of sublist
+        prev.next = temp       # Reconnect prev to new front
 
     # 4) Return the real head (skip dummy)
     return dummy.next               # Return head of modified list
@@ -260,20 +331,20 @@ def reverseBetween(head, left, right):  # Example: head = 1->2->3->4->5, left = 
     for _ in range(right - left):  # right = 4, left = 2, range(4-2) = [0, 1], 2 iterations
         # --- Iteration 1 ---
         # Store the next node to relocate
-        next_temp = curr.next      # curr = 2, next_temp = 3
-        # Detach next_temp from the list
-        curr.next = next_temp.next # curr.next = 3.next = 4, list = -1->1->2->4->5
-        # Insert next_temp at the front of the sublist (after prev)
-        next_temp.next = prev.next # next_temp = 3, prev.next = 2, 3.next = 2
-        prev.next = next_temp      # prev.next = 3, list = -1->1->3->2->4->5
+        temp = curr.next      # curr = 2, temp = 3
+        # Detach temp from the list
+        curr.next = temp.next # curr.next = 3.next = 4, list = -1->1->2->4->5
+        # Insert temp at the front of the sublist (after prev)
+        temp.next = prev.next # temp = 3, prev.next = 2, 3.next = 2
+        prev.next = temp      # prev.next = 3, list = -1->1->3->2->4->5
         # After Iteration 1: prev = 1, curr = 2, list = -1->1->3->2->4->5
 
         # --- Iteration 2 ---
         if _ == 1:
-            next_temp = curr.next      # curr = 2, next_temp = 4
-            curr.next = next_temp.next # curr.next = 4.next = 5, list = -1->1->3->2->5
-            next_temp.next = prev.next # next_temp = 4, prev.next = 3, 4.next = 3
-            prev.next = next_temp      # prev.next = 4, list = -1->1->4->3->2->5
+            temp = curr.next      # curr = 2, temp = 4
+            curr.next = temp.next # curr.next = 4.next = 5, list = -1->1->3->2->5
+            temp.next = prev.next # temp = 4, prev.next = 3, 4.next = 3
+            prev.next = temp      # prev.next = 4, list = -1->1->4->3->2->5
         # After Iteration 2: prev = 1, curr = 2, list = -1->1->4->3->2->5
 
     # 4️⃣ Return the real head (skip dummy)
