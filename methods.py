@@ -1,4 +1,4 @@
-#  STRING METHODS
+# STRING METHODS
 # LIST METHODS
 # DICTIONARY METHODS
 # SET METHODS
@@ -591,6 +591,40 @@ print(unique)  # Output: {1, 2, 3}
 
 # BUILT-IN FUNCTIONS
 # ----------------------------------------------------------------------------------
+# BUILT-IN FUNCTION: 
+print()
+# What it does: Outputs objects to console, separated by spaces.
+# Why use it: Displays results or debugs code.
+# How it works: Converts objects to strings; optional separator/end.
+# When to use: Testing outputs in algorithms or debugging.
+# Time/Space: O(n) time (n = output length), O(1) space.
+
+# Syntax:
+print(*objects, sep=' ', end='\n')  # Prints objects; 'sep' and 'end' optional
+
+# Basic Example 1 (Single Object):
+print(42)  # Output: 42
+
+# Basic Example 2 (Multiple Objects):
+print(1, 2, 3)  # Output: 1 2 3
+
+# Basic Example 3 (Custom Separator):
+print("a", "b", "c", sep=",")  # Output: a,b,c
+
+# DSA Example (Debug Array):
+nums = [1, 2, 3]
+print(nums)  # Output: [1, 2, 3]
+
+
+# Example: Using 'end' to control how print() joins outputs on one line
+nums = [1, 2, 3]
+for num in nums:
+    print(num, end=" → ")   # print number, stay on same line, add arrow after each
+print()                     # print a newline at the end
+# Output: 1 → 2 → 3 →
+
+
+
 # BUILT-IN FUNCTION: 
 len()
 # What it does: Returns number of items in object.

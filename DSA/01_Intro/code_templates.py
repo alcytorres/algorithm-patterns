@@ -236,10 +236,10 @@ def fn(head):
     prev = None
 
     while curr:
-        next_node = curr.next
+        temp = curr.next
         curr.next = prev
         prev = curr
-        curr = next_node 
+        curr = temp 
         
     return prev
 

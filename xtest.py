@@ -18,13 +18,22 @@ def add_node(prev_node, node_to_add):
 def delete_node(prev_node):
     prev_node.next = prev_node.next.next
 
-# Traversal (Iterating)
+# Traversing to get the Sum of All Node Values
 def get_sum(head):
     ans = 0
     while head:
         ans += head.val
         head = head.next  # move forward one node
     return ans
+
+# Forward traversal
+def traverse_forward(head):
+    curr = head
+    while curr:
+        print(curr.val, end=" → ")
+        curr = curr.next
+    print("None")
+
 
 # Example setup: 1 ⇄ 2 ⇄ 3
 a = SinglyNode(1)
@@ -53,6 +62,7 @@ while curr:
     curr = curr.next
 # Output: 1  99  2  3
 
+
 # --------------------------------------------
 # Delete node after 'a' (this removes node 99)
 delete_node(a)
@@ -66,6 +76,23 @@ while curr:
 # Output: 1  2  3
 
 
+# --------------------------------------------
+# Print total sum
+print(get_sum(a))
+# Output: 6
+
+
+# --------------------------------------------
+# Forward traversal
+print(traverse_forward(a))
+# Output: 1 → 2 → 3 → None
+
+
+# --------------------------------------------
+# Backward traversal N/A for SinglyList
+
+
+
 
 
 
@@ -73,7 +100,7 @@ while curr:
 # --------------------------------------------
 # Doubly linked list
 # --------------------------------------------
-class ListNode:
+class DoublyNode:
     def __init__(self, val):
         self.val = val
         self.next = None
@@ -96,11 +123,35 @@ def delete_node(node):
     prev_node.next = next_node
     next_node.prev = prev_node
 
+# Traversing to get the Sum of All Node Values
+def get_sum(head):
+    ans = 0
+    while head:
+        ans += head.val
+        head = head.next  # move forward one node
+    return ans
+
+# Forward traversal
+def traverse_forward(head):
+    curr = head
+    while curr:
+        print(curr.val, end=" → ")
+        curr = curr.next
+    print("None")
+
+# Backward traversal
+def traverse_backward(tail):
+    curr = tail
+    while curr:
+        print(curr.val, end=" → ")
+        curr = curr.prev
+    print("None")
+
 
 # Example setup: 1 ⇄ 2 ⇄ 3
-a = ListNode(1)
-b = ListNode(2)
-c = ListNode(3)
+a = DoublyNode(1)
+b = DoublyNode(2)
+c = DoublyNode(3)
 
 # Link them together
 a.next = b
@@ -108,9 +159,13 @@ b.prev = a
 b.next = c
 c.prev = b
 
+# Mark the start of the list
+head = a
+
+
 # --------------------------------------------
-# ✅ Insert a new node (99) BEFORE node c
-x = ListNode(99)
+# Insert a new node (99) BEFORE node c
+x = DoublyNode(99)
 add_node(c, x)
 # List becomes: 1 ⇄ 2 ⇄ 99 ⇄ 3
 
@@ -123,26 +178,39 @@ while curr:
 
 
 # --------------------------------------------
-# ✅ Delete node b (value = 2)
-delete_node(b)
-# List becomes: 1 ⇄ 99 ⇄ 3
+# Delete node x (value = 99)
+delete_node(x)
+# List becomes: 1 ⇄ 2 ⇄ 3
 
 # Print the list forward
 print("\nForward:")
 curr = a
 while curr:
     print(curr.val)
-    curr = curr.next  # 1 ⇄ 99 ⇄ 3
+    curr = curr.next  # 1 ⇄ 2 ⇄ 3
 
 # Print the list backward
 print("Backward:")
 curr = c
 while curr:
     print(curr.val)
-    curr = curr.prev  # 3 ⇄ 99 ⇄ 1
+    curr = curr.prev  # 3 ⇄ 2 ⇄ 1
 
 
+# --------------------------------------------
+# Print total sum
+print(get_sum(a))
+# Output: 6
 
+
+# --------------------------------------------
+print(traverse_forward(a))
+# Output: 1 → 2 → 3 → None
+
+
+# --------------------------------------------
+print(traverse_backward(c))
+# Output: 3 → 2 → 1 → None
 
 
 
@@ -252,3 +320,103 @@ while curr is not tail:
 # 1
 # 2
 # 3
+
+
+
+
+
+
+
+
+
+# --------------------------------------------
+# Doubly linked list: 
+# --------------------------------------------
+class DoublyNode:
+    def __init__(self, value, next=None, prev=None):
+        self.value = value
+        self.next = next
+        self.prev = prev
+
+    def __str__(self):
+        return str(self.value)
+
+# Display a doubly linked list as a string (e.g., '3 <-> 1 <-> 7'). O(n)
+def display(head):
+    if not head:
+        return "Empty List"
+    
+    elements = []
+    curr = head
+
+    while curr:
+        elements.append(str(curr.value))
+        curr = curr.next
+    return " <-> ".join(elements)
+
+
+# Inserts a node at the beginning of a doubly linked list. O(1)
+def insert_at_beginning(head, tail, value):
+    new_node = DoublyNode(value)
+
+    if not head:  # Empty list
+        return new_node, new_node
+    
+    new_node.next = head
+    head.prev = new_node
+    return new_node, tail
+
+
+# Inserts a node at the end of a doubly linked list. O(1)
+def insert_at_end(head, tail, value):
+    new_node = DoublyNode(value)
+    if not head:  # Empty list
+        return new_node, new_node
+    tail.next = new_node
+    new_node.prev = tail
+    return head, new_node
+
+
+# Example Usage
+
+# Creates single node with value 1 (head and tail are same).
+head = tail = DoublyNode(1)
+
+# Display initial list state
+print("Initial list:", display(head))  # Output: 1
+# Insert 3 at the beginning: 3 <-> 1
+head, tail = insert_at_beginning(head, tail, 3)
+print("After inserting 3 at beginning:", display(head))  # Output: 3 <-> 1
+# Insert 7 at the end: 3 <-> 1 <-> 7
+head, tail = insert_at_end(head, tail, 7)
+print("After inserting 7 at end:", display(head))  # Output: 3 <-> 1 <-> 7
+
+
+
+# ––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+# # Get List Length
+def get_length(head):
+    count = 0          # Initialize counter
+    curr = head        # Start at head
+    while curr:        # Traverse until None
+        count += 1     # Increment for each node
+        curr = curr.next  # Move to next node
+    return count       # Return total nodes
+
+# Test get_length
+print("List length:", get_length(head))  # Output: 3 (for 3 <-> 1 <-> 7)
+
+
+# ––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+# Check if Value Exists
+def has_value(head, value):
+    curr = head
+    while curr:
+        if curr.value == value:
+            return True
+        curr = curr.next
+    return False
+
+# Test has_value
+print("Has value 1:", has_value(head, 1))  # Output: True
+print("Has value 5:", has_value(head, 5))  # Output: False
