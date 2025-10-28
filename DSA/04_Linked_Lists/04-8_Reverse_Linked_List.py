@@ -26,8 +26,11 @@ def reverseList(head):
     curr = head
 
     while curr:
+        # Reverse the Link
         temp = curr.next
         curr.next = prev
+
+        # Advance the Pointers
         prev = curr
         curr = temp
         
@@ -37,9 +40,7 @@ def reverseList(head):
 
 # --------------------------------------------
 # EXAMPLE 1: Linked list: head = [1 → 2 → 3 → 4]
-a = ListNode(1)
-b = ListNode(2)
-c = ListNode(3)
+a = ListNode(1); b = ListNode(2); c = ListNode(3)
 d = ListNode(4)
 
 a.next = b; b.next = c; c.next = d;
@@ -197,6 +198,12 @@ Q: Why do we return 'prev' instead of 'curr' or 'head'?
 
   • Therefore, returning 'prev' gives us the fully reversed linked list.
 
+  
+
+
+
+
+
 """
 
 
@@ -208,8 +215,12 @@ def reverseList(head):
     curr = head             # Start at head of list
 
     while curr:             # Iterate until end of list
+        
+        # Reverse the Link
         temp = curr.next    # Store next node temporarily
         curr.next = prev    # Reverse link to point to previous node
+
+        # Advance the Pointers
         prev = curr         # Move prev to current node
         curr = temp         # Move curr to next node
 
@@ -219,7 +230,7 @@ def reverseList(head):
 
 
 """
-Reverse Singly Linked List — Step-by-step (Iterative)
+Reverse Singly Linked List — Step-by-step
 
 Goal:
 [None → 1 → 2 → 3 → 4]  ==>  [4 → 3 → 2 → 1 → None]
@@ -233,13 +244,11 @@ We use three pointers each iteration:
     prev = None
     curr = 1
 
-    Initial:
-    prev: None
     curr: 1 → 2 → 3 → 4 → None
 
 
     ——— Iteration 1 ———
-    next = 2
+    temp = 2
     curr.next = prev   (1.next = None)
 
     Reversed part: 1 → None
@@ -251,7 +260,7 @@ We use three pointers each iteration:
 
 
     ——— Iteration 2 ———
-    next = 3
+    temp = 3
     curr.next = prev   (2.next = 1)
 
     Reversed part: 2 → 1 → None
@@ -263,7 +272,7 @@ We use three pointers each iteration:
 
 
     ——— Iteration 3 ———
-    next = 4
+    temp = 4
     curr.next = prev   (3.next = 2)
 
     Reversed part: 3 → 2 → 1 → None
@@ -275,7 +284,7 @@ We use three pointers each iteration:
 
 
     ——— Iteration 4 ———
-    next = None
+    temp = None
     curr.next = prev   (4.next = 3)
 
     Reversed part: 4 → 3 → 2 → 1 → None
@@ -285,9 +294,10 @@ We use three pointers each iteration:
     prev = 4
     curr = None  (stop)
 
+    
+Return prev (new head): [4 → 3 → 2 → 1 → None]
 
-✅ Final (return prev):
-[4 → 3 → 2 → 1 → None]
+✅ Final: [4, 3, 2, 1] 
 """
 
 

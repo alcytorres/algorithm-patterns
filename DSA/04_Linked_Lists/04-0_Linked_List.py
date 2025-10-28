@@ -8,6 +8,13 @@ For each iteration, sketch:
     3. What should happen after the current operation.
 
     This helps you *see* pointer movement, avoid confusion, and debug logically.
+
+
+Loop Conditions
+    • Use while fast: when checking if fast reaches the end (None), e.g., finding the kth node from the end.
+
+    • Use while fast and fast.next: when accessing fast.next.next (e.g., middle node), to ensure both are non-None and avoid errors.
+
 """
 
 

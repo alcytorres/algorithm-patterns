@@ -68,10 +68,8 @@ def to_list(head):
 
 # --------------------------------------------
 # EXAMPLE 1: head = [1, 2, 3, 4]
-a = ListNode(1)
-b = ListNode(2)
-c = ListNode(3)
-d = ListNode(4)
+a = ListNode(1); b = ListNode(2)
+c = ListNode(3); d = ListNode(4)
 
 a.next = b; b.next = c; c.next = d
 

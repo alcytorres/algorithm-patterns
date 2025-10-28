@@ -32,11 +32,8 @@ def middleNode(head):
 
 # --------------------------------------------
 # EXAMPLE 1: Linked list: 1 → 2 → 3 → 4 → 5
-a = ListNode(1)
-b = ListNode(2)
-c = ListNode(3)
-d = ListNode(4)
-e = ListNode(5)
+a = ListNode(1); b = ListNode(2); c = ListNode(3)
+d = ListNode(4); e = ListNode(5)
 
 # Link them together
 a.next = b; b.next = c; c.next = d; d.next = e
@@ -192,12 +189,8 @@ def middleNode_first(head):
 
 # --------------------------------------------
 # EXAMPLE: Linked list: 1 → 2 → 3 → 4 → 5 → 6
-a = ListNode(1)
-b = ListNode(2)
-c = ListNode(3)
-d = ListNode(4)
-e = ListNode(5)
-f = ListNode(6)
+a = ListNode(1); b = ListNode(2); c = ListNode(3)
+d = ListNode(4); e = ListNode(5); f = ListNode(6)
 
 # Link them together
 a.next = b; b.next = c; c.next = d; d.next = e; e.next = f

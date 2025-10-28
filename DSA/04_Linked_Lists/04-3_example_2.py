@@ -11,14 +11,14 @@
 # Solution: https://leetcode.com/problems/linked-list-cycle/description/
 
 # Example 1
-    # Input: head = [3, 2, 0, -4], pos = 1
+    # Input: head = [1, 2, 3, 4], pos = 1
     # Output: true
-    # Explanation: There is a cycle in the linked list, where the tail connects to the 1st node (0-indexed).
+    # Explanation: There is a cycle in the linked list, where the tail connects to the node at index 1 (2).
 
 # Example 2
     # Input: head = [1, 2], pos = 0
     # Output: true
-    # Explanation: There is a cycle in the linked list, where the tail connects to the 0th node.
+    # Explanation: There is a cycle in the linked list, where the tail connects to the node at index 0 (1).
 
 # Example 3
     # Input: head = [1], pos = -1
@@ -37,7 +37,7 @@ def hasCycle(head):
     while fast and fast.next:
         slow = slow.next
         fast = fast.next.next
-        
+
         if slow == fast:
             return True
 

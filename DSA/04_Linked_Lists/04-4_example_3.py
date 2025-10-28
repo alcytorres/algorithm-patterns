@@ -27,11 +27,8 @@ def find_node(head, k):
 
 # --------------------------------------------
 # EXAMPLE 1: Linked list: 1 → 2 → 3 → 4 → 5
-a = ListNode(1)
-b = ListNode(2)
-c = ListNode(3)
-d = ListNode(4)
-e = ListNode(5)
+a = ListNode(1); b = ListNode(2); c = ListNode(3)
+d = ListNode(4); e = ListNode(5)
 
 # Link them together
 a.next = b; b.next = c; c.next = d; d.next = e
@@ -135,25 +132,38 @@ In this problem's context:
     for _ in range(k):
         fast = fast.next
 
-- It moves the `fast` pointer forward k times.
-- Purpose: to position `fast` k nodes ahead of `slow`
-  so when `fast` reaches the end, `slow` will be at the kth node from the end.
+    • It moves the `fast` pointer forward k times.
+    Purpose: to position `fast` k nodes ahead of `slow`
+    so when `fast` reaches the end, `slow` will be at the kth node from the end.
 
-  
+    
+
 ---
-Q: Why does one solution use `while fast:` and the others use `while fast and fast.next:`?
+Q: Why does this solution use `while fast:` and the others use `while fast and fast.next:`?
 
-- In the "Kth node from end" problem:
-  • `fast` moves k steps ahead first.
-  • Then both pointers move together until `fast` becomes None.
-  • So we only need `while fast:` (we stop exactly when `fast` runs off the list).
+- Kth Node from End 04-4 (while fast:):
+    • fast starts k nodes ahead of slow.
 
-- In the "Middle node" problem:
-  • `fast` moves two steps at a time.
-  • We must check both `fast` and `fast.next` to avoid trying to access `fast.next.next` on a None node.
-  • That's why we use `while fast and fast.next:`.
+    • Both pointers move one step until fast reaches the end (None).
 
+    • We want slow to stop when fast is None, pointing to the kth node from the end.
+
+    • Only while fast: is needed because we check fast itself, not its next node.
+
+    
+- Middle Node 04-2 (while fast and fast.next:):
+    • fast moves two steps per iteration (fast.next.next).
+    
+    • We must ensure fast and fast.next are not None to safely access fast.next.next.
+    
+    • while fast and fast.next: prevents accessing None.next, avoiding errors in lists with odd or even lengths.
   
+
+- Root Reason:
+    • while fast: suffices when only fast's position matters (end of list).
+
+    • while fast and fast.next: is used when fast.next.next is accessed, requiring both to be non-None for safety.
+
 
 
 Q: Why does returning 'slow' work but returning 'slow.val' can cause an error?

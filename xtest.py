@@ -286,7 +286,7 @@ while curr is not tail:
 # Output: 1 ⇄ 2 ⇄ 3
 
 # --------------------------------------------
-# ✅ INSERTING AT THE TAIL (ADD NODE TO END)
+# INSERTING AT THE TAIL (ADD NODE TO END)
 y = ListNode(77)
 add_to_end(y)
 # List: 1 ⇄ 2 ⇄ 3 ⇄ 77
@@ -298,7 +298,7 @@ if tail.prev is not head:
 # List now: 1 ⇄ 2 ⇄ 3
 
 # # --------------------------------------------
-# ✅ INSERTING AT THE HEAD (ADD NODE TO START)
+# INSERTING AT THE HEAD (ADD NODE TO START)
 x = ListNode(99)
 add_to_start(x)
 # List: 99 ⇄ 1 ⇄ 2 ⇄ 3
