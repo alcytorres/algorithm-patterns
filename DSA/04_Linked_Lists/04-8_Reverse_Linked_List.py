@@ -218,6 +218,16 @@ Q: Why do we return 'prev' instead of 'curr' or 'head'?
   
 
 
+Q: Why do we use `while curr:` instead of `while curr and curr.next:`?
+    • We must process every node — including the last one.
+
+    • `while curr:` continues until `curr` becomes None, ensuring all nodes are reversed.
+
+    • `while curr and curr.next:` stops one node early, leaving the final node's link unreversed.
+
+    • So `while curr:` is correct and necessary for a complete reversal.
+
+
 """
 
 

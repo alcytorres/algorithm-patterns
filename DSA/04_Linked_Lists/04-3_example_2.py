@@ -49,9 +49,7 @@ a = ListNode(1); b = ListNode(2)
 c = ListNode(3); d = ListNode(4)
 
 # Link them together
-a.next = b
-b.next = c
-c.next = d
+a.next = b; b.next = c; c.next = d
 d.next = b   # cycle here
 
 print(hasCycle(a))  # Output: True
@@ -177,7 +175,7 @@ def hasCycle(head):
     while fast and fast.next: # Continue while fast and next node exist
         slow = slow.next      # Move slow pointer one step
         fast = fast.next.next # Move fast pointer two steps
-        
+
         if slow == fast:      # If pointers meet, cycle exists
             return True       # Return True for cycle
         

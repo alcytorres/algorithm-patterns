@@ -191,6 +191,7 @@ def find_node(head, k):
     while fast:               # Move both until fast reaches end
         slow = slow.next      # Advance slow pointer
         fast = fast.next      # Advance fast pointer
+        
     return slow               # Slow is at kth node from end
 
 
