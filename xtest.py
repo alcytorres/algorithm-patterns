@@ -1,3 +1,7 @@
+# ----------------------------------------------------------
+# ✅ WHAT TO MEMORIZE — CORE INTERVIEW MATERIAL
+# ----------------------------------------------------------
+
 # --------------------------------------------
 # Singly Linked List
 # --------------------------------------------
@@ -7,26 +11,18 @@ class SinglyNode:
         self.val = val
         self.next = None
 
-# Inserting a Node
-# Let prev_node be the node at position i - 1
+# Insert a Node
+    # Let prev_node be the node at position i - 1
 def add_node(prev_node, node_to_add):
     node_to_add.next = prev_node.next
     prev_node.next = node_to_add
 
-# Deleting a Node
-# Delete the node right after prev_node
+# Delete a Node
+    # Delete the node right after prev_node
 def delete_node(prev_node):
     prev_node.next = prev_node.next.next
 
-# Traversing to get the Sum of All Node Values
-def get_sum(head):
-    ans = 0
-    while head:
-        ans += head.val
-        head = head.next  # move forward one node
-    return ans
-
-# Forward traversal
+# Forward Traversal Pattern
 def traverse_forward(head):
     curr = head
     while curr:
@@ -34,62 +30,55 @@ def traverse_forward(head):
         curr = curr.next
     print("None")
 
+# Reversal Pattern (memorize “save → reverse → move”)
+def reverse_list(head):
+    prev = None
+    curr = head
 
-# Example setup: 1 ⇄ 2 ⇄ 3
-a = SinglyNode(1)
-b = SinglyNode(2)
-c = SinglyNode(3)
+    while curr:
+        next_node = curr.next
+        curr.next = prev
+        prev = curr
+        curr = next_node
+    return prev
 
-# Link them: a → b → c
-a.next = b
-b.next = c
+    # Note: True reverse traversal in a singly linked list requires recursion or reversing the list first — you can't go backward without extra structure.
 
-# Mark the start of the list
-head = a
-
-# Create a new node
-x = SinglyNode(99)
 
 # --------------------------------------------
-# Insert x after a (so list becomes: 1 → 99 → 2 → 3)
+# Example setup: 1 ⇄ 2 ⇄ 3
+a = SinglyNode(1); b = SinglyNode(2); c = SinglyNode(3)
+# Link them: a → b → c
+a.next = b; b.next = c
+
+# --------------------------------------------
+# Insert Example
+x = SinglyNode(99)
+# Insert x after a
 add_node(a, x)
 
-# Print the full list to verify
 print("Forward:")
-curr = a
-while curr:
-    print(curr.val)
-    curr = curr.next
-# Output: 1  99  2  3
-
+traverse_forward(a)  # Output: 1 → 99 → 2 → 3 → None
 
 # --------------------------------------------
-# Delete node after 'a' (this removes node 99)
+# Delete Example
+
+# Delete node after 'a' (this removes node x (99))
 delete_node(a)
 
-# Print the list after deletion
 print("Forward:")
-curr = a
-while curr:
-    print(curr.val)
-    curr = curr.next
-# Output: 1  2  3
-
-
-# --------------------------------------------
-# Print total sum
-print(get_sum(a))
-# Output: 6
-
+traverse_forward(a)  # Output: 1 → 2 → 3 → None
 
 # --------------------------------------------
 # Forward traversal
-print(traverse_forward(a))
-# Output: 1 → 2 → 3 → None
-
+print("Forward:")
+traverse_forward(a)  # Output: 1 → 2 → 3 → None
 
 # --------------------------------------------
-# Backward traversal N/A for SinglyList
+# Reverse traversal
+print("Reverse:")
+result = reverse_list(a)
+traverse_forward(result)  # Output: 3 → 2 → 1 → None
 
 
 
@@ -122,14 +111,6 @@ def delete_node(node):
     next_node = node.next
     prev_node.next = next_node
     next_node.prev = prev_node
-
-# Traversing to get the Sum of All Node Values
-def get_sum(head):
-    ans = 0
-    while head:
-        ans += head.val
-        head = head.next  # move forward one node
-    return ans
 
 # Forward traversal
 def traverse_forward(head):
@@ -195,12 +176,6 @@ curr = c
 while curr:
     print(curr.val)
     curr = curr.prev  # 3 ⇄ 2 ⇄ 1
-
-
-# --------------------------------------------
-# Print total sum
-print(get_sum(a))
-# Output: 6
 
 
 # --------------------------------------------
@@ -384,13 +359,36 @@ head = tail = DoublyNode(1)
 
 # Display initial list state
 print("Initial list:", display(head))  # Output: 1
+
 # Insert 3 at the beginning: 3 <-> 1
 head, tail = insert_at_beginning(head, tail, 3)
-print("After inserting 3 at beginning:", display(head))  # Output: 3 <-> 1
+print("After inserting 3 at beginning:", display(head))  
+# Output: 3 <-> 1
+
 # Insert 7 at the end: 3 <-> 1 <-> 7
 head, tail = insert_at_end(head, tail, 7)
-print("After inserting 7 at end:", display(head))  # Output: 3 <-> 1 <-> 7
+print("After inserting 7 at end:", display(head))  
+# Output: 3 <-> 1 <-> 7
 
+
+
+
+
+# ----------------------------------------------------------
+# EXTRAS — OPTIONAL / GOOD TO UNDERSTAND
+# ----------------------------------------------------------
+
+# Sum of values (simple traversal variant)
+def get_sum(head):
+    count = 0
+    while head:
+        count += head.val
+        head = head.next  # move forward one node
+    return count
+
+# Print total sum
+print(get_sum(a))
+# Output: 6
 
 
 # ––––––––––––––––––––––––––––––––––––––––––––––––––––––––

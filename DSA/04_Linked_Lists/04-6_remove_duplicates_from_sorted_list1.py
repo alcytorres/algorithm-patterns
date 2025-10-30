@@ -32,8 +32,7 @@ def deleteDuplicates(head):
 a = ListNode(1); b = ListNode(1); c = ListNode(2)
 
 # Link them together
-a.next = b
-b.next = c
+a.next = b; b.next = c
 
 # Run
 result = deleteDuplicates(a)

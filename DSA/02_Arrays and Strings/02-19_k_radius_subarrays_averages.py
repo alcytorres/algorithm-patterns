@@ -8,7 +8,7 @@
     # nums =  [7, 4, 3, 9, 1, 8, 5, 2, 6]
     # Output: [-1, -1, -1, 5, 4, 4, -1, -1, -1]
 
-# Yashasvi Code: My Preferred solution
+# Yashasvi Code: Sliding Window Prefix Sum
 def getAverages(nums, k):
     n = len(nums)
     ans = [-1] * n
@@ -151,6 +151,34 @@ def getAverages(nums, k):
         ans[i] = curr // window_size     # Set average for current index
 
     return ans                # Return array of k-radius averages
+
+
+# ––––––––––––––––––––––––––––––––––––––––––––––
+# Yashasvi Code: Sliding Window Prefix Sum Refromatted 
+def getAverages(nums, k):
+    n = len(nums)
+    ans = [-1] * n
+    window = 2*k + 1
+    curr = 0
+
+    # Calculate sum of the first full window 
+    for i in range(window):
+        curr += nums[i]
+    ans[k] = curr // window
+
+    # Slide window across array and update averages
+    for i in range(k+1, n-k):
+        curr += nums[i+k] - nums[i-k-1]
+        ans[i] = curr // window
+
+    return ans
+
+
+nums = [7, 4, 3, 9, 1, 8, 5, 2, 6]
+k = 3
+print(getAverages(nums, k))
+# Output: [-1, -1, -1, 5, 4, 4, -1, -1, -1]
+
 
 
 

@@ -17,7 +17,7 @@
     # Output: 6
     # Explanation: [1, 1, 1, 0, 0, 0] is the longest contiguous subarray with equal number of 0 and 1.
 
-# WARNGING: Do NOT try to do the iterations in you head. View the iterations table
+# WARNGING: Do NOT try to do the iterations in you head. View the iterations table and draw it on a graph
 
 # Solution: https://leetcode.com/problems/contiguous-array/editorial/
 
@@ -98,12 +98,12 @@ Final: 4 ([1, 1, 0, 0])
 
 
 
-# -------------------------------------------------------
+---
 Q: What are the key and value of the hash table?
     • Key (diff): the current score = (# of 1s so far) - (# of 0s so far).
     • Value (index): the earliest position where that score was seen.
 
-
+---
 Q: How is the hash map in the Contiguous Array problem different from the ones we usually use in LeetCode?
 
     • A: In most problems, the hash map tracks frequencies (how many times a number or character appears).
@@ -113,32 +113,7 @@ Q: How is the hash map in the Contiguous Array problem different from the ones w
     • 👉 Instead of “how many times something appears,” we store “where we first saw this score,” so we can later measure the length of subarrays with equal 0s and 1s.
 
 
-# -------------------------------------------------------
-Q: WHY the FOR LOOP WORKS 
-
-     • Loop structure:  for i, num in enumerate(nums):
-        We need both the element (num) and its position (i), because the index tells us where a score first happened and lets us calculate subarray lengths.
-
-    • Update score  (diff):
-        Add +1 for a 1, subtract -1 for a 0.
-        → This running score shows how many more 1s than 0s we've seen so far.
-
-    • Check notebook:  if diff in counts:
-        If this score was seen before, the subarray between then and now must balance out (same number of 0s and 1s).
-        → Length = current index - first index of this score.
-
-    • Update max length: max_length = max(max_length, i - counts[diff]):
-        Compare the current balanced subarray length with the best one so far and keep the maximum.
-
-    • Update notebook (counts[diff] = i):
-        If this score hasn't been seen yet, record the index where it first appeared.
-        → Important: only store the earliest index, since that gives the longest subarray later.
-
-    • Why it finds the answer:
-        Same score twice = balance in between. By always comparing with the first time that score appeared, we guarantee we find the longest balanced chunk.
-
-
-# -------------------------------------------------------
+---
 Most IMPORTANT thing to Understand:
     • We want the longest subarray where 0s and 1s are equal.  
 
@@ -156,7 +131,7 @@ Why this code Works:
     • Prefix sum idea: diff acts like a prefix sum of (+1 for 1, -1 for 0).  
       → If diff repeats at index i and j, the subarray between i+1 and j has net zero difference → equal 0s and 1s.  
 
-    • Efficiency: O(n) because we only scan once and use O(1) lookups in the map. Brute force would check every subarray in O(n²).  
+    • Efficiency: O(N) because we only scan once and use O(1) lookups in the map. Brute force would check every subarray in O(N²).  
 
     • Intuition: Treat diff like a scoreboard. If you see the same score at two indices, the segment between them sums to 0 → equal 0s and 1s.
 
@@ -188,7 +163,7 @@ Quick Example Walkthrough:
 
 
 
-# -------------------------------------------------------
+---
 Q: Why counts[0] = -1?
 
     What it does: Pretends the score 0 happened at index -1 (before the array starts).
@@ -206,8 +181,8 @@ Q: Why counts[0] = -1?
     Without it: Subarrays beginning at index 0 would never be recognized as balanced.
 
 
-# -------------------------------------------------------
-Why “Score is 0 before we start”?
+---
+Q: Why “Score is 0 before we start”?
     • Before we look at any numbers, we haven't seen any 1s or 0s, so our score (diff = 1s - 0s) is 0 (no hills or valleys yet).
 
     • We set counts[0] = -1 to say, “At step -1 (before the list), our score was 0.” This helps us catch subarrays starting from index 0.
@@ -239,6 +214,33 @@ Analogy
 Why It Works
     • counts[0] = -1 lets us catch balanced subarrays starting from the beginning. 
     • Without it, we'd miss chunks like [0, 1]. Only -1 gives the correct length for these cases!
+
+    
+
+---
+Q: WHY the FOR LOOP WORKS 
+
+     • Loop structure:  for i, num in enumerate(nums):
+        We need both the element (num) and its position (i), because the index tells us where a score first happened and lets us calculate subarray lengths.
+
+    • Update score  (diff):
+        Add +1 for a 1, subtract -1 for a 0.
+        → This running score shows how many more 1s than 0s we've seen so far.
+
+    • Check notebook:  if diff in counts:
+        If this score was seen before, the subarray between then and now must balance out (same number of 0s and 1s).
+        → Length = current index - first index of this score.
+
+    • Update max length: max_length = max(max_length, i - counts[diff]):
+        Compare the current balanced subarray length with the best one so far and keep the maximum.
+
+    • Update notebook (counts[diff] = i):
+        If this score hasn't been seen yet, record the index where it first appeared.
+        → Important: only store the earliest index, since that gives the longest subarray later.
+
+    • Why it finds the answer:
+        Same score twice = balance in between. By always comparing with the first time that score appeared, we guarantee we find the longest balanced chunk.
+
 
 """
 

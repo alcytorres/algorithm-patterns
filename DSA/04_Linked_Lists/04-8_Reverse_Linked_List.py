@@ -3,8 +3,8 @@
 # Given the head of a singly linked list, reverse the list, and return the reversed list.
 
 # Example 1:
-    # Input: head = [1, 2, 3, 4]
-    # Output: [4, 3, 2, 1]
+    # Input: head = [1, 2, 3]
+    # Output: [3, 2, 1]
 
 # Example 2:
     # Input: head = [1, 2]
@@ -36,14 +36,13 @@ def reverseList(head):
         
     return prev
 
-#  Output: 4 → 3 → 2 → 1
+#  Output: 3 → 2 → 1
 
 # --------------------------------------------
-# EXAMPLE 1: Linked list: head = [1 → 2 → 3 → 4]
+# EXAMPLE 1: Linked list: head = [1 → 2 → 3]
 a = ListNode(1); b = ListNode(2); c = ListNode(3)
-d = ListNode(4)
 
-a.next = b; b.next = c; c.next = d;
+a.next = b; b.next = c;
 
 # Reverse and collect output
 result = reverseList(a)
@@ -52,7 +51,7 @@ curr = result
 while curr:
     ans.append(curr.val)
     curr = curr.next
-print("Output 1:", ans)   # [4, 3, 2, 1]
+print("Output 1:", ans)   # [3, 2, 1]
 
 
 # --------------------------------------------
@@ -95,17 +94,16 @@ Space: O(1)
 
 ---
 Overview for Each Iteration
-Input: head = [1, 2, 3, 4]
+Input: head = [1, 2, 3]
 
 Step: Reverse linked list by updating pointers
 curr.val | temp.val | prev.val | Action                         | Linked List
 ---------|----------|----------|--------------------------------|-----------------
-1        | 2        | None     | curr.next=None, prev=1, curr=2 | [1→None, 2→3→4]
-2        | 3        | 1        | curr.next=1, prev=2, curr=3    | [2→1→None, 3→4]
-3        | 4        | 2        | curr.next=2, prev=3, curr=4    | [3→2→1→None, 4]
-4        | None     | 3        | curr.next=3, prev=4, curr=None | [4→3→2→1→None]
+1        | 2        | None     | curr.next=None, prev=1, curr=2 | [1→None, 2→3]
+2        | 3        | 1        | curr.next=1, prev=2, curr=3    | [2→1→None, 3]
+3        | None     | 2        | curr.next=2, prev=3, curr=None | [3→2→1→None]
 
-Final: [4, 3, 2, 1]
+Final: [3, 2, 1]
 
 
 ---
@@ -114,7 +112,7 @@ Input: head = [1, 2]
 
 Step: Reverse linked list by updating pointers
 curr.val | temp.val | prev.val | Action
----------|----------|----------|------------------
+---------|----------|----------|-------------------------------
 1        | 2        | None     | curr.next=None, prev=1, curr=2
 2        | None     | 1        | curr.next=1, prev=2, curr=None
 
@@ -147,43 +145,62 @@ Why this code Works:
 TLDR:
     • Traverse the list, reversing each node's pointer so all links point backward.
 
----
+    
 Quick Example Walkthrough:
 
-Input: [1 → 2 → 3 → 4]
+Input: [1 → 2 → 3 → None]  ==>  [3 → 2 → 1 → None]
 
-    Step 0: prev = None, curr = 1
+We use three pointers each iteration:
+  • prev   : tail of the reversed part
+  • curr   : current node we're reversing
+  • temp   : saves curr.next so we don't lose the rest
 
-    Iteration 1:
+    Start:
+    prev = None
+    curr = 1
+
+    curr: 1 → 2 → 3 → None
+
+
+    ——— Iteration 1 ———
         temp = 2
-        curr.next = None  (1→None)
+        curr.next = prev   (1.next = None)
+
+        Reversed part: 1 → None
+        Remaining    : 2 → 3 → None
+
+        Move forward:
         prev = 1
         curr = 2
-    List so far: 1→None
 
-    Iteration 2:
+
+    ——— Iteration 2 ———
         temp = 3
-        curr.next = 1  (2→1)
+        curr.next = prev   (2.next = 1)
+
+        Reversed part: 2 → 1 → None
+        Remaining    : 3 → None
+
+        Move forward:
         prev = 2
         curr = 3
-    List so far: 2→1→None
 
-    Iteration 3:
-        temp = 4
-        curr.next = 2  (3→2)
-        prev = 3
-        curr = 4
-    List so far: 3→2→1→None
 
-    Iteration 4:
+    ——— Iteration 3 ———
         temp = None
-        curr.next = 3  (4→3)
-        prev = 4
-        curr = None
+        curr.next = prev   (3.next = 2)
 
-Return prev (new head): [4 → 3 → 2 → 1]
+        Reversed part: 3 → 2 → 1 → None
+        Remaining    : None
 
-Final Answer: [4, 3, 2, 1] ✅  
+        Move forward:
+        prev = 3
+        curr = None  (stop)
+
+    
+Return prev (new head): [3 → 2 → 1 → None]
+
+✅ Final: [3, 2, 1] 
 
 
 
@@ -201,9 +218,6 @@ Q: Why do we return 'prev' instead of 'curr' or 'head'?
   
 
 
-
-
-
 """
 
 
@@ -215,7 +229,7 @@ def reverseList(head):
     curr = head             # Start at head of list
 
     while curr:             # Iterate until end of list
-        
+
         # Reverse the Link
         temp = curr.next    # Store next node temporarily
         curr.next = prev    # Reverse link to point to previous node
@@ -228,77 +242,6 @@ def reverseList(head):
 
 
 
-
-"""
-Reverse Singly Linked List — Step-by-step
-
-Goal:
-[None → 1 → 2 → 3 → 4]  ==>  [4 → 3 → 2 → 1 → None]
-
-We use three pointers each iteration:
-  • prev   : tail of the reversed part
-  • curr   : current node we're reversing
-  • next   : saves curr.next so we don't lose the rest
-
-    Start:
-    prev = None
-    curr = 1
-
-    curr: 1 → 2 → 3 → 4 → None
-
-
-    ——— Iteration 1 ———
-    temp = 2
-    curr.next = prev   (1.next = None)
-
-    Reversed part: 1 → None
-    Remaining    : 2 → 3 → 4 → None
-
-    Move forward:
-    prev = 1
-    curr = 2
-
-
-    ——— Iteration 2 ———
-    temp = 3
-    curr.next = prev   (2.next = 1)
-
-    Reversed part: 2 → 1 → None
-    Remaining    : 3 → 4 → None
-
-    Move forward:
-    prev = 2
-    curr = 3
-
-
-    ——— Iteration 3 ———
-    temp = 4
-    curr.next = prev   (3.next = 2)
-
-    Reversed part: 3 → 2 → 1 → None
-    Remaining    : 4 → None
-
-    Move forward:
-    prev = 3
-    curr = 4
-
-
-    ——— Iteration 4 ———
-    temp = None
-    curr.next = prev   (4.next = 3)
-
-    Reversed part: 4 → 3 → 2 → 1 → None
-    Remaining    : None
-
-    Move forward:
-    prev = 4
-    curr = None  (stop)
-
-    
-Return prev (new head): [4 → 3 → 2 → 1 → None]
-
-✅ Final: [4, 3, 2, 1] 
-"""
 
 
 

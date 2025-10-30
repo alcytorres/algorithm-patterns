@@ -45,10 +45,8 @@ def hasCycle(head):
 
 # --------------------------------------------
 # EXAMPLE 1: Create a cycle (1 → 2 → 3 → 4 → back to 2)
-a = ListNode(1)
-b = ListNode(2)
-c = ListNode(3)
-d = ListNode(4)
+a = ListNode(1); b = ListNode(2)
+c = ListNode(3); d = ListNode(4)
 
 # Link them together
 a.next = b
@@ -179,6 +177,7 @@ def hasCycle(head):
     while fast and fast.next: # Continue while fast and next node exist
         slow = slow.next      # Move slow pointer one step
         fast = fast.next.next # Move fast pointer two steps
+        
         if slow == fast:      # If pointers meet, cycle exists
             return True       # Return True for cycle
         
@@ -207,7 +206,7 @@ def hasCycle(head):
     return False
 
 # --------------------------------------------
-# ✅ EXAMPLE 1: Create a cycle (1 → 2 → 3 → 4 → back to 1)
+# EXAMPLE 1: Create a cycle (1 → 2 → 3 → 4 → back to 1)
 
 a = ListNode(1)
 b = ListNode(2)
@@ -222,7 +221,7 @@ d.next = b   # cycle here
 print(hasCycle(a))  # Output: True
 
 # --------------------------------------------
-# ✅ EXAMPLE 2: No cycle (1 → 2 → None)
+# EXAMPLE 2: No cycle (1 → 2 → None)
 x = ListNode(1)
 y = ListNode(2)
 

@@ -53,11 +53,8 @@ def to_list(head):
 
 # --------------------------------------------
 # EXAMPLE 1: head = [1, 2, 3, 4, 5], left = 2, right = 4
-a = ListNode(1)
-b = ListNode(2)
-c = ListNode(3)
-d = ListNode(4)
-e = ListNode(5)
+a = ListNode(1); b = ListNode(2); c = ListNode(3)
+d = ListNode(4); e = ListNode(5)
 
 a.next = b; b.next = c; c.next = d; d.next = e
 
@@ -75,11 +72,8 @@ print("Output 2:", to_list(result))   # [5]
 
 # --------------------------------------------
 # EXAMPLE 3: head = [10, 20, 30, 40, 50], left = 2, right = 4
-a = ListNode(10)
-b = ListNode(20)
-c = ListNode(30)
-d = ListNode(40)
-e = ListNode(50)
+a = ListNode(10); b = ListNode(20); c = ListNode(30)
+d = ListNode(40); e = ListNode(50)
 
 a.next = b; b.next = c; c.next = d; d.next = e
 
@@ -176,53 +170,53 @@ TLDR:
 Quick Example Walkthrough:
     head = [1, 2, 3, 4, 5], left = 2, right = 4
 
-    Setup:
+    Setup
         dummy → 1 → 2 → 3 → 4 → 5
         prev = node(1)   (node before left)
         curr = prev.next = node(2)
 
+    We will do `(right - left) = 2` head-insertions.
+
+
     Iteration 1 (bring 3 to front of sublist):
         temp = curr.next = 3
-        curr.next = 4              (2 → 4 → 5)
-        temp.next = prev.next = 2  (3 → 2 → 4 → 5)
-        prev.next = temp           (1 → 3 → 2 → 4 → 5)
+        
+        Rewire:
+        curr.next = temp.next   → 2.next = 4
+        temp.next = prev.next   → 3.next = 2
+        prev.next = temp        → 1.next = 3
+
+        List now: 1 → 3 → 2 → 4 → 5
+        (`prev` still at 1, `curr` still at 2)
+        
 
     Iteration 2 (bring 4 to front of sublist):
         temp = curr.next = 4
-        curr.next = 5              (2 → 5)
-        temp.next = prev.next = 3  (4 → 3 → 2 → 5)
-        prev.next = temp           (1 → 4 → 3 → 2 → 5)
-
-    Result:
-        [1, 4, 3, 2, 5]
-
-
----  
-Q: How does 3 → 2 happen in the reversal (4 → 3 → 2 → 5)?
-
-Example:
-    head = [1, 2, 3, 4, 5], left = 2, right = 4
-
-Iteration 1 (bring 3 to front):
-    Before: 1 → 2 → 3 → 4 → 5
-    After:  1 → 3 → 2 → 4 → 5   # 3 → 2 created here
-
-Iteration 2 (bring 4 to front):
-    Before: 1 → 3 → 2 → 4 → 5
-    Steps:
-        temp = 4
-        curr.next = 5              (2 → 5)
-        temp.next = prev.next = 3  (4 → 3 → 2 → 5)
-        prev.next = temp           (1 → 4 → 3 → 2 → 5)
-
-Notes:
-    - 3 → 2 comes from Iteration 1.
-    - That link stays intact.
-    - Iteration 2 simply puts 4 at the front, giving 4 → 3 → 2.
-
         
+        Rewire:
+        curr.next = temp.next   → 2.next = 5
+        temp.next = prev.next   → 4.next = 3
+        prev.next = temp        → 1.next = 4
+
+        List now: 1 → 4 → 3 → 2 → 5
+        (sublist [2..4] is reversed)
 
     
+Return dummy.next → 1 → 4 → 3 → 2 → 5
+Final Output: [1, 4, 3, 2, 5] ✅
+
+
+
+---
+Q: Why this works?
+  • prev marks the node before the reversal starts.
+
+  • curr stays fixed at the start of the sublist.
+
+  • Each loop takes curr.next (temp) and moves it right after prev, effectively pulling nodes to the front one by one.
+
+
+
 ---
 Why do we need 'for _ in range(right - left):'?
 
@@ -362,15 +356,14 @@ def to_list(head):
 
 
 # Test the function
-a = ListNode(1)
-b = ListNode(2)
-c = ListNode(3)
-d = ListNode(4)
-e = ListNode(5)
+a = ListNode(1); b = ListNode(2); c = ListNode(3)
+d = ListNode(4); e = ListNode(5)
+
 a.next = b
 b.next = c
 c.next = d
 d.next = e
+
 result = reverseBetween(a, 2, 4)
 print(to_list(result))  # Output: [1, 4, 3, 2, 5]
 
