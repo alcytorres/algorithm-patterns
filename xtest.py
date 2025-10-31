@@ -5,14 +5,13 @@
 # --------------------------------------------
 # Singly Linked List
 # --------------------------------------------
-
 class SinglyNode:
     def __init__(self, val):
         self.val = val
         self.next = None
 
 # Insert a Node
-    # Let prev_node be the node at position i - 1
+    # prev_node is the node at position i - 1
 def add_node(prev_node, node_to_add):
     node_to_add.next = prev_node.next
     prev_node.next = node_to_add
@@ -53,6 +52,7 @@ a.next = b; b.next = c
 
 # --------------------------------------------
 # Insert Example
+
 x = SinglyNode(99)
 # Insert x after a
 add_node(a, x)
@@ -84,8 +84,6 @@ traverse_forward(result)  # Output: 3 → 2 → 1 → None
 
 
 
-
-
 # --------------------------------------------
 # Doubly linked list
 # --------------------------------------------
@@ -95,8 +93,9 @@ class DoublyNode:
         self.next = None
         self.prev = None
 
-# Insert new_node BEFORE node
-    # Let node be the node at position i
+# Insert a Node
+    # Insert new_node BEFORE node
+    # node is a i. node_to_add is at i - 1
 def add_node(node, node_to_add):
     prev_node = node.prev
     node_to_add.next = node
@@ -104,8 +103,8 @@ def add_node(node, node_to_add):
     prev_node.next = node_to_add
     node.prev = node_to_add
 
-# Delete node
-    # Let node be the node at position i
+# Delete a Node
+    # node is at position i
 def delete_node(node):
     prev_node = node.prev
     next_node = node.next
@@ -116,7 +115,7 @@ def delete_node(node):
 def traverse_forward(head):
     curr = head
     while curr:
-        print(curr.val, end=" → ")
+        print(curr.val, end=" ⇄ ")
         curr = curr.next
     print("None")
 
@@ -124,68 +123,55 @@ def traverse_forward(head):
 def traverse_backward(tail):
     curr = tail
     while curr:
-        print(curr.val, end=" → ")
+        print(curr.val, end=" ⇄ ")
         curr = curr.prev
     print("None")
 
 
 # Example setup: 1 ⇄ 2 ⇄ 3
-a = DoublyNode(1)
-b = DoublyNode(2)
-c = DoublyNode(3)
+a = DoublyNode(1); b = DoublyNode(2); c = DoublyNode(3)
 
 # Link them together
-a.next = b
-b.prev = a
-b.next = c
-c.prev = b
-
-# Mark the start of the list
-head = a
+a.next = b; b.prev = a; 
+b.next = c; c.prev = b
 
 
 # --------------------------------------------
-# Insert a new node (99) BEFORE node c
+# Insert Example
+
 x = DoublyNode(99)
+# # Insert a new node x (99) BEFORE node c (3)
 add_node(c, x)
-# List becomes: 1 ⇄ 2 ⇄ 99 ⇄ 3
 
-# Print the list forward
 print("Forward:")
-curr = a
-while curr:
-    print(curr.val)
-    curr = curr.next
+traverse_forward(a)  # Output: 1 ⇄ 2 ⇄ 99 ⇄ 3
 
-
-# --------------------------------------------
-# Delete node x (value = 99)
-delete_node(x)
-# List becomes: 1 ⇄ 2 ⇄ 3
-
-# Print the list forward
-print("\nForward:")
-curr = a
-while curr:
-    print(curr.val)
-    curr = curr.next  # 1 ⇄ 2 ⇄ 3
-
-# Print the list backward
 print("Backward:")
-curr = c
-while curr:
-    print(curr.val)
-    curr = curr.prev  # 3 ⇄ 2 ⇄ 1
+traverse_backward(c)  # Output: 3 ⇄ 99 ⇄ 2 ⇄ 1
 
 
 # --------------------------------------------
-print(traverse_forward(a))
-# Output: 1 → 2 → 3 → None
+# Delete Example
+
+# Delete node x (99)
+delete_node(x)
+
+print("Forward:")
+traverse_forward(a)  # Output: 1 ⇄ 2 ⇄ 3
+
+print("Backward:")
+traverse_backward(c)  # Output: 3 ⇄ 2 ⇄ 1
 
 
 # --------------------------------------------
-print(traverse_backward(c))
-# Output: 3 → 2 → 1 → None
+# Forward traversal
+print("Forward:")
+traverse_forward(a)  # Output: 1 → 2 → 3 → None
+
+# --------------------------------------------
+# Reverse traversal
+print("Reverse:")
+traverse_backward(c)  # Output: 3 → 2 → 1 → None
 
 
 

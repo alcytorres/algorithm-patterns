@@ -166,9 +166,8 @@ Quick Example Walkthrough:
 Input: [1 → 2 → 3 → 4]
 
     Step 0: dummy → 1 → 2 → 3 → 4  
-            prev = dummy, head = 1
+        prev = dummy, head = 1
 
----
     Step 1: Swap (1, 2)
         first_node = 1
         second_node = 2
@@ -177,10 +176,10 @@ Input: [1 → 2 → 3 → 4]
         1.next = 3  
         2.next = 1  
 
-    List: dummy → 2 → 1 → 3 → 4  
-    Move prev = 1, head = 3
+        List: dummy → 2 → 1 → 3 → 4  
+        Move prev = 1, head = 3
 
----
+
     Step 2: Swap (3, 4)
         first_node = 3
         second_node = 4
@@ -189,16 +188,42 @@ Input: [1 → 2 → 3 → 4]
         3.next = None  
         4.next = 3  
 
-    List: dummy → 2 → 1 → 4 → 3  
-    Move prev = 3, head = None
+        List: dummy → 2 → 1 → 4 → 3  
+        Move prev = 3, head = None
 
 Final Output: [2, 1, 4, 3] ✅
 
 
 
+---
+Quick Example Walkthrough:
+
+Input: [1 → 2 → 3]
+
+    Step 0: dummy → 1 → 2 → 3  
+        prev = dummy, head = 1
+
+    Step 1: Swap (1, 2)
+        first_node = 1
+        second_node = 2
+
+        prev.next = 2  
+        1.next = 3  
+        2.next = 1  
+
+        List: dummy → 2 → 1 → 3  
+        Move prev = 1, head = 3
+
+    Step 2: Stop (no pair left)
+        head.next = None  
+        Loop ends.
+
+Final Output: [2, 1, 3] ✅
 
 
 
+
+---
 Q: Why do we return dummy.next? (Example-based explanation)
   • Imagine the input list: [1 → 2 → 3 → 4]
   • We add a dummy node before it: [-1 → 1 → 2 → 3 → 4]
@@ -211,6 +236,19 @@ Q: Why do we return dummy.next? (Example-based explanation)
 
   • Returning dummy.next skips the dummy and returns the real swapped list:
       ✅ [2 → 1 → 4 → 3]
+
+
+
+---
+Q: Why do we use `while head and head.next:` instead of `while head:`?
+    • Each swap needs a pair of nodes — the current node (`head`) and the next one (`head.next`).
+    
+    • If we only check `while head:`, the last single node (when list length is 
+    odd) would try to swap with `None` → causes an error.
+    
+    • `while head and head.next:` safely stops when fewer than 2 nodes remain.
+
+    • This ensures all valid pairs are swapped without breaking the list.
 
 """
 
