@@ -2,9 +2,9 @@
 # ✅ WHAT TO MEMORIZE — CORE INTERVIEW MATERIAL
 # ----------------------------------------------------------
 
-# --------------------------------------------
+# ============================================================
 # Singly Linked List
-# --------------------------------------------
+# ============================================================
 class SinglyNode:
     def __init__(self, val):
         self.val = val
@@ -50,50 +50,43 @@ a = SinglyNode(1); b = SinglyNode(2); c = SinglyNode(3)
 a.next = b; b.next = c
 
 # --------------------------------------------
-# Insert 99 after 1:  1 → 99 → 2 → 3
+# INSERT 99 after 1
 x = SinglyNode(99)
-# Insert x after a
 add_node(a, x)
-
-print("[SLL] after insert: "); traverse_forward(a)  
+print("SLL after insert:    ", end=""); traverse_forward(a)  
 # Output: 1 → 99 → 2 → 3 → None
 
 # --------------------------------------------
-# Delete Example
-
-# Delete node after 'a' (this removes node x (99))
+# DELETE node after 1 (removes 99)
 delete_node(a)
-
-print("Forward:")
-traverse_forward(a)  # Output: 1 → 2 → 3 → None
-
-# --------------------------------------------
-# Forward traversal
-print("Forward:")
-traverse_forward(a)  # Output: 1 → 2 → 3 → None
+print("SLL after delete:    ", end=""); traverse_forward(a)  
+ # Output: 1 → 2 → 3 → None
 
 # --------------------------------------------
-# Reverse traversal
-print("Reverse:")
+# FORWARD traversal
+print("SLL after traversal: ", end=""); traverse_forward(a)  
+# Output: 1 → 2 → 3 → None
+
+# --------------------------------------------
+# REVERSE traversal
 result = reverse_list(a)
-traverse_forward(result)  # Output: 3 → 2 → 1 → None
+print("SLL after reverse:   ", end=""); traverse_forward(result)
+ # Output: 3 → 2 → 1 → None
 
 
 
 
 
-# --------------------------------------------
-# Doubly linked list - UNDERSTAND (NO NEED TO MEMORIZE)
-# --------------------------------------------
+# ============================================================
+# Doubly Linked List — Understand the Mechanics (No Need to Memorize)
+# ============================================================
 class DoublyNode:
     def __init__(self, val):
         self.val = val
         self.next = None
         self.prev = None
 
-# Insert a Node
-    # Insert new_node BEFORE node
-    # node is a i. node_to_add is at i - 1
+# Insert a Node BEFORE another node — O(1)
 def add_node(node, node_to_add):
     prev_node = node.prev
     node_to_add.next = node
@@ -101,15 +94,14 @@ def add_node(node, node_to_add):
     prev_node.next = node_to_add
     node.prev = node_to_add
 
-# Delete a Node
-    # node is at position i
+# Delete a Node — O(1)
 def delete_node(node):
     prev_node = node.prev
     next_node = node.next
     prev_node.next = next_node
     next_node.prev = prev_node
 
-# Forward traversal
+# Forward Traversal — O(N)
 def traverse_forward(head):
     curr = head
     while curr:
@@ -117,7 +109,7 @@ def traverse_forward(head):
         curr = curr.next
     print("None")
 
-# Backward traversal
+# Backward Traversal — O(N)
 def traverse_backward(tail):
     curr = tail
     while curr:
@@ -126,58 +118,39 @@ def traverse_backward(tail):
     print("None")
 
 
-# Example setup: 1 ⇄ 2 ⇄ 3
+# ---- Minimal DLL demo (single, clean pass) ----
+# Build: 1 ⇄ 2 ⇄ 3
 a = DoublyNode(1); b = DoublyNode(2); c = DoublyNode(3)
-
-# Link them together
-a.next = b; b.prev = a; 
-b.next = c; c.prev = b
+a.next = b; b.prev = a; b.next = c; c.prev = b
 
 
 # --------------------------------------------
-# Insert Example
-
+# INSERT 99 before 3
 x = DoublyNode(99)
-# # Insert a new node x (99) BEFORE node c (3)
 add_node(c, x)
+print("After insert (forward):  ", end=""); traverse_forward(a)
+# Output: 1 ⇄ 2 ⇄ 99 ⇄ 3 ⇄ None
 
-print("Forward:")
-traverse_forward(a)  # Output: 1 ⇄ 2 ⇄ 99 ⇄ 3
-
-print("Backward:")
-traverse_backward(c)  # Output: 3 ⇄ 99 ⇄ 2 ⇄ 1
-
+print("After insert (backward): ", end=""); traverse_backward(c)
+# Output: 3 ⇄ 99 ⇄ 2 ⇄ 1 ⇄ None
 
 # --------------------------------------------
-# Delete Example
-
-# Delete node x (99)
+# DELETE node 99
 delete_node(x)
+print("After delete (forward):  ", end=""); traverse_forward(a)
+# Output: 1 ⇄ 2 ⇄ 3 ⇄ None
 
-print("Forward:")
-traverse_forward(a)  # Output: 1 ⇄ 2 ⇄ 3
-
-print("Backward:")
-traverse_backward(c)  # Output: 3 ⇄ 2 ⇄ 1
-
-
-# --------------------------------------------
-# Forward traversal
-print("Forward:")
-traverse_forward(a)  # Output: 1 → 2 → 3 → None
-
-# --------------------------------------------
-# Reverse traversal
-print("Reverse:")
-traverse_backward(c)  # Output: 3 → 2 → 1 → None
+print("After delete (backward): ", end=""); traverse_backward(c)
+# Output: 3 ⇄ 2 ⇄ 1 ⇄ None
 
 
 
 
 
-# ----------------------------------------------------------
+
+# ============================================================
 # EXTRAS — OPTIONAL / GOOD TO UNDERSTAND
-# ----------------------------------------------------------
+# ============================================================
 # Why keep: sometimes you just want a quick utility during practice.
 
 # --------------------------------------------
@@ -192,7 +165,6 @@ class SinglyNode:
 a = SinglyNode(1); b = SinglyNode(2); c = SinglyNode(3)
 # Link them: a → b → c
 a.next = b; b.next = c
-
 
 # ––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 # Sum of values (simple traversal variant)

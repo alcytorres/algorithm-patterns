@@ -273,9 +273,9 @@ when fast hits None, slow is k-from-end.
 # ----------------------------
 """
 Use different pointer speeds or offsets to:
-- Find the middle in one pass.
-- Detect cycles without extra memory.
-- Grab the kth-from-end node in one pass.
+  • Find the middle in one pass.
+  • Detect cycles without extra memory.
+  • Grab the kth-from-end node in one pass.
 
 Pattern to remember:
 while fast and fast.next:
@@ -309,30 +309,6 @@ def get_middle(head):
 
 
 
-def get_middle(head):
-    slow = head
-    fast = head
-    while fast and fast.next:
-        slow = slow.next
-        fast = fast.next.next
-    
-    return slow.val
-
-
-
-class Solution:
-    def hasCycle(self, head: Optional[ListNode]) -> bool:
-        slow = head
-        fast = head
-        while fast and fast.next:
-            slow = slow.next
-            fast = fast.next.next
-            if slow == fast:
-                return True
-
-        return False
-    
-
 
 class Solution:
     def hasCycle(self, head: Optional[ListNode]) -> bool:
@@ -344,17 +320,3 @@ class Solution:
             head = head.next
         return False
     
-
-
-
-def find_node(head, k):
-    slow = head
-    fast = head
-    for _ in range(k):
-        fast = fast.next
-    
-    while fast:
-        slow = slow.next
-        fast = fast.next
-    
-    return slow
