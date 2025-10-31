@@ -15,6 +15,27 @@ Loop Conditions
 
     • Use while fast and fast.next: when accessing fast.next.next (e.g., middle node), to ensure both are non-None and avoid errors.
 
+
+----------------------------------------------------------
+Remember
+----------------------------------------------------------
+  • 95% of interview LL questions are on SINGLY lists. Master inserts/deletes, traversal, reversal, and 2-pointer patterns.
+
+  • You already have full writeups for common problems; this file is a compact, runnable cheat-sheet of patterns + tiny demos.
+
+  • Doubly lists: understand conceptually; minimal code included for contrast. No sentinels or heavy variants (low ROI).
+
+
+----------------------------------------------------------
+QUICK RECALL LINES (read before the interview)
+----------------------------------------------------------
+• Reverse SLL mantra: next = curr.next → curr.next = prev → prev = curr → curr = next
+• kth-from-end: advance fast k, then move slow+fast; slow lands on answer.
+• Middle (second middle): while fast and fast.next: slow=slow.next; fast=fast.next.next
+• Cycle: fast moves 2, slow moves 1; meet ⇒ cycle.
+• Insert/Delete after a node: O(1) pointer patching.
+• Doubly lists add prev pointer; back traversal O(1). Not common to implement from scratch in interviews.
+
 """
 
 
