@@ -33,7 +33,7 @@ d = ListNode(4); e = ListNode(5)
 # Link them together
 a.next = b; b.next = c; c.next = d; d.next = e
 
-# Print Result
+# Print
 k = 2
 node = find_node(a, k)
 print(node.val)

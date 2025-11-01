@@ -74,14 +74,14 @@ c = ListNode(3); d = ListNode(4)
 a.next = b; b.next = c; c.next = d
 
 result = swapPairs(a)
-print("Output 1:", to_list(result))  # [2, 1, 4, 3]
+print("Output:", to_list(result))  # [2, 1, 4, 3]
 
 # --------------------------------------------
 # EXAMPLE 2: head = [1]
 a = ListNode(1)
 
 result = swapPairs(a)
-print("Output 2:", to_list(result))  # [1]
+print("Output:", to_list(result))  # [1]
 
 # --------------------------------------------
 # EXAMPLE 3: head = [1, 2, 3]
@@ -91,7 +91,7 @@ c = ListNode(3)
 a.next = b; b.next = c
 
 result = swapPairs(a)
-print("Output 3:", to_list(result))  # [2, 1, 3]
+print("Output:", to_list(result))  # [2, 1, 3]
 
 
 """

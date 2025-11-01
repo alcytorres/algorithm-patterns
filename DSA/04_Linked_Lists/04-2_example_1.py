@@ -39,7 +39,7 @@ b.next = c
 c.next = d
 d.next = e
 
-# Print Result
+# Print
 print(get_middle(a))
 # Output: 3
 

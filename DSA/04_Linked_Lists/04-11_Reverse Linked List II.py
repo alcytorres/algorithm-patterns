@@ -59,7 +59,7 @@ d = ListNode(4); e = ListNode(5)
 a.next = b; b.next = c; c.next = d; d.next = e
 
 result = reverseBetween(a, 2, 4)
-print("Output 1:", to_list(result))   # [1, 4, 3, 2, 5]
+print("Output:", to_list(result))   # [1, 4, 3, 2, 5]
 
 
 # --------------------------------------------
@@ -67,7 +67,7 @@ print("Output 1:", to_list(result))   # [1, 4, 3, 2, 5]
 a = ListNode(5)
 
 result = reverseBetween(a, 1, 1)
-print("Output 2:", to_list(result))   # [5]
+print("Output:", to_list(result))   # [5]
 
 
 # --------------------------------------------
@@ -78,7 +78,7 @@ d = ListNode(40); e = ListNode(50)
 a.next = b; b.next = c; c.next = d; d.next = e
 
 result = reverseBetween(a, 2, 4)
-print("Output 2:", to_list(result))   # [10, 40, 30, 20, 50]
+print("Output:", to_list(result))   # [10, 40, 30, 20, 50]
 
 
 
@@ -247,6 +247,15 @@ Q: Why was it confusing with [1, 2, 3, 4, 5]?
     • The numbers looked like both values and positions.
 
     • Using values like [10, 20, 30, 40, 50] makes it clear they're just positions, not node values.
+
+    
+---
+Q: Why return dummy.next instead of prev?
+  • prev stops right before the reversed section, not at the head.
+
+  • dummy.next always points to the real head, even if the head was reversed.
+
+  • So returning dummy.next guarantees the full list is returned correctly.
 
 
 """
