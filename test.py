@@ -4,6 +4,18 @@
 
 
 
+# Trace Overview
+# right = 0
+# curr  = 0
+# ans   = 0
+# left  = 0
+
+
+
+
+
+
+
 
 
 

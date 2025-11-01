@@ -1,4 +1,4 @@
-# STRING METHODS
+#  STRING METHODS
 # LIST METHODS
 # DICTIONARY METHODS
 # SET METHODS
@@ -232,41 +232,11 @@ print("".join(chars))  # Output: "ab"
 
 # Basic Example 4 (Arrow Separator):
 words = ["1", "2", "3", "4"]
-print(" -> ".join(words)) # Output: 1 -> 2 -> 3 -> 4
+print(" -> ".join(words))
 
 # DSA Example (List to String):
 words = ["hello", "world"]
 print(" ".join(words))  # Output: "hello world"
-
-
-# Efficient string building
-# arr is a list of characters
-def fn(arr):
-    ans = []
-    for c in arr:
-        ans.append(c)
-    
-    return "".join(ans)
-
-print(fn(['a', 'b', 'c', 'd']))
-# Output: abcd
-
-# Example 1: Joining characters with no separator
-def fn(arr):
-    return ''.join(arr)
-
-arr = ["P", "y", "t", "h", "o", "n"]
-print(fn(arr))  # Output: Python
-
-
-# Example 2: Joining words with a space separator
-def fn(words):
-    return ''.join(words)
-
-words = ["Hello", "world", "from", "Python"]
-print(fn(words))  # Output: Hello world from Python
-
-
 
 
 
@@ -465,34 +435,6 @@ print(list(ages.keys()))  # Output: ["Alice", "Bob"]
 
 
 # DICTIONARY METHOD: 
-.values()
-# What it does: Returns a view of all values in a dictionary.
-# Why use it: Accesses values for iteration or aggregation.
-# How it works: Dynamic view; updates with dict changes.
-# When to use: Summing or checking values in hash maps.
-# Time/Space: O(1) time for view, O(n) for list conversion (n = values).
-
-# Syntax:
-dict.values()  # Returns a view of dictionary values
-
-# Basic Example 1 (Get Values):
-d = {"a": 1, "b": 2}
-print(list(d.values()))  # Output: [1, 2]
-
-# Basic Example 2 (Empty Dict):
-d = {}
-print(list(d.values()))  # Output: []
-
-# Basic Example 3 (Sum Values):
-d = {"a": 1, "b": 3}
-print(sum(d.values()))  # Output: 4
-
-# DSA Example (Value Iteration):
-ages = {"Alice": 25, "Bob": 30}
-print(list(ages.values()))  # Output: [25, 30]
-
-
-# DICTIONARY METHOD: 
 .get()
 # What it does: Gets value for key, default if missing.
 # Why use it: Safe access without KeyError.
@@ -552,6 +494,7 @@ print(list(ages.items()))  # Output: [("Alice", 25), ("Bob", 30)]
 
 
 
+
 # SET METHODS
 # ----------------------------------------------------------------------------------
 # SET METHOD: 
@@ -591,40 +534,6 @@ print(unique)  # Output: {1, 2, 3}
 
 # BUILT-IN FUNCTIONS
 # ----------------------------------------------------------------------------------
-# BUILT-IN FUNCTION: 
-print()
-# What it does: Outputs objects to console, separated by spaces.
-# Why use it: Displays results or debugs code.
-# How it works: Converts objects to strings; optional separator/end.
-# When to use: Testing outputs in algorithms or debugging.
-# Time/Space: O(n) time (n = output length), O(1) space.
-
-# Syntax:
-print(*objects, sep=' ', end='\n')  # Prints objects; 'sep' and 'end' optional
-
-# Basic Example 1 (Single Object):
-print(42)  # Output: 42
-
-# Basic Example 2 (Multiple Objects):
-print(1, 2, 3)  # Output: 1 2 3
-
-# Basic Example 3 (Custom Separator):
-print("a", "b", "c", sep=",")  # Output: a,b,c
-
-# DSA Example (Debug Array):
-nums = [1, 2, 3]
-print(nums)  # Output: [1, 2, 3]
-
-
-# Example: Using 'end' to control how print() joins outputs on one line
-nums = [1, 2, 3]
-for num in nums:
-    print(num, end=" → ")   # print number, stay on same line, add arrow after each
-print()                     # print a newline at the end
-# Output: 1 → 2 → 3 →
-
-
-
 # BUILT-IN FUNCTION: 
 len()
 # What it does: Returns number of items in object.
@@ -843,43 +752,6 @@ print(dict(pairs))  # Output: {"a": 1, "b": 2}
 
 
 # BUILT-IN FUNCTION: 
-defaultdict()
-# What it does: Creates a dictionary with a default factory for missing keys.
-# Why use it: Simplifies handling missing keys in hash maps.
-# How it works: Calls factory (e.g., int, list) for undefined keys.
-# When to use: Frequency counts or grouping without explicit initialization.
-# Time/Space: O(1) average time for access, O(n) space for n items.
-
-# Syntax:
-from collections import defaultdict
-defaultdict(factory)  # 'factory' provides default value (e.g., int, list)
-
-# Basic Example 1 (Default Zero):
-from collections import defaultdict
-d = defaultdict(int)
-d["a"] += 1
-print(d)  # Output: defaultdict(<class 'int'>, {'a': 1})
-
-# Basic Example 2 (Default List):
-from collections import defaultdict
-d = defaultdict(list)
-d["a"].append(1)
-print(d)  # Output: defaultdict(<class 'list'>, {'a': [1]})
-
-# Basic Example 3 (Empty Access):
-from collections import defaultdict
-d = defaultdict(int)
-print(d["b"])  # Output: 0
-
-# DSA Example (Frequency Count):
-from collections import defaultdict
-counts = defaultdict(int)
-for c in "aba":
-    counts[c] += 1
-print(counts)  # Output: defaultdict(<class 'int'>, {'a': 2, 'b': 1})
-
-
-# BUILT-IN FUNCTION: 
 enumerate()
 # What it does: Pairs indices with iterable elements.
 # Why use it: Tracks position in loops.
@@ -908,28 +780,6 @@ print(list(enumerate(nums)))  # Output: [(0, "a")]
 nums = ["a", "b"]
 for i, val in enumerate(nums):
     print(i, val)  # Output: 0 a, 1 b
-
-
-# DICTIONARY BUILDING from LIST
-def fn(nums):
-    ans = {}
-    for i, num in enumerate(nums):
-        ans[i] = num
-    return ans
-    
-nums = ['a', 'b', 'c']
-print(fn(nums))
-# Output: {0:'a', 1:'b', 2:'c'}
-
-# PRINT INDEX + VALUE PAIRS
-nums = ['a', 'b', 'c']
-for i, num in enumerate(nums):
-    print(i, num)  
-# Output:
-# 0 a
-# 1 b
-# 2 c
-
 
 
 # BUILT-IN FUNCTION: 
