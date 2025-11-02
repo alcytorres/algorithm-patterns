@@ -45,7 +45,7 @@ ans = []
 while curr:
     ans.append(curr.val)
     curr = curr.next
-print("Output 1:", ans)   # [3, 4, 5]
+print("Output:", ans)   # [3, 4, 5]
 
 
 # --------------------------------------------
@@ -63,7 +63,7 @@ ans = []
 while curr:
     ans.append(curr.val)
     curr = curr.next
-print("Output 2:", ans)   # [4, 5, 6]
+print("Output:", ans)   # [4, 5, 6]
 
 """
 
@@ -203,6 +203,7 @@ while curr:
     ans.append(curr.val)
     curr = curr.next
 print("Output:", ans)   # [3, 4, 5, 6]
+
 
 """
 Overview for Each Iteration
