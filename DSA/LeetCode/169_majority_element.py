@@ -1,28 +1,29 @@
-# Majority Element
+# 169. Majority Element
 """
 Given an array nums of size n, return the majority element.
 
 The majority element is the element that appears more than ⌊n / 2⌋ times. You may assume that the majority element always exists in the array.
 
 Example 1:
-Input: nums = [3,2,3]
-Output: 3
+    Input: nums = [3, 2, 3]
+    Output: 3
 
 Example 2:
-Input: nums = [2,2,1,1,1,2,2]
-Output: 2
+    Input: nums = [2, 2, 1, 1, 1, 2, 2]
+    Output: 2
 
 Example 3:
-Input: nums = [3,2,2,3]
-Output: Invalid Input. There must be a majority for this algo to work even if running it outputs 2 or 3. 
+    Input: nums = [3, 2, 2, 3]
+    Output: Invalid Input. There must be a majority for this algo to work even if running it outputs 2 or 3. 
 
 # Why: Practices Boyer-Moore Voting Algorithm for efficient majority element detection.
 
 https://www.youtube.com/watch?v=c1B3LZQtZ_s
+
+Solution: https://leetcode.com/problems/majority-element/description/
 """
 
 def majority_element(nums): 
-
     # 1️⃣ Initialize variables
     answer = -1
     count = 0
@@ -32,19 +33,19 @@ def majority_element(nums):
         if count == 0:
             answer = num
         
-        # Update count: increment if num matches answer, decrement otherwise
+        # 3️⃣ Update count: increment if num matches answer, decrement otherwise
         if answer == num:
             count += 1
         else:
             count -= 1
 
-    # 3️⃣ Return the majority element
+    # 4️⃣ Return the majority element
     return answer
 
 print(majority_element([2, 1, 2, 2, 2, 3]))  # Output: 2
 
-# Time: O(n)
-# Space: O (1)
+# Time: O(N)
+# Space: O(1)
 
 
 # Test Solution
@@ -52,9 +53,8 @@ print(majority_element([2, 1, 2, 2, 2, 3]))  # Output: 2
 # count  = 0    
 
 
-
-# Simple Breakdown 
-
+# ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+# Breakdown 
 def majority_element(nums): 
     # 1️⃣ Initialize variables
     answer = -1
@@ -65,13 +65,13 @@ def majority_element(nums):
         if count == 0:
             answer = num
         
-        # Update count: increment if num matches answer, decrement otherwise
+        # 3️⃣Update count: increment if num matches answer, decrement otherwise
         if answer == num:
             count += 1
         else:
             count -= 1
 
-    # 3️⃣ Return the majority element
+    # 4️⃣ Return the majority element
     return answer
 
 print(majority_element([2, 1, 2, 2, 2, 3]))  # Output: 2
@@ -80,8 +80,32 @@ print(majority_element([2, 1, 2, 2, 2, 3]))  # Output: 2
 # print(majority_element([3, 2, 1, 1, 2, 2, 2, 3, 2]))  # Output: 2
 
 
-# ----------------------------------------------------------------------------------
 
+
+# --------------------------------------------------------------
+# Brute Force
+def majority_element_brute_force(nums):
+    n = len(nums)  # Get length of array
+    threshold = n // 2  # Majority requires > n/2 occurrences
+
+    # Count occurrences of each number
+    for num in nums:  # Check each number
+        count = 0  # Reset count for current number
+        for other in nums:  # Count how many times num appears
+            if other == num:  # If numbers match
+                count += 1  # Increment count
+            if count > threshold:  # If count exceeds n/2
+                return num  # Return majority element
+
+    return -1  # Return -1 if no majority (though problem guarantees one)
+
+    # Time: O(n²)
+    # Space: O (1)
+
+
+
+
+# --------------------------------------------------------------
 # Task: Find the majority element in an array, which appears more than ⌊n / 2⌋ times.
 # Assumption: The majority element always exists in the array.
 # Example: nums = [2, 1, 2, 2, 2, 3] → Output = 2 (2 appears 4 times, ⌊6/2⌋ = 3, 4 > 3)

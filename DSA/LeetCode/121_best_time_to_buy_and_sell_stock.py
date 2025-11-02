@@ -1,4 +1,4 @@
-# Best Time to Buy and Sell Stock I
+# 121. Best Time to Buy and Sell Stock I
 """
 You are given an array prices where prices[i] is the price of a given stock on the ith day.
 
@@ -9,8 +9,8 @@ Return the maximum profit you can achieve from this transaction. If you cannot a
 Find and return the maximum profit you can achieve.
  
 Example 1:
-Input: prices = [7,1,5,3,6,4]
-Output: 5
+    Input: prices = [7,1,5,3,6,4]
+    Output: 5
 
 Explanation: Buy on day 2 (price = 1) and sell on day 5 (price = 6), profit = 6-1 = 5.
 
@@ -19,10 +19,11 @@ Note that buying on day 2 and selling on day 1 is not allowed because you must b
 # Why: Practices tracking minimum price and maximum profit efficiently in a single pass.
 
 https://www.youtube.com/watch?v=kJZrMGpyWpk
+
+Solution: https://leetcode.com/problems/best-time-to-buy-and-sell-stock/description/
 """
 
 def max_profit(prices):
-
     # 1️⃣ Initialize variables
     min_price = float('inf')
     max_profit = 0
@@ -46,8 +47,30 @@ print(max_profit([7, 1, 5, 3, 6, 4]))
 # Space: O(1)
 
 
-# ----------------------------------------------------------------------------------
 
+
+
+# ---------------------------------------------------------------
+# Brute Force
+def maxProfit(self, prices):
+        max_profit = 0
+        for i in range(len(prices)):
+            for j in range(i+1, len(prices)):
+                profit = prices[j] - prices[i]
+
+                if profit > 0:
+                    max_profit = max(max_profit, profit)
+        
+        return max_profit
+        # Time: O(N^2) (Brute Force)
+        # Space: O(1)
+        # This was modified from the video explanation to let max_profit = 0, this is better
+
+
+
+
+
+# ---------------------------------------------------------------
 # Task: Find the maximum profit from buying and selling a stock once, given an array of daily prices.
 
 # Return 0 if no profit is possible. Buy must occur before sell.

@@ -45,9 +45,9 @@ print(merge_sorted_arrays(arr1, arr2))
 
 
 """
-
 Overview for Each Iteration
 Input: arr1 = [1, 4, 7, 20], arr2 = [3, 5, 6]
+
 Step 1: Merge arrays while both have elements
 i  | j | arr1[i] | arr2[j] | arr1[i] <= arr2[j] | Action         | ans
 ---|---|---------|---------|--------------------|----------------|-----------------
