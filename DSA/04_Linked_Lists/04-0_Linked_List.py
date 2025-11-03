@@ -1,5 +1,5 @@
 """
-🚨 LINKED LIST CODE RED 🚨
+🚨 LINKED LIST BEST PRACTICES 🚨
 Always DRAW the linked list with pen and paper before coding.
 
 For each iteration, sketch:
