@@ -243,8 +243,7 @@ Q: Why do we return dummy.next? (Example-based explanation)
 Q: Why do we use `while head and head.next:` instead of `while head:`?
     • Each swap needs a pair of nodes — the current node (`head`) and the next one (`head.next`).
     
-    • If we only check `while head:`, the last single node (when list length is 
-    odd) would try to swap with `None` → causes an error.
+    • If we only check `while head:`, the last single node (when list length is odd) would try to swap with `None` → causes an error.
     
     • `while head and head.next:` safely stops when fewer than 2 nodes remain.
 

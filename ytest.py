@@ -140,7 +140,11 @@ Quick Example Walkthrough:
 
 # What is the absolute best, basic, simple, memorable, easy to follow for a beginner solution for this problem that is efficient? Justify your answer
 
+# Which of the following is the absolute best, basic, simple, memorable, easy to follow for a beginner solution for this problem that is efficient? Justify your answer
+
+
 # The goal is clarity and learning for a beginner to easily follow along
+
 
 
 # ––––––––––––––––––––––––––––––––––––––––
@@ -335,9 +339,26 @@ print(fn(nums))   # Output 2 (since 2 and 4 are even)
 
 
 # –––––––––––––––––––––––––––––––––––––––––––––––
-# Give me a simple, easy to understand, concise reply in bullets and set up with a question as the header for how this code   XYZ. 
+# Give me a simple, easy to understand, concise reply in bullets and set up with a question as the header for the prior response XYZ. 
 
 # Provide your reply in a .py file with """
+
+# Here is an example
+
+"""
+---
+Q: Why do we use `while head and head.next:` instead of `while head:`?
+    • Each swap needs a pair of nodes — the current node (`head`) and the next one (`head.next`).
+    
+    • If we only check `while head:`, the last single node (when list length is odd) would try to swap with `None` → causes an error.
+    
+    • `while head and head.next:` safely stops when fewer than 2 nodes remain.
+
+    • This ensures all valid pairs are swapped without breaking the list.
+
+"""
+
+
 
 
 

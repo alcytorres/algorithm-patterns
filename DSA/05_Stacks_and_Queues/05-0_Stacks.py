@@ -4,9 +4,9 @@ STACKS & STRING PROBLEMS — PRACTICAL, HIGH-ROI MINI-GUIDE
 ===========================================================
 
 Scope:
-- Based strictly on your provided content (Stacks + String problems).
-- Focused on what actually shows up in non-FAANG entry-level interviews.
-- No filler. Clear patterns, tiny templates, and quick mental models.
+  • Based strictly on your provided content (Stacks + String problems).
+  • Focused on what actually shows up in non-FAANG entry-level interviews.
+  • No filler. Clear patterns, tiny templates, and quick mental models.
 
 Contents:
 1) 🧩 What is a Stack (LIFO) — mental picture + when to use it
@@ -26,17 +26,18 @@ Contents:
 # ------------------------------------------------------------
 """
 Plain English:
-- Stack = add/remove from the SAME end (top). Last in, first out (LIFO).
-- Think kitchen plates: you put one on top, you take from the top.
+  • Stack = add/remove from the SAME end (top). Last in, first out (LIFO).
+  • Think kitchen plates: you put one on top, you take from the top.
 
 Why it appears in string questions:
-- You often need a short-term "history" of prior characters to decide
+  • You often need a short-term "history" of prior characters to decide
   what to do with the current character (match, delete, compare).
-- That "most recent thing" you added is exactly what you want to inspect
+  
+  • That "most recent thing" you added is exactly what you want to inspect
   or remove first → LIFO → stack.
 
 Recursion note:
-- Function calls use a call stack internally (push on call, pop on return).
+  • Function calls use a call stack internally (push on call, pop on return).
 """
 
 
@@ -55,11 +56,14 @@ Use Python list as a stack (dynamic array):
 
 def _stack_demo():
     stack = []
+
     stack.append(1)
     stack.append(2)
     stack.append(3)
+    
     a = stack.pop()   # 3
     b = stack.pop()   # 2
     stack.append(5)
+
     top = stack[-1] if stack else None
     return a, b, top, bool(stack)  # (3, 2, 5, True)

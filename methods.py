@@ -435,32 +435,31 @@ print(list(ages.keys()))  # Output: ["Alice", "Bob"]
 
 
 # DICTIONARY METHOD: 
-.get()
-# What it does: Gets value for key, default if missing.
-# Why use it: Safe access without KeyError.
-# How it works: O(1) lookup; optional default.
-# When to use: Frequency counts in hash maps.
-# Time/Space: O(1) average time, O(1) space.
+.values()
+# What it does: Returns a view of all values in a dictionary.
+# Why use it: Accesses values for iteration or aggregation.
+# How it works: Dynamic view; updates with dict changes.
+# When to use: Summing values or checking ranges in hash maps.
+# Time/Space: O(1) time for view, O(n) for list conversion (n = values).
 
 # Syntax:
-dict.get(key, default)  # Returns value or 'default' (None if omitted)
+dict.values()  # Returns a view of dictionary values
 
-# Basic Example 1 (Existing Key):
-d = {"a": 1}
-print(d.get("a"))  # Output: 1
+# Basic Example 1 (Get Values):
+d = {"a": 1, "b": 2}
+print(list(d.values()))  # Output: [1, 2]
 
-# Basic Example 2 (Missing Key):
-d = {"a": 1}
-print(d.get("b"))  # Output: None
+# Basic Example 2 (Empty Dict):
+d = {}
+print(list(d.values()))  # Output: []
 
-# Basic Example 3 (With Default):
-d = {"a": 1}
-print(d.get("b", 0))  # Output: 0
+# Basic Example 3 (Sum Values):
+d = {"a": 1, "b": 3}
+print(sum(d.values()))  # Output: 4
 
-# DSA Example (Frequency Count):
-counts = {"a": 1}
-counts["b"] = counts.get("b", 0) + 1
-print(counts)  # Output: {"a": 1, "b": 1}
+# DSA Example (Value Aggregation):
+scores = {"Alice": 90, "Bob": 85}
+print(sum(scores.values()))  # Output: 175
 
 
 # DICTIONARY METHOD: 
@@ -491,6 +490,34 @@ for k, v in d.items():
 ages = {"Alice": 25, "Bob": 30}
 print(list(ages.items()))  # Output: [("Alice", 25), ("Bob", 30)]
 
+
+# DICTIONARY METHOD: 
+.get()
+# What it does: Gets value for key, default if missing.
+# Why use it: Safe access without KeyError.
+# How it works: O(1) lookup; optional default.
+# When to use: Frequency counts in hash maps.
+# Time/Space: O(1) average time, O(1) space.
+
+# Syntax:
+dict.get(key, default)  # Returns value or 'default' (None if omitted)
+
+# Basic Example 1 (Existing Key):
+d = {"a": 1}
+print(d.get("a"))  # Output: 1
+
+# Basic Example 2 (Missing Key):
+d = {"a": 1}
+print(d.get("b"))  # Output: None
+
+# Basic Example 3 (With Default):
+d = {"a": 1}
+print(d.get("b", 0))  # Output: 0
+
+# DSA Example (Frequency Count):
+counts = {"a": 1}
+counts["b"] = counts.get("b", 0) + 1
+print(counts)  # Output: {"a": 1, "b": 1}
 
 
 
@@ -560,6 +587,43 @@ print(len(lst))  # Output: 0
 # DSA Example (Array Length):
 array = [1, 2, 3]
 print(len(array))  # Output: 3
+
+
+# BUILT-IN FUNCTION: 
+print()
+# What regenerative: Outputs objects to console with formatting.
+# Why use it: Debugs code and displays results.
+# How it works: Converts args to strings; customizable sep/end.
+# When to use: Testing outputs during DSA problem solving.
+# Time/Space: O(n) time (n = output length), O(1) space.
+
+# Syntax:
+print(*objects, sep=' ', end='\n')  # Prints objects; sep/end optional
+
+# Basic Example 1 (Single Value):
+print(42)  # Output: 42
+
+# Basic Example 2 (Multiple Values):
+print(1, "abc", True)  # Output: 1 abc True
+
+# DSA Example (Debug Array):
+nums = [1, 2, 3]
+print("nums:", nums)  # Output: nums: [1, 2, 3]
+
+
+print(*objects, sep=' ', end='\n')
+    # sep: separates multiple objects with custom text (default ' ')
+    # end: ends output with custom text (default '\n')
+
+# Basic Example 4 (Custom Separator):
+print("a", "b", "c", sep="-")  # a-b-c
+
+# Basic Example 5 (Custom Ending – no newline):
+print("Hello", end="!")  # Hello!
+
+# Basic Example 6 (Custom join + custom end with newline):
+print("a", "b", sep="-", end=".\n")  # a-b.
+
 
 
 # BUILT-IN FUNCTION: 
@@ -749,6 +813,117 @@ print(dict())  # Output: {}
 # DSA Example (From List of Pairs):
 pairs = [("a", 1), ("b", 2)]
 print(dict(pairs))  # Output: {"a": 1, "b": 2}
+
+
+# BUILT-IN FUNCTION: 
+defaultdict(int)
+# What it does: Dictionary with default 0 for missing keys.
+# Why use it: Simplifies frequency counting.
+# How it works: Returns 0 on missing key access.
+# When to use: Counting characters, words, or occurrences.
+# Time/Space: O(1) average access, O(n) space for n items.
+
+# Syntax:
+from collections import defaultdict
+defaultdict(int)  # Default value is 0
+
+# Basic Example 1 (Count Chars):
+from collections import defaultdict
+d = defaultdict(int)
+for c in "hello":
+    d[c] += 1
+print(d)  # Output: defaultdict(<class 'int'>, {'h': 1, 'e': 1, 'l': 2, 'o': 1})
+
+# Basic Example 2 (Safe Increment):
+from collections import defaultdict
+d = defaultdict(int)
+d["x"] += 5
+print(d["x"])  # Output: 5
+
+# Basic Example 3 (Empty Access):
+from collections import defaultdict
+d = defaultdict(int)
+print(d["missing"])  # Output: 0
+
+# DSA Example (Frequency Count):
+from collections import defaultdict
+counts = defaultdict(int)
+for c in "aba":
+    counts[c] += 1
+print(dict(counts))  # Output: {'a': 2, 'b': 1}
+
+
+# BUILT-IN FUNCTION: 
+defaultdict(list)
+# What it does: Dictionary with default empty list for missing keys.
+# Why use it: Groups items without initialization.
+# How it works: Returns [] on missing key access.
+# When to use: Grouping anagrams, building adjacency lists.
+# Time/Space: O(1) average access, O(n) space for n items.
+
+# Syntax:
+from collections import defaultdict
+defaultdict(list)  # Default value is []
+
+# Basic Example 1 (Group by Key):
+from collections import defaultdict
+d = defaultdict(list)
+d["fruits"].append("apple")
+d["fruits"].append("banana")
+print(d)  # Output: defaultdict(<class 'list'>, {'fruits': ['apple', 'banana']})
+
+# Basic Example 2 (Safe Append):
+from collections import defaultdict
+d = defaultdict(list)
+d["a"].append(1)
+print(d["a"])  # Output: [1]
+
+# Basic Example 3 (Empty Access):
+from collections import defaultdict
+d = defaultdict(list)
+print(d["missing"])  # Output: []
+
+# DSA Example (Group Anagrams):
+from collections import defaultdict
+groups = defaultdict(list)
+groups["eat"].append("tea")
+groups["eat"].append("ate")
+print(dict(groups))  # Output: {'eat': ['tea', 'ate']}
+
+
+# BUILT-IN FUNCTION: 
+Counter()
+# What it does: Counts hashable objects and returns a dict-like counter.
+# Why use it: Fast frequency counting without manual loops.
+# How it works: Subclass of dict; default 0 for missing keys.
+# When to use: Anagram checks, top-k elements, mode finding.
+# Time/Space: O(n) time (n = elements), O(k) space (k = unique items).
+
+# Syntax:
+from collections import Counter
+Counter(iterable)  # Returns Counter object from iterable
+
+# Basic Example 1 (Count String):
+from collections import Counter
+c = Counter("hello")
+print(c)  # Output: Counter({'l': 2, 'h': 1, 'e': 1, 'o': 1})
+
+# Basic Example 2 (Count List):
+from collections import Counter
+c = Counter([1, 2, 2, 3])
+print(c)  # Output: Counter({2: 2, 1: 1, 3: 1})
+
+# Basic Example 3 (Empty):
+from collections import Counter
+c = Counter()
+print(c["x"])  # Output: 0
+
+# DSA Example (Most Common):
+from collections import Counter
+votes = ['a', 'b', 'a', 'c', 'a']
+c = Counter(votes)
+print(c.most_common(1))  # Output: [('a', 3)]
+
 
 
 # BUILT-IN FUNCTION: 

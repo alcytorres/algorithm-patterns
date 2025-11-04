@@ -13,14 +13,13 @@ stack.pop() # 3
 stack.pop() # 2
 
 # Check if empty
-not stack # False
+not stack # Fal
 
 # Check element at top
 stack[-1] # 1
 
 # Get size
 len(stack) # 1
-
 
 
 
