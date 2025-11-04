@@ -49,6 +49,9 @@ def isValid(s):
 s = "()"
 print(isValid(s))  # Output: True
 
+s = ")"
+print(isValid(s))  # Output: False
+
 s = "(["
 print(isValid(s))  # Output: False
 
@@ -173,59 +176,67 @@ TLDR (one sentence):
 ---
 Quick Example Walkthroughs:
 
+
 Example 1: s = "()"
 --------------------------------
-    stack = []
-    '(' → open → push → ['(']
-    ')' → close → pop '(' → matches ✓
-    End: stack = [] → valid ✅
+    Start: stack = []
+    1. '(' → opening → push → stack = ['(']
+    2. ')' → closing → pop last '(' → matches → stack = []
 
+    End: stack empty → all brackets matched → ✅ valid
     Output: True
 
-
-Example 2: s = "(]"
+    
+Example 2: s = ")"
 --------------------------------
-    stack = []
-    '(' → push ['(']
-    ']' → close → pop '(' → mismatch ✗
-    Return False immediately ❌
+    Start: stack = []
+    1. ')' → closing but stack empty → invalid ❌
 
     Output: False
 
 
-Example 3: s = "([])"
+Example 3: s = "(["
 --------------------------------
-    stack = []
-    '(' → push ['(']
-    '[' → push ['(', '[']
-    ']' → pop '[' ✓
-    ')' → pop '(' ✓
-    End: stack = [] → valid ✅
+    Start: stack = []
+    1. '(' → opening → push → stack = ['(']
+    2. '[' → opening → push → stack = ['(', '[']
+   
+    End: stack not empty → missing closings → invalid ❌
+    Output: False
 
+
+Example 4: s = "([])"
+--------------------------------
+    Start: stack = []
+    1. '(' → opening → push → stack = ['(']
+    2. '[' → opening → push → stack = ['(', '[']
+    3. ']' → closing → pop '[' → matches → stack = ['(']
+    4. ')' → closing → pop '(' → matches → stack = []
+    
+    End: stack empty → all matched → valid ✅
     Output: True
 
 
-Example 4: s = "([)"
+Example 5: s = "([)"
 --------------------------------
-    stack = []
-    '(' → push ['(']
-    '[' → push ['(', '[']
-    ')' → close → pop '[' ✗ (expected '(')
-    Return False ❌
+    Start: stack = []
+    1. '(' → opening → push → stack = ['(']
+    2. '[' → opening → push → stack = ['(', '[']
+    3. ')' → closing → pop '[' → mismatch → invalid ❌
 
     Output: False
 
 
-Example 5: s = "()[]{}"
+Example 6: s = "()[]{}"
 --------------------------------
-    stack = []
-    '(' → push ['(']
-    ')' → pop '(' ✓
-    '[' → push ['[']
-    ']' → pop '[' ✓
-    '{' → push ['{']
-    '}' → pop '{' ✓
-    End: stack = [] → valid ✅
+    Start: stack = []
+    1. '(' → opening → push → stack = ['(']
+    2. ')' → closing → pop '(' → matches → stack = []
+    3. '[' → opening → push → stack = ['[']
+    4. ']' → closing → pop '[' → matches → stack = []
+    5. '{' → opening → push → stack = ['{']
+    6. '}' → closing → pop '{' → matches → stack = []
+    End: stack empty → all matched → valid ✅
 
     Output: True
 
