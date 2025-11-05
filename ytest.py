@@ -359,7 +359,16 @@ Q: Why do we use `while head and head.next:` instead of `while head:`?
 """
 
 
+# –––––––––––––––––––––––––––––––––––––––––––––––
+# Get a better step by step walkthru
+# –––––––––––––––––––––––––––––––––––––––––––––––
+# For this code:
 
+
+# Is there a better, concise, simple, super easy to follow for a beginner walkthru of the code for each iteration. Justify your answer. I want it to be crystal clear and easy to follow. Also it should be concise so i can quickly follow and scan the flow. 
+
+
+# Reply in a .py file with """
 
 
 

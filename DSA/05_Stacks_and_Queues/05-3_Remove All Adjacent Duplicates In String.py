@@ -61,7 +61,7 @@ Space: O(N)
   - Stack stores remaining non-duplicate characters.
 
 
-
+---
 Overview for Each Iteration
 Input: s = "abbaca"
 
@@ -166,7 +166,27 @@ Q: What does `if stack and stack[-1] == c:` do?
 
   • In short: "If there's something in the stack and it matches the current character, remove it."
 
+
+---
+Q: Why do we need `if stack`?
+  • To make sure the stack is NOT empty before checking stack[-1].
+
+Example: s = "a"
+
+Without `if stack`:
+--------------------
+  • stack = []
+  • 'a' → check stack[-1] == 'a' → ❌ ERROR (stack is empty!)
+
+With `if stack`:
+--------------------
+  • stack = []
+  • 'a' → stack is empty → skip comparison → push → stack = ['a']
+
+✅ Prevents error when trying to access stack[-1] on an empty stack.
+
 """
+
 
 
 
