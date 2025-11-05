@@ -4,15 +4,31 @@
 
 # Solution: https://leetcode.com/problems/daily-temperatures/description/
  
-
 # Example 1:
     # Input: temperatures = [73,74,75,71,69,72,76,73]
-    # Output: [1,1,4,2,1,1,0,0]
+    # Output: [1, 1, 4, 2, 1, 1, 0, 0]
 
 # Example 2:
-    # Input: temperatures = [30,40,50,60]
-    # Output: [1,1,1,0]
+    # Input: temperatures = [30, 40, 50, 60]
+    # Output: [1, 1, 1, 0]
 
 # Example 3:
-    # Input: temperatures = [30,60,90]
-    # Output: [1,1,0]
+    # Input: temperatures = [30, 60, 90]
+    # Output: [1, 1, 0]
+
+
+def dailyTemperatures(temperatures):
+    stack = []
+    answer = [0] * len(temperatures)
+    
+    for i in range(len(temperatures)):
+        while stack and temperatures[stack[-1]] < temperatures[i]:
+            j = stack.pop()
+            answer[j] = i - j
+        stack.append(i)
+    
+    return answer
+
+
+temperatures = [30, 60, 90]
+print(dailyTemperatures(temperatures))  # [1, 1, 0]
