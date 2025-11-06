@@ -122,11 +122,11 @@ Quick Example Walkthrough:
 # -----------------------------------------------
 # Hash Set rewritten w explicit loop: 
 
-def numJewelsInStones(J, S):
+def numJewelsInStones(jewels, stones):
     Jset = set(J)
     count = 0
 
-    for s in S:
+    for s in stones:
         if s in Jset:
             count += 1
     return count
@@ -135,8 +135,7 @@ def numJewelsInStones(J, S):
 jewels = "aA"
 stones = "aAAbbbb"
 print(numJewelsInStones(jewels, stones))
-# Output 3
-
+# Output 3: You have 3 stones (a, A, A) that are also jewels.
 
 """
 Time: O(J + S)
@@ -180,6 +179,7 @@ b   | False     | 3
 b   | False     | 3
 b   | False     | 3
 b   | False     | 3
+
 Final: 3
 
 """
@@ -242,11 +242,11 @@ print(numJewelsInStones(jewels, stones))
 """
 📘 Tutorial: sum(condition for x in items)
 
-- You can use sum() with a generator expression to count matches.
+  • You can use sum() with a generator expression to count matches.
 
-- Each condition produces True (1) or False (0).
+  • Each condition produces True (1) or False (0).
 
-- sum() adds them up → count of items where condition is True.
+  • sum() adds them up → count of items where condition is True.
 """
 
 # Example: condition for x in items:

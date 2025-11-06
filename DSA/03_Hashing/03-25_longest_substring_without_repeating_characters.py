@@ -5,7 +5,7 @@
 # Solution: https://leetcode.com/problems/longest-substring-without-repeating-characters/description/
 
 # Example 1:
-    # Input: s = "abcabcbb"
+    # Input: s = "ababcb"
     # Output: 3
     # Explanation: The answer is "abc", with the length of 3.
 
@@ -36,7 +36,7 @@ def lengthOfLongestSubstring(s):
 
     return max_len
 
-s = "abbabcb"
+s = "ababcb"
 print(lengthOfLongestSubstring(s))  
 # Output: 3 → "abc" is the Longest substring without repeats in "abbabcb".
 
@@ -106,30 +106,45 @@ TLDR:
 ---
 Quick Example Walkthrough:
 
-    s = "abcabcbb"
+    s = "ababcb"
 
-    Step 1: right=0 → 'a' not in seen → add → window="a" → max_len=1  
-    Step 2: right=1 → 'b' not in seen → add → window="ab" → max_len=2  
-    Step 3: right=2 → 'c' not in seen → add → window="abc" → max_len=3  
-   
-    Step 4: right=3 → 'a' in seen → remove left 'a' → window="bc" → add 'a' → window="bca" → max_len=3  
-    
-    Step 5: right=4 → 'b' in seen → remove left until 'b' gone → window="ca" → add 'b' → window="cab" → max_len=3  
-  
-    Step 6: right=5 → 'c' in seen → shrink left until 'c' gone → window="ab" → add 'c' → window="abc" → max_len=3  
-   
-    Step 7: right=6 → 'b' in seen → shrink left until 'b' gone → window="c" → add 'b' → window="cb" → max_len=3  
-   
-    Step 8: right=7 → 'b' in seen → shrink left until 'b' gone → window="b" → max_len=3  
+    Step 1: right=0 → 'a' not in seen → add → window="a" → max_len=1
+    Step 2: right=1 → 'b' not in seen → add → window="ab" → max_len=2
 
-    Final Answer: 3 ("abc")
+    Step 3: right=2 → 'a' in seen → remove left 'a' → window="b" → add 'a' → window="ba" → max_len=2
+
+    Step 4: right=3 → 'b' in seen → remove left 'b' → window="a" → add 'b' → window="ab" → max_len=2
+
+    Step 5: right=4 → 'c' not in seen → add → window="abc" → max_len=3
+
+    Step 6: right=5 → 'b' in seen → remove left until 'b' gone → remove 'a', then 'b' → window="c" → add 'b' → window="cb" → max_len=3
+
+Final Answer: 3 ("abc")
 
 """
 
 
+# –––––––––––––––––––––––––––––––––––––––––––––––––––––––
+# Breakdown
+
+def lengthOfLongestSubstring(s):
+    seen = set()              # Track characters in current window
+    left = max_len = 0        # Left bound, max substring length
+
+    for right in range(len(s)):  # Iterate right pointer over string
+        while s[right] in seen:  # If current char already in window
+            seen.remove(s[left]) # Remove leftmost char
+            left += 1            # Shrink window from left
+
+        seen.add(s[right])       # Add current char to window
+        max_len = max(max_len, right - left + 1)  # Update max length
+
+    return max_len            # Return longest substring without repeating chars
+
+
 
 # –––––––––––––––––––––––––––––––––––––––––––––––––––––––
-# Approach: Sliding Window with Set
+# Best Solution: Sliding Window with Set
 
 def lengthOfLongestSubstring(s):
     seen = set()
@@ -151,10 +166,10 @@ s = "abcabcbb"
 print(lengthOfLongestSubstring(s))  
 # Output: 3
 
-
 """
 Overview for Each Iteration
 Input: s = "abcabcbb"
+
 Step: Find longest substring without repeating characters
 r   | s[r] | seen before | s[r] in seen | l   | seen after remove | seen after add | max_len
 ----|------|-------------|--------------|-----|-------------------|----------------|--------
@@ -168,26 +183,10 @@ r   | s[r] | seen before | s[r] in seen | l   | seen after remove | seen after a
     |      | {b, c}      | True         | 4   | {c}               | {c, b}         | 3
 7   | b    | {c, b}      | True         | 5   | {b}               | {b}            | 3
     |      | {b}         | True         | 6   | {}                | {b}            | 3
+
 Final: 3 ("abc")
 
 """
-
-
-# –––––––––––––––––––––––––––––––––––––––––––––––––––––––
-# Breakdown
-
-def lengthOfLongestSubstring(s):
-    seen = set()              # Track characters in current window
-    left = max_len = 0        # Left bound, max substring length
-
-    for right in range(len(s)):  # Iterate right pointer over string
-        while s[right] in seen:  # If current char already in window
-            seen.remove(s[left]) # Remove leftmost char
-            left += 1            # Shrink window from left
-        seen.add(s[right])       # Add current char to window
-        max_len = max(max_len, right - left + 1)  # Update max length
-    return max_len            # Return longest substring without repeating chars
-
 
 
 # –––––––––––––––––––––––––––––––––––––––––––––––––––––––
@@ -226,6 +225,7 @@ print(lengthOfLongestSubstring(s))
     • Sets in Python are collections of unique elements.
     • .add(x) inserts an element into the set.
     • .remove(x) deletes an element from the set (raises an error if x not present).
+
     • Very useful for sliding window problems where we track what's inside the window.
 """
 
@@ -303,7 +303,7 @@ def sliding_window_add_first(arr):
 🧩 TYPE 2 — "Shrink Before Add"
 When to use:
 - Condition is about uniqueness (no duplicates)
-- You must ensure the element you add doesn’t break the rule.
+- You must ensure the element you add doesn't break the rule.
 - Example: "Longest Substring Without Repeating Characters"
 
 Why:
@@ -331,8 +331,9 @@ def sliding_window_shrink_before_add(s):
 
 """
 ✅ Quick Summary:
-- Use "Add First, Then Shrink" → when condition depends on totals/counts (e.g., sum > K, distinct > K)
-- Use "Shrink Before Add" → when condition depends on current element validity (e.g., duplicates)
+  • Use "Add First, Then Shrink" → when condition depends on totals/counts (e.g., sum > K, distinct > K)
+
+  • Use "Shrink Before Add" → when condition depends on current element validity (e.g., duplicates)
 """
 
 
