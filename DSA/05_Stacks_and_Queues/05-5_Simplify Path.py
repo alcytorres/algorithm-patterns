@@ -104,7 +104,6 @@ Space: O(N)
 
 
 
-
 ---
 Overview for Each Iteration
 Input: path = "/home/"
@@ -241,8 +240,7 @@ Example 5: path = "/.../a/../b/c/../d/./"
 
 
 
-
-
+    
 
 
 Q: What does `continue` do in this solution?

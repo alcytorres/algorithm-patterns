@@ -25,6 +25,7 @@
 def backspaceCompare(s, t):
     def build(s):
         stack = []
+
         for c in s:
             if c != "#":
                 stack.append(c)
@@ -307,7 +308,6 @@ Q: Why is it `elif` instead of `else`?
 """
 
 
-
 # ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 # Breakdown 
 def backspaceCompare(s, t):
@@ -323,6 +323,7 @@ def backspaceCompare(s, t):
         return "".join(stack)         # Convert stack to final string
     
     return build(s) == build(t)       # Compare processed strings
+
 
 
 

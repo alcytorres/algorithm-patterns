@@ -337,13 +337,10 @@ else:
 Notes:
 -------
   • Falsy values: `0`, `""`, `[]`, `{}`, `set()`, `None`, `False`
+  
   • Truthy values: everything else (non-empty strings, non-zero numbers, non-empty containers, etc.)
 
 """
-
-
-
-
 
 
 
