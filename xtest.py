@@ -244,6 +244,15 @@ print()
 
 
 # BUILT-IN FUNCTION: 
+enumerate()
+# What it does: Pairs indices with iterable elements.
+# Why use it: Tracks position in loops.
+# How it works: Returns iterator of (index, value).
+# When to use: Index-based array operations.
+# Time/Space: O(1) create, O(1) per iteration.
+
+
+# BUILT-IN FUNCTION: 
 sum()
 # What it does: Sums iterable items.
 # Why use it: Aggregates numbers easily.
@@ -253,12 +262,12 @@ sum()
 
 
 # BUILT-IN FUNCTION: 
-enumerate()
-# What it does: Pairs indices with iterable elements.
-# Why use it: Tracks position in loops.
-# How it works: Returns iterator of (index, value).
-# When to use: Index-based array operations.
-# Time/Space: O(1) create, O(1) per iteration.
+max()
+# What it does: Returns largest item.
+# Why use it: Finds max quickly.
+# How it works: Iterates once; optional key.
+# When to use: Max in arrays or profits.
+# Time/Space: O(n) time, O(1) space.
 
 
 # BUILT-IN FUNCTION: 
@@ -316,6 +325,15 @@ dict()
 
 
 # BUILT-IN FUNCTION: 
+set()
+# What it does: Creates set from iterable, unique elements.
+# Why use it: Fast deduplication and membership.
+# How it works: Hashes elements; unordered.
+# When to use: Removing duplicates in arrays.
+# Time/Space: O(n) time, O(n) space.
+
+
+# BUILT-IN FUNCTION: 
 defaultdict(int)
 # What it does: Dictionary with default 0 for missing keys.
 # Why use it: Simplifies frequency counting.
@@ -352,30 +370,12 @@ iter()
 
 
 # BUILT-IN FUNCTION: 
-zip()
-# What it does: Pairs elements from iterables.
-# Why use it: Simultaneous iteration.
-# How it works: Stops at shortest iterable.
-# When to use: Merging or comparing arrays.
-# Time/Space: O(1) create, O(1) per iteration.
-
-
-# BUILT-IN FUNCTION: 
 next()
 # What it does: Gets next from iterator.
 # Why use it: Step-by-step iteration control.
 # How it works: Calls __next__; default for exhausted.
 # When to use: Custom generator processing.
 # Time/Space: O(1) per call, O(1) space.
-
-
-# BUILT-IN FUNCTION: 
-set()
-# What it does: Creates set from iterable, unique elements.
-# Why use it: Fast deduplication and membership.
-# How it works: Hashes elements; unordered.
-# When to use: Removing duplicates in arrays.
-# Time/Space: O(n) time, O(n) space.
 
 
 # BUILT-IN FUNCTION: 
@@ -388,12 +388,21 @@ sorted()
 
 
 # BUILT-IN FUNCTION: 
-max()
-# What it does: Returns largest item.
-# Why use it: Finds max quickly.
-# How it works: Iterates once; optional key.
-# When to use: Max in arrays or profits.
-# Time/Space: O(n) time, O(1) space.
+zip()
+# What it does: Pairs elements from iterables.
+# Why use it: Simultaneous iteration.
+# How it works: Stops at shortest iterable.
+# When to use: Merging or comparing arrays.
+# Time/Space: O(1) create, O(1) per iteration.
+
+
+# BUILT-IN FUNCTION: 
+type()
+# What it does: Returns object's type.
+# Why use it: Identifies data types.
+# How it works: Returns class; compares with ==.
+# When to use: Debugging or type-specific logic.
+# Time/Space: O(1) time, O(1) space.
 
 
 # BUILT-IN FUNCTION: 
@@ -413,14 +422,6 @@ isinstance()
 # When to use: Input checks in polymorphic code.
 # Time/Space: O(1) time, O(1) space.
 
-
-# BUILT-IN FUNCTION: 
-type()
-# What it does: Returns object's type.
-# Why use it: Identifies data types.
-# How it works: Returns class; compares with ==.
-# When to use: Debugging or type-specific logic.
-# Time/Space: O(1) time, O(1) space.
 
 
 

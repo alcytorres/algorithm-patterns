@@ -717,6 +717,31 @@ print(len(array))  # Output: 3
 
 
 # BUILT-IN FUNCTION: 
+range()
+# What it does: Generates number sequence.
+# Why use it: Efficient looping without list.
+# How it works: Lazy; stores start/stop/step.
+# When to use: Iteration in arrays or matrices.
+# Time/Space: O(1) time, O(1) space.
+
+# Syntax:
+range(stop)  # From 0 to 'stop-1'
+range(start, stop, step)  # From 'start' to 'stop-1' with 'step'
+
+# Basic Example 1 (Default):
+print(list(range(3)))  # Output: [0, 1, 2]
+
+# Basic Example 2 (Start/Stop):
+print(list(range(1, 4)))  # Output: [1, 2, 3]
+
+# Basic Example 3 (With Step):
+print(list(range(0, 6, 2)))  # Output: [0, 2, 4]
+
+# DSA Example (Loop Range):
+print(list(range(3)))  # Output: [0, 1, 2]
+
+
+# BUILT-IN FUNCTION: 
 print()
 # What regenerative: Outputs objects to console with formatting.
 # Why use it: Debugs code and displays results.
@@ -751,6 +776,90 @@ print("Hello", end="!")  # Hello!
 # Basic Example 6 (Custom join + custom end with newline):
 print("a", "b", sep="-", end=".\n")  # a-b.
 
+
+# BUILT-IN FUNCTION: 
+enumerate()
+# What it does: Pairs indices with iterable elements.
+# Why use it: Tracks position in loops.
+# How it works: Returns iterator of (index, value).
+# When to use: Index-based array operations.
+# Time/Space: O(1) create, O(1) per iteration.
+
+# Syntax:
+enumerate(iterable, start=0)  # (index, value) tuples
+
+# Basic Example 1 (Default Start):
+nums = ["a", "b"]
+for i, v in enumerate(nums):
+    print(i, v)  # Output: 0 a, 1 b
+
+# Basic Example 2 (Custom Start):
+nums = ["a", "b"]
+for i, v in enumerate(nums, 1):
+    print(i, v)  # Output: 1 a, 2 b
+
+# Basic Example 3 (To List):
+nums = ["a"]
+print(list(enumerate(nums)))  # Output: [(0, "a")]
+
+# DSA Example (Index Tracking):
+nums = ["a", "b"]
+for i, val in enumerate(nums):
+    print(i, val)  # Output: 0 a, 1 b
+
+
+# BUILT-IN FUNCTION: 
+sum()
+# What it does: Sums iterable items.
+# Why use it: Aggregates numbers easily.
+# How it works: Adds elements; start optional.
+# When to use: Subarray or cumulative sums.
+# Time/Space: O(n) time, O(1) space.
+
+# Syntax:
+sum(iterable)  # Sum of elements
+
+# Basic Example 1 (List):
+nums = [1, 2, 3]
+print(sum(nums))  # Output: 6
+
+# Basic Example 2 (With Start):
+nums = [1, 2]
+print(sum(nums, 10))  # Output: 13
+
+# Basic Example 3 (Empty):
+print(sum([]))  # Output: 0
+
+# DSA Example (Array Sum):
+numbers = [1, 2, 3]
+print(sum(numbers))  # Output: 6
+
+
+# BUILT-IN FUNCTION: 
+max()
+# What it does: Returns largest item.
+# Why use it: Finds max quickly.
+# How it works: Iterates once; optional key.
+# When to use: Max in arrays or profits.
+# Time/Space: O(n) time, O(1) space.
+
+# Syntax:
+max(iterable)  # Largest in iterable
+
+# Basic Example 1 (List):
+nums = [1, 5, 3]
+print(max(nums))  # Output: 5
+
+# Basic Example 2 (Arguments):
+print(max(1, 2, 3))  # Output: 3
+
+# Basic Example 3 (Strings):
+chars = ["a", "c", "b"]
+print(max(chars))  # Output: "c"
+
+# DSA Example (Max in Array):
+numbers = [1, 5, 3]
+print(max(numbers))  # Output: 5
 
 
 # BUILT-IN FUNCTION: 
@@ -837,32 +946,6 @@ print(float(num) + 0.55)  # Output: 124.0
 
 
 # BUILT-IN FUNCTION: 
-input()
-# What it does: Reads user input as string.
-# Why use it: Gets interactive data.
-# How it works: Optional prompt; strips newline.
-# When to use: Testing or user-driven algorithms.
-# Time/Space: O(n) time, O(n) space for string.
-
-# Syntax:
-input(prompt)  # Returns string; 'prompt' optional
-
-# Basic Example 1 (No Prompt):
-# input()  # Waits for input, returns string
-
-# Basic Example 2 (With Prompt):
-# input("Enter: ")  # Displays "Enter: ", returns input
-
-# Basic Example 3 (Process Input):
-# num = input("Num: ")
-# print(int(num))  # Converts input to int
-
-# DSA Example (Read Number):
-# num = input("Enter number: ")
-# print(int(num) + 1)  # Output: input + 1
-
-
-# BUILT-IN FUNCTION: 
 list()
 # What it does: Creates list from iterable.
 # Why use it: Converts to mutable list.
@@ -940,6 +1023,34 @@ print(dict())  # Output: {}
 # DSA Example (From List of Pairs):
 pairs = [("a", 1), ("b", 2)]
 print(dict(pairs))  # Output: {"a": 1, "b": 2}
+
+
+# BUILT-IN FUNCTION: 
+set()
+# What it does: Creates set from iterable, unique elements.
+# Why use it: Fast deduplication and membership.
+# How it works: Hashes elements; unordered.
+# When to use: Removing duplicates in arrays.
+# Time/Space: O(n) time, O(n) space.
+
+# Syntax:
+set(iterable)  # New set; 'iterable' optional
+
+# Basic Example 1 (From List):
+lst = [1, 2, 2]
+print(set(lst))  # Output: {1, 2}
+
+# Basic Example 2 (From String):
+text = "aab"
+print(set(text))  # Output: {"a", "b"}
+
+# Basic Example 3 (Empty):
+print(set())  # Output: set()
+
+# DSA Example (Remove Duplicates):
+nums = [1, 2, 2]
+print(set(nums))  # Output: {1, 2}
+
 
 
 # BUILT-IN FUNCTION: 
@@ -1052,38 +1163,6 @@ c = Counter(votes)
 print(c.most_common(1))  # Output: [('a', 3)]
 
 
-
-# BUILT-IN FUNCTION: 
-enumerate()
-# What it does: Pairs indices with iterable elements.
-# Why use it: Tracks position in loops.
-# How it works: Returns iterator of (index, value).
-# When to use: Index-based array operations.
-# Time/Space: O(1) create, O(1) per iteration.
-
-# Syntax:
-enumerate(iterable, start=0)  # (index, value) tuples
-
-# Basic Example 1 (Default Start):
-nums = ["a", "b"]
-for i, v in enumerate(nums):
-    print(i, v)  # Output: 0 a, 1 b
-
-# Basic Example 2 (Custom Start):
-nums = ["a", "b"]
-for i, v in enumerate(nums, 1):
-    print(i, v)  # Output: 1 a, 2 b
-
-# Basic Example 3 (To List):
-nums = ["a"]
-print(list(enumerate(nums)))  # Output: [(0, "a")]
-
-# DSA Example (Index Tracking):
-nums = ["a", "b"]
-for i, val in enumerate(nums):
-    print(i, val)  # Output: 0 a, 1 b
-
-
 # BUILT-IN FUNCTION: 
 iter()
 # What it does: Creates iterator from iterable.
@@ -1133,28 +1212,60 @@ print(type(iterator))  # Output: <class 'list_iterator'>
 
 
 # BUILT-IN FUNCTION: 
-range()
-# What it does: Generates number sequence.
-# Why use it: Efficient looping without list.
-# How it works: Lazy; stores start/stop/step.
-# When to use: Iteration in arrays or matrices.
-# Time/Space: O(1) time, O(1) space.
+next()
+# What it does: Gets next from iterator.
+# Why use it: Step-by-step iteration control.
+# How it works: Calls __next__; default for exhausted.
+# When to use: Custom generator processing.
+# Time/Space: O(1) per call, O(1) space.
 
 # Syntax:
-range(stop)  # From 0 to 'stop-1'
-range(start, stop, step)  # From 'start' to 'stop-1' with 'step'
+next(iterator, default)  # Next item or 'default'
 
-# Basic Example 1 (Default):
-print(list(range(3)))  # Output: [0, 1, 2]
+# Basic Example 1 (From List Iterator):
+it = iter([1, 2])
+print(next(it))  # Output: 1
 
-# Basic Example 2 (Start/Stop):
-print(list(range(1, 4)))  # Output: [1, 2, 3]
+# Basic Example 2 (With Default):
+it = iter([])
+print(next(it, "end"))  # Output: "end"
 
-# Basic Example 3 (With Step):
-print(list(range(0, 6, 2)))  # Output: [0, 2, 4]
+# Basic Example 3 (Multiple Calls):
+it = iter([1, 2])
+print(next(it))  # Output: 1
+print(next(it))  # Output: 2
 
-# DSA Example (Loop Range):
-print(list(range(3)))  # Output: [0, 1, 2]
+# DSA Example (Iterator Traversal):
+iter_nums = iter([1, 2, 3])
+print(next(iter_nums))  # Output: 1
+
+
+# BUILT-IN FUNCTION: 
+sorted()
+# What it does: Returns sorted list from iterable.
+# Why use it: Sorts without modifying original.
+# How it works: Stable sort; optional key/reverse.
+# When to use: Preparing for binary search.
+# Time/Space: O(n log n) time, O(n) space.
+
+# Syntax:
+sorted(iterable, reverse=False)  # New sorted list
+
+# Basic Example 1 (Ascending):
+nums = [3, 1, 2]
+print(sorted(nums))  # Output: [1, 2, 3]
+
+# Basic Example 2 (Descending):
+nums = [3, 1, 2]
+print(sorted(nums, reverse=True))  # Output: [3, 2, 1]
+
+# Basic Example 3 (Strings):
+chars = ["b", "a"]
+print(sorted(chars))  # Output: ["a", "b"]
+
+# DSA Example (Sort Array):
+nums = [3, 1, 2]
+print(sorted(nums))  # Output: [1, 2, 3]
 
 
 # BUILT-IN FUNCTION: 
@@ -1190,60 +1301,59 @@ chars = ["a", "b"]
 print(list(zip(nums, chars)))  # Output: [(1, "a"), (2, "b")]
 
 
-# BUILT-IN FUNCTION: 
-next()
-# What it does: Gets next from iterator.
-# Why use it: Step-by-step iteration control.
-# How it works: Calls __next__; default for exhausted.
-# When to use: Custom generator processing.
-# Time/Space: O(1) per call, O(1) space.
-
-# Syntax:
-next(iterator, default)  # Next item or 'default'
-
-# Basic Example 1 (From List Iterator):
-it = iter([1, 2])
-print(next(it))  # Output: 1
-
-# Basic Example 2 (With Default):
-it = iter([])
-print(next(it, "end"))  # Output: "end"
-
-# Basic Example 3 (Multiple Calls):
-it = iter([1, 2])
-print(next(it))  # Output: 1
-print(next(it))  # Output: 2
-
-# DSA Example (Iterator Traversal):
-iter_nums = iter([1, 2, 3])
-print(next(iter_nums))  # Output: 1
-
 
 # BUILT-IN FUNCTION: 
-set()
-# What it does: Creates set from iterable, unique elements.
-# Why use it: Fast deduplication and membership.
-# How it works: Hashes elements; unordered.
-# When to use: Removing duplicates in arrays.
-# Time/Space: O(n) time, O(n) space.
+type()
+# What it does: Returns object's type.
+# Why use it: Identifies data types.
+# How it works: Returns class; compares with ==.
+# When to use: Debugging or type-specific logic.
+# Time/Space: O(1) time, O(1) space.
 
 # Syntax:
-set(iterable)  # New set; 'iterable' optional
+type(object)  # Returns type class
 
-# Basic Example 1 (From List):
-lst = [1, 2, 2]
-print(set(lst))  # Output: {1, 2}
+# Basic Example 1 (String):
+value = "abc"
+print(type(value))  # Output: <class 'str'>
 
-# Basic Example 2 (From String):
-text = "aab"
-print(set(text))  # Output: {"a", "b"}
+# Basic Example 2 (Compare Type):
+num = 42
+print(type(num) == int)  # Output: True
 
-# Basic Example 3 (Empty):
-print(set())  # Output: set()
+# Basic Example 3 (List):
+lst = []
+print(type(lst))  # Output: <class 'list'>
 
-# DSA Example (Remove Duplicates):
-nums = [1, 2, 2]
-print(set(nums))  # Output: {1, 2}
+# DSA Example (Type Validation):
+value = "123"
+print(type(value) == str)  # Output: True
+
+
+# BUILT-IN FUNCTION: 
+input()
+# What it does: Reads user input as string.
+# Why use it: Gets interactive data.
+# How it works: Optional prompt; strips newline.
+# When to use: Testing or user-driven algorithms.
+# Time/Space: O(n) time, O(n) space for string.
+
+# Syntax:
+input(prompt)  # Returns string; 'prompt' optional
+
+# Basic Example 1 (No Prompt):
+# input()  # Waits for input, returns string
+
+# Basic Example 2 (With Prompt):
+# input("Enter: ")  # Displays "Enter: ", returns input
+
+# Basic Example 3 (Process Input):
+# num = input("Num: ")
+# print(int(num))  # Converts input to int
+
+# DSA Example (Read Number):
+# num = input("Enter number: ")
+# print(int(num) + 1)  # Output: input + 1
 
 
 # BUILT-IN FUNCTION: 
@@ -1275,115 +1385,6 @@ value = "123"
 print(isinstance(value, str))  # Output: True
 
 
-# BUILT-IN FUNCTION: 
-type()
-# What it does: Returns object's type.
-# Why use it: Identifies data types.
-# How it works: Returns class; compares with ==.
-# When to use: Debugging or type-specific logic.
-# Time/Space: O(1) time, O(1) space.
-
-# Syntax:
-type(object)  # Returns type class
-
-# Basic Example 1 (String):
-value = "abc"
-print(type(value))  # Output: <class 'str'>
-
-# Basic Example 2 (Compare Type):
-num = 42
-print(type(num) == int)  # Output: True
-
-# Basic Example 3 (List):
-lst = []
-print(type(lst))  # Output: <class 'list'>
-
-# DSA Example (Type Validation):
-value = "123"
-print(type(value) == str)  # Output: True
-
-
-# BUILT-IN FUNCTION: 
-sorted()
-# What it does: Returns sorted list from iterable.
-# Why use it: Sorts without modifying original.
-# How it works: Stable sort; optional key/reverse.
-# When to use: Preparing for binary search.
-# Time/Space: O(n log n) time, O(n) space.
-
-# Syntax:
-sorted(iterable, reverse=False)  # New sorted list
-
-# Basic Example 1 (Ascending):
-nums = [3, 1, 2]
-print(sorted(nums))  # Output: [1, 2, 3]
-
-# Basic Example 2 (Descending):
-nums = [3, 1, 2]
-print(sorted(nums, reverse=True))  # Output: [3, 2, 1]
-
-# Basic Example 3 (Strings):
-chars = ["b", "a"]
-print(sorted(chars))  # Output: ["a", "b"]
-
-# DSA Example (Sort Array):
-nums = [3, 1, 2]
-print(sorted(nums))  # Output: [1, 2, 3]
-
-
-
-# BUILT-IN FUNCTION: 
-max()
-# What it does: Returns largest item.
-# Why use it: Finds max quickly.
-# How it works: Iterates once; optional key.
-# When to use: Max in arrays or profits.
-# Time/Space: O(n) time, O(1) space.
-
-# Syntax:
-max(iterable)  # Largest in iterable
-
-# Basic Example 1 (List):
-nums = [1, 5, 3]
-print(max(nums))  # Output: 5
-
-# Basic Example 2 (Arguments):
-print(max(1, 2, 3))  # Output: 3
-
-# Basic Example 3 (Strings):
-chars = ["a", "c", "b"]
-print(max(chars))  # Output: "c"
-
-# DSA Example (Max in Array):
-numbers = [1, 5, 3]
-print(max(numbers))  # Output: 5
-
-
-# BUILT-IN FUNCTION: 
-sum()
-# What it does: Sums iterable items.
-# Why use it: Aggregates numbers easily.
-# How it works: Adds elements; start optional.
-# When to use: Subarray or cumulative sums.
-# Time/Space: O(n) time, O(1) space.
-
-# Syntax:
-sum(iterable)  # Sum of elements
-
-# Basic Example 1 (List):
-nums = [1, 2, 3]
-print(sum(nums))  # Output: 6
-
-# Basic Example 2 (With Start):
-nums = [1, 2]
-print(sum(nums, 10))  # Output: 13
-
-# Basic Example 3 (Empty):
-print(sum([]))  # Output: 0
-
-# DSA Example (Array Sum):
-numbers = [1, 2, 3]
-print(sum(numbers))  # Output: 6
 
 
 
