@@ -170,7 +170,7 @@ Why this code Works:
     • Intuition: Like checking nested boxes — each new box opened must be the next one closed.
 
 ---
-TLDR (one sentence):
+TLDR:
     • Use a stack to push open brackets and ensure each close matches the most recent open; valid if stack is empty at the end.
 
 ---
@@ -289,7 +289,7 @@ In short:
 Q: Why does the code use `if not stack: return False`?
   • It checks if the stack is empty before trying to pop.  
 
-  • If the stack is empty, it means there's a closing bracket without a matching opening one.  
+  • If the stack is empty, it means we found a closing bracket before its matching opening bracket.
 
   • `not stack` → True when stack is empty, so we return False because it's invalid syntax.  
 
@@ -337,7 +337,7 @@ else:
 Notes:
 -------
   • Falsy values: `0`, `""`, `[]`, `{}`, `set()`, `None`, `False`
-  
+
   • Truthy values: everything else (non-empty strings, non-zero numbers, non-empty containers, etc.)
 
 """
@@ -350,13 +350,13 @@ def isValid(s):
     stack = []                          # Stack to track opening brackets
     matching = {"(": ")", "[": "]", "{": "}"}  # Map opening to closing bracket
    
-    for c in s:                         # Iterate over each character
-        if c in matching:               # If character is opening bracket
-            stack.append(c)             # Push onto stack
+    for c in s:                # Iterate over each character
+        if c in matching:      # If character is opening bracket
+            stack.append(c)    # Push onto stack
 
-        else:                           # If character is closing bracket
-            if not stack:               # If stack empty (no opening)
-                return False            # Invalid: closing without opening
+        else:                  # If character is closing bracket
+            if not stack:      # If stack empty (no opening)
+                return False   # Invalid: closing without opening
            
             last_open = stack.pop()       # Pop last opening bracket
             if matching[last_open] != c:  # If not matching pair

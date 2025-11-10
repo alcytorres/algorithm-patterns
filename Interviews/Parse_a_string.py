@@ -10,6 +10,58 @@ Inflix operators can be only + or * or -
 expr = expression 
 """
 
+# ––––––––––––––––––––––––––––––––––––––––––––––
+# Solution 1 – eval magic
+def fn(s):
+    return eval(s)
+
+# Example usage
+s = "1 + 3 * 10"
+print(fn(s))  # Output: 31
+
+# Time complexity:O(n) – where n is the length of the string
+# Space complexity:O(1) – constant extra space (not counting the input string)
+
+
+# ––––––––––––––––––––––––––––––––––––––––––––––
+# Solution 2 – Split-add-multiply
+def fn(s):
+    s = s.replace(' ', '')        # "1 + 3* 10" → "1+3*10"
+    parts = s.split('+')          # ["1", "3*10"]
+    total = 0
+    for part in parts:
+        if '*' in part:
+            nums = part.split('*')  # "3*10" → ["3", "10"]
+            val = 1
+            for n in nums:
+                val *= int(n)       # 3 * 10 = 30
+            total += val
+        else:
+            total += int(part)      # just add the number
+    return total
+
+# === Test ===
+s = "1 + 3 * 10"
+print(fn(s))  # 31
+
+# More examples:
+# print(fn("2 + 5"))         # 7
+# print(fn("4 * 5 + 2 * 3")) # 26
+# print(fn("10"))            # 10
+
+
+# Time: O(n) – we look at each character once.
+# Space: O(n) – we keep two short lists that together are at most the size of the input.
+
+
+
+
+
+
+
+
+
+# ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 
 def evaluate(expr):
     # turn "1 + 2 * 10" → ['1', '+', '2', '*', '10']

@@ -358,3 +358,26 @@ Step order (what happens in order):
 Output: True ✅ 
 
 """
+
+
+
+# ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+# Same Solution rewritten
+
+def backspaceCompare(s, t):
+    def build(s):
+        stack = []
+
+        for c in s:
+            if stack and c == "#":
+                stack.pop()
+            else:
+                stack.append(c)
+        
+        return "".join(stack)
+
+    return build(s) == build(t)
+
+
+s = "ab#c"; t = "ad#c"
+print(backspaceCompare(s, t))  # Output: True 

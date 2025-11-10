@@ -7,36 +7,120 @@
 
 
 
-
-
+# ============================================================
 # STRING METHODS
+# ============================================================
 
 # STRING METHOD: 
-.upper()
-# What it does: Converts all characters in a string to uppercase.
-# Why use it: Standardizes text for comparisons or display.
-# How it works: Returns a new string; original unchanged.
-# When to use: Case-insensitive matching in palindromes or anagrams.
-# Time/Space: O(n) time (n = string length), O(n) space for new string.
+.split()
+# What it does: Splits string into list based on delimiter.
+# Why use it: Parses strings into tokens efficiently.
+# How it works: Default delimiter is whitespace; optional maxsplit.
+# When to use: Tokenizing inputs in word or array problems.
+# Time/Space: O(n) time (n = string length), O(n) space for list.
 
 # Syntax:
-string.upper()  # Returns a new string with all uppercase letters
+string.split(separator)  # Returns list; 'separator' optional (defaults to whitespace)
 
-# Basic Example 1 (Simple String):
-text = "hello"
-print(text.upper())  # Output: "HELLO"
+# Basic Example 1 (Default Whitespace):
+text = "hello world"
+print(text.split())  # Output: ['hello', 'world']
 
-# Basic Example 2 (Mixed Case):
-text = "Hello World"
-print(text.upper())  # Output: "HELLO WORLD"
+# Basic Example 2 (Custom Delimiter):
+text = "a,b,c"
+print(text.split(','))  # Output: ['a', 'b', 'c']
 
-# Basic Example 3 (Empty String):
-text = ""
-print(text.upper())  # Output: ""
+# Basic Example 3 (No Delimiter):
+text = "abc"
+print(text.split())  # Output: ['abc']
 
-# DSA Example (Palindrome Prep):
-word = "RaCeCaR"
-print(word.upper())  # Output: "RACECAR"
+# DSA Example (Word Parsing):
+text = "hello world"
+print(text.split())  # Output: ['hello', 'world']
+
+
+# STRING METHOD: 
+.join()
+# What it does: Joins iterable elements into string with separator.
+# Why use it: Builds strings from lists efficiently.
+# How it works: Iterable must contain strings; concatenates with separator.
+# When to use: Constructing outputs from token lists.
+# Time/Space: O(n) time (n = total length), O(n) space for string.
+
+# Syntax:
+separator.join(iterable)  # Returns string from 'iterable' elements
+
+# Basic Example 1 (Space Separator):
+words = ["hello", "world"]
+print(" ".join(words))  # Output: "hello world"
+
+# Basic Example 2 (Comma Separator):
+chars = ["a", "b", "c"]
+print(",".join(chars))  # Output: "a,b,c"
+
+# Basic Example 3 (No Separator):
+chars = ["a", "b"]
+print("".join(chars))  # Output: "ab"
+
+# Basic Example 4 (Arrow Separator):
+words = ["1", "2", "3", "4"]
+print(" -> ".join(words))
+
+# DSA Example (List to String):
+words = ["hello", "world"]
+print(" ".join(words))  # Output: "hello world"
+
+
+# STRING METHOD: 
+ord()
+# What it does: Returns Unicode code point of a character.
+# Why use it: Converts char to int for indexing or math.
+# How it works: 'a' → 97, 'A' → 65, '0' → 48.
+# When to use: String → array index (e.g., 26-letter problems).
+# Time/Space: O(1) time, O(1) space.
+
+# Syntax:
+ord(char)  # char must be length 1
+
+# Basic Example 1:
+print(ord('a'))  # Output: 97
+
+# Basic Example 2:
+print(ord('A'))  # Output: 65
+
+# Basic Example 3:
+print(ord('0'))  # Output: 48
+
+# DSA Example (Char to Index):
+s = "abc"
+index = ord(s[0]) - ord('a')  # 'a' → 0
+print(index)  # Output: 0
+
+
+# STRING METHOD: 
+chr()
+# What it does: Returns character from Unicode code point.
+# Why use it: Converts int to char (reverse of ord()).
+# How it works: 97 → 'a', 65 → 'A'.
+# When to use: Building strings from indices.
+# Time/Space: O(1) time, O(1) space.
+
+# Syntax:
+chr(integer)  # integer in valid Unicode range
+
+# Basic Example 1:
+print(chr(97))  # Output: a
+
+# Basic Example 2:
+print(chr(65))  # Output: A
+
+# Basic Example 3:
+print(chr(48))  # Output: 0
+
+# DSA Example (Index to Char):
+index = 0
+char = chr(index + ord('a'))
+print(char)  # Output: a
 
 
 # STRING METHOD: 
@@ -65,6 +149,34 @@ print(text.lower())  # Output: ""
 # DSA Example (Anagram Prep):
 word = "Listen"
 print(word.lower())  # Output: "listen"
+
+
+# STRING METHOD: 
+.upper()
+# What it does: Converts all characters in a string to uppercase.
+# Why use it: Standardizes text for comparisons or display.
+# How it works: Returns a new string; original unchanged.
+# When to use: Case-insensitive matching in palindromes or anagrams.
+# Time/Space: O(n) time (n = string length), O(n) space for new string.
+
+# Syntax:
+string.upper()  # Returns a new string with all uppercase letters
+
+# Basic Example 1 (Simple String):
+text = "hello"
+print(text.upper())  # Output: "HELLO"
+
+# Basic Example 2 (Mixed Case):
+text = "Hello World"
+print(text.upper())  # Output: "HELLO WORLD"
+
+# Basic Example 3 (Empty String):
+text = ""
+print(text.upper())  # Output: ""
+
+# DSA Example (Palindrome Prep):
+word = "RaCeCaR"
+print(word.upper())  # Output: "RACECAR"
 
 
 # STRING METHOD: 
@@ -152,34 +264,6 @@ print(text.isnumeric())  # Output: True
 
 
 # STRING METHOD: 
-.split()
-# What it does: Splits string into list based on delimiter.
-# Why use it: Parses strings into tokens efficiently.
-# How it works: Default delimiter is whitespace; optional maxsplit.
-# When to use: Tokenizing inputs in word or array problems.
-# Time/Space: O(n) time (n = string length), O(n) space for list.
-
-# Syntax:
-string.split(separator)  # Returns list; 'separator' optional (defaults to whitespace)
-
-# Basic Example 1 (Default Whitespace):
-text = "hello world"
-print(text.split())  # Output: ['hello', 'world']
-
-# Basic Example 2 (Custom Delimiter):
-text = "a,b,c"
-print(text.split(','))  # Output: ['a', 'b', 'c']
-
-# Basic Example 3 (No Delimiter):
-text = "abc"
-print(text.split())  # Output: ['abc']
-
-# DSA Example (Word Parsing):
-text = "hello world"
-print(text.split())  # Output: ['hello', 'world']
-
-
-# STRING METHOD: 
 .format()
 # What it does: Formats string with placeholders.
 # Why use it: Builds dynamic strings easily.
@@ -207,42 +291,12 @@ template = "Value: {}"
 print(template.format(42))  # Output: "Value: 42"
 
 
-# STRING METHOD: 
-.join()
-# What it does: Joins iterable elements into string with separator.
-# Why use it: Builds strings from lists efficiently.
-# How it works: Iterable must contain strings; concatenates with separator.
-# When to use: Constructing outputs from token lists.
-# Time/Space: O(n) time (n = total length), O(n) space for string.
-
-# Syntax:
-separator.join(iterable)  # Returns string from 'iterable' elements
-
-# Basic Example 1 (Space Separator):
-words = ["hello", "world"]
-print(" ".join(words))  # Output: "hello world"
-
-# Basic Example 2 (Comma Separator):
-chars = ["a", "b", "c"]
-print(",".join(chars))  # Output: "a,b,c"
-
-# Basic Example 3 (No Separator):
-chars = ["a", "b"]
-print("".join(chars))  # Output: "ab"
-
-# Basic Example 4 (Arrow Separator):
-words = ["1", "2", "3", "4"]
-print(" -> ".join(words))
-
-# DSA Example (List to String):
-words = ["hello", "world"]
-print(" ".join(words))  # Output: "hello world"
 
 
-
-
+# ============================================================
 # LIST METHODS
-# ----------------------------------------------------------------------------------
+# ============================================================
+
 # LIST METHOD: 
 .append()
 # What it does: Adds a single element to the end of a list.
@@ -274,6 +328,69 @@ result = []
 for i in range(3):
     result.append(i)
 print(result)  # Output: [0, 1, 2]
+
+
+# LIST METHOD: 
+.pop()
+# What it does: Removes and returns element at index (default last).
+# Why use it: Removes while retrieving value.
+# How it works: Shifts if not last; modifies in place.
+# When to use: Implementing stacks or queues.
+# Time/Space: O(1) for last, O(n) otherwise, O(1) space.
+
+# Syntax:
+list.pop(index)  # Removes/returns at 'index' (optional, defaults -1)
+
+# Basic Example 1 (Pop Last):
+lst = [1, 2, 3]
+item = lst.pop()
+print(item, lst)  # Output: 3 [1, 2]
+
+# Basic Example 2 (Pop Index):
+lst = [1, 2, 3]
+item = lst.pop(1)
+print(item, lst)  # Output: 2 [1, 3]
+
+# Basic Example 3 (Empty List):
+# lst = []
+# lst.pop()  # Raises IndexError
+
+# DSA Example (Stack Pop):
+stack = [1, 2, 3]
+last = stack.pop()
+print(last, stack)  # Output: 3 [1, 2]
+
+
+# LIST METHOD: 
+.sort()
+# What it does: Sorts list in place.
+# Why use it: Prepares data efficiently.
+# How it works: Modifies original; stable sort.
+# When to use: In-place for two-pointer.
+# Time/Space: O(n log n) time, O(1) space.
+
+# Syntax:
+list.sort()  # Sorts in place; reverse optional
+
+# Basic Example 1 (Ascending):
+nums = [3, 1, 2]
+nums.sort()
+print(nums)  # Output: [1, 2, 3]
+
+# Basic Example 2 (Descending):
+nums = [3, 1, 2]
+nums.sort(reverse=True)
+print(nums)  # Output: [3, 2, 1]
+
+# Basic Example 3 (Strings):
+chars = ["b", "a"]
+chars.sort()
+print(chars)  # Output: ["a", "b"]
+
+# DSA Example (Sort for Binary Search):
+numbers = [3, 1, 2]
+numbers.sort()
+print(numbers)  # Output: [1, 2, 3]
 
 
 # LIST METHOD: 
@@ -309,38 +426,6 @@ print(result)  # Output: [1, 2, 3, 4]
 
 
 # LIST METHOD: 
-.insert()
-# What it does: Inserts element at specified index.
-# Why use it: Adds at specific positions.
-# How it works: Shifts elements right; modifies in place.
-# When to use: Maintaining sorted order in arrays.
-# Time/Space: O(n) time (shifting), O(1) space per call.
-
-# Syntax:
-list.insert(index, item)  # Inserts 'item' at 'index'
-
-# Basic Example 1 (Insert Middle):
-lst = [1, 3]
-lst.insert(1, 2)
-print(lst)  # Output: [1, 2, 3]
-
-# Basic Example 2 (Insert Start):
-lst = [2, 3]
-lst.insert(0, 1)
-print(lst)  # Output: [1, 2, 3]
-
-# Basic Example 3 (Insert End):
-lst = [1, 2]
-lst.insert(2, 3)
-print(lst)  # Output: [1, 2, 3]
-
-# DSA Example (Insert in Sorted List):
-numbers = [1, 3]
-numbers.insert(1, 2)
-print(numbers)  # Output: [1, 2, 3]
-
-
-# LIST METHOD: 
 .remove()
 # What it does: Removes first occurrence of value.
 # Why use it: Deletes by value, not index.
@@ -372,40 +457,102 @@ print(numbers)  # Output: [1, 2]
 
 
 # LIST METHOD: 
-.pop()
-# What it does: Removes and returns element at index (default last).
-# Why use it: Removes while retrieving value.
-# How it works: Shifts if not last; modifies in place.
-# When to use: Implementing stacks or queues.
-# Time/Space: O(1) for last, O(n) otherwise, O(1) space.
+.insert()
+# What it does: Inserts element at specified index.
+# Why use it: Adds at specific positions.
+# How it works: Shifts elements right; modifies in place.
+# When to use: Maintaining sorted order in arrays.
+# Time/Space: O(n) time (shifting), O(1) space per call.
 
 # Syntax:
-list.pop(index)  # Removes/returns at 'index' (optional, defaults -1)
+list.insert(index, item)  # Inserts 'item' at 'index'
 
-# Basic Example 1 (Pop Last):
-lst = [1, 2, 3]
-item = lst.pop()
-print(item, lst)  # Output: 3 [1, 2]
+# Basic Example 1 (Insert Middle):
+lst = [1, 3]
+lst.insert(1, 2)
+print(lst)  # Output: [1, 2, 3]
 
-# Basic Example 2 (Pop Index):
-lst = [1, 2, 3]
-item = lst.pop(1)
-print(item, lst)  # Output: 2 [1, 3]
+# Basic Example 2 (Insert Start):
+lst = [2, 3]
+lst.insert(0, 1)
+print(lst)  # Output: [1, 2, 3]
 
-# Basic Example 3 (Empty List):
-# lst = []
-# lst.pop()  # Raises IndexError
+# Basic Example 3 (Insert End):
+lst = [1, 2]
+lst.insert(2, 3)
+print(lst)  # Output: [1, 2, 3]
 
-# DSA Example (Stack Pop):
-stack = [1, 2, 3]
-last = stack.pop()
-print(last, stack)  # Output: 3 [1, 2]
+# DSA Example (Insert in Sorted List):
+numbers = [1, 3]
+numbers.insert(1, 2)
+print(numbers)  # Output: [1, 2, 3]
 
 
 
 
+
+# ============================================================
 # DICTIONARY METHODS
-# ----------------------------------------------------------------------------------
+# ============================================================
+
+# DICTIONARY METHOD: 
+.get()
+# What it does: Gets value for key, default if missing.
+# Why use it: Safe access without KeyError.
+# How it works: O(1) lookup; optional default.
+# When to use: Frequency counts in hash maps.
+# Time/Space: O(1) average time, O(1) space.
+
+# Syntax:
+dict.get(key, default)  # Returns value or 'default' (None if omitted)
+
+# Basic Example 1 (Existing Key):
+d = {"a": 1}
+print(d.get("a"))  # Output: 1
+
+# Basic Example 2 (Missing Key):
+d = {"a": 1}
+print(d.get("b"))  # Output: None
+
+# Basic Example 3 (With Default):
+d = {"a": 1}
+print(d.get("b", 0))  # Output: 0
+
+# DSA Example (Frequency Count):
+counts = {"a": 1}
+counts["b"] = counts.get("b", 0) + 1
+print(counts)  # Output: {"a": 1, "b": 1}
+
+
+# DICTIONARY METHOD: 
+.items()
+# What it does: Returns view of key-value pairs as tuples.
+# Why use it: Iterates over keys and values together.
+# How it works: Dynamic view; changes with dict.
+# When to use: Processing pairs in grouping problems.
+# Time/Space: O(1) for view, O(n) for list conversion.
+
+# Syntax:
+dict.items()  # Returns (key, value) tuples view
+
+# Basic Example 1 (Get Items):
+d = {"a": 1, "b": 2}
+print(list(d.items()))  # Output: [("a", 1), ("b", 2)]
+
+# Basic Example 2 (Empty Dict):
+d = {}
+print(list(d.items()))  # Output: []
+
+# Basic Example 3 (Loop Pairs):
+d = {"a": 1, "b": 2}
+for k, v in d.items():
+    print(k, v)  # Output: a 1, b 2
+
+# DSA Example (Key-Value Iteration):
+ages = {"Alice": 25, "Bob": 30}
+print(list(ages.items()))  # Output: [("Alice", 25), ("Bob", 30)]
+
+
 # DICTIONARY METHOD: 
 .keys()
 # What it does: Returns view of dictionary keys.
@@ -462,68 +609,13 @@ scores = {"Alice": 90, "Bob": 85}
 print(sum(scores.values()))  # Output: 175
 
 
-# DICTIONARY METHOD: 
-.items()
-# What it does: Returns view of key-value pairs as tuples.
-# Why use it: Iterates over keys and values together.
-# How it works: Dynamic view; changes with dict.
-# When to use: Processing pairs in grouping problems.
-# Time/Space: O(1) for view, O(n) for list conversion.
-
-# Syntax:
-dict.items()  # Returns (key, value) tuples view
-
-# Basic Example 1 (Get Items):
-d = {"a": 1, "b": 2}
-print(list(d.items()))  # Output: [("a", 1), ("b", 2)]
-
-# Basic Example 2 (Empty Dict):
-d = {}
-print(list(d.items()))  # Output: []
-
-# Basic Example 3 (Loop Pairs):
-d = {"a": 1, "b": 2}
-for k, v in d.items():
-    print(k, v)  # Output: a 1, b 2
-
-# DSA Example (Key-Value Iteration):
-ages = {"Alice": 25, "Bob": 30}
-print(list(ages.items()))  # Output: [("Alice", 25), ("Bob", 30)]
-
-
-# DICTIONARY METHOD: 
-.get()
-# What it does: Gets value for key, default if missing.
-# Why use it: Safe access without KeyError.
-# How it works: O(1) lookup; optional default.
-# When to use: Frequency counts in hash maps.
-# Time/Space: O(1) average time, O(1) space.
-
-# Syntax:
-dict.get(key, default)  # Returns value or 'default' (None if omitted)
-
-# Basic Example 1 (Existing Key):
-d = {"a": 1}
-print(d.get("a"))  # Output: 1
-
-# Basic Example 2 (Missing Key):
-d = {"a": 1}
-print(d.get("b"))  # Output: None
-
-# Basic Example 3 (With Default):
-d = {"a": 1}
-print(d.get("b", 0))  # Output: 0
-
-# DSA Example (Frequency Count):
-counts = {"a": 1}
-counts["b"] = counts.get("b", 0) + 1
-print(counts)  # Output: {"a": 1, "b": 1}
 
 
 
-
+# ============================================================
 # SET METHODS
-# ----------------------------------------------------------------------------------
+# ============================================================
+
 # SET METHOD: 
 .add()
 # What it does: Adds element if not present.
@@ -556,11 +648,46 @@ unique.add(3)
 print(unique)  # Output: {1, 2, 3}
 
 
+# SET METHOD: 
+.remove()
+# What it does: Removes a specific element from the set.
+# Why use it: Deletes a known element quickly.
+# How it works: O(1) average lookup and removal; raises KeyError if not present.
+# When to use: Removing seen elements, invalid items, or deduplication cleanup.
+# Time/Space: O(1) average time, O(1) space.
+
+# Syntax:
+set.remove(element)  # Removes 'element'; raises KeyError if not found
+
+# Basic Example 1 (Remove Existing):
+s = {1, 2, 3}
+s.remove(2)
+print(s)  # Output: {1, 3}
+
+# Basic Example 2 (No Error on Duplicate):
+s = {1, 2}
+s.remove(2)
+s.remove(2)  # Raises KeyError
+
+# Basic Example 3 (Safe Removal):
+s = {1, 2}
+if 2 in s:
+    s.remove(2)
+print(s)  # Output: {1}
+
+# DSA Example (Remove Seen):
+seen = {1, 2, 3}
+seen.remove(2)
+print(seen)  # Output: {1, 3}
 
 
 
+
+
+# ============================================================
 # BUILT-IN FUNCTIONS
-# ----------------------------------------------------------------------------------
+# ============================================================
+
 # BUILT-IN FUNCTION: 
 len()
 # What it does: Returns number of items in object.
@@ -1205,41 +1332,6 @@ print(sorted(nums))  # Output: [1, 2, 3]
 
 
 
-
-# ADDITIONAL COMMON METHODS/FUNCTIONS FOR LEETCODE
-# ----------------------------------------------------------------------------------
-# LIST METHOD: 
-.sort()
-# What it does: Sorts list in place.
-# Why use it: Prepares data efficiently.
-# How it works: Modifies original; stable sort.
-# When to use: In-place for two-pointer.
-# Time/Space: O(n log n) time, O(1) space.
-
-# Syntax:
-list.sort()  # Sorts in place; reverse optional
-
-# Basic Example 1 (Ascending):
-nums = [3, 1, 2]
-nums.sort()
-print(nums)  # Output: [1, 2, 3]
-
-# Basic Example 2 (Descending):
-nums = [3, 1, 2]
-nums.sort(reverse=True)
-print(nums)  # Output: [3, 2, 1]
-
-# Basic Example 3 (Strings):
-chars = ["b", "a"]
-chars.sort()
-print(chars)  # Output: ["a", "b"]
-
-# DSA Example (Sort for Binary Search):
-numbers = [3, 1, 2]
-numbers.sort()
-print(numbers)  # Output: [1, 2, 3]
-
-
 # BUILT-IN FUNCTION: 
 max()
 # What it does: Returns largest item.
@@ -1297,8 +1389,10 @@ print(sum(numbers))  # Output: 6
 
 
 
+# ============================================================
 # SPECIAL METHODS
-# ----------------------------------------------------------------------------------
+# ============================================================
+
 # SPECIAL METHOD: 
 __init__()
 # What it does: Initializes class instance.

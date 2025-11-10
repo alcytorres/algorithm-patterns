@@ -96,23 +96,24 @@ print("Output:", to_list(result))  # [2, 1, 3]
 
 """
 Time: O(N)
-  - Count occurrences of all numbers → O(N).
-  - Loop through dictionary of U unique numbers → O(U), where U ≤ N.
-  - Overall: O(N).
+  - Let N = number of nodes in the linked list.
+  - Each node is visited and rearranged exactly once.
+  - Swapping two nodes involves a constant number of pointer operations → O(1) per pair.
+  - Overall traversal and swaps → O(N).
 
-Space: O(U) ≈ O(N)
-  - Dictionary 'counts' stores up to U unique numbers.
-  - A few variables (max_unique, num) use O(1).
-  - Overall: O(U), which in the worst case is O(N).
+Space: O(1)
+  - Uses only a few pointers (dummy, prev, head, first_node, second_node).
+  - All swaps are done in place with no extra data structures.
+  - Overall: O(1).
 
   
-Interview Answer
+Interview Answer: Worst Case
 
 Time: O(N)
-  - Count elements and scan counts once.
+  - Single traversal swaps adjacent pairs in constant time per pair.
 
-Space: O(N)
-  - Dictionary stores up to N unique numbers.
+Space: O(1)
+  - Constant space — only a few pointers used for swapping.
 
 
 
