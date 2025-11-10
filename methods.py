@@ -1,4 +1,4 @@
-#  STRING METHODS
+# STRING METHODS
 # LIST METHODS
 # DICTIONARY METHODS
 # SET METHODS
@@ -778,6 +778,34 @@ print("a", "b", sep="-", end=".\n")  # a-b.
 
 
 # BUILT-IN FUNCTION: 
+sorted()
+# What it does: Returns sorted list from iterable.
+# Why use it: Sorts without modifying original.
+# How it works: Stable sort; optional key/reverse.
+# When to use: Preparing for binary search.
+# Time/Space: O(n log n) time, O(n) space.
+
+# Syntax:
+sorted(iterable, reverse=False)  # New sorted list
+
+# Basic Example 1 (Ascending):
+nums = [3, 1, 2]
+print(sorted(nums))  # Output: [1, 2, 3]
+
+# Basic Example 2 (Descending):
+nums = [3, 1, 2]
+print(sorted(nums, reverse=True))  # Output: [3, 2, 1]
+
+# Basic Example 3 (Strings):
+chars = ["b", "a"]
+print(sorted(chars))  # Output: ["a", "b"]
+
+# DSA Example (Sort Array):
+nums = [3, 1, 2]
+print(sorted(nums))  # Output: [1, 2, 3]
+
+
+# BUILT-IN FUNCTION: 
 enumerate()
 # What it does: Pairs indices with iterable elements.
 # Why use it: Tracks position in loops.
@@ -1238,34 +1266,6 @@ print(next(it))  # Output: 2
 # DSA Example (Iterator Traversal):
 iter_nums = iter([1, 2, 3])
 print(next(iter_nums))  # Output: 1
-
-
-# BUILT-IN FUNCTION: 
-sorted()
-# What it does: Returns sorted list from iterable.
-# Why use it: Sorts without modifying original.
-# How it works: Stable sort; optional key/reverse.
-# When to use: Preparing for binary search.
-# Time/Space: O(n log n) time, O(n) space.
-
-# Syntax:
-sorted(iterable, reverse=False)  # New sorted list
-
-# Basic Example 1 (Ascending):
-nums = [3, 1, 2]
-print(sorted(nums))  # Output: [1, 2, 3]
-
-# Basic Example 2 (Descending):
-nums = [3, 1, 2]
-print(sorted(nums, reverse=True))  # Output: [3, 2, 1]
-
-# Basic Example 3 (Strings):
-chars = ["b", "a"]
-print(sorted(chars))  # Output: ["a", "b"]
-
-# DSA Example (Sort Array):
-nums = [3, 1, 2]
-print(sorted(nums))  # Output: [1, 2, 3]
 
 
 # BUILT-IN FUNCTION: 
