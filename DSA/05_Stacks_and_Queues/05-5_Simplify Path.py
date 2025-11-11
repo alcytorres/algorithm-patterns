@@ -3,18 +3,17 @@
 # You are given an absolute path for a Unix-style file system, which always begins with a slash '/'. Your task is to transform this absolute path into its simplified canonical path.
 
 # The rules of a Unix-style file system are as follows:
+    # A single period '.' represents the current directory.
+    # A double period '..' represents the previous/parent directory.
+    # Multiple consecutive slashes such as '//' and '///' are treated as a single slash '/'.
+    # Any sequence of periods that does not match the rules above should be treated as a valid directory or file name. For example, '...' and '....' are valid directory or file names.
 
-# A single period '.' represents the current directory.
-# A double period '..' represents the previous/parent directory.
-# Multiple consecutive slashes such as '//' and '///' are treated as a single slash '/'.
-# Any sequence of periods that does not match the rules above should be treated as a valid directory or file name. For example, '...' and '....' are valid directory or file names.
 # The simplified canonical path should follow these rules:
-
-# The path must start with a single slash '/'.
-# Directories within the path must be separated by exactly one slash '/'.
-# The path must not end with a slash '/', unless it is the root directory.
-# The path must not have any single or double periods ('.' and '..') used to denote current or parent directories.
-# Return the simplified canonical path.
+    # The path must start with a single slash '/'.
+    # Directories within the path must be separated by exactly one slash '/'.
+    # The path must not end with a slash '/', unless it is the root directory.
+    # The path must not have any single or double periods ('.' and '..') used to denote current or parent directories.
+    # Return the simplified canonical path.
 
 # Solution: https://leetcode.com/problems/simplify-path/description/
 
@@ -117,36 +116,6 @@ home | False             | False        | []             | append         | ['ho
 Final: '/' + 'home' → "/home"
 
 
----
-Overview for Each Iteration
-Input: path = "/home//foo/"
-
-Step: Split and process path
-part | part == '' or '.' | part == '..' | stack (before) | Action         | stack (after)
------|-------------------|--------------|----------------|----------------|---------------
-     | True              | False        | []             | continue       | []
-home | False             | False        | []             | append         | ['home']
-     | True              | False        | ['home']       | continue       | ['home']
-     | True              | False        | ['home']       | continue       | ['home']
-foo  | False             | False        | ['home']       | append         | ['home', 'foo']
-     | True              | False        | ['home', 'foo']| continue       | ['home', 'foo']
-Final: '/' + 'home/foo' → "/home/foo"
-
-
----
-Overview for Each Iteration
-Input: path = "/../"
-
-Step: Split and process path
-part | part == '' or '.' | part == '..' | stack (before) | Action         | stack (after)
------|-------------------|--------------|----------------|----------------|---------------
-     | True              | False        | []             | continue       | []
-..   | False             | True         | []             | pop (empty) → skip | []
-     | True              | False        | []             | continue       | []
-Final: '/' + '' → "/"
-
-
-
 
 
 ---
@@ -172,7 +141,7 @@ Why this code Works:
     • Intuition: Imagine navigating a file explorer — when you go into a folder, add it to the path; when you click “up one level,” remove the last folder.
 
 ---
-TLDR (one sentence):
+TLDR:
     • Split the path and use a stack to simulate moving through directories — push folders, pop for "..", skip "." and empty parts.
 
 ---
@@ -235,8 +204,28 @@ Example 5: path = "/.../a/../b/c/../d/./"
     Final: "/" + ".../b/d" → "/.../b/d"
     Output: "/.../b/d" ✅
 
-    
 
+Example 6: path = "/a/b///c/.././d/../f/"
+----------------------------------------
+Split → ['', 'a', 'b', '', '', 'c', '..', '.', 'd', '..', 'f', '']
+
+Stack = []
+
+''   → skip
+'a'  → push → ['a']
+'b'  → push → ['a','b']
+''   → skip
+''   → skip
+'c'  → push → ['a','b','c']
+'..' → pop  → ['a','b']
+'.'  → skip
+'d'  → push → ['a','b','d']
+'..' → pop  → ['a','b']
+'f'  → push → ['a','b','f']
+''   → skip
+
+Final: "/" + "a/b/f" → "/a/b/f"
+Output: "/a/b/f" ✅
 
 
 
@@ -249,11 +238,11 @@ Q: What does `continue` do in this solution?
 - ✅ `continue` tells Python to **skip the rest of the current loop** 
   and move on to the next iteration.
 
-- In this code, it’s used when `part` is either:
+- In this code, it's used when `part` is either:
     - an empty string '' (from multiple slashes like "//"), or
     - a single dot '.' (which means "current directory" in Unix paths)
 
-- When either of those appears, we don’t need to do anything — 
+- When either of those appears, we don't need to do anything — 
   we simply skip and go to the next `part`.
 
 Example:
@@ -289,6 +278,59 @@ def simplifyPath(path):
 
 
 
+
+
+
+
+# ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+# Playground
+
+
+# ––––––––––––––––––––––––––––––––––––––––––––––
+"""
+📘 Tutorial: When to Use `continue` in LeetCode
+
+  • `continue` skips the *rest of the loop* and jumps to the next item.
+
+  • Use it when you want to ignore certain cases early and keep your logic clean.
+
+  • Great for filtering: skip blanks, skip invalid input, skip no-op values.
+"""
+
+# Example 1: Skip negative numbers
+nums = [-1, 2, -3, 4]
+result = []
+for n in nums:
+    if n < 0:
+        continue      # skip negatives
+    result.append(n)
+print(result)  # Output: [2, 4]
+
+
+# Example 2: Skip empty strings
+words = ["hi", "", "code", ""]
+clean = []
+for w in words:
+    if w == "":
+        continue      # skip blanks
+    clean.append(w)
+print(clean)  # Output: ["hi", "code"]
+
+
+# Example 3: Skip '.' and '' in Simplify Path
+def simplifyPath(path):
+    stack = []
+    for part in path.split('/'):
+        if part == '' or part == '.':
+            continue    # skip meaningless parts
+        if part == '..':
+            if stack:
+                stack.pop()
+        else:
+            stack.append(part)
+    return '/' + '/'.join(stack)
+
+print(simplifyPath("/a/./b//c/../"))  # Output: "/a/b"
 
 
 

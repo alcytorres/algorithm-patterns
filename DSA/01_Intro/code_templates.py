@@ -603,13 +603,11 @@ Mini Cheats you asked about
 """
 📘 Tutorial: @staticmethod in Python
 
-- @staticmethod defines a regular function that lives inside a class.
-- It does NOT take or use 'self' (no access to instance attributes).
-- You can call it directly from the class OR from an instance.
-- The key difference: instance calls fail without @staticmethod.
-
-When to use:
-- The method logically belongs to the class but doesn’t depend on instance data.
+- A @staticmethod is just a normal function stored inside a class.
+- It does NOT get 'self' automatically.
+- You can call it from the class OR from an instance.
+- Key idea: instance calls would break without @staticmethod
+  because Python would try to pass the instance as 'self'.
 """
 
 # Example 1: Dog class
@@ -617,43 +615,131 @@ class Dog:
     def __init__(self, age):
         self.age = age
 
-
+    @staticmethod
     def bark_times(n):
         print("Woof! " * n)
 
 d1 = Dog(3)
 
-# ✅ Works with or without @staticmethod
-Dog.bark_times(3)     # class call — works either way
+print(d1.bark_times(3))   # Instance call
+# Without @staticmethod this breaks:
+# Python would secretly do: Dog.bark_times(d1, 3)
+# 'd1' becomes self → too many arguments → error
 
-# ✅ Works ONLY with @staticmethod
-d1.bark_times(3)      # instance call — fails without @staticmethod
-# Output: TypeError: Dog.bark_times() takes 1 positional argument but 2 were given
+
+# Works both ways:
+Dog.bark_times(3)         # Class call
+
 
 """
-- Without @staticmethod, Python automatically passes `d1` (the instance) as the first argument (self). 
-- The method only expects 1 argument (n),
-- so Python ends up giving it 2 → TypeError:
+Without @staticmethod:
+    • d1.bark_times(3) becomes Dog.bark_times(d1, 3)
+    • That means 2 arguments get sent in
+    • But the method only expects (n)
+    • → TypeError
+
+With @staticmethod:
+    • Python does NOT pass 'self'
+    • d1.bark_times(3) just passes (3)
+    • Works from instance OR class
+    • Acts like a normal function stored inside a class
 """
+
 
 # Example 2: Math class
 class Math:
 
+    @staticmethod
     def add(a, b):
         return a + b
 
-# Works both ways:
-print(Math.add(2, 3))   # ✅ class call (works with or without @staticmethod)
-
 m1 = Math()
-print(m1.add(2, 3))     # ✅ instance call (fails without @staticmethod)
-# Output: TypeError: Math.add() takes 2 positional arguments but 3 were given
+print(m1.add(1, 2))     # Instance call
+# Without @staticmethod this breaks:
+# Python would secretly do: Math.add(m1, 1, 2)
+# That extra 'm1' becomes self → too many arguments → error
+
+
+# Works both ways:
+print(Math.add(1, 2))   # Class call
+
 
 """
-- Without @staticmethod, Python automatically passes `m1` (the instance) as the first argument (self).
-- The method only expects 2 arguments (a, b),
-- so Python ends up giving it 3 → TypeError.
+Without @staticmethod:
+    • Calling m1.add(1, 2) secretly becomes Math.add(m1, 1, 2)
+    • That means 3 arguments get sent in
+    • But the function only expects (a, b)
+    • → TypeError
+
+With @staticmethod:
+    • Python does NOT pass 'self'
+    • m1.add(1, 2) just passes (1, 2)
+    • Works from instance OR class
+    • Acts like a normal function stored inside a class
+
 """
+
+
+
+
+# ––––––––––––––––––––––––––––––––––––––––––––––
+"""
+📘 Tutorial: When to Use `continue` in LeetCode
+
+  • `continue` skips the *rest of the loop* and jumps to the next item.
+
+  • Use it when you want to ignore certain cases early and keep your logic clean.
+
+  • Great for filtering: skip blanks, skip invalid input, skip no-op values.
+"""
+
+# Example 1: Skip negative numbers
+nums = [-1, 2, -3, 4]
+result = []
+for n in nums:
+    if n < 0:
+        continue      # skip negatives
+    result.append(n)
+print(result)  # Output: [2, 4]
+
+
+# Example 2: Skip empty strings
+words = ["hi", "", "code", ""]
+clean = []
+for w in words:
+    if w == "":
+        continue      # skip blanks
+    clean.append(w)
+print(clean)  # Output: ["hi", "code"]
+
+
+# Example 3: Skip '.' and '' in Simplify Path
+def simplifyPath(path):
+    stack = []
+    for part in path.split('/'):
+        if part == '' or part == '.':
+            continue    # skip meaningless parts
+        if part == '..':
+            if stack:
+                stack.pop()
+        else:
+            stack.append(part)
+    return '/' + '/'.join(stack)
+
+print(simplifyPath("/a/./b//c/../"))  # Output: "/a/b"
+
+
+
+
+
+
+# ––––––––––––––––––––––––––––––––––––––––––––––
+
+
+
+
+
+# ––––––––––––––––––––––––––––––––––––––––––––––
 
 
 

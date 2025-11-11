@@ -12,7 +12,7 @@
 # ============================================================
 
 # STRING METHOD: 
-.split()
+# .split()
 # What it does: Splits string into list based on delimiter.
 # Why use it: Parses strings into tokens efficiently.
 # How it works: Default delimiter is whitespace; optional maxsplit.
@@ -20,19 +20,24 @@
 # Time/Space: O(n) time (n = string length), O(n) space for list.
 
 # Syntax:
-string.split(separator)  # Returns list; 'separator' optional (defaults to whitespace)
+# string.split(separator)  # Returns list; 'separator' optional (defaults to whitespace)
 
 # Basic Example 1 (Default Whitespace):
-text = "hello world"
-print(text.split())  # Output: ['hello', 'world']
+s = "a b  c"
+print(s.split())  # Output: ['a', 'b', 'c']
 
 # Basic Example 2 (Custom Delimiter):
-text = "a,b,c"
-print(text.split(','))  # Output: ['a', 'b', 'c']
+s = "1,2,3"
+print(s.split(','))  # Output: ['1', '2', '3']
 
-# Basic Example 3 (No Delimiter):
-text = "abc"
-print(text.split())  # Output: ['abc']
+# Basic Example 3: Splitting a path (LeetCode-relevant)
+path = "/a//b/c/"
+print(path.split('/'))
+# ['', 'a', '', 'b', 'c', '']  ← empty strings come from extra slashes
+
+# Basic Example 4 (No Delimiter):
+s = "abc"
+print(s.split())  # Output: ['abc']
 
 # DSA Example (Word Parsing):
 text = "hello world"
@@ -51,24 +56,24 @@ print(text.split())  # Output: ['hello', 'world']
 separator.join(iterable)  # Returns string from 'iterable' elements
 
 # Basic Example 1 (Space Separator):
-words = ["hello", "world"]
-print(" ".join(words))  # Output: "hello world"
+chars = ["a", "b"]
+print(" ".join(words))  # Output: "a b"
 
-# Basic Example 2 (Comma Separator):
-chars = ["a", "b", "c"]
-print(",".join(chars))  # Output: "a,b,c"
-
-# Basic Example 3 (No Separator):
+# Basic Example 2 (No Separator):
 chars = ["a", "b"]
 print("".join(chars))  # Output: "ab"
 
+# Basic Example 3 (Comma Separator):
+chars = ["a", "b", "c"]
+print(",".join(chars))  # Output: "a,b,c"
+
 # Basic Example 4 (Arrow Separator):
-words = ["1", "2", "3", "4"]
-print(" -> ".join(words))
+nums = ["1", "2", "3", "4"]
+print(" -> ".join(words))  # 1 -> 2 -> 3 -> 4
 
 # DSA Example (List to String):
-words = ["hello", "world"]
-print(" ".join(words))  # Output: "hello world"
+chars = ["a", "b"]
+print("".join(words))  # Output: "ab"
 
 
 # STRING METHOD: 

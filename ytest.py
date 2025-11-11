@@ -309,9 +309,9 @@ print(largestUniqueNumber(nums))
 
 
 # –––––––––––––––––––––––––––––––––––––––––––––––
-# Give me a conicse GUIDE on XYZ 
+# Give me a concise GUIDE on XYZ 
 # –––––––––––––––––––––––––––––––––––––––––––––––
-# Give me a conicse GUIDE on XYZ as was used in this LeetCode problem. Show a basic example and then an example within a function
+# Give me a concise, simple, excellent for beginner GUIDE on XYZ as was used in this LeetCode problem. Show a basic example and then an example within a function
 
 # Here is an example
 # Copy the same format
