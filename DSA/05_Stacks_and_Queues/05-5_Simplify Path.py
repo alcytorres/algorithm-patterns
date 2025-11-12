@@ -18,6 +18,15 @@
 # Solution: https://leetcode.com/problems/simplify-path/description/
 
 # Example 1:
+    # Input: path = "/a/b///c/.././d/../f/"
+    # Output: "/a/b/f"
+    # Explanation:
+    # Extra slashes are treated as one.
+    # "." means current directory (ignored).
+    # ".." moves up one level.
+    # Simplified path: "/a/b/f"
+
+# Example 2:
     # Input: path = "/home/"
     # Output: "/home"
     # Explanation:
@@ -30,23 +39,25 @@
     # Multiple consecutive slashes are replaced by a single one.
 
 # Example 3:
-    # Input: path = "/home/user/Documents/../Pictures"
-    # Output: "/home/user/Pictures"
-    # Explanation:
-    # A double period ".." refers to the directory up a level (the parent directory).
-
-# Example 4:
     # Input: path = "/../"
     # Output: "/"
     # Explanation:
     # Going one level up from the root directory is not possible.
 
-# Example 5:
-    # Input: path = "/.../a/../b/c/../d/./"
-    # Output: "/.../b/d"
+# Example 4:
+    # Input: path = "/home/user/Documents/../Pictures"
+    # Output: "/home/user/Pictures"
     # Explanation:
-    # "..." is a valid name for a directory in this problem.
+    # A double period ".." refers to the directory up a level (the parent directory).
 
+# TLDR:
+# Given a Unix-style file path string
+# Simplify it to its canonical form by:
+#   • Removing redundant slashes (`// → /`)
+#   • Ignoring current directory markers (`.`)
+#   • Going up one directory for (`..`)
+#   • Keeping valid folder names (like `...`)
+# Return the final simplified absolute path starting with `/`
 
 def simplifyPath(path):
     stack = []
@@ -62,8 +73,9 @@ def simplifyPath(path):
 
     return '/' + '/'.join(stack)
 
-path = "/home/"
-print(simplifyPath(path))  # /home
+
+path = "/a/b///c/.././d/../f/"
+print(simplifyPath(path))  # /a/b/f
 
 path = "/home//foo/"
 print(simplifyPath(path))  # /home/foo
@@ -71,8 +83,8 @@ print(simplifyPath(path))  # /home/foo
 path = "/../"
 print(simplifyPath(path))  # /
 
-path = "/.../a/../b/c/../d/./"
-print(simplifyPath(path))  #  "/.../b/d"
+path = path = "/home/user/Documents/../Pictures"
+print(simplifyPath(path))  # /home/user/Pictures
 
 
 
@@ -100,21 +112,6 @@ Time: O(N)
 
 Space: O(N)
   - Stack holds directory names to form the simplified path.
-
-
-
----
-Overview for Each Iteration
-Input: path = "/home/"
-
-Step: Split and process path
-part | part == '' or '.' | part == '..' | stack (before) | Action         | stack (after)
------|-------------------|--------------|----------------|----------------|---------------
-     | True              | False        | []             | continue       | []
-home | False             | False        | []             | append         | ['home']
-     | True              | False        | ['home']       | continue       | ['home']
-Final: '/' + 'home' → "/home"
-
 
 
 
@@ -147,31 +144,49 @@ TLDR:
 ---
 Quick Example Walkthroughs:
 
-Example 1: path = "/home/"
---------------------------------
-    Split → ['', 'home', '']
+Example 1: path = "/a/b///c/.././d/../f/"
+----------------------------------------
+    Split → ['', 'a', 'b', '', '', 'c', '..', '.', 'd', '..', 'f', '']
+
     Stack = []
-    'home' → push ['home']
-    Final: "/" + "home" → "/home"
-    Output: "/home" ✅
+
+    ''   → skip
+    'a'  → push → ['a']
+    'b'  → push → ['a','b']
+    ''   → skip
+    ''   → skip
+    'c'  → push → ['a','b','c']
+    '..' → pop  → ['a','b']
+    '.'  → skip
+    'd'  → push → ['a','b','d']
+    '..' → pop  → ['a','b']
+    'f'  → push → ['a','b','f']
+    ''   → skip
+
+    Final: "/" + "a/b/f" → "/a/b/f"
+    Output: "/a/b/f" ✅
 
 
-Example 2: path = "/home//foo/"
+Example 2: path = "/home//docs/"
 --------------------------------
-    Split → ['', 'home', '', 'foo', '']
+    Split → ['', 'home', '', 'docs', '']
     Stack = []
+
     'home' → push ['home']
     '' → skip
-    'foo' → push ['home', 'foo']
-    Final: "/" + "home/foo" → "/home/foo"
-    Output: "/home/foo" ✅
+    'docs' → push ['home', 'docs']
+
+    Final: "/" + "home/docs" → "/home/docs"
+    Output: "/home/docs" ✅
 
 
 Example 3: path = "/../"
 --------------------------------
     Split → ['', '..', '']
     Stack = []
+
     '..' → try to go up, but stack empty → skip
+
     Final: "/" + "" → "/"
     Output: "/" ✅
 
@@ -180,56 +195,18 @@ Example 4: path = "/home/user/Documents/../Pictures"
 --------------------------------
     Split → ['', 'home', 'user', 'Documents', '..', 'Pictures']
     Stack = []
+
     'home' → ['home']
     'user' → ['home','user']
     'Documents' → ['home','user','Documents']
     '..' → pop → ['home','user']
     'Pictures' → ['home','user','Pictures']
+
     Final: "/" + "home/user/Pictures"
     Output: "/home/user/Pictures" ✅
 
 
-Example 5: path = "/.../a/../b/c/../d/./"
---------------------------------
-    Split → ['', '...', 'a', '..', 'b', 'c', '..', 'd', '.', '']
-    Stack = []
-    '...' → ['...']
-    'a' → ['...', 'a']
-    '..' → pop 'a' → ['...']
-    'b' → ['...', 'b']
-    'c' → ['...', 'b', 'c']
-    '..' → pop 'c' → ['...', 'b']
-    'd' → ['...', 'b', 'd']
-    '.' → skip
-    Final: "/" + ".../b/d" → "/.../b/d"
-    Output: "/.../b/d" ✅
 
-
-Example 6: path = "/a/b///c/.././d/../f/"
-----------------------------------------
-Split → ['', 'a', 'b', '', '', 'c', '..', '.', 'd', '..', 'f', '']
-
-Stack = []
-
-''   → skip
-'a'  → push → ['a']
-'b'  → push → ['a','b']
-''   → skip
-''   → skip
-'c'  → push → ['a','b','c']
-'..' → pop  → ['a','b']
-'.'  → skip
-'d'  → push → ['a','b','d']
-'..' → pop  → ['a','b']
-'f'  → push → ['a','b','f']
-''   → skip
-
-Final: "/" + "a/b/f" → "/a/b/f"
-Output: "/a/b/f" ✅
-
-
-
-    
 
 
 Q: What does `continue` do in this solution?
@@ -258,8 +235,6 @@ Example:
 
 
 
-
-
 # ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 # Breakdown 
 def simplifyPath(path):
@@ -280,10 +255,123 @@ def simplifyPath(path):
 
 
 
-
-
 # ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 # Playground
+
+# STRING METHOD: 
+.split()
+# What it does: Splits string into list based on delimiter.
+# Why use it: Parses strings into tokens efficiently.
+# How it works: Default delimiter is whitespace; optional maxsplit.
+# When to use: Tokenizing inputs in word or array problems.
+# Time/Space: O(n) time (n = string length), O(n) space for list.
+
+# Syntax:
+string.split(separator)  # Returns list; 'separator' optional (defaults to whitespace)
+
+# Basic Example 1 (Default Whitespace):
+s = "a b  c"
+print(s.split())  # Output: ['a', 'b', 'c']
+
+# Basic Example 2 (Custom Delimiter):
+s = "1,2,3"
+print(s.split(','))  # Output: ['1', '2', '3']
+
+# Basic Example 3: Splitting a path (LeetCode-relevant)
+path = "/a//b/c/"
+print(path.split('/'))
+# ['', 'a', '', 'b', 'c', '']  ← empty strings come from extra slashes
+
+# Basic Example 4 (No Delimiter):
+s = "abc"
+print(s.split())  # Output: ['abc']
+
+# DSA Example (Word Parsing):
+text = "hello world"
+print(text.split())  # Output: ['hello', 'world']
+
+"""
+📘 split() Mini Cheat Sheet
+
+split()                → smart whitespace split
+   • collapses spaces
+   • trims ends
+   • no empty strings
+
+split(delimiter)       → literal split
+   • every delimiter counts
+   • keeps empty strings
+   • no trimming/collapsing
+
+Examples:
+" a  b ".split()       → ['a','b']
+"/a//b/".split('/')    → ['','a','','b','']
+
+---
+Character Walkthrough: s = "/a//b/c/" 
+  s.split('/') → ['', 'a', '', 'b', 'c', '']
+
+    /  starts a new piece → ''  
+    a  added to piece → 'a'
+    /  slash ends piece → 'a' saved
+    /  slash again → empty piece '' saved
+    b  added → 'b'
+    /  ends piece → 'b' saved
+    c  added → 'c'
+    /  ends piece → 'c' saved
+    (end) trailing slash → '' saved
+
+    Final: ['', 'a', '', 'b', 'c', '']
+
+"""
+
+
+# ––––––––––––––––––––––––––––––––––––––––––––––
+"""
+Tutorial: .split() + .join() in LeetCode
+
+  - .split() turns string into list of parts
+  - .join() turns list back into string with separator
+  
+  - Use together to clean, reorder, or rebuild strings
+"""
+
+# Example 1: Reverse Words
+def reverse_words(s):
+    words = s.split()           # → ['sky', 'is', 'blue']
+    words.reverse()             # → ['blue', 'is', 'sky']
+    return " ".join(words)      # → "blue is sky"
+
+print(reverse_words("sky is blue"))
+
+
+# Example 2: Remove Extra Spaces
+def clean_spaces(s):
+    words = s.split()           # → ['hello', 'world'] (removes extra spaces)
+    return " ".join(words)      # → "hello world"
+
+print(clean_spaces("  hello   world  "))
+
+
+# Example 3: Build Path from string
+def build_path(s):
+    parts = s.split("/")           # → ['', 'home', 'user', 'docs']
+    parts = [p for p in parts if p]  # remove empty
+    return "/" + "/".join(parts)
+
+print(build_path("/home/user/docs/"))  # "/home/user/docs"
+
+
+# Example 3: Build Path from string (no list comprehension)
+def build_path(s):
+    parts = s.split("/")           # ['', 'home', 'user', 'docs']
+    stack = []
+    for p in parts:
+        if p:                      # skip empty strings
+            stack.append(p)
+    return "/" + "/".join(stack)
+
+print(build_path("/home/user/docs/"))  # "/home/user/docs"
 
 
 # ––––––––––––––––––––––––––––––––––––––––––––––
@@ -331,6 +419,10 @@ def simplifyPath(path):
     return '/' + '/'.join(stack)
 
 print(simplifyPath("/a/./b//c/../"))  # Output: "/a/b"
+
+
+
+
 
 
 

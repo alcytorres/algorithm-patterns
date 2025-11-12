@@ -1,27 +1,29 @@
 # Index and Slicing
 
 """
-Here's a clear, simple, and thorough guide to indexing and slicing in Python,
-designed to be easy to follow with plenty of examples.
+INDEXING and SLICING in Python GUIDE
+  • designed to be easy to follow with plenty of examples.
 
 --- What Are Indexing and Slicing in Python? ---
    - Indexing: A way to access a single element in a sequence (like a string, list, or tuple) using its position.
+   
    - Slicing: A way to extract a portion (or "slice") of a sequence by specifying a range of positions.
 
 # Python sequences are ordered, and each element has an index (position) starting from 0 for the first element.
+
 # You can also use negative indices to count from the end, where -1 is the last element.
 """
 
 """
---- 1. Indexing ---
+--- 1. INDEXING ---
    - Indexing lets you grab one item from a sequence using square brackets [ ] and the position number.
 
 # Syntax: sequence[index]
 
-# Key Points:
+Key Points:
    - Positive indices: Start at 0 (first item).
    - Negative indices: Start at -1 (last item) and go backward.
-   - If you try an index outside the sequence’s range, you’ll get an IndexError.
+   - If you try an index outside the sequence's range, you'll get an IndexError.
 """
 
 # Examples with a String
@@ -44,17 +46,20 @@ print(numbers[1])  # Output: 20 (second item)
 print(numbers[-1]) # Output: 50 (last item)
 print(numbers[-3]) # Output: 30 (third-to-last)
 
+
 """
---- 2. Slicing ---
+--- 2. SLICING ---
    - Slicing lets you extract a range of elements from a sequence.
    - You specify a start, stop, and optionally a step.
 
-# Syntax: sequence[start:stop:step]
+Syntax: sequence[start:stop:step]
    - start: The index where the slice begins (inclusive). Defaults to 0 if omitted.
+
    - stop: The index where the slice ends (exclusive). Defaults to the end if omitted.
+
    - step: How many positions to skip between elements. Defaults to 1 if omitted.
 
-# Key Points:
+Key Points:
    - The stop index is not included in the result.
    - Omitting start means "from the beginning."
    - Omitting stop means "to the end."
@@ -88,6 +93,7 @@ print(text[:-2])   # Output: Pyth
 # From third-to-last to second-to-last
 print(text[-3:-1]) # Output: ho
 
+
 # Using Step
 # The step value controls how you move through the sequence.
 # - Step 1: Take every element (default).
@@ -105,6 +111,7 @@ print(text[::-1])   # Output: nohtyP
 
 # Every second character from index 1 to end
 print(text[1::2])   # Output: yhn
+
 
 # List Slicing Examples
 numbers = [10, 20, 30, 40, 50, 60]
@@ -185,6 +192,8 @@ print("Pythonista"[::3])  # 4. Output: "Phia"
 | Reverse           | [::-1]           | text[::-1]         | nohtyP   |
 
 """
-That’s it! You now have a solid grasp of indexing and slicing in Python.
+That's it! You now have a solid grasp of indexing and slicing in Python.
+
 Practice with different sequences (strings, lists, tuples) to get comfortable."
+
 """

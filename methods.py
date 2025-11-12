@@ -1,3 +1,6 @@
+# ============================================================
+# METHODS and BUILT-IN FUNCTIONS GUIDE
+# ============================================================
 # STRING METHODS
 # LIST METHODS
 # DICTIONARY METHODS
@@ -6,13 +9,30 @@
 # SPECIAL METHODS
 
 
+# Goal: Build a frequency-based ordering perfectly — scannable, practical, interview-ready Guide.
+  # Your order is now OPTIMAL for:
+    # Entry-level roles
+    # Non-FAANG companies
+    # LeetCode Easy/Medium
+    # Fast scanning & muscle memory
+
+# Placement Rule:
+  # Rank by LeetCode frequency (Easy/Medium, non-FAANG) → Place in natural problem-solving flow.
+
+# How I decide:
+  # How often it appears in real problems
+  # When it’s used in the solution (input → process → output)
+  # What it pairs with (e.g., .split() → .join(), ord() → chr())
+  # Put most-used first — so you scan → find → use in 3 seconds
+
+
 
 # ============================================================
 # STRING METHODS
 # ============================================================
 
 # STRING METHOD: 
-# .split()
+.split()
 # What it does: Splits string into list based on delimiter.
 # Why use it: Parses strings into tokens efficiently.
 # How it works: Default delimiter is whitespace; optional maxsplit.
@@ -20,10 +40,10 @@
 # Time/Space: O(n) time (n = string length), O(n) space for list.
 
 # Syntax:
-# string.split(separator)  # Returns list; 'separator' optional (defaults to whitespace)
+string.split(separator)  # Returns list; 'separator' optional (defaults to whitespace)
 
 # Basic Example 1 (Default Whitespace):
-s = "a b  c"
+s = " a b  c"
 print(s.split())  # Output: ['a', 'b', 'c']
 
 # Basic Example 2 (Custom Delimiter):
@@ -35,13 +55,46 @@ path = "/a//b/c/"
 print(path.split('/'))
 # ['', 'a', '', 'b', 'c', '']  ← empty strings come from extra slashes
 
-# Basic Example 4 (No Delimiter):
-s = "abc"
-print(s.split())  # Output: ['abc']
+# DSA Example (Reverse Words in a String):
+s = "sky is blue"
+words = s.split()            # → ['sky', 'is', 'blue']
+print(" ".join(words[::-1])) # → "blue is sky"
 
-# DSA Example (Word Parsing):
-text = "hello world"
-print(text.split())  # Output: ['hello', 'world']
+
+"""
+📘 split() Mini Cheat Sheet
+
+split()                → smart whitespace split
+   • collapses spaces
+   • trims ends
+   • no empty strings
+
+split(delimiter)       → literal split
+   • every delimiter counts
+   • keeps empty strings
+   • no trimming/collapsing
+
+Examples:
+" a  b ".split()       → ['a','b']
+"/a//b/".split('/')    → ['','a','','b','']
+
+---
+Character Walkthrough: s = "/a//b/c/" 
+  s.split('/') → ['', 'a', '', 'b', 'c', '']
+
+    /  starts a new piece → ''  
+    a  added to piece → 'a'
+    /  slash ends piece → 'a' saved
+    /  slash again → empty piece '' saved
+    b  added → 'b'
+    /  ends piece → 'b' saved
+    c  added → 'c'
+    /  ends piece → 'c' saved
+    (end) trailing slash → '' saved
+
+    Final: ['', 'a', '', 'b', 'c', '']
+
+"""
 
 
 # STRING METHOD: 
@@ -399,6 +452,38 @@ print(numbers)  # Output: [1, 2, 3]
 
 
 # LIST METHOD: 
+.reverse()
+# What it does: Reverses list in place.
+# Why use it: Flips order without creating new list.
+# How it works: Modifies original; O(n) time.
+# When to use: Two-pointer, palindrome, or reverse traversal.
+# Time/Space: O(n) time, O(1) space.
+
+# Syntax:
+list.reverse()  # Reverses list in place
+
+# Basic Example 1 (Simple List):
+lst = [1, 2, 3]
+lst.reverse()
+print(lst)  # Output: [3, 2, 1]
+
+# Basic Example 2 (Empty List):
+lst = []
+lst.reverse()
+print(lst)  # Output: []
+
+# Basic Example 3 (Single Element):
+lst = [1]
+lst.reverse()
+print(lst)  # Output: [1]
+
+# DSA Example (Two-Pointer Prep):
+nums = [1, 2, 3]
+nums.reverse()
+print(nums)  # Output: [3, 2, 1]
+
+
+# LIST METHOD: 
 .extend()
 # What it does: Adds multiple elements from iterable to list end.
 # Why use it: Combines lists efficiently.
@@ -748,7 +833,7 @@ print(list(range(3)))  # Output: [0, 1, 2]
 
 # BUILT-IN FUNCTION: 
 print()
-# What regenerative: Outputs objects to console with formatting.
+# What it does: Outputs objects to console with formatting.
 # Why use it: Debugs code and displays results.
 # How it works: Converts args to strings; customizable sep/end.
 # When to use: Testing outputs during DSA problem solving.
@@ -808,6 +893,35 @@ print(sorted(chars))  # Output: ["a", "b"]
 # DSA Example (Sort Array):
 nums = [3, 1, 2]
 print(sorted(nums))  # Output: [1, 2, 3]
+
+
+# BUILT-IN FUNCTION: 
+reversed()
+# What it does: Returns reverse iterator of sequence.
+# Why use it: Reverses without modifying original.
+# How it works: Returns iterator; use list() to materialize.
+# When to use: When you need reversed view but want to keep original.
+# Time/Space: O(1) to create, O(n) to consume.
+
+# Syntax:
+reversed(sequence)  # Returns reverse iterator
+
+# Basic Example 1 (List to Iterator):
+nums = [1, 2, 3]
+rev = reversed(nums)
+print(list(rev))  # Output: [3, 2, 1]
+
+# Basic Example 2 (String):
+text = "abc"
+print(list(reversed(text)))  # Output: ['c', 'b', 'a']
+
+# Basic Example 3 (Range):
+print(list(reversed(range(3))))  # Output: [2, 1, 0]
+
+# DSA Example (Reverse Without Mutating):
+nums = [1, 2, 3]
+print(list(reversed(nums)))  # Output: [3, 2, 1]
+print(nums)  # Output: [1, 2, 3] ← original unchanged
 
 
 # BUILT-IN FUNCTION: 

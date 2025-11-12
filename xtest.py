@@ -1,3 +1,6 @@
+# ============================================================
+# METHODS and BUILT-IN FUNCTIONS GUIDE
+# ============================================================
 # STRING METHODS
 # LIST METHODS
 # DICTIONARY METHODS
@@ -36,6 +39,8 @@
 .pop()
 
 .sort()
+
+.reverse()
 
 .extend()
 
@@ -79,6 +84,8 @@ range()
 print()
 
 sorted()
+
+reversed()
 
 enumerate()
 
