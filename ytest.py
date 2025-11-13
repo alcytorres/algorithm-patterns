@@ -316,6 +316,8 @@ print(largestUniqueNumber(nums))
 # Here is an example
 # Copy the same format
 
+
+# Guide
 """
 📘 Tutorial: sum(condition for x in items)
 
@@ -338,7 +340,52 @@ nums = [1, 2, 3, 4]
 print(fn(nums))   # Output 2 (since 2 and 4 are even)
 
 
+# Guide
+"""
+Tutorial: .split() + .join() in LeetCode
 
+  - .split() turns string into list of parts
+  - .join() turns list back into string with separator
+  
+  - Use together to clean, reorder, or rebuild strings
+"""
+
+# Example 1: Reverse Words
+def reverse_words(s):
+    words = s.split()           # → ['sky', 'is', 'blue']
+    words.reverse()             # → ['blue', 'is', 'sky']
+    return " ".join(words)      # → "blue is sky"
+
+print(reverse_words("sky is blue"))
+
+
+# Example 2: Remove Extra Spaces
+def clean_spaces(s):
+    words = s.split()           # → ['hello', 'world'] (removes extra spaces)
+    return " ".join(words)      # → "hello world"
+
+print(clean_spaces("  hello   world  "))
+
+
+# Example 3: Build Path from string
+def build_path(s):
+    parts = s.split("/")           # → ['', 'home', 'user', 'docs']
+    parts = [p for p in parts if p]  # remove empty
+    return "/" + "/".join(parts)
+
+print(build_path("/home/user/docs/"))  # "/home/user/docs"
+
+
+# Example 3: Build Path from string (no list comprehension)
+def build_path(s):
+    parts = s.split("/")           # ['', 'home', 'user', 'docs']
+    stack = []
+    for p in parts:
+        if p:                      # skip empty strings
+            stack.append(p)
+    return "/" + "/".join(stack)
+
+print(build_path("/home/user/docs/"))  # "/home/user/docs"
 
 
 

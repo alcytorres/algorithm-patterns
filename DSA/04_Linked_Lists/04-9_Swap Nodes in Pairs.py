@@ -256,9 +256,9 @@ Q: Why do we use `while head and head.next:` instead of `while head:`?
 # –––––––––––––––––––––––––––––––––––––––––––––––
 # Breakdown 
 def swapPairs(head):
-    dummy = ListNode(-1)      # Create dummy node pointing to head
-    dummy.next = head         # Link dummy to head
-    prev = dummy         # Initialize prev at dummy
+    dummy = ListNode(-1)    # Create dummy node pointing to head
+    dummy.next = head       # Link dummy to head
+    prev = dummy            # Initialize prev at dummy
 
     while head and head.next:    # Continue while at least two nodes remain
 

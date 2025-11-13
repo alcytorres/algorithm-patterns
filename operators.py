@@ -96,7 +96,7 @@ Notes:
 - Bitwise operators work on integers at the binary level.
 - Membership operators are handy for strings, lists, tuples, etc.
 
-Let me know if you’d like examples or a deeper dive into any of these!
+Let me know if you'd like examples or a deeper dive into any of these!
 
 """
 

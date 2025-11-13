@@ -195,8 +195,9 @@ print(sliding_window_shrink_before_add(s))
 
 """
 ✅ Quick Summary:
-- Use "Add First, Then Shrink" → when condition depends on totals/counts (e.g., sum > K, distinct > K)
-- Use "Shrink Before Add" → when condition depends on current element validity (e.g., duplicates)
+  • Use "Add First, Then Shrink" → when condition depends on totals/counts (e.g., sum > K, distinct > K)
+
+  • Use "Shrink Before Add" → when condition depends on current element validity (e.g., duplicates)
 """
 
 
@@ -367,7 +368,405 @@ nums = [1, 2, 3, 4]
 print(fn(nums))   # Output 2 (since 2 and 4 are even)
 
 
+
+
 # ––––––––––––––––––––––––––––––––––––––––––––––
+"""
+📘 Tutorial: @staticmethod in Python
+
+- A @staticmethod is just a normal function stored inside a class.
+- It does NOT get 'self' automatically.
+- You can call it from the class OR from an instance.
+- Key idea: instance calls would break without @staticmethod
+  because Python would try to pass the instance as 'self'.
+"""
+
+# Example 1: Dog class
+class Dog:
+    def __init__(self, age):
+        self.age = age
+
+    @staticmethod
+    def bark_times(n):
+        print("Woof! " * n)
+
+d1 = Dog(3)
+
+print(d1.bark_times(3))   # Instance call
+# Without @staticmethod this breaks:
+# Python would secretly do: Dog.bark_times(d1, 3)
+# 'd1' becomes self → too many arguments → error
+
+
+# Works both ways:
+Dog.bark_times(3)         # Class call
+
+
+"""
+Without @staticmethod:
+    • d1.bark_times(3) becomes Dog.bark_times(d1, 3)
+    • That means 2 arguments get sent in
+    • But the method only expects (n)
+    • → TypeError
+
+With @staticmethod:
+    • Python does NOT pass 'self'
+    • d1.bark_times(3) just passes (3)
+    • Works from instance OR class
+    • Acts like a normal function stored inside a class
+"""
+
+
+# Example 2: Math class
+class Math:
+
+    @staticmethod
+    def add(a, b):
+        return a + b
+
+m1 = Math()
+print(m1.add(1, 2))     # Instance call
+# Without @staticmethod this breaks:
+# Python would secretly do: Math.add(m1, 1, 2)
+# That extra 'm1' becomes self → too many arguments → error
+
+
+# Works both ways:
+print(Math.add(1, 2))   # Class call
+
+
+"""
+Without @staticmethod:
+    • Calling m1.add(1, 2) secretly becomes Math.add(m1, 1, 2)
+    • That means 3 arguments get sent in
+    • But the function only expects (a, b)
+    • → TypeError
+
+With @staticmethod:
+    • Python does NOT pass 'self'
+    • m1.add(1, 2) just passes (1, 2)
+    • Works from instance OR class
+    • Acts like a normal function stored inside a class
+
+"""
+
+
+
+
+# ––––––––––––––––––––––––––––––––––––––––––––––
+"""
+📘 Tutorial: When to Use `continue` in LeetCode
+
+  • `continue` skips the *rest of the loop* and jumps to the next item.
+
+  • Use it when you want to ignore certain cases early and keep your logic clean.
+
+  • Great for filtering: skip blanks, skip invalid input, skip no-op values.
+"""
+
+# Example 1: Skip negative numbers
+nums = [-1, 2, -3, 4]
+result = []
+for n in nums:
+    if n < 0:
+        continue      # skip negatives
+    result.append(n)
+print(result)  # Output: [2, 4]
+
+
+# Example 2: Skip empty strings
+words = ["hi", "", "code", ""]
+clean = []
+for w in words:
+    if w == "":
+        continue      # skip blanks
+    clean.append(w)
+print(clean)  # Output: ["hi", "code"]
+
+
+# Example 3: Skip '.' and '' in Simplify Path
+def simplifyPath(path):
+    stack = []
+    for part in path.split('/'):
+        if part == '' or part == '.':
+            continue    # skip meaningless parts
+        if part == '..':
+            if stack:
+                stack.pop()
+        else:
+            stack.append(part)
+    return '/' + '/'.join(stack)
+
+print(simplifyPath("/a/./b//c/../"))  # Output: "/a/b"
+
+
+
+# ––––––––––––––––––––––––––––––––––––––––––––––
+"""
+Tutorial: .split() + .join() in LeetCode
+
+  - .split() turns string into list of parts
+  - .join() turns list back into string with separator
+  
+  - Use together to clean, reorder, or rebuild strings
+"""
+
+# Example 1: Reverse Words
+def reverse_words(s):
+    words = s.split()           # → ['sky', 'is', 'blue']
+    words.reverse()             # → ['blue', 'is', 'sky']
+    return " ".join(words)      # → "blue is sky"
+
+print(reverse_words("sky is blue"))
+
+
+# Example 2: Remove Extra Spaces
+def clean_spaces(s):
+    words = s.split()           # → ['hello', 'world'] (removes extra spaces)
+    return " ".join(words)      # → "hello world"
+
+print(clean_spaces("  hello   world  "))
+
+
+# Example 3: Build Path from string
+def build_path(s):
+    parts = s.split("/")           # → ['', 'home', 'user', 'docs']
+    parts = [p for p in parts if p]  # remove empty
+    return "/" + "/".join(parts)
+
+print(build_path("/home/user/docs/"))  # "/home/user/docs"
+
+
+# Example 3: Build Path from string (no list comprehension)
+def build_path(s):
+    parts = s.split("/")           # ['', 'home', 'user', 'docs']
+    stack = []
+    for p in parts:
+        if p:                      # skip empty strings
+            stack.append(p)
+    return "/" + "/".join(stack)
+
+print(build_path("/home/user/docs/"))  # "/home/user/docs"
+
+
+
+# ––––––––––––––––––––––––––––––––––––––––––––––
+"""
+GUIDE: float('inf') AND float('-inf')
+----------------------------------------------
+
+WHAT IS float('inf')?
+    • Python's version of +∞ (positive infinity).
+    • Larger than any real number.
+    • Best starting value when you want to track the **minimum**.
+
+WHAT IS float('-inf')?
+    • Python;s version of -∞ (negative infinity).
+    • Smaller than any real number.
+    • Best starting value when you want to track the **maximum**.
+
+WHY THIS MATTERS IN LEETCODE:
+    • You often scan through a list and want to keep updating a “best so far.”
+    • Using ±∞ ensures the very first element replaces your starting value.
+    • Cleaner and safer than manually using the first element of the array.
+
+MOST COMMON USE CASES (Beginner Level)
+    1) Tracking a MIN value  ← MOST COMMON for float('inf')
+         - Stock problems (best buy price)
+         - Running minimum in number arrays
+
+    2) Tracking a MAX value  ← MOST COMMON for float('-inf')
+         - Max subarray variations
+         - Running maximum in arrays
+
+ANALOGY:
+    • Tracking MIN: start with “infinite price” so the first real price is always better.
+    • Tracking MAX: start with “lowest possible number” so the first real number is bigger.
+
+CHEAT CODE:
+    • Need MIN → float('inf')
+    • Need MAX → float('-inf')
+"""
+
+# --------------------------------------------------------
+# Example 1 (MOST COMMON): Track running minimum
+# --------------------------------------------------------
+def min_element(nums):
+    m = float('inf')          # Start absurdly high
+    for n in nums:
+        if n < m:
+            m = n
+    return m
+
+print(min_element([4, 2, 9, -1, 6]))  # → -1
+
+# --------------------------------------------------------
+# Example 2 (2nd most common): Track running maximum
+# --------------------------------------------------------
+def max_element(nums):
+    m = float('-inf')         # Start absurdly low
+    for n in nums:
+        if n > m:
+            m = n
+    return m
+
+print(max_element([4, 2, 9, -1, 6]))  # → 9
+
+# --------------------------------------------------------
+# Example 3 (very common beginner pattern): Stock problem
+# --------------------------------------------------------
+def max_profit(prices):
+    min_price = float('inf')
+    max_profit = 0
+
+    for price in prices:
+        if price < min_price:
+            min_price = price
+
+        profit = price - min_price
+
+        if profit > max_profit:
+            max_profit = profit
+
+    return max_profit
+
+print(max_profit([7, 1, 5, 3, 6, 4]))  # → 5
+
+
+
+# ––––––––––––––––––––––––––––––––––––––––––––––
+
+
+
+
+# ––––––––––––––––––––––––––––––––––––––––––––––
+
+
+
+
+# ––––––––––––––––––––––––––––––––––––––––––––––
+
+
+
+
+
+
+
+
+
+
+
+
+
+# ============================================================
+# 📘 Algorithm Tools You Should Know
+        # Keep adding to the Algorithm Tools You Should Know
+# ============================================================
+
+"""
+These are universal DSA mini-tools that clean up solutions and reduce bugs.
+They're not tied to Python syntax — they're patterns that make solutions cleaner.
+"""
+
+# ------------------------------------------------------------
+# 1) Sentinel Values (float('inf'), float('-inf'))
+"""
+For tracking running MIN/MAX without special cases.
+
+• Need MIN → float('inf')
+• Need MAX → float('-inf')
+"""
+
+def track_min(nums):
+    m = float('inf')
+    for x in nums:
+        if x < m:
+            m = x
+    return m
+
+def track_max(nums):
+    m = float('-inf')
+    for x in nums:
+        if x > m:
+            m = x
+    return m
+
+# ------------------------------------------------------------
+# 2) Early-Exit Conditions (“guard clauses”)
+"""
+Ends function early instead of nesting logic.
+Keeps code cleaner and avoids unnecessary work.
+"""
+
+def safe_divide(a, b):
+    if b == 0:       # early exit if invalid
+        return None
+    return a / b
+
+print(safe_divide(10, 2))  # → 5
+print(safe_divide(10, 0))  # → None
+
+
+# ------------------------------------------------------------
+# 3) Counting With Booleans (sum(condition))
+"""
+True = 1, False = 0 → lets you count matches with zero extra code.
+"""
+
+def count_evens(nums):
+    return sum(x % 2 == 0 for x in nums)
+
+print(count_evens([1, 2, 3, 4]))  # → 2
+
+
+# ------------------------------------------------------------
+# 4) Using Sets for O(1) Lookup
+"""
+Use sets anytime the question is:
+    “Is x in the list?”
+List check → O(N)
+Set check → O(1)
+"""
+
+def check_membership(nums, targets):
+    nums_set = set(nums)
+    return [t in nums_set for t in targets]
+
+print(check_membership([3, 7, 9], [7, 2, 9]))  
+# → [True, False, True]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# ============================================================
+# DELETE THIS: IT has A LOT OF things I DO NOT NEED to KNOW
+# ============================================================
 """
 🔥 LeetCode Python Patterns — Ranked (most useful → least)
 """
@@ -588,192 +987,3 @@ Mini Cheats you asked about
   [1,2] + [5,4,7]              # concat
 """
 
-
-
-
-# ––––––––––––––––––––––––––––––––––––––––––––––
-"""
-📘 Tutorial: @staticmethod in Python
-
-- A @staticmethod is just a normal function stored inside a class.
-- It does NOT get 'self' automatically.
-- You can call it from the class OR from an instance.
-- Key idea: instance calls would break without @staticmethod
-  because Python would try to pass the instance as 'self'.
-"""
-
-# Example 1: Dog class
-class Dog:
-    def __init__(self, age):
-        self.age = age
-
-    @staticmethod
-    def bark_times(n):
-        print("Woof! " * n)
-
-d1 = Dog(3)
-
-print(d1.bark_times(3))   # Instance call
-# Without @staticmethod this breaks:
-# Python would secretly do: Dog.bark_times(d1, 3)
-# 'd1' becomes self → too many arguments → error
-
-
-# Works both ways:
-Dog.bark_times(3)         # Class call
-
-
-"""
-Without @staticmethod:
-    • d1.bark_times(3) becomes Dog.bark_times(d1, 3)
-    • That means 2 arguments get sent in
-    • But the method only expects (n)
-    • → TypeError
-
-With @staticmethod:
-    • Python does NOT pass 'self'
-    • d1.bark_times(3) just passes (3)
-    • Works from instance OR class
-    • Acts like a normal function stored inside a class
-"""
-
-
-# Example 2: Math class
-class Math:
-
-    @staticmethod
-    def add(a, b):
-        return a + b
-
-m1 = Math()
-print(m1.add(1, 2))     # Instance call
-# Without @staticmethod this breaks:
-# Python would secretly do: Math.add(m1, 1, 2)
-# That extra 'm1' becomes self → too many arguments → error
-
-
-# Works both ways:
-print(Math.add(1, 2))   # Class call
-
-
-"""
-Without @staticmethod:
-    • Calling m1.add(1, 2) secretly becomes Math.add(m1, 1, 2)
-    • That means 3 arguments get sent in
-    • But the function only expects (a, b)
-    • → TypeError
-
-With @staticmethod:
-    • Python does NOT pass 'self'
-    • m1.add(1, 2) just passes (1, 2)
-    • Works from instance OR class
-    • Acts like a normal function stored inside a class
-
-"""
-
-
-
-
-# ––––––––––––––––––––––––––––––––––––––––––––––
-"""
-📘 Tutorial: When to Use `continue` in LeetCode
-
-  • `continue` skips the *rest of the loop* and jumps to the next item.
-
-  • Use it when you want to ignore certain cases early and keep your logic clean.
-
-  • Great for filtering: skip blanks, skip invalid input, skip no-op values.
-"""
-
-# Example 1: Skip negative numbers
-nums = [-1, 2, -3, 4]
-result = []
-for n in nums:
-    if n < 0:
-        continue      # skip negatives
-    result.append(n)
-print(result)  # Output: [2, 4]
-
-
-# Example 2: Skip empty strings
-words = ["hi", "", "code", ""]
-clean = []
-for w in words:
-    if w == "":
-        continue      # skip blanks
-    clean.append(w)
-print(clean)  # Output: ["hi", "code"]
-
-
-# Example 3: Skip '.' and '' in Simplify Path
-def simplifyPath(path):
-    stack = []
-    for part in path.split('/'):
-        if part == '' or part == '.':
-            continue    # skip meaningless parts
-        if part == '..':
-            if stack:
-                stack.pop()
-        else:
-            stack.append(part)
-    return '/' + '/'.join(stack)
-
-print(simplifyPath("/a/./b//c/../"))  # Output: "/a/b"
-
-
-
-# ––––––––––––––––––––––––––––––––––––––––––––––
-"""
-Tutorial: .split() + .join() in LeetCode
-
-  - .split() turns string into list of parts
-  - .join() turns list back into string with separator
-  
-  - Use together to clean, reorder, or rebuild strings
-"""
-
-# Example 1: Reverse Words
-def reverse_words(s):
-    words = s.split()           # → ['sky', 'is', 'blue']
-    words.reverse()             # → ['blue', 'is', 'sky']
-    return " ".join(words)      # → "blue is sky"
-
-print(reverse_words("sky is blue"))
-
-
-# Example 2: Remove Extra Spaces
-def clean_spaces(s):
-    words = s.split()           # → ['hello', 'world'] (removes extra spaces)
-    return " ".join(words)      # → "hello world"
-
-print(clean_spaces("  hello   world  "))
-
-
-# Example 3: Build Path from string
-def build_path(s):
-    parts = s.split("/")           # → ['', 'home', 'user', 'docs']
-    parts = [p for p in parts if p]  # remove empty
-    return "/" + "/".join(parts)
-
-print(build_path("/home/user/docs/"))  # "/home/user/docs"
-
-
-# Example 3: Build Path from string (no list comprehension)
-def build_path(s):
-    parts = s.split("/")           # ['', 'home', 'user', 'docs']
-    stack = []
-    for p in parts:
-        if p:                      # skip empty strings
-            stack.append(p)
-    return "/" + "/".join(stack)
-
-print(build_path("/home/user/docs/"))  # "/home/user/docs"
-
-
-
-# ––––––––––––––––––––––––––––––––––––––––––––––
-
-
-
-
-# ––––––––––––––––––––––––––––––––––––––––––––––

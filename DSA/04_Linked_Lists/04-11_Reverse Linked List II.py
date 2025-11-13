@@ -262,7 +262,7 @@ Q: Why return dummy.next instead of prev?
 
 
 
-# ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+# ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 # Breakdown 
 def reverseBetween(head, left, right):
     # 0) Early exit — empty list or no-op range
@@ -287,7 +287,7 @@ def reverseBetween(head, left, right):
         prev.next = temp       # Reconnect prev to new front
 
     # 4) Return the real head (skip dummy)
-    return dummy.next               # Return head of modified list
+    return dummy.next          # Return head of modified list
 
 
 
@@ -295,7 +295,7 @@ def reverseBetween(head, left, right):
 
 
 
-# ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+# ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 # Task: Reverse nodes in a singly linked list from position left to right and return the modified list.
 # Example: head = [1, 2, 3, 4, 5], left = 2, right = 4 → Output = [1, 4, 3, 2, 5]
 

@@ -1,5 +1,12 @@
 
+# Always check if the stack is empty when about to pop() a character
+# Never pop a char if the stack is empty
 
+
+
+
+
+# ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 # Declaration: we will just use a list
 stack = []
 
@@ -40,3 +47,21 @@ if not stack:
     print("Stack is empty!")
 else:
     print(f"Stack is not empty, top is: {stack[-1]}")
+
+
+
+# -----------------------------------------------------------
+# Stack Pattern: “Process with Memory”
+"""
+Used for: removing pairs, validating parentheses, monotonic stacks.
+Push when needed, pop when rule breaks.
+"""
+
+def remove_adjacent_dups(s):
+    stack = []
+    for c in s:
+        if stack and stack[-1] == c:
+            stack.pop()
+        else:
+            stack.append(c)
+    return "".join(stack)

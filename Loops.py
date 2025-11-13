@@ -54,8 +54,10 @@ arr = [1, 2, 3, 4]
 target = 5
 left = 0
 window_sum = 0
+
 for right in range(len(arr)):  # right = 0, 1, 2, 3
     window_sum += arr[right]
+    
     while window_sum > target:  # Shrink window if sum exceeds target
         window_sum -= arr[left]
         left += 1

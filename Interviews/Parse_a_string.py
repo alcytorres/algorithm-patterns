@@ -101,7 +101,7 @@ print(evaluate("1 + 2 * 10"))  # 21
 
 
 
-# ----------------------------------------------------------------------------------
+# ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 # Solution with output Full Breakdown
 
 # Task: Parse a string containing infix operators (+, -, *) and values, evaluate the expression, and return the result.
