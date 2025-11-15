@@ -54,16 +54,29 @@ Use Python list as a stack (dynamic array):
     size = len(stack)   # O(1)
 """
 
-def _stack_demo():
+# Stack Operations Demo (Push, Pop, Peek, and Check Empty)
+def stack_demo():
     stack = []
 
     stack.append(1)
     stack.append(2)
-    stack.append(3)
-    
-    a = stack.pop()   # 3
-    b = stack.pop()   # 2
-    stack.append(5)
+    stack.append(3)  # [1, 2, 3]
 
-    top = stack[-1] if stack else None
-    return a, b, top, bool(stack)  # (3, 2, 5, True)
+    a = stack.pop()  # 3
+    b = stack.pop()  # 2
+    stack.append(5)  # [1, 5]
+
+    # Get top element safely (None if stack is empty)
+    if stack:
+        top = stack[-1]
+    else:
+        top = None
+
+    # Check if stack is not empty
+    is_not_empty = bool(stack)
+
+    return top, is_not_empty
+
+# Run
+result = stack_demo()
+print(result)   # (5, True)

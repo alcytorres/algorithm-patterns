@@ -113,6 +113,8 @@ defaultdict(list)
 
 Counter()
 
+deque()
+
 iter()
 
 next()

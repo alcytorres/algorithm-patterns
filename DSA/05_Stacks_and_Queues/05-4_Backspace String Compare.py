@@ -326,9 +326,32 @@ def backspaceCompare(s, t):
 
 
 
-
 # ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 # Same Solution differnt format
+def backspaceCompare(s, t):
+    def build(s):
+        stack = []
+
+        for c in s:
+            if c == '#':
+                if stack:
+                    stack.pop()
+            else:
+                stack.append(c)
+        
+        return ''.join(stack)
+    
+    return build(s) == build(t)
+
+
+s = "ab#c"; t = "ad#c"
+print(backspaceCompare(s, t))  # Output: True 
+
+
+
+# ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+# This solution is NOT correct.
+# This appends # when stack is empty → Wrong!
 
 def backspaceCompare(s, t):
     def build(s):
@@ -347,6 +370,7 @@ def backspaceCompare(s, t):
 
 s = "ab#c"; t = "ad#c"
 print(backspaceCompare(s, t))  # Output: True 
+
 
 
 

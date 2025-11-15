@@ -1311,6 +1311,109 @@ print(c.most_common(1))  # Output: [('a', 3)]
 
 
 # BUILT-IN FUNCTION: 
+deque()
+# What it does: Double-ended queue with O(1) append/pop from both ends.
+# Why use it: Fast stack, queue, or sliding window operations.
+# How it works: Linked list of blocks; O(1) left/right access.
+# When to use: BFS, sliding window, monotonic queue, LRU cache.
+# Time/Space: O(1) per operation, O(n) space.
+
+# Syntax:
+from collections import deque
+deque(iterable)  # Creates deque from iterable
+
+# Basic Example 1 (From List):
+from collections import deque
+d = deque([1, 2, 3])
+print(d)  # Output: deque([1, 2, 3])
+
+# Basic Example 2 (Empty):
+from collections import deque
+d = deque()
+print(d)  # Output: deque([])
+
+# Basic Example 3 (String):
+from collections import deque
+d = deque("abc")
+print(d)  # Output: deque(['a', 'b', 'c'])
+
+# DSA Example (Sliding Window):
+from collections import deque
+window = deque()
+for i in range(3):
+    window.append(i)
+print(window)  # Output: deque([0, 1, 2])
+window.popleft()  # Remove oldest
+print(window)  # Output: deque([1, 2])
+
+
+# DEQUE METHOD: .
+append()
+# What it does: Adds element to right end.
+# Why use it: O(1) push to end.
+# How it works: Appends to right.
+# When to use: Stack push, queue enqueue.
+
+# Syntax:
+deque.append(item)
+
+# Example:
+d = deque()
+d.append(1)
+d.append(2)
+print(d)  # Output: deque([1, 2])
+
+
+# DEQUE METHOD: 
+.appendleft()
+# What it does: Adds element to left end.
+# Why use it: O(1) push to front.
+# How it works: Inserts at start.
+# When to use: Monotonic queue, BFS.
+
+# Syntax:
+deque.appendleft(item)
+
+# Example:
+d = deque([2])
+d.appendleft(1)
+print(d)  # Output: deque([1, 2])
+
+
+# DEQUE METHOD: 
+.pop()
+# What it does: Removes and returns rightmost element.
+# Why use it: O(1) pop from end.
+# How it works: Removes from right.
+# When to use: Stack pop.
+
+# Syntax:
+deque.pop()
+
+# Example:
+d = deque([1, 2])
+print(d.pop())  # Output: 2
+print(d)        # Output: deque([1])
+
+
+# DEQUE METHOD: 
+.popleft()
+# What it does: Removes and returns leftmost element.
+# Why use it: O(1) pop from front.
+# How it works: Removes from left.
+# When to use: Queue dequeue, sliding window.
+
+# Syntax:
+deque.popleft()
+
+# Example:
+d = deque([1, 2])
+print(d.popleft())  # Output: 1
+print(d)            # Output: deque([2])
+
+
+
+# BUILT-IN FUNCTION: 
 iter()
 # What it does: Creates iterator from iterable.
 # Why use it: Manual control over iteration.

@@ -1,13 +1,13 @@
+# ============================================================
+# Stacks
+# ============================================================
 
 # Always check if the stack is empty when about to pop() a character
 # Never pop a char if the stack is empty
 
 
-
-
-
-# ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
-# Declaration: we will just use a list
+# –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+# Stack Declaration: we will just use a list
 stack = []
 
 # Pushing elements:
@@ -29,7 +29,8 @@ stack[-1] # 1
 len(stack) # 1
 
 
-
+# –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+# Stack Operations Demo (Push, Pop, Peek, and Check Empty)
 
 stack = []
 
