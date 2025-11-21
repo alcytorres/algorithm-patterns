@@ -1342,9 +1342,9 @@ from collections import deque
 window = deque()
 for i in range(3):
     window.append(i)
-print(window)  # Output: deque([0, 1, 2])
+print(window)     # Output: deque([0, 1, 2])
 window.popleft()  # Remove oldest
-print(window)  # Output: deque([1, 2])
+print(window)     # Output: deque([1, 2])
 
 
 # DEQUE METHOD: .

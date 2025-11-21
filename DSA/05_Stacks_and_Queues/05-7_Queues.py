@@ -40,6 +40,19 @@ print(queue)            # [2, 3]
 
 
 
+"""
+---
+Q: What is the best way to build a queue in python?
+
+    • from collections import deque
+
+    • deque = the fast, correct way to do a queue.
+    • Always use it when you need FIFO (First In, First Out).
+
+    """
+
+
+
 
 # ============================================================
 # Queues Guide
@@ -134,9 +147,9 @@ from collections import deque
 window = deque()
 for i in range(3):
     window.append(i)
-print(window)  # Output: deque([0, 1, 2])
+print(window)     # Output: deque([0, 1, 2])
 window.popleft()  # Remove oldest
-print(window)  # Output: deque([1, 2])
+print(window)     # Output: deque([1, 2])
 
 
 # DEQUE METHOD: .
