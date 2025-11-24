@@ -33,18 +33,30 @@ print(merge_sorted_arrays(arr1, arr2))
 # Output: [1, 3, 4, 5, 6, 7, 20]
 
 
-# Time: O(n + m)
-# - Compare elements from both arrays once: O(n + m), where n = len(arr1) and m = len(arr2).
-# - Remaining elements from each array are appended in O(n) or O(m) total.
-# - No nested loops that depend on each other.
-
-# Space: O(n + m)
-# - Result array 'ans' stores all elements from both arrays, O(n + m) space.
-# - Only a constant number of extra variables (i, j) are used besides the output array.
-# - If we exclude the result array, extra working space is O(1).
-
-
 """
+Time: O(M + N)
+  - Let M = len(arr1), N = len(arr2).
+  - Two pointers walk through both arrays.
+  - Each element is compared and appended exactly once.
+  - Remaining elements (if any) are appended in linear time.
+  - Overall: O(M + N).
+
+Space: O(M + N)
+  - The output array stores all elements from both input arrays.
+  - Pointer variables (i, j) use O(1).
+  - Overall: O(M + N).
+
+  
+Interview Answer: Worst Case
+
+Time: O(M + N)
+  - Each element from both arrays is processed once.
+
+Space: O(M + N)
+  - Need space for the merged output array.
+
+
+---
 Overview for Each Iteration
 Input: arr1 = [1, 4, 7, 20], arr2 = [3, 5, 6]
 
@@ -67,6 +79,7 @@ Step 3: Add remaining elements from arr2
 j  | arr2[j] | Action         | ans
 ---|---------|----------------|-------------------
 -  | -       | None (j=3)     | [1, 3, 4, 5, 6, 7, 20]
+
 Final: [1, 3, 4, 5, 6, 7, 20]
 
 

@@ -263,6 +263,7 @@ Trick to remember:
 
 
 
+
 # ============================================================
 # MY GUIDES
 # ============================================================
@@ -635,6 +636,81 @@ print(max_profit([7, 1, 5, 3, 6, 4]))  # → 5
 
 
 # ––––––––––––––––––––––––––––––––––––––––––––––
+"""
+📘 Tutorial: for i in range(n - 1, -1, -1)
+
+This pattern means:
+- Start at index n-1 (the LAST index)
+- Stop at -1 (but not including -1)
+- Move by -1 each time (counting backwards)
+
+Why it's useful:
+- Lets you fill an array from RIGHT → LEFT
+- Perfect when the largest values are picked first (like in sortedSquares)
+- Removes the need to reverse the final result
+
+Think of it as: "Give me all valid indices, but backwards."
+"""
+
+# ---------------------------------------------------------
+# Basic Example
+# ---------------------------------------------------------
+# Goal: Fill an array from RIGHT to LEFT using range(n-1, -1, -1)
+n = 5
+ans = [None] * n
+
+# Fill ans with its own indices, but backwards.
+for i in range(n - 1, -1, -1):
+    print(ans)
+    ans[i] = i
+
+print(ans)
+# Output:
+# [None, None, None, None, None]
+# [None, None, None, None, 4]
+# [None, None, None, 3, 4]
+# [None, None, 2, 3, 4]
+# [None, 1, 2, 3, 4]
+# → [0, 1, 2, 3, 4]
+
+
+# ---------------------------------------------------------
+# Example in a Function (Real DSA Use Case)
+# ---------------------------------------------------------
+# 977. Squares of a Sorted Array
+# Two-pointer trick + fill from the back using range(n-1, -1, -1)
+
+def sortedSquares(nums):
+    n = len(nums)
+    ans = [0] * n
+    l, r = 0, n - 1
+
+    # i goes from last index → 0
+    for i in range(n - 1, -1, -1):
+        # pick the bigger square from the ends
+        if abs(nums[l]) < abs(nums[r]):
+            square = nums[r]
+            r -= 1
+        else:
+            square = nums[l]
+            l += 1
+
+        # place square in correct sorted position
+        ans[i] = square * square
+
+    return ans
+
+
+nums = [-4, -1, 0, 3, 10]
+print(sortedSquares(nums))
+# Output: [0, 1, 9, 16, 100]
+
+"""
+Key takeaways:
+  - range(n-1, -1, -1) = indices in reverse order
+  - Ideal when your algorithm produces biggest → smallest results
+  - Lets you build the final sorted array in ONE pass without reversing
+"""
 
 
 

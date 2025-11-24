@@ -47,9 +47,11 @@ Time: O(N)
 Space: O(1)
   - In-place reversal, constant extra space.
 
-  
+  ---
+
 Overview for Each Iteration
 Input: s = ["h", "e", "l", "l", "o"]
+
 Step: Reverse string in-place using two pointers
 l   | r   | s[l] | s[r] | l < r | Action          | s
 ----|-----|------|------|-------|-----------------|---------------

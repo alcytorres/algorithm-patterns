@@ -815,8 +815,10 @@ range()
 # Time/Space: O(1) time, O(1) space.
 
 # Syntax:
-range(stop)  # From 0 to 'stop-1'
-range(start, stop, step)  # From 'start' to 'stop-1' with 'step'
+range(stop)                     # 0 → stop-1
+range(start, stop)              # start → stop-1
+range(start, stop, step)        # with custom increment (can be negative!)
+
 
 # Basic Example 1 (Default):
 print(list(range(3)))  # Output: [0, 1, 2]
@@ -825,10 +827,45 @@ print(list(range(3)))  # Output: [0, 1, 2]
 print(list(range(1, 4)))  # Output: [1, 2, 3]
 
 # Basic Example 3 (With Step):
-print(list(range(0, 6, 2)))  # Output: [0, 2, 4]
+print(list(range(0, 10, 2)))    # [0, 2, 4, 6, 8]
 
-# DSA Example (Loop Range):
-print(list(range(3)))  # Output: [0, 1, 2]
+# GOING BACKWARD: Include the final number (0 in most cases)
+print(list(range(5, -1, -1)))   # [5, 4, 3, 2, 1, 0]   ← super useful!
+
+# GOING BACKWARD: Stop just BEFORE the stop value
+print(list(range(5, 0, -1)))   # [5, 4, 3, 2, 1] 
+
+# GOING BACKWARD: Stop even earlier
+print(list(range(5, 1, -1)))   # [5, 4, 3, 2] 
+
+# ─────────────────────────────────────────────────────────────
+# REAL DSA EXAMPLE FROM "Sorted Squares" PROBLEM
+# ─────────────────────────────────────────────────────────────
+# Goal: Fill an array from RIGHT to LEFT using range(n-1, -1, -1)
+n = 5
+ans = [None] * n
+
+# Fill ans with its own indices, but backwards.
+for i in range(n - 1, -1, -1):
+    print(ans)
+    ans[i] = i
+
+print(ans)
+# Output:
+# [None, None, None, None, None]
+# [None, None, None, None, 4]
+# [None, None, None, 3, 4]
+# [None, None, 2, 3, 4]
+# [None, 1, 2, 3, 4]
+# → [0, 1, 2, 3, 4]
+
+# ─────────────────────────────────────────────────────────────
+# QUICK MEMORIZATION TIP
+# ─────────────────────────────────────────────────────────────
+# Going backwards? Just remember:
+# range(n-1, -1, -1)   → "from n-1 down to 0 inclusive"
+# This exact line appears in DOZENS of two-pointer / merging problems!
+
 
 
 # BUILT-IN FUNCTION: 

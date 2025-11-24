@@ -23,20 +23,22 @@ print(find_pair_sum(nums, target))
 # Output: True -> nums[2] + nums[5] = 4 + 10 = 14 matches the target.
 
 
-# Time: O(n)
-# - Two pointers (left, right) each move toward the center once.
-# - Each iteration adjusts one pointer, so at most n steps total.
-# - No nested loops.
-
-# Space: O(1)
-# - Only a constant number of variables (left, right, curr) are used.
-# - No additional data structures.
-# - Overall: O(1) space.
-
-
 """
+Time: O(n)
+  - Two pointers (left, right) each move toward the center once.
+  - Each iteration adjusts one pointer, so at most n steps total.
+  - No nested loops.
+
+Space: O(1)
+  - Only a constant number of variables (left, right, curr) are used.
+  - No additional data structures.
+  - Overall: O(1) space.
+
+
+---
 Overview for Each Iteration
 Input: nums = [1, 3, 4, 6, 8, 10, 12], target = 14
+
 Step: Find pair summing to target using two pointers
 l  | r | nums[l] | nums[r] | curr      | curr vs target | Action      | Result
 ---|---|---------|---------|-------- --|----------------|-------------|--------
@@ -44,6 +46,7 @@ l  | r | nums[l] | nums[r] | curr      | curr vs target | Action      | Result
 1  | 6 | 3       | 12      | 15 (3+12) | > 14           | r-=1        | -
 1  | 5 | 3       | 10      | 13 (3+10) | < 14           | l+=1        | -
 2  | 5 | 4       | 10      | 14 (4+10) | == 14          | Return True | True
+
 Final: True ([4, 10])
 
 

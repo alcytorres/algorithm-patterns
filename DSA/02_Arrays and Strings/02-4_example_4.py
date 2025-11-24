@@ -43,9 +43,10 @@ Space: O(1)
   - Constant extra memory (just two pointers).
 
 
-
+---
 Overview for Each Iteration
 Input: s = "ace", t = "abcde"
+
 Step: Check if s is a subsequence of t
 i | j | s[i] | t[j] | Match? | Action
 - | - | -    | -    | -      | Initialize i=0, j=0
@@ -54,13 +55,14 @@ i | j | s[i] | t[j] | Match? | Action
 1 | 2 | c    | c    | Yes    | i+=1, j+=1 (i=2, j=3)
 2 | 3 | e    | d    | No     | j+=1 (i=2, j=4)
 2 | 4 | e    | e    | Yes    | i+=1, j+=1 (i=3, j=5)
+
 End: i=3, len(s)=3, return True
 
 
 
 ---------------------------------------------------
 Q: Why do we use while i < len(s) and j < len(t):?
-    👉 To make sure we never go out of range for either string.
+    • To make sure we never go out of range for either string.
 
     • We stop when we've checked all characters in s (success) or all in t (failure).
 
@@ -68,7 +70,7 @@ Q: Why do we use while i < len(s) and j < len(t):?
 
 
 Q: What if we already know len(t) >= len(s)?
-    👉 Then while i < len(s) alone would technically work — because t will never run out before s.
+    • Then while i < len(s) alone would technically work — because t will never run out before s.
 
     • But we still use and j < len(t) as good practice, in case that assumption changes.
 
