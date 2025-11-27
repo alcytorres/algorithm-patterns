@@ -40,8 +40,6 @@ k = 2
 print(find_longest_substring(s, k))  
 # Output: 3 → The longest substring with at most 2 distinct characters is "ece" (length 3, distinct chars = {e, c}).
 
-# Counts = {3: 3, 1: 2, 2: 2, 4: 3, 5: 2, 6: 1}
-
 
 """
 Time: O(N)
@@ -146,7 +144,7 @@ Quick Example Walkthrough:
 
 
 
----------------------------------------------------
+---
 Q: Why use defaultdict instead of regular dictionary {}?
     • Automatically initializes missing keys with 0.
     • Simplifies code by avoiding manual existence checks.
@@ -171,7 +169,7 @@ from collections import defaultdict  # Initialize defaultdict for character coun
 
 def find_longest_substring(s, k):
     counts = defaultdict(int)  # Track character frequencies in window
-    left = ans = 0            # Left bound, max length of substring
+    left = ans = 0             # Left bound, max length of substring
 
     for right in range(len(s)):  # Iterate right pointer over string
         counts[s[right]] += 1    # Increment count of current character
@@ -224,6 +222,7 @@ Space: O(n)
 
 Overview for Each Iteration
 Input: s = "eceba", k = 2
+
 Step: Find longest substring with at most k distinct characters
 i  | j  | Substring | Distinct Chars   | distinct <= k | ans
 ---|----|-----------|------------------|---------------|------------------
@@ -242,6 +241,7 @@ i  | j  | Substring | Distinct Chars   | distinct <= k | ans
 3  | 3  | b         | {b} = 1          | True          | 3 (max(3, 3-3+1))
 3  | 4  | ba        | {b, a} = 2       | True          | 3 (max(3, 4-3+1))
 4  | 4  | a         | {a} = 1          | True          | 3 (max(3, 4-4+1))
+
 Final: 3 ("ece")
 
 """
@@ -297,6 +297,7 @@ print(sorted(counts.items()))
 """
 Overview for Each Iteration
 Input: s = [('yellow', 1), ('blue', 2), ('yellow', 3), ('blue', 4), ('red', 1)]
+
 Step: Group values by key using defaultdict
 k       | v   | counts
 --------|-----|--------------------
@@ -306,6 +307,7 @@ blue    | 2   | {yellow: [1], blue: [2]}
 yellow  | 3   | {yellow: [1, 3], blue: [2]}
 blue    | 4   | {yellow: [1, 3], blue: [2, 4]}
 red     | 1   | {yellow: [1, 3], blue: [2, 4], red: [1]}
+
 Final: sorted(counts.items()) = [('blue', [2, 4]), ('red', [1]), ('yellow', [1, 3])]
 
 """

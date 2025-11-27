@@ -6,7 +6,6 @@
 
 # Solution: https://leetcode.com/problems/check-if-the-sentence-is-pangram/editorial/
 
-
 # Example:
     # Input: sentence = "thequickbrownfoxjumpsoverthelazydog"
     # Output: True

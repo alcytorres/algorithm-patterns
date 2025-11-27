@@ -46,6 +46,8 @@ print(intersection(nums))
 
 # Output: [3, 4] → 3 and 4 are the only nums that appear in all three arrays.
 
+# Counts = {3: 3, 1: 2, 2: 2, 4: 3, 5: 2, 6: 1}
+
 
 """
 Time: O(T log T)
@@ -193,7 +195,7 @@ Space: O(U) ≈ O(N)
   - same as before
 
   
-----------------------------------------------
+---
 Q: Why was the original time complexity O(N + k log k), but now it's only O(N)?
 
 A: Because of the sorting step in the earlier version:

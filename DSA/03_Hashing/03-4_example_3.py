@@ -61,6 +61,7 @@ x   | x+1 | x-1 | x+1 in seen | x-1 in seen | ans
 2   | 3   | 1   | False       | False       | [2]
 4   | 5   | 3   | False       | False       | [2, 4]
 6   | 7   | 5   | False       | False       | [2, 4, 6]
+
 Final: [2, 4, 6]
 
 
@@ -98,7 +99,7 @@ nums = [2, 4, 4, 6]
 Final Answer: [2, 4, 6]
 
 
----------------------------------------------------
+---
 Q: How is the requirement that each valid number x appears only once in the answer handled?
     • Converting nums to a set (seen = set(nums)), removes duplicates. 
 
@@ -129,7 +130,6 @@ print(5 in s)   # False, checked instantly (O(1))
 l = [2, 4, 6]
 print(4 in l)   # True, but Python may scan up to index 1 (O(n))
 print(5 in l)   # False, Python scans all elements (O(n))
-
 
 
 

@@ -9,6 +9,12 @@
 
 # Solution: https://leetcode.com/problems/missing-number/editorial/
 
+# Constraints:
+    # n == nums.length
+    # 1 <= n <= 104
+    # 0 <= nums[i] <= n
+    # All the numbers of nums are unique.
+
 def missingNumber(nums):
     seen = set(nums)
     n = len(nums) + 1
@@ -62,6 +68,16 @@ num | num in seen | Action
 
 Final: 2
 
+
+---
+Q: Why use `n = len(nums) + 1` and loop `for num in range(n)`?
+
+  • Because the valid range is 0..n, which includes one extra number beyond the array length.
+
+  • Using +1 ensures we check the final value `n`, which might be the missing number.
+
+  • Example: nums = [0, 1, 2] → length = 3 → missing number is 3, so we must include it in the loop.
+
 """
 
 
@@ -70,13 +86,12 @@ Final: 2
 
 def missingNumber(nums):
     seen = set(nums)       # Convert array to set for O(1) lookups
-    n = len(nums) + 1         # Range of expected numbers (0 to n)
+    n = len(nums) + 1      # Range of expected numbers (0 to n)
     
-    for num in range(n):   # Iterate over numbers 0 to n
+    for num in range(n):     # Iterate over numbers 0 to n
         if num not in seen:  # If number missing from set
-            return num         # Return first missing number
+            return num       # Return first missing number
         
-
 
 
 

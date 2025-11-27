@@ -75,7 +75,7 @@ Final: [3, 1] (nums[1] + nums[3] = 1 + 4 = 5)
 
 
 
--------------------------------------------------
+---
 Q: Why do we use `d[num] = i` instead of `d[diff] = i`?
 
   • d is a lookup table of numbers we've already seen.

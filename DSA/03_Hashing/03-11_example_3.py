@@ -76,7 +76,7 @@ Final: True
 
 
 
----------------------------------------------------
+---
 Q: How does `return len(set(frequency)) == 1` check if all counts are equal?
     • Convert the list of frequencies into a set.
 

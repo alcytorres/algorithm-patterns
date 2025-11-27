@@ -68,7 +68,7 @@ x   | x + 1 | x + 1 in hash_set | count
 Final: 3
 
 
----------------------------------------------------
+---
 Q: Why use a set instead of a array for lookups?
     • Set lookups are O(1) on average (hash table).
     • Array lookups are O(n) since they scan sequentially.
