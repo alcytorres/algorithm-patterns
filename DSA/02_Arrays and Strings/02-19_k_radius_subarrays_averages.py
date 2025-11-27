@@ -8,7 +8,7 @@
     # nums =  [7, 4, 3, 9, 1, 8, 5, 2, 6]
     # Output: [-1, -1, -1, 5, 4, 4, -1, -1, -1]
 
-# Yashasvi Code: Sliding Window Prefix Sum
+# Sliding Window Prefix Sum
 def getAverages(nums, k):
     n = len(nums)
     ans = [-1] * n
@@ -67,7 +67,7 @@ Overview for Each Iteration
 Input: nums = [7, 4, 3, 9, 1, 8, 5, 2, 6], k = 3
 
 Step 1: Initialize variables
-n = 9, window_size = 2*3 + 1 = 7, ans = [-1, -1, -1, -1, -1, -1, -1, -1, -1]
+n = 9, window_size = 2*3 + 1 = 7, ans = [-1,-1,-1,-1,-1,-1,-1,-1,-1]
 
 Step 2: Calculate sum of first full window (indices 0 to 6)
 curr = sum(nums[0:7]) = 7 + 4 + 3 + 9 + 1 + 8 + 5 = 37
@@ -76,7 +76,7 @@ ans = [-1, -1, -1, 5, -1, -1, -1, -1, -1]
 
 Step 3: Slide window and compute averages
 i  | curr            | nums[i+k] | nums[i-k-1] | ans[i]    | ans
----|-----------------|-----------|-------------|-----------|------------------------------------
+---|-----------------|-----------|-------------|-----------|-----------------------------------
 4  | 32 (37 + 2 - 7) | 2         | 7           | 4 (32//7) | [-1, -1, -1, 5, 4, -1, -1, -1, -1]
 5  | 34 (32 + 6 - 4) | 6         | 4           | 4 (34//7) | [-1, -1, -1, 5, 4, 4, -1, -1, -1]
 
@@ -116,12 +116,12 @@ Quick Example Walkthrough:
     → ans = [-1,-1,-1,5,-1,-1,-1,-1,-1]
 
     Slide to center 4 (indices 1-7):
-    sum = 37 - 7 (drop left) + 2 (add right) = 32
+    sum = 37 + 2 (add right) - 7 (drop left) = 32
     ans[4] = 32 // 7 = 4
     → ans = [-1,-1,-1,5,4,-1,-1,-1,-1]
 
     Slide to center 5 (indices 2-8):
-    sum = 32 - 4 + 6 = 34
+    sum = 32 + 6 - 4 = 34
     ans[5] = 34 // 7 = 4
     → ans = [-1,-1,-1,5,4,4,-1,-1,-1]
 
@@ -146,15 +146,16 @@ def getAverages(nums, k):
     ans[k] = curr // window_size    # Set average for first valid index
 
     # Slide window across array and update averages
-    for i in range(k+1, n-k): # Slide window for remaining valid indices
+    for i in range(k+1, n-k):  # Slide window for remaining valid indices
         curr += nums[i+k] - nums[i-k-1]  # Update sum: add new, remove old
         ans[i] = curr // window_size     # Set average for current index
 
-    return ans                # Return array of k-radius averages
+    return ans                 # Return array of k-radius averages
+
 
 
 # ––––––––––––––––––––––––––––––––––––––––––––––
-# Yashasvi Code: Sliding Window Prefix Sum Refromatted 
+# Sliding Window Prefix Sum Refromatted 
 def getAverages(nums, k):
     n = len(nums)
     ans = [-1] * n

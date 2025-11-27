@@ -71,7 +71,7 @@ Final: 4 ("1011")
 
 
 
-
+---
 Q: Why is l += 1 outside the if s[l] == "0": block?
 
   Because we always need to move the left pointer (l) forward when shrinking the window — whether the character is "0" or "1".

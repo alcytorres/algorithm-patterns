@@ -1,9 +1,7 @@
 # 643. Maximum Average Subarray I
-# Finds the contiguous subarray of length k with the maximum average value.
-
 # You are given an integer array nums consisting of n elements, and an integer k.
 
-# Find a contiguous subarray whose length is equal to k that has the maximum average value and return this value. 
+# Find the maximum average of any contiguous subarray of length k in nums. Return this value. 
 
 # Solution: https://leetcode.com/problems/maximum-average-subarray-i/solutions/127562/maximum-average-subarray-i/
 
@@ -120,7 +118,7 @@ Final Answer: 8 ÷ 2 = 4 (best subarray = [1,7])
 
 
 
----------------------------------------------------
+---
 ⚠️ Caution:
     • I verified this solution is correct, but LeetCode may deny it unless the last line is: return float(ans) / k
 

@@ -100,10 +100,11 @@ def twoSum(nums, target):
     d = {}                    # Initialize dictionary for number-to-index mapping
     
     for i, num in enumerate(nums):  # Iterate with index and number
-        diff = target - num   # Calculate complement needed for target
-        if diff in d:         # If complement exists in dictionary
+        diff = target - num         # Calculate complement needed for target
+
+        if diff in d:            # If complement exists in dictionary
             return [i, d[diff]]  # Return current and complement's indices
-        d[num] = i            # Store current number and its index
+        d[num] = i               # Store current number and its index
 
     return []                 # Return empty list if no solution found
 

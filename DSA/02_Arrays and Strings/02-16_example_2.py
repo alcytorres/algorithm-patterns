@@ -121,7 +121,7 @@ Final Answer: 2
 
 
 
----------------------------------------------------
+---
 Q: How do we determine the number of valid splits in nums = [10, 4, -8, 7]?
 	•  Split at i = 0 → left [10] = 10, right [4, -8, 7] = 3 → 10 ≥ 3 → valid.
 
@@ -137,45 +137,49 @@ Q: How do we determine the number of valid splits in nums = [10, 4, -8, 7]?
 # ––––––––––––––––––––––––––––––––––––––––––––––
 # Breakdown 
 def waysToSplitArray(nums):
-    total = sum(nums)         # Calculate total sum of array
-    left = count = 0          # Initialize left sum and valid split counter
-    n = len(nums)             # Length of array
-   
-    for i in range(n - 1):    # Iterate up to second-to-last index
-        left += nums[i]       # Add current number to left sum
-        right = total - left  # Calculate right sum
-        if left >= right:     # If left sum is at least as large as right sum
-            count += 1        # Increment valid split counter
+    total = sum(nums)    # Precompute total sum of entire array
+    left = count = 0     # left: sum of left part, count: valid split
+    n = len(nums)        # Length of input array
     
-    return count              # Return total number of valid splits
+    for i in range(n - 1):   # Try every possible split point (except last)
+        left += nums[i]      # Grow left part by adding current element
+        right = total - left   # Right part = everything not yet in left
+        
+        if left >= right:  # Valid split: left section >= right section
+            count += 1     # Count this valid position
+    
+    return count           # Total number of ways to split array
 
 
 
 # ––––––––––––––––––––––––––––––––––––––––––––––
 # Solution 2: Prefix Sum Array
 
-def waysToSplitArray(nums): 
+def waysToSplitArray(nums):
     # Build prefix sum array
     prefix = [nums[0]]
     for i in range(1, len(nums)):
         prefix.append(prefix[-1] + nums[i])
-
+    
     # Count valid splits where left sum >= right sum
-    ans = 0
-    n = len(nums)
+    count = 0
+    n = len(nums)  # 4
 
     for i in range(n - 1):
         left = prefix[i]
-        right = prefix[-1] - prefix[i]
-
+        right = prefix[-1] - left
+        
         if left >= right:
-            ans += 1
+            count += 1
     
-    return ans
+    return count
 
-nums = [10, 4, -8, 7]  # -> [10, 14, 6, 13]
+nums = [10, 4, -8, 7]   # -> [10, 14, 6, 13]
 print(waysToSplitArray(nums))
-# Output: 2
+# Output: 2 → Valid splits after indices [0, 1]:
+# - Split 0 → left = 10, right = 3 ✅
+# - Split 1 → left = 14, right = -1 ✅
+# - Split 2 → left = 6, right = 7 ❌
 
 """
 Time: O(N)
@@ -206,6 +210,7 @@ i  | l  | r (prefix[-1] - prefix[i]) | left >= right | ans
 0  | 10 | 3 (13 - 10)                | True          | 1
 1  | 14 | -1 (13 - 14)               | True          | 2
 2  | 6  | 7 (13 - 6)                 | False         | 2
+
 Final: 2
 
 
@@ -214,20 +219,24 @@ Final: 2
 
 # ––––––––––––––––––––––––––––––––––––––––––––––
 # Breakdown
-def waysToSplitArray(nums): 
-    prefix = [nums[0]]       # Initialize prefix with first element
-    for i in range(1, len(nums)):  # Iterate from index 1
-        prefix.append(prefix[-1] + nums[i])  # Add current element to previous sum
+def waysToSplitArray(nums):
+    # Build prefix sum array
+    prefix = [nums[0]]               # Start with first element
+    for i in range(1, len(nums)):    # For each remaining element
+        prefix.append(prefix[-1] + nums[i])  # Add it to previous sum
     
-    ans = 0                  # Count of valid splits
-    for i in range(len(nums) - 1):  # Iterate up to second-to-last index
-        left = prefix[i]    # Sum of left section up to i
-        right = prefix[-1] - prefix[i]  # Sum of right section from i+1 to end
-        if left >= right:  # Check if left sum >= right sum
-            ans += 1         # Increment count for valid split
+    count = 0           # Counter for valid splits
+    n = len(nums)       # Length of array
     
-    return ans               # Return total number of ways
-
+    # Try every possible split point (except last index)
+    for i in range(n - 1):
+        left  = prefix[i]           # Sum of elements from 0 to i
+        right = prefix[-1] - left   # Sum of elements from i+1 to end
+        
+        if left >= right:  # Valid split if left part >= right part
+            count += 1     # Count this split
+    
+    return count             # Total number of valid splits
 
 
 
@@ -248,4 +257,7 @@ def waysToSplitArray(nums):
 
 nums = [10, 4, -8, 7]  # -> [10, 14, 6, 13]
 print(waysToSplitArray(nums))
-# Output: 2
+# Output: 2 → Valid splits after indices [0, 1]:
+# - Split 0 → left = 10, right = 3 ✅
+# - Split 1 → left = 14, right = -1 ✅
+# - Split 2 → left = 6, right = 7 ❌

@@ -43,12 +43,13 @@ print("List:", build_string_list(s))      # Output: forest
 # Useful for backtracking. Can sort since order isn’t key.
 
 # Closing Tip
-# This is just the start! We’ll build on these ideas (like sliding windows with hash maps) later. Try the quiz next!
+# This is just the start! We’ll build on these ideas (like sliding windows with hash maps) later.
 
 
 # –––––––––––––––––––––––––––––––––––––––––––––––––
 # Arrays and Strings O(n) string building Example
-# 344. Reverse String
+
+# 344. Reverse an array of characters
 def reverseString(s):
     left = 0
     right = len(s) - 1
@@ -60,16 +61,20 @@ def reverseString(s):
     
     return s
 
-s1 = ["h","e","l","l","o"]
+s1 = ['h','e','l','l','o']
 print(reverseString(s1))   # Output: ["o","l","l","e","h"]
 
-# Efficient String Reversal
+
+# Build a Reversed String from a Character Array
 def reverseStrings(s):
-    # Optional: Build reversed string for output
     result = []
-    for c in s:
-        result.append(c)
-    return "".join(result)
+    n = len(s)
     
-s2 = ["h","e","l","l","o"]
-print(reverseStrings(s1))  # Output: olleh
+    # Iterate backwards over the list
+    for i in range(n - 1, -1, -1):
+        result.append(s[i])
+    
+    return "".join(result)
+
+s2 = ['h','e','l','l','o']
+print(reverseStrings(s2))  # Output: olleh

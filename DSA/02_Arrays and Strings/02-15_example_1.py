@@ -79,7 +79,7 @@ Final: [True, False, True]
 
 
 
----------------------------------------------------
+---
 Q: Why do we use curr = prefix[y] - prefix[x] + nums[x]?
     •	prefix[i] stores the sum from index 0 to i.
     •	prefix[y] - prefix[x] removes everything up to index x, so it gives the sum from x+1 to y.

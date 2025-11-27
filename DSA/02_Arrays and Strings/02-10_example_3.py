@@ -118,7 +118,7 @@ Final Answer: 8
 
 
 
----------------------------------------------------
+---
 Q: Why does left += 1 occur inside the if curr >= k: condition?
     • Only adjust when product is too big (curr >= k)
 
