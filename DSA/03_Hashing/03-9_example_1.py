@@ -106,8 +106,7 @@ r  | s[r] | counts        | len>k | l | s[l] | Action       | ans
 Final: 3 ("ece")
 
 
-
-
+---
 Most IMPORTANT thing to Understand:
     • We use a sliding window (left → right) to keep track of a substring.  
 
@@ -117,6 +116,7 @@ Most IMPORTANT thing to Understand:
 
     • ans always records the longest valid window length seen so far.  
 
+---
 Why this code Works:
     • Hash map (counts): keeps track of characters inside the current window and their counts.  
 
@@ -126,9 +126,11 @@ Why this code Works:
 
     • Intuition: like stretching a rubber band (window) across the string — make it as long as possible without including more than k distinct characters.  
 
+---
 TLDR:
     • Grow a window across the string, shrink it when > k distinct characters, and track the max valid window length.  
 
+---
 Quick Example Walkthrough:
     s = "eceba", k = 2  
 
@@ -141,7 +143,6 @@ Quick Example Walkthrough:
     Step 5: right=4 → "eba" → counts={e:1, b:1, a:1} → too many distinct → shrink left: remove e → window="ba" → ans=3  
 
     Final Answer: 3 ("ece")  
-
 
 
 ---
@@ -220,6 +221,7 @@ Space: O(n)
   - Overall: O(n) total space.
 
 
+---
 Overview for Each Iteration
 Input: s = "eceba", k = 2
 

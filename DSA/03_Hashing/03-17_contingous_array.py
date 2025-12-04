@@ -13,9 +13,9 @@
     # Explanation: [0, 1] (or [1, 0]) is a longest contiguous subarray with equal number of 0 and 1.
 
 # Example 3:
-    # Input: nums = 0, 1, 1, 1, 1, 1, 0, 0, 0]
-    # Output: 6
-    # Explanation: [1, 1, 1, 0, 0, 0] is the longest contiguous subarray with equal number of 0 and 1.
+    # Input: nums = [0, 1, 1, 1, 1, 0, 0]
+    # Output: 4
+    # Explanation: [1, 1, 0, 0] is the longest contiguous subarray with equal number of 0 and 1.
 
 # WARNGING: Do NOT try to do the iterations in you head. View the iterations table and draw it on a graph
 
@@ -82,6 +82,7 @@ Space: O(N)
 
 Overview for Each Iteration
 Input: nums = [0, 1, 1, 1, 1, 0, 0]
+
 Step: Process array to find longest subarray with equal 0s and 1s
 i | num | diff | counts[diff] | max_length   | counts
 --|-----|------|--------------|--------------|-----------------------------
@@ -106,7 +107,7 @@ Q: What are the key and value of the hash table?
 ---
 Q: How is the hash map in the Contiguous Array problem different from the ones we usually use in LeetCode?
 
-    • A: In most problems, the hash map tracks frequencies (how many times a number or character appears).
+    • In most problems, the hash map tracks frequencies (how many times a number or character appears).
 
     • Here, the hash map tracks first-seen indices for each running balance (diff).
 
@@ -207,7 +208,7 @@ Analogy
     • Each 1 = step up (+1).
     • Each 0 = step down (-1).
     • Your running score (diff) = your current height.
-    • At the start, you’re at ground level (diff = 0).
+    • At the start, you're at ground level (diff = 0).
     • We record: “Ground level first seen at index -1.”
     • Why -1? So if we return to ground level later (like after [0, 1]), the subarray length is current_index - (-1) → includes the whole chunk starting at index 0.
 
@@ -218,28 +219,24 @@ Why It Works
     
 
 ---
-Q: WHY the FOR LOOP WORKS 
+Q: Why does this loop correctly find the longest balanced subarray?
 
-     • Loop structure:  for i, num in enumerate(nums):
-        We need both the element (num) and its position (i), because the index tells us where a score first happened and lets us calculate subarray lengths.
+  • Track a running score `diff`:
+      Add +1 for a 1, subtract -1 for a 0.
+      → If diff is the same at two different indices, the part in between has equal 0s and 1s.
 
-    • Update score  (diff):
-        Add +1 for a 1, subtract -1 for a 0.
-        → This running score shows how many more 1s than 0s we've seen so far.
+  • Store the FIRST time each diff value appears:
+      counts[diff] = index
+      → Using the earliest index gives the longest possible subarray next time diff repeats.
 
-    • Check notebook:  if diff in counts:
-        If this score was seen before, the subarray between then and now must balance out (same number of 0s and 1s).
-        → Length = current index - first index of this score.
+  • When diff repeats:
+      The subarray between previous_index and current_index is balanced.
+      → Length = i - counts[diff]
+      → Update max_length if this one is bigger.
 
-    • Update max length: max_length = max(max_length, i - counts[diff]):
-        Compare the current balanced subarray length with the best one so far and keep the maximum.
-
-    • Update notebook (counts[diff] = i):
-        If this score hasn't been seen yet, record the index where it first appeared.
-        → Important: only store the earliest index, since that gives the longest subarray later.
-
-    • Why it finds the answer:
-        Same score twice = balance in between. By always comparing with the first time that score appeared, we guarantee we find the longest balanced chunk.
+  • Why it works:
+      Same diff twice = same imbalance.
+      Everything in between must cancel out → equal 0s and 1s.
 
 
 """
@@ -310,16 +307,18 @@ Space: O(1)
   - Overall: O(1) space.
 
 
-Trace Overview
-nums = [0,1,1,1,1,1,0,0,0]
-i=0: j=1 → zeros=1, ones=1 → len=2 (ans=2)
-i=1: (no equal-length found; more 1s than 0s ahead)
-i=2: (no equal-length found)
-i=3: j=8 → subarray [1,1,1,0,0,0] → zeros=3, ones=3 → len=6 (ans=6)
-i=4: j=7 → [1,1,0,0] → len=4 (ans stays 6)
-i=5: j=6 → [1,0] → len=2 (ans stays 6)
-i=6..8: only 0s remain → no equal-length updates
-Final ans = 6
+    Trace Overview
+    nums = [0,1,1,1,1,1,0,0,0]
+
+    i=0: j=1 → zeros=1, ones=1 → len=2 (ans=2)
+    i=1: (no equal-length found; more 1s than 0s ahead)
+    i=2: (no equal-length found)
+    i=3: j=8 → subarray [1,1,1,0,0,0] → zeros=3, ones=3 → len=6 (ans=6)
+    i=4: j=7 → [1,1,0,0] → len=4 (ans stays 6)
+    i=5: j=6 → [1,0] → len=2 (ans stays 6)
+    i=6..8: only 0s remain → no equal-length updates
+
+    Final ans = 6
 
 """
 
@@ -358,91 +357,19 @@ print(findMaxLength(nums))
 """
 Overview for Each Iteration
 Input: nums = [0, 1]
+
 Step: Process array to find longest subarray with equal 0s and 1s
 i | num | diff | counts[diff] | max_length   | counts
 --|-----|------|--------------|--------------|-------------
 - | -   | 0    | -1           | 0            | {0:-1}
 0 | 0   | -1   | absent       | 0            | {0:-1, -1:0}
 1 | 1   | 0    | -1           | 2 (1 - (-1)) | {0:-1, -1:0}
+
 Final: 2 ([0, 1])
 
 
 """
 
-
-# –––––––––––––––––––––––––––––––––––––––––––––––––––––––
-# Best Solution
-
-from collections import defaultdict
-
-def findMaxLength(nums):
-    # Step 1: Initialize variables
-    counts = defaultdict(int)
-    counts[0] = -1            
-    diff = 0                 
-    max_length = 0        
-    
-    # Step 2: Process each number
-    for i, num in enumerate(nums):
-        if num == 1:
-            diff += 1         # Add 1 for a 1
-        else:
-            diff -= 1         # Subtract 1 for a 0
-
-        if diff in counts:    
-            max_length = max(max_length, i - counts[diff])  
-        else:
-            counts[diff] = i  
-    
-    return max_length
-
-
-nums = [0, 1, 1, 1, 1, 1, 0, 0, 0]
-print(findMaxLength(nums))
-# Output: 6
-
-"""
-Overview for Each Iteration
-Input: nums = [0, 1, 1, 1, 1, 1, 0, 0, 0]
-Step: Process array to find longest subarray with equal 0s and 1s
-i | num | diff | counts[diff] | max_length   | counts
---|-----|------|--------------|--------------|---------------------------------
-- | -   | 0    | -1           | 0            | {0:-1}
-0 | 0   | -1   | absent       | 0            | {0:-1, -1:0}
-1 | 1   | 0    | -1           | 2 (1 - (-1)) | {0:-1, -1:0}
-2 | 1   | 1    | absent       | 2            | {0:-1, -1:0, 1:2}
-3 | 1   | 2    | absent       | 2            | {0:-1, -1:0, 1:2, 2:3}
-4 | 1   | 3    | absent       | 2            | {0:-1, -1:0, 1:2, 2:3, 3:4}
-5 | 1   | 4    | absent       | 2            | {0:-1, -1:0, 1:2, 2:3, 3:4, 4:5}
-6 | 0   | 3    | 4            | 2 (6 - 4)    | {0:-1, -1:0, 1:2, 2:3, 3:4, 4:5}
-7 | 0   | 2    | 3            | 4 (7 - 3)    | {0:-1, -1:0, 1:2, 2:3, 3:4, 4:5}
-8 | 0   | 1    | 2            | 6 (8 - 2)    | {0:-1, -1:0, 1:2, 2:3, 3:4, 4:5}
-Final: 6 ([1, 1, 1, 0, 0, 0])
-
-
-Quick Example Walkthrough:
-    nums = [0, 1, 1, 1, 1, 1, 0, 0, 0]  
-
-    Step 1: Initialize counts = {0:-1} (diff=0 seen before the array starts).  
-            This lets us catch subarrays starting at index 0.  
-
-    Step 2: Process elements one by one:  
-
-        i=0, num=0 → diff=-1 (first time) → save counts[-1]=0.  
-        i=1, num=1 → diff=0 (seen at -1) → subarray length = 1 - (-1) = 2.  
-        i=2, num=1 → diff=1 (first time) → save counts[1]=2.  
-        i=3, num=1 → diff=2 (first time) → save counts[2]=3.  
-        i=4, num=1 → diff=3 (first time) → save counts[3]=4.  
-        i=5, num=1 → diff=4 (first time) → save counts[4]=5.  
-        i=6, num=0 → diff=3 (seen at 4) → subarray length = 6 - 4 = 2.  
-        i=7, num=0 → diff=2 (seen at 3) → subarray length = 7 - 3 = 4.  
-        i=8, num=0 → diff=1 (seen at 2) → subarray length = 8 - 2 = 6.  
-
-    Step 3: Maximum length found = 6.  
-
-    Final Answer: 6 → subarray [1, 1, 1, 0, 0, 0].  
-
-"""
 
 
 
@@ -481,6 +408,7 @@ print(findMaxLength(nums))
 """
 Full Overview for Each Iteration
 Input: nums = [0, 1, 1, 0, 0]
+
 Step: Process array to find longest subarray with equal 0s and 1s
 i | num | diff | counts[diff] | max_length   | counts
 --|-----|------|--------------|--------------|------------------
@@ -490,6 +418,7 @@ i | num | diff | counts[diff] | max_length   | counts
 2 | 1   | 1    | absent       | 2            | {0:-1, -1:0, 1:2}
 3 | 0   | 0    | -1           | 2 (3 - (-1)) | {0:-1, -1:0, 1:2}
 4 | 0   | -1   | 0            | 4 (4 - 0)    | {0:-1, -1:0, 1:2}
+
 Final: 4 ([1, 1, 0, 0])
 
 """

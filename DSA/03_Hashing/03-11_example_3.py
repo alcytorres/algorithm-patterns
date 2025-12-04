@@ -27,6 +27,7 @@ s = "abacbc"
 print(areOccurrencesEqual(s))
 # Output: True → Each character in "abacbc" appears exactly twice.
 
+# defaultdict = {'a': 2, 'b': 2, 'c': 2}
 
 """
 Time: O(N)
@@ -57,15 +58,15 @@ Overview for Each Iteration
 Input: s = "abacbc"
 
 Step 1: Count frequency of each character
-i  | c   | counts
----|-----|---------------------
--  | -   | {}
-0  | a   | {a: 1}
-1  | b   | {a: 1, b: 1}
-2  | a   | {a: 2, b: 1}
-3  | c   | {a: 2, b: 1, c: 1}
-4  | b   | {a: 2, b: 2, c: 1}
-5  | c   | {a: 2, b: 2, c: 2}
+i  | c  | counts
+---|----|---------------------
+-  | -  | {}
+0  | a  | {a: 1}
+1  | b  | {a: 1, b: 1}
+2  | a  | {a: 2, b: 1}
+3  | c  | {a: 2, b: 1, c: 1}
+4  | b  | {a: 2, b: 2, c: 1}
+5  | c  | {a: 2, b: 2, c: 2}
 
 Step 2: Check if all frequencies are equal
 frequencies = counts.values() = [2, 2, 2]
@@ -104,6 +105,24 @@ def areOccurrencesEqual(s):
 
 
 # –––––––––––––––––––––––––––––––––––––––––––––––––––––
+# Alternative Solution 
+
+from collections import defaultdict
+
+def areOccurrencesEqual(s):
+    counts = defaultdict(int)
+
+    for c in s:
+        counts[c] += 1
+    
+    return len(set(counts.values())) == 1
+
+s = "abacbc"
+print(areOccurrencesEqual(s))
+# Output: True → Each character in "abacbc" appears exactly twice.
+
+
+# –––––––––––––––––––––––––––––––––––––––––––––––––––––
 # Alternative Solution I came up with 
 
 from collections import defaultdict
@@ -127,6 +146,26 @@ print(areOccurrencesEqual(s))
 
 # {'a': 2, 'b': 2, 'c': 2}
 
+# –––––––––––––––––––––––––––––––––––––––––––––––––––––
+# Alternative Solution I came up with 
+
+from collections import defaultdict
+
+def areOccurrencesEqual(s):
+    counts = defaultdict(int)
+
+    for c in s:
+        counts[c] += 1
+    
+    frequency = counts.values()
+    
+    if len(set(frequency)) == 1:
+        return True
+    return False
+    
+s = "abacbc"
+print(areOccurrencesEqual(s))
+# Output: True → Each character in "abacbc" appears exactly twice.
 
 
 

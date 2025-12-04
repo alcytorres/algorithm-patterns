@@ -114,7 +114,7 @@ key | counts[key] | counts[key] == n | ans
 Final: sorted([3, 4]) = [3, 4]
 
 
-
+---
 Most IMPORTANT thing to Understand:
     • We're counting how many arrays each number appears in.
 
@@ -122,7 +122,7 @@ Most IMPORTANT thing to Understand:
 
     • We use a hash map (counts[x]) to track the appearance count for each number across arrays.
 
-
+---
 Why this code Works:
     • Hash map role: counts[x] accumulates how many arrays contained x.
 
@@ -130,11 +130,11 @@ Why this code Works:
 
     • Efficiency: one pass over all elements to count, one pass over keys to filter, then sort the result — no need to compare arrays over and over.  
 
-
+---
 TLDR:
     • Count appearances of each number across arrays and return the numbers whose count equals the number of arrays.
 
-
+---
 Quick Example Walkthrough:
     nums = [[3, 1, 2, 4, 5], [1, 2, 3, 4], [3, 4, 5, 6]]
 
@@ -149,12 +149,12 @@ Quick Example Walkthrough:
 
 
 
-# ---------------------------------------------------
+---
 Q: What would be time and space if we do NOT sort the final ans?
 
-  • ✅ Time: O(T) — counting and collecting elements only (no sorting).
+  • Time: O(T) — counting and collecting elements only (no sorting).
 
-  • ✅ Space: O(T) — dictionary + result list for unique elements.
+  • Space: O(T) — dictionary + result list for unique elements.
 
 """
 

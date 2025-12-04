@@ -51,6 +51,7 @@ Space: O(N)
   - Hash set holds all unique values from arr.
 
 
+---
 Overview for Each Iteration
 Input: arr = [1, 2, 2, 3]
 

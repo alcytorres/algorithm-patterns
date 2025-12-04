@@ -59,20 +59,78 @@ Space: O(N)
   - Dictionary stores previously seen numbers.
 
 
-
+---
 Overview for Each Iteration
 Input: nums = [3, 1, 7, 4, -6], target = 5
 
 Step: Find indices of two numbers summing to target
-i  | num  | diff (target - num) | d                   | Action
----|------|---------------------|---------------------|--------------------
-0  | 3    | 2 (5 - 3)           | {3: 0}              | Store 3 at index 0
-1  | 1    | 4 (5 - 1)           | {3: 0, 1: 1}        | Store 1 at index 1
-2  | 7    | -2 (5 - 7)          | {3: 0, 1: 1, 7: 2}  | Store 7 at index 2
-3  | 4    | 1 (5 - 4)           | {3: 0, 1: 1, 7: 2}  | Found 1 in d, return [3, 1]
+i | num | diff (target - num) | d               | Action
+--|-----|---------------------|-----------------|--------------------------
+0 | 3   | 2 (5 - 3)           | {3:0}           | Store 3 at index 0
+1 | 1   | 4 (5 - 1)           | {3:0, 1:1}      | Store 1 at index 1
+2 | 7   | -2 (5 - 7)          | {3:0, 1:1, 7:2} | Store 7 at index 2
+3 | 4   | 1 (5 - 4)           | {3:0, 1:1, 7:2} | Found 1 in d, return [3, 1]
 
 Final: [3, 1] (nums[1] + nums[3] = 1 + 4 = 5)
 
+
+---
+Most IMPORTANT thing to Understand:
+    • As you scan the array, you want to know: “Have I already seen the number needed to complete the pair?”
+
+    • For each current number num, the needed partner is diff = target - num.
+
+    • A hash map lets you check instantly (O(1)) whether that partner has already appeared.
+
+---
+Why this code Works:
+    • Hash map role:
+        • d stores: number → index where it appeared.
+        • This lets us check “Have we seen diff before?” in O(1).
+
+    • Technique:
+        • One-pass scan.
+        • For each num, compute diff.
+        • If diff is in the map → we found the pair.
+        • Otherwise, store num in the map and continue.
+
+    • Efficiency:
+        • No nested loops.
+        • Replace O(N²) brute force with O(N) by using constant-time lookups.
+
+    • Intuition:
+        • Like walking through a room with a checklist:
+          “I need diff. Have I seen it already?” If yes, answer found.
+
+---
+TLDR:
+    • Store numbers as you go and check if the complement (target - num) is already in the map — if so, return the two indices.
+
+---
+Quick Example Walkthrough:
+
+    nums = [3, 1, 7, 4, -6], target = 5
+
+    Map initially: {}
+
+    i=0, num=3  
+        diff = 5 - 3 = 2  
+        2 not in map → store 3: d = {3:0}
+
+    i=1, num=1  
+        diff = 5 - 1 = 4  
+        4 not in map → store 1: d = {3:0, 1:1}
+
+    i=2, num=7  
+        diff = 5 - 7 = -2  
+        -2 not in map → store 7: d = {3:0, 1:1, 7:2}
+
+    i=3, num=4  
+        diff = 5 - 4 = 1  
+        1 *is* in map → index = 1  
+        Return [3, 1]
+
+    Final Answer: [3, 1]
 
 
 ---
