@@ -56,7 +56,7 @@ Space: O(J)
   - Need a set for jewel types.
 
 
-
+---
 Overview for Each Iteration
 Input: jewels = "aA", stones = "aAAbbbb"
 
@@ -73,10 +73,11 @@ b   | False     | 3
 b   | False     | 3
 b   | False     | 3
 b   | False     | 3
+
 Final: 3
 
 
-
+---
 Most IMPORTANT thing to Understand:
     • We need to count how many characters in stones also appear in jewels.
 
@@ -95,7 +96,7 @@ Why this code Works:
     • Intuition: Like having a “whitelist” of jewel types—you just check each stone against the list.
 
 ---
-TLDR (one sentence):
+TLDR:
     • Make a set of jewels and count how many stones belong to that set.
 
 ---
@@ -123,7 +124,7 @@ Quick Example Walkthrough:
 # Hash Set rewritten w explicit loop: 
 
 def numJewelsInStones(jewels, stones):
-    Jset = set(J)
+    Jset = set(jewels)
     count = 0
 
     for s in stones:

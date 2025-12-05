@@ -69,6 +69,7 @@ Space: O(1)
   - Counter stores at most 26 letters.
 
 
+---
 Overview for Each Iteration
 Input: ransomNote = "aac", magazine = "aabc"
 
@@ -89,7 +90,7 @@ Final: True
 
 
 
-
+---
 Most IMPORTANT thing to Understand:
     We just need to check if magazine has at least as many of each letter as ransomNote needs.
 
@@ -97,7 +98,7 @@ Most IMPORTANT thing to Understand:
 
     A Counter (hash map) stores how many of each letter magazine provides; we decrement as we “use” letters.
 
-    
+---  
 Why this code Works:
     • Data structure: Counter(magazine) holds counts for each letter so we can check availability in O(1) per letter.
 
@@ -107,10 +108,11 @@ Why this code Works:
 
     • Intuition: Like filling a shopping list from pantry stock—if any item hits zero before you finish, you can't complete the list.
 
+---
 TLDR:
     • Count letters in magazine and spend them while scanning ransomNote; if any needed letter is unavailable, return False, else True.
 
-    
+---
 Quick Example Walkthrough:
 
     ransomNote = "aac", magazine = "aabc"

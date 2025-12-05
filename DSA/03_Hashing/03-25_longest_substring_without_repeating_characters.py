@@ -32,6 +32,7 @@ def lengthOfLongestSubstring(s):
             left += 1
         # Expand window
         seen.add(s[right])
+
         max_len = max(max_len, right - left + 1)
 
     return max_len
@@ -65,6 +66,7 @@ Space: O(N)
 
 Overview for Each Iteration
 Input: s = "ababcb"
+
 Step: Find longest substring without repeating characters using sliding window
 r  | s[r] | seen       | s[r] in seen | l  | Action            | max_len
 ---|------|------------|--------------|----|-------------------|--------
@@ -78,10 +80,12 @@ r  | s[r] | seen       | s[r] in seen | l  | Action            | max_len
 5  | b    | {a, b, c}  | True         | 2  | Remove 'a', l+=1  | 3
    |      | {b, c}     | True         | 3  | Remove 'b', l+=1  | 3
    |      | {c}        | False        | 4  | Add 'b'           | 3 (5-4+1)
+
 Final: 3 ("abc")
 
 
 
+---
 Most IMPORTANT thing to Understand:
     • We need the longest substring (continuous part of s) with no repeated characters.
 
@@ -267,49 +271,61 @@ print(remove_duplicates(nums))
 
 """
 🔥 Dynamic Sliding Window Templates (2 Types)
-Use these for LeetCode substring/subarray problems.
+Use these for LeetCode substring/subarray problems (subarrays / substrings).
 
-========================================================
-🧠 TYPE 1 — "Add First, Then Shrink"
-When to use:
-- Condition is about counts, sums, distinct count ≤ K, etc.
-- You add arr[right] first, then check if window breaks.
-- Example: "Longest Subarray with Sum ≤ K" or "At most K distinct chars"
-
-Why:
-- Adding a new element may cause violation (sum > K, count > K)
-- So you shrink AFTER adding.
+🎯 Core Rule:
+    • Rule checks the WINDOW as a whole (sum, #distinct) → Add first, then shrink
+    • Rule checks the NEW element (duplicates)          → Shrink first, then add
 """
 
-def sliding_window_add_first(arr):
+# ========================================================
+# 🧠 TYPE 1 — "Add First, Then Shrink"
+# Use when the rule is about the WINDOW as a whole:
+#   • sum ≤ K
+#   • at most K distinct characters
+#   • total count / total cost / total something
+#
+# Pattern:
+#   1) Add arr[right] into the window
+#   2) While the window breaks the rule → shrink from the left
+#   3) Update the answer
+#
+# Example use cases:
+#   • Longest subarray with sum ≤ K
+# ========================================================
+
+def sliding_window_add_first(arr, LIMIT):
     left = curr = ans = 0
 
     for right in range(len(arr)):
-        # ✅ Step 1: Add current element
+        # ✅ Step 1: Add current element to the window
         curr += arr[right]
 
-        # 🚨 Step 2: Shrink while window is invalid
-        while curr > SOME_LIMIT:   # example condition
+        # 🚨 Step 2: Shrink while the WINDOW is invalid
+        while curr > LIMIT:     # condition about the whole window
             curr -= arr[left]
             left += 1
 
-        # ✅ Step 3: Update answer
+        # ✅ Step 3: Update answer using current valid window
         ans = max(ans, right - left + 1)
     
     return ans
 
-"""
-========================================================
-🧩 TYPE 2 — "Shrink Before Add"
-When to use:
-- Condition is about uniqueness (no duplicates)
-- You must ensure the element you add doesn't break the rule.
-- Example: "Longest Substring Without Repeating Characters"
 
-Why:
-- Adding s[right] itself could break the rule.
-- So you shrink BEFORE adding it.
-"""
+# ========================================================
+# 🧩 TYPE 2 — "Shrink Before Add"
+# Use when the rule is about the NEW ELEMENT:
+#   • no duplicates allowed
+#   • something about s[right] itself must be safe before entering
+#
+# Pattern:
+#   1) While s[right] would break the rule → shrink from the left
+#   2) Add s[right] into the window
+#   3) Update the answer
+#
+# Example use case:
+#   • Longest substring without repeating characters
+# ========================================================
 
 def sliding_window_shrink_before_add(s):
     seen = set()
@@ -317,24 +333,32 @@ def sliding_window_shrink_before_add(s):
 
     for right in range(len(s)):
         # 🚨 Step 1: Shrink until s[right] can safely enter
-        while s[right] in seen:
+        while s[right] in seen:     # condition about the new element
             seen.remove(s[left])
             left += 1
 
-        # ✅ Step 2: Add current element (now window is valid)
+        # ✅ Step 2: Add current element (window is now valid)
         seen.add(s[right])
 
-        # ✅ Step 3: Update answer
+        # ✅ Step 3: Update answer using current valid window
         ans = max(ans, right - left + 1)
     
     return ans
 
-"""
-✅ Quick Summary:
-  • Use "Add First, Then Shrink" → when condition depends on totals/counts (e.g., sum > K, distinct > K)
 
-  • Use "Shrink Before Add" → when condition depends on current element validity (e.g., duplicates)
 """
+🎯 Sliding Window Rule of Thumb
+
+• If the rule checks the WINDOW as a whole (sum, #distinct)
+    ➜ Add first
+    ➜ Then shrink if the window becomes invalid
+
+• If the rule checks the NEW element (duplicates)
+    ➜ Shrink first
+    ➜ Then add the new element
+    
+"""
+
 
 
 

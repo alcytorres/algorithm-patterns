@@ -31,6 +31,8 @@ strs = ["eat", "tea", "tan", "ate", "nat", "bat"]
 print(groupAnagrams(strs))
 # Output: [['eat', 'tea', 'ate'], ['tan', 'nat'], ['bat']]
 
+# buckets = {'aet': ['eat', 'tea', 'ate'], 'ant': ['tan', 'nat'], 'abt': ['bat']})
+
 
 """
 Time: O(N * K log K)
@@ -62,9 +64,10 @@ Space: O(N * K)
   - Dictionary stores all strings and their sorted keys.
 
 
-  
+---
 Overview for Each Iteration
 Input: strs = ["eat", "tea", "tan", "ate", "nat", "bat"]
+
 Step: Group anagrams by sorted string key
 s     | key | buckets
 -     | -   | {}
@@ -74,11 +77,12 @@ tan   | ant | {aet: [eat, tea], ant: [tan]}
 ate   | aet | {aet: [eat, tea, ate], ant: [tan]}
 nat   | ant | {aet: [eat, tea, ate], ant: [tan, nat]}
 bat   | abt | {aet: [eat, tea, ate], ant: [tan, nat], abt: [bat]}
+
 Final: [[bat], [tan, nat], [eat, tea, ate]]
 
 
 Step-by-Step Walkthrough:
-For strs = ["eat", "tea", "tan", "ate", "nat", "bat"]:
+    For strs = ["eat", "tea", "tan", "ate", "nat", "bat"]:
   • Start: buckets = {} (empty notebook).
 
   • Process each word:
@@ -89,10 +93,10 @@ For strs = ["eat", "tea", "tan", "ate", "nat", "bat"]:
     "nat": sorted("nat") = ['a', 'n', 't'], ''.join(['a', 'n', 't']) = "ant", buckets["ant"] = ["tan", "nat"].
     "bat": sorted("bat") = ['a', 'b', 't'], ''.join(['a', 'b', 't']) = "abt", buckets["abt"] = ["bat"].
 
-Return: list(buckets.values()) = [["eat", "tea", "ate"], ["tan", "nat"], ["bat"]].
+    Return: list(buckets.values()) = [["eat", "tea", "ate"], ["tan", "nat"], ["bat"]].
 
 
-
+---
 Most IMPORTANT thing to Understand:
     • Anagrams become the same string when their letters are sorted.  
 
@@ -100,7 +104,7 @@ Most IMPORTANT thing to Understand:
 
     • The dictionary groups all words that share the same sorted key.  
 
-    
+---
 Why this code Works:
     • Hash map (buckets): key = sorted word, value = list of words with that key.  
 
@@ -110,11 +114,11 @@ Why this code Works:
 
     Intuition: If two words look the same after sorting their letters, they must be anagrams → group them together.
 
-    
+---
 TLDR:
     • Sort each word to create a key, then group words with the same key together.  
 
-    
+---   
 Quick Example Walkthrough:
     strs = ["eat", "tea", "tan", "ate", "nat", "bat"]  
 
@@ -132,7 +136,7 @@ Quick Example Walkthrough:
     Final Answer: [["bat"], ["tan","nat"], ["eat","tea","ate"]]  
 
     
-# -------------------------------------------------------
+---
 Q: Why defaultdict(list)?
     • defaultdict(list) gives [] for new keys (good for grouping)
 
@@ -140,7 +144,7 @@ Q: Why defaultdict(list)?
     
     • Here it means we can always do buckets[key].append(word) without checking if the key exists first
 
-    
+---   
 Q: Why sort the string to make the key?
     • Because sorting makes all anagrams look identical
    
@@ -149,7 +153,7 @@ Q: Why sort the string to make the key?
     • This guarantees that anagrams collapse into the same dictionary bucket.
 
     
-# -------------------------------------------------------
+---
 Q: Why is the space O(N * K) instead of O(N)?
     • We store all the strings twice: once as sorted keys and once as originals in the lists.
 

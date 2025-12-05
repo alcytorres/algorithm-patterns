@@ -80,6 +80,7 @@ Space: O(N)
   - Dictionary may hold up to N different diff values.
 
 
+---
 Overview for Each Iteration
 Input: nums = [0, 1, 1, 1, 1, 0, 0]
 
@@ -124,8 +125,8 @@ Most IMPORTANT thing to Understand:
     • diff = running balance (how many more 1s than 0s we've seen so far).  
 
     • If the same diff value shows up again, everything between those two indices must have balanced out (equal 0s and 1s).  
-
-    
+ 
+---
 Why this code Works:
     • Hash map (counts): stores the first index where each diff value was seen.  
 
@@ -136,11 +137,11 @@ Why this code Works:
 
     • Intuition: Treat diff like a scoreboard. If you see the same score at two indices, the segment between them sums to 0 → equal 0s and 1s.
 
-    
+---    
 TLDR:
     • Track the balance of 1s and 0s with diff; if diff repeats, the subarray between those two points is balanced.  
 
-    
+---  
 Quick Example Walkthrough:
     nums = [0, 1, 1, 1, 1, 0, 0]
 

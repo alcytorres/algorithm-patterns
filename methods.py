@@ -906,30 +906,66 @@ print("a", "b", sep="-", end=".\n")  # a-b.
 
 # BUILT-IN FUNCTION: 
 sorted()
-# What it does: Returns sorted list from iterable.
+# What it does: Returns sorted list from iterable (string, list, set, etc.).
 # Why use it: Sorts without modifying original.
-# How it works: Stable sort; optional key/reverse.
+# How it works: Uses Timsort (stable); supports key= and reverse=.
 # When to use: Preparing for binary search.
 # Time/Space: O(n log n) time, O(n) space.
 
 # Syntax:
 sorted(iterable, reverse=False)  # New sorted list
+    # reverse=True means sort in descending order
+    # reverse=False means sort in ascending order
 
-# Basic Example 1 (Ascending):
+# ======================
+# 1) Basic Number Sorting
+# ======================
+
+# Ascending (default)
 nums = [3, 1, 2]
-print(sorted(nums))  # Output: [1, 2, 3]
+print(sorted(nums))            # [1, 2, 3]
 
-# Basic Example 2 (Descending):
+# Descending
 nums = [3, 1, 2]
-print(sorted(nums, reverse=True))  # Output: [3, 2, 1]
+print(sorted(nums, reverse=True))   # [3, 2, 1]
 
-# Basic Example 3 (Strings):
+
+# ======================
+# 2) Sorting Strings (DSA Intro)
+# ======================
+
+# Sorting a list of characters
 chars = ["b", "a"]
-print(sorted(chars))  # Output: ["a", "b"]
+print(sorted(chars))           # ["a", "b"]
 
-# DSA Example (Sort Array):
-nums = [3, 1, 2]
-print(sorted(nums))  # Output: [1, 2, 3]
+# Sorting characters *inside* a string
+word = "bat"
+print(sorted(word))            # ['a', 'b', 't']
+# → Output is a LIST of characters
+
+
+# ======================
+# 3) Sorting List of Strings (Alphabetical)
+# ======================
+words = ["rat", "bat", "cat"]
+print(sorted(words))           # ['bat', 'cat', 'rat']
+
+
+# ======================
+# 4) Key-Based Sorting (Very Common in LeetCode)
+# ======================
+words = ["pear", "fig", "grape"]
+print(sorted(words, key=len))  # ['fig', 'pear', 'grape']
+
+
+# ======================
+# 5) Anagram Helper (Top LeetCode Use Case)
+# ======================
+word = "eat"
+key = "".join(sorted(word))
+print(key)                     # "aet" → anagram signature
+
+
 
 
 # BUILT-IN FUNCTION: 
