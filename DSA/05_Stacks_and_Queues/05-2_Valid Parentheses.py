@@ -295,7 +295,7 @@ Q: Why does the code use `if not stack: return False`?
 
   • Equivalent to: `if len(stack) == 0: return False`  
 
-  • Simpler and more Pythonic — avoids errors and keeps the code clean.
+  • Avoids errors and keeps the code clean.
 
 
 
@@ -309,13 +309,14 @@ Q: Why does the solution end with `return not stack`?
 
   • Equivalent to: `return len(stack) == 0`
 
-  • Simpler and more Pythonic — shorter and easier to read.
+  • Shorter and easier to read.
   
 
 
 ---
 Q: How do you test if something is truthy or falsy in Python?
   • You can use a simple `if` statement — Python automatically checks truthiness.
+  
 """
 
 # Examples:
@@ -344,10 +345,10 @@ Notes:
 
 
 
-# ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+# ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 # Breakdown 
 def isValid(s):
-    stack = []                          # Stack to track opening brackets
+    stack = []     # Stack to track opening brackets
     matching = {"(": ")", "[": "]", "{": "}"}  # Map opening to closing bracket
    
     for c in s:                # Iterate over each character
@@ -362,7 +363,7 @@ def isValid(s):
             if matching[last_open] != c:  # If not matching pair
                 return False              # Invalid: wrong closing bracket
     
-    return not stack                    # Valid only if all brackets matched
+    return not stack     # Valid only if all brackets matched
 
 s = "()"
 print(isValid(s))  # Output: True
@@ -376,7 +377,7 @@ print(isValid(s))  # Output: False
 
 
 
-# ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+# –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 # Playground 
 d = {'a': 1, "b": 2}
 for c in d:
@@ -387,7 +388,7 @@ for c in matching:
     print(c)
 
 
-# ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+# –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 # LIST METHOD: 
 .pop()
 # What it does: Removes and returns element at index (default last).
@@ -420,7 +421,7 @@ print(last, stack)  # Output: 3 [1, 2]
 
 
 
-# ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+# –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 # Same solution rewritten
 
 def isValid(s):
