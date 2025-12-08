@@ -225,7 +225,7 @@ Final Output: [2, 1, 3] ✅
 
 
 ---
-Q: Why do we return dummy.next? (Example-based explanation)
+Q: Why do we return dummy.next?
   • Imagine the input list: [1 → 2 → 3 → 4]
   • We add a dummy node before it: [-1 → 1 → 2 → 3 → 4]
 

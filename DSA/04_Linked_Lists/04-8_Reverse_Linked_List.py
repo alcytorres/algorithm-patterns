@@ -205,27 +205,26 @@ Return prev (new head): [3 → 2 → 1 → None]
 
 
 ---
-Q: Why do we return 'prev' instead of 'curr' or 'head'?
+Q: Why return 'prev' instead of 'curr' or 'head'?
 
-  • 'head' never changes — it always points to the original first node (which becomes the tail).
+  • `curr` ends as None — it's past the end.
+  • `head` still points to the old first node — now the tail.
+  • `prev` always points to the most recently reversed node.
 
-  • 'curr' keeps moving forward and ends up as None when the loop finishes.
-
-  • 'prev' tracks the node most recently reversed — by the end, it points to the new head.
-
-  • Therefore, returning 'prev' gives us the fully reversed linked list.
+👉 When the loop ends, `prev` is sitting on the NEW head of the list, so we return it.
 
   
 
+---
+Q: Why use `while curr:`? instead of `while curr and curr.next:`?
 
-Q: Why do we use `while curr:` instead of `while curr and curr.next:`?
-    • We must process every node — including the last one.
+  • We need to reverse the pointer of every single node.
+  
+  • `curr` walks through the list until it becomes None.
+  
+  • If we used `while curr and curr.next:`, the last node would be skipped.
 
-    • `while curr:` continues until `curr` becomes None, ensuring all nodes are reversed.
-
-    • `while curr and curr.next:` stops one node early, leaving the final node's link unreversed.
-
-    • So `while curr:` is correct and necessary for a complete reversal.
+👉 `while curr:` ensures the entire list gets reversed.
 
 
 """

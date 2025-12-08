@@ -103,7 +103,7 @@ Why this code Works:
     • Intuition: Like two runners — one runs twice as fast; when the fast one finishes, the slower is halfway.
 
 ---
-TLDR (one sentence):
+TLDR:
     • Move one pointer twice as fast as the other; when the fast one finishes, the slow one points to the middle.
 
 ---

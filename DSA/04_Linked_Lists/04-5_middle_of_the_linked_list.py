@@ -47,6 +47,8 @@ while curr:
     curr = curr.next
 print("Output:", ans)   # [3, 4, 5]
 
+# print(result.val)  # 3
+
 
 # --------------------------------------------
 # EXAMPLE 2: Linked list: 1 → 2 → 3 → 4 → 5 → 6
@@ -64,6 +66,9 @@ while curr:
     ans.append(curr.val)
     curr = curr.next
 print("Output:", ans)   # [4, 5, 6]
+
+# print(result.val)  # 4
+
 
 """
 
@@ -203,6 +208,9 @@ while curr:
     ans.append(curr.val)
     curr = curr.next
 print("Output:", ans)   # [3, 4, 5, 6]
+
+# print(result.val)  # 3
+
 
 
 """

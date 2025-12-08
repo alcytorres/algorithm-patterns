@@ -132,14 +132,15 @@ Why this code Works:
     • Data structure: Linked list nodes with pointers to the next node.  
 
     • Technique: Fast & slow pointer pattern — fast moves twice as fast as slow.  
-      If a cycle exists, they'll meet at some point; if not, fast reaches the end.  
+
+    • If a cycle exists, they'll meet at some point; if not, fast reaches the end.  
 
     • Efficiency: O(N) time (each node visited at most twice), O(1) space (no extra structures).  
 
     • Intuition: Think of two runners on a circular track — if there's a loop, the faster runner eventually catches up.  
 
 ---
-TLDR (one sentence):
+TLDR:
     • Move one pointer slowly and one quickly — if they ever meet, there's a cycle; if fast reaches the end, there isn't.  
 
 ---

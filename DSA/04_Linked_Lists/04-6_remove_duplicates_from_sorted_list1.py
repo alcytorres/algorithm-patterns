@@ -191,23 +191,16 @@ Q: Where do we set `head` to point to the first node?
   • because it happens implicitly when we call `deleteDuplicates(a)`.
 
 
-
+  
 ---
-Q: Why do we return `head` at the end of the solution?
+Q: Why return `head`?
+  • `head` always points to the first node of the list.
+  
+  • Even though `curr` moves, `head` never changes.
+  
+  • After deleting duplicates, the list still starts at that same first node.
 
-- `head` points to the start of the linked list.
-    • Even though we move `curr` through the list during the loop,
-    • `head` always stays fixed at the first node.
-
-- After we finish removing duplicates,
-    • the modified list still begins at the same starting node.
-
-- By returning `head`, we give back the entire updated linked list
-    • starting from its first node — so the caller can access and print it.
-
-✅ In short:
-  • We return `head` because it represents the entry point
-  • to the new, duplicate-free linked list.
+👉 Returning `head` gives back the entire updated list from its beginning.
 
 
 
