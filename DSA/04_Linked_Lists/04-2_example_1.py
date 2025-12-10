@@ -73,11 +73,11 @@ Overview for Each Iteration
 Input: head = [1, 2, 3, 4, 5]
 
 Step: Find middle node using slow and fast pointers
-Iteration | slow.val | fast.val | fast.next exists | Action
-----------|----------|----------|------------------|----------------
-0         | 1        | 1        | True             | slow=2, fast=3
-1         | 2        | 3        | True             | slow=3, fast=5
-2         | 3        | 5        | False            | Exit loop
+i | slow.val | fast.val | fast.next exists | Action
+--|----------|----------|------------------|----------------
+0 | 1        | 1        | True             | slow=2, fast=3
+1 | 2        | 3        | True             | slow=3, fast=5
+2 | 3        | 5        | False            | Exit loop
 
 Final: 3 (slow.val)
 

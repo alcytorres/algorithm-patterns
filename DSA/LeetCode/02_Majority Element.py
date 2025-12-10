@@ -7,8 +7,8 @@
 #     Output: 3
 
 # Example 2:
-#     Input: nums = [2, 2, 1, 1, 1, 2, 2]
-#     Output: 2
+#     Input: nums = [3, 1, 1, 3, 3, 3]
+#     Output: 3
  
 # Constraints:
 #     n == nums.length
@@ -31,7 +31,7 @@ def majorityElement(nums):
     return max(count, key=count.get)
 
 nums = [3, 2, 3]
-print(majorityElement(nums))
+print(majorityElement(nums))  # Output: 3
 
 
 """
@@ -71,7 +71,7 @@ def majorityElement(nums):
     return max(count, key=count.get)  # Return the number with highest count
 
 
-
+# ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 # Follow-up: Could you solve the problem in linear time and in O(1) space?
 
 # Boyer–Moore Voting Algorithm Solution
@@ -87,11 +87,138 @@ def majorityElement(nums):
     return candidate
 
 nums = [3, 2, 3]
-print(majorityElement(nums))
+print(majorityElement(nums))  # Output: 3
+
+
+"""
+Time: O(N)
+  - Let N = length of nums.
+  - Single pass through nums.
+  - For each element:
+      • Compare to candidate → O(1).
+      • Update count in O(1).
+  - No nested loops or additional passes.
+  - Overall: O(N).
+
+Space: O(1)
+  - Stores only two scalar variables: count and candidate.
+  - No extra arrays, maps, or data structures used.
+  - Overall: O(1).
+
+  
+Interview Answer: Worst Case
+
+Time: O(N)
+  - Boyer-Moore scans the list once.
+
+Space: O(1)
+  - Tracks only a running candidate and counter.
+
+
+---
+Overview for Each Iteration
+Input: nums = [3, 2, 3]
+
+i | num | count == 0 | candidate | count before | Action              | count after
+--|-----|------------|-----------|--------------|---------------------|-------------
+0 | 3   | True       | None → 3  | 0            | set candidate=3     | +1 → 1
+1 | 2   | False      | 3         | 1            | num ≠ candidate     | -1 → 0
+2 | 3   | True       | 3         | 0            | set candidate=3     | +1 → 1
+
+Final: candidate = 3 → return 3
 
 
 
+---
+Most IMPORTANT thing to Understand:
+    • The majority element appears MORE than n/2 times — it has more “support” than all other numbers combined.
 
+    • Boyer-Moore's key idea: pair up every occurrence of the majority element with a different element — the majority element ALWAYS survives.
+
+    • The algorithm keeps a running "candidate" and a "vote count." If the count ever hits zero, we pick a new candidate.
+
+---
+Why this code Works:
+    • Data structure: No extra space — just a candidate and a counter.
+
+    • Technique (voting):
+        • When num == candidate → +1 vote.
+        • When num != candidate → -1 vote cancels it.
+        • Majority element can't be fully canceled because it appears more than all others combined.
+
+    • Efficiency:
+        • One-pass scan (O(N)).
+        • O(1) space.
+        • No hashing, no sorting.
+
+    • Intuition:
+        • Think of it as a tournament: every time the candidate meets a different number, they knock each other out.  
+          The majority element has too many “copies” to be eliminated.
+
+---
+TLDR:
+    • This works because the majority element cannot lose all its votes — it survives the canceling process and becomes the final candidate.
+
+    
+---
+Quick Example Walkthrough:
+
+    nums = [3, 2, 3]
+
+    Start:
+        candidate=None, count=0
+
+    1) num=3  
+        count==0 → candidate=3  
+        count=1
+
+    2) num=2  
+        different → count=0  
+        (candidate "loses all votes")
+
+    3) num=3  
+        count==0 → candidate=3  
+        count=1
+
+    Final candidate = 3  
+    This is the majority element.
+
+
+---
+Quick Example Walkthrough:
+
+    nums = [3, 1, 1, 3, 3, 3]
+
+    Start:
+        candidate=None, count=0
+
+    1) num=3
+        count==0 → candidate=3
+        count=1
+
+    2) num=1
+        different → count=0
+        (candidate loses all votes)
+
+    3) num=1
+        count==0 → candidate=1
+        count=1
+
+    4) num=3
+        different → count=0
+        (candidate loses all votes again)
+
+    5) num=3
+        count==0 → candidate=3
+        count=1
+
+    6) num=3
+        same → count=2
+
+    Final candidate = 3  
+    This is the majority element.
+
+"""
 
 # ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 # Breakdown – Boyer–Moore Voting Algorithm 
@@ -110,10 +237,71 @@ def majorityElement(nums):
 
     return candidate   # Guaranteed to be the majority element
 
+# ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+# Boyer–Moore Voting Algorithm reformatted
+def majorityElement(nums):
+    count = 0          # Tracks "votes" for current candidate
+    candidate = None   # Current suspected majority element
+
+    for num in nums:            # One pass through array
+        if count == 0:          # No active candidate
+            candidate = num     # Pick current number as new candidate
+        
+        if candidate == num:    # If current number matches candidate
+            count += 1          # Give it a vote
+        else:                   # Otherwise
+            count -= 1          # Cancel out one vote
+
+    return candidate    # Guaranteed to be majority (by problem says it exists)
 
 
-# (O(n) time
-# O(1) space)
+
+
+# ============================================================
+# 📘 Tutorial: Passing a Function (without parentheses) to key=
+# ============================================================
+"""
+Big Idea:
+    key= expects a FUNCTION, not a result.
+
+    • count.get      → gives max() a TOOL to use later
+    • count.get()    → runs the tool right now (wrong here)
+
+Why no parentheses?
+    We want max() to CALL the function for us internally
+    on each item it checks.
+
+Use cases:
+    • Choose longest string
+    • Choose dict key with biggest value
+"""
+
+# --------------------------
+# Basic Example (Strings)
+# --------------------------
+words = ["hi", "banana", "yo"]
+
+# key=len  → "Use length to decide which is biggest"
+longest = max(words, key=len)
+
+print(longest)   # Output: "banana"
+
+
+# ------------------------------------
+# Example Inside a Function (LeetCode)
+# Pick the key with the highest value
+# ------------------------------------
+def majorityElement(nums):
+    count = {}
+
+    for num in nums:
+        count[num] = count.get(num, 0) + 1
+
+    # key=count.get → "Compare keys by their values"
+    return max(count, key=count.get)
+
+nums = [1, 3, 3]
+print(majorityElement(nums))  # Output: 3
 
 
 
@@ -121,6 +309,13 @@ def majorityElement(nums):
 
 
 
+
+
+
+
+
+
+# ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 # Option 2
 from collections import defaultdict
 
@@ -141,7 +336,7 @@ def majorityElement(nums):
     return majorityNum
 
 nums = [3, 2, 3]
-print(majorityElement(nums))
+print(majorityElement(nums))  # Output: 3
 
 
 
@@ -166,7 +361,8 @@ def majorityElement_Simple(nums):
             return num
 
 nums = [3, 2, 3]
-print(majorityElement(nums))
+print(majorityElement(nums))  # Output: 3
+
 
 
 # Option 4
@@ -177,7 +373,7 @@ def majorityElement(nums):
     return max(counts.keys(), key=counts.get)
 
 nums = [3, 2, 3]
-print(majorityElement(nums))
+print(majorityElement(nums))  # Output: 3
 
 
 # Option 5
@@ -186,7 +382,7 @@ def majorityElement(nums):
     return nums[len(nums) // 2]
 
 nums = [3, 2, 3]
-print(majorityElement(nums))
+print(majorityElement(nums))  # Output: 3
 
 # Time: O(nlgn)
 # Space: O(1) or (O(n))
@@ -202,6 +398,8 @@ def majorityElement(nums):
         if count > majority_count:
             return num
 
+nums = [3, 2, 3]
+print(majorityElement(nums))  # Output: 3
 
 
 
