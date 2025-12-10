@@ -208,14 +208,13 @@ Example 4: path = "/home/user/Documents/../Pictures"
 
 
 
-
+---
 Q: What does `continue` do in this solution?
---------------------------------------------
 
-- ✅ `continue` tells Python to **skip the rest of the current loop** 
+  • `continue` tells Python to SKIP the rest of the current loop
   and move on to the next iteration.
 
-- In this code, it's used when `part` is either:
+  • In this code, it's used when `part` is either:
     - an empty string '' (from multiple slashes like "//"), or
     - a single dot '.' (which means "current directory" in Unix paths)
 
@@ -231,23 +230,48 @@ Example:
 
 ✅ Prevents adding useless or invalid entries to the path.
 
+
+
+
+---
+Q: How do extra slashes (// or ///) get removed?
+
+A: Two steps:
+
+1. path.split('/') → automatically turns multiple slashes into EMPTY strings ('')
+   Example:
+   "/a/b///c/" → split gives: ['', 'a', 'b', '', '', 'c', '']
+
+   → All those '' come from extra slashes!
+
+2. This line IGNORES the empty strings:
+   if part == '' or part == '.':
+       continue    → skips them completely!
+
+So yes:
+   • split('/') creates '' for extra slashes
+   • continue skips every '' → they disappear!
+
+Result: "/a/b///c/.././" → becomes clean "/a/b"
+
+
 """
 
 
 
-# ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+# ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 # Breakdown 
 def simplifyPath(path):
-    stack = []                        # Stack to track valid directories
+    stack = []       # Stack to track valid directories
 
     for part in path.split('/'):      # Split path by '/' into components
         if part == '' or part == '.': # Skip empty parts or current dir
             continue
-        if part == '..':              # If go up one directory
-            if stack:                 # Only pop if not at root
+        if part == '..':            # If go up one directory
+            if stack:               # Only pop if not at root
                 stack.pop()
-        else:                         # Valid directory name
-            stack.append(part)        # Add to path
+        else:                       # Valid directory name
+            stack.append(part)      # Add to path
 
     return '/' + '/'.join(stack)      # Join with '/' and add leading '/'
 
@@ -255,7 +279,7 @@ def simplifyPath(path):
 
 
 
-# ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+# ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 # Playground
 
 # STRING METHOD: 
@@ -431,7 +455,7 @@ print(simplifyPath("/a/./b//c/../"))  # Output: "/a/b"
 
 
 
-# ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+# ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 # Approach: Using Stacks
 
 def simplifyPath(path):

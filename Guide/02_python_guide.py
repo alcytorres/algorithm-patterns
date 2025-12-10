@@ -1,6 +1,7 @@
 # Python Full Course For Beginners: Zero to Hero in 3 Hours
 # Video: https://www.youtube.com/watch?v=NakyjvSrTIQ
 # Grok notes: https://grok.com/chat/d75c2885-2cd7-47e5-a46c-37e60661c914
+
 # Transcript: https://tactiq.io/tools/run/youtube_transcript?yt=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DNakyjvSrTIQ
 # Environment: Examples use Google Colab, but code is compatible with any Python environment (e.g., VS Code)
 
@@ -29,6 +30,7 @@
 # 2:38:35 User Input
 # 2:41:18 List Comprehension      ***Review Important***
 # 2:49:13 ASCII / Ord / Chr
+# 2:53:45 Lambda Function 
 # 2:53:50 Modules / Pip / Packages
 # 2:57:52 Python Scripts / Files
 # 3:04:11 Local Python
@@ -36,7 +38,6 @@
 
 # Stack
 # Queue 
-# Linked List
 # Linked List
 
 
@@ -2230,6 +2231,7 @@ print(d)  # Outputs: {1: 'A', 2: 'B', ..., 26: 'Z'}
 # ----------------------------------------------------------------------------------
 # 2:53:45 Lambda Function 
 
+# View full guide
 
 # ----------------------------------------------------------------------------------
 # 2:53:50 Modules / Pip / Packages

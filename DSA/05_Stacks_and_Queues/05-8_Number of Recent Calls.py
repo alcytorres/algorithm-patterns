@@ -92,7 +92,7 @@ When a new ping comes in:
 
 """
 
-# ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+# ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 from collections import deque
 
 class RecentCounter:
@@ -267,7 +267,7 @@ Q; Why does it not fail with print(obj.ping(3001))?  3001 is more than 3000?
 
 
 
-# ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+# ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 # Breakdown 
 from collections import deque  # Import deque for efficient append/pop from both ends
 class RecentCounter:

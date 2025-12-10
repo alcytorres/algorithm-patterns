@@ -1059,27 +1059,45 @@ print(sum(numbers))  # Output: 6
 max()
 # What it does: Returns largest item.
 # Why use it: Finds max quickly.
-# How it works: Iterates once; optional key.
-# When to use: Max in arrays or profits.
+# How it works: Iterates once; can use the item itself OR a custom comparison via key.
+# When to use: Getting max element in arrays, strings, or choosing the "best" item by some rule.
 # Time/Space: O(n) time, O(1) space.
 
 # Syntax:
-max(iterable)  # Largest in iterable
+max(iterable)                # Largest in iterable
+max(a, b, c, ...)            # Largest of arguments
+max(iterable, key=function)  # Largest based on function(item)
+
 
 # Basic Example 1 (List):
 nums = [1, 5, 3]
 print(max(nums))  # Output: 5
 
-# Basic Example 2 (Arguments):
+# Basic Example 2 (Multiple Arguments):
 print(max(1, 2, 3))  # Output: 3
 
 # Basic Example 3 (Strings):
 chars = ["a", "c", "b"]
 print(max(chars))  # Output: "c"
 
-# DSA Example (Max in Array):
-numbers = [1, 5, 3]
-print(max(numbers))  # Output: 5
+
+# KEY EXAMPLE — Use custom rule for comparison
+# key=function → tells max() what to look at
+words = ["hi", "banana", "yo"]
+print(max(words, key=len))  
+# Output: "banana" (longest string)
+
+# DICTIONARY EXAMPLE — Pick key with highest value
+count = {3: 2, 2: 1}
+print(max(count, key=count.get))
+# Output: 3 (because count[3] = 2 is highest)
+
+# DSA Example — Majority Element (frequency-based max)
+nums = [3, 2, 3]
+count = {3: 2, 2: 1}
+print(max(count, key=count.get))  
+# Output: 3 (because count[3] = 2 is highest)
+
 
 
 # BUILT-IN FUNCTION: 

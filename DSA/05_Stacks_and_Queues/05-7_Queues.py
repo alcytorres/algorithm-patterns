@@ -61,13 +61,13 @@ Q: What is the best way to build a queue in python?
 # https://leetcode.com/explore/interview/card/leetcodes-interview-crash-course-data-structures-and-algorithms/706/stacks-and-queues/4516/
 
 
-# –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+# –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 # Queue Declaration: we will use deque from the collections module
-import collections
-queue = collections.deque()
+from collections import deque
+
 
 # If you want to initialize it with some initial values:
-queue = collections.deque([1, 2, 3])
+queue = deque([1, 2, 3])
 
 # Enqueueing/adding elements:
 queue.append(4)
@@ -86,7 +86,7 @@ queue[0] # 3
 len(queue) # 3
 
 
-# –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+# –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 # Queue Example Run (Using deque)
 from collections import deque
 
@@ -114,7 +114,7 @@ print(queue)  # deque([])
 
 
 
-# –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+# –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 # BUILT-IN FUNCTION: 
 deque()
 # What it does: Double-ended queue with O(1) append/pop from both ends.
@@ -215,4 +215,3 @@ deque.popleft()
 d = deque([1, 2])
 print(d.popleft())  # Output: 1
 print(d)            # Output: deque([2])
-

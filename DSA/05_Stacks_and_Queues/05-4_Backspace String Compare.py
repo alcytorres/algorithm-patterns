@@ -191,7 +191,6 @@ Final: "a" == "a" → return True
 
 
 
-
 ---
 Most IMPORTANT thing to Understand:
     • The '#' acts like a backspace — it deletes the most recent character (if any).
@@ -270,25 +269,10 @@ Compare:
 
 
 
-
 ---
-Q: Why do we use `elif stack:` instead of just `elif:` ?
-    • ✅ `elif stack:` checks if the stack is NOT empty before popping.
+Q: Why is it `elif stack` instead of `else`?
 
-    • If we wrote only `elif:`, it would always try to run, even when stack is empty.
-
-    • That would cause an error (can't pop from an empty list).
-
-    • So `elif stack:` makes sure there's at least one character to remove.
-
-    • In short: it prevents crashes when a '#' appears at the start.
-
-    
-
----
-Q: Why is it `elif` instead of `else`?
-
-  - Because we only want to pop when both are true:
+  - Because we only want to pop when BOTH are true:
     1. The character is '#'
     2. The stack is not empty
 
@@ -305,28 +289,60 @@ Q: Why is it `elif` instead of `else`?
 
 
 
+---
+Q: Why do we use `elif stack:` instead of just `elif:` ?
+    • The `elif stack:` condition protects us from popping nothing.
+
+    • If the stack has a letter, remove it (good).
+    
+    • If the stack is empty and we tried to pop → boom (error).
+    
+    • So `elif stack:` = “Only backspace when there's something to erase.”
+
+    • It turns '#' into a safe backspace instead of a dangerous one.
+
+
+--- 
+Q: What happens if input starts with '#'?
+
+  A: It does nothing — safely ignored!
+
+    Example: s = "#c"; t = "#c"
+    stack = []
+
+    1. '#' → backspace, but stack empty → "elif stack:" → False → skip
+    2. 'c' → append → stack = ['c']
+
+    → final: "c"
+
+    Same for t → both become "c" → True
+
+One-liner to remember:
+   "# at start = useless backspace → ignored"
+   Only deletes if there's something before it
+
 """
 
 
-# ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+# ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 # Breakdown 
 def backspaceCompare(s, t):
-    def build(s):                     # Helper to process backspaces
-        stack = []                    # Stack to simulate typing
+    def build(s):            # Helper to process backspaces
+        stack = []           # Stack to simulate typing
 
-        for c in s:                   # Iterate over each character
-            if c != "#":              # If not backspace
-                stack.append(c)       # Add character
-            elif stack:               # If backspace and stack not empty
-                stack.pop()           # Remove last character
+        for c in s:                # Iterate over each character
+            if c != "#":           # If not backspace
+                stack.append(c)    # Add character
+            elif stack:            # If backspace and stack not empty
+                stack.pop()        # Remove last character
 
-        return "".join(stack)         # Convert stack to final string
+        return "".join(stack)      # Convert stack to final string
     
-    return build(s) == build(t)       # Compare processed strings
+    return build(s) == build(t)    # Compare processed strings
 
 
 
-# ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+# ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 # Same Solution differnt format
 def backspaceCompare(s, t):
     def build(s):
@@ -349,7 +365,7 @@ print(backspaceCompare(s, t))  # Output: True
 
 
 
-# ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+# ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 # This solution is NOT correct.
 # This appends # when stack is empty → Wrong!
 
@@ -374,7 +390,7 @@ print(backspaceCompare(s, t))  # Output: True
 
 
 
-# ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+# ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 # Playground 
 
 # How Nested Functions Work – Visual flow of execution
@@ -407,7 +423,7 @@ Output: True ✅
 
 
 
-# ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+# ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 # Same Solution rewritten
 
 def backspaceCompare(s, t):

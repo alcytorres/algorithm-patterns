@@ -173,7 +173,7 @@ O(n!)     | Factorial     | All permutations stored
 
 
 
---------------------------------------------------------------
+---
 📊 Time & Space Complexity Symbols Cheat Sheet
 
 Symbol  | Meaning / When it Appears                          | Example
@@ -188,7 +188,48 @@ n!      | Factorial growth (all permutations)                | Generate all perm
 
 
 
--------------------------------------------------------------
+---
+"""
+Q: When do I use O(N + M) vs O(N * M)?
+
+🧠 Simple Rule:
+  • Do one thing after another  →  ADD  →  O(N + M)
+  • Do one thing FOR EACH of another  →  MULTIPLY  →  O(N * M)
+
+
+--------------------------------------------------
+O(N + M) — Separate loops (one after the other)
+--------------------------------------------------
+def print_both(arr1, arr2):
+    for x in arr1:      # This loop → O(N)
+        print(x)
+
+    for y in arr2:      # This loop → O(M)
+        print(y)
+
+# Total work: first all of arr1, then all of arr2 → O(N + M)
+
+
+--------------------------------------------------
+O(N * M) — Nested loops (for each, do all)
+--------------------------------------------------
+def print_pairs(arr1, arr2):
+    for x in arr1:          # Outer loop runs n times
+        for y in arr2:      # Inner loop runs m times for EACH x
+            print(x, y)
+
+# Total work: n * m prints → O(n * m)
+
+
+💡 Memory trick:
+  • Loops in a line (one after another)         → add their sizes → O(N + M)
+  • Loops inside loops (one wrapped in another) → multiply sizes → O(N * M)
+"""
+
+
+
+
+---
 Q: “What's the difference between O(U) and O(N) in time/space complexity analysis?”
 
 O(U) vs O(N)
@@ -214,7 +255,7 @@ Interview tip:
 
 
 """
--------------------------------------------------------------
+---
 COMPLEXITY TEMPLATE — STUDY + INTERVIEW FORMAT
 
 Instructions:
@@ -224,6 +265,7 @@ Instructions:
   * Don't overdo it with too many details.  
   * Don't swing too far into being overly concise.  
   * Use the optimal amount so a beginner can quickly understand and recall.  
+
 - Some cases (like #2225 Find Players With Zero or One Losses) may need more bullets because more is going on.  
 - Typical problems should use fewer bullets.  
 - STUDY ANSWER = thorough, with step breakdowns and worst-case reasoning.  
@@ -231,7 +273,7 @@ Instructions:
 - REMEMBER I'm a beginner so the bullet explanations for the Study Answer should be very simple and easy to follow. If you need more bullets or to make them a little longer because you think that will make it easier for me follow do so
 Place your answer inside """ """ in a .py file with a code block. Don't include the code; just the time and space template.
 
-------------------------------------------------
+---
 TEMPLATE:
 
 Time: O(...)
@@ -255,7 +297,7 @@ Time: O(...)
 Space: O(...)
   - 1-2 bullets summarizing memory usage at a high level.
 
-------------------------------------------------
+---
 EXAMPLE 1: #2225 Find Players With Zero or One Losses
 """
 
@@ -353,4 +395,3 @@ Space: O(1)
   - Constant extra space.
 
 """
-
