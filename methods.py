@@ -322,6 +322,34 @@ print(text.isnumeric())  # Output: True
 
 
 # STRING METHOD: 
+.isalpha()
+# What it does: Returns True if all characters are alphabetic letters.
+# Why use it: Quickly checks if a string contains only letters (a–z, A–Z).
+# How it works: Ignores spaces, digits, punctuation, symbols.
+# When to use: Input validation, word checking, cleaning tokens.
+# Time/Space: O(n) time, O(1) space.
+
+# Syntax:
+string.isalpha()  # → True only if len > 0 and all chars are letters
+
+# Basic Example 1:
+print("hello".isalpha())       # True
+print("hello123".isalpha())    # False
+print("hello world".isalpha()) # False (space)
+print("".isalpha())            # False (empty string)
+
+# Basic Example 2 (Unicode letters):
+print("café".isalpha())       # True
+print(" naïve ".isalpha())     # False (space)
+
+# DSA Example (Valid word after split):
+words = "hello world 123 bye".split()
+valid_words = [w for w in words if w.isalpha()]
+print(valid_words)  # Output: ['hello', 'world', 'bye']
+
+
+
+# STRING METHOD: 
 .format()
 # What it does: Formats string with placeholders.
 # Why use it: Builds dynamic strings easily.

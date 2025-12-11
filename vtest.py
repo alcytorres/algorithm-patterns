@@ -12,3 +12,6 @@ def fn(a, b, c):
     return a * (1/b) * (1/c)
 
 print(fn(10, 10, 10))
+
+
+

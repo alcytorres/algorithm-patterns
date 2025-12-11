@@ -1,4 +1,6 @@
-# Check if a String is a Palindrome
+# Simple Palindrome Checker
+
+# Check if a clean String is a Palindrome
 
 # Example 1: Given a string s, return true if it is a palindrome, false otherwise.
 
@@ -73,6 +75,7 @@ def is_palindrome(s):
         right -= 1              # Move right pointer inward
 
     return True                 # String is a palindrome
+
 
 
 
