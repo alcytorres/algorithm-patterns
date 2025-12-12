@@ -153,7 +153,7 @@ def max_profit(prices):
         if p < min_price:     # If current price is lower
             min_price = p     # Update minimum price
 
-        profit = p - min_price  # Calculate profit if sold today
+        profit = p - min_price   # Calculate profit if sold today
         if profit > max_profit:  # If this is a new best profit
             max_profit = profit  # Update max profit
 
