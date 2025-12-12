@@ -1,5 +1,5 @@
-125. Valid Palindrome
-
+# 125. Valid Palindrome
+"""
 A phrase is a palindrome if, after converting all uppercase letters into lowercase letters and removing all non-alphanumeric characters, it reads the same forward and backward. Alphanumeric characters include letters and numbers.
 
 Given a string s, return true if it is a palindrome, or false otherwise.
@@ -24,6 +24,8 @@ Constraints:
     1 <= s.length <= 2 * 105
     s consists only of printable ASCII characters.
 
+https://leetcode.com/problems/valid-palindrome/description/
+"""
 
 def is_palindrome(s):
     new_string = ""
@@ -33,14 +35,14 @@ def is_palindrome(s):
             new_string = new_string + c.lower()  
     
     # Check if the new string reads the same forwards and backwards
-    left = 0
-    right = len(new_string) - 1
+    l = 0
+    r = len(new_string) - 1
     
-    while left < right:
-        if new_string[left] != new_string[right]:
+    while l < r:
+        if new_string[l] != new_string[r]:
             return False
-        left += 1
-        right -= 1
+        l += 1
+        r -= 1
         
     return True
 

@@ -1,19 +1,19 @@
 # 1. Two Sum
+"""
+Example 1
+    Given an array of integers nums and an integer target, return indices of the two numbers such that they add up to target.
 
-# Example 1
-    # Given an array of integers nums and an integer target, return indices of the two numbers such that they add up to target.
+You may assume that each input would have exactly one solution, and you may not use the same element twice.
 
-# You may assume that each input would have exactly one solution, and you may not use the same element twice.
+You can return the answer in any order.
 
-# You can return the answer in any order.
+Example:
+    Input: nums = [3, 1, 7, 4, -6], target = 5
+    Output: [1, 3]
+    Explanation: Because nums[1] + nums[3] == 5, we return [1, 3] or [3, 1].
 
-# Example:
-    # Input: nums = [3, 1, 7, 4, -6], target = 5
-    # Output: [1, 3]
-    # Explanation: Because nums[1] + nums[3] == 5, we return [1, 3] or [3, 1].
-
-# Solution: https://leetcode.com/problems/two-sum/description/
-
+Solution: https://leetcode.com/problems/two-sum/description/
+"""
 # ––––––––––––––––––––––––––––––––––––––––––––––––
 # Enumerate-Based One-Pass Hash Map Solution
 
@@ -138,18 +138,30 @@ Q: Why do we use `d[num] = i` instead of `d[diff] = i`?
 
   • d is a lookup table of numbers we've already seen.
 
-  • We store what we have (num), not what we need (diff).
+  • We store the current number (num) because it's the thing we HAVE.
 
-  • When we see a new number, we check if its complement (diff) was seen before.
+  • We check for diff because it's the thing we NEED.
 
-  • If yes → diff is already in d, meaning we've found the pair.
+  • If diff is already in d → we found the pair.
+  • If not → we save num so future numbers can match with it.
 
-  • If no → we store the current number (num) so future numbers can find it later.
+👉 d[num] = i means: "This number exists at this index."
+👉 d[diff] = i would store a number we haven't seen yet, which makes no sense.
 
-  👉 d[num] = i keeps track of “I've seen this number at this index.”
-  👉 Using d[diff] = i would wrongly store what we don't have yet.
+
+
+Q: Why do we include `return []` at the end?
+
+  • The loop returns as soon as it finds a valid pair.
+    
+  • If no pair is found during the loop, the function must still return something.
+    
+  • Returning [] is just a safe fallback so the function always returns a valid value.
 
 """
+
+
+
 
 
 # ––––––––––––––––––––––––––––––––––––––––––––––––––

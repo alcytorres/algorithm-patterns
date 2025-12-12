@@ -1,23 +1,23 @@
 # 217. Contains Duplicate
+"""
+Given an integer array nums, return true if any value appears at least twice in the array, and return false if every element is distinct.
 
-# Given an integer array nums, return true if any value appears at least twice in the array, and return false if every element is distinct.
+Example 1:
+    Input: nums = [1, 2, 3, 1]
+    Output: true
+    Explanation:
+    The element 1 occurs at the indices 0 and 3.
 
-# Example 1:
-#     Input: nums = [1, 2, 3, 1]
-#     Output: true
-#     Explanation:
-#     The element 1 occurs at the indices 0 and 3.
-
-# Example 2:
-#     Input: nums = [1, 2, 3, 4]
-#     Output: false
-#     Explanation:
-#     All elements are distinct.
+Example 2:
+    Input: nums = [1, 2, 3, 4]
+    Output: false
+    Explanation:
+    All elements are distinct.
  
-# Constraints:
-#     1 <= nums.length <= 105
-#     -109 <= nums[i] <= 109
-
+Constraints:
+    1 <= nums.length <= 105
+    -109 <= nums[i] <= 109
+"""
 
 # Option 1: Set Early-Exit Duplicate Check
 def containsDuplicate(nums):
@@ -114,7 +114,7 @@ Final Answer: True
 """
 
 
-# ──────────────────────────────────────────────────────────────────────
+# ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 # Breakdown
 def containsDuplicate(nums):
     seen = set()           # Empty set to track numbers we've seen
@@ -129,7 +129,7 @@ def containsDuplicate(nums):
 
 
 
-# ──────────────────────────────────────────────────────────────────────
+# ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 # Option 2: Dictionary Frequency Counting Approach
 from collections import defaultdict
 
@@ -150,7 +150,7 @@ print(containsDuplicate(nums))  # Output True
 
 
 
-# ──────────────────────────────────────────────────────────────────────
+# ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 # Option 3: Quick Set-Length Trick (One-Liner Solution)
 def containsDuplicate(nums):
     return True if len(set(nums)) < len(nums) else False

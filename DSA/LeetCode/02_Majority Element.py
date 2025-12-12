@@ -1,25 +1,25 @@
 # 169. Given an array nums of size n, return the majority element.
+"""
+The majority element is the element that appears more than ⌊n / 2⌋ times. You may assume that the majority element always exists in the array.
 
-# The majority element is the element that appears more than ⌊n / 2⌋ times. You may assume that the majority element always exists in the array.
+Example 1:
+    Input: nums = [3, 2, 3]
+    Output: 3
 
-# Example 1:
-#     Input: nums = [3, 2, 3]
-#     Output: 3
-
-# Example 2:
-#     Input: nums = [3, 1, 1, 3, 3, 3]
-#     Output: 3
+Example 2:
+    Input: nums = [3, 1, 1, 3, 3, 3]
+    Output: 3
  
-# Constraints:
-#     n == nums.length
-#     1 <= n <= 5 * 104
-#     -109 <= nums[i] <= 109
-#     The input is generated such that a majority element will exist in the array.
+Constraints:
+    n == nums.length
+    1 <= n <= 5 * 104
+    -109 <= nums[i] <= 109
+    The input is generated such that a majority element will exist in the array.
  
-# Follow-up: Could you solve the problem in linear time and in O(1) space?
+Follow-up: Could you solve the problem in linear time and in O(1) space?
+"""
 
-
-# Optpion 1
+# Optpion 1: Dictionary Frequency + max() Lookup
 def majorityElement(nums):
     count = {}
     for num in nums:
@@ -119,14 +119,13 @@ Space: O(1)
 Overview for Each Iteration
 Input: nums = [3, 2, 3]
 
-i | num | count == 0 | candidate | count before | Action              | count after
---|-----|------------|-----------|--------------|---------------------|-------------
-0 | 3   | True       | None → 3  | 0            | set candidate=3     | +1 → 1
-1 | 2   | False      | 3         | 1            | num ≠ candidate     | -1 → 0
-2 | 3   | True       | 3         | 0            | set candidate=3     | +1 → 1
+i | num | count == 0 | candidate | count before | Action          | count after
+--|-----|------------|-----------|--------------|-----------------|------------
+0 | 3   | True       | None → 3  | 0            | set candidate=3 | +1 → 1
+1 | 2   | False      | 3         | 1            | num ≠ candidate | -1 → 0
+2 | 3   | True       | 3         | 0            | set candidate=3 | +1 → 1
 
 Final: candidate = 3 → return 3
-
 
 
 ---
@@ -153,13 +152,12 @@ Why this code Works:
 
     • Intuition:
         • Think of it as a tournament: every time the candidate meets a different number, they knock each other out.  
-          The majority element has too many “copies” to be eliminated.
+        • The majority element has too many “copies” to be eliminated.
 
 ---
 TLDR:
     • This works because the majority element cannot lose all its votes — it survives the canceling process and becomes the final candidate.
 
-    
 ---
 Quick Example Walkthrough:
 
@@ -308,15 +306,8 @@ print(majorityElement(nums))  # Output: 3
 
 
 
-
-
-
-
-
-
-
 # ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
-# Option 2
+# Option 2: Defaultdict Frequency Scan
 from collections import defaultdict
 
 def majorityElement(nums):
@@ -338,9 +329,29 @@ def majorityElement(nums):
 nums = [3, 2, 3]
 print(majorityElement(nums))  # Output: 3
 
+# Time:  O(N) 
+# Space: O(N)  
 
 
-# Option 3
+# ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+# Counter-Based Frequency Solution
+from collections import Counter
+
+def majorityElement(nums):
+    count = Counter(nums)
+    print(count)
+    
+    return max(count, key=count.get)
+
+nums = [3, 2, 3]
+print(majorityElement(nums))  # Output: 3
+
+# Time:  O(N) 
+# Space: O(N)  
+
+
+# ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+# Dictionary Count + Threshold Check"
 def majorityElement_Simple(nums):
     # 1. Initialize a dictionary to store element counts
     counts = {}
@@ -363,20 +374,11 @@ def majorityElement_Simple(nums):
 nums = [3, 2, 3]
 print(majorityElement(nums))  # Output: 3
 
+# Time:  O(N) 
+# Space: O(N)  
 
-
-# Option 4
-from collections import Counter
-
-def majorityElement(nums):
-    counts = Counter(nums)
-    return max(counts.keys(), key=counts.get)
-
-nums = [3, 2, 3]
-print(majorityElement(nums))  # Output: 3
-
-
-# Option 5
+# ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+# Sorting-Based Middle Element Solution
 def majorityElement(nums):
     nums.sort()
     return nums[len(nums) // 2]
@@ -386,6 +388,7 @@ print(majorityElement(nums))  # Output: 3
 
 # Time: O(nlgn)
 # Space: O(1) or (O(n))
+
 
 
 # ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
