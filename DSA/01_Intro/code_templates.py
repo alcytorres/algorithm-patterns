@@ -318,3 +318,56 @@ Trick to remember:
 """
 
 
+# ––––––––––––––––––––––––––––––––––––––––––––––
+# Monotonic increasing stack
+    # The same logic can be applied to maintain a monotonic queue.
+
+def fn(arr):
+    stack = []
+    ans = 0
+
+    for num in arr:
+        # for monotonic decreasing, just flip the > to <
+        while stack and stack[-1] > num:
+            # do logic
+            stack.pop()
+        stack.append(num)
+    
+    return ans
+
+# ––––––––––––––––––––––––––––––––––––––––––––––
+# Binary search
+
+def fn(arr, target):
+    left = 0
+    right = len(arr) - 1
+
+    while left <= right:
+        mid = (left + right) // 2
+        if arr[mid] == target:
+            # do something
+            return
+        if arr[mid] > target:
+            right = mid - 1
+        else:
+            left = mid + 1
+    
+    # left is the insertion point
+    return left
+
+# ––––––––––––––––––––––––––––––––––––––––––––––
+# Binary search: duplicate elements, left-most insertion point
+
+def fn(arr, target):
+    left = 0
+    right = len(arr)
+
+    while left < right:
+        mid = (left + right) // 2
+        if arr[mid] >= target:
+            right = mid
+        else:
+            left = mid + 1
+
+    return left
+
