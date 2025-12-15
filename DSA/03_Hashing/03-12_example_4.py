@@ -1,19 +1,19 @@
 # 560. Subarray Sum Equals K
+"""
+Example 4: Given an array of integers nums and an integer k, return the total number of subarrays whose sum equals to k.
 
-# Example 4: Given an array of integers nums and an integer k, return the total number of subarrays whose sum equals to k.
+A subarray is a contiguous non-empty sequence of elements within an array.
 
-# A subarray is a contiguous non-empty sequence of elements within an array.
+Example 1:
+    Input: nums = [1, 2, 3], k = 3
+    Output: 2 (subarrays [1, 2] and [3])
 
-# Example 1:
-    # Input: nums = [1, 2, 3], k = 3
-    # Output: 2 (subarrays [1, 2] and [3])
+Example 2:
+    Input: nums = [1, 2, 1, 2, 1], k = 3
+    Output: 4 (subarrays [1, 2], [2, 1], [1, 2], [2, 1])
 
-# Example 2:
-    # Input: nums = [1, 2, 1, 2, 1], k = 3
-    # Output: 4 (subarrays [1, 2], [2, 1], [1, 2], [2, 1])
-
-# Solution: https://leetcode.com/problems/subarray-sum-equals-k/solutions/127728/subarray-sum-equals-k/
-
+Solution: https://leetcode.com/problems/subarray-sum-equals-k/solutions/127728/subarray-sum-equals-k/
+"""
 
 # ––––––––––––––––––––––––––––––––––––––––––––––––
 from collections import defaultdict
@@ -36,6 +36,28 @@ nums = [1, 2, 1, 2, 1]
 k = 3
 print(subarraySum(nums, k))
 # Output: 4 (subarrays [1, 2], [2, 1], [1, 2], [2, 1])
+
+# Count: {0: 1, -2: 0, 1: 1, 3: 1, 4: 1, 6: 1, 7: 1})
+
+# Key: running prefix sum (sum of elements up to current index)
+# Value: how many prefixes have had that exact sum so far
+
+# ––––––––––––––––––––––––––––––––––––––––––––––––
+# Breakdown 
+from collections import defaultdict
+
+def subarraySum(nums, k):
+    counts = defaultdict(int) # Track frequency of prefix sums
+    counts[0] = 1             # Initialize for subarrays starting at index 0
+    ans = curr = 0            # ans: counts subarrays, curr: running sum
+
+    for num in nums:           # Iterate over each number
+        curr += num            # Add current number to running sum
+        ans += counts[curr - k]  # Count subarrays where sum = k
+        counts[curr] += 1      # Increment frequency of current sum
+        
+    return ans                # Return total subarrays with sum k
+
 
 """
 Time: O(N)
@@ -187,24 +209,6 @@ Takeaway:
 
 """
   
-
-# ––––––––––––––––––––––––––––––––––––––––––––––––
-# Breakdown 
-from collections import defaultdict
-
-def subarraySum(nums, k):
-    counts = defaultdict(int)  # Track frequency of prefix sums
-    counts[0] = 1             # Initialize for subarrays starting at index 0
-    ans = curr = 0            # ans: counts subarrays, curr: running sum
-
-    for num in nums:          # Iterate over each number
-        curr += num            # Add current number to running sum
-        ans += counts[curr - k]  # Count subarrays where sum = k
-        counts[curr] += 1     # Increment frequency of current sum
-        
-    return ans                # Return total subarrays with sum k
-
-
 
 
 

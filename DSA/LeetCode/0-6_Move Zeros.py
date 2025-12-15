@@ -20,7 +20,7 @@ Follow up: Could you minimize the total number of operations done?
     • The Two-Pointer solution already minimizes the number of operations.
 """
 
-# Two Pointers In-Place Solution
+# Two Pointers In-Place
 def moveZeroes(nums):
     slow = 0
     for fast in range(len(nums)):
@@ -52,7 +52,7 @@ def moveZeroes(nums):
     for i in range(slow, len(nums)):   # From where non-zeros ended...
         nums[i] = 0                    # ...to the end → set to 0
     
-    return nums       # Modified in-place (not required to return)
+    return nums       # Modified in-place
 
 
 """
@@ -137,7 +137,7 @@ Quick Example Walkthrough:
         fast=2 → 0  → skip
 
         fast=3 → 3  → place at slow=1 → nums = [1, 3, 0, 3, 6], slow=2
-        
+
         fast=4 → 6  → place at slow=2 → nums = [1, 3, 6, 3, 6], slow=3
 
     Phase 2 — Fill remaining positions with zero:

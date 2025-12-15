@@ -49,6 +49,31 @@ print(isAnagram(s, t))  # Output: True
 
 # {'a': 3, 'n': 1, 'g': 1, 'r': 1, 'm': 1})
 
+# ––––––––––––––––––––––––––––––––––––––––––––––––––
+# Breakdown
+from collections import defaultdict
+
+def isAnagram(s, t):
+    if len(s) != len(t):      # If lengths differ → can't be anagram
+        return False          # Early exit
+    
+    count = defaultdict(int)  # Dictionary: char → frequency in s
+    
+    # Step 1: Count characters in string s
+    for c in s:               # Go through each char in s
+        count[c] += 1         # Increase count for this character
+    
+    # Step 2: Decrease counts using string t
+    for c in t:               # Go through each char in t
+        count[c] -= 1         # Use up one occurrence of this char
+        
+        if count[c] < 0:     # If we used more than we had
+            return False     # t has extra char → not anagram
+    
+    return True              # All counts zero → perfect anagram!
+
+
+
 """
 Time: O(N)
   - Let N = length of the strings (they must be equal length to be anagrams).
@@ -166,33 +191,37 @@ Quick Example Walkthrough:
 
     Final Output: True
 
+    
+
+
+
+Q: Why is the time complexity O(N) instead of O(N + M) even though there are two loops?
+
+------------------------------------------------------------
+1️⃣ Inside THIS LeetCode problem ("Valid Anagram")
+------------------------------------------------------------
+  • The algorithm only runs both loops when s and t have the same length.
+  • If lengths differ, the function returns immediately and does NOT run the loops.
+  • So in the only case that matters for Big-O, we have N = M.
+  • The loops then run N times each → O(N + N) → O(2N) → O(N).
+
+→ For this problem: O(N), because the full work only happens when lengths match.
+
+
+------------------------------------------------------------
+2️⃣ Outside this problem (general case, no length check)
+------------------------------------------------------------
+  • If the early length check were removed, both loops would always run.
+
+      if len(s) != len(t):
+        return False
+
+  • Then the true time would be O(N + M), since you'd scan both strings fully.
+
+→ General case: O(N + M).  
+→ LeetCode problem: O(N), because the mismatch case exits early.
+
 """
-
-
-# ––––––––––––––––––––––––––––––––––––––––––––––––––
-# Breakdown
-from collections import defaultdict
-
-def isAnagram(s, t):
-    if len(s) != len(t):      # If lengths differ → can't be anagram
-        return False          # Early exit
-    
-    count = defaultdict(int)  # Dictionary: char → frequency in s
-    
-    # Step 1: Count characters in string s
-    for c in s:               # Go through each char in s
-        count[c] += 1         # Increase count for this character
-    
-    # Step 2: Decrease counts using string t
-    for c in t:               # Go through each char in t
-        count[c] -= 1         # Use up one occurrence of this char
-        
-        if count[c] < 0:     # If we used more than we had
-            return False     # t has extra char → not anagram
-    
-    return True              # All counts zero → perfect anagram!
-
-
 
 
 

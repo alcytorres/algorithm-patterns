@@ -339,8 +339,6 @@ from collections import Counter
 
 def majorityElement(nums):
     count = Counter(nums)
-    print(count)
-    
     return max(count, key=count.get)
 
 nums = [3, 2, 3]

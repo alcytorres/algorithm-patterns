@@ -27,6 +27,7 @@ Constraints:
 https://leetcode.com/problems/valid-palindrome/description/
 """
 
+# Simple Palindrome Check (Build String → Two Pointers)
 def is_palindrome(s):
     new_string = ""
     
@@ -62,8 +63,8 @@ def is_palindrome(s):
     
 
     # Step 2: Check if the new string reads the same forwards and backwards
-    left = 0       # Pointer starting from beginning
-    right = len(new_string) - 1    # Pointer starting from end
+    left = 0                      # Pointer starting from beginning
+    right = len(new_string) - 1   # Pointer starting from end
     
     while left < right:    # Continue until pointers meet
         if new_string[left] != new_string[right]:   # If characters don't match

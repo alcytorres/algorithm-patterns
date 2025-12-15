@@ -1,5 +1,5 @@
 # 704. Binary Search
-
+"""
 Given an array of integers nums which is sorted in ascending order, and an integer target, write a function to search target in nums. If target exists, then return its index. Otherwise, return -1.
 
 You must write an algorithm with O(log n) runtime complexity.
@@ -19,11 +19,54 @@ Constraints:
     -104 < nums[i], target < 104
     All the integers in nums are unique.
     nums is sorted in ascending order.
-
+"""
 # Solution: https://leetcode.com/problems/binary-search/description/
 
-
 # Approach 1: Find the Exact Value
+def search(nums, target):
+    left = 0
+    right = len(nums) - 1
+    
+    while left <= right:
+        mid = (left + right) // 2
+        
+        if nums[mid] == target:
+            return mid
+        elif nums[mid] < target:
+            left = mid + 1                 
+        else:
+            right = mid - 1
+    
+    return -1
+
+nums = [-1, 0, 3, 5, 9, 12]
+target = 9
+print(search(nums, target))  # Output: 4
+
+
+# ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+# Breakdown 
+def search(nums, target):
+    left = 0                   # Left boundary of search range
+    right = len(nums) - 1      # Right boundary of search range
+    
+    while left <= right:       # Continue while search range is valid
+        mid = (left + right) // 2   # Find middle index (integer division)
+        
+        if nums[mid] == target:     # Found target exactly
+            return mid              # Return its index
+        
+        elif nums[mid] < target:    # Target is in right half
+            left = mid + 1          # Discard left half (including mid)
+        
+        else:                       # Target is in left half
+            right = mid - 1         # Discard right half (including mid)
+    
+    return -1                  # Target not found after search
+
+
+# ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+# Breakdown
 def search(nums, target):
     # Set the left and right boundaries
     left = 0
@@ -50,6 +93,106 @@ def search(nums, target):
 nums = [-1, 0, 3, 5, 9, 12]
 target = 9
 print(search(nums, target))  # Output: 4
+
+
+"""
+Time: O(log N)
+  - Let N = length of nums.
+  - Each iteration of the while loop cuts the search space in half.
+  - Comparisons and pointer updates inside the loop are O(1).
+  - Maximum number of iterations is log₂(N).
+  - Overall: O(log N).
+
+Space: O(1)
+  - Uses only a few integer variables: left, right, mid.
+  - No additional data structures or recursion.
+  - Overall: O(1).
+
+  
+Interview Answer: Worst Case
+
+Time: O(log N)
+  - Binary search halves the array each step.
+
+Space: O(1)
+  - Constant extra space for pointers.
+
+
+---
+Overview for Each Iteration
+Input: nums = [-1, 0, 3, 5, 9, 12], target = 9
+
+i | l | r | mid | nums[mid] | nums[mid] vs target | Action      | Search range after
+--|---|---|-----|-----------|---------------------|-------------|---------------------
+0 | 0 | 5 | 2   | 3         | 3 < 9               | l = mid + 1 | [3, 5] (indices 3-5)
+1 | 3 | 5 | 4   | 9         | 9 == 9              | return 4    | —
+
+Final: 4
+
+
+---
+Most IMPORTANT thing to Understand:
+    • Binary search repeatedly cuts the search space in half — that's why it is O(log n).
+
+    • We always compare the target to the middle element:
+        • If equal → found.
+        • If smaller → search left half.
+        • If larger → search right half.
+
+    • The loop continues while left ≤ right — meaning the search range is still valid.
+
+---
+Why this code Works:
+    • Data structure requirement: nums **must be sorted**, or the mid comparison logic would not work.
+
+    • Technique: Halve the search space each time by moving either left or right pointer based on mid comparison.
+
+    • Efficiency: Each step eliminates half the remaining elements → O(log n), far faster than scanning linearly.
+
+    • Intuition: Like looking up a word in a dictionary — check the midpoint and decide which half to continue searching.
+
+---
+TLDR:
+    • Repeatedly check the middle of the array and shrink the search range based on whether the target is bigger or smaller.
+
+---
+Quick Example Walkthrough:
+
+    nums = [-1, 0, 3, 5, 9, 12], target = 9
+
+    Initial:
+        left = 0, right = 5
+
+    Step 1:
+        mid = (0 + 5) // 2 = 2
+        nums[2] = 3
+        3 < 9 → target is in the RIGHT half
+        left = 3
+
+    Step 2:
+        left = 3, right = 5
+        mid = (3 + 5) // 2 = 4
+        nums[4] = 9
+        Found target → return 4
+
+    Final Answer: 4
+
+    
+
+
+Q: Why  while l <= r: ?
+
+
+"""
+
+
+
+
+
+
+
+
+
 
 
 # Approach 2: Find Upper bound

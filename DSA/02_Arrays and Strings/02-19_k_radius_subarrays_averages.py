@@ -1,13 +1,13 @@
 # 2090. K Radius Subarray Averages
+"""
+Solution: https://leetcode.com/problems/k-radius-subarray-averages/description/
 
-# Solution: https://leetcode.com/problems/k-radius-subarray-averages/description/
+Video https://www.youtube.com/watch?v=L33kbF6Cr_I
 
-# Video https://www.youtube.com/watch?v=L33kbF6Cr_I
-
-# Example
-    # nums =  [7, 4, 3, 9, 1, 8, 5, 2, 6]
-    # Output: [-1, -1, -1, 5, 4, 4, -1, -1, -1]
-
+Example
+    nums =  [7, 4, 3, 9, 1, 8, 5, 2, 6]
+    Output: [-1, -1, -1, 5, 4, 4, -1, -1, -1]
+"""
 # Sliding Window Prefix Sum
 def getAverages(nums, k):
     n = len(nums)
