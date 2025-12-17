@@ -1,7 +1,26 @@
+# ============================================================
 # Binary Search
+# ============================================================
+"""
+You should think about binary search anytime the input is SORTED.
 
-You should think about binary search anytime the problem provides anything sorted. O(log n) is extremely fast and binary search is usually a huge optimization.
+Binary search runs in O(log n), which is extremely fast and often a huge optimization over linear scans.
+"""
 
+# ============================================================
+# Standard Binary Search (MOST IMPORTANT — memorize this)
+# ============================================================
+"""
+Use this when:
+• You need to find the EXACT value
+• Return index if found, else return -1 (or existence)
+• Elements are DISTINCT, or duplicates don't matter
+
+IMPORTANT:
+• When the target is NOT found, `left` ends up at the insertion position.
+• This is why this template ALSO works for insertion problems
+  when values are distinct (ex: LeetCode 35).
+"""
 
 # Binary search Template
 def binary_search(arr, target):
@@ -10,80 +29,95 @@ def binary_search(arr, target):
 
     while left <= right:
         mid = (left + right) // 2
+
         if arr[mid] == target:
-            # do something
-            return
-        if arr[mid] > target:
+            return mid
+        elif arr[mid] < target:
+            left = mid + 1
+        else:
             right = mid - 1
-        else:
-            left = mid + 1
     
-    # target is not in arr, but left is at the insertion point
-    return left
+    # Target not found
+    # `left` is the correct insertion position
+    return left   # or -1 depending on the problem
 
+# ============================================================
+# Lower Bound — Left-Most Insertion Point (for DUPLICATES)
+# ============================================================
+"""
+Use this ONLY when:
+• The array MAY contain duplicates
+• The problem asks for:
+    - "first occurrence"
+    - "left-most index"
+    - insertion position WHEN duplicates exist
 
-# ––––––––––––––––––––––––––––––––––––––––––––––
-# Binary Search — Lower Bound (Left-Most Position in Duplicate Elements)
-def binary_search(arr, target):
+Returns:
+• The smallest index where arr[index] >= target
+"""
+
+def lower_bound(arr, target):
     left = 0
     right = len(arr)
 
     while left < right:
         mid = (left + right) // 2
-        if arr[mid] >= target:
-            right = mid
-        else:
+
+        if arr[mid] < target:
             left = mid + 1
+        else:
+            right = mid
 
     return left
 
-# ––––––––––––––––––––––––––––––––––––––––––––––
-# Binary Search — Upper Bound (Right-Most Position in Duplicate Elements)
-def binary_search(arr, target):
+# ============================================================
+# Upper Bound — Right-Most Insertion Point (for DUPLICATES)
+# ============================================================
+"""
+Use this ONLY when:
+• The array MAY contain duplicates
+• The problem asks for:
+    - "last occurrence"
+    - "right-most index"
+    - "count occurrences"
+
+Returns:
+• The smallest index where arr[index] > target
+"""
+
+def upper_bound(arr, target):
     left = 0
     right = len(arr)
 
     while left < right:
         mid = (left + right) // 2
-        if arr[mid] > target:
-            right = mid
-        else:
+
+        if arr[mid] <= target:
             left = mid + 1
+        else:
+            right = mid
 
     return left
 
-
+# ============================================================
+# How to Choose the RIGHT Binary Search (No Confusion)
+# ============================================================
 
 """
-Binary Search Templates — What to Memorize + When to Use Each
+ONE RULE TO REMEMBER:
 
-1) Standard Binary Search (MOST IMPORTANT — memorize this)
-   Use when the problem says:
-   • "Return the index if found, else -1"
-   • Elements are unique OR you don't care which duplicate index you get
-   • You only need exact match / existence
+• If values are DISTINCT → Standard Binary Search is enough
+• If DUPLICATES matter → Use Lower / Upper Bound
 
-   Example: LeetCode 704 (unique elements, return index or -1) → use STANDARD.
+Quick mapping:
+• Exact index / exists?                → STANDARD
+• Insert position (distinct values)    → STANDARD (return left)
+• First occurrence                     → LOWER BOUND
+• Last occurrence                      → UPPER BOUND
+• Count occurrences                    → upper_bound - lower_bound
 
-2) Lower Bound (Left-Most Position)
-   Use when the problem says:
-   • "first occurrence" / "left-most index"
-   • "insertion position" (where target should be inserted to keep sorted)
-
-   Key condition:
-   • if arr[mid] >= target: move right = mid
-
-3) Upper Bound (Right-Most Position)
-   Use when the problem says:
-   • "last occurrence" / "right-most index"
-   • "count occurrences" (often uses upper - lower)
-
-   Key condition:
-   • if arr[mid] > target: move right = mid
-
-Quick Decision Rule (no overthinking):
-   • Need exact index / exists? → STANDARD
-   • Need first/left-most or insert spot? → LOWER BOUND
-   • Need last/right-most or count? → UPPER BOUND
-   
+Examples:
+• LeetCode 704 (Binary Search)          → STANDARD
+• LeetCode 35 (Search Insert Position)  → STANDARD (distinct values)
+• First/Last position problems          → LOWER / UPPER BOUND
 """

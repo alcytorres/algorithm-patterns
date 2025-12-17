@@ -334,7 +334,7 @@ print(majorityElement(nums))  # Output: 3
 
 
 # ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
-# Counter-Based Frequency Solution
+# Counter-Based Frequency 
 from collections import Counter
 
 def majorityElement(nums):

@@ -180,7 +180,85 @@ Quick Example Walkthrough:
     
 
 
-Q: Why  while l <= r: ?
+
+
+---
+Q: Why do we use `while l <= r:` in exact-value binary search?
+
+    • `l` and `r` define the remaining search range.
+
+    • When `l == r`, there is one last element that could be the target.
+
+    • `while l <= r:` ensures this final element is checked.
+
+    • Using `while l < r:` would stop early and skip it.
+
+    • Skipping that check can miss a valid target.
+
+→ Therefore, `while l <= r:` guarantees every possible index is examined.
+    
+
+
+---
+Walkthrough: Why `while l <= r` matters:
+
+Goal: find target = 3 in nums = [1, 3]
+    Index:   0  1
+    nums =  [1, 3]
+
+------------------------------------------------------------
+Correct loop: `while l <= r`
+------------------------------------------------------------
+Start:
+    l = 0
+    r = 1
+
+Step 1:
+    l <= r  → 0 <= 1  ✅ keep going
+    mid = (0 + 1) // 2 = 0
+    nums[mid] = nums[0] = 1
+
+    1 < 3, so the target must be on the RIGHT side.
+    Move l:
+        l = mid + 1 = 1
+
+Step 2:
+    l <= r  → 1 <= 1 ✅ keep going (this is the IMPORTANT part!)
+    mid = (1 + 1) // 2 = 1
+    nums[mid] = nums[1] = 3
+
+    3 == 3 ✅ found it!
+    return 1
+
+So we correctly return index 1.
+
+------------------------------------------------------------
+Wrong loop: `while l < r`
+------------------------------------------------------------
+Start:
+    l = 0
+    r = 1
+
+Step 1:
+    l < r  → 0 < 1 ✅ keep going
+    mid = (0 + 1) // 2 = 0
+    nums[mid] = 1
+
+    1 < 3, so move l:
+        l = mid + 1 = 1
+
+Step 2:
+    l < r  → 1 < 1 ❌ False → STOP LOOP
+
+We STOP without ever checking nums[1] (which is 3).
+Then we return -1 (not found) ❌ WRONG
+
+------------------------------------------------------------
+Takeaway
+------------------------------------------------------------
+  • When l == r, there is 1 last box left to open.
+  • `l <= r` opens that last box.
+  • `l < r` stops early and skips it.
 
 
 """
