@@ -1,9 +1,9 @@
 # Time Complexity Examples
+"""
+Time complexity: as the input size grows, how much longer does the algorithm take to complete?
 
-# Time complexity: as the input size grows, how much longer does the algorithm take to complete?
-
-# Space complexity: as the input size grows, how much more memory does the algorithm use?
-
+Space complexity: as the input size grows, how much more memory does the algorithm use?
+"""
 
 # O(n) - Linear time: Single loop printing array elements
 def fn(arr):

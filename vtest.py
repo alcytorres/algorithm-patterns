@@ -19,8 +19,9 @@ print(fn(10, 10, 10))
 
 
 # algorithms.py
+# ==========================================================
 # Collection of common searching and sorting algorithms for interviews
-
+# ==========================================================
 # ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 # Binary Search (iterative version – most common in interviews)
 
@@ -156,3 +157,95 @@ def bubble_sort(arr):
 arr = [4, 3, 1, 2]
 print("Bubble Sort:", bubble_sort(arr))
 # Output: [1, 2, 3, 4]
+
+
+
+
+
+
+
+
+
+# –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+# “Count how many times a target appears in a sorted array.”
+
+# Input: nums = [1, 2, 2, 2, 3, 4]
+# target = 2
+# Output: 3
+
+def lower_bound(nums, target):
+    l, r = 0, len(nums)
+    while l < r:
+        mid = (l + r) // 2
+        if nums[mid] < target:
+            l = mid + 1
+        else:
+            r = mid
+    return l
+
+def upper_bound(nums, target):
+    l, r = 0, len(nums)
+    while l < r:
+        mid = (l + r) // 2
+        if nums[mid] <= target:
+            l = mid + 1
+        else:
+            r = mid
+    return l
+
+nums = [1, 2, 2, 2, 3, 4]
+target = 2
+
+print(upper_bound(nums, target) - lower_bound(nums, target))  # 3
+
+
+# –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+# Given a sorted array that may contain duplicates, return the index of the FIRST occurrence of target.
+# If target does not exist, return -1.
+
+# Input: nums = [1, 2, 2, 2, 3]
+# target = 2
+# Output: 1
+
+def first_occurrence(nums, target):
+    l, r = 0, len(nums)
+
+    while l < r:
+        mid = (l + r) // 2
+        if nums[mid] < target:
+            l = mid + 1
+        else:
+            r = mid
+
+    if l < len(nums) and nums[l] == target:
+        return l
+    return -1
+
+nums = [1, 2, 2, 2, 3]
+print(first_occurrence(nums, target))  # Output: 1
+
+
+# –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+# Given a sorted array that may contain duplicates, return the index of the LAST occurrence of target.
+# If target does not exist, return -1.
+
+# Input: nums = [1, 2, 2, 2, 3]
+# target = 2
+# Output: 3
+
+def last_occurrence(nums, target):
+    l, r = 0, len(nums)
+
+    while l < r:
+        mid = (l + r) // 2
+        if nums[mid] <= target:
+            l = mid + 1
+        else:
+            r = mid
+
+    if l - 1 >= 0 and nums[l - 1] == target:
+        return l - 1
+    return -1
+
+nums = [1, 2, 2, 2, 3]
+print(last_occurrence(nums, target))  # Output: 3

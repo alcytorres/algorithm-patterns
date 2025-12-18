@@ -21,17 +21,30 @@ Constraints:
 
 # Option 1: Set Early-Exit Duplicate Check
 def containsDuplicate(nums):
-    count = set()
+    seen = set()
     
     for num in nums:
-        if num in count:
+        if num in seen:
             return True
-        count.add(num)
+        seen.add(num)
 
     return False
 
 nums =  [1, 2, 3, 1]
 print(containsDuplicate(nums))  # Output True
+
+
+# ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+# Breakdown
+def containsDuplicate(nums):
+    seen = set()           # Empty set to track numbers we've seen
+    
+    for num in nums:       # Go through each number once
+        if num in seen:    # If we've seen this number before
+            return True    # Duplicate found → return True immediately
+        seen.add(num)      # Otherwise, mark this number as seen
+    
+    return False           # No duplicates found after full scan
 
 
 """
@@ -112,19 +125,6 @@ Final Answer: True
 
 
 """
-
-
-# ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
-# Breakdown
-def containsDuplicate(nums):
-    seen = set()           # Empty set to track numbers we've seen
-    
-    for num in nums:       # Go through each number once
-        if num in seen:    # If we've seen this number before
-            return True    # Duplicate found → return True immediately
-        seen.add(num)      # Otherwise, mark this number as seen
-    
-    return False           # No duplicates found after full scan
 
 
 
