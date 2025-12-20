@@ -33,7 +33,7 @@ def is_palindrome(s):
     
     for c in s:
         if c.isalpha() or c.isdigit():
-            new_string = new_string + c.lower()  
+            new_string += c.lower()  
     
     # Check if the new string reads the same forwards and backwards
     l = 0
@@ -58,8 +58,8 @@ def is_palindrome(s):
     new_string = ""    # Empty string to store valid chars
     
     for c in s:        # Go through every character in string
-        if c.isalpha() or c.isdigit():   # if it's a letter or number
-            new_string = new_string + c.lower()  # make it lowercase and add
+        if c.isalpha() or c.isdigit():  # if it's a letter or number
+            new_string += c.lower()     # make it lowercase and add
     
 
     # Step 2: Check if the new string reads the same forwards and backwards

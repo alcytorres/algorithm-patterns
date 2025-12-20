@@ -52,14 +52,13 @@ target = 2
 print(searchInsert(nums, target))  # Output: 1
 
 
-
 # ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 # Breakdown 
 def searchInsert(nums, target):
-    l = 0                    # Left boundary of search range
-    r = len(nums) - 1        # Right boundary of search range
+    l = 0                 # Left boundary of search range
+    r = len(nums) - 1     # Right boundary of search range
     
-    while l <= r:               # Continue while search range is valid
+    while l <= r:         # Continue while search range is valid
         mid = (l + r) // 2      # Calculate middle index
         
         if nums[mid] == target:    # Target found exactly
@@ -100,6 +99,18 @@ Space: O(1)
 
 ---
 Overview for Each Iteration
+Input: nums = [1, 3, 5, 6], target = 5
+
+i | l | r | mid | nums[mid] | comparison | Action      | Result
+--|---|---|-----|-----------|------------|-------------|-------
+0 | 0 | 3 | 1   | 3         | 3 < 5      | l = 2       | continue
+1 | 2 | 3 | 2   | 5         | 5 == 5     | return 2    | 2
+
+Final: 2
+
+
+---
+Overview for Each Iteration
 Input: nums = [1, 3, 5, 6], target = 2
 
 i | l | r | mid | nums[mid] | comparison | Action      | Result
@@ -110,17 +121,6 @@ i | l | r | mid | nums[mid] | comparison | Action      | Result
 
 Final: 1
 
-
----
-Overview for Each Iteration
-Input: nums = [1, 3, 5, 6], target = 5
-
-i | l | r | mid | nums[mid] | comparison | Action      | Result
---|---|---|-----|-----------|------------|-------------|-------
-0 | 0 | 3 | 1   | 3         | 3 < 5      | l = 2       | continue
-1 | 2 | 3 | 2   | 5         | 5 == 5     | return 2    | 2
-
-Final: 2
 
 ---
 Overview for Each Iteration

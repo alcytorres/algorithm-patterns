@@ -195,7 +195,7 @@ Q: Why do we use `while l <= r:` in exact-value binary search?
 
     • Skipping that check can miss a valid target.
 
-→ Therefore, `while l <= r:` guarantees every possible index is examined.
+→ Fix: `while l <= r:` guarantees every possible index is examined.
     
 
 
@@ -259,6 +259,21 @@ Takeaway
   • When l == r, there is 1 last box left to open.
   • `l <= r` opens that last box.
   • `l < r` stops early and skips it.
+
+
+  
+
+
+---
+Q: Why l = mid + 1 instead of just l = mid in binary search?
+
+  • If nums[mid] < target, the current mid cannot be the answer — we already checked it.
+
+  • Using l = mid would keep mid in the search range, so the next loop could calculate the same mid again.
+
+  • This causes an infinite loop — the pointers never make progress.
+
+→ Fix: l = mid + 1 excludes the checked mid and guarantees the search range shrinks every time.
 
 
 """
