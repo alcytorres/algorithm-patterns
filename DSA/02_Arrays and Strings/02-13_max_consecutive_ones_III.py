@@ -35,6 +35,25 @@ print(longestOnes(nums, k))
     #  [0, 1, 1, 1, 1, 0], formed by flipping the zeros at indices 5 and 10
 
 
+# ––––––––––––––––––––––––––––––––––––––––––––––
+# Breakdown 
+def longestOnes(nums, k):
+    left = ans = curr = 0  # Left bound, max length, count of 0's in window
+    
+    for right in range(len(nums)):  # Iterate right pointer over array
+        if nums[right] == 0:       # If current element is 0
+            curr += 1              # Increment 0's count
+        
+        while curr > k:            # Shrink window if 0's exceed k
+            if nums[left] == 0:    # If leftmost element is 0
+                curr -= 1          # Decrement 0's count
+            left += 1              # Move left pointer forward
+        
+        ans = max(ans, right - left + 1)  # Update max window size
+    
+    return ans   # Return the maximum length of consecutive 1's possible
+
+
 """
 Time: O(N)
   - Let N = length of nums.
@@ -89,7 +108,7 @@ Final: 6
     • [0, 0, 1, 1, 1, 1] → formed by flipping the zeros at indices 4 and 5
     • [0, 1, 1, 1, 1, 0] → formed by flipping the zeros at indices 5 and 10
 
-
+---
 Most IMPORTANT thing to Understand:
     • We want the longest stretch of 1s, but we can flip at most k zeros into 1s.
 
@@ -113,13 +132,13 @@ TLDR
 
     
 Quick Example Walkthrough:
-    nums = [1,1,1,0,0,0,1,1,1,1,0], k = 2
+    nums = [1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 0], k = 2
 
-    Step 1: Expand → [1,1,1,0,0], zeros = 2 → window length = 5.
+    Step 1: Expand → [1, 1, 1, 0, 0], zeros = 2 → window length = 5.
 
     Step 2: Add next 0 → zeros = 3 → shrink left until zeros = 2.
 
-    Step 3: Expand with [1,1,1,1] → zeros = 2 → window length = 6 (best).
+    Step 3: Expand with [1, 1, 1, 1]  → zeros = 2 → window length = 6 (best).
 
     Step 4: Add final 0 → zeros = 3 → shrink again, still best = 6.
 
@@ -136,25 +155,6 @@ Q: Which subarray of length 6 is the final answer?
 	• The algorithm only returns the max length (6), not which subarray produced it.
 
 """
-
-
-# ––––––––––––––––––––––––––––––––––––––––––––––
-# Breakdown 
-def longestOnes(nums, k):
-    left = ans = curr = 0  # Left bound, max length, count of 0's in window
-    
-    for right in range(len(nums)):  # Iterate right pointer over array
-        if nums[right] == 0:       # If current element is 0
-            curr += 1              # Increment 0's count
-        
-        while curr > k:            # Shrink window if 0's exceed k
-            if nums[left] == 0:    # If leftmost element is 0
-                curr -= 1          # Decrement 0's count
-            left += 1              # Move left pointer forward
-        
-        ans = max(ans, right - left + 1)  # Update max window size
-    
-    return ans   # Return the maximum length of consecutive 1's possible
 
 
 

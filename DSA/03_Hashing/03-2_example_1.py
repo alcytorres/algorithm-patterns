@@ -14,6 +14,7 @@ Example:
 
 Solution: https://leetcode.com/problems/two-sum/description/
 """
+
 # ––––––––––––––––––––––––––––––––––––––––––––––––
 # Enumerate-Based One-Pass Hash Map Solution
 
@@ -33,6 +34,21 @@ nums = [3, 1, 7, 4, -6]
 target = 5
 print(twoSum(nums, target))  
 # Output: [3, 1] → Indices [3, 1] correspond to numbers [4, 1], and 4 + 1 = 5 matches the target.
+
+
+# ––––––––––––––––––––––––––––––––––––––––––––––––––
+# Breakdown 
+def twoSum(nums, target):
+    d = {}    # Initialize dictionary for number-to-index mapping
+    
+    for i, num in enumerate(nums):  # Iterate with index and number
+        diff = target - num         # Calculate complement needed for target
+
+        if diff in d:            # If complement exists in dictionary
+            return [i, d[diff]]  # Return current and complement's indices
+        d[num] = i            # Store current number and its index
+
+    return []                 # Return empty list if no solution found
 
 
 """
@@ -160,23 +176,6 @@ Q: Why do we include `return []` at the end?
 
 """
 
-
-
-
-
-# ––––––––––––––––––––––––––––––––––––––––––––––––––
-# Breakdown 
-def twoSum(nums, target):
-    d = {}                    # Initialize dictionary for number-to-index mapping
-    
-    for i, num in enumerate(nums):  # Iterate with index and number
-        diff = target - num         # Calculate complement needed for target
-
-        if diff in d:            # If complement exists in dictionary
-            return [i, d[diff]]  # Return current and complement's indices
-        d[num] = i               # Store current number and its index
-
-    return []                 # Return empty list if no solution found
 
 
 
