@@ -34,6 +34,20 @@ nums = [3, 2, 3]
 print(majorityElement(nums))  # Output: 3
 
 
+# ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+# Breakdown 
+def majorityElement(nums):
+    count = {}    # Dictionary to store frequency of each number
+    
+    for num in nums:     # Go through every number in the array
+        if num in count:     # If we've seen this number before
+            count[num] += 1  # Increment its count
+        else:                # If it's the first time seeing it
+            count[num] = 1   # Start counting it with 1
+    
+    return max(count, key=count.get)  # Return the number with highest count
+
+
 """
 Time: O(N)
   - Let N = length of nums.
@@ -56,19 +70,6 @@ Time: O(N)
 Space: O(N)
   - Hash map stores counts for all unique numbers.
 """
-
-
-# ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
-# Breakdown 
-def majorityElement(nums):
-    count = {}    # Dictionary to store frequency of each number
-    for num in nums:     # Go through every number in the array
-        if num in count:     # If we've seen this number before
-            count[num] += 1  # Increment its count
-        else:                # If it's the first time seeing it
-            count[num] = 1   # Start counting it with 1
-    
-    return max(count, key=count.get)  # Return the number with highest count
 
 
 # ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––

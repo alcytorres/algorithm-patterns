@@ -25,7 +25,6 @@ Constraints:
     -104 <= target <= 104
 """
 
-
 def searchInsert(nums, target):
     l = 0
     r = len(nums) - 1
