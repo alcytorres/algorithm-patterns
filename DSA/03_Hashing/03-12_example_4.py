@@ -162,6 +162,24 @@ Quick Example Walkthrough:
     Final Answer: 4
 
 
+    
+
+
+---
+How the dictionary works in subarraySum:
+
+  • `curr` is the running prefix sum.
+  • We access the map using `curr` and `curr - k` → keys must be prefix sums.
+  • We do `count[curr] += 1` → values count how many times each sum appears.
+
+So:
+  • Key   = prefix sum so far
+  • Value = number of times that sum has occurred
+
+Why it works:
+  • If `curr - k` was seen before, the numbers between form a subarray with sum = k.
+  • Each occurrence adds one valid subarray.
+
  
 ---
 Q: Why Does CURR - K work?  ****** VERY IMPORTANT TO UNDESTAND ****** 

@@ -1,14 +1,14 @@
 # 1004. Max Consecutive Ones III 
+"""
+Given a binary array nums and an integer k, return the maximum number of consecutive 1's in the array if you can flip at most k 0's.
 
-# Given a binary array nums and an integer k, return the maximum number of consecutive 1's in the array if you can flip at most k 0's.
+Example:
+    Input: nums = [1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 0], k = 2
+    Output: 6
+    Explanation: nums[5] and nums[10] were flipped from 0 to 1. We are left with [1, 1, 1, 1, 1, 1] 
 
-# Example:
-    # Input: nums = [1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 0], k = 2
-    # Output: 6
-    # Explanation: nums[5] and nums[10] were flipped from 0 to 1. We are left with [1, 1, 1, 1, 1, 1] 
-
-# Solution: https://leetcode.com/problems/max-consecutive-ones-iii/solutions/409192/max-consecutive-ones-iii/
-
+Solution: https://leetcode.com/problems/max-consecutive-ones-iii/solutions/409192/max-consecutive-ones-iii/
+"""
 def longestOnes(nums, k):
     left = ans = curr = 0
 
