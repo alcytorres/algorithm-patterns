@@ -1,29 +1,29 @@
 # Example 3: 713. Subarray Product Less Than K
+"""
+Counts subarrays where product of all elements is strictly less than k.
 
-# Counts subarrays where product of all elements is strictly less than k.
+Example
+    nums = [2, 3], k = 7
+    Output: 3 --> [2], [2, 3], [3]
 
-# Example
-    # nums = [2, 3], k = 7
-    # Output: 3 --> [2], [2, 3], [3]
-
-# Solution: https://leetcode.com/problems/subarray-product-less-than-k/
-
+Solution: https://leetcode.com/problems/subarray-product-less-than-k/
+"""
 
 def num_subarrays_product_less_than_k(nums, k):
     if k <= 1:     
         return 0
     
-    left = ans = 0          
+    l = ans = 0          
     curr = 1          
     
-    for right in range(len(nums)):  
-        curr *= nums[right]        
+    for r in range(len(nums)):  
+        curr *= nums[r]        
         
         while curr >= k:           
-            curr //= nums[left]    
-            left += 1           
+            curr //= nums[l]    
+            l += 1           
             
-        ans += right - left + 1  
+        ans += r - l + 1  
     
     return ans
 
@@ -35,6 +35,29 @@ print(num_subarrays_product_less_than_k(nums, k))
 # r=1: Counted [10, 5], [5]
 # r=2: After shrinking, counted [5, 2], [2]
 # r=3: Counted [5, 2, 6], [2, 6], [6]
+
+
+# ––––––––––––––––––––––––––––––––––––––––––––––––––
+# Breakdown
+def num_subarrays_product_less_than_k(nums, k):
+    if k <= 1:     # If k <= 1, no valid subarrays possible (since nums are positive)
+        return 0
+    
+    left = 0       # Left bound of the window
+    curr = 1       # Tracks product of current window
+    ans = 0        # Tracks number of valid subarrays
+    
+    for right in range(len(nums)):  # Iterate right pointer over array
+        curr *= nums[right]         # Multiply element to window product
+        
+        while curr >= k:           # Shrink window while product is >= k
+            curr //= nums[left]    # Divide out leftmost element. 
+            left += 1              # Move left pointer forward
+            
+        ans += right - left + 1  # Add number of valid subarrays ending at right
+    
+    return ans  # Returns the count of valid subarrays
+
 
 """
 Time: O(N)
@@ -155,26 +178,6 @@ print("After curr //= nums[2]:", curr)  # Output: 1.0
 
 
 
-# ––––––––––––––––––––––––––––––––––––––––––––––––––
-# Breakdown
-def num_subarrays_product_less_than_k(nums, k):
-    if k <= 1:     # If k <= 1, no valid subarrays possible (since nums are positive)
-        return 0
-    
-    left = 0       # Left bound of the window
-    curr = 1       # Tracks product of current window
-    ans = 0        # Tracks number of valid subarrays
-    
-    for right in range(len(nums)):  # Iterate right pointer over array
-        curr *= nums[right]         # Multiply element to window product
-        
-        while curr >= k:           # Shrink window while product is >= k
-            curr //= nums[left]    # Divide out leftmost element. 
-            left += 1              # Move left pointer forward
-            
-        ans += right - left + 1  # Add number of valid subarrays ending at right
-    
-    return ans  # Returns the count of valid subarrays
 
 
 

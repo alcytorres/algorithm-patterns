@@ -1,11 +1,12 @@
 # 1480. Running Sum of 1d Array
+"""
+Given an array nums. We define a running sum of an array as runningSum[i] = sum(nums[0]…nums[i]). Return the running sum of nums.
 
-# Given an array nums. We define a running sum of an array as runningSum[i] = sum(nums[0]…nums[i]). Return the running sum of nums.
-
-# Example
-    # Input: nums = [1, 2, 3, 4, 5]
-    # Output:       [1, 3, 6, 10, 15]
-    # Explanation: Running sum is obtained as follows: [1, 1+2, 1+2+3, 1+2+3+4, 1+2+3+4+5].
+Example
+    Input: nums = [1, 2, 3, 4, 5]
+    Output:       [1, 3, 6, 10, 15]
+    Explanation: Running sum is obtained as follows: [1, 1+2, 1+2+3, 1+2+3+4, 1+2+3+4+5].
+"""
 
 def runningSum(nums):
     prefix = [nums[0]]
@@ -17,7 +18,6 @@ def runningSum(nums):
 nums = [1, 2, 3, 4, 5]
 print(runningSum(nums))
 # Output: [1, 3, 6, 10, 15]
-
 
 """
 Time: O(N)

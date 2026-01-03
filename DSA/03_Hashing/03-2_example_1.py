@@ -35,6 +35,9 @@ target = 5
 print(twoSum(nums, target))  
 # Output: [3, 1] → Indices [3, 1] correspond to numbers [4, 1], and 4 + 1 = 5 matches the target.
 
+# Key   = number we have already seen
+# Value = index where that number appears
+
 
 # ––––––––––––––––––––––––––––––––––––––––––––––––––
 # Breakdown 
