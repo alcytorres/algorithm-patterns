@@ -95,6 +95,47 @@ Quick Example Walkthroughs:
 
 Example 1: prices = [7, 1, 5, 3, 6, 4]
 --------------------------------
+
+Start:
+    min_price = ∞
+    max_profit = 0
+
+Day 1: price = 7
+    Is 7 < min_price? → YES → min_price = 7
+    profit = 7 - 7 = 0 → max_profit = 0
+
+Day 2: price = 1
+    Is 1 < min_price? → YES → min_price = 1
+    profit = 1 - 1 = 0 → max_profit = 0
+
+Day 3: price = 5
+    Is 5 < min_price? → NO (min is 1)
+    profit = 5 - 1 = 4 → max_profit = 4
+
+Day 4: price = 3
+    Is 3 < min_price? → NO
+    profit = 3 - 1 = 2 → max_profit stays 4
+
+Day 5: price = 6
+    Is 6 < min_price? → NO
+    profit = 6 - 1 = 5 → max_profit = 5
+
+Day 6: price = 4
+    Is 4 < min_price? → NO
+    profit = 4 - 1 = 3 → max_profit stays 5
+
+Final Answer:
+    max_profit = 5  (Buy at 1, Sell at 6)
+
+Key Idea:
+    • Track the lowest price seen so far.
+    • Pretend to sell every day.
+    • Keep the best profit.
+
+    
+
+Example 1: prices = [7, 1, 5, 3, 6, 4]
+--------------------------------
 min_price = inf, max_profit = 0
 
     Day 1: 7 → min=7 → profit=0 → max_profit=0  
@@ -107,6 +148,7 @@ min_price = inf, max_profit = 0
     Final Answer: 5 ✅ (Buy at 1, Sell at 6)
 
 
+    
 Example 2: prices = [7, 6, 4, 3, 1]
 --------------------------------
 min_price = inf, max_profit = 0
@@ -118,7 +160,6 @@ min_price = inf, max_profit = 0
     Day 5: 1 → min=1 → profit=0 → max_profit=0  
 
     Final Answer: 0 ✅ (No profitable transaction)
-
 
 
 
