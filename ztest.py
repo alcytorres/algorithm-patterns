@@ -79,4 +79,3 @@ print(fn(s))  # 31
 # print(fn("10-3"))  # 7
 # print(fn("8/2"))   # 4
 
-

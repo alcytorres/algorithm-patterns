@@ -249,3 +249,10 @@ def last_occurrence(nums, target):
 
 nums = [1, 2, 2, 2, 3]
 print(last_occurrence(nums, target))  # Output: 3
+
+
+
+
+text = 'sky'
+text.encode("utf-8")  -> bytes
+bytes.decode("utf-8") -> str

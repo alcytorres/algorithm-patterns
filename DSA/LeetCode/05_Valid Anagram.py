@@ -198,7 +198,7 @@ Quick Example Walkthrough:
 Q: Why is the time complexity O(N) instead of O(N + M) even though there are two loops?
 
 ------------------------------------------------------------
-1️⃣ Inside THIS LeetCode problem ("Valid Anagram")
+1. Inside THIS LeetCode problem ("Valid Anagram")
 ------------------------------------------------------------
   • The algorithm only runs both loops when s and t have the same length.
   • If lengths differ, the function returns immediately and does NOT run the loops.
@@ -209,7 +209,7 @@ Q: Why is the time complexity O(N) instead of O(N + M) even though there are two
 
 
 ------------------------------------------------------------
-2️⃣ Outside this problem (general case, no length check)
+2. Outside this problem (general case, no length check)
 ------------------------------------------------------------
   • If the early length check were removed, both loops would always run.
 
