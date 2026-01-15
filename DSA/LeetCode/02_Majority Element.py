@@ -304,53 +304,43 @@ print(majorityElement(nums))  # Output: 3
 
 
 
-
-
-
 # ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
-# Option 2: Defaultdict Frequency Scan
-from collections import defaultdict
-
+# Solution 2: Sorting-Based Middle Element Solution
 def majorityElement(nums):
-    counts = defaultdict(int)
-
-    for num in nums:
-        counts[num] += 1
-
-    max_count = 0
-    majorityNum = None
-
-    for key, value in counts.items():
-        if value > max_count:
-            majorityNum = key
-            max_count = value
-    
-    return majorityNum
+    nums.sort()
+    return nums[len(nums) // 2]
 
 nums = [3, 2, 3]
 print(majorityElement(nums))  # Output: 3
 
-# Time:  O(N) 
-# Space: O(N)  
+"""
+Time: O(N log N)
+  - Sorting the array dominates the runtime.
+  - Accessing the middle element is O(1).
+  - Overall: O(N log N).
+
+Space:
+  - Algorithmically: O(1) auxiliary space (no extra data structures).
+  - In Python: O(N) worst-case due to Timsort's internal buffers.
+
+Interview Answer (Worst Case):
+  - Time: O(N log N)
+  - Space: O(N) in Python (implementation-dependent)
+
+  
+Timsort Internal Buffers (Python)
+--------------------------------
+  • Python's list.sort() uses Timsort.
+  • While it looks in-place, Timsort may allocate
+  • temporary internal arrays ("buffers") during sorting.
+  • Because of this, sorting can use up to O(N) extra space
+  • in the worst case, even though no extra data structures
+  • are created by the user.
+"""
 
 
 # ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
-# Counter-Based Frequency 
-from collections import Counter
-
-def majorityElement(nums):
-    count = Counter(nums)
-    return max(count, key=count.get)
-
-nums = [3, 2, 3]
-print(majorityElement(nums))  # Output: 3
-
-# Time:  O(N) 
-# Space: O(N)  
-
-
-# ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
-# Dictionary Count + Threshold Check"
+# Solution 3: Dictionary Count + Threshold Check"
 def majorityElement_Simple(nums):
     # 1. Initialize a dictionary to store element counts
     counts = {}
@@ -376,17 +366,39 @@ print(majorityElement(nums))  # Output: 3
 # Time:  O(N) 
 # Space: O(N)  
 
+
 # ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
-# Sorting-Based Middle Element Solution
+# Solution 4: Counter-Based Frequency 
+from collections import Counter
+
 def majorityElement(nums):
-    nums.sort()
-    return nums[len(nums) // 2]
+    count = Counter(nums)
+    return max(count, key=count.get)
 
 nums = [3, 2, 3]
 print(majorityElement(nums))  # Output: 3
 
-# Time: O(nlgn)
-# Space: O(1) or (O(n))
+# Time:  O(N) 
+# Space: O(N)  
+
+
+# ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+# Solution 5: Majority Element Using Hash Map Frequency
+from collections import defaultdict
+
+def majorityElement(nums):
+    count = defaultdict(int)
+    for num in nums:
+        count[num] += 1
+    
+    return max(count, key=count.get)
+
+nums = [3, 2, 3]
+print(majorityElement(nums))  # Output: 3
+
+# Time:  O(N) 
+# Space: O(N)  
+
 
 
 
