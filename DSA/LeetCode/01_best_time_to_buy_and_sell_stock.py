@@ -19,6 +19,7 @@ https://www.youtube.com/watch?v=kJZrMGpyWpk
 Solution: https://leetcode.com/problems/best-time-to-buy-and-sell-stock/description/
 """
 
+# Single Pass: Track Min Price + Max Profit
 def max_profit(prices):
     # Initialize variables
     min_price = float('inf')
@@ -295,8 +296,8 @@ print(max_profit([7, 1, 5, 3, 6, 4]))  # → 5
 
 
 # ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
-# Brute Force
-def maxProfit(self, prices):
+# Brute Force: Check Every Possible Buy-Sell Day
+def maxProfit(prices):
         max_profit = 0
         for i in range(len(prices)):
             for j in range(i+1, len(prices)):
