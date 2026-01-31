@@ -1,14 +1,16 @@
 # 643. Maximum Average Subarray I
-# You are given an integer array nums consisting of n elements, and an integer k.
+"""
+You are given an integer array nums consisting of n elements, and an integer k.
 
-# Find the maximum average of any contiguous subarray of length k in nums. Return this value. 
+Find the maximum average of any contiguous subarray of length k in nums. Return this value. 
 
-# Solution: https://leetcode.com/problems/maximum-average-subarray-i/solutions/127562/maximum-average-subarray-i/
+Solution: https://leetcode.com/problems/maximum-average-subarray-i/solutions/127562/maximum-average-subarray-i/
 
-# Example
+Example
     # Input: nums = [4, -2, 1, 7, -1], k = 2
     # Output: 4
     # Explanation: Maximum average is (1 + 7) / 2 = 8 / 2 = 4
+"""
 
 class Solution(object):
     def findMaxAverage(self, nums, k):
