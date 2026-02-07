@@ -1,13 +1,13 @@
 # Example 1: Longest Subarray with Sum Less Than or Equal to k
+"""
+Finds the length of the longest subarray with sum <= k using sliding window.
 
-# Finds the length of the longest subarray with sum <= k using sliding window.
+Example 1: nums = [1, 1, 2, 2, 4, 2], k = 8
+Output: 4 (subarray [1, 1, 2, 2], sum = 6)
 
-# Example 1: nums = [1, 1, 2, 2, 4, 2], k = 8
-# Output: 4 (subarray [1, 1, 2, 2], sum = 6)
-
-# Example 1: nums = [1, 3, 3, 6], k = 8
-# Output: 3 (subarray [1, 3, 3], sum = 7)
-
+Example 1: nums = [1, 3, 3, 6], k = 8
+Output: 3 (subarray [1, 3, 3], sum = 7)
+"""
 
 def longest_subarray_sum(nums, k):
     left = curr = ans = 0        
