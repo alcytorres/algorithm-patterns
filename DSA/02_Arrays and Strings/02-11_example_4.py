@@ -1,10 +1,11 @@
 # Example 4: Largest Sum of Subarray with Fixed Length k
+"""
+Finds the subarray of length k with the largest sum.
 
-# Finds the subarray of length k with the largest sum.
-
-# Example:
-    # Input: [1, 4, 6, 2]
-    # Output: 10  --> Subarray [4, 6] (length 2, sum 4 + 6 = 10) is the largest sum for k=2.
+Example:
+    Input: [1, 4, 6, 2]
+    Output: 10  --> Subarray [4, 6] (length 2, sum 4 + 6 = 10) is the largest sum for k=2.
+"""
 
 def find_best_subarray(nums, k):
     curr = 0    
