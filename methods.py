@@ -1642,6 +1642,34 @@ chars = ["a", "b"]
 print(list(zip(nums, chars)))  # Output: [(1, "a"), (2, "b")]
 
 
+# BUILT-IN FUNCTION: 
+any()
+# What it does: Returns True if any element in the iterable is truthy.
+# Why use it: Quick check if at least one item satisfies a condition.
+# How it works: Short-circuits (stops at first True); returns False for empty.
+# When to use: Existence checks (e.g., any duplicate, any match, any valid).
+# Time/Space: O(n) worst-case time, O(1) space.
+
+# Syntax:
+any(iterable)  # True if any item is truthy, False otherwise
+
+# Basic Example 1 (Numbers):
+print(any([0, 0, 1, 0]))  # Output: True
+
+# Basic Example 2 (Empty iterable):
+print(any([]))  # Output: False
+
+# Basic Example 3 (Strings):
+print(any(["", "", "hello", ""]))  # Output: True
+
+# DSA Example (Check if any even number):
+nums = [1, 3, 5, 8, 7]
+print(any(x % 2 == 0 for x in nums))  # Output: True
+
+# DSA Example (Check if any letter is uppercase):
+password = "Hello"
+print(any(c.isupper() for c in password))
+
 
 # BUILT-IN FUNCTION: 
 type()

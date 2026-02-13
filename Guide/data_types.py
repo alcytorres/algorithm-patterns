@@ -1,4 +1,4 @@
-# Python Data Types - Quick Reference for Interviews & LeetCode
+# Python Data Types Crash Course: Mutable vs Immutable
 
 """
 What are Data Types?

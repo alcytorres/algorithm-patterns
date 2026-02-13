@@ -1,8 +1,4 @@
-# Operators
-
-"""
-Here's a concise cheat sheet for Python operators, categorized by type. I'll keep it clear and practical for quick reference:
-"""
+# Python Operators Cheat Sheet
 
 #1. Arithmetic Operators
 | Operator | Description            | Example      |
@@ -92,13 +88,10 @@ Here's a concise cheat sheet for Python operators, categorized by type. I'll kee
 
 
 """
-
 Notes:
 - Use parentheses `()` to override precedence when needed (e.g., `(2 + 3) * 4` vs. `2 + 3 * 4`).
 - Bitwise operators work on integers at the binary level.
 - Membership operators are handy for strings, lists, tuples, etc.
-
-Let me know if you'd like examples or a deeper dive into any of these!
 
 """
 

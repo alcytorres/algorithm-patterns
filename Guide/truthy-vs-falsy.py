@@ -1,7 +1,11 @@
+# Truthy vs Fasly Cheatsheet
+
 """
 Truthy vs Fasly
 
-Here's a concise cheat sheet for truthy vs. falsy values in Python, tailored for solving LeetCode data structures and algorithms problems. It focuses on the most critical concepts for success in conditionals, loops, and data structure manipulations.
+Cheat sheet for truthy vs. falsy values in Python, tailored for solving LeetCode data structures and algorithms problems. 
+
+It focuses on the most critical concepts for success in conditionals, loops, and data structure manipulations.
 
 Truthy vs. Falsy in Python for LeetCode
 

@@ -71,6 +71,7 @@ deque()
 iter()
 next()
 zip()
+any()
 type()
 input()
 isinstance()
@@ -81,22 +82,4 @@ __str__()
 
 
 
-
-
-
-
-
-
-# DELETE, DELETE DELETE
-
-# Delete this once you determine there is no more value
-# Note I updated to a better version of this guide under methods.py
-
-
-# STRING METHODS
-# LIST METHODS
-# DICTIONARY METHODS
-# SET METHODS
-# BUILT-IN FUNCTIONS
-# SPECIAL METHODS
 
