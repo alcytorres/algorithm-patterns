@@ -433,13 +433,13 @@ item = lst.pop()
 print(item, lst)  # Output: 3 [1, 2]
 
 # Basic Example 2 (Pop Index):
-lst = [1, 2, 3]
+lst = [1, 2, 3, 4]
 item = lst.pop(1)
-print(item, lst)  # Output: 2 [1, 3]
+print(item, lst)  # Output: 2 [1, 3, 4]
 
 # Basic Example 3 (Empty List):
-# lst = []
-# lst.pop()  # Raises IndexError
+lst = []
+lst.pop()  # Raises IndexError
 
 # DSA Example (Stack Pop):
 stack = [1, 2, 3]
