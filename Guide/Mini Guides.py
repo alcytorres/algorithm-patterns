@@ -500,8 +500,81 @@ print(majorityElement(nums))  # Output: 3
 
 
 
-# ––––––––––––––––––––––––––––––––––––––––––––––
+# ============================================================
+# Mini Guide: Mutation in Python
+# ============================================================
+"""
+Mutation = changing an object directly after it's created (in place).
 
+Key idea:
+- Some methods CHANGE the original object → they usually return None
+- Some functions CREATE A NEW object → they return the new one
+
+Common trap: assigning the result of a mutating method → you get None!
+"""
+
+# How to TEST if a method mutates an object
+# Simple 3-step trick every beginner can use:
+
+original = [4, 2, 7, 1]          # make a list
+print("Before:", original)       # remember what it looks like
+
+result = original.sort()         # try the method
+
+print("After: ", original)       # did the list change?
+print("Result:", result)         # what did the method return?
+
+# Output pattern tells you everything:
+# Before: [4, 2, 7, 1]
+# After:  [1, 2, 4, 7]          ← changed → mutated!
+# Result: None                  ← returned None → mutates
+
+
+# Quick reference: Common mutating vs non-mutating methods
+
+# Mutates (changes original, usually returns None)
+nums = [3, 1, 4]
+nums.sort()          # mutates
+nums.append(5)       # mutates
+nums.pop()           # mutates
+nums.reverse()       # mutates
+d = {"a": 1}
+d.update({"b": 2})   # mutates
+my_set = {1, 2}
+my_set.add(3)        # mutates
+
+# Does NOT mutate (returns new object, original stays same)
+nums = [3, 1, 4]
+sorted_list = sorted(nums)   # new list
+reversed_list = list(reversed(nums))  # new list
+upper_string = "hello".upper()  # new string
+new_dict = dict(d)        # new dict
+
+print(nums)          # still [3, 1, 4]
+print(sorted_list)      # [1, 3, 4]
+
+
+# Golden rule to remember
+"""
+If you see:
+x = my_list.sort()   → almost always wrong! x becomes None
+
+Do this instead:
+my_list.sort()       # just call it
+# or
+x = sorted(my_list)  # get new sorted version
+"""
+
+# Test it yourself pattern (copy-paste this template)
+"""
+original = [your object here]
+print("Before:", original)
+
+result = original.your_method()   # or function(original)
+
+print("After: ", original)
+print("Result:", result)
+"""
 
 
 # ––––––––––––––––––––––––––––––––––––––––––––––

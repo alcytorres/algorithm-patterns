@@ -1318,220 +1318,6 @@ nums = [1, 2, 2]
 print(set(nums))  # Output: {1, 2}
 
 
-
-# BUILT-IN FUNCTION: 
-defaultdict(int)
-# What it does: Dictionary with default 0 for missing keys.
-# Why use it: Simplifies frequency counting.
-# How it works: Returns 0 on missing key access.
-# When to use: Counting characters, words, or occurrences.
-# Time/Space: O(1) average access, O(n) space for n items.
-
-# Syntax:
-from collections import defaultdict
-defaultdict(int)  # Default value is 0
-
-# Basic Example 1 (Count Chars):
-from collections import defaultdict
-d = defaultdict(int)
-for c in "hello":
-    d[c] += 1
-print(d)  # Output: defaultdict(<class 'int'>, {'h': 1, 'e': 1, 'l': 2, 'o': 1})
-
-# Basic Example 2 (Safe Increment):
-from collections import defaultdict
-d = defaultdict(int)
-d["x"] += 5
-print(d["x"])  # Output: 5
-
-# Basic Example 3 (Empty Access):
-from collections import defaultdict
-d = defaultdict(int)
-print(d["missing"])  # Output: 0
-
-# DSA Example (Frequency Count):
-from collections import defaultdict
-counts = defaultdict(int)
-for c in "aba":
-    counts[c] += 1
-print(dict(counts))  # Output: {'a': 2, 'b': 1}
-
-
-# BUILT-IN FUNCTION: 
-defaultdict(list)
-# What it does: Dictionary with default empty list for missing keys.
-# Why use it: Groups items without initialization.
-# How it works: Returns [] on missing key access.
-# When to use: Grouping anagrams, building adjacency lists.
-# Time/Space: O(1) average access, O(n) space for n items.
-
-# Syntax:
-from collections import defaultdict
-defaultdict(list)  # Default value is []
-
-# Basic Example 1 (Group by Key):
-from collections import defaultdict
-d = defaultdict(list)
-d["fruits"].append("apple")
-d["fruits"].append("banana")
-print(d)  # Output: defaultdict(<class 'list'>, {'fruits': ['apple', 'banana']})
-
-# Basic Example 2 (Safe Append):
-from collections import defaultdict
-d = defaultdict(list)
-d["a"].append(1)
-print(d["a"])  # Output: [1]
-
-# Basic Example 3 (Empty Access):
-from collections import defaultdict
-d = defaultdict(list)
-print(d["missing"])  # Output: []
-
-# DSA Example (Group Anagrams):
-from collections import defaultdict
-groups = defaultdict(list)
-groups["eat"].append("tea")
-groups["eat"].append("ate")
-print(dict(groups))  # Output: {'eat': ['tea', 'ate']}
-
-
-# BUILT-IN FUNCTION: 
-Counter()
-# What it does: Counts hashable objects and returns a dict-like counter.
-# Why use it: Fast frequency counting without manual loops.
-# How it works: Subclass of dict; default 0 for missing keys.
-# When to use: Anagram checks, top-k elements, mode finding.
-# Time/Space: O(n) time (n = elements), O(k) space (k = unique items).
-
-# Syntax:
-from collections import Counter
-Counter(iterable)  # Returns Counter object from iterable
-
-# Basic Example 1 (Count String):
-from collections import Counter
-c = Counter("hello")
-print(c)  # Output: Counter({'l': 2, 'h': 1, 'e': 1, 'o': 1})
-
-# Basic Example 2 (Count List):
-from collections import Counter
-c = Counter([1, 2, 2, 3])
-print(c)  # Output: Counter({2: 2, 1: 1, 3: 1})
-
-# Basic Example 3 (Empty):
-from collections import Counter
-c = Counter()
-print(c["x"])  # Output: 0
-
-# DSA Example (Most Common):
-from collections import Counter
-votes = ['a', 'b', 'a', 'c', 'a']
-c = Counter(votes)
-print(c.most_common(1))  # Output: [('a', 3)]
-
-
-# BUILT-IN FUNCTION: 
-deque()
-# What it does: Double-ended queue with O(1) append/pop from both ends.
-# Why use it: Fast stack, queue, or sliding window operations.
-# How it works: Linked list of blocks; O(1) left/right access.
-# When to use: BFS, sliding window, monotonic queue, LRU cache.
-# Time/Space: O(1) per operation, O(n) space.
-
-# Syntax:
-from collections import deque
-deque(iterable)  # Creates deque from iterable
-
-# Basic Example 1 (From List):
-from collections import deque
-d = deque([1, 2, 3])
-print(d)  # Output: deque([1, 2, 3])
-
-# Basic Example 2 (Empty):
-from collections import deque
-d = deque()
-print(d)  # Output: deque([])
-
-# Basic Example 3 (String):
-from collections import deque
-d = deque("abc")
-print(d)  # Output: deque(['a', 'b', 'c'])
-
-# DSA Example (Sliding Window):
-from collections import deque
-window = deque()
-for i in range(3):
-    window.append(i)
-print(window)     # Output: deque([0, 1, 2])
-window.popleft()  # Remove oldest
-print(window)     # Output: deque([1, 2])
-
-
-# DEQUE METHOD: .
-append()
-# What it does: Adds element to right end.
-# Why use it: O(1) push to end.
-# How it works: Appends to right.
-# When to use: Stack push, queue enqueue.
-
-# Syntax:
-deque.append(item)
-
-# Example:
-d = deque()
-d.append(1)
-d.append(2)
-print(d)  # Output: deque([1, 2])
-
-
-# DEQUE METHOD: 
-.appendleft()
-# What it does: Adds element to left end.
-# Why use it: O(1) push to front.
-# How it works: Inserts at start.
-# When to use: Monotonic queue, BFS.
-
-# Syntax:
-deque.appendleft(item)
-
-# Example:
-d = deque([2])
-d.appendleft(1)
-print(d)  # Output: deque([1, 2])
-
-
-# DEQUE METHOD: 
-.pop()
-# What it does: Removes and returns rightmost element.
-# Why use it: O(1) pop from end.
-# How it works: Removes from right.
-# When to use: Stack pop.
-
-# Syntax:
-deque.pop()
-
-# Example:
-d = deque([1, 2])
-print(d.pop())  # Output: 2
-print(d)        # Output: deque([1])
-
-
-# DEQUE METHOD: 
-.popleft()
-# What it does: Removes and returns leftmost element.
-# Why use it: O(1) pop from front.
-# How it works: Removes from left.
-# When to use: Queue dequeue, sliding window.
-
-# Syntax:
-deque.popleft()
-
-# Example:
-d = deque([1, 2])
-print(d.popleft())  # Output: 1
-print(d)            # Output: deque([2])
-
-
-
 # BUILT-IN FUNCTION: 
 iter()
 # What it does: Creates iterator from iterable.
@@ -1754,6 +1540,223 @@ value = "123"
 print(isinstance(value, str))  # Output: True
 
 
+
+
+
+# ============================================================
+# MUTABLE CONTAINER CONSTRUCTORS & METHODS
+# ============================================================
+
+# BUILT-IN FUNCTION: 
+defaultdict(int)
+# What it does: Dictionary with default 0 for missing keys.
+# Why use it: Simplifies frequency counting.
+# How it works: Returns 0 on missing key access.
+# When to use: Counting characters, words, or occurrences.
+# Time/Space: O(1) average access, O(n) space for n items.
+
+# Syntax:
+from collections import defaultdict
+defaultdict(int)  # Default value is 0
+
+# Basic Example 1 (Count Chars):
+from collections import defaultdict
+d = defaultdict(int)
+for c in "hello":
+    d[c] += 1
+print(d)  # Output: defaultdict(<class 'int'>, {'h': 1, 'e': 1, 'l': 2, 'o': 1})
+
+# Basic Example 2 (Safe Increment):
+from collections import defaultdict
+d = defaultdict(int)
+d["x"] += 5
+print(d["x"])  # Output: 5
+
+# Basic Example 3 (Empty Access):
+from collections import defaultdict
+d = defaultdict(int)
+print(d["missing"])  # Output: 0
+
+# DSA Example (Frequency Count):
+from collections import defaultdict
+counts = defaultdict(int)
+for c in "aba":
+    counts[c] += 1
+print(dict(counts))  # Output: {'a': 2, 'b': 1}
+
+
+# BUILT-IN FUNCTION: 
+defaultdict(list)
+# What it does: Dictionary with default empty list for missing keys.
+# Why use it: Groups items without initialization.
+# How it works: Returns [] on missing key access.
+# When to use: Grouping anagrams, building adjacency lists.
+# Time/Space: O(1) average access, O(n) space for n items.
+
+# Syntax:
+from collections import defaultdict
+defaultdict(list)  # Default value is []
+
+# Basic Example 1 (Group by Key):
+from collections import defaultdict
+d = defaultdict(list)
+d["fruits"].append("apple")
+d["fruits"].append("banana")
+print(d)  # Output: defaultdict(<class 'list'>, {'fruits': ['apple', 'banana']})
+
+# Basic Example 2 (Safe Append):
+from collections import defaultdict
+d = defaultdict(list)
+d["a"].append(1)
+print(d["a"])  # Output: [1]
+
+# Basic Example 3 (Empty Access):
+from collections import defaultdict
+d = defaultdict(list)
+print(d["missing"])  # Output: []
+
+# DSA Example (Group Anagrams):
+from collections import defaultdict
+groups = defaultdict(list)
+groups["eat"].append("tea")
+groups["eat"].append("ate")
+print(dict(groups))  # Output: {'eat': ['tea', 'ate']}
+
+
+# BUILT-IN FUNCTION: 
+Counter()
+# What it does: Counts hashable objects and returns a dict-like counter.
+# Why use it: Fast frequency counting without manual loops.
+# How it works: Subclass of dict; default 0 for missing keys.
+# When to use: Anagram checks, top-k elements, mode finding.
+# Time/Space: O(n) time (n = elements), O(k) space (k = unique items).
+
+# Syntax:
+from collections import Counter
+Counter(iterable)  # Returns Counter object from iterable
+
+# Basic Example 1 (Count String):
+from collections import Counter
+c = Counter("hello")
+print(c)  # Output: Counter({'l': 2, 'h': 1, 'e': 1, 'o': 1})
+
+# Basic Example 2 (Count List):
+from collections import Counter
+c = Counter([1, 2, 2, 3])
+print(c)  # Output: Counter({2: 2, 1: 1, 3: 1})
+
+# Basic Example 3 (Empty):
+from collections import Counter
+c = Counter()
+print(c["x"])  # Output: 0
+
+# DSA Example (Most Common):
+from collections import Counter
+votes = ['a', 'b', 'a', 'c', 'a']
+c = Counter(votes)
+print(c.most_common(1))  # Output: [('a', 3)]
+
+
+# BUILT-IN FUNCTION: 
+deque()
+# What it does: Double-ended queue with O(1) append/pop from both ends.
+# Why use it: Fast stack, queue, or sliding window operations.
+# How it works: Linked list of blocks; O(1) left/right access.
+# When to use: BFS, sliding window, monotonic queue, LRU cache.
+# Time/Space: O(1) per operation, O(n) space.
+
+# Syntax:
+from collections import deque
+deque(iterable)  # Creates deque from iterable
+
+# Basic Example 1 (From List):
+from collections import deque
+d = deque([1, 2, 3])
+print(d)  # Output: deque([1, 2, 3])
+
+# Basic Example 2 (Empty):
+from collections import deque
+d = deque()
+print(d)  # Output: deque([])
+
+# Basic Example 3 (String):
+from collections import deque
+d = deque("abc")
+print(d)  # Output: deque(['a', 'b', 'c'])
+
+# DSA Example (Sliding Window):
+from collections import deque
+window = deque()
+for i in range(3):
+    window.append(i)
+print(window)     # Output: deque([0, 1, 2])
+window.popleft()  # Remove oldest
+print(window)     # Output: deque([1, 2])
+
+
+# DEQUE METHOD: .
+append()
+# What it does: Adds element to right end.
+# Why use it: O(1) push to end.
+# How it works: Appends to right.
+# When to use: Stack push, queue enqueue.
+
+# Syntax:
+deque.append(item)
+
+# Example:
+d = deque()
+d.append(1)
+d.append(2)
+print(d)  # Output: deque([1, 2])
+
+
+# DEQUE METHOD: 
+.appendleft()
+# What it does: Adds element to left end.
+# Why use it: O(1) push to front.
+# How it works: Inserts at start.
+# When to use: Monotonic queue, BFS.
+
+# Syntax:
+deque.appendleft(item)
+
+# Example:
+d = deque([2])
+d.appendleft(1)
+print(d)  # Output: deque([1, 2])
+
+
+# DEQUE METHOD: 
+.pop()
+# What it does: Removes and returns rightmost element.
+# Why use it: O(1) pop from end.
+# How it works: Removes from right.
+# When to use: Stack pop.
+
+# Syntax:
+deque.pop()
+
+# Example:
+d = deque([1, 2])
+print(d.pop())  # Output: 2
+print(d)        # Output: deque([1])
+
+
+# DEQUE METHOD: 
+.popleft()
+# What it does: Removes and returns leftmost element.
+# Why use it: O(1) pop from front.
+# How it works: Removes from left.
+# When to use: Queue dequeue, sliding window.
+
+# Syntax:
+deque.popleft()
+
+# Example:
+d = deque([1, 2])
+print(d.popleft())  # Output: 1
+print(d)            # Output: deque([2])
 
 
 

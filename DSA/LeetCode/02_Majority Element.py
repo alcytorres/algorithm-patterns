@@ -222,23 +222,6 @@ Quick Example Walkthrough:
 # ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 # Breakdown – Boyer–Moore Voting Algorithm 
 def majorityElement(nums):
-    count = 0          # Voting counter – how many "votes" the current candidate has
-    candidate = None   # Current candidate for majority element
-
-    for num in nums:       # One pass through the array
-        if count == 0:     # No active candidate (votes dropped to zero)
-            candidate = num # Elect the current number as new candidate
-        
-        # Vote for or against the candidate
-        count += 1 if num == candidate else -1  
-        # Same → +1 vote
-        # Different → -1 vote (cancels one vote for candidate)
-
-    return candidate   # Guaranteed to be the majority element
-
-# ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
-# Boyer–Moore Voting Algorithm reformatted
-def majorityElement(nums):
     count = 0          # Tracks "votes" for current candidate
     candidate = None   # Current suspected majority element
 
@@ -251,7 +234,7 @@ def majorityElement(nums):
         else:                   # Otherwise
             count -= 1          # Cancel out one vote
 
-    return candidate    # Guaranteed to be majority (by problem says it exists)
+    return candidate    # Guaranteed to be majority (problem says it exists)
 
 
 
@@ -339,36 +322,9 @@ Timsort Internal Buffers (Python)
 """
 
 
-# ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
-# Solution 3: Dictionary Count + Threshold Check"
-def majorityElement_Simple(nums):
-    # 1. Initialize a dictionary to store element counts
-    counts = {}
-
-    # 2. Iterate through the array and count frequencies
-    for num in nums:
-        # If the number is already a key, increment its count.
-        # Otherwise, add it with a starting count of 1.
-        counts[num] = counts.get(num, 0) + 1
-
-    # 3. Determine the majority threshold
-    n = len(nums)
-    majority_threshold = n // 2  # integer division gives floor(n/2)
-
-    # 4. Find the element whose count exceeds the threshold
-    for num, count in counts.items():
-        if count > majority_threshold:
-            return num
-
-nums = [3, 2, 3]
-print(majorityElement(nums))  # Output: 3
-
-# Time:  O(N) 
-# Space: O(N)  
-
 
 # ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
-# Solution 4: Counter-Based Frequency 
+# Solution 3: Counter-Based Frequency 
 from collections import Counter
 
 def majorityElement(nums):
@@ -383,7 +339,7 @@ print(majorityElement(nums))  # Output: 3
 
 
 # ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
-# Solution 5: Majority Element Using Hash Map Frequency
+# Solution 4: Majority Element Using Hash Map Frequency
 from collections import defaultdict
 
 def majorityElement(nums):

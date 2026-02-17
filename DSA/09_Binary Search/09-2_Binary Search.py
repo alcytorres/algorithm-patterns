@@ -22,7 +22,7 @@ Constraints:
 """
 # Solution: https://leetcode.com/problems/binary-search/description/
 
-# Approach 1: Find the Exact Value
+# Binary Search: Find Exact Match
 def search(nums, target):
     l = 0
     r = len(nums) - 1

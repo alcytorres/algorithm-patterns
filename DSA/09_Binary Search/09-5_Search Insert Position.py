@@ -4,7 +4,7 @@ Given a sorted array of distinct integers and a target value, return the index i
 
 You must write an algorithm with O(log n) runtime complexity.
 
-# Solution: https://leetcode.com/problems/search-insert-position/description/
+Solution: https://leetcode.com/problems/search-insert-position/description/
 
 Example 1:
     Input: nums = [1, 3, 5, 6], target = 5
@@ -25,6 +25,7 @@ Constraints:
     -104 <= target <= 104
 """
 
+# Binary Search: Find Insert Position
 def searchInsert(nums, target):
     l = 0
     r = len(nums) - 1
