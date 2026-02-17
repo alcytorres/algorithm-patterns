@@ -9,16 +9,16 @@ INDEXING and SLICING in Python GUIDE
    
    - Slicing: A way to extract a portion (or "slice") of a sequence by specifying a range of positions.
 
-# Python sequences are ordered, and each element has an index (position) starting from 0 for the first element.
+Python sequences are ordered, and each element has an index (position) starting from 0 for the first element.
 
-# You can also use negative indices to count from the end, where -1 is the last element.
+You can also use negative indices to count from the end, where -1 is the last element.
 """
 
 """
 --- 1. INDEXING ---
    - Indexing lets you grab one item from a sequence using square brackets [ ] and the position number.
 
-# Syntax: sequence[index]
+Syntax: sequence[index]
 
 Key Points:
    - Positive indices: Start at 0 (first item).
@@ -191,8 +191,25 @@ print("Pythonista"[::3])  # 4. Output: "Phia"
 | With step         | [::2]            | text[::2]          | Pto      |
 | Reverse           | [::-1]           | text[::-1]         | nohtyP   |
 
+
+
 """
-That's it! You now have a solid grasp of indexing and slicing in Python.
+Core facts:
+   • Stop index is NEVER included
+   • Omitting start   → from beginning
+   • Omitting stop    → to the end
+   
+   • Negative indices count from the end (-1 = last item)
+   • Step = -1        → easiest way to reverse a list
+   • Step < 0         → traversal direction reverses (start should be later than stop if both given)
+
+
+Most common mistakes to avoid:
+   • Thinking stop is included
+
+   • Forgetting that slicing creates a new list (not a view)
+
+   • Using [::-1] on very large lists in tight loops (memory + time)
 
 Practice with different sequences (strings, lists, tuples) to get comfortable."
 
