@@ -1,8 +1,6 @@
 # Truthy vs Fasly Cheatsheet
 
 """
-Truthy vs Fasly
-
 Cheat sheet for truthy vs. falsy values in Python, tailored for solving LeetCode data structures and algorithms problems. 
 
 It focuses on the most critical concepts for success in conditionals, loops, and data structure manipulations.
@@ -54,11 +52,28 @@ Key Use Cases in LeetCode
 
 ---
 Quick Tips
-- Debug with bool(): `bool([])` → `False`, `bool([1])` → `True`.
-- Avoid Pitfalls:
-  - `''` is falsy, but `'0'` is truthy (non-empty string).
-  - `0` is falsy, but `0.1` is truthy.
-- Edge Cases: Test with `[]`, `0`, `None` to ensure correctness.
+  • Debug with bool(): `bool([])` → `False`, `bool([1])` → `True`.
+  
+  • Avoid Pitfalls:
+    •  `''` is falsy, but `'0'` is truthy (non-empty string).
+    •  `0` is falsy, but `0.1` is truthy.
+
+   • Edge Cases: Test with `[]`, `0`, `None` to ensure correctness.
 
 
 """
+
+# Check if truthy or fasly
+print(bool([1]))   # True
+print(bool([]))    # False
+print(bool({}))    # False
+print(bool(""))    # False
+print(bool(" "))   # True
+print(bool(0))     # False
+print(bool(1))     # True
+print(bool(None))  # False
+print(bool(False)) # False
+print(bool(True))  # True
+print(bool(0.0))   # False
+print(bool(0.1))   # True
+
