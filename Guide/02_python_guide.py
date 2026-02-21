@@ -248,14 +248,16 @@ print(grocery_list[5])  # IndexError: list index out of range
 
 # ----------------------------------------------------------------------------------
 # 0:33:24 For Loops
-
-# Key Points:
-# - For loops iterate over items in a sequence (e.g., list, range).
-# - Syntax: `for variable in sequence:`, followed by indented code.
-# - Iterate directly over list items (`for item in list`) or indices (`for i in range(len(list))`).
-# - `range(n)` generates numbers from 0 to n-1; `len(list)` gives the list's length.
-# - `enumerate(list)` provides both index and item for iteration.
-# - Indexing starts at 0; last valid index is `len(list) - 1`.
+"""
+Key Points:
+  • For loops iterate over items in a sequence (e.g., list, range).
+  • Syntax: `for variable in sequence:`, followed by indented code.
+  • Iterate directly over list items (`for item in list`) or indices (`for i in range(len(list))`).
+  • `range(n)` generates numbers from 0 to n-1; `len(list)` gives the list's length.
+  • `enumerate(list)` provides both index and item for iteration.
+  • Indexing starts at 0; last valid index is `len(list) - 1`.
+  
+"""
 
 # Background to Know:
 # range(5) is a Python object, not a list. Printing it shows range(0, 5). Convert to list with list(range(5)) to see [0, 1, 2, 3, 4].
