@@ -194,7 +194,7 @@ Quick Example Walkthrough:
     
 
 
-
+---
 Q: Why is the time complexity O(N) instead of O(N + M) even though there are two loops?
 
 ------------------------------------------------------------
@@ -220,6 +220,22 @@ Q: Why is the time complexity O(N) instead of O(N + M) even though there are two
 
 → General case: O(N + M).  
 → LeetCode problem: O(N), because the mismatch case exits early.
+
+
+
+
+---
+Q: Why is the space complexity O(1) for this anagram solution (using a hashmap / dictionary to count characters)?
+
+    • Only lowercase English letters (a-z) are allowed.
+
+    • At most 26 different characters possible.
+
+    • No matter if the strings are 5 or 1,000 letters long… → you still only need at most 26 slots in the dictionary.
+
+    • The space used is fixed — it never grows with the input length n.
+
+→ Fixed character set (exactly 26 letters) → maximum 26 entries → O(1) space.
 
 """
 
@@ -381,9 +397,8 @@ Space Impact:
 ------------------------------------------------------------
 THE KEY TAKEAWAY
 ------------------------------------------------------------
-The only solution that *doesn't* work for Unicode is the fixed
-26-length array version.
+The only solution that *doesn't* work for Unicode is the fixed 26-length array version.
 
-Your sorting and dictionary solutions already handle Unicode without
-any code changes — only the space complexity changes from O(1) to O(k).
+Your sorting and dictionary solutions already handle Unicode without any code changes — only the space complexity changes from O(1) to O(k).
+
 """

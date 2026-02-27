@@ -146,4 +146,5 @@ Quick rules of thumb:
   • Method returns None + changes the object → usually mutates in place
   • Returns new object / value / view / bool → does NOT mutate
   • Strings are immutable → no method ever mutates them
+  
 """
