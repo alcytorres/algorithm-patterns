@@ -225,17 +225,68 @@ Q: Why is the time complexity O(N) instead of O(N + M) even though there are two
 
 
 ---
-Q: Why is the space complexity O(1) for this anagram solution (using a hashmap / dictionary to count characters)?
+Q: Why do we say this solution uses O(1) space 
+   (even though we're using a dictionary / hashmap to count characters)?
 
-    • Only lowercase English letters (a-z) are allowed.
+A: Because of the problem rules!
 
-    • At most 26 different characters possible.
+  • The constraints say: only lowercase English letters (a-z).
+  • That means just 26 possible characters — ever.
+  • No matter how long the strings are (even n = 50,000 or 5 million),
+  your dictionary can have **at most 26 keys**.
+  • 26 is a fixed number. It does **not** grow when the input (n) gets bigger.
 
-    • No matter if the strings are 5 or 1,000 letters long… → you still only need at most 26 slots in the dictionary.
+  → Fixed small set of characters → max 26 entries → O(1) space! (super efficient) 👍
 
-    • The space used is fixed — it never grows with the input length n.
+  
+Follow-up question people ask: 
+  • "What if the strings had Unicode characters (emoji, Chinese, symbols, etc.)?"
 
-→ Fixed character set (exactly 26 letters) → maximum 26 entries → O(1) space.
+Answer for beginners:
+  • Then there could be millions of different possible characters.
+
+  • In the worst case, a long string could use a new character almost every time.
+
+  • → The dictionary could grow as big as the string length (up to O(n) space).
+
+  • But in LeetCode 242, we don't have to worry — it's only a-z, so O(1) is correct and safe.
+
+Most interview / LeetCode problems like this limit to lowercase letters → so we happily say O(1) space. 😄
+
+
+
+---
+Q: What limits this to lowercase English letters (not Unicode)?
+
+A: The problem constraints — not the code.
+
+  • "s and t consist of lowercase English letters" (only a-z, 26 chars).
+  • Dict max 26 keys → O(1) space guaranteed.
+  • Code handles Unicode fine, but inputs won't have it.
+
+(Full Unicode → could be O(n) worst-case.)
+
+
+
+
+
+
+Q: What happens to time and space complexity if we remove 
+   the line: if len(s) != len(t): return False
+
+A: Time stays O(n), space stays O(1).
+
+Time complexity:
+- Still O(n): We loop through both strings once (2n steps total).
+- We just do a tiny bit more unnecessary work when lengths differ 
+  (count all of s, then subtract t and eventually find negatives or leftover positives).
+
+Space complexity:
+- Still O(1): Dict max 26 keys (only a-z allowed by constraints).
+- Removing the length check doesn't change how many keys we store.
+Bottom line: Removing it makes the code slightly slower in worst case 
+(when lengths differ), but big-O remains exactly the same: O(n) time, O(1) space.
+
 
 """
 
