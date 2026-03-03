@@ -194,32 +194,6 @@ Quick Example Walkthrough:
     
 
 
----
-Q: Why is the time complexity O(N) instead of O(N + M) even though there are two loops?
-
-------------------------------------------------------------
-1. Inside THIS LeetCode problem ("Valid Anagram")
-------------------------------------------------------------
-  • The algorithm only runs both loops when s and t have the same length.
-  • If lengths differ, the function returns immediately and does NOT run the loops.
-  • So in the only case that matters for Big-O, we have N = M.
-  • The loops then run N times each → O(N + N) → O(2N) → O(N).
-
-→ For this problem: O(N), because the full work only happens when lengths match.
-
-
-------------------------------------------------------------
-2. Outside this problem (general case, no length check)
-------------------------------------------------------------
-  • If the early length check were removed, both loops would always run.
-
-      if len(s) != len(t):
-        return False
-
-  • Then the true time would be O(N + M), since you'd scan both strings fully.
-
-→ General case: O(N + M).  
-→ LeetCode problem: O(N), because the mismatch case exits early.
 
 
 
@@ -255,37 +229,62 @@ Most interview / LeetCode problems like this limit to lowercase letters → so w
 
 
 
+
+
 ---
-Q: What limits this to lowercase English letters (not Unicode)?
+Q: Why is the time O(N) instead of O(N + M) when there are two loops?
 
-A: The problem constraints — not the code.
+A: Because in this problem, the 2 strings are always the same length when we actually do the loops!
 
-  • "s and t consist of lowercase English letters" (only a-z, 26 chars).
-  • Dict max 26 keys → O(1) space guaranteed.
-  • Code handles Unicode fine, but inputs won't have it.
+  • If the lengths are different → we stop right away (return False). No loops run!
 
-(Full Unicode → could be O(n) worst-case.)
+  • So the only time we run both loops is when lengths are the same → N = M.
 
-
+  • That means we do N steps + N steps = 2N steps → still called O(N).
 
 
+Imagine you're checking if two toy boxes have the same toys.
+If one box is way bigger → you already know it's not the same, so you stop fast.
+
+Only when boxes are same size do you check every toy → that's the O(N) case.
 
 
-Q: What happens to time and space complexity if we remove 
-   the line: if len(s) != len(t): return False
+Outside this problem (if we removed the length check):
+  • We would always check both boxes fully → O(N + M) time.
+  • But here → O(N) is correct!
+
+
+
+---
+Q: What if we remove the line: if len(s) != len(t): return False?
 
 A: Time stays O(n), space stays O(1).
 
-Time complexity:
-- Still O(n): We loop through both strings once (2n steps total).
-- We just do a tiny bit more unnecessary work when lengths differ 
-  (count all of s, then subtract t and eventually find negatives or leftover positives).
+Why time is still O(n):
+  • We still loop through both strings once → 2n steps.
+   
+  • We just waste a little extra work when lengths differ (count all of s, then subtract t and eventually find negatives or leftover positives).
 
-Space complexity:
-- Still O(1): Dict max 26 keys (only a-z allowed by constraints).
-- Removing the length check doesn't change how many keys we store.
-Bottom line: Removing it makes the code slightly slower in worst case 
-(when lengths differ), but big-O remains exactly the same: O(n) time, O(1) space.
+Why space is still O(1):
+  • Dict still has max 26 keys (only a-z allowed).
+
+Bottom line: The code gets slightly slower in some cases, but Big-O stays exactly the same.
+
+
+
+
+
+
+---
+Q: What limits the solution inputs to use ONLY lowercase English letters (not Unicode)?
+
+A: The problem rules say so! — not the code.
+
+  • "s and t consist of lowercase English letters"
+  • only a-z, 26 chars
+  • Code works with Unicode too, but inputs won't have it.
+
+If Unicode char. allowed → could be O(n) worst-case.
 
 
 """
