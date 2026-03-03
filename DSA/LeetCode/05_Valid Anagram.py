@@ -85,10 +85,13 @@ Time: O(N)
 
 Space: O(1)
   - count dictionary stores frequencies of lowercase English letters.
-  - Maximum distinct keys = 26 → constant space.
+  - Maximum distinct keys = 26 → constant space (doesn't grow with N).
   - A few loop variables use O(1).
-  - Overall: O(1) if input is restricted to lowercase English.
-  - If Unicode letters allowed, space becomes O(U), where U = number of unique characters.
+  - Overall: O(1) because of the "only a-z" constraint.
+
+  If Unicode were allowed:
+  - Space would be O(U), where U = number of unique characters.
+  - Worst case: U ≈ N (if every char is different) → up to O(N) space.
 
   
 Interview Answer: Worst Case
@@ -196,21 +199,19 @@ Quick Example Walkthrough:
 
 
 
-
-
 ---
 Q: Why do we say this solution uses O(1) space 
    (even though we're using a dictionary / hashmap to count characters)?
 
-A: Because of the problem rules!
+A: The problem constraints limit us to ONLY 26 possible characters!
 
-  • The constraints say: only lowercase English letters (a-z).
-  • That means just 26 possible characters — ever.
-  • No matter how long the strings are (even n = 50,000 or 5 million),
-  your dictionary can have **at most 26 keys**.
-  • 26 is a fixed number. It does **not** grow when the input (n) gets bigger.
+  • The rules say: "only lowercase English letters (a-z)".
+  • That means just 26 possible characters.
+  • No matter how long the strings are (even n = 5 million),
+  your dictionary can have at MOST 26 keys.
+  • 26 is a fixed number. It does NOT grow when the input (N) gets bigger.
 
-  → Fixed small set of characters → max 26 entries → O(1) space! (super efficient) 👍
+  → Fixed small set of characters → max 26 entries → O(1) space! 👍
 
   
 Follow-up question people ask: 
@@ -221,7 +222,7 @@ Answer for beginners:
 
   • In the worst case, a long string could use a new character almost every time.
 
-  • → The dictionary could grow as big as the string length (up to O(n) space).
+  • → The dictionary could grow as big as the string length (up to O(N) space).
 
   • But in LeetCode 242, we don't have to worry — it's only a-z, so O(1) is correct and safe.
 
@@ -230,61 +231,34 @@ Most interview / LeetCode problems like this limit to lowercase letters → so w
 
 
 
-
 ---
-Q: Why is the time O(N) instead of O(N + M) when there are two loops?
+Q: Why is time O(N) with 2 loops instead of O(N + M)? 
 
-A: Because in this problem, the 2 strings are always the same length when we actually do the loops!
+A: Because in this problem, both strings are the same length whenever we actually run the loops!
 
-  • If the lengths are different → we stop right away (return False). No loops run!
-
-  • So the only time we run both loops is when lengths are the same → N = M.
-
-  • That means we do N steps + N steps = 2N steps → still called O(N).
-
-
-Imagine you're checking if two toy boxes have the same toys.
-If one box is way bigger → you already know it's not the same, so you stop fast.
-
-Only when boxes are same size do you check every toy → that's the O(N) case.
-
-
-Outside this problem (if we removed the length check):
-  • We would always check both boxes fully → O(N + M) time.
-  • But here → O(N) is correct!
+- If lengths differ → we return False immediately. No loops happen!
+- So the only time we do both loops is when N = M → N steps + N steps = 2N steps → O(2N) = O(N).
 
 
 
 ---
-Q: What if we remove the line: if len(s) != len(t): return False?
+Q: What happens to time and space if we remove the length check? 
+    `if len(s) != len(t): return False`...?
 
-A: Time stays O(n), space stays O(1).
-
-Why time is still O(n):
-  • We still loop through both strings once → 2n steps.
-   
-  • We just waste a little extra work when lengths differ (count all of s, then subtract t and eventually find negatives or leftover positives).
-
-Why space is still O(1):
-  • Dict still has max 26 keys (only a-z allowed).
-
-Bottom line: The code gets slightly slower in some cases, but Big-O stays exactly the same.
+  • We'd always run both loops → still O(N) time overall (2N steps).
+  • But we'd waste extra work when lengths differ (count all of s, then subtract t until we see negatives or leftovers).
+  • Space stays O(1) — dict still max 26 keys.
 
 
+Toy box example:
+Two toy boxes with the same toys?
+
+  • Sizes different? Stop fast (like the length check — no counting needed).
+  • Sizes same? Count every toy in both boxes → O(N) time.
 
 
-
-
----
-Q: What limits the solution inputs to use ONLY lowercase English letters (not Unicode)?
-
-A: The problem rules say so! — not the code.
-
-  • "s and t consist of lowercase English letters"
-  • only a-z, 26 chars
-  • Code works with Unicode too, but inputs won't have it.
-
-If Unicode char. allowed → could be O(n) worst-case.
+Bottom line: 
+The length check makes the code faster in real life when lengths mismatch, but Big-O time stays O(N) either way for this problem.
 
 
 """
@@ -292,23 +266,8 @@ If Unicode char. allowed → could be O(n) worst-case.
 
 
 
-# ––––––––––––––––––––––––––––––––––––––––––––––––––
-# Sorting-Based Anagram Check 
-def isAnagram(s, t):
-    # If lengths are different → impossible to be anagram
-    if len(s) != len(t):
-        return False
-    
-    # Count how many times each letter appears in both strings
-    # and compare the counts
-    return sorted(s) == sorted(t)
 
-s = "anagram"
-t = "nagaram"
-print(isAnagram(s, t))  # Output: True
 
-# Time: O(n log n)
-# Space: O(n)
 
 
 # ––––––––––––––––––––––––––––––––––––––––––––––––––
@@ -367,9 +326,23 @@ def isAnagram(s, t):
 # Space: O(1)
 
 
+# ––––––––––––––––––––––––––––––––––––––––––––––––––
+# Sorting-Based Anagram Check 
+def isAnagram(s, t):
+    # If lengths are different → impossible to be anagram
+    if len(s) != len(t):
+        return False
+    
+    # Count how many times each letter appears in both strings
+    # and compare the counts
+    return sorted(s) == sorted(t)
 
+s = "anagram"
+t = "nagaram"
+print(isAnagram(s, t))  # Output: True
 
-
+# Time: O(n log n)
+# Space: O(n)
 
 
 
@@ -396,59 +369,31 @@ s = "resume"
 t = "résumé"
 print(isAnagram(s, t))  # Output: IndexError: list index out of range
 
+
+
 # ============================================================
 # Valid Anagram — Follow-Up Summary
 # ============================================================
 """
-FOLLOW-UP: What if the inputs contain Unicode characters?
+FOLLOW-UP: What if inputs had Unicode characters (emoji, accents, Chinese, etc.)?
 
-Key Issue:
-    Some solutions assume the alphabet is ONLY 'a'-'z'.  
-    These break when Unicode characters are allowed.
+Key points:
 
-------------------------------------------------------------
-1. ASCII-Only Solution (NOT Unicode-Safe)
-------------------------------------------------------------
-A common approach in C++/Java:
+1. Fixed 26-array solution (common in C++/Java):
+   counts = [0] * 26
+   counts[ord(c) - ord('a')] += 1
+   → Breaks! Only works for a-z. Emoji or "é" causes crash (index error).
 
-    counts = [0] * 26
-    for c in s:
-        counts[ord(c) - ord('a')] += 1
-    for c in t:
-        counts[ord(c) - ord('a')] -= 1
-        if counts[ord(c) - ord('a')] < 0:
-            return False
+2. Your Python solutions (sorting or dictionary):
+   - sorted(s) == sorted(t)
+   - or count[c] += 1 / count[c] -= 1
+   → Work perfectly with any Unicode — no changes needed!
 
-Why it fails:
-    - Only works for 26 lowercase English letters.
-    - Unicode has thousands of characters (é, Ü, 你, 🙂, etc.).
-    - Cannot map all Unicode characters into [0..25].
+Space difference:
+  •  Only a-z → O(1) space (max 26 keys)
+  • Full Unicode → O(k) space (k = number of different characters, worst case O(n) if all unique)
 
-Space:
-    - O(1) only because alphabet is fixed size 26.
-
-------------------------------------------------------------
-2. Sorting and Dictionary Solutions (Unicode-Safe)
-------------------------------------------------------------
-Your Python solutions:
-
-    sorted(s) == sorted(t)
-    OR
-    count[c] += 1 / count[c] -= 1
-
-Why they work automatically:
-    - Python strings and sorting fully support Unicode.
-    - Dictionaries can use any Unicode character as a key.
-
-Space Impact:
-    - For ASCII-only: O(1) space (max 26 letters).
-    - For Unicode: O(k) space, where k = number of distinct characters.
-
-------------------------------------------------------------
-THE KEY TAKEAWAY
-------------------------------------------------------------
-The only solution that *doesn't* work for Unicode is the fixed 26-length array version.
-
-Your sorting and dictionary solutions already handle Unicode without any code changes — only the space complexity changes from O(1) to O(k).
+Takeaway:
+  • Most Python solutions are Unicode-safe automatically.  
 
 """
