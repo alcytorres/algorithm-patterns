@@ -1,22 +1,23 @@
 # 1189. Maximum Number of Balloons
+"""
+Given a string text, you want to use the characters of text to form as many instances of the word "balloon" as possible.
 
-# Given a string text, you want to use the characters of text to form as many instances of the word "balloon" as possible.
+You can use each character in text at most once. Return the maximum number of instances that can be formed.
 
-# You can use each character in text at most once. Return the maximum number of instances that can be formed.
+Example 1:
+    Input: text = "nlaebolko"
+    Output: 1
 
-# Example 1:
-    # Input: text = "nlaebolko"
-    # Output: 1
+Example 2:
+    Input: text = "loonbalxballpoon"
+    Output: 2
 
-# Example 2:
-    # Input: text = "loonbalxballpoon"
-    # Output: 2
+Example 3:
+    Input: text = "leetcode"
+    Output: 0
 
-# Example 3:
-    # Input: text = "leetcode"
-    # Output: 0
-
-# Solution: https://leetcode.com/problems/maximum-number-of-balloons/editorial/
+Solution: https://leetcode.com/problems/maximum-number-of-balloons/editorial/
+"""
 
 from collections import defaultdict
 
@@ -61,7 +62,7 @@ Space: O(1)
   - Only stores counts for a fixed alphabet size.
 
 
-
+---
 Overview for Each Iteration
 Step 1: Count characters in text
 Idx | char | counts
@@ -88,7 +89,7 @@ n    | 1     | 1 per balloon | 1
 Final: min(1, 1, 1, 1, 1) = 1
 
 
-
+---
 Most IMPORTANT thing to Understand:
     • We need to check how many full copies of the word "balloon" can be built from the letters in text.  
 
@@ -96,6 +97,7 @@ Most IMPORTANT thing to Understand:
 
     • The answer is limited by whichever letter runs out first.  
 
+---
 Why this code Works:
     • Hash map (counts): stores how many times each character appears in text.  
 
@@ -105,9 +107,11 @@ Why this code Works:
 
     • Intuition: Like making “balloon kits” — the letter with the smallest supply (after dividing for repeats) determines how many kits you can make.  
 
+---
 TLDR:
     • Count each letter in text, then take the minimum possible full "balloon"s across {b, a, l//2, o//2, n}.  
 
+---
 Quick Example Walkthrough:
     text = "nlaebolko"  
 

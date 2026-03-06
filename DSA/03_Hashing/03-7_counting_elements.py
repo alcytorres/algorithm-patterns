@@ -1,16 +1,16 @@
 # 1426. Counting Elements
+"""
+Given an integer array arr, count how many elements x there are, such that x + 1 is also in arr. 
 
-# Given an integer array arr, count how many elements x there are, such that x + 1 is also in arr. 
+If there are duplicates in arr, count them separately.
 
-# If there are duplicates in arr, count them separately.
+Example:
+    Input: arr = [1, 2, 2, 3]
+    Output: 3
+    Explanation: 1, 2, and 2 are counted cause 2 and 3 are in arr.
 
-# Example:
-    # Input: arr = [1, 2, 2, 3]
-    # Output: 3
-    # Explanation: 1, 2, and 2 are counted cause 2 and 3 are in arr.
-
-# Solution: https://leetcode.com/problems/counting-elements/solutions/567376/counting-elements/
-
+Solution: https://leetcode.com/problems/counting-elements/solutions/567376/counting-elements/
+"""
 
 # Optimized Solution: Search with HashSet
 def countElements(arr):

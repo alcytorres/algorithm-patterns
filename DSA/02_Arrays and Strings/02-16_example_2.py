@@ -1,15 +1,17 @@
 # Example 2: 2270. Number of Ways to Split Array
 
-# Given an integer array nums, find the number of ways to split the array into two parts so that the first section has a sum greater than or equal to the sum of the second section. The second section should have at least one number.
+"""
+Given an integer array nums, find the number of ways to split the array into two parts so that the first section has a sum greater than or equal to the sum of the second section. The second section should have at least one number.
 
-# Solution: https://leetcode.com/problems/number-of-ways-to-split-array/solutions/6209795/number-of-ways-to-split-array/
+Solution: https://leetcode.com/problems/number-of-ways-to-split-array/solutions/6209795/number-of-ways-to-split-array/
 
-# Example 
-    # Input: nums = [10, 4, -8, 7]
-    # Output: 2
-    # i=0: left=10, right=3 (10>=3) valid
-    # i=1: left=14, right=-1 (14>=-1) valid
-    # i=2: left=6, right=7 (6<7) invalid
+Example 
+    Input: nums = [10, 4, -8, 7]
+    Output: 2
+    i=0: left=10, right=3 (10>=3) valid
+    i=1: left=14, right=-1 (14>=-1) valid
+    i=2: left=6, right=7 (6<7) invalid
+"""
 
 # ––––––––––––––––––––––––––––––––––––––––––––––
 # Best Solution: No array needed
@@ -61,7 +63,7 @@ Space: O(1)
   - Constant extra space for running sums and counter.
 
 
-
+---
 Overview for Each Iteration
 Input: nums = [10, 4, -8, 7]
 
@@ -78,7 +80,7 @@ i   | nums[i] | l         | r (total - l) | l >= r | count
 Final: 2
 
 
-
+---
 Most IMPORTANT thing to Understand:
     • We split the array into left and right parts.
 
@@ -87,6 +89,7 @@ Most IMPORTANT thing to Understand:
     • The right side must have at least one number → we stop at n-1.
 
 
+---
 Why this code Works:
 
     • total: total sum of all numbers.
@@ -101,11 +104,11 @@ Why this code Works:
 
     • Intuition: Like walking through the array while carrying a “left bag.” At each step, compare your bag vs. the rest.
 
-
+---
 TLDR
     • Keep a running left sum, compute right as total - left, and count how many times left ≥ right.
 
-    
+---  
 Quick Example Walkthrough:
 nums = [10, 4, -8, 7]
 

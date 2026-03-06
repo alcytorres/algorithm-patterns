@@ -1,10 +1,11 @@
 # Simple Palindrome Checker
+"""
+Check if a clean String is a Palindrome
 
-# Check if a clean String is a Palindrome
+Given a string s, return true if it is a palindrome, false otherwise.
 
-# Example 1: Given a string s, return true if it is a palindrome, false otherwise.
-
-# Checks if string s is a palindrome by comparing characters from both ends.
+Checks if string s is a palindrome by comparing characters from both ends.
+"""
 
 def is_palindrome(s):
     left = 0                    
@@ -24,9 +25,10 @@ print(is_palindrome(s))
 
 """
 Time: O(N)
+  - Let N = length of the string s.
   - Two pointers (left, right) scan string from both ends.
-  - Each character is checked once (at most N/2 comparisons).
-  - No nested loops.
+  - Each loop compares characters and moves both pointers inward.
+  - At most N/2 comparisons occur.
   - Overall: O(N).
 
 Space: O(1)
@@ -38,10 +40,10 @@ Space: O(1)
 Interview Answer
 
 Time: O(N)
-  - Single pass with two pointers.
+  - Two pointers scan the string once from both ends.
 
 Space: O(1)
-  - Constant extra space.
+  - Only pointer variables are used.
 
 
 ---
@@ -57,6 +59,20 @@ l | r | s[l] | s[r] | l < r | Action      | Result
 3 | 3 | e    | e    | False | Exit loop   | True
 
 Final: True
+
+
+
+---
+Q: Why is the time complexity O(N) instead of O(N/2)?
+
+  • The loop runs at most N/2 times because two pointers move toward the center.
+
+  • Each iteration checks two characters and moves both pointers inward.
+
+  • Big-O measures how runtime grows as N increases, not the exact number of operations.
+
+  • Since N/2 still grows linearly with N, O(N/2) simplifies to O(N).
+
 
 """
 
@@ -75,6 +91,65 @@ def is_palindrome(s):
         right -= 1              # Move right pointer inward
 
     return True                 # String is a palindrome
+
+
+
+
+
+
+
+# –––––––––––––––––––––––––––––––––––––––––––––––––––––––
+# Brute force
+def is_palindrome_bruteforce(s):
+    # Reverse the string and compare
+    reversed_s = ""
+    
+    for c in s:
+        reversed_s = c + reversed_s
+    
+    if reversed_s == s:
+        return True
+    return False
+
+
+s = "racecar"
+print(is_palindrome_bruteforce(s))
+# Output: True
+
+
+# Time: O(N^2)
+# - The loop runs n times.
+# - Each time we do: reversed_s = c + reversed_s
+# - String concatenation creates a new string each time (O(n)).
+# - Overall: O(n * n) = O(n^2) time.
+
+# Space: O(N)
+# - We create a new string 'reversed_s' the same size as s.
+# - Overall: O(n) space.
+
+
+
+# Overview for Each Iteration
+# s = "racecar"
+
+# reversed_s starts = ""
+
+# read 'r' → reversed_s = "r"
+# read 'a' → reversed_s = "ar"
+# read 'c' → reversed_s = "car"
+# read 'e' → reversed_s = "ecar"
+# read 'c' → reversed_s = "cecar"
+# read 'a' → reversed_s = "acecar"
+# read 'r' → reversed_s = "racecar"
+
+# compare reversed_s == s
+# "racecar" == "racecar" → True
+
+
+
+
+
+
 
 
 

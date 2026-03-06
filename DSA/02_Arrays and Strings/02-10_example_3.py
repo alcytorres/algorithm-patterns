@@ -83,7 +83,7 @@ Space: O(1)
   - Constant space for counters and product tracking.
   
 
-
+---
 Overview for Each Iteration
 Input: nums = [10, 5, 2, 6], k = 100
 Step: Count subarrays with product < k using sliding window
@@ -99,7 +99,7 @@ Final: 8 ([10], [5], [5, 2], [2], [2, 6], [6], [10, 5], [5, 2, 6])
 
 
 
-
+---
 Most IMPORTANT thing to Understand:
     We want to count all subarrays where the product of numbers is < k.
 
@@ -108,6 +108,7 @@ Most IMPORTANT thing to Understand:
     Key rule: if curr < k, then all subarrays ending at right are valid → count them in one step.
 
     
+---
 Why this code Works:
     • Hash map not needed — we just keep a running product curr.
 
@@ -120,10 +121,12 @@ Why this code Works:
     • Intuition: like stretching a rubber band (window). If it's too tight (product too big), loosen it from the left until it fits.
 
     
+---
 TLDR
     • Grow the window with right; shrink from left if product ≥ k; every valid window adds right - left + 1 new subarrays.
 
 
+---
 Quick Example Walkthrough:
     nums = [10, 5, 2, 6], k = 100
 

@@ -9,6 +9,7 @@ Example:
 
 Solution: https://leetcode.com/problems/max-consecutive-ones-iii/solutions/409192/max-consecutive-ones-iii/
 """
+
 def longestOnes(nums, k):
     l = ans = curr = 0
 
@@ -77,7 +78,7 @@ Space: O(1)
   - Constant space for pointers and zero counter.
 
 
-
+---
 Overview for Each Iteration
 Input: nums = [1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 0], k = 2
 
@@ -116,7 +117,7 @@ Most IMPORTANT thing to Understand:
 
     • The current window is always valid (≤ k zeros), and we track the maximum length.
 
-    
+---    
 Why this code Works:
     • curr: counts how many zeros are in the current window.
 
@@ -126,11 +127,12 @@ Why this code Works:
 
     • Intuition: Like stretching a rubber band over the array — expand until it breaks the “≤ k zeros” rule, then pull in the left side to fix it.
 
-    
+---  
 TLDR
     • Keep a window with at most k zeros. Expand right, shrink left if needed. Track the largest valid window size.
 
-    
+
+---   
 Quick Example Walkthrough:
     nums = [1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 0], k = 2
 

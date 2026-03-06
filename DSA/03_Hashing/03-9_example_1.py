@@ -1,16 +1,16 @@
 # Longest Substring with At Most K Distinct Characters
+"""
+Example 1: You are given a string s and an integer k. Find the length of the longest substring that contains at most k distinct characters.
 
-# Example 1: You are given a string s and an integer k. Find the length of the longest substring that contains at most k distinct characters.
+Example
+    Input: s = "eceba" and k = 2, 
+    Output: return 3.
+    The longest substring with at most 2 distinct characters is "ece".
 
-# Example
-    # Input: s = "eceba" and k = 2, 
-    # Output: return 3.
-    # The longest substring with at most 2 distinct characters is "ece".
-
-# ece (positions 0-2): Characters {e, c} → 2 distinct → valid.
-# ceb (positions 1-3): Characters {c, e, b} → 3 distinct → invalid.
-# eba (positions 2-4): Characters {e, b, a} → 3 distinct → invalid.
-
+ece (positions 0-2): Characters {e, c} → 2 distinct → valid.
+ceb (positions 1-3): Characters {c, e, b} → 3 distinct → invalid.
+eba (positions 2-4): Characters {e, b, a} → 3 distinct → invalid.
+"""
 
 from collections import defaultdict
 
@@ -65,7 +65,7 @@ Space: O(K)
   - Dictionary holds at most K distinct characters.
 
 
-
+---
 Overview for Each Iteration
 Input: s = "eceba", k = 2
 
@@ -86,7 +86,7 @@ Final: 3 ("ece")
 
 
 
-
+---
 Simple Overview for Each Iteration
 Input: s = "eceba", k = 2
 

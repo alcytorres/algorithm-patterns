@@ -51,7 +51,7 @@ Space: O(1)
   - Constant space for running sum and best value.
   
 
-
+---
 Overview for Each Iteration
 Input: nums = [1, 4, 6, 2], k = 2
 
@@ -71,7 +71,7 @@ i | curr       | nums[i] | nums[i-k] | ans
 Final: 10 ([4, 6])
 
 
-
+---
 Most IMPORTANT thing to Understand:
     • We want the maximum sum of any subarray of size k.
 
@@ -79,7 +79,7 @@ Most IMPORTANT thing to Understand:
 
     • When we slide the window forward, subtract the element leaving and add the new one coming in.
 
-    
+--- 
 Why this code Works:
     • Running sum curr tracks the sum of the current window.
 
@@ -89,11 +89,11 @@ Why this code Works:
 
     • Intuition: Like moving a window over text — you don’t reread all letters, just swap one out and add one in.
 
-    
+--- 
 TLDR
     • Keep a rolling sum of size k, slide it across the array, and track the maximum.
 
-    
+---
 Quick Example Walkthrough:
     nums = [1, 4, 6, 2], k = 2
 

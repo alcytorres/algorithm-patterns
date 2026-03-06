@@ -7,9 +7,9 @@ Find the maximum average of any contiguous subarray of length k in nums. Return 
 Solution: https://leetcode.com/problems/maximum-average-subarray-i/solutions/127562/maximum-average-subarray-i/
 
 Example
-    # Input: nums = [4, -2, 1, 7, -1], k = 2
-    # Output: 4
-    # Explanation: Maximum average is (1 + 7) / 2 = 8 / 2 = 4
+    Input: nums = [4, -2, 1, 7, -1], k = 2
+    Output: 4
+    Explanation: Maximum average is (1 + 7) / 2 = 8 / 2 = 4
 """
 
 class Solution(object):
@@ -63,7 +63,7 @@ Space: O(1)
   - Constant space for running total and average calculation.
 
 
-
+---
 Overview for Each Iteration
 Input: nums = [4, -2, 1, 7, -1], k = 2
 
@@ -84,7 +84,7 @@ i   | curr          | nums[i] | nums[i-k] | ans
 Final: 8/2 = 4 ([1, 7])
 
 
-
+---
 Most IMPORTANT thing to Understand:
     • We want the subarray of length k with the highest average.
 
@@ -92,7 +92,8 @@ Most IMPORTANT thing to Understand:
 
     • Average = (best sum) ÷ k. So maximizing the sum also maximizes the average.
 
-    
+
+---  
 Why this code Works:
     • Running sum curr: tracks the sum of the current window.
 
@@ -102,9 +103,11 @@ Why this code Works:
 
     • Intuition: Like moving a magnifying glass over the array — you don't recheck everything, just swap one number out and one in.
 
+---
 TLDR
     • Keep a rolling sum of each k-sized window, track the largest sum, then divide by k.
 
+---
 Quick Example Walkthrough:
     nums = [4, -2, 1, 7, -1], k = 2
 

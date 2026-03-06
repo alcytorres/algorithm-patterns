@@ -1,19 +1,19 @@
 # 1133. Largest Unique Number
+"""
+Given an integer array nums, return the largest integer that only occurs once. If no integer occurs once, return -1.
 
-# Given an integer array nums, return the largest integer that only occurs once. If no integer occurs once, return -1.
+Example 1:
+    Input: nums = [1, 3, 9, 4, 9, 8, 3]
+    Output: 8
+    Explanation: The maximum integer in the array is 9 but it is repeated. The number 8 occurs only once, so it is the answer.
 
-# Example 1:
-    # Input: nums = [1, 3, 9, 4, 9, 8, 3]
-    # Output: 8
-    # Explanation: The maximum integer in the array is 9 but it is repeated. The number 8 occurs only once, so it is the answer.
+Example 2:
+    Input: nums = [9, 9, 8, 8]
+    Output: -1
+    Explanation: There is no number that occurs only once.
 
-# Example 2:
-    # Input: nums = [9, 9, 8, 8]
-    # Output: -1
-    # Explanation: There is no number that occurs only once.
-
-# Solution: https://leetcode.com/problems/largest-unique-number/solutions/5833698/largest-unique-number/
-
+Solution: https://leetcode.com/problems/largest-unique-number/solutions/5833698/largest-unique-number/
+"""
 
 from collections import defaultdict
 
@@ -39,30 +39,52 @@ print(largestUniqueNumber(nums))
 # counts = {1:1, 3:2, 9:2, 4:1, 8:1}
 
 
+# –––––––––––––––––––––––––––––––––––––––––––––––––
+# Breakdown 
+from collections import defaultdict
+
+def largestUniqueNumber(nums):
+    counts = defaultdict(int)  # Notebook to count how many times each number appears
+    for num in nums:          # Go through each number in the list
+        counts[num] += 1      # Add 1 to the count of this number in the notebook
+    
+    max_unique = -1           # Start with -1 (return this if no number appears once)
+    for num in counts:        # Check each number in the notebook
+        if counts[num] == 1 and num > max_unique:  # If number appears once and is bigger
+            max_unique = num  # Update to this bigger number
+    
+    return max_unique         # Return the biggest number that appears once
+
+
+
+
 """
 Time: O(N)
-  - Let N = length of nums.
-  - Step 1: Count frequencies by scanning nums once → O(N).
-  - Step 2: Scan dictionary keys (≤ N unique numbers) → O(N).
-  - Overall: O(N + N) = O(N).
-
-Space: O(U) ≈ O(N)
-  - Dictionary 'counts' stores up to U unique numbers.
-  - A few integer variables for tracking (max_unique, num) use O(1).
-  - Overall: O(U).
+  - Let N = number of elements in nums, U = number of unique numbers.
+  - First loop counts occurrences using a dictionary → O(N).
+  - Second loop scans all unique keys in the dictionary to find the largest with count = 1 → O(U).
+  - Combined: O(N + U).
   - Worst case: U = N (all numbers unique), so O(N).
 
-  
+
+Space: O(U) ≈ O(N)
+  - Dictionary 'counts' stores frequency for each unique number → up to U entries.
+  - Only a few extra variables (max_unique).
+  - Overall space complexity: O(U).
+  - Worst case: U = N (all numbers unique), so O(N).
+
+
 Interview Answer: Worst Case
 
 Time: O(N)
-  - Count numbers in one pass.
-  - Scan frequencies in another pass.
+  - One pass to count frequencies and another pass over the dictionary keys.
+  - Both passes are linear.
 
 Space: O(N)
-  - Dictionary stores up to N unique numbers.
+  - Hash map stores counts for up to N numbers.
 
 
+---
 Overview for Each Iteration
 Input: nums = [1, 3, 9, 4, 9, 8, 3]
 Step 1: Count occurrences of each number
@@ -89,7 +111,7 @@ num | counts[num] | max_unique
 Final: 8
 
 
-
+---
 Most IMPORTANT thing to Understand:
     • We need to find the largest number in the array that occurs exactly once.
 
@@ -99,6 +121,7 @@ Most IMPORTANT thing to Understand:
 
     • If no number is unique, we return -1.
 
+---
 Why this code Works:
     • Hash map (counts): stores how many times each number appears.
 
@@ -110,9 +133,11 @@ Why this code Works:
 
     • Intuition: Think of it like a vote tally — each number “gets votes.” We only want numbers that got exactly one vote, and we pick the biggest of those.
 
+---
 TLDR
     • This solution works because we count how often each number appears, then pick the largest one that occurs exactly once.
-    
+
+---  
 Quick Example Walkthrough:
     nums = [1, 3, 9, 4, 9, 8, 3]
 
@@ -131,21 +156,6 @@ Quick Example Walkthrough:
 
 
 
-# –––––––––––––––––––––––––––––––––––––––––––––––––
-# Breakdown 
-from collections import defaultdict
-
-def largestUniqueNumber(nums):
-    counts = defaultdict(int)  # Notebook to count how many times each number appears
-    for num in nums:          # Go through each number in the list
-        counts[num] += 1      # Add 1 to the count of this number in the notebook
-    
-    max_unique = -1           # Start with -1 (return this if no number appears once)
-    for num in counts:        # Check each number in the notebook
-        if counts[num] == 1 and num > max_unique:  # If number appears once and is bigger
-            max_unique = num  # Update to this bigger number
-    
-    return max_unique         # Return the biggest number that appears once
 
 
 

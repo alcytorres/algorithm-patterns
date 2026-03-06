@@ -1,14 +1,14 @@
 # Numbers Without Adjacent Values
+"""
+Given an integer array nums, find all the numbers x in nums that satisfy the following: x + 1 is not in nums, and x - 1 is not in nums.
 
-# Example 3: 
-    # Given an integer array nums, find all the numbers x in nums that satisfy the following: x + 1 is not in nums, and x - 1 is not in nums.
+If a valid number x appears multiple times, you only need to include it in the answer once.
 
-# If a valid number x appears multiple times, you only need to include it in the answer once.
-
-# Example:
-    # Input: nums = [2, 4, 4, 6]
-    # Output:       [2, 4, 6]
-    # Explanation: For each x in nums, neither x+1 nor x-1 exists in nums (e.g., for x=2, 3 and 1 are absent; for x=4, 5 and 3 are absent). All numbers satisfy the condition, and duplicates are not an issue here.
+Example:
+    Input: nums = [2, 4, 4, 6]
+    Output:       [2, 4, 6]
+    Explanation: For each x in nums, neither x+1 nor x-1 exists in nums (e.g., for x=2, 3 and 1 are absent; for x=4, 5 and 3 are absent). All numbers satisfy the condition, and duplicates are not an issue here.
+"""
 
 def find_numbers(nums):
     seen = set(nums)  # {2, 4, 6}
@@ -48,7 +48,7 @@ Space: O(N)
   - Set and result list hold up to all unique numbers.
 
 
-
+---
 Overview for Each Iteration
 Input: nums = [2, 4, 4, 6]
 
@@ -65,6 +65,7 @@ x   | x+1 | x-1 | x+1 in seen | x-1 in seen | ans
 Final: [2, 4, 6]
 
 
+---
 Most IMPORTANT thing to Understand:
     • We want numbers where neither neighbor (x+1 or x-1) is present in the array.
 
@@ -72,7 +73,7 @@ Most IMPORTANT thing to Understand:
 
     • The result only includes each valid number once, even if it appears multiple times.
 
-    
+--- 
 Why this code Works:
     • seen (a set) holds all unique numbers so we don't double-count.
 
@@ -82,10 +83,12 @@ Why this code Works:
 
     • Intuition: Think of it like neighbors on a street — we only keep the houses with no one living next door.
 
+---
 TLDR
     • Build a set of numbers, keep only those with no neighbors (x+1 or x-1) in the set.
 
-    
+
+---  
 Quick Example Walkthrough:
 nums = [2, 4, 4, 6]
 

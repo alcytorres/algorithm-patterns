@@ -1,6 +1,6 @@
 # 560. Subarray Sum Equals K
 """
-Example 4: Given an array of integers nums and an integer k, return the total number of subarrays whose sum equals to k.
+Given an array of integers nums and an integer k, return the total number of subarrays whose sum equals to k.
 
 A subarray is a contiguous non-empty sequence of elements within an array.
 
@@ -128,6 +128,7 @@ Most IMPORTANT thing to Understand:
     
     • counts[0] = 1 handles subarrays that start at index 0.
 
+---
 Why this code Works:
     • Hash map (counts): key = running sum value, value = how many times we've seen it so far.
 
@@ -139,10 +140,11 @@ Why this code Works:
 
     • One pass, O(n) time; O(1) average lookups; avoids O(n^2) brute-force checks.
 
+---
 TLDR:
     • Track running sums and, at each index, add how many earlier sums equal (curr - k) — that gives the number of subarrays ending here whose sum is exactly k.
 
-
+---
 Quick Example Walkthrough:
     nums = [1, 2, 1, 2, 1], k = 3
 

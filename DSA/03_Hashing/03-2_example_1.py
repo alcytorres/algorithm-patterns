@@ -168,7 +168,7 @@ Q: Why do we use `d[num] = i` instead of `d[diff] = i`?
 👉 d[diff] = i would store a number we haven't seen yet, which makes no sense.
 
 
-
+---
 Q: Why do we include `return []` at the end?
 
   • The loop returns as soon as it finds a valid pair.

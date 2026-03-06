@@ -62,7 +62,7 @@ Space: O(N)
   - Output array of length N; otherwise constant extra space.
 
 
-
+---
 Overview for Each Iteration
 Input: nums = [7, 4, 3, 9, 1, 8, 5, 2, 6], k = 3
 
@@ -83,7 +83,7 @@ i  | curr            | nums[i+k] | nums[i-k-1] | ans[i]    | ans
 Final: [-1, -1, -1, 5, 4, 4, -1, -1, -1]
 
 
-
+---
 Most IMPORTANT thing to Understand:
     • A valid average at index i needs a window of size 2k+1 (k elements before + k after + the element itself).
 
@@ -91,7 +91,8 @@ Most IMPORTANT thing to Understand:
 
     • We use a sliding window sum: instead of recalculating the sum from scratch, update it by adding the new element and removing the old one.
 
-    
+
+---  
 Why this code Works:
     • Hash map not needed here. Just a running sum (curr).
 
@@ -101,10 +102,11 @@ Why this code Works:
 
     • Intuition: Like moving a magnifying glass across the array, you don't re-count everything, you just update the view.
 
+---
 TLDR
     • This works because we keep a running sum of the current window and update it in O(1) as the window slides, giving the averages in one pass.
 
-
+---
 Quick Example Walkthrough:
     nums = [7, 4, 3, 9, 1, 8, 5, 2, 6], k = 3
 
