@@ -373,5 +373,121 @@ print(majorityElement(nums))  # Output: 3
 
 
 
-# DICTIONARY METHOD: 
-.get()
+
+
+
+
+
+
+
+
+
+
+# ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+"""
+Goal: Show why the indented version is wrong and the standard Boyer-Moore version is correct.
+
+
+Example: nums = [1, 2, 2]
+Majority element = 2
+"""
+
+# Erroneous version
+def majorityElement_wrong(nums):
+    candidate = None
+    count = 0
+
+    for num in nums:
+        if count == 0:
+            candidate = num
+
+            # ← this 4 line block should NOT be indented here
+            if candidate == num:  
+                count += 1
+            else:
+                count -= 1
+
+    return candidate
+
+
+# Correct Boyer-Moore version
+def majorityElement_correct(nums):
+    candidate = None
+    count = 0
+
+    for num in nums:
+        if count == 0:
+            candidate = num
+
+        if candidate == num:
+            count += 1
+        else:
+            count -= 1
+
+    return candidate
+
+
+nums = [1, 2, 2]
+
+print("Wrong:", majorityElement_wrong(nums))      # 1
+print("Correct:", majorityElement_correct(nums))  # 2
+
+
+"""
+Step-by-step walkthrough
+nums = [1, 2, 2]
+
+
+1) ERRONEOUS CODE
+
+Start:
+candidate = None, count = 0
+
+num = 1
+• count == 0 -> candidate = 1
+• inner if runs
+• candidate == num -> count = 1
+State: candidate = 1, count = 1
+
+num = 2
+• count != 0
+• outer if does not run
+• inner if is nested inside outer if, so it does not run either
+State: candidate = 1, count = 1
+
+num = 2
+• same thing, nothing runs
+State: candidate = 1, count = 1
+
+Return 1  ❌
+
+
+2) CORRECT CODE
+
+Start:
+candidate = None, count = 0
+
+num = 1
+• count == 0 -> candidate = 1
+• candidate == num -> count = 1
+State: candidate = 1, count = 1
+
+num = 2
+• count != 0, candidate stays 1
+• candidate != num -> count = 0
+State: candidate = 1, count = 0
+
+num = 2
+• count == 0 -> candidate = 2
+• candidate == num -> count = 1
+State: candidate = 2, count = 1
+
+Return 2  ✅
+
+
+Core difference:
+- Wrong code: vote update only happens when count == 0
+- Correct code: vote update happens every iteration
+
+That is why the wrong code gets stuck on the first element.
+"""
