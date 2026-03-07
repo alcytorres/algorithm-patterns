@@ -74,26 +74,29 @@ def searchInsert(nums, target):
 
 
 """
-Time: O(log N)
+Time: O(LOG N)
   - Let N = length of nums.
-  - Binary search repeatedly halves the search space.
-  - Each loop iteration does O(1) work (comparison + pointer updates).
-  - Maximum iterations ≈ log₂(N).
-  - Overall: O(log N).
+  - Each loop checks the middle element of the current search range.
+  - Based on the comparison, half of the array indices are discarded.
+  - The searchable portion of the array keeps shrinking:
+      N → N/2 → N/4 → N/8 ...
+  - This continues until the target is found or the search range becomes empty.
+  - If the target is not found, we return l, which represents the correct insertion position.
+  - Overall: O(LOG N).
 
 Space: O(1)
-  - Uses only a few integer variables (l, r, mid).
-  - No extra data structures or recursion.
+  - Uses only a few integer variables (left, right, mid).
+  - No additional data structures are created.
   - Overall: O(1).
 
   
 Interview Answer: Worst Case
 
-Time: O(log N)
-  - Binary search halves the array each step.
+Time: O(LOG N)
+  - Binary search repeatedly cuts the searchable portion of the array in half.
 
 Space: O(1)
-  - Constant extra space for pointers.
+  - Only pointer variables (l, r, mid) are used.
 
   
 

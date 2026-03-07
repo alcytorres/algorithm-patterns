@@ -96,26 +96,29 @@ print(search(nums, target))  # Output: 4
 
 
 """
-Time: O(log N)
+Time: O(LOG N)
   - Let N = length of nums.
-  - Each iteration of the while loop cuts the search space in half.
-  - Comparisons and pointer updates inside the loop are O(1).
-  - Maximum number of iterations is log₂(N).
-  - Overall: O(log N).
+  - Each loop checks the middle element of the current search range.
+  - Based on the comparison, half of the array indices are discarded.
+  - The searchable portion of the array keeps shrinking:
+      N → N/2 → N/4 → N/8 ...
+  - This halving continues until the target is found or the range becomes empty.
+  - Overall: O(LOG N).
 
 Space: O(1)
-  - Uses only a few integer variables: left, right, mid.
-  - No additional data structures or recursion.
+  - Uses only a few integer variables (left, right, mid).
+  - No additional data structures are created.
   - Overall: O(1).
 
   
 Interview Answer: Worst Case
 
-Time: O(log N)
-  - Binary search halves the array each step.
+Time: O(LOG N)
+  - Binary search repeatedly cuts the searchable portion of the array in half.
 
 Space: O(1)
-  - Constant extra space for pointers.
+  - Only pointer variables (l, r, mid) are used.
+
 
 
 ---
