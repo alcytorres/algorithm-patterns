@@ -180,11 +180,11 @@ Quick Example Walkthrough:
 
     
 
----    
+---
 Q: Why is the space complexity O(N)?
 
-  • We create a new string (`new_string`) that stores all valid characters from the input.
-  
+A: Because we create a new string (`new_string`) that stores all valid characters from the input.
+
   • In the worst case, every character is kept → up to N characters stored.
 
   • Extra memory grows with input size → O(N) space.

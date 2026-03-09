@@ -17,6 +17,8 @@ Constraints:
     The input is generated such that a majority element will exist in the array.
  
 Follow-up: Could you solve the problem in linear time and in O(1) space?
+
+Solution: https://leetcode.com/problems/majority-element/description/
 """
 
 # Optpion 1: Dictionary Frequency + max() Lookup
@@ -32,6 +34,8 @@ def majorityElement(nums):
 
 nums = [3, 2, 3]
 print(majorityElement(nums))  # Output: 3
+
+# count = {3: 2, 2: 1}
 
 
 # ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
@@ -69,6 +73,41 @@ Time: O(N)
 
 Space: O(N)
   - Hash map stores counts for all unique numbers.
+
+
+
+
+---
+Q: Why do we set count[num] = 1 instead of 0?
+
+A: Because the else branch runs when we see a number for the first time — and that's already 1 occurrence!
+
+  • Seeing a number for the first time means it appeared once → the count should be 1.
+
+  • Setting it to 0 would mean "I've seen this number zero times," which is wrong.
+
+  • It still gives the correct answer because the relative order stays the same, but the counts themselves are inaccurate.
+
+  • Use 1 to keep the counts truthful.
+
+
+---
+Q: What's the difference between: 
+`max(counts.keys(), key=counts.get)` 
+and 
+`max(counts, key=counts.get)` ?
+
+A: There is no difference — they do the exact same thing.
+
+  • `max(counts.keys(), key=counts.get)` — explicitly says "loop over the keys."
+
+  • `max(counts, key=counts.get)` — loops over the keys by default.
+
+  • When you pass a dictionary to `for`, `max`, `min`, etc., Python automatically iterates over the keys.
+
+  • So `.keys()` is just extra typing for the same result.
+
+
 """
 
 
@@ -77,18 +116,40 @@ Space: O(N)
 
 # Boyer–Moore Voting Algorithm Solution
 def majorityElement(nums):
-    count = 0
-    candidate = None
+    count = 0         
+    candidate = None   
 
-    for num in nums:
-        if count == 0:
-            candidate = num
-        count += 1 if num == candidate else -1
+    for num in nums:         
+        if count == 0:          
+            candidate = num     
+        
+        if candidate == num:    
+            count += 1          
+        else:                   
+            count -= 1          
 
-    return candidate
+    return candidate   
 
 nums = [3, 2, 3]
 print(majorityElement(nums))  # Output: 3
+
+
+# ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+# Breakdown – Boyer–Moore Voting Algorithm 
+def majorityElement(nums):
+    count = 0          # Tracks "votes" for current candidate
+    candidate = None   # Current suspected majority element
+
+    for num in nums:            # One pass through array
+        if count == 0:          # No active candidate
+            candidate = num     # Pick current number as new candidate
+        
+        if candidate == num:    # If current number matches candidate
+            count += 1          # Give it a vote
+        else:                   # Otherwise
+            count -= 1          # Cancel out one vote
+
+    return candidate    # Guaranteed to be majority (problem says it exists)
 
 
 """
@@ -219,43 +280,45 @@ Quick Example Walkthrough:
 
 """
 
-# ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
-# Breakdown – Boyer–Moore Voting Algorithm 
-def majorityElement(nums):
-    count = 0          # Tracks "votes" for current candidate
-    candidate = None   # Current suspected majority element
-
-    for num in nums:            # One pass through array
-        if count == 0:          # No active candidate
-            candidate = num     # Pick current number as new candidate
-        
-        if candidate == num:    # If current number matches candidate
-            count += 1          # Give it a vote
-        else:                   # Otherwise
-            count -= 1          # Cancel out one vote
-
-    return candidate    # Guaranteed to be majority (problem says it exists)
-
 
 
 
 # ============================================================
-# 📘 Tutorial: Passing a Function (without parentheses) to key=
+# 📘 GUIDE: What is key= used for?
+# Sorting & Selecting the Smart Way
 # ============================================================
 """
-Big Idea:
+What is key= ?
+
+    key= tells Python HOW TO COMPARE the items.
+    Instead of comparing items by their face value,
+    it calls the function you give it on each item
+    and compares THOSE RESULTS instead.
+
+    It changes the RULER, not what gets returned.
+
+    • Without key=  
+    →  max([3, 1, 2])  →  compares 3, 1, 2 directly  
+    →  returns 3
+
+    • With key=     
+    →  max(["hi", "banana"], key=len)  →  compares lengths  
+    →  returns "banana"
+
+
+Important rule:
     key= expects a FUNCTION, not a result.
 
-    • count.get      → gives max() a TOOL to use later
-    • count.get()    → runs the tool right now (wrong here)
+    • count.get      → gives max() a TOOL to use later  ✅
+    • count.get()    → runs the tool right now (wrong)   ❌
+
+TLDR:
+    key=   → "Sort or pick based on this function's result"
 
 Why no parentheses?
     We want max() to CALL the function for us internally
-    on each item it checks.
-
-Use cases:
-    • Choose longest string
-    • Choose dict key with biggest value
+    on each item it checks. 
+    We hand over the tool — max() decides when to use it.
 """
 
 # --------------------------
@@ -267,6 +330,12 @@ words = ["hi", "banana", "yo"]
 longest = max(words, key=len)
 
 print(longest)   # Output: "banana"
+
+# Behind the scenes, max() does this:
+#   len("hi")      → 2
+#   len("banana")  → 6
+#   len("yo")      → 2
+#   6 is biggest   → returns "banana"  (the original item, NOT 6)
 
 
 # ------------------------------------
@@ -284,6 +353,16 @@ def majorityElement(nums):
 
 nums = [1, 3, 3]
 print(majorityElement(nums))  # Output: 3
+
+# Behind the scenes:
+#   1. After the loop, count = {1: 1, 3: 2}
+#   2. max() loops through the keys: 1, 3
+#   3. For each one, it calls count.get() to decide how to compare:
+#        count.get(1)  → 1
+#        count.get(3)  → 2
+#   4. Python internally holds those results: [1, 2]
+#   5. Picks the biggest: 2
+#   6. Returns the original key that produced it: 3
 
 
 

@@ -167,14 +167,15 @@ min_price = inf, max_profit = 0
 
 ---
 Q: Why do we use `float('inf')` in this solution?
-    • We need to track the **minimum price**, and starting at +∞ guarantees the first real price becomes the new minimum.
 
-    • It avoids awkward edge cases like manually doing `min_price = prices[0]`.
-        • Empty list → prices[0] crashes.
+A: We need to track the minimum price, and starting at +∞ guarantees the first real price becomes the new minimum.
 
-    • Makes the logic cleaner: every upcoming price is compared against an initial “impossibly large” value.
+  • It avoids awkward edge cases like manually doing `min_price = prices[0]`.
+      • Empty list → prices[0] crashes.
 
-    • Ensures the algorithm works even if prices change later or input formats vary — the first number will always replace +∞.
+  • Makes the logic cleaner: every upcoming price is compared against an initial "impossibly large" value.
+
+  • Ensures the algorithm works even if prices change later or input formats vary — the first number will always replace +∞.
 
 
 """

@@ -453,22 +453,41 @@ Key takeaways:
 
 
 # ============================================================
-# 📘 Tutorial: Passing a Function (without parentheses) to key=
+# 📘 GUIDE: What is key= used for?
+# Sorting & Selecting the Smart Way
 # ============================================================
 """
-Big Idea:
+What is key= ?
+
+    key= tells Python HOW TO COMPARE the items.
+    Instead of comparing items by their face value,
+    it calls the function you give it on each item
+    and compares THOSE RESULTS instead.
+
+    It changes the RULER, not what gets returned.
+
+    • Without key=  
+    →  max([3, 1, 2])  →  compares 3, 1, 2 directly  
+    →  returns 3
+
+    • With key=     
+    →  max(["hi", "banana"], key=len)  →  compares lengths  
+    →  returns "banana"
+
+
+Important rule:
     key= expects a FUNCTION, not a result.
 
-    • count.get      → gives max() a TOOL to use later
-    • count.get()    → runs the tool right now (wrong here)
+    • count.get      → gives max() a TOOL to use later  ✅
+    • count.get()    → runs the tool right now (wrong)   ❌
+
+TLDR:
+    key=   → "Sort or pick based on this function's result"
 
 Why no parentheses?
     We want max() to CALL the function for us internally
-    on each item it checks.
-
-Use cases:
-    • Choose longest string
-    • Choose dict key with biggest value
+    on each item it checks. 
+    We hand over the tool — max() decides when to use it.
 """
 
 # --------------------------
@@ -480,6 +499,12 @@ words = ["hi", "banana", "yo"]
 longest = max(words, key=len)
 
 print(longest)   # Output: "banana"
+
+# Behind the scenes, max() does this:
+#   len("hi")      → 2
+#   len("banana")  → 6
+#   len("yo")      → 2
+#   6 is biggest   → returns "banana"  (the original item, NOT 6)
 
 
 # ------------------------------------
@@ -497,6 +522,17 @@ def majorityElement(nums):
 
 nums = [1, 3, 3]
 print(majorityElement(nums))  # Output: 3
+
+# Behind the scenes:
+#   1. After the loop, count = {1: 1, 3: 2}
+#   2. max() loops through the keys: 1, 3
+#   3. For each one, it calls count.get() to decide how to compare:
+#        count.get(1)  → 1
+#        count.get(3)  → 2
+#   4. Python internally holds those results: [1, 2]
+#   5. Picks the biggest: 2
+#   6. Returns the original key that produced it: 3
+
 
 
 

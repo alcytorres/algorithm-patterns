@@ -236,26 +236,27 @@ Q: Why is time O(N) with 2 loops instead of O(N + M)?
 
 A: Because in this problem, both strings are the same length whenever we actually run the loops!
 
-- If lengths differ → we return False immediately. No loops happen!
-- So the only time we do both loops is when N = M → N steps + N steps = 2N steps → O(2N) = O(N).
+  • If lengths differ → we return False immediately. No loops happen!
+
+  • So the only time we do both loops is when N = M → N steps + N steps = 2N steps → O(2N) = O(N).
 
 
 
 ---
-Q: What happens to time and space if we remove the length check? 
-    `if len(s) != len(t): return False`...?
+Q: What happens to time and space if we remove the length check?
+   `if len(s) != len(t): return False`...?
 
-  • We'd always run both loops → still O(N) time overall (2N steps).
-  • But we'd waste extra work when lengths differ (count all of s, then subtract t until we see negatives or leftovers).
-  • Space stays O(1) — dict still max 26 keys.
+A: Big-O stays O(N) either way, but the length check makes it faster in practice by skipping unnecessary work.
 
+  • Without it, we'd always run both loops → still O(N) time (2N steps), but wasted effort when lengths differ.
 
-Toy box example:
-Two toy boxes with the same toys?
+  • Space stays O(1) — dict still has max 26 keys.
+
+  Toy box example:
+  Two toy boxes with the same toys?
 
   • Sizes different? Stop fast (like the length check — no counting needed).
   • Sizes same? Count every toy in both boxes → O(N) time.
-
 
 Bottom line: 
 The length check makes the code faster in real life when lengths mismatch, but Big-O time stays O(N) either way for this problem.

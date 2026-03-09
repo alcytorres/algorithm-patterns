@@ -184,22 +184,18 @@ Quick Example Walkthrough:
 
 
 
-
 ---
 Q: Why do we use `while l <= r:` in exact-value binary search?
 
-    • `l` and `r` define the remaining search range.
+A: Because when `l == r`, there is one last element that could be the target — and we need to check it.
 
-    • When `l == r`, there is one last element that could be the target.
+  • `l` and `r` define the remaining search range.
 
-    • `while l <= r:` ensures this final element is checked.
+  • `while l <= r:` ensures this final element is checked.
 
-    • Using `while l < r:` would stop early and skip it.
-
-    • Skipping that check can miss a valid target.
-
-→ Fix: `while l <= r:` guarantees every possible index is examined.
+  • Using `while l < r:` would stop early and skip it → can miss a valid target.
     
+
 
 
 ---
