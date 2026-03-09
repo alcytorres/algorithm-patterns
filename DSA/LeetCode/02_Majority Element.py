@@ -77,6 +77,41 @@ Space: O(N)
   - Hash map stores counts for all unique numbers.
 
 
+---
+Most IMPORTANT thing to Understand:
+    • There is one number that appears more than half the time (> n/2).
+    • That means it appears more times than all other numbers combined.
+    • We count how often each number appears → the one with highest count is the majority.
+
+---
+Why this code Works:
+    • Dictionary 'count' tracks frequency of each number.
+    • One pass through array to build frequencies.
+    • max(count, key=count.get) returns the key (number) with highest value (count).
+    • Since majority > n/2, no other number can tie or beat its count.
+
+---
+TLDR
+    We count frequency of every number → return the one with the highest frequency 
+    (it must be the majority since it appears > n/2 times).
+
+---
+Quick Example Walkthrough
+    nums = [1, 3, 3]
+
+    Step 1: Build frequency count
+        • See 1 → count = {1: 1}
+        • See 3 → count = {1: 1, 3: 1}
+        • See 3 → count = {1: 1, 3: 2}
+
+    Step 2: Find number with highest count
+        • Keys: 1 and 3
+        • count[1] = 1
+        • count[3] = 2 ← highest
+
+    Final Answer: 3
+
+
 
 
 ---

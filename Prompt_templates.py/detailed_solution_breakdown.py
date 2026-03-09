@@ -16,6 +16,8 @@ DETAILED SOLUTION BREAKDOWN
 
 # Between each bullet point skip a line to space out the breakdown and make it more easy to scan
 
+# Make sure to reply with a .py file so I can copy and paste your response
+
 # Here is a great template with more detail of what I'm looking that you can you as a reference. While I want you to generanlly follow this template it is not rigit. If you think adding a little more detail to a specific problem is necessary for me to fully understand make sure to do that.
 
 """
