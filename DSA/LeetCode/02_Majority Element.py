@@ -3,7 +3,7 @@
 The majority element is the element that appears more than ⌊n / 2⌋ times. You may assume that the majority element always exists in the array.
 
 Example 1:
-    Input: nums = [3, 2, 3]
+    Input: nums = [1, 3, 3]
     Output: 3
 
 Example 2:
@@ -32,10 +32,12 @@ def majorityElement(nums):
     
     return max(count, key=count.get)
 
-nums = [3, 2, 3]
+nums = [1, 3, 3]
 print(majorityElement(nums))  # Output: 3
 
-# count = {3: 2, 2: 1}
+# count = {1: 1, 3: 2}
+
+# When you PASS a dictionary to `for`, `max`, `min`, etc., Python AUTOMATICALLY ITERATES OVER the KEYS.
 
 
 # ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
@@ -97,13 +99,13 @@ Q: What's the difference between:
 and 
 `max(counts, key=counts.get)` ?
 
-A: There is no difference — they do the exact same thing.
+A: There is NO difference — they do the exact SAME thing.
 
   • `max(counts.keys(), key=counts.get)` — explicitly says "loop over the keys."
 
-  • `max(counts, key=counts.get)` — loops over the keys by default.
+  • `max(counts, key=counts.get)` — loops over the KEYS by DEFAULT.
 
-  • When you pass a dictionary to `for`, `max`, `min`, etc., Python automatically iterates over the keys.
+  • When you PASS a dictionary to `for`, `max`, `min`, etc., Python AUTOMATICALLY ITERATES OVER the KEYS.
 
   • So `.keys()` is just extra typing for the same result.
 
@@ -130,7 +132,7 @@ def majorityElement(nums):
 
     return candidate   
 
-nums = [3, 2, 3]
+nums = [1, 3, 3]
 print(majorityElement(nums))  # Output: 3
 
 
@@ -179,12 +181,12 @@ Space: O(1)
 
 ---
 Overview for Each Iteration
-Input: nums = [3, 2, 3]
+Input: nums = [1, 3, 3]
 
 i | num | count == 0 | candidate | count before | Action          | count after
 --|-----|------------|-----------|--------------|-----------------|------------
-0 | 3   | True       | None → 3  | 0            | set candidate=3 | +1 → 1
-1 | 2   | False      | 3         | 1            | num ≠ candidate | -1 → 0
+0 | 1   | True       | None → 1  | 0            | set candidate=1 | +1 → 1
+1 | 3   | False      | 1         | 1            | num ≠ candidate | -1 → 0
 2 | 3   | True       | 3         | 0            | set candidate=3 | +1 → 1
 
 Final: candidate = 3 → return 3
@@ -223,16 +225,16 @@ TLDR:
 ---
 Quick Example Walkthrough:
 
-    nums = [3, 2, 3]
+    nums = [1, 3, 3]
 
     Start:
         candidate=None, count=0
 
-    1) num=3  
-        count==0 → candidate=3  
+    1) num=1  
+        count==0 → candidate=1  
         count=1
 
-    2) num=2  
+    2) num=3  
         different → count=0  
         (candidate "loses all votes")
 
@@ -372,7 +374,7 @@ def majorityElement(nums):
     nums.sort()
     return nums[len(nums) // 2]
 
-nums = [3, 2, 3]
+nums = [1, 3, 3]
 print(majorityElement(nums))  # Output: 3
 
 """
@@ -410,7 +412,7 @@ def majorityElement(nums):
     count = Counter(nums)
     return max(count, key=count.get)
 
-nums = [3, 2, 3]
+nums = [1, 3, 3]
 print(majorityElement(nums))  # Output: 3
 
 # Time:  O(N) 
@@ -428,7 +430,7 @@ def majorityElement(nums):
     
     return max(count, key=count.get)
 
-nums = [3, 2, 3]
+nums = [1, 3, 3]
 print(majorityElement(nums))  # Output: 3
 
 # Time:  O(N) 
@@ -447,7 +449,7 @@ def majorityElement(nums):
         if count > majority_count:
             return num
 
-nums = [3, 2, 3]
+nums = [1, 3, 3]
 print(majorityElement(nums))  # Output: 3
 
 
@@ -467,7 +469,7 @@ print(majorityElement(nums))  # Output: 3
 Goal: Show why the indented version is wrong and the standard Boyer-Moore version is correct.
 
 
-Example: nums = [1, 2, 2]
+Example: nums = [1, 3, 3]
 Majority element = 2
 """
 
@@ -506,15 +508,16 @@ def majorityElement_correct(nums):
     return candidate
 
 
-nums = [1, 2, 2]
+nums = [1, 3, 3]
 
 print("Wrong:", majorityElement_wrong(nums))      # 1
-print("Correct:", majorityElement_correct(nums))  # 2
+print("Correct:", majorityElement_correct(nums))  # 3
+
 
 
 """
 Step-by-step walkthrough
-nums = [1, 2, 2]
+nums = [1, 3, 3]
 
 
 1) ERRONEOUS CODE
@@ -528,13 +531,13 @@ num = 1
 • candidate == num -> count = 1
 State: candidate = 1, count = 1
 
-num = 2
+num = 3
 • count != 0
 • outer if does not run
 • inner if is nested inside outer if, so it does not run either
 State: candidate = 1, count = 1
 
-num = 2
+num = 3
 • same thing, nothing runs
 State: candidate = 1, count = 1
 
@@ -551,17 +554,17 @@ num = 1
 • candidate == num -> count = 1
 State: candidate = 1, count = 1
 
-num = 2
+num = 3
 • count != 0, candidate stays 1
 • candidate != num -> count = 0
 State: candidate = 1, count = 0
 
-num = 2
-• count == 0 -> candidate = 2
+num = 3
+• count == 0 -> candidate = 3
 • candidate == num -> count = 1
-State: candidate = 2, count = 1
+State: candidate = 3, count = 1
 
-Return 2  ✅
+Return 3  ✅
 
 
 Core difference:
