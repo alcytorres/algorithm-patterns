@@ -109,12 +109,50 @@ The fix WITH if __name__ == '__main__':
 
 
 
+# ===============================
+# Try it yourself: Compare CORRECT vs WRONG
+# ===============================
+
 """
-Try it yourself:
-    Run python3 file_1.py → you'll see pass (test code runs)
-    
-    Run python3 file_2.py → you'll see 30 (test code is skipped, only the function is used)
-    
-    That's the whole point: if __name__ == '__main__': keeps your test code from leaking out when another file imports your functions.
+CORRECT (current state — test code is inside the guard):
+    python3 file_1.py  → pass       (test runs because you ran it directly)
+    python3 file_2.py  → 30         (test is skipped — only the add result)
+
+WRONG (test code is outside the guard):
+    1. In file_1.py, comment out the CORRECT section
+    2. Uncomment the WRONG section
+    3. python3 file_1.py  → pass     (same as before)
+    4. python3 file_2.py  → pass     (test code leaked during import!)
+                          → 30
+
+    That "pass" leaking into file_2's output is the problem.
+    There was no guard to stop it from running during import.
+
+
+
+
+---
+Q: Why does running file_2.py print "pass" AND 30 when there's no guard?
+   
+   All file_2 does is print(add(10, 20)) — so where does "pass" come from?
+
+A: Because import doesn't just grab the function — it runs the entire file.
+
+  • When Python sees from file_1 import add, it opens file_1.py and executes it top to bottom. If the test code is sitting out in the open (no guard), Python runs it during the import. That's where pass comes from.
+
+ • Then after the import is done, print(add(10, 20)) runs and prints 30.
+
+  • So you get both: pass from the import, then 30 from your code. You only wanted 30.
+
+
+
+---
+Q: But I only imported add, not the whole file. Why does Python run all of file_1?
+
+A: Python has to execute the entire file to find add. There's no way to grab one function without running everything else.
+
+  • from file_1 import add and import file_1 both run the whole file.
+
+  • The from ... import part only controls what name you get access to — not what code runs.
 
 """
