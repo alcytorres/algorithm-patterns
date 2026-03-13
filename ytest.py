@@ -136,7 +136,8 @@ Quick Example Walkthrough:
 # –––––––––––––––––––––––––––––––––––––––
 #  What is the best efficient simple solution? 
 # –––––––––––––––––––––––––––––––––––––––
-# Give me the top 2 most basic, simple, memorable, easy to follow for a beginner solutions to this problem as a ranked list. Make sure it is efficient. Justify your answer and explain you reasoning
+# What is the absolute best, basic, simple, memorable, easy to follow for a beginner top 2 solution for this problem that is efficient thar you rec for someone practicting for entry level SWE technical interviews?  Not targetting FAANG companies. Just want to get my first door at where ever will hire me
+# Justify your answer
 
 # What is the absolute best, basic, simple, memorable, easy to follow for a beginner solution for this problem that is efficient? Justify your answer
 

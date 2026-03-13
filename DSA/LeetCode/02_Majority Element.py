@@ -21,7 +21,7 @@ Follow-up: Could you solve the problem in linear time and in O(1) space?
 Solution: https://leetcode.com/problems/majority-element/description/
 """
 
-# Optpion 1: Dictionary Frequency + max() Lookup
+# Solution 1: Dictionary Frequency + max() Lookup
 def majorityElement(nums):
     count = {}
     for num in nums:

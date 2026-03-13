@@ -19,7 +19,7 @@ Constraints:
     -109 <= nums[i] <= 109
 """
 
-# Option 1: Set Early-Exit Duplicate Check
+# Solution 1: Set Early-Exit Duplicate Check
 def containsDuplicate(nums):
     seen = set()
     
@@ -130,7 +130,7 @@ Final Answer: True
 
 
 # ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
-# Option 2: Dictionary Frequency Counting Approach
+# Solution 2: Dictionary Frequency Counting Approach
 from collections import defaultdict
 
 def containsDuplicate(nums):
@@ -151,7 +151,7 @@ print(containsDuplicate(nums))  # Output True
 
 
 # ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
-# Option 3: Quick Set-Length Trick (One-Liner Solution)
+# Solution 3: Quick Set-Length Trick (One-Liner Solution)
 def containsDuplicate(nums):
     return True if len(set(nums)) < len(nums) else False
 

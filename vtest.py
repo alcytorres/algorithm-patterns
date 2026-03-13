@@ -14,5 +14,3 @@ Check on CLAUDE if the examples at the bottom of 09-0_Binary Search.py are worth
 
 
 
-# Guide on what this is
-if __name__ == '__main__':
