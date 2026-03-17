@@ -3,6 +3,15 @@
 A phrase is a palindrome if, after converting all uppercase letters into lowercase letters and removing all non-alphanumeric characters, it reads the same forward and backward. Alphanumeric characters include letters and numbers.
 
 Given a string s, return true if it is a palindrome, or false otherwise.
+
+---
+A simpler way to say it:
+    • Given a string, strip out everything that isn't a letter or number, make it all lowercase, then check if it reads the same forwards and backwards. Return true if it does, false if it doesn't.
+
+    So the steps are:
+      1. Remove all spaces, punctuation, and special characters (keep only letters and digits).
+      2. Lowercase everything.
+      3. Compare the cleaned string to its reverse — if they match, it's a palindrome.
  
 Example 1:
     Input: s = "A man, a plan, a canal: Panama"
@@ -24,7 +33,7 @@ Constraints:
     1 <= s.length <= 2 * 105
     s consists only of printable ASCII characters.
 
-https://leetcode.com/problems/valid-palindrome/description/
+Solution: https://leetcode.com/problems/valid-palindrome/description/
 """
 
 # Simple Palindrome Check (Build String → Two Pointers)
