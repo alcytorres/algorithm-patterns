@@ -50,6 +50,8 @@ def fizzBuzz(n):
 n = 15
 print(fizzBuzz(n))
 
+# Output: ['1', '2', 'Fizz', '4', 'Buzz', 'Fizz', '7', '8', 'Fizz', 'Buzz', '11', 'Fizz', '13', '14', 'FizzBuzz']
+
 
 # ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 # Breakdown
@@ -167,6 +169,26 @@ i  | i%3==0 | i%5==0 | Action         | ans (appended)
 
 Final: ["1","2","Fizz","4","Buzz","Fizz","7","8","Fizz","Buzz","11","Fizz","13","14","FizzBuzz"]
 
+
+
+
+---
+Q: Why do we write  for i in range(1, n+1):   
+   instead of range(1, n) or range(0, n+1)?
+
+A: We need to process every number **from 1 to n inclusive** (exactly what Fizz Buzz asks for).
+
+- range(1, n+1) → gives 1, 2, 3, ..., n  
+  (starts at 1 and includes n)
+
+- range(1, n) → gives 1, 2, 3, ..., n-1  
+  (misses the last number n)
+
+- range(0, n+1) → gives 0, 1, 2, ..., n  
+  (starts at 0 — which we don't want)
+  
+
+Fizz Buzz never includes 0 and always includes n, so `range(1, n+1)` is the correct way to loop over exactly the numbers 1 through n.
 
 """
 
