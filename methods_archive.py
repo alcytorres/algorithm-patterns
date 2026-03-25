@@ -29,6 +29,8 @@ chr()
 .isdigit()
 .isnumeric()
 .isalpha()
+.isupper()
+.islower()
 .format()
 
 ### LIST METHODS

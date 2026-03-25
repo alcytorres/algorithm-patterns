@@ -34,7 +34,7 @@ set    = {1, 2, 3}         # type: set
 # Immutable
 int    = 10                # type: int
 float  = 3.14              # type: float
-str    = "hello"           # type: str
+str    = "Amy"             # type: str
 tuple  = (1, 2, 3)         # type: tuple
 bool   = True              # type: bool
 
@@ -45,7 +45,7 @@ empty_string  = ""
 empty_dict    = {}
 empty_int     = 0
 empty_tuple   = ()
-empty_set     = set()      # {} is dict!
+empty_set     = set()      # Note: {} creates an empty dict, not a set!
 empty_float   = 0.0
 empty_bool    = False
 none_value    = None

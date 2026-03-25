@@ -110,6 +110,47 @@ print(fn(nums))   # Output 2 (since 2 and 4 are even)
 
 # ––––––––––––––––––––––––––––––––––––––––––––––
 """
+📘 Tutorial: Condition-First Rule in any(), all(), sum()
+
+- When you put a short for loop inside any(), all(), or sum(),
+  the condition (what you check) comes FIRST, then the for part.
+
+- Pattern:
+    any(condition for item in collection)
+        ↑               ↑
+        what to check    the loop
+
+- This applies to any(), all(), and sum() — same order every time.
+"""
+
+# Example 1: any() — check if any letter is uppercase
+password = "Hello123"
+has_upper = any(c.isupper() for c in password)
+print(has_upper)  # Output: True
+
+# Example 2: all() — check if all numbers are positive
+nums = [1, 2, 3, 4]
+all_positive = all(n > 0 for n in nums)
+print(all_positive)  # Output: True
+
+# Example 3: sum() — count how many are even
+nums = [1, 2, 3, 4]
+even_count = sum(n % 2 == 0 for n in nums)
+print(even_count)  # Output: 2
+
+# Example 4: Real use — password strength check
+password = "Hello123"
+if len(password) >= 8 and any(c.isupper() for c in password):
+    print("Strong password")
+else:
+    print("Weak password")
+# Output: Strong password
+
+
+
+
+# ––––––––––––––––––––––––––––––––––––––––––––––
+"""
 📘 Tutorial: @staticmethod in Python
 
 - A @staticmethod is just a normal function stored inside a class.

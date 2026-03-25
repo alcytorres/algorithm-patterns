@@ -348,6 +348,63 @@ valid_words = [w for w in words if w.isalpha()]
 print(valid_words)  # Output: ['hello', 'world', 'bye']
 
 
+# STRING METHOD: 
+.isupper()
+# What it does: Returns True if all cased characters are uppercase.
+# Why use it: Checks for uppercase letters in validation or filtering.
+# How it works: Returns True/False; ignores non-letter characters (digits, symbols).
+# When to use: Password strength checks, case-based filtering in string problems.
+# Time/Space: O(n) time (n = string length), O(1) space.
+
+# Syntax:
+string.isupper()  # Returns True if all cased chars are uppercase, else False
+
+# Basic Example 1 (All Uppercase):
+text = "HELLO"
+print(text.isupper())  # Output: True
+
+# Basic Example 2 (Mixed Case):
+text = "Hello"
+print(text.isupper())  # Output: False
+
+# Basic Example 3 (With Digits — digits are ignored):
+text = "ABC123"
+print(text.isupper())  # Output: True
+
+# DSA Example (Count uppercase letters):
+password = "Hello123"
+upper_count = sum(c.isupper() for c in password)
+print(upper_count)  # Output: 1
+
+
+# STRING METHOD: 
+.islower()
+# What it does: Returns True if all cased characters are lowercase.
+# Why use it: Checks for lowercase letters in validation or filtering.
+# How it works: Returns True/False; ignores non-letter characters (digits, symbols).
+# When to use: Password checks, case-based filtering, cleaning strings.
+# Time/Space: O(n) time (n = string length), O(1) space.
+
+# Syntax:
+string.islower()  # Returns True if all cased chars are lowercase, else False
+
+# Basic Example 1 (All Lowercase):
+text = "hello"
+print(text.islower())  # Output: True
+
+# Basic Example 2 (Mixed Case):
+text = "Hello"
+print(text.islower())  # Output: False
+
+# Basic Example 3 (With Digits — digits are ignored):
+text = "abc123"
+print(text.islower())  # Output: True
+
+# DSA Example (Check if any char is lowercase):
+password = "HELLO123"
+has_lower = any(c.islower() for c in password)
+print(has_lower)  # Output: False
+
 
 # STRING METHOD: 
 .format()
@@ -1454,7 +1511,7 @@ print(any(x % 2 == 0 for x in nums))  # Output: True
 
 # DSA Example (Check if any letter is uppercase):
 password = "Hello"
-print(any(c.isupper() for c in password))
+print(any(c.isupper() for c in password))  # Output: True
 
 
 # BUILT-IN FUNCTION: 

@@ -8,9 +8,10 @@ It focuses on the most critical concepts for success in conditionals, loops, and
 Truthy vs. Falsy in Python for LeetCode
 
 In Python, truthy values evaluate to `True` and falsy values evaluate to `False` in boolean contexts (e.g., `if`, `while`). This is key for handling edge cases and writing efficient code in LeetCode problems.
+"""
 
 ---
-Common Falsy Values
+# Common Falsy Values
 | Value       | Description                  | LeetCode Example               |
 |-------------|------------------------------|--------------------------------|
 | `[]`        | Empty list                   | `if not arr: return 0`         |
@@ -22,7 +23,7 @@ Common Falsy Values
 | `None`      | Null value                   | `if root is None: return`      |
 | `False`     | Boolean false                | `if not flag: skip()`          |
 
-Common Truthy Values
+# Common Truthy Values
 | Value         | Description                  | LeetCode Example               |
 |---------------|------------------------------|--------------------------------|
 | `[1, 2]`      | Non-empty list               | `if arr: process(arr)`         |
@@ -33,6 +34,7 @@ Common Truthy Values
 | `3.14`        | Non-zero float               | `if val: adjust(val)`          |
 | `True`        | Boolean true                 | `if flag: execute()`           |
 
+"""
 ---
 Key Use Cases in LeetCode
 1. Empty Checks: Use `if not x:` to handle empty lists, strings, dicts, etc.
