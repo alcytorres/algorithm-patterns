@@ -1,7 +1,6 @@
 # 1. Two Sum
 """
-Example 1
-    Given an array of integers nums and an integer target, return indices of the two numbers such that they add up to target.
+Given an array of integers nums and an integer target, return indices of the two numbers such that they add up to target.
 
 You may assume that each input would have exactly one solution, and you may not use the same element twice.
 
@@ -13,6 +12,8 @@ Example:
     Explanation: Because nums[1] + nums[3] == 5, we return [1, 3] or [3, 1].
 
 Solution: https://leetcode.com/problems/two-sum/description/
+
+Why: Practices efficient hash map usage for finding pairs with a specific sum.
 """
 
 # ––––––––––––––––––––––––––––––––––––––––––––––––
@@ -252,6 +253,39 @@ def twoSum(nums, target):
 
 
 
+
+# Pseudocode
+# FUNCTION two_sum(nums, target)
+#     // Step 1: Create an empty hash map to store number-to-index pairs
+#     INITIALIZE hash_map as empty dictionary
+
+#     // Step 2: Loop through the array with index and number
+#     FOR EACH index, number IN ENUMERATE(nums)
+#         // Step 3: Calculate the complement needed to reach target
+#         SET complement = target - number
+
+#         // Step 4: Check if complement exists in hash map
+#         IF complement EXISTS IN hash_map
+#             // Found a pair: return indices of complement and current number
+#             RETURN [hash_map[complement], index]
+
+#         // Step 5: Store current number and its index in hash map
+#         SET hash_map[number] = index
+
+
+# ––––––––––––––––––––––––––––––––––––––––––––––––
+# Brute force Solution
+def two_sum(nums, target):
+    n = len(nums)   
+    for i in range(n):
+        for j in range(n):
+            if i != j:
+                curr_sum = nums[i] + nums[j]
+                if curr_sum == target:
+                    return [i, j]
+    
+    # Time: O(n^2)
+    # Space: O(1)
 
 
 
