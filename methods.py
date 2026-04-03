@@ -1890,9 +1890,9 @@ class Person:
         self.name = name
         self.age = age
     def __str__(self):
-        return f"{self.name} ({self.age})"
-p = Person("Alice", 25)
-print(p)  # Output: "Alice (25)"
+        return f"{self.name} {self.age}"
+p = Person("Amy", 25)
+print(p)  # Output: "Amy 25"
 
 # Basic Example 3 (Default Override):
 class Empty:
