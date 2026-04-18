@@ -655,13 +655,56 @@ print("Result:", result)
 
 
 # ––––––––––––––––––––––––––––––––––––––––––––––
+"""
+📘 Tutorial: List Comprehension
 
+List comprehension = create a new list by doing something to each item — all in one line.
 
+Syntax:
+    [expression for item in iterable]
+    [expression for item in iterable if condition]
+         ↑              ↑                   ↑
+    what to keep     the loop         optional filter
 
+Memory trick — read it left to right:
+    "Give me [this] for each [item] in [collection]"
+    [n * n   for n   in nums]
+      result   var    source
+"""
 
-# ––––––––––––––––––––––––––––––––––––––––––––––
+# Example 1: Transform — square each number
+nums = [1, 2, 3, 4]
+squares = [n * n for n in nums]
+print(squares)  # [1, 4, 9, 16]
 
+# Example 2: Filter — keep only evens
+nums = [1, 2, 3, 4, 5, 6]
+evens = [n for n in nums if n % 2 == 0]
+print(evens)  # [2, 4, 6]
 
+# Example 3: Transform + Filter — square only evens
+nums = [1, 2, 3, 4, 5, 6]
+even_squares = [n * n for n in nums if n % 2 == 0]
+print(even_squares)  # [4, 16, 36]
+
+# Example 4: Strings — uppercase each word
+words = ["hello", "world"]
+upper = [w.upper() for w in words]
+print(upper)  # ['HELLO', 'WORLD']
+
+# Example 5: Extract part of each item
+pairs = [(1, 'a'), (2, 'b'), (3, 'c')]
+first_items = [p[0] for p in pairs]
+print(first_items)  # [1, 2, 3]
+
+"""
+vs. regular loop (same result, more lines):
+    squares = []
+    for n in nums:
+        squares.append(n * n)
+
+List comprehension does all of that in ONE line.
+"""
 
 
 # ––––––––––––––––––––––––––––––––––––––––––––––
@@ -747,7 +790,7 @@ print(check_membership([3, 7, 9], [7, 2, 9]))
 # → [True, False, True]
 
 
-
+ 
 
 
 

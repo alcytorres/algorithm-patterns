@@ -47,7 +47,7 @@ s = "anagram"
 t = "nagaram"
 print(isAnagram(s, t))  # Output: True
 
-# {'a': 3, 'n': 1, 'g': 1, 'r': 1, 'm': 1})
+# Count = {'a': 3, 'n': 1, 'g': 1, 'r': 1, 'm': 1})
 
 # ––––––––––––––––––––––––––––––––––––––––––––––––––
 # Breakdown
