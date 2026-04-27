@@ -1,8 +1,9 @@
 # Check if String s is a Subsequence of String t
+"""
+Given two strings s and t, return true if s is a subsequence of t, or false otherwise.
 
-# Example 4: Given two strings s and t, return true if s is a subsequence of t, or false otherwise.
-
-# Assume the len(t) >= len(s) , and both are strings with valid characters.
+Assume the len(t) >= len(s) , and both are strings with valid characters.
+"""
 
 def is_subsequence(s, t):
     i = j = 0           
