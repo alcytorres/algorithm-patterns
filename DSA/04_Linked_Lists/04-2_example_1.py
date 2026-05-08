@@ -1,12 +1,13 @@
-# Find the Middle Node in a Singly Linked List
+"""
+Find the Middle Node in a Singly Linked List
 
-# Example 1: Given the head of a linked list with an odd number of nodes head, return the value of the node in the middle.
+Example 1: Given the head of a linked list with an odd number of nodes head, return the value of the node in the middle.
 
-# Example:
-    # Input linked list: 1 → 2 → 3 → 4 → 5
-    # Output: 3
-    # Explanation: 3 is the value of the node in the middle.
-
+Example:
+    Input linked list: 1 → 2 → 3 → 4 → 5
+    Output: 3
+    Explanation: 3 is the value of the node in the middle.
+"""
 # --------------------------------------------
 # FIND MIDDLE NODE OF A LINKED LIST
 # --------------------------------------------

@@ -16,8 +16,8 @@ The simplified canonical path should follow these rules:
     Return the simplified canonical path.
 
 Example 1:
-    Input: path = "/a/b///c/.././d/../f/"
     Output: "/a/b/f"
+    Input: path = "/a/b///c/.././d/../f/"
     Explanation:
     Extra slashes are treated as one.
     "." means current directory (ignored).
