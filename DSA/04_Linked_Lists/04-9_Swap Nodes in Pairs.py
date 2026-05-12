@@ -1,29 +1,28 @@
 # 24. Swap Nodes in Pairs
+"""
+Given a linked list, swap every two adjacent nodes and return its head. You must solve the problem without modifying the values in the list's nodes (i.e., only nodes themselves may be changed.)
 
-# Given a linked list, swap every two adjacent nodes and return its head. You must solve the problem without modifying the values in the list's nodes (i.e., only nodes themselves may be changed.)
- 
-# Solution: https://leetcode.com/problems/swap-nodes-in-pairs/description/
+Example 1:
+    Input: head = [1, 2, 3, 4]
+    Output: [2, 1, 4, 3]
+    Explanation: View image
 
-# Example 1:
-    # Input: head = [1, 2, 3, 4]
-    # Output: [2, 1, 4, 3]
-    # Explanation: View image
+Example 2:
+    Input: head = []
+    Output: []
 
-# Example 2:
-    # Input: head = []
-    # Output: []
+Example 3:
+    Input: head = [1]
+    Output: [1]
 
-# Example 3:
-    # Input: head = [1]
-    # Output: [1]
+Example 4:
+    Input: head = [1, 2, 3]
+    Output: [2, 1, 3]
 
-# Example 4:
-    # Input: head = [1, 2, 3]
-    # Output: [2, 1, 3]
+HINT: Draw the linked list at each iteration to see how the pointers change
 
-
-# HINT: Draw the linked list at each iteration to see how the pointers change
-
+Solution: https://leetcode.com/problems/swap-nodes-in-pairs/description/
+"""
 # ––––––––––––––––––––––––––––––––––––––––––––––– 
 # Approach 1: Swap Nodes in Pairs (Dummy Node Version)
 
