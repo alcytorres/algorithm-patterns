@@ -23,6 +23,7 @@ Follow up: Could you minimize the total number of operations done?
 # Two Pointers In-Place
 def moveZeroes(nums):
     slow = 0
+    
     for fast in range(len(nums)):
         if nums[fast] != 0:
             nums[slow] = nums[fast]
