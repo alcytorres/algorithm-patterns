@@ -1,0 +1,251 @@
+# ============================================
+# Python Classes vs Functions (LeetCode Style)
+# Beginner Guide
+# ============================================
+
+
+# =========================================================
+# PART 1: Standalone Function (Simplest Version)
+# =========================================================
+
+# This is a NORMAL standalone function.
+# It is NOT inside a class.
+
+
+def is_palindrome(s):
+    l = 0
+    r = len(s) - 1
+
+    while l < r:
+        if s[l] != s[r]:
+            return False
+        l += 1
+        r -= 1
+
+    return True
+
+
+# Call the function directly
+print(is_palindrome("racecar"))
+
+# Output: True
+
+
+# =========================================================
+# Mental Model
+# =========================================================
+
+# def is_palindrome(s):
+#
+# Creates a standalone function.
+#
+# You call it directly:
+#
+# is_palindrome(s)
+
+
+# =========================================================
+# PART 2: LeetCode Class Version
+# =========================================================
+
+# LeetCode often wraps functions inside a class.
+#
+# This means the function becomes a METHOD.
+#
+# Method = function inside a class.
+
+
+class Solution(object):
+
+    # This method belongs to the Solution class
+    def isPalindrome(self, s):
+
+        l = 0
+        r = len(s) - 1
+
+        while l < r:
+            if s[l] != s[r]:
+                return False
+            l += 1
+            r -= 1
+
+        return True
+
+
+# =========================================================
+# PART 3: Creating the Object
+# =========================================================
+
+# Solution = blueprint/class
+#
+# Solution() = create object from blueprint
+
+
+solution = Solution()
+
+
+# What is stored in solution?
+#
+# An object created from the Solution class.
+#
+# That object now has access to:
+#
+# solution.isPalindrome()
+
+
+# =========================================================
+# PART 4: Calling the Method
+# =========================================================
+
+print(solution.isPalindrome("racecar"))
+
+# Output: True
+
+
+# =========================================================
+# What Python Is Roughly Doing Internally
+# =========================================================
+
+# This:
+#
+# solution.isPalindrome("racecar")
+#
+# roughly becomes:
+#
+# Solution.isPalindrome(solution, "racecar")
+#
+# That is why "self" exists.
+#
+# Python automatically passes the object in.
+
+
+# =========================================================
+# PART 5: Understanding self
+# =========================================================
+
+# self refers to the object itself.
+#
+# You do NOT manually pass self.
+# Python does it automatically.
+
+
+# Example:
+
+class Dog:
+
+    def bark(self):
+        print("Woof")
+
+
+my_dog = Dog()
+
+my_dog.bark()
+
+# Output: Woof
+
+
+# Internally Python roughly does:
+#
+# Dog.bark(my_dog)
+
+
+# =========================================================
+# PART 6: Simple Comparison
+# =========================================================
+
+# Standalone function:
+def greet():
+    print("Hi")
+
+
+greet()
+
+
+# Class method:
+class Person:
+
+    def greet(self):
+        print("Hi")
+
+
+person = Person()
+person.greet()
+
+
+# =========================================================
+# Final Mental Model
+# =========================================================
+
+# Standalone function:
+#
+def greet():
+
+# Call directly:
+greet()
+
+
+# Class method:
+
+class Person:
+    def greet(self):
+
+# Create object first:
+person = Person()
+
+# Then call method:
+person.greet()
+
+
+# =========================================================
+# Key Vocabulary
+# =========================================================
+
+# Function:
+# Reusable block of code.
+
+# Method:
+# A function inside a class.
+
+# Class:
+# Blueprint for creating objects.
+
+# Object / Instance:
+# Actual thing created from the class.
+
+# self:
+# Refers to the object itself.
+
+
+# =========================================================
+# PART 7: class Solution(object) vs class Solution
+# =========================================================
+
+# These are effectively the same:
+#
+class Solution(object):
+class Solution:
+
+# (object) means "inherits from object."
+#
+# In Python 3, all classes automatically inherit from object.
+# So writing (object) is unnecessary.
+
+# Modern style:
+#
+class Solution:
+#
+# Cleaner and preferred.
+
+# You still see (object) on:
+#
+# - LeetCode
+# - older tutorials
+# - older codebases
+#
+# It became a habit from Python 2 where it mattered.
+
+# Simple takeaway:
+#
+# class Solution:
+#
+# is what you should normally write today.

@@ -40,6 +40,28 @@ prices = [7, 1, 5, 3, 6, 4]
 print(max_profit(prices))
 # Output: 5 → The best trade is buying at 1 and selling at 6 later, giving a maximum profit of 6 - 1 = 5.
 
+
+# ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+# Breakdown 
+def max_profit(prices):
+
+    # Initialize variables
+    min_price = float('inf')  # Track lowest price seen so far
+    max_profit = 0            # Track highest profit possible
+
+    # Iterate through the array
+    for p in prices:          # Go through each day's price
+        if p < min_price:     # If current price is lower
+            min_price = p     # Update minimum price
+
+        profit = p - min_price   # Calculate profit if sold today
+        if profit > max_profit:  # If this is a new best profit
+            max_profit = profit  # Update max profit
+
+    # Return the maximum profit
+    return max_profit         # Return highest profit (0 if none)
+
+
 """
 Time: O(N)
   - Let N = number of days (length of prices).
@@ -182,28 +204,6 @@ A: We need to track the minimum price, and starting at +∞ guarantees the first
 
 
 
-# ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
-# Breakdown 
-def max_profit(prices):
-
-    # Initialize variables
-    min_price = float('inf')  # Track lowest price seen so far
-    max_profit = 0            # Track highest profit possible
-
-    # Iterate through the array
-    for p in prices:          # Go through each day's price
-        if p < min_price:     # If current price is lower
-            min_price = p     # Update minimum price
-
-        profit = p - min_price   # Calculate profit if sold today
-        if profit > max_profit:  # If this is a new best profit
-            max_profit = profit  # Update max profit
-
-    # Return the maximum profit
-    return max_profit         # Return highest profit (0 if none)
-
-
-
 
 # ––––––––––––––––––––––––––––––––––––––––––––––
 """
@@ -294,8 +294,6 @@ print(max_profit([7, 1, 5, 3, 6, 4]))  # → 5
 
 
 
-
-
 # ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 # Brute Force: Check Every Possible Buy-Sell Day
 def maxProfit(prices):
@@ -308,6 +306,7 @@ def maxProfit(prices):
                     max_profit = max(max_profit, profit)
         
         return max_profit
+        
         # Time: O(N^2) (Brute Force)
         # Space: O(1)
         # This was modified from the video explanation to let max_profit = 0, this is better
