@@ -23,6 +23,22 @@ s = "racecar"
 print(is_palindrome(s))  
 # Output: True
 
+# ––––––––––––––––––––––––––––––––––––––––––––––––––
+# Breakdown
+
+def is_palindrome(s):
+    left = 0                    # Start left pointer at index 0
+    right = len(s) - 1          # Start right pointer at last index
+
+    while left < right:         # Continue until pointers meet
+        if s[left] != s[right]: # If characters don't match, not a palindrome
+            return False
+        left += 1               # Move left pointer inward
+        right -= 1              # Move right pointer inward
+
+    return True                 # String is a palindrome
+
+
 """
 Time: O(N)
   - Let N = length of the string s.
@@ -75,26 +91,6 @@ Q: Why is the time complexity O(N) instead of O(N/2)?
 
 
 """
-
-
-# ––––––––––––––––––––––––––––––––––––––––––––––––––
-# Breakdown
-
-def is_palindrome(s):
-    left = 0                    # Start left pointer at index 0
-    right = len(s) - 1          # Start right pointer at last index
-
-    while left < right:         # Continue until pointers meet
-        if s[left] != s[right]: # If characters don't match, not a palindrome
-            return False
-        left += 1               # Move left pointer inward
-        right -= 1              # Move right pointer inward
-
-    return True                 # String is a palindrome
-
-
-
-
 
 
 

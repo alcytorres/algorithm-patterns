@@ -1,8 +1,10 @@
-# Check if String s is a Subsequence of String t
+# Is Subsequence
 """
 Given two strings s and t, return true if s is a subsequence of t, or false otherwise.
 
 Assume the len(t) >= len(s) , and both are strings with valid characters.
+
+Solution: https://leetcode.com/problems/is-subsequence/
 """
 
 def is_subsequence(s, t):
@@ -19,6 +21,18 @@ s = "ace"
 t = "abcde"
 print(is_subsequence(s, t))
 # Output: True - "ace" appears in order within "abcde" as a subsequence.
+
+# ––––––––––––––––––––––––––––––––––––––––––––––––
+# Breakdown 
+def is_subsequence(s, t):
+    i = j = 0            # Pointer for string s, and t starts at index 0
+
+    while i < len(s) and j < len(t):  # Continue until s or t is exhausted
+        if s[i] == t[j]:        # Match found, move s pointer
+            i += 1
+        j += 1                  # Always move t pointer
+
+    return i == len(s)          # True if all characters in s were found. Same as saying return True
 
 
 """
@@ -79,18 +93,6 @@ Q: What if we already know len(t) >= len(s)?
 
 """
 
-
-# ––––––––––––––––––––––––––––––––––––––––––––––––
-# Breakdown 
-def is_subsequence(s, t):
-    i = j = 0            # Pointer for string s, and t starts at index 0
-
-    while i < len(s) and j < len(t):  # Continue until s or t is exhausted
-        if s[i] == t[j]:        # Match found, move s pointer
-            i += 1
-        j += 1                  # Always move t pointer
-
-    return i == len(s)          # True if all characters in s were found. Same as saying return True
 
 
 

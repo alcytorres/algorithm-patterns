@@ -26,6 +26,25 @@ s = ["h", "e", "l", "l", "o"]
 print(reverseString(s))  
 # Output: ["o", "l", "l", "e", "h"]
 
+# ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+# Breakdown
+def reverseString(s):
+    left = 0                 # Initialize left pointer at start of list
+    right = len(s) - 1       # Initialize right pointer at end of list
+    
+    while left < right:               # Continue until pointers meet
+        s[left], s[right] = s[right], s[left]  # Swap elements at left and right pointers
+        left += 1                     # Move left pointer inward
+        right -= 1                    # Move right pointer inward
+    
+    return s                          # Return the reversed list
+
+# Complexity
+# Time: O(n) - Performs n/2 swaps to reverse n elements.
+# Space: O(1) - Uses two pointers, modifying list in-place.
+
+# Output: ["o","l","l","e","h"] - Returns the list with characters reversed in-place.
+
 
 """
 Time: O(N)
@@ -48,8 +67,8 @@ Time: O(N)
 Space: O(1)
   - In-place reversal, constant extra space.
 
-  ---
 
+---
 Overview for Each Iteration
 Input: s = ["h", "e", "l", "l", "o"]
 
@@ -79,25 +98,6 @@ print(reverseString(s))  # Output: ["o","l","l","e","h"]
 # Space: O(1) - Modifies the input array in-place, using only a constant amount of auxiliary space for internal operations.
 
 
-
-# ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
-# Breakdown
-def reverseString(s):
-    left = 0                 # Initialize left pointer at start of list
-    right = len(s) - 1       # Initialize right pointer at end of list
-    
-    while left < right:               # Continue until pointers meet
-        s[left], s[right] = s[right], s[left]  # Swap elements at left and right pointers
-        left += 1                     # Move left pointer inward
-        right -= 1                    # Move right pointer inward
-    
-    return s                          # Return the reversed list
-
-# Complexity
-# Time: O(n) - Performs n/2 swaps to reverse n elements.
-# Space: O(1) - Uses two pointers, modifying list in-place.
-
-# Output: ["o","l","l","e","h"] - Returns the list with characters reversed in-place.
 
 
 
