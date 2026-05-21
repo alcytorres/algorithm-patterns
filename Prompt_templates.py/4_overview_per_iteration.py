@@ -48,8 +48,30 @@ Example:
     Input: nums = [1, 3, 9, 4, 9, 8, 3]
     Output: 8
     Explanation: The maximum integer in the array is 9 but it is repeated. The number 8 occurs only once, so it is the answer.
+"""
+
+from collections import defaultdict
+
+def largestUniqueNumber(nums):
+    # Step 1: Count occurrences of each number
+    counts = defaultdict(int)
+    for num in nums:
+        counts[num] += 1
+    
+    # Step 2: Find the largest number with count 1
+    max_unique = -1
+    for num in counts:
+        if counts[num] == 1 and num > max_unique:
+            max_unique = num
+    
+    return max_unique
 
 
+nums = [1, 3, 9, 4, 9, 8, 3]
+print(largestUniqueNumber(nums))
+# Output: 8 → Number 9 is largest but appears twice, so 8 is the next largest number that occurs only once.
+
+"""
 ---
 Overview for Each Iteration
 Input: nums = [1, 3, 9, 4, 9, 8, 3]

@@ -791,6 +791,51 @@ print(check_membership([3, 7, 9], [7, 2, 9]))
 
 
  
+# ------------------------------------------------------------
+"""
+📘 Tutorial: How Python Reads Loops + if Statements
+
+- Python reads code TOP → BOTTOM within one loop iteration.
+
+- An if statement is NOT a loop.
+  It only checks the condition ONCE, then continues downward.
+
+- Python does NOT jump back to the if statement.
+  It only restarts after reaching the END of the loop body.
+
+- Important:
+    • Code OUTSIDE the if block always runs.
+    • Code INSIDE the if block only runs if the condition is True.
+"""
+
+# Example:
+i = 0
+
+while i < 3:
+
+    if i == 1:
+        print("MATCH")
+
+    print("Always runs")
+
+    i += 1
+
+# Output:
+# Always runs
+# MATCH
+# Always runs
+# Always runs
+
+
+"""
+Easy Mental Model:
+    • One loop iteration = reading a page top-to-bottom.
+    • Python keeps moving downward until the loop body ends.
+    • THEN the next iteration begins.
+"""
+
+
+# ------------------------------------------------------------
 
 
 

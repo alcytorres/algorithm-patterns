@@ -3,3 +3,19 @@
 # Make a new weighted average list of it all
 
 
+
+# Organize mini guides doc. Delete the bottom part that says delete
+
+# how do you know to do this ans = [0] * n   ?
+# its not something intuitive. be realistic how you would think of that or if thats just comes down to memory?
+
+# Review slicing arrays
+
+
+
+
+
+
+
+
+

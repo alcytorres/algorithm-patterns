@@ -7,6 +7,7 @@ Assume the len(t) >= len(s) , and both are strings with valid characters.
 Solution: https://leetcode.com/problems/is-subsequence/
 """
 
+# Solution: Two Pointers: Sequential Character Match
 def is_subsequence(s, t):
     i = j = 0           
 
@@ -59,6 +60,163 @@ Space: O(1)
 
 
 ---
+Most IMPORTANT thing to Understand:
+    • We need to check if every character in s appears in t in the same order.
+
+    • The characters do NOT need to be next to each other.
+
+    • Pointer i tracks where we are in s.
+
+    • Pointer j tracks where we are in t.
+
+    • If s[i] matches t[j], we found the next needed character, so we move i forward.
+
+    • j always moves forward because we keep scanning through t.
+
+Why this code Works:
+    • Two pointers:
+        • i = character we are trying to match in s.
+        • j = character we are currently checking in t.
+
+    • If s[i] == t[j]:
+        • We found the next required character from s.
+        • Move i forward to look for the next character.
+
+    • If they do not match:
+        • Only move j forward.
+        • Keep searching through t.
+
+    • Efficiency:
+        • We scan each string once.
+        • Time: O(n), where n is len(t).
+        • Space: O(1).
+
+    • Intuition:
+        • Think of s as a checklist.
+        • Think of t as a long sentence.
+        • Every time you find the next checklist item in order, you check it off.
+
+TLDR:
+    • This solution works because it scans t from left to right and checks whether all characters in s can be found in order.
+
+Quick Example Walkthrough:
+    s = "ace"
+    t = "abcde"
+
+    Starting State:
+        i = 0
+        j = 0
+
+        i points at s[0] = "a"
+        j points at t[0] = "a"
+
+    Loop Iteration 1:
+        Compare:
+            s[i] == t[j]
+            "a" == "a" → MATCH
+
+        Since they match:
+            i += 1
+
+        Now:
+            i = 1
+
+        Then this line ALWAYS runs:
+            j += 1
+
+        Now:
+            j = 1
+
+        Current state:
+            i points at s[1] = "c"
+            j points at t[1] = "b"
+
+    --------------------------------------------------
+
+    Loop Iteration 2:
+        Compare:
+            "c" == "b" → NO MATCH
+
+        Since there is NO match:
+            i does NOT move
+
+        But j ALWAYS moves:
+            j += 1
+
+        Now:
+            i = 1
+            j = 2
+
+        Current state:
+            i points at s[1] = "c"
+            j points at t[2] = "c"
+
+    --------------------------------------------------
+
+    Loop Iteration 3:
+        Compare:
+            "c" == "c" → MATCH
+
+        Since they match:
+            i += 1
+
+        Now:
+            i = 2
+
+        Then j ALWAYS moves:
+            j += 1
+
+        Now:
+            j = 3
+
+        Current state:
+            i points at s[2] = "e"
+            j points at t[3] = "d"
+
+    --------------------------------------------------
+
+    Loop Iteration 4:
+        Compare:
+            "e" == "d" → NO MATCH
+
+        i stays the same.
+
+        j moves:
+            j += 1
+
+        Now:
+            i = 2
+            j = 4
+
+        Current state:
+            i points at s[2] = "e"
+            j points at t[4] = "e"
+
+    --------------------------------------------------
+
+    Loop Iteration 5:
+        Compare:
+            "e" == "e" → MATCH
+
+        Move i:
+            i += 1
+            i = 3
+
+        Move j:
+            j += 1
+            j = 5
+
+    --------------------------------------------------
+
+    Final Check:
+        i == len(s)
+        3 == 3 → True
+
+        This means:
+            We successfully matched ALL characters in s in order.
+
+
+---
 Overview for Each Iteration
 Input: s = "ace", t = "abcde"
 
@@ -97,76 +255,231 @@ Q: What if we already know len(t) >= len(s)?
 
 
 
-# ––––––––––––––––––––––––––––––––––––––––––––––––
-# Task: Check if string s is a subsequence of string t (characters of s appear in order in t).
-# Example: s = "ace", t = "abcde" → Output = True (s appears in order within t)
-# Why: Practices two-pointer technique to efficiently check for subsequence.
+# ============================================
+# Reading Loops + If Statements Correctly
+# ============================================
 
-def is_subsequence(s, t):  # Example: s = "ace", t = "abcde"
+# =========================================================
+# The Common Beginner Mistake
+# =========================================================
 
-    # 1️⃣ Initialize pointers
-    # Initialize pointer i for string s
-    # Why? Tracks the current character in s we need to find in t
-    i = 0  # i = 0
+# Code:
+while i < len(s) and j < len(t):
 
-    # Initialize pointer j for string t
-    # Why? Scans through t to find characters matching s
-    j = 0  # j = 0
+    if s[i] == t[j]:
+        i += 1
 
-    # 2️⃣ Iterate while both pointers are within bounds
-    # Continue while we haven't reached the end of s or t
-    # Why? We need to check all characters of s against t
-    while i < len(s) and j < len(t):  # i = 0, len(s) = 3, j = 0, len(t) = 5
-        # --- Iteration 1 ---
-        # Check if current characters match
-        # Why? If they match, we advance in s to look for the next character
-        if s[i] == t[j]:  # s[0] = 'a', t[0] = 'a', 'a' == 'a' is true
-            i += 1  # i = 0 + 1 = 1
-        # Always advance j to check the next character in t
-        # Why? We must scan through all of t to find s's characters in order
-        j += 1  # j = 0 + 1 = 1
-        # After Iteration 1: i = 1, j = 1
-        # Current chars: s[1] = 'c', t[1] = 'b'
-
-        # --- Iteration 2 ---
-        if i == 1 and j == 1:
-            if s[i] == t[j]:  # s[1] = 'c', t[1] = 'b', 'c' == 'b' is false
-                i += 1  # skip
-            j += 1  # j = 1 + 1 = 2
-            # After Iteration 2: i = 1, j = 2
-            # Current chars: s[1] = 'c', t[2] = 'c'
-
-        # --- Iteration 3 ---
-        if i == 1 and j == 2:
-            if s[i] == t[j]:  # s[1] = 'c', t[2] = 'c', 'c' == 'c' is true
-                i += 1  # i = 1 + 1 = 2
-            j += 1  # j = 2 + 1 = 3
-            # After Iteration 3: i = 2, j = 3
-            # Current chars: s[2] = 'e', t[3] = 'd'
-
-        # --- Iteration 4 ---
-        if i == 2 and j == 3:
-            if s[i] == t[j]:  # s[2] = 'e', t[3] = 'd', 'e' == 'd' is false
-                i += 1  # skip
-            j += 1  # j = 3 + 1 = 4
-            # After Iteration 4: i = 2, j = 4
-            # Current chars: s[2] = 'e', t[4] = 'e'
-
-        # --- Iteration 5 ---
-        if i == 2 and j == 4:
-            if s[i] == t[j]:  # s[2] = 'e', t[4] = 'e', 'e' == 'e' is true
-                i += 1  # i = 2 + 1 = 3
-            j += 1  # j = 4 + 1 = 5
-            # After Iteration 5: i = 3, j = 5
-            # Loop exits: i = 3, len(s) = 3, condition i < len(s) is false
-
-    # 3️⃣ Check if all characters of s were found
-    # Return True if i reached the end of s, False otherwise
-    # Why? If i == len(s), all characters of s were found in order in t
-    return i == len(s)  # i = 3, len(s) = 3, 3 == 3 is True
+    j += 1
 
 
-s = "ace"
-t = "abcde"
-print(is_subsequence(s, t)) 
-# Output: True - "ace" appears in order within "abcde" as a subsequence.
+# Common mistake:
+#
+# Thinking Python does this:
+#
+# 1. Check if condition
+# 2. Run i += 1
+# 3. Jump BACK to the if condition again
+# 4. Then eventually run j += 1
+#
+# That is NOT what happens.
+
+
+# =========================================================
+# What Actually Happens
+# =========================================================
+
+# Python reads code TOP TO BOTTOM.
+#
+# Inside ONE loop iteration:
+#
+# 1. Check loop condition
+# 2. Run code line-by-line downward
+# 3. Reach bottom of loop body
+# 4. THEN start next iteration
+
+
+# =========================================================
+# Important Insight
+# =========================================================
+
+# if statements are NOT loops.
+#
+# An if statement is only:
+#
+# "If this condition is true, run this block ONCE."
+#
+# Then Python continues downward normally.
+
+
+# =========================================================
+# The Actual Execution Order
+# =========================================================
+
+# Code:
+while i < len(s) and j < len(t):
+
+    if s[i] == t[j]:
+        i += 1
+
+    j += 1
+
+
+# Real execution order:
+#
+# 1. Check while condition
+# 2. Check if condition
+# 3. If match:
+#       run i += 1
+# 4. Continue downward
+# 5. Run j += 1
+# 6. Reach bottom of loop
+# 7. Start NEXT iteration
+
+
+# =========================================================
+# SUPER Important Detail
+# =========================================================
+
+# This line:
+
+j += 1
+
+
+# is OUTSIDE the if statement.
+#
+# That means it ALWAYS runs.
+
+
+# Example:
+
+if True:
+    print("Inside if")
+
+print("Always runs")
+
+
+# Output:
+# Inside if
+# Always runs
+
+
+# =========================================================
+# Tiny Example
+# =========================================================
+
+i = 0
+
+while i < 3:
+    print("A")
+
+    if i == 1:
+        print("B")
+
+    print("C")
+
+    i += 1
+
+# Output:
+# A
+# C
+#
+# A
+# B
+# C
+#
+# A
+# C
+
+
+# Important:
+#
+# After the if statement finishes,
+# Python CONTINUES downward.
+#
+# It does NOT jump back upward.
+
+
+# =========================================================
+# Easy Mental Model
+# =========================================================
+
+# Think of ONE loop iteration like reading a page.
+#
+# Python starts at the top.
+#
+# It reads downward line-by-line.
+#
+# ONLY after reaching the bottom
+# does the next iteration begin.
+
+
+# =========================================================
+# Beginner Strategy for Reading Loops
+# =========================================================
+
+# Step 1:
+# Find the loop.
+#
+# for ...
+# while ...
+#
+# Everything indented below repeats.
+
+
+# Step 2:
+# Ignore the fact that it loops.
+#
+# Read ONLY ONE iteration slowly
+# from top to bottom.
+
+
+# Step 3:
+# Ask:
+#
+# What variables changed?
+#
+# Those updated values are what
+# the NEXT iteration starts with.
+
+
+# =========================================================
+# Applying This to Is Subsequence
+# =========================================================
+
+# Code:
+
+def is_subsequence(s, t):
+    i = j = 0
+
+    while i < len(s) and j < len(t):
+
+        if s[i] == t[j]:
+            i += 1
+
+        j += 1
+
+    return i == len(s)
+
+
+# Key idea:
+#
+# i only moves when characters match.
+#
+# j ALWAYS moves.
+#
+# So:
+#
+# i = tracks progress through s
+# j = scans through t
+
+
+# This line:
+#
+#     j += 1
+#
+# being OUTSIDE the if statement
+# is the entire trick.
+#
+# It means:
+#
+# "Keep scanning through t no matter what."

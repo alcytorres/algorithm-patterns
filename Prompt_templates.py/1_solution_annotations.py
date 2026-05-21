@@ -1,6 +1,6 @@
 """
 ============================================
-SOLUTION BREAKDOWN
+SOLUTION ANNOTATIONS
 ============================================
 
 Give me a breakdown of this LeetCode-style solution in the exact style I've been using in this chat.
