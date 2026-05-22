@@ -9,8 +9,10 @@ Example
     Output: 4
     Explanation: Maximum average is (1 + 7) / 2 = 8 / 2 = 4
 
-Solution: https://leetcode.com/problems/maximum-average-subarray-i/solutions/127562/maximum-average-subarray-i/
+Solution: https://leetcode.com/problems/maximum-average-subarray-i/description/
 """
+
+# Solution: Sliding Window: Fixed-Size Maximum Average
 
 class Solution(object):
     def findMaxAverage(self, nums, k):
@@ -38,6 +40,24 @@ nums = [4, -2, 1, 7, -1]
 k = 2
 print(solution.findMaxAverage(nums, k))  
 # Output: 4  →  Subarray [1, 7] (length 2, sum 1 + 7 = 8, average 8/2 = 4) has the largest average for k=2
+
+# ––––––––––––––––––––––––––––––––––––––––––––––
+# Breakdown
+def findMaxAverage(nums, k):
+    curr = 0             # Tracks sum of current window
+   
+    # Build first window of size k
+    for i in range(k):   # Iterate over first k elements
+        curr += nums[i]  # Add to window sum
+    
+    ans = curr        # Initialize answer with first window's sum
+    
+    # Slide window, maintaining size k
+    for i in range(k, len(nums)):  # Start from index k
+        curr += nums[i] - nums[i - k] # Add the new element, subtract the leftmost element
+        ans = max(ans, curr)       # Update max sum
+    
+    return float(ans) / k          # Return maximum average
 
 """
 Time: O(N)
@@ -137,27 +157,10 @@ Why?
 """
 
 
-# ––––––––––––––––––––––––––––––––––––––––––––––
-# Breakdown
-def findMaxAverage(nums, k):
-    curr = 0          # Tracks sum of current window
-   
-    # Build first window of size k
-    for i in range(k):  # Iterate over first k elements
-        curr += nums[i]  # Add to window sum
-    
-    ans = curr        # Initialize answer with first window's sum
-    
-    # Slide window, maintaining size k
-    for i in range(k, len(nums)):  # Start from index k
-        curr += nums[i] - nums[i - k] # Add the new element, subtract the leftmost element
-        ans = max(ans, curr)       # Update max sum
-    
-    return float(ans) / k          # Return maximum average
-
 
 # ––––––––––––––––––––––––––––––––––––––––––––––
-# Best Solution
+# Solution: Sliding Window: Fixed-Size Maximum Average
+# Simpler example: nums = [1, 2, 3, 4]
 
 def findMaxAverage(nums, k):
     """

@@ -5,6 +5,8 @@ Finds the longest substring with at most one "0" by flipping at most one "0" to 
 In other words "what is the longest substring that contains at most one "0"?
 """
 
+# Solution: Sliding Window: Shrink Window When Zero Count Exceeds Limit
+
 def longest_substring_one_zero(s):
     left = curr = ans = 0        
         

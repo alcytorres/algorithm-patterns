@@ -9,6 +9,8 @@ Example
 Solution: https://leetcode.com/problems/subarray-product-less-than-k/
 """
 
+# Sliding Window: Shrink Window When Product Reaches k
+
 def num_subarrays_product_less_than_k(nums, k):
     if k <= 1:     
         return 0

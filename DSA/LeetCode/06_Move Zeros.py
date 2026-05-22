@@ -22,7 +22,8 @@ Follow up: Could you minimize the total number of operations done?
 Solution: https://leetcode.com/problems/move-zeroes/description/
 """
 
-# Two Pointers In-Place
+# Solution: Two Pointers In-Place
+
 def moveZeroes(nums):
     slow = 0
     

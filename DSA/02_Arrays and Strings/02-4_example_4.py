@@ -1,4 +1,4 @@
-# Is Subsequence
+# 392. Is Subsequence
 """
 Given two strings s and t, return true if s is a subsequence of t, or false otherwise.
 
@@ -73,6 +73,7 @@ Most IMPORTANT thing to Understand:
 
     • j always moves forward because we keep scanning through t.
 
+---
 Why this code Works:
     • Two pointers:
         • i = character we are trying to match in s.
@@ -96,10 +97,12 @@ Why this code Works:
         • Think of t as a long sentence.
         • Every time you find the next checklist item in order, you check it off.
 
+---
 TLDR:
     • This solution works because it scans t from left to right and checks whether all characters in s can be found in order.
 
-Quick Example Walkthrough:
+---
+Full Example Walkthrough:
     s = "ace"
     t = "abcde"
 

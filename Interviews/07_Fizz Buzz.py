@@ -26,6 +26,7 @@ Solution: https://leetcode.com/problems/fizz-buzz/solutions/173828/fizz-buzz-by-
 """
 
 # Solution 1: Straightforward If/Elif/Else Chain
+
 def fizzBuzz(n):
     """
     :type n: int

@@ -20,6 +20,7 @@ Solution: https://leetcode.com/problems/best-time-to-buy-and-sell-stock/descript
 """
 
 # Single Pass: Track Min Price + Max Profit
+
 def max_profit(prices):
     # Initialize variables
     min_price = float('inf')

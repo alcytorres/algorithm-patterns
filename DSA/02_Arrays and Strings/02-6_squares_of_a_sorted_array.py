@@ -11,6 +11,8 @@ Example:
 Solution: https://leetcode.com/problems/squares-of-a-sorted-array/description/
 """
 
+# Solution: Two Pointers: Largest Square from Both Ends
+
 def sortedSquares(nums):
     n = len(nums)
     ans = [0] * n
@@ -43,14 +45,14 @@ def sortedSquares(nums):
     
     for i in range(n - 1, -1, -1):    # Iterate backwards from n-1 to 0 to fill ans
         if abs(nums[left]) < abs(nums[right]):  # Compare absolute values at pointers
-            val = nums[right]      # Use right element if its absolute value is larger
-            right -= 1                # Move right pointer inward
+            val = nums[right]   # Use right element if its absolute value is larger
+            right -= 1          # Move right pointer inward
         else:
-            val = nums[left]       # Use left element if its absolute value is larger or equal
-            left += 1                 # Move left pointer inward
+            val = nums[left]    # Use left element if its absolute value is larger or equal
+            left += 1           # Move left pointer inward
             
         ans[i] = val * val      # Square the chosen number and store in ans
-    return ans                        # Return sorted array of squares
+    return ans                  # Return sorted array of squares
 
 
 """
@@ -261,7 +263,6 @@ Final ans:
 
 
 
-
 ---
 Overview for Each Iteration
 Input: nums = [-4, -1, 0, 3, 10]
@@ -388,6 +389,14 @@ def sortedSquares(nums):
 nums = [-4, -1, 0, 3, 10]
 print(sortedSquares(nums))  
 # Output: [0, 1, 9, 16, 100]
+
+# Time: O(N)
+#   - Two pointers process each element once.
+#   - Reversing the result list is also linear.
+
+# Space: O(N)
+#   - Result list stores N squared numbers.
+#   - Reversing creates another O(N) list.
 
 
 

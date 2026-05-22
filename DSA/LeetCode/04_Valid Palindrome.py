@@ -37,6 +37,7 @@ Solution: https://leetcode.com/problems/valid-palindrome/description/
 """
 
 # Simple Palindrome Check (Build String → Two Pointers)
+
 def is_palindrome(s):
     new_string = ""
     

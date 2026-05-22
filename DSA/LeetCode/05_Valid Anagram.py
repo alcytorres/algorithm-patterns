@@ -27,6 +27,7 @@ Follow up: What if the inputs contain Unicode characters? How would you adapt yo
 """
 
 # Solution 1: One Dictionary Frequency Check
+
 from collections import defaultdict
 
 def isAnagram(s, t):

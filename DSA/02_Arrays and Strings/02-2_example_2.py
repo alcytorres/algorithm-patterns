@@ -5,6 +5,8 @@ Given a sorted array of unique integers and a target integer, return true if the
 This problem is similar to Two Sum. (In Two Sum, the input is not sorted).
 """
 
+# Solution: Two Pointers: Target Sum Pair Search
+
 def find_pair_sum(nums, target):
     left = 0                    
     right = len(nums) - 1       

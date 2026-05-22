@@ -7,6 +7,8 @@ Given a string s, return true if it is a palindrome, false otherwise.
 Checks if string s is a palindrome by comparing characters from both ends.
 """
 
+# Solution: Two Pointers: Opposite-End Character Check
+
 def is_palindrome(s):
     left = 0                    
     right = len(s) - 1          

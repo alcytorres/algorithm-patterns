@@ -25,7 +25,8 @@ Constraints:
 Solution: https://leetcode.com/problems/search-insert-position/description/
 """
 
-# Binary Search: Find Insert Position
+# Solution: Binary Search: Find Insert Position
+
 def searchInsert(nums, target):
     l = 0
     r = len(nums) - 1

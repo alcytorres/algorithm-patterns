@@ -1,6 +1,34 @@
 # ––––––––––––––– Prompts –––––––––––––––
 
 
+"""
+Based on the style of these solution titles:
+
+- Single Pass: Track Min Price + Max Profit
+- Dictionary Frequency + max() Lookup
+- Majority Element Using Hash Map Frequency
+- Counter-Based Frequency
+- Boyer–Moore Voting Algorithm Solution
+- Set Early-Exit Duplicate Check
+- Simple Palindrome Check (Build String → Two Pointers)
+- One Dictionary Frequency Check
+- Straightforward If/Elif/Else Chain
+- Two Pointers In-Place
+- Two Pointers: Sequential Character Match
+- Sliding Window: Fixed-Size Max Sum
+
+Give me the best concise, beginner-friendly title for this LeetCode solution.
+
+Focus on:
+- the main pattern/technique
+- the core intuition
+- being easy to skim later in notes
+- matching the naming style above
+
+Here is the solution:
+"""
+
+
 
 # ––––––––––––––––––––––––––––––––––––––––
 # GET OUTPUT FOR LEETCODE SOLUTIONS

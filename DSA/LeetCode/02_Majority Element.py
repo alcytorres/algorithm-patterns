@@ -22,6 +22,7 @@ Solution: https://leetcode.com/problems/majority-element/description/
 """
 
 # Solution 1: Dictionary Frequency + max() Lookup
+
 def majorityElement(nums):
     count = {}
     for num in nums:

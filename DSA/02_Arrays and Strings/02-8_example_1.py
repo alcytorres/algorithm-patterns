@@ -9,6 +9,8 @@ Example 1: nums = [1, 3, 3, 6], k = 8
 Output: 3 (subarray [1, 3, 3], sum = 7)
 """
 
+# Solution: Sliding Window: Shrink Window When Sum Exceeds k
+
 def longest_subarray_sum(nums, k):
     left = curr = ans = 0        
     
