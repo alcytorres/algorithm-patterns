@@ -6,10 +6,6 @@ In each iteration, you calculate the step by step sum of startValue plus element
 
 Return the minimum positive value of startValue such that the step by step sum is never less than 1.
 
-Solution: https://leetcode.com/problems/minimum-value-to-get-positive-step-by-step-sum/solutions/1513266/minimum-value-to-get-positive-step-by-step-sum/
-
-Video https://www.youtube.com/watch?v=QgRZcbYboxg
-
 Example 1
     Input: nums = [-3, 2, -3, 4, 2]
     Output: 5
@@ -24,6 +20,11 @@ Example 2
 Example 3
     Input: nums = [-1, -2, -3]
     Output: 7
+
+
+Video https://www.youtube.com/watch?v=QgRZcbYboxg
+
+Solution: https://leetcode.com/problems/minimum-value-to-get-positive-step-by-step-sum/solutions/1513266/minimum-value-to-get-positive-step-by-step-sum/
 """
 
 def minStartValue(nums):

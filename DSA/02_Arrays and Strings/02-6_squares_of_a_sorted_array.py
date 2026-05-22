@@ -55,6 +55,67 @@ def sortedSquares(nums):
     return ans                  # Return sorted array of squares
 
 
+# ––––––––––––––––––––––––––––––––––––––––––––––––
+# 🧠 First Time? Thoughts → Code
+
+
+"""
+Read the problem (10 sec)
+    • Square every number → return them sorted.
+    • Input is already sorted → that's the hint. Don't ignore it.
+
+Start naive (totally fine)
+    • "Square each number, then sort."
+    • Works. O(N log N). Say that out loud first if you're stuck.
+
+The one insight that unlocks the optimal code
+    • Biggest square = biggest absolute value (sign disappears after squaring).
+    • Array is sorted → extremes live at the ends:
+          left  = most negative
+          right = most positive
+    • So the current largest square is ALWAYS either nums[left] or nums[right].
+    • Compare those two → pick the winner → move that pointer inward.
+    • Repeat until both pointers meet.
+
+Why fill from the back?
+    • You discover squares from largest → smallest.
+    • Largest goes in the last slot, then second-largest, and so on.
+    • Filling backwards = sorted output without a separate sort step.
+
+Thought → line of code
+    n = len(nums)
+        → I need to know how many slots to fill.
+
+    ans = [0] * n
+        → Output must be length n.
+        → I don't know the values yet — just reserve n slots (zeros are placeholders).
+        → Same idea as "make an empty answer list of the right size."
+
+    l, r = 0, n - 1
+        → Only two candidates for "biggest |x|" each step: the two ends.
+
+    for i in range(n - 1, -1, -1)
+        → i = where I write in ans (last index first, then inward).
+        → Not magic — just "fill ans from right to left."
+
+    abs(nums[l]) vs abs(nums[r])
+        → Squaring ignores sign. Compare size, not positive vs negative.
+
+    ans[i] = val * val
+        → Place the square we just earned into the next open back slot.
+
+Memory hook (one sentence)
+    • Pick the stronger end → square it → drop it in the back → move that pointer in.
+
+Would you arrive at this cold?
+    • Naive path: yes, immediately (square + sort).
+    • Optimal path: only after you ask "what does sorted input buy me?"
+    • [0] * n and backward range are NOT first instincts — they come AFTER
+      you decide to place largest squares from the end. Then the code is just
+      bookkeeping for that decision.
+"""
+
+
 """
 Time: O(N)
   - Let N = length of nums.
