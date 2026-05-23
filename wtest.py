@@ -14,4 +14,6 @@
 
 
 
+update full breakdown guide. dont talk about time or space compelxicty. i already have a custom gpt for that.
+
 

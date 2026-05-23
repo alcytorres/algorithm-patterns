@@ -21,11 +21,12 @@ Example 3
     Input: nums = [-1, -2, -3]
     Output: 7
 
-
 Video https://www.youtube.com/watch?v=QgRZcbYboxg
 
 Solution: https://leetcode.com/problems/minimum-value-to-get-positive-step-by-step-sum/solutions/1513266/minimum-value-to-get-positive-step-by-step-sum/
 """
+
+# Solution — Minimum Value to Get Positive Step by Step Sum
 
 def minStartValue(nums):
     min_val = 0
@@ -61,26 +62,28 @@ def minStartValue(nums):
 """
 Time: O(N)
   - Let N = length of nums.
-  - Step 1: Initialize running total and track minimum prefix sum.
-  - Step 2: Iterate through nums once → O(N).
-      • For each num, update total in O(1).
-      • Update min_val in O(1).
-  - Final calculation (-min_val + 1) is O(1).
+  - One pass through nums array → O(N).
+  - Each iteration:
+      • Update running sum (total) → O(1)
+      • Update minimum running sum (min_val) → O(1)
+  - Final calculation: -min_val + 1 → O(1)
   - Overall: O(N).
 
 Space: O(1)
   - Only scalar variables used: total and min_val.
-  - No additional data structures are created.
+  - No extra data structures are created.
   - Overall: O(1).
 
   
 Interview Answer: Worst Case
 
 Time: O(N)
-  - Single pass computes prefix sums and tracks the minimum.
+  - One pass through the nums array.
+  - Each number is processed one time.
 
 Space: O(1)
-  - Constant space for running total and minimum value.
+  - Only total and min_val variables are used. 
+  - No extra data structures.
 
 
 ---
@@ -100,51 +103,279 @@ i   | num  | total | min_val
 Final: -(-4) + 1 = 5
 
 
----
-Most IMPORTANT thing to Understand:
-    We track the running total as we move through the array.
-
-    If the running total ever dips too low, we'll need a higher starting value to keep it ≥ 1.
-
-    The answer comes from the lowest point (minimum running total) we reach.
 
 ---
-Why this code Works:
-    total tracks the running sum.
+Most IMPORTANT thing to Understand
 
-    min_val records the lowest total ever goes.
+    • We pretend the starting value is 0 first.
 
-    If min_val is negative, we need to offset it so the lowest point becomes 1 → formula: -min_val + 1.
+    • As we move through nums:
+        • We track the running sum.
 
-    Efficiency: one pass through the array, O(n) time, O(1) space.
+    • The MOST IMPORTANT thing:
+        • Find the LOWEST running sum we ever reach.
 
-    Intuition: It's like walking on uneven ground — you add a “boost” at the start so your lowest dip is still above level 1.
+    • If the running sum drops to -4:
+        • We need a startValue big enough so:
+            -4 becomes at least 1.
 
----  
+    • Formula:
+        startValue = -minimum_running_sum + 1
+
+    • This guarantees:
+        • Every step-by-step sum stays >= 1.
+
+---
+Why this code Works
+
+    • total:
+        • Tracks the running prefix sum.
+
+    • min_val:
+        • Stores the LOWEST running sum seen so far.
+
+    • Why we track the minimum:
+        • The lowest dip is the dangerous point.
+        • If we can fix the lowest point, all higher points are automatically safe.
+
+    • Example:
+        Running sums:
+            [-3, -1, -4, 0, 2]
+
+        Lowest value:
+            -4
+
+        We need:
+            startValue + (-4) >= 1
+
+        Solve:
+            startValue >= 5
+
+    • Why "-min_val + 1" works:
+        • If min_val = -4:
+            • Add 4 to bring it to 0
+            • Add 1 more so it becomes 1
+
+        Final:
+            5
+
+    • Efficiency:
+        • Only one pass through nums.
+        • Time: O(N)
+        • Space: O(1)
+
+    • Intuition:
+        • Think of the running sum like walking downhill.
+        • min_val is the deepest hole you fall into.
+        • startValue is how high you must start so you never go below height 1.
+
+---
 TLDR
-    • Keep a running sum, track its lowest dip, then return 1 - min_val to keep the sum always ≥ 1.
+    • This solution finds the lowest running sum while traversing the array.
+
+    • Then it calculates the minimum startValue needed to lift that lowest point up to at least 1.
 
 ---
-Quick Example Walkthrough:
-nums = [-3, 2, -3, 4, 2]
+Quick Example Walkthrough
 
-    Start: total=0, min_val=0
-    Add -3 → total=-3, min_val=-3
-    Add +2 → total=-1, min_val=-3
-    Add -3 → total=-4, min_val=-4
-    Add +4 → total=0, min_val=-4
-    Add +2 → total=2, min_val=-4
-    Lowest dip = -4 → need -(-4)+1 = 5.
+    nums = [-3, 2, -3, 4, 2]
 
-Final Answer: 5
+    Step 1:
+        Start with running sum = 0
+
+    Step 2:
+        Build running sums:
+            -3
+            -1
+            -4
+            0
+            2
+
+    Step 3:
+        Lowest running sum:
+            -4
+
+    Step 4:
+        We need:
+            startValue + (-4) >= 1
+
+        So:
+            startValue = 5
+
+    Final Answer:
+        5
+
+---
+Full Example Walkthrough
+
+    nums = [-3, 2, -3, 4, 2]
+
+    Starting State:
+        total = 0
+        min_val = 0
+
+--------------------------------------------------
+
+    Loop Iteration 1:
+        num = -3
+
+        Update running sum:
+            total += -3
+            total = -3
+
+        Update minimum:
+            min_val = min(0, -3)
+            min_val = -3
+
+        Current State:
+            total = -3
+            min_val = -3
+
+--------------------------------------------------
+
+    Loop Iteration 2:
+        num = 2
+
+        Update running sum:
+            total += 2
+            total = -1
+
+        Update minimum:
+            min_val = min(-3, -1)
+            min_val = -3
+
+        Current State:
+            total = -1
+            min_val = -3
+
+--------------------------------------------------
+
+    Loop Iteration 3:
+        num = -3
+
+        Update running sum:
+            total += -3
+            total = -4
+
+        Update minimum:
+            min_val = min(-3, -4)
+            min_val = -4
+
+        Current State:
+            total = -4
+            min_val = -4
+
+--------------------------------------------------
+
+    Loop Iteration 4:
+        num = 4
+
+        Update running sum:
+            total += 4
+            total = 0
+
+        Update minimum:
+            min_val = min(-4, 0)
+            min_val = -4
+
+        Current State:
+            total = 0
+            min_val = -4
+
+--------------------------------------------------
+
+    Loop Iteration 5:
+        num = 2
+
+        Update running sum:
+            total += 2
+            total = 2
+
+        Update minimum:
+            min_val = min(-4, 2)
+            min_val = -4
+
+        Current State:
+            total = 2
+            min_val = -4
+
+--------------------------------------------------
+
+Final Calculation
+
+    Lowest running sum:
+        min_val = -4
+
+    We need:
+        startValue + (-4) >= 1
+
+    Solve:
+        startValue >= 5
+
+    Return:
+        -min_val + 1
+        = -(-4) + 1
+        = 4 + 1
+        = 5
+
+--------------------------------------------------
+
+Final Answer
+
+    5
+
+    This means:
+        Starting with 5 guarantees every running total stays at least 1.
 
 """
 
 
+# ––––––––––––––––––––––––––––––––––––––––––––––––
+# Q: Why min_val = 0 (not float('inf'))
+
+"""
+Can I use min_val = float('inf')?
+    • Technically the loop still runs.
+    • But you can get the WRONG answer when nums never dips below 0.
+
+Example: nums = [3, 2, 1]  →  answer should be 1
+
+    With min_val = 0:
+        total: 3 → 5 → 8
+        min_val stays 0  (0 is still the lowest point)
+        return -0 + 1 = 1  ✅
+
+    With min_val = float('inf'):
+        min_val becomes 3 → 3 → 3  (never remembers 0)
+        return -3 + 1 = -2  ❌
+
+
+Why min_val must start at 0
+    • total starts at 0 = "pretend startValue is 0, sum so far is 0"
+    • Before you add any nums, the running sum is already 0
+    • That starting point might be the lowest the path ever gets
+    • min_val tracks the lowest running sum seen — including that start
+
+
+First time seeing the problem — how you'd figure it out
+    • Read: step-by-step sum must never drop below 1
+    • Ask: "How low could the sum go if startValue were 0?"
+          → Walk nums left to right, add each number, watch total dip
+    • The danger is the deepest dip (minimum prefix sum)
+    • You haven't moved yet → dip starts at 0, not at infinity
+    • So initialize min_val = 0 to include "before the first element"
+
+Memory hook
+    • total = path with startValue 0
+    • min_val = lowest point on that path (including the start at 0)
+    • Answer lifts that lowest point to 1:  -min_val + 1
+"""
+
 
 
 # –––––––––––––––––––––––––––––––––––––––––––––––––––––––
-# Best Solution
+# Solution — Minimum Value to Get Positive Step by Step Sum
+# More Examples
 
 def minStartValue(nums):
     total = 0
@@ -180,67 +411,27 @@ print(minStartValue(nums))
 
 
 # –––––––––––––––––––––––––––––––––––––––––––––––––––––––
-# Task: Find the minimum positive startValue such that the step-by-step sum of startValue plus array elements never falls below 1.
-# Example: nums = [-3, 2, -3, 4, 2] → Output = 5 (startValue = 5 ensures step-by-step sum ≥ 1)
-# Why: Practices prefix sum technique to determine the minimum starting value for a cumulative sum constraint.
+# Alternative solution 
+class Solution:
+    def minStartValue(self, nums: list[int]) -> int:
 
-def minStartValue(nums):  # Example: nums = [-3, 2, -3, 4, 2]
+        total = 0
+        min_value = 0
+        
+        for num in nums:
+            total += num 
+            if total < min_value:
+                min_value = total
 
-    # 1️⃣ Initialize variables
-    # Initialize min_val to track the minimum step-by-step sum
-    # Why? We need to find the lowest point of the cumulative sum to determine the required startValue
-    min_val = 0  # min_val = 0
-
-    # Initialize total to track the current step-by-step sum
-    # Why? We simulate the cumulative sum starting from 0 to find the minimum
-    total = 0  # total = 0
-
-    # 2️⃣ Iterate over the array
-    # Loop through each number to compute step-by-step sums
-    # Why? We need to calculate the cumulative sum and track its minimum
-    for num in nums:  # num takes values [-3, 2, -3, 4, 2]
-        # --- Iteration 1: num = -3 ---
-        # Update the step-by-step sum
-        # Why? We add each element to simulate the cumulative sum
-        total += num  # total = 0 + (-3) = -3
-        # Update the minimum sum seen so far
-        # Why? The lowest sum determines how much startValue is needed to keep sums ≥ 1
-        min_val = min(min_val, total)  # min_val = min(0, -3) = -3
-        # After Iteration 1: total = -3, min_val = -3
-
-        # --- Iteration 2: num = 2 ---
-        if num == 2:
-            total += num  # total = -3 + 2 = -1
-            min_val = min(min_val, total)  # min_val = min(-3, -1) = -3
-            # After Iteration 2: total = -1, min_val = -3
-
-        # --- Iteration 3: num = -3 ---
-        if num == -3:
-            total += num  # total = -1 + (-3) = -4
-            min_val = min(min_val, total)  # min_val = min(-3, -4) = -4
-            # After Iteration 3: total = -4, min_val = -4
-
-        # --- Iteration 4: num = 4 ---
-        if num == 4:
-            total += num  # total = -4 + 4 = 0
-            min_val = min(min_val, total)  # min_val = min(-4, 0) = -4
-            # After Iteration 4: total = 0, min_val = -4
-
-        # --- Iteration 5: num = 2 ---
-        if num == 2:
-            total += num  # total = 0 + 2 = 2
-            min_val = min(min_val, total)  # min_val = min(-4, 2) = -4
-            # After Iteration 5: total = 2, min_val = -4
-
-    # 3️⃣ Compute minimum positive startValue
-    # Return the value needed to offset the minimum sum to ensure all sums are ≥ 1
-    # Why? If min_val is negative, we need -min_val + 1 to make the lowest sum at least 1
-    return -min_val + 1  # min_val = -4, -(-4) + 1 = 4 + 1 = 5
+        return -min_value + 1
 
 
+solution = Solution()
 nums = [-3, 2, -3, 4, 2]
-print(minStartValue(nums))  
-# Output: 5 - Returns 5 as the minimum positive startValue ensuring the step-by-step sum starting from nums[0] never falls below 1.
+print(solution.minStartValue(nums))
+# Output: 5
+
+
 
 
 

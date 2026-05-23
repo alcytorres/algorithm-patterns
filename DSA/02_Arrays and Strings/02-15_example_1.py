@@ -9,6 +9,8 @@ Example:
     Output: [True, False, True]
 """
 
+# Solution: Prefix Sum: Build Once + O(1) Range Sum per Query
+
 def answer_queries(nums, queries, limit):
     prefix = [nums[0]]
     for i in range(1, len(nums)):

@@ -8,6 +8,9 @@ Example
     nums =  [7, 4, 3, 9, 1, 8, 5, 2, 6]
     Output: [-1, -1, -1, 5, 4, 4, -1, -1, -1]
 """
+
+# Solution: Sliding Window: Seed First Sum + Slide Add/Remove Ends
+
 # Sliding Window Prefix Sum
 def getAverages(nums, k):
     n = len(nums)

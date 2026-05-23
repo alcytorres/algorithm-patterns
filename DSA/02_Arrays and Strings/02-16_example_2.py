@@ -3,18 +3,18 @@
 """
 Given an integer array nums, find the number of ways to split the array into two parts so that the first section has a sum greater than or equal to the sum of the second section. The second section should have at least one number.
 
-Solution: https://leetcode.com/problems/number-of-ways-to-split-array/solutions/6209795/number-of-ways-to-split-array/
-
 Example 
     Input: nums = [10, 4, -8, 7]
     Output: 2
     i=0: left=10, right=3 (10>=3) valid
     i=1: left=14, right=-1 (14>=-1) valid
     i=2: left=6, right=7 (6<7) invalid
+
+Solution: https://leetcode.com/problems/number-of-ways-to-split-array/solutions/6209795/number-of-ways-to-split-array/
 """
 
 # ––––––––––––––––––––––––––––––––––––––––––––––
-# Best Solution: No array needed
+# Solution: Single Pass: Running Left Sum vs Total − Left
 
 def waysToSplitArray(self):
     total = sum(nums)

@@ -10,6 +10,8 @@ Example
 Solution: https://leetcode.com/problems/running-sum-of-1d-array/description/
 """
 
+# Solution: Running Sum of 1d Array
+
 def runningSum(nums):
     prefix = [nums[0]]
     for i in range(1, len(nums)):
