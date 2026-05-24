@@ -1,7 +1,6 @@
 # What is point of this from typing import List
 
 
-
 """
 Review common_algorithms.py 
 

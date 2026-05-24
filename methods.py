@@ -349,6 +349,38 @@ print(valid_words)  # Output: ['hello', 'world', 'bye']
 
 
 # STRING METHOD: 
+.isalnum()
+# What it does: Returns True if all characters are alphanumeric (letters or digits).
+# Why use it: Filters out spaces, punctuation, and symbols in one call.
+# How it works: Equivalent to .isalpha() or .isdigit() for each char.
+# When to use: Cleaning strings in palindrome and validation problems.
+# Time/Space: O(n) time (n = string length), O(1) space.
+
+# Syntax:
+string.isalnum()  # Returns True if all chars are letters or digits, else False
+
+# Basic Example 1 (Letters and Digits):
+print("hello123".isalnum())  # True
+
+# Basic Example 2 (With Spaces):
+print("hello 123".isalnum())  # False (space is not alphanumeric)
+
+# Basic Example 3 (Punctuation):
+print("hello!".isalnum())    # False (! is not alphanumeric)
+
+# Basic Example 4 (Single Character Check):
+print("a".isalnum())   # True
+print("3".isalnum())   # True
+print("@".isalnum())   # False
+print("".isalnum())    # False (empty string)
+
+# DSA Example (Valid Palindrome — LeetCode 125):
+s = "A man, a plan, a canal: Panama"
+new_string = [c.lower() for c in s if c.isalnum()]
+print(new_string == new_string[::-1])  # True
+
+
+# STRING METHOD: 
 .isupper()
 # What it does: Returns True if all cased characters are uppercase.
 # Why use it: Checks for uppercase letters in validation or filtering.

@@ -58,7 +58,6 @@ def sortedSquares(nums):
 # ––––––––––––––––––––––––––––––––––––––––––––––––
 # 🧠 First Time? Thoughts → Code
 
-
 """
 Read the problem (10 sec)
     • Square every number → return them sorted.

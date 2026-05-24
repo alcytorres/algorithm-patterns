@@ -164,4 +164,49 @@ Space: O(1)
   - Only pointer variables are used.
 
 
+
+------------------------------------------------
+Example 3: minStartValue
+"""
+
+def minStartValue(nums):
+    min_val = 0
+    total = 0
+
+    for num in nums:
+        total += num
+        min_val = min(min_val, total)
+
+    return -min_val + 1
+
+nums = [-3, 2, -3, 4, 2]
+print(minStartValue(nums))
+# Output: 5 → Returns 5 as the minimum positive startValue ensuring the step-by-step sum starting from nums[0] never falls below 1.
+
+"""
+Time: O(N)
+  - Let N = length of nums.
+  - One pass through nums array → O(N).
+  - Each iteration:
+      • Update running sum (total) → O(1)
+      • Update minimum running sum (min_val) → O(1)
+  - Final calculation: -min_val + 1 → O(1)
+  - Overall: O(N).
+
+Space: O(1)
+  - Only scalar variables used: total and min_val.
+  - No extra data structures are created.
+  - Overall: O(1).
+
+  
+Interview Answer: Worst Case
+
+Time: O(N)
+  - One pass through the nums array.
+  - Each number is processed one time.
+
+Space: O(1)
+  - Only total and min_val variables are used. 
+  - No extra data structures.
+
 """
