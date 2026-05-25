@@ -22,7 +22,7 @@ Example 3:
 Constraints:
     1 <= n <= 104
 
-Solution: https://leetcode.com/problems/fizz-buzz/solutions/173828/fizz-buzz-by-leetcode-v2ox/
+Solution: https://leetcode.com/problems/fizz-buzz/description/
 """
 
 # Solution 1: Straightforward If/Elif/Else Chain
@@ -190,9 +190,21 @@ A: We need to process every number **from 1 to n inclusive** (exactly what Fizz 
 
 Fizz Buzz never includes 0 and always includes n, so `range(1, n+1)` is the correct way to loop over exactly the numbers 1 through n.
 
+
+
+
+---
+Q: What does "1-indexed" mean here?
+
+A: It means the counting starts at 1, not 0.
+
+  • answer[1] = label for the number 1.
+  • answer[2] = label for the number 2.
+  • answer[n] = label for the number n.
+
+  • In Python lists are 0-indexed, so answer[0] holds the label for number 1.
+  • That's why we loop with `range(1, n+1)` — we process numbers 1 through n, then append each label in order.
 """
-
-
 
 
 

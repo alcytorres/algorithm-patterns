@@ -300,8 +300,6 @@ Full Example Walkthrough:
 
 
 
-
-
 ---
 Q: Why is the space complexity O(N)?
 
@@ -313,6 +311,16 @@ A: Because we store the cleaned version of the input in extra memory.
 
   • Extra memory grows with input size → O(N) space.
 
+
+
+---
+Q: Why can't a string be changed in place?
+
+A: Because strings in Python are immutable — once created, they cannot be modified.
+
+  • `new_string += c` does NOT edit the old string — it creates a brand-new one.
+  • That's why building a string in a loop with `+=` can get slow.
+  • Use a list + `"".join()` when you need to build a string piece by piece.
 """
 
 
@@ -519,11 +527,37 @@ Time: O(N)
 Space: O(N)
   - Cleaned string can be as long as the original input.
 
+"""
 
 
 
+# ––––––––––––––––––––––––––––––––––––––––––––––––––
+# Why += on Strings is O(N²) and How List + Join Fixes It
+
+# String += (copies entire string each time)
+new_string = ""
+new_string += "a"   # creates "a"          (copies 1 char)
+new_string += "b"   # creates "ab"         (copies 2 chars)
+new_string += "c"   # creates "abc"        (copies 3 chars)
+# Each += rebuilds from scratch → 1 + 2 + 3 + ... + N = O(N²)
+
+
+# List + join (appends in place, joins once)
+chars = []
+chars.append("a")   # ["a"]               (O(1))
+chars.append("b")   # ["a", "b"]          (O(1))
+chars.append("c")   # ["a", "b", "c"]     (O(1))
+result = "".join(chars)  # "abc"           (one O(N) pass)
+# Total: N appends at O(1) + one join at O(N) = O(N)
+
+
+"""
 ---
 Q: Why += on Strings is O(N²)
+
+The code above shows why:
+    • Each += rebuilds the entire string from scratch (strings are immutable).
+    • List + join appends in O(1), then builds the final string once.
 
 Think of it like writing on paper.
 
