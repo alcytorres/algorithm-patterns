@@ -17,6 +17,8 @@ Example 2:
 Constraints:
     1 <= nums.length <= 105
     -109 <= nums[i] <= 109
+
+Solution: https://leetcode.com/problems/contains-duplicate/submissions/2013652533/
 """
 
 # Solution 1: Set Early-Exit Duplicate Check
@@ -55,22 +57,23 @@ Time: O(N)
   - Loop through nums once.
       • Checking membership in a set is O(1) average.
       • Adding to the set is O(1) average.
-  - Early return if a duplicate is found, but worst case still scans all N elements.
+  - Early return if a duplicate is found, but worst case still scans all N numbers.
   - Overall: O(N).
 
 Space: O(N)
-  - The set 'seen' can store up to N distinct elements in the worst case.
-  - Only one extra variable (num) outside the set.
+  - One extra structure: set `seen` (numbers we've already seen).
+  - Worst case: all numbers are unique (e.g. [1, 2, 3, 4]) → no early return, so the set stores all N numbers.
+  - The set is what uses the extra memory — not the loop (num) variable.
   - Overall: O(N).
 
-  
+
 Interview Answer: Worst Case
 
 Time: O(N)
-  - One pass with O(1) set lookups.
+  - One pass through nums; each set check/add is O(1) average.
 
 Space: O(N)
-  - Set holds all seen elements in the worst case.
+  - Set holds up to N unique numbers when no duplicate is found.
 
 
 ---

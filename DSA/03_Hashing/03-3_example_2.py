@@ -38,20 +38,22 @@ Time: O(N)
   - Overall: O(N).
 
 Space: O(1)
-  - The set 'seen' can store at most 26 lowercase English letters (constant bound).
-  - A few variables (loop variable c) use O(1) space.
+  - One extra structure: set `seen` (letters we've already seen).
+  - Only lowercase English letters exist → the set can hold at most 26 entries.
+  - Even if N is huge, the set never grows with string length — it caps at 26.
   - Overall: O(1).
 
-  
+
 Interview Answer: Worst Case
 
 Time: O(N)
-  - Each character checked once with O(1) set operations.
+  - One pass through s; each set check/add is O(1) average.
 
 Space: O(1)
-  - Set stores at most 26 letters, constant space.
+  - Alphabet is fixed at 26 letters → set never exceeds 26 entries.
 
 
+---
 Overview for Each Iteration
 Input: s = "abccbaacz"
 
