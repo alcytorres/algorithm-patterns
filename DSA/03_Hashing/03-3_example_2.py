@@ -28,6 +28,18 @@ s = "abccbaacz"
 print(repeatedCharacter(s))
 # Output: "c" → The letter 'c' is the first to appear twice
 
+
+# ––––––––––––––––––––––––––––––––––––––––––––––– 
+# Breakdown
+def repeatedCharacter(s):
+    seen = set()          # Initialize empty set for seen characters
+    for c in s:           # Iterate over each character in string
+        if c in seen:     # If character already in set
+            return c      # Return first repeated character
+        seen.add(c)       # Add character to set
+    return ""             # Return empty string if no character repeats
+
+
 """
 Time: O(N)
   - Let N = length of string s.
@@ -104,16 +116,6 @@ Final Answer: "c"
 """
 
 
-
-# ––––––––––––––––––––––––––––––––––––––––––––––– 
-# Breakdown
-def repeatedCharacter(s):
-    seen = set()               # Initialize empty set for seen characters
-    for c in s:                # Iterate over each character in string
-        if c in seen:          # If character already in set
-            return c           # Return first repeated character
-        seen.add(c)            # Add character to set
-    return ""                  # Return empty string if no character repeats
 
 
 

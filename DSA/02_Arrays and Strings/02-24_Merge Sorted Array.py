@@ -269,8 +269,63 @@ Final: [1, 2, 2, 3, 5, 6]
 """
 
 
+# ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+# 🧠 First Time? Thoughts → Code
 
+"""
+Read the problem (10 sec)
+    • Merge two sorted arrays into one sorted array — but store the answer inside nums1.
+    • nums1 is longer with zeros at the end → that extra space is the hint. Don't ignore it.
 
+Start naive (totally fine)
+    • "Copy nums2 into nums1, then sort." Or "make a new list, merge from the front like merge sort, copy back."
+    • Works. O((m + n) log(m + n)) or O(m + n) with extra space. Say that out loud first if you're stuck.
+
+The one insight that unlocks the optimal code
+    • Both arrays are sorted → the largest remaining value is always at the end of nums1 or nums2.
+    • Compare those two ends → the bigger one belongs at the back of the final array.
+    • nums1's tail is empty (the zeros) → safe to write there without losing data you still need.
+    • Repeat until every nums2 value is placed.
+
+Why fill from the back?
+    • Merging from the front overwrites nums1 values before you've moved them.
+    • The empty slots live at the back → fill largest-first into those slots.
+    • When nums2 runs out, leftover nums1 values are already in the right spots.
+
+Thought → line of code
+    p1 = m - 1
+        → Start at the last real nums1 value, not the placeholder zeros.
+
+    p2 = n - 1
+        → Start at the last nums2 value (its "big end").
+
+    write = m + n - 1
+        → First open slot is the very back of nums1.
+
+    while p2 >= 0
+        → Every nums2 value must land in nums1.
+        → When p2 is done, nums1's leftovers are already sorted at the front.
+
+    if p1 >= 0 and nums1[p1] > nums2[p2]
+        → Compare the two current largest picks.
+        → p1 >= 0 guards when nums1 is exhausted.
+
+    else branch (take nums2)
+        → nums2 wins when it's bigger, equal, OR nums1 is empty.
+
+    write -= 1
+        → After each placement, next write spot moves one left.
+
+Memory hook (one sentence)
+    • Compare the two back-of-the-line values → put the bigger one in the empty tail → slide left.
+
+Would you arrive at this cold?
+    • Naive path: yes, immediately (combine + sort, or merge into a helper array).
+    • Optimal path: only after you ask "why is nums1 longer with zeros at the end?"
+    • p1 = m - 1, while p2 >= 0, and writing from the back are NOT first instincts —
+      they come AFTER you decide to use the tail as free space. Then the code is just
+      bookkeeping for that decision.
+"""
 
 
 

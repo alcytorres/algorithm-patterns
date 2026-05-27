@@ -4,57 +4,23 @@ A pangram is a sentence where every letter of the English alphabet appears at le
 
 Given a string sentence containing only lowercase English letters, return true if sentence is a pangram, or false otherwise.
 
-Solution: https://leetcode.com/problems/check-if-the-sentence-is-pangram/editorial/
-
 Example:
     Input: sentence = "thequickbrownfoxjumpsoverthelazydog"
     Output: True
     Explanation: sentence contains at least one of every letter of the English alphabet.
+
+Solution: https://leetcode.com/problems/check-if-the-sentence-is-pangram/editorial/
 """
 
 def checkIfPangram(sentence):
     seen = set(sentence)
     return len(seen) == 26
 
-s = "thequickbrownfoxjumpsoverthelazydog"
-print(checkIfPangram(s))
+sentence = "thequickbrownfoxjumpsoverthelazydog"
+print(checkIfPangram(sentence))
 # Output: True
 
-"""
-Time: O(N)
-  - Let N = length of the input string sentence.
-  - Step 1: Build a set from all characters in the sentence → O(N).
-      • Each character is inserted once, with O(1) average per insertion.
-  - Step 2: Compare set size to 26 → O(1).
-  - Overall: O(N).
-
-Space: O(1)
-  - The set 'seen' can store at most 26 lowercase English letters (constant bound).
-  - A few extra variables use O(1) space.
-  - Overall: O(1).
-
-  
-Interview Answer: Worst Case
-
-Time: O(N)
-  - Single pass builds the set of characters.
-
-Space: O(1)
-  - At most 26 unique letters stored.
-
-
-  
-Overview for Each Iteration
-Input: sentence = "thequickbrownfoxjumpsoverthelazydog"
-
-Step: Create set of unique characters and check length
-seen = set(sentence)
-seen = {'t', 'h', 'e', 'q', 'u', 'i', 'c', 'k', 'b', 'r', 'o', 'w', 'n', 'f', 'x', 'j', 'm', 'p', 's', 'v', 'l', 'a', 'z', 'y', 'd', 'g'}
-len(seen) = 26
-
-Final: True (26 unique letters, including all alphabet letters)
-
-"""
+# seen = {'w', 'f', 'y', 'h', 'j', 'r', 'v', 'l', 'z', 't', 'i', 'n', 'm', 's', 'e', 'k', 'x', 'a', 'g', 'p', 'c', 'd', 'q', 'b', 'u', 'o'}
 
 
 # ––––––––––––––––––––––––––––––––––––––––––––––– 
@@ -66,10 +32,100 @@ def checkIfPangram(sentence):
     # If the size of 'seen' is 26, then 'sentence' is a pangram.
     return len(seen) == 26
 
-s = "thequickbrownfoxjumpsoverthelazydog"
-print(checkIfPangram(s))
-# Output: True
 
+"""
+Time: O(N)
+  - Let N = length of sentence.
+  - Step 1: Build a set from all characters in the sentence → O(N).
+      • Each character is inserted once, with O(1) average per insertion.
+  - Step 2: Compare set size to 26 → O(1).
+  - Overall: O(N).
+
+Space: O(1)
+  - One extra structure: set `seen` (unique letters found).
+  - Only lowercase English letters exist → the set holds at most 26 entries.
+  - Set size is capped by the alphabet, not by N.
+  - Overall: O(1).
+
+
+Interview Answer: Worst Case
+
+Time: O(N)
+  - One pass through sentence to build the set.
+
+Space: O(1)
+  - Alphabet is fixed at 26 letters → set never exceeds 26 entries.
+
+
+---
+Most IMPORTANT thing to Understand:
+    • A pangram must contain every lowercase English letter at least once.
+
+    • We only care about which letters appear — not how many times each one shows up.
+
+    • A set automatically removes duplicates, so we can just count how many unique letters we found.
+
+    • If the set has exactly 26 unique letters, every letter a–z is present → it's a pangram.
+
+
+---
+Why this code Works:
+    • Data structure: a set stores only unique characters from the sentence.
+
+    • Technique: `set(sentence)` collects every distinct letter in one pass.
+
+    • Final check: if `len(seen) == 26`, all 26 alphabet letters were found.
+
+    • Efficiency: One pass through the string. Set insert and size check are O(1) average.
+
+    • Intuition: Like collecting unique stamps — if your album has all 26 letters of the alphabet, the sentence is a pangram.
+
+
+---
+TLDR:
+    • Put all unique letters into a set; if the set has 26 entries, the sentence is a pangram.
+
+
+---
+Quick Example Walkthrough:
+
+    sentence = "thequickbrownfoxjumpsoverthelazydog"
+
+    Step 1: Build set from sentence
+        seen = {'t', 'h', 'e', 'q', 'u', 'i', 'c', 'k', 'b', 'r', 'o', 'w', 'n', 'f', 'x', 'j', 'm', 'p', 's', 'v', 'l', 'a', 'z', 'y', 'd', 'g'}
+
+    Step 2: Check size
+        len(seen) = 26
+        26 == 26 → True
+
+Final Answer: True
+
+
+---
+Full Example Walkthrough:
+    sentence = "thequickbrownfoxjumpsoverthelazydog"
+
+    Starting State:
+        seen = {} (empty set)
+
+    Building set — Python loops through each character:
+        't' → add → seen = {'t'}
+        'h' → add → seen = {'t', 'h'}
+        'e' → add → seen = {'t', 'h', 'e'}
+        'q' → add → seen = {'t', 'h', 'e', 'q'}
+        ...
+        (duplicates like extra 'e', 'o', 'u' are ignored — sets only keep one copy)
+        ...
+        'g' → add → seen = {all 26 letters}
+
+    Final Check:
+        len(seen) == 26
+        26 == 26 → True
+
+        This means:
+            Every letter a-z appears at least once in the sentence.
+
+"""
 
 
 
@@ -86,8 +142,24 @@ s = "thequickbrownfoxjumpsoverthelazydog"
 print(checkIfPangram(s))
 # Output: True
 
-# Time: O(n)
-# Space: O
+# Time: O(N) — one pass to build set + O(1) size check.
+# Space: O(1) — set holds at most 26 letters.
+
+# ––––––––––––––––––––––––––––––––––––––––––––––––
+# My original solution
+
+def checkIfPangram(sentence: str) -> bool:
+    seen = set()
+    for c in sentence:
+        seen.add(c)
+    return len(seen) == 26
+
+sentence = "thequickbrownfoxjumpsoverthelazydog"
+print(checkIfPangram(sentence))
+# Output: True
+
+# Time: O(N) — loop each char once, O(1) add per char.
+# Space: O(1) — set holds at most 26 letters.
 
 
 # ––––––––––––––––––––––––––––––––––––––––––––––––
@@ -100,25 +172,6 @@ s = "thequickbrownfoxjumpsoverthelazydog"
 print(checkIfPangram(s))
 # Output: True
 
+# Time: O(N) — one pass; isalpha() and set insert are O(1) each.
+# Space: O(1) — set holds at most 26 letters.
 
-
-
-# ––––––––––––––––––––––––––––––––––––––––––––––– 
-# Task: Check if a string is a pangram (contains every lowercase English letter at least once).
-# Example: sentence = "thequickbrownfoxjumpsoverthelazydog" → Output = True (contains all 26 letters)
-# Why: Practices set usage to efficiently track unique characters.
-
-def checkIfPangram(sentence):  # Example: sentence = "thequickbrownfoxjumpsoverthelazydog"
-
-    # 1️⃣ Create a set of unique characters
-    # Convert sentence to a set to get unique characters
-    # Why? We need to count distinct letters, ignoring duplicates and non-letters
-    seen = set(sentence)  # seen = {'t', 'h', 'e', 'q', 'u', 'i', 'c', 'k', 'b', 'r', 'o', 'w', 'n', 'f', 'x', 'j', 'm', 'p', 's', 'v', 'l', 'a', 'z', 'y', 'd', 'g'}
-
-    # 2️⃣ Check if set contains all 26 letters
-    # Return True if the set has exactly 26 elements
-    # Why? A pangram has all 26 lowercase English letters; non-letters don't affect the count
-    return len(seen) == 26  # len(seen) = 26, 26 == 26 is True
-
-s = "thequickbrownfoxjumpsoverthelazydog"
-print(checkIfPangram(s))  # Output: True
