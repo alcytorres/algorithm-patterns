@@ -155,6 +155,63 @@ Quick Example Walkthrough:
 
 
 
+# ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+# Same pattern as Remove Element (02-26) — slow/fast = write/read
+
+def moveZeroes(nums):
+    write = 0
+    
+    for read in range(len(nums)):
+        if nums[read] != 0:
+            nums[write] = nums[read]
+            write += 1
+    
+    for i in range(write, len(nums)):
+        nums[i] = 0
+
+    return nums
+
+"""
+slow / fast  vs  write / read  — same idea, different names
+
+    • fast  = read   → scans the whole array (looks at each element)
+    • slow  = write  → next spot to place a "keeper" at the front
+
+    • fast finds what to look at; slow finds where to put what you keep
+
+
+Same pattern as Remove Element (27):
+    Move Zeroes (this file)              Remove Element (02-26)
+    ─────────────────────                ────────────────────────
+    fast scans nums                      fast scans nums
+    slow = where next keeper goes        slow = where next keeper goes
+    keep if nums[fast] != 0              keep if nums[fast] != val
+    nums[slow] = nums[fast]              nums[slow] = nums[fast]
+    slow += 1                            slow += 1
+
+    • Move Zeroes: Phase 2 fills the tail with 0s — judge needs the full array correct.
+    • Remove Element: no Phase 2 — return slow; judge only checks nums[:slow], tail is junk.
+
+    • Phase 1 of Move Zeroes IS Remove Element with val = 0 (if you stopped before Phase 2).
+
+    • Both: one pass to pack keepers at the front, O(N) time, O(1) space.
+
+Memory hook:
+    If you know this slow/fast loop, you already know Remove Element — same loop, just "!= val" and skip Phase 2.
+"""
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
