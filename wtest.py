@@ -17,26 +17,7 @@
 # Update full breakdown guide. dont talk about time or space compelxicty. i already have a custom gpt for that.
 
 
-"""
 
----
-Overview for Each Iteration
-Input: nums = [3, 0, 1]
-
-Step 1: Create set and determine range
-seen = {3, 0, 1}
-n = len(nums) + 1 = 4
-
-Step 2: Check each number in range [0, n)
-num | num in seen | Action
-----|-------------|----------
-0   | True        | Continue
-1   | True        | Continue
-2   | False       | Return 2
-
-Final: 2
-
-"""
 
 
 

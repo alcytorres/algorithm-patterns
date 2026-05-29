@@ -1,9 +1,12 @@
-# Time Complexity Examples
+# TIME VS SPACE COMPLEXITY
 """
-Time complexity: as the input size grows, how much longer does the algorithm take to complete?
+Time (SPEED): as the input size grows, how much longer does the algorithm take to complete?
 
-Space complexity: as the input size grows, how much more memory does the algorithm use?
+Space (MEMORY): as the input size grows, how much more memory does the algorithm use?
 """
+
+# ––––––––––––––––––––––––––––––––––––––––––––––––
+# Time Complexity Examples
 
 # O(n) - Linear time: Single loop printing array elements
 def fn(arr):
@@ -171,6 +174,42 @@ O(n!)     | Factorial     | All permutations stored
 
 
 
+---
+Q: Is time more important than space?
+
+Generally yes — but it depends on context.
+
+Default (LeetCode / most interviews):
+  • Optimize time first.
+  • Use extra space (hash set, hash map) if it gives a big time win.
+  • Example: O(N) time + O(N) space beats O(N²) time + O(1) space.
+
+Why time usually wins:
+  • Slow algorithms time out on large inputs.
+  • Extra O(N) memory is usually affordable.
+  • Time often grows faster than space (N² vs N).
+
+When space matters more:
+  • Problem says "O(1) space" — follow that constraint.
+  • Memory is very limited (embedded, mobile, huge datasets).
+  • N is tiny — O(N²) time may be fine; skip the extra structure.
+
+Simple rule:
+  LeetCode / most interviews  →  Time first (use hash set if it helps)
+  Problem says "O(1) space"   →  Space first
+  N very small (< ~100)       →  Either works; simpler code is fine
+
+Interview one-liner:
+  "I optimize for time first since slow algorithms fail at scale.
+   I'll use extra space like a hash set when it cuts time meaningfully.
+   If the problem has a space constraint, I follow that."
+
+Real example (Counting Elements — N lookups, one per element):
+  List lookup (x + 1 in arr):  Time O(N²), Space O(1)
+  Set lookup  (x + 1 in seen):  Time O(N),   Space O(N)
+  N = 1,000 → list ~1,000,000 checks vs set ~1,000 → choose the set.
+
+
 
 
 ---
@@ -186,20 +225,21 @@ log n   | Input is halved each step                          | Binary search on 
 n², n³  | Nested loops (2 or 3 levels)                       | Double loop over n × n grid → O(n²)
 n!      | Factorial growth (all permutations)                | Generate all permutations of n → O(n!)
 
-
-
----
 """
+
+
+"""
+---
 Q: When do I use O(N + M) vs O(N * M)?
 
 🧠 Simple Rule:
   • Do one thing after another  →  ADD  →  O(N + M)
   • Do one thing FOR EACH of another  →  MULTIPLY  →  O(N * M)
+"""
 
-
---------------------------------------------------
-O(N + M) — Separate loops (one after the other)
---------------------------------------------------
+# --------------------------------------------------
+# O(N + M) — Separate loops (one after the other)
+# --------------------------------------------------
 def print_both(arr1, arr2):
     for x in arr1:      # This loop → O(N)
         print(x)
@@ -210,9 +250,9 @@ def print_both(arr1, arr2):
 # Total work: first all of arr1, then all of arr2 → O(N + M)
 
 
---------------------------------------------------
-O(N * M) — Nested loops (for each, do all)
---------------------------------------------------
+# --------------------------------------------------
+# O(N * M) — Nested loops (for each, do all)
+# --------------------------------------------------
 def print_pairs(arr1, arr2):
     for x in arr1:          # Outer loop runs n times
         for y in arr2:      # Inner loop runs m times for EACH x
@@ -220,7 +260,7 @@ def print_pairs(arr1, arr2):
 
 # Total work: n * m prints → O(n * m)
 
-
+"""
 💡 Memory trick:
   • Loops in a line (one after another)         → add their sizes → O(N + M)
   • Loops inside loops (one wrapped in another) → multiply sizes → O(N * M)
@@ -228,7 +268,7 @@ def print_pairs(arr1, arr2):
 
 
 
-
+"""
 ---
 Q: “What's the difference between O(U) and O(N) in time/space complexity analysis?”
 
@@ -250,4 +290,6 @@ Interview tip:
 
     
 """
+
+
 

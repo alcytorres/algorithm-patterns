@@ -76,6 +76,24 @@ Space: O(N)
 
 
 ---
+Overview for Each Iteration
+    Input: nums = [0, 1]
+
+    Step 1: Determine range and create set
+    n = len(nums) = 2
+    seen = {0, 1}
+
+    Step 2: Check each number in range(n + 1) → [0, n] inclusive
+    num | num in seen | Action
+    ----|-------------|----------
+    0   | True        | Continue
+    1   | True        | Continue
+    2   | False       | Return 2
+
+Final: 2
+
+
+---
 Most IMPORTANT thing to Understand:
 
     • The full range is [0, n] where n = len(nums).
@@ -117,11 +135,11 @@ Quick Example Walkthrough:
 
     nums = [0, 1]
 
-    Step 1: Set up
+    Step 1: Determine range and create set
         n = 2
         seen = {0, 1}
 
-    Step 2: Check each number in range [0, 2]
+    Step 2: Check each number in range [0, 2] inclusive
         • num = 0 → 0 in seen → keep going
         • num = 1 → 1 in seen → keep going
         • num = 2 → 2 not in seen → return 2
@@ -132,11 +150,11 @@ Quick Example Walkthrough:
 Quick Example Walkthrough:
     nums = [3, 0, 1]
 
-    Step 1: Set up
+    Step 1: Determine range and create set
         n = 3
         seen = {3, 0, 1}
 
-    Step 2: Check each number in range [0, 3]
+    Step 2: Check each number in range [0, 3] inclusive
         • num = 0 → 0 in seen → keep going
         • num = 1 → 1 in seen → keep going
         • num = 2 → 2 not in seen → return 2
