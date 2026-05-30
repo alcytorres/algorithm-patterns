@@ -1,5 +1,7 @@
-# 169. Given an array nums of size n, return the majority element.
+# 169. Majority Element
 """
+Given an array nums of size n, return the majority element.
+
 The majority element is the element that appears more than ⌊n / 2⌋ times. You may assume that the majority element always exists in the array.
 
 Example 1:
@@ -475,6 +477,31 @@ print(majorityElement(nums))  # Output: 3
 
 
 
+
+# ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+# Brute Force
+def majority_element_brute_force(nums):
+    n = len(nums)  # Get length of array
+    threshold = n // 2  # Majority requires > n/2 occurrences
+
+    # Count occurrences of each number
+    for num in nums:  # Check each number
+        count = 0  # Reset count for current number
+        for other in nums:  # Count how many times num appears
+            if other == num:  # If numbers match
+                count += 1  # Increment count
+            if count > threshold:  # If count exceeds n/2
+                return num  # Return majority element
+
+    return -1  # Return -1 if no majority (though problem guarantees one)
+
+nums = [1, 3, 3]
+print(majorityElement(nums))  # Output: 3
+
+# Time: O(N²)
+# Space: O (1)
+
+
 # ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 # Brute Force
 def majorityElement(nums):
@@ -487,13 +514,6 @@ def majorityElement(nums):
 
 nums = [1, 3, 3]
 print(majorityElement(nums))  # Output: 3
-
-
-
-
-
-
-
 
 
 

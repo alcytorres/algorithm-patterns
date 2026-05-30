@@ -5,6 +5,11 @@ Check if a clean String is a Palindrome
 Given a string s, return true if it is a palindrome, false otherwise.
 
 Checks if string s is a palindrome by comparing characters from both ends.
+
+Example
+    Input: s = "racecar"
+    Output: True
+    Explanation: Reads the same forward and backward — "racecar" == "racecar".
 """
 
 # Solution: Two Pointers: Opposite-End Character Check

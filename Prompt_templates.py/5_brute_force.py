@@ -22,28 +22,42 @@ Rules for the brute force code:
 - Code should be easy for someone learning algorithms to understand
 
 
-Add the complexity explanation exactly like this style:
+Add the complexity explanation inside a """ """ block, matching the study + interview format used in optimized solutions:
 
-# Time: O(...)
-# - Explain why in simple bullets
-# - Mention loop counts or operations
+Time: O(...)
+  - Define variables (e.g., N = input size).
+  - Step 1: ... → O(...).
+  - Step 2: ... → O(...).
+  - Combined / Overall: O(...).
 
-# Space: O(...)
-# - Mention variables or structures used
-# - Keep explanation concise
+Space: O(...)
+  - State main structures or variables.
+  - Overall: O(...).
+
+Interview Answer: Worst Case
+
+Time: O(...)
+  - 1-2 bullets highlighting the dominant step(s).
+
+Space: O(...)
+  - 1-2 bullets summarizing memory usage.
 
 
-Add a final section:
-# Overview for Each Iteration
+Add a final section inside the same """ """ block:
+---
+Overview for Each Iteration
 
-Show a **simple high-level walkthrough of how the algorithm works** on the example input.
+Show a **simple high-level walkthrough** of how the algorithm works on the example input.
 
 Use a readable step format like:
 
-# i = ...
-# j = ...
-# subarray / substring / value being checked
-# updates to ans
+    i = ...
+    j = ...
+    value being checked
+    result / update
+
+End with:
+Final: [answer]
 
 The goal of the Overview is to quickly show how the answer is reached.
 
@@ -78,29 +92,49 @@ s = "racecar"
 print(is_palindrome_bruteforce(s))
 # Output: True
 
-# Time: O(N^2)
-# - The loop runs n times.
-# - Each time we do: reversed_s = c + reversed_s
-# - String concatenation creates a new string each time (O(N)).
-# - Overall: O(N * N) = O(N^2) time.
+"""
+Time: O(N²)
+  - Let N = length of the string s.
 
-# Space: O(N)
-# - We create a new string 'reversed_s' the same size as s.
-# - Overall: O(N) space.
+  - Step 1: Build reversed string → O(N²).
+      • Loop runs N times (once per character).
+      • Each step: reversed_s = c + reversed_s creates a new string → O(N).
+
+  - Step 2: Compare reversed_s == s → O(N).
+
+  - Combined: O(N² + N).
+  - Overall: O(N²).
 
 
-# Overview for Each Iteration
-# s = "racecar"
+Space: O(N)
+  - reversed_s stores up to N characters.
+  - Overall: O(N).
 
-# reversed_s starts = ""
 
-# read 'r' → reversed_s = "r"
-# read 'a' → reversed_s = "ar"
-# read 'c' → reversed_s = "car"
-# read 'e' → reversed_s = "ecar"
-# read 'c' → reversed_s = "cecar"
-# read 'a' → reversed_s = "acecar"
-# read 'r' → reversed_s = "racecar"
+Interview Answer: Worst Case
 
-# compare reversed_s == s
-# "racecar" == "racecar" → True
+Time: O(N²)
+  - Each prepend builds a new string; N prepends → quadratic time.
+
+Space: O(N)
+  - Reversed copy of the string.
+
+
+---
+Overview for Each Iteration
+s = "racecar"
+
+    reversed_s starts = ""
+
+    read 'r' → reversed_s = "r"
+    read 'a' → reversed_s = "ar"
+    read 'c' → reversed_s = "car"
+    read 'e' → reversed_s = "ecar"
+    read 'c' → reversed_s = "cecar"
+    read 'a' → reversed_s = "acecar"
+    read 'r' → reversed_s = "racecar"
+
+    compare reversed_s == s
+    "racecar" == "racecar" → True
+
+"""
