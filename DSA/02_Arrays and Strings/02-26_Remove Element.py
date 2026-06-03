@@ -45,11 +45,13 @@ Constraints:
     0 <= nums[i] <= 50
     0 <= val <= 100
 
+Solution: https://leetcode.com/problems/remove-element/description/
 """
 
 
 def removeElement(nums, val):
     write = 0
+
     for read in range(len(nums)):
         if nums[read] != val:
             nums[write] = nums[read]
@@ -70,6 +72,7 @@ print(removeElement(nums, val))
 
 def removeElement(nums, val):
     write = 0                         # Next open spot at the front for a kept value
+
     for read in range(len(nums)):     # Walk through every index in the array
         if nums[read] != val:         # This one is not the value we are removing
             nums[write] = nums[read]  # Copy it into the front we are building
