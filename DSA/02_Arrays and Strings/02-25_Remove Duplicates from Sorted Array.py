@@ -59,13 +59,11 @@ def removeDuplicates(nums):
 
 nums = [1, 1, 2]
 print(removeDuplicates(nums))
-# Output: 2
-# nums = [1, 2, _]
+# Output: 2 → One pass keeps each new unique at the front; k=2 so nums[:2] = [1, 2] (tail ignored)
 
 nums = [0, 0, 1, 1, 1, 2, 2, 3, 3, 4]
 print(removeDuplicates(nums))
-# Output: 5
-# nums = [0, 1, 2, 3, 4, _, _, _, _, _]
+# Output: 5 → Sorted duplicates are adjacent; pack uniques to get nums[:5] = [0, 1, 2, 3, 4]
 
 
 # ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
@@ -334,8 +332,7 @@ def removeDuplicates(nums):
 
 nums = [1, 1, 2]
 print(removeDuplicates(nums))
-# Output: 2
-# nums = [1, 2, _]
+# Output: 2 → Build a unique list, copy back to nums; O(N) time but O(N) extra space
 
 """
 Time: O(N)
@@ -403,8 +400,7 @@ def removeDuplicates(nums):
 
 nums = [1, 1, 2]
 print(removeDuplicates(nums))
-# Output: 2
-# nums = [1, 2, _]
+# Output: 2 → Same read/write idea: k = last unique index; return k+1 for count
 
 """
 ---

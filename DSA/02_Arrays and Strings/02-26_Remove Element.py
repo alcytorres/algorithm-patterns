@@ -63,8 +63,7 @@ def removeElement(nums, val):
 nums = [3, 2, 2, 3]
 val = 3
 print(removeElement(nums, val))
-# Output: 2  
-# nums = [2, 2, _, _]
+# Output: 2 → One pass copies non-3 values to the front; k=2 so nums[:2] = [2, 2] (tail ignored)
 
 
 # ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
@@ -333,9 +332,7 @@ def removeElement(nums: list[int], val: int) -> int:
 nums = [3, 2, 2, 3]
 val = 3
 print(removeElement(nums, val))
-# Output: 2 | nums = [2,2,_,_]
-
-# nums = [2, 2]
+# Output: 2 → Pop each 3 in place; list shrinks to [2, 2] but each pop can shift O(N)
 
 """
 Time: O(N²)

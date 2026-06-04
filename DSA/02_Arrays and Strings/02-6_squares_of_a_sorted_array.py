@@ -32,8 +32,8 @@ def sortedSquares(nums):
     return ans
 
 nums = [-4, -1, 0, 3, 10]
-print(sortedSquares(nums))  
-# Output: [0, 1, 9, 16, 100]
+print(sortedSquares(nums))
+# Output: [0, 1, 9, 16, 100] → Compare |nums[l]| vs |nums[r]|; place bigger square at ans[i], fill back to front
 
 # ––––––––––––––––––––––––––––––––––––––––––––––––
 # Breakdown 
@@ -412,7 +412,7 @@ def sortedSquares(nums):
 
 nums = [-4, -1, 0, 3, 10]
 print(sortedSquares(nums))
-# Output: [0, 1, 9, 16, 100]
+# Output: [0, 1, 9, 16, 100] → Compare |nums[l]| vs |nums[r]|; place bigger square at ans[i], fill back to front
 
 """
 Key takeaways:
@@ -447,8 +447,8 @@ def sortedSquares(nums):
     return ans[::-1]
 
 nums = [-4, -1, 0, 3, 10]
-print(sortedSquares(nums))  
-# Output: [0, 1, 9, 16, 100]
+print(sortedSquares(nums))
+# Output: [0, 1, 9, 16, 100] → Pick larger |end| each step, append squares, then reverse to sort
 
 # Time: O(N)
 #   - Two pointers process each element once.
@@ -475,8 +475,8 @@ def sortedSquares(nums):
     return sorted(x*x for x in nums)  # Square each element and sort in one line
 
 nums = [-10, -5, 1, 2, 4, 7]
-print(sortedSquares(nums)) 
-# Output: [1, 4, 16, 25, 49, 100]
+print(sortedSquares(nums))
+# Output: [1, 4, 16, 25, 49, 100] → Square every element, then sort; simple O(n log n) approach
 
 
 # Time: O(n log n) - Generates n squared values in O(n) time, followed by sorting with Python's Timsort algorithm in O(n log n).
@@ -495,8 +495,8 @@ def sortedSquares(nums):
     return ans
 
 numbers = [-10, -5, 1, 2, 4, 7]
-print(sortedSquares(numbers))  
-# Output: [1, 4, 16, 25, 49, 100]
+print(sortedSquares(numbers))
+# Output: [1, 4, 16, 25, 49, 100] → Loop to square into a list, then .sort(); same idea as sorted(x*x for x in nums)
 
 # Time: O(n log n) - Iterates through n elements to square in O(n) time, followed by sorting the ans array in O(n log n) using Timsort.
 

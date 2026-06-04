@@ -52,6 +52,7 @@ print(fizzBuzz(n))
 
 # Output: ['1', '2', 'Fizz', '4', 'Buzz', 'Fizz', '7', '8', 'Fizz', 'Buzz', '11', 'Fizz', '13', '14', 'FizzBuzz']
 
+# → Loop each i; check 3&5 first, then 3, then 5, else str(i)
 
 # ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 # Breakdown
@@ -230,4 +231,5 @@ def fizzBuzz(n):
 
 n = 15
 print(fizzBuzz(n))
+# Output: 15 labels for 1..15 → Append Fizz/Buzz when divisible; if still empty, use str(i) (15 → FizzBuzz)
 

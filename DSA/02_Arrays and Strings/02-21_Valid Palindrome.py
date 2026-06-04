@@ -58,7 +58,8 @@ def is_palindrome(s):
     return True
 
 s = "A man, a plan, a canal: Panama"
-print(is_palindrome(s))  # Output: True
+print(is_palindrome(s))
+# Output: True → Keep alnum lowercase → "amanaplanacanalpanama"; l/r pointers match inward
 
 
 # ––––––––––––––––––––––––––––––––––––––––––––––––––
@@ -482,7 +483,8 @@ def is_palindrome(s):
     return True
 
 s = "A man, a plan, a canal: Panama"
-print(is_palindrome(s))  # Output: True
+print(is_palindrome(s))
+# Output: True → Same check: build cleaned string with +=, then l/r pointers compare inward
 
 
 """

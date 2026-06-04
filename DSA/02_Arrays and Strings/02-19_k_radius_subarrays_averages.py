@@ -36,7 +36,7 @@ def getAverages(nums, k):
 nums = [7, 4, 3, 9, 1, 8, 5, 2, 6]
 k = 3
 print(getAverages(nums, k))
-# Output: [-1, -1, -1, 5, 4, 4, -1, -1, -1]
+# Output: [-1, -1, -1, 5, 4, 4, -1, -1, -1] → Seed 2k+1 window sum at i=k; slide by adding right end, dropping left
 
 
 """
@@ -183,7 +183,7 @@ def getAverages(nums, k):
 nums = [7, 4, 3, 9, 1, 8, 5, 2, 6]
 k = 3
 print(getAverages(nums, k))
-# Output: [-1, -1, -1, 5, 4, 4, -1, -1, -1]
+# Output: [-1, -1, -1, 5, 4, 4, -1, -1, -1] → Seed 2k+1 window sum at i=k; slide by adding right end, dropping left
 
 
 
@@ -257,7 +257,8 @@ def getAverages(nums, k):  # Example: nums = [7, 4, 3, 9, 1, 8, 5, 2, 6], k = 3
 
 
 nums = [7, 4, 3, 9, 1, 8, 5, 2, 6]
-print(getAverages(nums, 3))  # Output: [-1, -1, -1, 5, 4, 4, -1, -1, -1]
+print(getAverages(nums, 3))
+# Output: [-1, -1, -1, 5, 4, 4, -1, -1, -1] → Seed 2k+1 window sum at i=k; slide by adding right end, dropping left
 
 
 
@@ -288,7 +289,7 @@ def getAverages(nums, k):
 
 nums = [7, 4, 3, 9, 1, 8, 5, 2, 6]
 print(getAverages(nums, 3))
-# Output: [-1, -1, -1, 5, 4, 4, -1, -1, -1]
+# Output: [-1, -1, -1, 5, 4, 4, -1, -1, -1] → Grow window with right; when size 2k+1, write avg at left+k, then shrink left
 
 # Time: O(n) – O(n) to create the result array, plus O(n) to slide the window (each element added and removed once).
 # Space: O(n) total due to result array, O(1) auxiliary if excluding it.
@@ -322,7 +323,7 @@ def getAverages(nums, k):
 
 nums = [7, 4, 3, 9, 1, 8, 5, 2, 6]
 print(getAverages(nums, 3))
-# Output: [-1, -1, -1, 5, 4, 4, -1, -1, -1] - Returns averages of k-radius subarrays (k=3) where each valid index i has 2k+1 elements, else -1.
+# Output: [-1, -1, -1, 5, 4, 4, -1, -1, -1] → First full window at i=k; slide sum forward, store avg at i-k each step
 
 # Time: O(n) - Initializes averages array in O(n) and slides window over n elements with O(1) operations per iteration.
 # Space: O(1) - Uses only a constant number of variables (window_sum, window_size), excluding the output array.
@@ -395,3 +396,4 @@ def getAverages(nums, k):
 
 nums = [7, 4, 3, 9, 1, 8, 5, 2, 6]
 print(getAverages(nums, 3))
+# Output: [-1, -1, -1, 5, 4, 4, -1, -1, -1] → Prefix sum gives each 2k+1 window in O(1); invalid indices stay -1

@@ -49,7 +49,7 @@ n = 3
 
 merge(nums1, m, nums2, n)
 print(nums1)
-# Output: [1, 2, 2, 3, 5, 6]
+# Output: [1, 2, 2, 3, 5, 6] → Merge from the back: always place the larger of p1/p2 into the empty tail
 
 
 # ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
@@ -345,7 +345,7 @@ n = 3
 
 merge(nums1, m, nums2, n)
 print(nums1)
-# Output: [1, 2, 2, 3, 5, 6]
+# Output: [1, 2, 2, 3, 5, 6] → Concatenate both parts and sort; simple but O((m+n) log(m+n))
 
 
 
@@ -375,4 +375,4 @@ n = 3
 
 merge(nums1, m, nums2, n)
 print(nums1)
-# Output: [1, 2, 2, 3, 5, 6]
+# Output: [1, 2, 2, 3, 5, 6] → Classic forward merge into a helper list, then copy back (O(m+n) time, O(m+n) space)

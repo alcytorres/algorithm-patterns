@@ -34,7 +34,7 @@ def sortArrayByParity(nums):
 
 nums = [3, 1, 2, 4]
 print(sortArrayByParity(nums))
-# Output: [2, 4, 3, 1]
+# Output: [2, 4, 3, 1] → One pass swaps each even to the front so all evens come before all odds
 
 
 # ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
@@ -320,7 +320,7 @@ def sortArrayByParity_bruteforce(nums):
 
 nums = [3, 1, 2, 4]
 print(sortArrayByParity_bruteforce(nums))
-# Output: [2, 4, 3, 1]
+# Output: [2, 4, 3, 1] → Split into evens and odds lists, then return evens + odds
 
 
 """

@@ -38,7 +38,8 @@ def moveZeroes(nums):
     return nums
 
 nums = [0, 1, 0, 3, 6]
-print(moveZeroes(nums))  # Output: [1, 3, 6, 0, 0]
+print(moveZeroes(nums))
+# Output: [1, 3, 6, 0, 0] → Phase 1 packs non-zeros to the front; Phase 2 fills the rest with 0
 
 
 # ––––––––––––––––––––––––––––––––––––––––––––––––––
@@ -232,7 +233,8 @@ def moveZeroes_Optimized(nums):
             slow += 1
 
 nums = [0, 1, 0, 3, 12]
-print(moveZeroes(nums))
+print(moveZeroes_Optimized(nums))
+# Output: [1, 3, 12, 0, 0] → Swap each non-zero forward with slow; fewer writes than copy + fill
 
 # Time:  O(n)  — each element processed once, swaps only when needed
 # Space: O(1)  — in-place
