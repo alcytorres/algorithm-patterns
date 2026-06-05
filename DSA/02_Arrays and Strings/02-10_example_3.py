@@ -2,9 +2,25 @@
 """
 Counts subarrays where product of all elements is strictly less than k.
 
-Example
+Example 1:
+    Input: nums = [10,5,2,6], k = 100
+    Output: 8
+    Explanation: The 8 subarrays that have product less than 100 are:
+    [10], [5], [2], [6], [10, 5], [5, 2], [2, 6], [5, 2, 6]
+    Note that [10, 5, 2] is not included as the product of 100 is not strictly less than k.
+
+Example 2:
+    Input: nums = [1,2,3], k = 0
+    Output: 0
+
+Example 3
     nums = [2, 3], k = 7
     Output: 3 --> [2], [2, 3], [3]
+
+Constraints:
+    1 <= nums.length <= 3 * 104
+    1 <= nums[i] <= 1000
+    0 <= k <= 106
 
 Solution: https://leetcode.com/problems/subarray-product-less-than-k/
 """
@@ -39,51 +55,51 @@ print(num_subarrays_product_less_than_k(nums, k))
 # r=3: Counted [5, 2, 6], [2, 6], [6]
 
 
-# ––––––––––––––––––––––––––––––––––––––––––––––––––
+# ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 # Breakdown
 def num_subarrays_product_less_than_k(nums, k):
-    if k <= 1:     # If k <= 1, no valid subarrays possible (since nums are positive)
-        return 0
+    if k <= 1:            # No valid subarray when k is 0 or 1
+        return 0          # Nothing can be strictly less than k
     
-    left = 0       # Left bound of the window
-    curr = 1       # Tracks product of current window
-    ans = 0        # Tracks number of valid subarrays
+    l = ans = 0           # Left edge of window; running count of valid subarrays
+    curr = 1              # Product inside the current window (empty starts at 1)
     
-    for right in range(len(nums)):  # Iterate right pointer over array
-        curr *= nums[right]         # Multiply element to window product
+    for r in range(len(nums)):   # Grow window by including each new right element
+        curr *= nums[r]          # Multiply in the new number at the right
         
-        while curr >= k:           # Shrink window while product is >= k
-            curr //= nums[left]    # Divide out leftmost element. 
-            left += 1              # Move left pointer forward
+        while curr >= k:         # Shrink from the left while product is too big
+            curr //= nums[l]     # Divide out the leftmost number we are dropping
+            l += 1               # Move left pointer one step to the right
             
-        ans += right - left + 1  # Add number of valid subarrays ending at right
+        ans += r - l + 1         # Every subarray ending at r with left in [l..r] works
     
-    return ans  # Returns the count of valid subarrays
+    return ans                   # Total count of valid subarrays
 
 
 """
 Time: O(N)
   - Let N = length of nums.
-  - The right pointer (r) expands the window across the array → O(N).
-  - The left pointer (l) only moves forward when product >= k, never backward.
-  - Each element is multiplied into and divided out of 'curr' at most once.
-  - Counting subarrays (ans += r - l + 1) is O(1) per iteration.
+  - Right pointer r moves through the array once → N steps.
+  - Left pointer l only moves forward (never backward).
+  - Each element is multiplied in once and divided out at most once → at most 2N window updates total.
+  - Each step inside the loop is O(1) (multiply, divide, add to ans).
   - Overall: O(N).
 
+
 Space: O(1)
-  - Only a few scalar variables (l, r, curr, ans) are used.
-  - No additional data structures are created.
+  - Only a few variables: l, ans, curr, and the loop index r.
+  - No extra arrays or hash maps.
   - Overall: O(1).
 
-  
+
 Interview Answer: Worst Case
 
 Time: O(N)
-  - Sliding window adjusts boundaries at most twice per element.
+  - Sliding window — each index enters and leaves the window at most once.
 
 Space: O(1)
-  - Constant space for counters and product tracking.
-  
+  - Constant extra variables only.
+
 
 ---
 Overview for Each Iteration
@@ -97,53 +113,196 @@ r | nums[r] | curr | l | curr >= k | Action                    | ans
 2 | 2       | 100  | 0 | Yes       | curr//=nums[0]=100//10=10 | 3
   |         | 10   | 1 | No        | ans+=2-1+1=2              | 5
 3 | 6       | 60   | 1 | No        | ans+=3-1+1=3              | 8
+
 Final: 8 ([10], [5], [5, 2], [2], [2, 6], [6], [10, 5], [5, 2, 6])
 
 
 
 ---
 Most IMPORTANT thing to Understand:
-    We want to count all subarrays where the product of numbers is < k.
+    • Count every **contiguous** subarray whose product is **strictly less than** k.
 
-    Use two pointers (left and right) to keep a sliding window. The product curr is the product of everything inside the window.
+    • Use a sliding window: expand with `r`, shrink from `l` when the product is too big (`curr >= k`).
 
-    Key rule: if curr < k, then all subarrays ending at right are valid → count them in one step.
+    • `curr` = product of all numbers in the window `[l..r]`.
 
-    
+    • After the window is valid (`curr < k`), add `r - l + 1` — that is how many good subarrays **end at** `r`.
+
 ---
 Why this code Works:
-    • Hash map not needed — we just keep a running product curr.
+    • Sliding window:
+        • `r` adds `nums[r]` to the window (multiply into `curr`).
+        • `while curr >= k`: drop `nums[l]` (divide out) and move `l` right until product < k again.
 
-    • Sliding window: multiply in the new number at right; while product is too big (≥ k), shrink from left until it's valid.
+    • Counting trick (`ans += r - l + 1`):
+        • If `[l..r]` is valid, then `[l..r]`, `[l+1..r]`, … `[r..r]` all have product < k.
+        • That is exactly `r - l + 1` subarrays ending at `r`.
 
-    • Counting trick: once valid, add right - left + 1 (all tails ending at right are guaranteed valid).
+    • Efficiency:
+        • Brute force checks every subarray → O(N²).
+        • Each index enters and leaves the window at most once → O(N).
 
-    • Efficiency: each number is multiplied in and divided out at most once → O(n) time, O(1) space.
+    • Intuition:
+        • Like a stretchy window on the array — pull right to grow, pinch left when the product hits k.
 
-    • Intuition: like stretching a rubber band (window). If it's too tight (product too big), loosen it from the left until it fits.
-
-    
 ---
-TLDR
-    • Grow the window with right; shrink from left if product ≥ k; every valid window adds right - left + 1 new subarrays.
+TLDR:
+    • Grow the window with `r`, shrink with `l` while product ≥ k, then add how many valid subarrays end at `r`.
 
 
 ---
 Quick Example Walkthrough:
+
     nums = [10, 5, 2, 6], k = 100
 
-    Start: left=0, curr=1, ans=0
+    r=0: curr=10 < 100 → add 1 → ans=1  ([10])
 
-    right=0 → curr=10 (<100) → add 0-0+1=1 → ans=1 ([10])
+    r=1: curr=50 < 100 → add 2 → ans=3  ([10,5], [5])
 
-    right=1 → curr=50 (<100) → add 1-0+1=2 → ans=3 ([10,5], [5])
+    r=2: curr=100 → shrink (drop 10), curr=10, l=1 → add 2 → ans=5  ([5,2], [2])
 
-    right=2 → curr=100 (≥100) → shrink: divide by 10 → curr=10, left=1 → now valid → add 2-1+1=2 → ans=5 ([5,2], [2])
+    r=3: curr=60 < 100 → add 3 → ans=8  ([5,2,6], [2,6], [6])
 
-    right=3 → curr=60 (<100) → add 3-1+1=3 → ans=8 ([5,2,6], [2,6], [6])
+    Final Answer: 8
 
-Final Answer: 8
 
+---
+Full Example Walkthrough:
+    nums = [10, 5, 2, 6], k = 100
+
+    Starting State:
+        l = 0, ans = 0, curr = 1
+
+    --------------------------------------------------
+
+    Loop Iteration 1 (r = 0):
+        Add nums[0] = 10:
+            curr = 1 * 10 = 10
+
+        curr >= k? → 10 >= 100 → NO (no shrink)
+
+        Count:
+            ans += 0 - 0 + 1 = 1
+
+        Now:
+            l = 0, curr = 10, ans = 1
+            Valid endings at r=0: [10]
+
+    --------------------------------------------------
+
+    Loop Iteration 2 (r = 1):
+        Add nums[1] = 5:
+            curr = 10 * 5 = 50
+
+        curr >= k? → NO
+
+        Count:
+            ans += 1 - 0 + 1 = 2 → ans = 3
+
+        Now:
+            l = 0, curr = 50, ans = 3
+            Valid endings at r=1: [10,5], [5]
+
+    --------------------------------------------------
+
+    Loop Iteration 3 (r = 2):
+        Add nums[2] = 2:
+            curr = 50 * 2 = 100
+
+        curr >= k? → YES → shrink:
+            curr //= nums[0] → 100 // 10 = 10, l = 1
+
+        curr >= k? → 10 >= 100 → NO
+
+        Count:
+            ans += 2 - 1 + 1 = 2 → ans = 5
+
+        Now:
+            l = 1, curr = 10, ans = 5
+            Window [5,2]; valid endings: [5,2], [2]
+
+    --------------------------------------------------
+
+    Loop Iteration 4 (r = 3):
+        Add nums[3] = 6:
+            curr = 10 * 6 = 60
+
+        curr >= k? → NO
+
+        Count:
+            ans += 3 - 1 + 1 = 3 → ans = 8
+
+        Now:
+            l = 1, curr = 60, ans = 8
+            Valid endings at r=3: [5,2,6], [2,6], [6]
+
+    --------------------------------------------------
+
+    Final Check:
+        return ans → 8
+
+        Eight contiguous subarrays have product strictly less than 100.
+
+
+
+
+
+---
+🧠 First Time? Thoughts → Code
+
+Read the problem (10 sec)
+    • Count how many **contiguous** subarrays have product **strictly less than** k.
+
+    • All `nums[i] >= 1` — product only grows as the window gets longer (no negatives, no zeros).
+
+    • If k ≤ 1, nothing works → return 0 early.
+
+Start naive (totally fine)
+    • For every start `i`, extend to every end `j`, multiply elements, count if product < k.
+
+    • O(N²) — totally reasonable first try (you already have this as brute force).
+
+The one insight that unlocks the optimal code
+    • Don't re-count from scratch for every subarray — keep one window `[l..r]` and a running product `curr`.
+
+    • When `curr >= k`, shrink from the left (`curr //= nums[l]`, `l += 1`) until valid again.
+
+    • At each `r`, every valid subarray **ending at r** is counted in one shot: `ans += r - l + 1`.
+
+Why sliding window? (only if needed)
+    • Contiguous subarrays = a window that only grows right and shrinks left (never reset `l` backward).
+
+    • Positive numbers → once product ≥ k, extending further only makes it worse — safe to drop from the left.
+
+    • `r - l + 1` is the non-obvious part — you're counting **endings**, not listing each subarray.
+
+Thought → line of code
+    • `if k <= 1: return 0`
+        → Can't be strictly less than 0 or 1 with positive ints.
+
+    • `curr = 1`
+        → Empty window product (multiply in as you grow).
+
+    • `curr *= nums[r]`
+        → Include the new right end.
+
+    • `while curr >= k: curr //= nums[l]; l += 1`
+        → Window too big — remove left until product < k.
+
+    • `ans += r - l + 1`
+        → All subarrays ending at `r` with start from `l` to `r` are valid.
+
+Memory hook (one sentence)
+    • Grow `r`, shrink `l` while product ≥ k, add `r - l + 1` each step.
+
+Would you arrive at this cold?
+    • Immediately: nested loops / brute force — yes.
+
+    • Sliding window with multiply/divide: maybe, if you've seen variable-size windows.
+
+    • `ans += r - l + 1`: usually **not** — that's the LeetCode trick; brute force doesn't need it.
+
+    • `curr //= nums[l]` when shrinking: makes sense once you know you're maintaining a running product.
 
 
 ---
@@ -157,6 +316,80 @@ Q: Why does left += 1 occur inside the if curr >= k: condition?
     • Ensures the window's product stays < k so all valid subarrays are counted.
 
 """
+
+
+
+
+# –––––––––––––––––––––––––––––––––––––––––––––––––––––––
+# Brute force — try every subarray (nested loops)
+
+def num_subarrays_product_less_than_k_bruteforce(nums, k):
+    if k <= 1:
+        return 0
+
+    ans = 0
+
+    for i in range(len(nums)):       # Start of subarray
+        curr = 1
+        for j in range(i, len(nums)):  # End of subarray
+            curr *= nums[j]            # Product of nums[i..j]
+            if curr < k:
+                ans += 1
+            else:
+                break                  # Product only grows (nums[j] >= 1), stop extending
+
+    return ans
+
+
+nums = [10, 5, 2, 6]
+k = 100
+print(num_subarrays_product_less_than_k_bruteforce(nums, k))
+# Output: 8 → Check every subarray starting at i; count if product < k
+
+
+"""
+Time: O(N²)
+  - Let N = length of nums.
+
+  - Outer loop: pick start index i → O(N).
+
+  - Inner loop: extend end index j from i → at most N steps per i.
+
+  - Each step: multiply one number and compare → O(1).
+
+  - Combined: O(N × N).
+  - Overall: O(N²).
+
+
+Space: O(1)
+  - Only ans, curr, and loop indices (i, j).
+  - Overall: O(1).
+
+
+Interview Answer: Worst Case
+
+Time: O(N²)
+  - Every start index i tries all end indices j (until product hits k).
+
+Space: O(1)
+  - No extra arrays — just a running product.
+
+
+---
+Overview for Each Iteration
+Input: nums = [10, 5, 2, 6], k = 100
+
+    i=0: [10]→10✓, [10,5]→50✓, [10,5,2]→100✗ stop
+    i=1: [5]→5✓, [5,2]→10✓, [5,2,6]→60✓
+    i=2: [2]→2✓, [2,6]→12✓
+    i=3: [6]→6✓
+
+    ans = 2+3+2+1 = 8
+
+Final: 8
+"""
+
+
 
 
 # ––––––––––––––––––––––––––––––––––––––––––––––––––
@@ -181,99 +414,3 @@ print("After curr //= nums[1]:", curr)  # Output: 5.0
 curr //= nums[2]   # Remove nums[2] (5), curr = 20 / 5
 print("After curr //= nums[2]:", curr)  # Output: 1.0
 
-
-
-
-
-
-# ––––––––––––––––––––––––––––––––––––––––––––––––––
-# Task: Count the number of contiguous subarrays with a product strictly less than k.
-# Assume nums contains positive integers.
-# Example: nums = [10, 5, 2, 6], k = 100 → Output = 8 (subarrays: [10], [5], [2], [6], [10, 5], [5, 2], [2, 6], [5, 2, 6])
-# Why: Practices sliding window technique to count subarrays meeting a product constraint.
-
-def num_subarrays_product_less_than_k(nums, k):  # Example: nums = [10, 5, 2, 6], k = 100
-
-    # 1️⃣ Input Validation
-    # If k <= 1, return 0 since no subarray of positive integers can have product < k
-    # Why? Positive integers have products >= 1, so no valid subarrays exist for k <= 1
-    if k <= 1:  # k = 100, 100 <= 1 is false, proceed
-        return 0  # skip
-
-    # 2️⃣ Initialize variables
-    # Initialize left pointer for the sliding window
-    # Why? We use left to shrink the window when the product is too large
-    left = 0  # left = 0
-
-    # Initialize current product of the window
-    # Why? We track the product of elements in the current window
-    curr = 1  # curr = 1 (initial value for multiplication)
-
-    # Initialize answer to count valid subarrays
-    # Why? We need to track the number of subarrays with product < k
-    ans = 0  # ans = 0
-
-    # 3️⃣ Iterate with right pointer
-    # Loop through the array with right pointer to expand the window
-    # Why? We process each element to build windows and count valid subarrays
-    for right in range(len(nums)):  # right goes from 0 to 3 (len(nums) = 4)
-        # --- Iteration 1: right = 0 ---
-        # Multiply the current element into the window product
-        # Why? We expand the window by including the new element
-        curr *= nums[right]  # nums[0] = 10, curr = 1 * 10 = 10
-
-        # Shrink window while product is >= k
-        # Why? We need the product to be < k for valid subarrays
-        while curr >= k:  # curr = 10, k = 100, 10 >= 100 is false, skip
-            curr //= nums[left]  # skip
-            left += 1  # skip
-        # Add the number of valid subarrays ending at right
-        # Why? Each window from left to right is valid, and there are right - left + 1 subarrays
-        ans += right - left + 1  # right = 0, left = 0, ans = 0 + (0 - 0 + 1) = 1
-        # After Iteration 1: left = 0, curr = 10, ans = 1
-        # Current window: [10] (product = 10, subarrays: [10])
-
-        # --- Iteration 2: right = 1 ---
-        if right == 1:
-            curr *= nums[right]  # nums[1] = 5, curr = 10 * 5 = 50
-            while curr >= k:  # curr = 50, k = 100, 50 >= 100 is false, skip
-                curr //= nums[left]
-                left += 1
-            ans += right - left + 1  # right = 1, left = 0, ans = 1 + (1 - 0 + 1) = 3
-            # After Iteration 2: left = 0, curr = 50, ans = 3
-            # Current window: [10, 5] (product = 50, subarrays: [10], [5], [10, 5])
-
-        # --- Iteration 3: right = 2 ---
-        if right == 2:
-            curr *= nums[right]  # nums[2] = 2, curr = 50 * 2 = 100
-            while curr >= k:  # curr = 100, k = 100, 100 >= 100 is true
-                curr //= nums[left]  # nums[0] = 10, curr = 100 // 10 = 10
-                left += 1  # left = 0 + 1 = 1
-                # Check again: curr = 10, k = 100, 10 >= 100 is false, exit while
-            ans += right - left + 1  # right = 2, left = 1, ans = 3 + (2 - 1 + 1) = 5
-            # After Iteration 3: left = 1, curr = 10, ans = 5
-            # Current window: [5, 2] (product = 10, subarrays: [5], [5, 2])
-
-        # --- Iteration 4: right = 3 ---
-        if right == 3:
-            curr *= nums[right]  # nums[3] = 6, curr = 10 * 6 = 60
-            while curr >= k:  # curr = 60, k = 100, 60 >= 100 is false, skip
-                curr //= nums[left]
-                left += 1
-            ans += right - left + 1  # right = 3, left = 1, ans = 5 + (3 - 1 + 1) = 8
-            # After Iteration 4: left = 1, curr = 60, ans = 8
-            # Current window: [5, 2, 6] (product = 60, subarrays: [6], [2, 6], [5, 2, 6])
-
-    # 4️⃣ Return the count of valid subarrays
-    # Why? ans contains the total number of subarrays with product < k
-    return ans  # ans = 8
-
-
-nums = [10, 5, 2, 6]
-k = 100
-print(num_subarrays_product_less_than_k(nums, k))  
-# Output: 8
-# r=0: [10]
-# r=1: [10, 5], [5]
-# r=2: [5, 2], [2]
-# r=3: [5, 2, 6], [2, 6], [6]
