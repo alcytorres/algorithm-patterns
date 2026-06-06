@@ -23,6 +23,18 @@ l = [2, 4, 4, 6]
 print(find_numbers(l))
 # Output: [2, 4, 6]
 
+# ––––––––––––––––––––––––––––––––––––––––––––––––
+# Breakdown 
+def find_numbers(nums):
+    seen = set(nums)          # Convert array to set for O(1) lookups
+    ans = []                  # Initialize empty result list
+    for x in seen:            # Iterate over unique numbers in set
+        if x+1 not in seen and x-1 not in seen:  # Check if x+1 and x-1 absent
+            ans.append(x)     # Add x to result if condition met
+    return ans                # Return list of numbers without adjacent values
+
+
+
 """
 Time: O(N)
   - Let N = length of nums.
@@ -137,16 +149,6 @@ print(5 in l)   # False, Python scans all elements (O(n))
 
 
 
-# ––––––––––––––––––––––––––––––––––––––––––––––––
-# Breakdown 
-def find_numbers(nums):
-    seen = set(nums)          # Convert array to set for O(1) lookups
-    ans = []                  # Initialize empty result list
-    for x in seen:            # Iterate over unique numbers in set
-        if x+1 not in seen and x-1 not in seen:  # Check if x+1 and x-1 absent
-            ans.append(x)     # Add x to result if condition met
-    return ans                # Return list of numbers without adjacent values
-
 
 
 # ––––––––––––––––––––––––––––––––––––––––––––––––
@@ -163,55 +165,3 @@ print(find_numbers(l))
 # Output: [2, 4, 6]
 
 
-
-# ––––––––––––––––––––––––––––––––––––––––––––––––
-# Task: Find all numbers x in an array such that x+1 and x-1 are not in the array, including each valid x once.
-# Example: nums = [2, 4, 4, 6] → Output = [2, 4, 6] (all numbers satisfy: no x+1 or x-1 in nums)
-# Why: Practices hash set usage for efficient lookup of adjacent values.
-
-def find_numbers(nums):  # Example: nums = [2, 4, 4, 6]
-
-    # 1️⃣ Create a set from the input array
-    # Convert nums to a set for O(1) lookup
-    # Why? We need to quickly check if x+1 and x-1 exist, and a set ensures unique elements
-    seen = set(nums)  # seen = {2, 4, 6}
-
-    # 2️⃣ Initialize result array
-    # Create an empty list to store valid numbers
-    # Why? We need to collect numbers that satisfy the condition
-    ans = []  # ans = []
-
-    # 3️⃣ Iterate through unique numbers in the set
-    # Check each unique number x in seen
-    # Why? We only need to check each distinct number once, and check if x+1 and x-1 are absent
-    for x in seen:  # x takes values [2, 4, 6] (order may vary due to set)
-        # --- Iteration 1: x = 2 ---
-        # Check if x+1 and x-1 are not in the set
-        # Why? A number is valid if both its adjacent values are absent
-        if x + 1 not in seen and x - 1 not in seen:  # x = 2, x+1 = 3, x-1 = 1
-                                                    # 3 not in {2, 4, 6}, 1 not in {2, 4, 6}, True
-            ans.append(x)  # ans = [2]
-        # After Iteration 1: ans = [2]
-
-        # --- Iteration 2: x = 4 ---
-        if x == 4:
-            if x + 1 not in seen and x - 1 not in seen:  # x = 4, x+1 = 5, x-1 = 3
-                                                        # 5 not in {2, 4, 6}, 3 not in {2, 4, 6}, True
-                ans.append(x)  # ans = [2, 4]
-            # After Iteration 2: ans = [2, 4]
-
-        # --- Iteration 3: x = 6 ---
-        if x == 6:
-            if x + 1 not in seen and x - 1 not in seen:  # x = 6, x+1 = 7, x-1 = 5
-                                                        # 7 not in {2, 4, 6}, 5 not in {2, 4, 6}, True
-                ans.append(x)  # ans = [2, 4, 6]
-            # After Iteration 3: ans = [2, 4, 6]
-
-    # 4️⃣ Return the result
-    # Why? ans contains all unique numbers x where x+1 and x-1 are not in the array
-    return ans  # ans = [2, 4, 6]
-
-
-l = [2, 4, 4, 6]
-print(find_numbers(l))  
-# Output: [2, 4, 6]

@@ -345,8 +345,18 @@ n = 3
 
 merge(nums1, m, nums2, n)
 print(nums1)
-# Output: [1, 2, 2, 3, 5, 6] → Concatenate both parts and sort; simple but O((m+n) log(m+n))
+# Output: [1, 2, 2, 3, 5, 6] → Concatenate both parts and sort
 
+"""
+Time: O((M + N) log(M + N))
+  - Concat nums1[:m] + nums2 → O(M + N).
+  - sorted() on M + N elements → O((M + N) log(M + N)).
+  - Overall: O((M + N) log(M + N)).
+
+Space: O(M + N)
+  - nums1[:m] + nums2 builds a new list of size M + N.
+  - Overall: O(M + N).
+"""
 
 
 # Forward merge into a helper array (classic merge-sort step)
@@ -375,4 +385,15 @@ n = 3
 
 merge(nums1, m, nums2, n)
 print(nums1)
-# Output: [1, 2, 2, 3, 5, 6] → Classic forward merge into a helper list, then copy back (O(m+n) time, O(m+n) space)
+# Output: [1, 2, 2, 3, 5, 6] → Classic forward merge into a helper list, then copy back
+
+"""
+Time: O(M + N)
+  - Each element from nums1 and nums2 is compared and appended at most once.
+  - Copy merged back into nums1 → O(M + N).
+  - Overall: O(M + N).
+
+Space: O(M + N)
+  - merged list stores all M + N elements.
+  - Overall: O(M + N).
+"""

@@ -387,8 +387,18 @@ stones = "aAAbbbb"
 print(numJewelsInStones(jewels, stones))
 # Output 3
 
-# Time Complexity: O(J.length∗S.length))
-# Space Complexity: O(1) 
+
+"""
+Time: O(J × S)
+    • Let J = length of jewels, S = length of stones.
+    • The loop runs S times (once per stone).
+    • Each s in J scans the jewels string → O(J) per check.
+    • Combined: S checks × O(J) each → O(J × S).
+
+Space: O(1)
+    • No extra data structures — just the loop and a running count inside sum.
+    • The generator (s in J for s in S) is consumed one item at a time, not stored.
+"""
 
 
 

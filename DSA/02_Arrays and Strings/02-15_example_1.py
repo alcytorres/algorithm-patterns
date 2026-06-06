@@ -33,6 +33,21 @@ print(answer_queries(nums, queries, limit))
 # [2, 4] = 12
 
 
+# ––––––––––––––––––––––––––––––––––––––––––––––
+# Breakdown
+def answer_queries(nums, queries, limit):
+    prefix = [nums[0]]       # Initialize prefix with first element
+    for i in range(1, len(nums)):  # Iterate from index 1
+        prefix.append(prefix[-1] + nums[i])  # Add current element to previous sum
+    
+    ans = []                 # Store results for each query
+    for x, y in queries:     # Iterate over each query [x, y]
+        curr = prefix[y] - prefix[x] + nums[x]  # Compute subarray sum from x to y
+        ans.append(curr < limit)  # Append True if sum < limit, False otherwise
+    
+    return ans               # Return array of boolean answers
+
+
 """
 Time: O(N + Q)
   - Let N = length of nums, Q = number of queries.
@@ -135,21 +150,6 @@ def fn(nums):
 nums = [[1, 2], [3, 4], [5, 6]]
 print(fn(nums))  # Output: [[1, 2], [3, 4], [5, 6]]
 
-
-
-# ––––––––––––––––––––––––––––––––––––––––––––––
-# Breakdown
-def answer_queries(nums, queries, limit):
-    prefix = [nums[0]]       # Initialize prefix with first element
-    for i in range(1, len(nums)):  # Iterate from index 1
-        prefix.append(prefix[-1] + nums[i])  # Add current element to previous sum
-    
-    ans = []                 # Store results for each query
-    for x, y in queries:     # Iterate over each query [x, y]
-        curr = prefix[y] - prefix[x] + nums[x]  # Compute subarray sum from x to y
-        ans.append(curr < limit)  # Append True if sum < limit, False otherwise
-    
-    return ans               # Return array of boolean answers
 
 
 
