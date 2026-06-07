@@ -201,8 +201,25 @@ Final: [1, 2, 0]
 
 
 
-
+---
 Follow-up: Can you solve it without using an extra space (i.e., O(1) memory)?
+"""
+
+# Honorable mention: O(1) extra space (follow-up only)
+def buildArray(nums):
+    n = len(nums)
+
+    for i in range(n):
+        nums[i] += n * nums[nums[i]]  # encode old + new in one cell
+    for i in range(n):
+        nums[i] //= n                 # decode to get answer
+    
+    return nums
+
+
+nums = [2, 0, 1]
+print(buildArray(nums))
+# Output: [1, 2, 0]
 
 
 
@@ -213,11 +230,7 @@ Follow-up: Can you solve it without using an extra space (i.e., O(1) memory)?
 
 
 
-
-
-
-
-
+"""
 ---
 🧠 First Time? Thoughts → Code
 
