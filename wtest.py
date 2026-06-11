@@ -18,3 +18,13 @@
 
 
 
+
+
+
+
+#   a = (b × whole times) + leftover
+
+# n % 10   # get the last digit
+# n // 10  # remove the last digit
+
+

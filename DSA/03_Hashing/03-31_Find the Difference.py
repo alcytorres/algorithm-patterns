@@ -50,7 +50,7 @@ print(findTheDifference(s, t))
 from collections import defaultdict
 
 def findTheDifference(s, t):
-    count = defaultdict(int)  # Notebook to count each letter in s
+    count = defaultdict(int)    # Notebook to count each letter in s
     for c in s:                 # Go through each letter in s
         count[c] += 1           # Add 1 to this letter's count
 
@@ -95,7 +95,7 @@ Input: s = "abcd", t = "abcde"
 
 Step 1: Count each letter in s
 i | c | count
---|---|---|------------------
+--|---|--------------------
 - | - | {}
 0 | a | {a:1}
 1 | b | {a:1, b:1}
@@ -104,7 +104,7 @@ i | c | count
 
 Step 2: Subtract using t
 i | c | count[c] | <0? | Result
---|---|---|------|-----|-----------
+--|---|----------|-----|-----------
 0 | a | 1→0      | No  | continue
 1 | b | 1→0      | No  | continue
 2 | c | 1→0      | No  | continue
@@ -320,6 +320,8 @@ Would you arrive at this cold?
 
 
 """
+
+
 # –––––––––––––––––––––––––––––––––––––––––––––––––––––––
 # Brute force — List + remove (cross off letters from a copy of s)
 
@@ -379,4 +381,41 @@ Input: s = "abcd", t = "abcde"
     c = 'e' → NOT in list → return 'e'
 
 Final: "e"
+
 """
+
+
+
+
+
+
+
+# 2. Sort both strings and compare
+class Solution:
+    def findTheDifference(self, s: str, t: str) -> str:
+        s = sorted(s)
+        t = sorted(t)
+
+        for i in range(len(s)):
+            if s[i] != t[i]:
+                return t[i]
+
+        return t[-1]
+
+# Time: O(N log N) - Sort both strings, then one pass to compare.
+# Space: O(N) - sorted copies of s and t.
+
+
+
+# 3. XOR solution
+class Solution:
+    def findTheDifference(self, s: str, t: str) -> str:
+        ans = 0
+
+        for c in s + t:
+            ans ^= ord(c)
+
+        return chr(ans)
+
+# Time: O(N) - One pass over all characters in s and t.
+# Space: O(1) - Only the ans variable; pairs cancel via XOR.
