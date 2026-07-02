@@ -4,6 +4,15 @@ Given two strings s and t, return true if s is a subsequence of t, or false othe
 
 Assume the len(t) >= len(s) , and both are strings with valid characters.
 
+Example 1:
+    Input: s = "abc", t = "abcde"
+    Output: True
+
+Constraints:
+    0 <= s.length <= 100
+    0 <= t.length <= 104
+    s and t consist only of lowercase English letters.
+
 Solution: https://leetcode.com/problems/is-subsequence/
 """
 

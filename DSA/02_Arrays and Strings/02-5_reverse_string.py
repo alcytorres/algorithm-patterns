@@ -36,10 +36,10 @@ def reverseString(s):
     
     while left < right:               # Continue until pointers meet
         s[left], s[right] = s[right], s[left]  # Swap elements at left and right pointers
-        left += 1                     # Move left pointer inward
-        right -= 1                    # Move right pointer inward
+        left += 1            # Move left pointer inward
+        right -= 1           # Move right pointer inward
     
-    return s                          # Return the reversed list
+    return s                 # Return the reversed list
 
 # Complexity
 # Time: O(n) - Performs n/2 swaps to reverse n elements.
@@ -58,7 +58,7 @@ Time: O(N)
 Space: O(1)
   - The reversal is done in-place using only two pointer variables.
   - No additional data structures are created.
-  - Overall: O(1).
+  - Overall: O(1)
 
   
 Interview Answer: Worst Case
@@ -83,6 +83,123 @@ l   | r   | s[l] | s[r] | l < r | Action          | s
 
 Final: ["o", "l", "l", "e", "h"]
 
+
+
+---
+Most IMPORTANT thing to Understand:
+    • We need to reverse the list in-place — swap characters inside the same array, no extra list.
+
+    • Two pointers start at opposite ends: left at the start, right at the end.
+
+    • Each swap puts one character in its final reversed position.
+
+    • When left >= right, every pair has been swapped and the string is reversed.
+
+---
+Why this code Works:
+    • Two pointers:
+        • left = index from the front (starts at 0).
+        • right = index from the back (starts at len(s) - 1).
+
+    • Each iteration:
+        • Swap s[left] and s[right].
+        • Move left forward and right backward.
+
+    • Why swapping works:
+        • First swap puts the last character where the first was, and the first where the last was.
+        • Each inward step fixes the next outer pair.
+        • The middle character (if odd length) stays put — left == right, loop stops.
+
+    • Efficiency:
+        • One pass, N/2 swaps.
+        • Time: O(N).
+        • Space: O(1) — only two pointer variables.
+
+    • Intuition:
+        • Like two people at opposite ends of a line swapping name tags and stepping inward until they meet in the middle.
+
+---
+TLDR:
+    • Swap the outermost pair, then the next pair inward, until the pointers meet. After N/2 swaps, the list is reversed in-place.
+
+---
+Quick Example Walkthrough:
+    s = ["h", "e", "l", "l", "o"]
+
+    Step 1: Initialize
+        left = 0, right = 4
+
+    Step 2: Swap and move inward
+        • Swap s[0]='h' and s[4]='o' → ["o", "e", "l", "l", "h"], left=1, right=3
+        • Swap s[1]='e' and s[3]='l' → ["o", "l", "l", "e", "h"], left=2, right=2
+        • left < right? 2 < 2 → False → exit loop
+
+    Final Answer: ["o", "l", "l", "e", "h"]
+
+---
+Full Example Walkthrough:
+    s = ["h", "e", "l", "l", "o"]
+
+    Starting State:
+        left = 0
+        right = 4
+
+        left points at s[0] = "h"
+        right points at s[4] = "o"
+
+        s = ["h", "e", "l", "l", "o"]
+
+    Loop Iteration 1:
+        Check:
+            left < right → 0 < 4 → True
+
+        Swap:
+            s[0], s[4] = s[4], s[0]
+            "h" ↔ "o"
+
+        Move pointers:
+            left = 1
+            right = 3
+
+        Current state:
+            s = ["o", "e", "l", "l", "h"]
+            left points at s[1] = "e"
+            right points at s[3] = "l"
+
+    --------------------------------------------------
+
+    Loop Iteration 2:
+        Check:
+            left < right → 1 < 3 → True
+
+        Swap:
+            s[1], s[3] = s[3], s[1]
+            "e" ↔ "l"
+
+        Move pointers:
+            left = 2
+            right = 2
+
+        Current state:
+            s = ["o", "l", "l", "e", "h"]
+            left points at s[2] = "l"
+            right points at s[2] = "l"
+
+    --------------------------------------------------
+
+    Loop Iteration 3:
+        Check:
+            left < right → 2 < 2 → False
+
+        Loop exits — no swap this round.
+
+    --------------------------------------------------
+
+    Final Check:
+        Return s → ["o", "l", "l", "e", "h"]
+
+        Every character is in reversed order, done in-place with O(1) extra space.
+
 """
 
 
@@ -101,53 +218,3 @@ print(reverseString(s))  # Output: ["o","l","l","e","h"]
 
 
 
-
-
-# ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
-# Task: Reverse a string (given as an array of characters) in-place using O(1) extra memory.
-# Example: s = ["h", "e", "l", "l", "o"] → Output = ["o", "l", "l", "e", "h"]
-# Why: Practices two-pointer technique for in-place array manipulation.
-
-def reverseString(s):  # Example: s = ["h", "e", "l", "l", "o"]
-
-    # 1️⃣ Initialize pointers
-    # Start left pointer at the beginning of the array
-    # Why? We swap characters from the start toward the middle
-    left = 0  # left = 0
-
-    # Start right pointer at the end of the array
-    # Why? We swap characters from the end toward the middle
-    right = len(s) - 1  # len(s) = 5, right = 5 - 1 = 4
-
-    # 2️⃣ Swap characters while pointers don't meet
-    # Continue until left pointer is less than right pointer
-    # Why? Once pointers meet or cross, the array is fully reversed
-    while left < right:  # left = 0, right = 4, 0 < 4 is true
-        # --- Iteration 1 ---
-        # Swap characters at left and right pointers
-        # Why? To reverse the string, we exchange characters from both ends
-        s[left], s[right] = s[right], s[left]  # s[0] = "h", s[4] = "o"
-                                               # Swap: s[0] = "o", s[4] = "h"
-        # Move pointers inward
-        # Why? We process the next pair of characters
-        left += 1  # left = 0 + 1 = 1
-        right -= 1  # right = 4 - 1 = 3
-        # After Iteration 1: left = 1, right = 3, s = ["o", "e", "l", "l", "h"]
-        # Current pair: s[1] = "e", s[3] = "l"
-
-        # --- Iteration 2 ---
-        if left == 1 and right == 3:
-            s[left], s[right] = s[right], s[left]  # s[1] = "e", s[3] = "l"
-                                                   # Swap: s[1] = "l", s[3] = "e"
-            left += 1  # left = 1 + 1 = 2
-            right -= 1  # right = 3 - 1 = 2
-            # After Iteration 2: left = 2, right = 2, s = ["o", "l", "l", "e", "h"]
-            # Loop exits: left = 2, right = 2, 2 < 2 is false
-
-    # 3️⃣ Return the reversed array
-    # Why? The array has been modified in-place to be reversed
-    return s  # s = ["o", "l", "l", "e", "h"]
-
-
-s = ["h", "e", "l", "l", "o"]
-print(reverseString(s))  # Output: ["o", "l", "l", "e", "h"]

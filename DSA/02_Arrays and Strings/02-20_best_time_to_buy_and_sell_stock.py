@@ -66,10 +66,10 @@ def max_profit(prices):
 """
 Time: O(N)
   - Let N = number of days (length of prices).
-  - Loop through prices once → O(N).
-      • Track the running minimum price in O(1).
-      • Compute current profit and update max in O(1).
-  - No nested loops — single sweep.
+  - One loop through prices → O(N).
+      • Update running minimum price → O(1).
+      • Compute current profit and update max profit → O(1).
+  - No nested loops — each price is visited once.
   - Overall: O(N).
 
 Space: O(1)
@@ -81,109 +81,307 @@ Space: O(1)
 Interview Answer: Worst Case
 
 Time: O(N)
-  - Single pass updates min price and best profit.
+  - Single pass through prices; each day updates min price and best profit in O(1).
 
 Space: O(1)
   - Constant extra space for two variables.
 
 
   
+
 ---
 Most IMPORTANT thing to Understand:
-    • We're finding the **maximum difference** (sell - buy) where the buy happens before the sell.
+    • We want the biggest profit from one buy-then-sell trade, where buy happens before sell.
 
-    • Keep track of:
-        - The lowest price seen so far (best buying point).
-        - The highest profit achievable at each step.
+    • At each day, the best buy price is the lowest price seen so far — not every past day.
 
-    • We don't need to check all pairs — just keep updating min and max as we go.
+    • `min_price` tracks that cheapest buy so far.
+
+    • `max_profit` tracks the best profit if we sold on any day up to now.
+
+    • We never need to compare every buy/sell pair — one pass is enough.
 
 ---
 Why this code Works:
-    • Track running minimum price — simulates buying at the lowest price so far.
+    • Running minimum:
+        • `min_price` stores the lowest price seen before the current day.
+        • When a new lower price appears, it becomes the new best buy point.
 
-    • For each day, compute profit if sold today → price - min_price.
+    • Profit at each day:
+        • `profit = p - min_price` means "if I bought at the cheapest day so far and sold today, what do I make?"
+        • If that profit beats `max_profit`, we save it.
 
-    • Update max_profit whenever a better profit appears.
+    • Efficiency:
+        • Brute force checks all pairs → O(N²).
+        • This scans once → O(N) time, O(1) space.
 
-    • Efficiency: one pass O(N), constant space O(1).
-
-    • Intuition: Like walking through prices, remembering the cheapest buy day and updating your best profit as prices rise.
+    • Intuition:
+        • Walk through prices left to right.
+        • Remember the cheapest day to buy.
+        • Every time price goes up, ask: "Is this my best sell day so far?"
 
 ---
 TLDR:
-    • Scan once, track the lowest price and best profit difference — no need to compare all pairs.
+    • One pass tracks the lowest buy price seen so far and the best profit if you sell today — no need to check all pairs.
+
 
 ---
-Quick Example Walkthroughs:
+Quick Example 1 Walkthrough:
+    prices = [7, 1, 5, 3, 6, 4]
 
-Example 1: prices = [7, 1, 5, 3, 6, 4]
---------------------------------
+    Step 1: Start with min_price = ∞, max_profit = 0
 
-Start:
-    min_price = ∞
-    max_profit = 0
+    Step 2: Walk through each price
+        • Day 1 (7): min becomes 7, profit = 0, max stays 0
+        • Day 2 (1): min becomes 1, profit = 0, max stays 0
+        • Day 3 (5): min stays 1, profit = 4, max becomes 4
+        • Day 4 (3): min stays 1, profit = 2, max stays 4
+        • Day 5 (6): min stays 1, profit = 5, max becomes 5
+        • Day 6 (4): min stays 1, profit = 3, max stays 5
 
-Day 1: price = 7
-    Is 7 < min_price? → YES → min_price = 7
-    profit = 7 - 7 = 0 → max_profit = 0
-
-Day 2: price = 1
-    Is 1 < min_price? → YES → min_price = 1
-    profit = 1 - 1 = 0 → max_profit = 0
-
-Day 3: price = 5
-    Is 5 < min_price? → NO (min is 1)
-    profit = 5 - 1 = 4 → max_profit = 4
-
-Day 4: price = 3
-    Is 3 < min_price? → NO
-    profit = 3 - 1 = 2 → max_profit stays 4
-
-Day 5: price = 6
-    Is 6 < min_price? → NO
-    profit = 6 - 1 = 5 → max_profit = 5
-
-Day 6: price = 4
-    Is 4 < min_price? → NO
-    profit = 4 - 1 = 3 → max_profit stays 5
-
-Final Answer:
-    max_profit = 5  (Buy at 1, Sell at 6)
-
-Key Idea:
-    • Track the lowest price seen so far.
-    • Pretend to sell every day.
-    • Keep the best profit.
-
-    
-
-Example 1: prices = [7, 1, 5, 3, 6, 4]
---------------------------------
-min_price = inf, max_profit = 0
-
-    Day 1: 7 → min=7 → profit=0 → max_profit=0  
-    Day 2: 1 → min=1 → profit=0 → max_profit=0  
-    Day 3: 5 → min=1 → profit=4 → max_profit=4  
-    Day 4: 3 → min=1 → profit=2 → max_profit=4  
-    Day 5: 6 → min=1 → profit=5 → max_profit=5  
-    Day 6: 4 → min=1 → profit=3 → max_profit=5  
-
-    Final Answer: 5 ✅ (Buy at 1, Sell at 6)
+    Final Answer: 5 (buy at 1, sell at 6)
 
 
-    
-Example 2: prices = [7, 6, 4, 3, 1]
---------------------------------
-min_price = inf, max_profit = 0
+---
+Quick Example 2 Walkthrough:
+    prices = [7, 6, 4, 3, 1]
 
-    Day 1: 7 → min=7 → profit=0 → max_profit=0  
-    Day 2: 6 → min=6 → profit=0 → max_profit=0  
-    Day 3: 4 → min=4 → profit=0 → max_profit=0  
-    Day 4: 3 → min=3 → profit=0 → max_profit=0  
-    Day 5: 1 → min=1 → profit=0 → max_profit=0  
+    Step 1: Start with min_price = ∞, max_profit = 0
 
-    Final Answer: 0 ✅ (No profitable transaction)
+    Step 2: Walk through each price
+        • Day 1 (7): min becomes 7, profit = 0, max stays 0
+        • Day 2 (6): min becomes 6, profit = 0, max stays 0
+        • Day 3 (4): min becomes 4, profit = 0, max stays 0
+        • Day 4 (3): min becomes 3, profit = 0, max stays 0
+        • Day 5 (1): min becomes 1, profit = 0, max stays 0
+
+    Final Answer: 0 (no profitable transaction — prices only go down)
+
+
+
+---
+Full Example 1 Walkthrough:
+    prices = [7, 1, 5, 3, 6, 4]
+
+    Starting State:
+        min_price = inf
+        max_profit = 0
+
+        About to process first price: p = 7
+
+    Loop Iteration 1:
+        Current price:
+            p = 7
+
+        Check minimum:
+            Is 7 < inf? → YES
+            min_price = 7
+
+        Calculate profit:
+            profit = 7 - 7 = 0
+
+        Check max profit:
+            Is 0 > 0? → NO
+            max_profit stays 0
+
+        Now:
+            min_price = 7
+            max_profit = 0
+
+    --------------------------------------------------
+
+    Loop Iteration 2:
+        Current price:
+            p = 1
+
+        Check minimum:
+            Is 1 < 7? → YES
+            min_price = 1
+
+        Calculate profit:
+            profit = 1 - 1 = 0
+
+        Check max profit:
+            Is 0 > 0? → NO
+            max_profit stays 0
+
+        Now:
+            min_price = 1
+            max_profit = 0
+
+    --------------------------------------------------
+
+    Loop Iteration 3:
+        Current price:
+            p = 5
+
+        Check minimum:
+            Is 5 < 1? → NO
+            min_price stays 1
+
+        Calculate profit:
+            profit = 5 - 1 = 4
+
+        Check max profit:
+            Is 4 > 0? → YES
+            max_profit = 4
+
+        Now:
+            min_price = 1
+            max_profit = 4
+
+    --------------------------------------------------
+
+    Loop Iteration 4:
+        Current price:
+            p = 3
+
+        Check minimum:
+            Is 3 < 1? → NO
+            min_price stays 1
+
+        Calculate profit:
+            profit = 3 - 1 = 2
+
+        Check max profit:
+            Is 2 > 4? → NO
+            max_profit stays 4
+
+        Now:
+            min_price = 1
+            max_profit = 4
+
+    --------------------------------------------------
+
+    Loop Iteration 5:
+        Current price:
+            p = 6
+
+        Check minimum:
+            Is 6 < 1? → NO
+            min_price stays 1
+
+        Calculate profit:
+            profit = 6 - 1 = 5
+
+        Check max profit:
+            Is 5 > 4? → YES
+            max_profit = 5
+
+        Now:
+            min_price = 1
+            max_profit = 5
+
+    --------------------------------------------------
+
+    Loop Iteration 6:
+        Current price:
+            p = 4
+
+        Check minimum:
+            Is 4 < 1? → NO
+            min_price stays 1
+
+        Calculate profit:
+            profit = 4 - 1 = 3
+
+        Check max profit:
+            Is 3 > 5? → NO
+            max_profit stays 5
+
+        Now:
+            min_price = 1
+            max_profit = 5
+
+    --------------------------------------------------
+
+    Final Check:
+        return max_profit
+        return 5
+
+        This means:
+            The best single trade is buy at 1 and sell at 6, for a profit of 5.
+
+
+
+
+---
+🧠 First Time? Thoughts → Code
+
+Read the problem (10 sec)
+    • Pick one buy day and one later sell day — maximize sell price minus buy price.
+
+    • If no profit is possible, return 0.
+
+    • Key constraint: buy must come before sell. You can't sell then buy.
+
+
+Start naive (totally fine)
+    • Try every buy day i, then every sell day j after it. Track the biggest profit.
+        → Nested loops over all pairs.
+
+    • O(N²) time — fine for small inputs, too slow for big arrays.
+
+
+The one insight that unlocks the optimal code
+    • You don't need to try every buy day. At any sell day, the best buy is always the lowest price seen so far.
+
+    • Walk left to right: update the cheapest buy, then ask "if I sell today, what's my profit?"
+
+    • Keep the best profit seen — that's your answer.
+
+    • One pass replaces all pair checks.
+
+
+Why a running minimum?
+    • The array is ordered by time — you can only look backward for buys.
+
+    • `min_price` = "cheapest day I could have bought on before today."
+
+    • `p - min_price` = profit if you bought at that cheapest day and sold today.
+
+
+Thought → line of code
+    • `min_price = float('inf')`
+        → Need a starting min before any price exists.
+        → `inf` guarantees the first real price becomes the min without special-casing `prices[0]`.
+        → (Weird syntax alert: `float('inf')` is just Python's way of saying "infinity.")
+
+    • `max_profit = 0`
+        → Start at 0 because "no profit" is the default answer.
+        → We only update when we actually find a gain.
+
+    • `for p in prices:`
+        → One left-to-right scan — time order is built into the array.
+
+    • `if p < min_price: min_price = p`
+        → New low? That's the new best buy point going forward.
+
+    • `profit = p - min_price`
+        → The core question: "sell today after buying at the cheapest day so far."
+
+    • `if profit > max_profit: max_profit = profit`
+        → Save the best sell day we've seen so far.
+
+    • `return max_profit`
+        → Never found profit? Still 0. Found one? Return the best.
+
+
+Memory hook (one sentence)
+    • Walk the prices, remember the cheapest buy, and track the best "sell today" profit.
+
+
+Would you arrive at this cold?
+    • Immediately: nested loops — "try every buy, then every sell after it." You'd probably get O(N²) without studying.
+
+    • After asking "what does the input buy me?": the array is already in time order, so you only need the running minimum — not every past day.
+
+    • Bookkeeping: `min_price`, `max_profit`, the update checks.
+
+    • Real insight: at each day, the optimal buy is always the min so far — that's what kills the inner loop.
+
+
+
 
 
 
@@ -306,8 +504,7 @@ def maxProfit(prices):
         
         return max_profit
         
-        # Time: O(N^2) (Brute Force)
-        # Space: O(1)
-        # This was modified from the video explanation to let max_profit = 0, this is better
-
+    # Time: O(N^2) (Brute Force)
+    # Space: O(1)
+    # This was modified from the video explanation to let max_profit = 0, this is better
 
