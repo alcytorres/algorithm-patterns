@@ -55,7 +55,7 @@ def findMaxAverage(nums, k):
     for i in range(k):   # Iterate over first k elements
         curr += nums[i]  # Add to window sum
     
-    ans = curr        # Initialize answer with first window's sum
+    ans = curr           # Initialize answer with first window's sum
     
     # Slide window, maintaining size k
     for i in range(k, len(nums)):  # Start from index k
@@ -88,126 +88,307 @@ Space: O(1)
   - Constant space for running total and average calculation.
 
 
----
-Overview for Each Iteration
-Input: nums = [4, -2, 1, 7, -1], k = 2
-
-Step 1: Calculate initial sum for first window of size k
-i   | curr    | ans
-----|---------|----
--   | 0       | 0
-0   | 4       | 4
-1   | 2 (4-2) | 2
-
-Step 2: Slide window and compute maximum sum
-i   | curr          | nums[i] | nums[i-k] | ans
-----|---------------|---------|-----------|---------------
-2   | -1 (2+1-4)    | 1       | 4         | 2 (max(2, -1))
-3   | 8 (-1+7-(-2)) | 7       | -2        | 8 (max(2, 8))
-4   | 6 (8-1-7)     | -1      | 1         | 8 (max(8, 6))
-
-Final: 8/2 = 4 ([1, 7])
-
 
 ---
 Most IMPORTANT thing to Understand:
-    • We want the subarray of length k with the highest average.
+    • We need the highest average of any contiguous subarray of exactly length k.
 
-    • Instead of recalculating every sum, we keep a running sum of the current window of size k.
+    • Average = sum / k, and k is fixed — so the subarray with the biggest sum also has the biggest average.
 
-    • Average = (best sum) ÷ k. So maximizing the sum also maximizes the average.
+    • Instead of recomputing each window's sum from scratch, we slide one window across the array and update the sum in O(1).
 
-
----  
-Why this code Works:
-    • Running sum curr: tracks the sum of the current window.
-
-    • Sliding window: when moving forward, add the new element and remove the one that just left.
-
-    • Efficiency: avoids recalculating each window in O(k). Total = O(n), space = O(1).
-
-    • Intuition: Like moving a magnifying glass over the array — you don't recheck everything, just swap one number out and one in.
+    • `curr` tracks the sum of the current window. `ans` tracks the best (largest) window sum seen so far.
 
 ---
-TLDR
-    • Keep a rolling sum of each k-sized window, track the largest sum, then divide by k.
+Why this code Works:
+    • Sliding window (fixed size k):
+        • First loop builds the initial window: sum of nums[0] through nums[k-1].
+        • Second loop slides the window one index at a time.
+
+    • Each slide:
+        • Add the new right element: nums[i]
+        • Remove the old left element: nums[i - k]
+        • `curr += nums[i] - nums[i - k]` keeps the window size exactly k.
+
+    • `ans = max(ans, curr)` remembers the best window sum as we slide.
+
+    • Return `ans / k` because max sum ÷ k = max average.
+
+    • Efficiency:
+        • Brute force: nested loops try every start, re-summing k elements each time → O(N × k).
+        • Sliding window processes each element once → O(N).
+        • Space: O(1) — only `curr`, `ans`, and loop counters.
+
+    • Intuition:
+        • Like a moving frame of width k sliding across the array.
+        • You only adjust the edges — drop the left number, add the right number — instead of recounting everything inside.
+
+---
+TLDR:
+    • Build the first window sum, then slide it across the array while tracking the max sum. Divide by k to get the max average.
+
 
 ---
 Quick Example Walkthrough:
     nums = [4, -2, 1, 7, -1], k = 2
 
-    Step 1: First window [4, -2], sum = 2 → ans = 2
+    Step 1: Build first window (indices 0-1)
+        curr = 4 + (-2) = 2
+        ans = 2
 
-    Step 2: Slide to [ -2, 1 ], sum = 2 - 4 + 1 = -1 → ans = 2
+    Step 2: Slide the window
+        • i=2: curr = 2 + 1 - 4 = -1  → ans stays 2
+        • i=3: curr = -1 + 7 - (-2) = 8 → ans = 8  (window [1, 7])
+        • i=4: curr = 8 + (-1) - 1 = 6  → ans stays 8
 
-    Step 3: Slide to [1, 7], sum = -1 - (-2) + 7 = 8 → ans = 8
+    Step 3: Return average
+        ans / k = 8 / 2 = 4
 
-    Step 4: Slide to [7, -1], sum = 8 - 1 - 7 = 6 → ans = 8
+    Final Answer: 4
 
-Final Answer: 8 ÷ 2 = 4 (best subarray = [1,7])
+
+---
+Full Example Walkthrough:
+    nums = [4, -2, 1, 7, -1]
+    k = 2
+
+    Starting State:
+        curr = 0
+        ans = (not set yet)
+
+    --------------------------------------------------
+
+    Build First Window (i = 0 to 1):
+        i = 0: curr += nums[0] = 4        → curr = 4
+        i = 1: curr += nums[1] = -2       → curr = 2
+
+        ans = curr = 2
+        Current window: [4, -2], sum = 2, average = 1
+
+    --------------------------------------------------
+
+    Loop Iteration 1 (i = 2):
+        Slide: add nums[2], remove nums[0]
+            curr += nums[2] - nums[0]
+            curr += 1 - 4 = -3
+            curr = 2 + (-3) = -1
+
+        Compare:
+            ans = max(2, -1) = 2
+
+        Current window: [-2, 1], sum = -1, average = -0.5
+
+    --------------------------------------------------
+
+    Loop Iteration 2 (i = 3):
+        Slide: add nums[3], remove nums[1]
+            curr += nums[3] - nums[1]
+            curr += 7 - (-2) = 9
+            curr = -1 + 9 = 8
+
+        Compare:
+            ans = max(2, 8) = 8
+
+        Current window: [1, 7], sum = 8, average = 4
+
+    --------------------------------------------------
+
+    Loop Iteration 3 (i = 4):
+        Slide: add nums[4], remove nums[2]
+            curr += nums[4] - nums[2]
+            curr += (-1) - 1 = -2
+            curr = 8 + (-2) = 6
+
+        Compare:
+            ans = max(8, 6) = 8
+
+        Current window: [7, -1], sum = 6, average = 3
+
+    --------------------------------------------------
+
+    Final Check:
+        return ans / k
+        8 / 2 = 4
+
+        This means:
+            The subarray [1, 7] has the largest average of any length-2 contiguous subarray.
+
+
+---
+Overview for Each Iteration
+Input: nums = [4, -2, 1, 7, -1], k = 2
+
+Phase 1: Build first window
+i | curr | ans | window      | Action
+--|------|-----|-------------|----------------------------------
+0 | 4    | -   | [4]         | curr += nums[0]
+1 | 2    | 2   | [4, -2]     | curr += nums[1], ans = curr
+
+Phase 2: Slide window
+i | curr | ans | window      | Action
+--|------|-----|-------------|----------------------------------
+2 | -1   | 2   | [-2, 1]     | +nums[2] -nums[0], ans stays 2
+3 | 8    | 8   | [1, 7]      | +nums[3] -nums[1], ans = max(2,8)
+4 | 6    | 8   | [7, -1]     | +nums[4] -nums[2], ans stays 8
+
+Final: ans / k = 8 / 2 = 4
 
 
 
 ---
-⚠️ Caution:
-    • I verified this solution is correct, but LeetCode may deny it unless the last line is: return float(ans) / k
+🧠 First Time? Thoughts → Code
 
-Why?
-    • In Python 2, "ans / k" does integer division if both are ints
+Read the problem (10 sec)
+    • Find the highest average of any contiguous subarray of exactly length k.
 
-    • In Python 3, "/" always returns a float (e.g., 12 / 4 = 3.0)
-    
-    • LeetCode sometimes runs code with Python 2 by default, so explicitly casting to float ensures the result matches the expected floating-point output.
+    • k is fixed for every window — so max average = max sum ÷ k. Track the biggest sum, divide once at the end.
+
+    • "Contiguous" + fixed length k → windows slide across the array.
+
+
+Start naive (totally fine)
+    • Try every starting index, inner loop sums the next k elements, keep the best.
+        → Nested loops.
+
+    • O(N × k) — works, but re-sums almost the same elements every time.
+
+
+The one insight that unlocks the optimal code
+    • Adjacent windows share k − 1 elements. Don't re-add them — just update the edges.
+
+    • Slide right: add the new element coming in, subtract the one leaving.
+
+    • One running sum (`curr`), updated in O(1) per step → whole scan is O(N).
+
+
+Why sliding window?
+    • Window size never changes — classic fixed-size sliding window.
+
+    • Each step only 2 numbers change (one enters, one exits). Everything in the middle stays.
+
+
+Thought → line of code
+    • `for i in range(k): curr += nums[i]`
+        → Build the first full window before sliding.
+        → Can't use the slide formula until you have a starting sum.
+
+    • `ans = curr`
+        → First window counts — initialize max with it.
+
+    • `for i in range(k, len(nums))`
+        → `i` is the new right edge entering the window.
+        → Start at k, not 0 — first k elements already summed.
+
+    • `curr += nums[i] - nums[i - k]`
+        → The whole trick in one line: add right, drop left.
+        → `nums[i - k]` is the element leaving — not obvious until you picture the window shifting.
+
+    • `ans = max(ans, curr)`
+        → Track best sum. Divide by k only at the end since k is constant.
+
+    • `return ans / k`
+        → Max sum ÷ k = max average. One division, not per window.
+
+
+Memory hook (one sentence)
+    • Build the first window, then slide: add the new right, drop the old left, track the best sum.
+
+
+Would you arrive at this cold?
+    • Immediately: nested loops — "try every start, sum k elements." O(N × k) without studying.
+
+    • After asking "what does the input buy me?": fixed size + contiguous → sliding window; adjacent windows overlap almost completely.
+
+    • Bookkeeping: `curr`, `ans`, two loops, the add-minus slide line.
+
+    • Real insight: update the running sum at the edges — that's what kills the inner loop.
 
 """
 
 
 
-# ––––––––––––––––––––––––––––––––––––––––––––––
-# Solution: Sliding Window: Fixed-Size Maximum Average
-# Simpler example: nums = [1, 2, 3, 4]
 
-def findMaxAverage(nums, k):
-    """
-    :type nums: List[int]
-    :type k: int
-    :rtype: float
-    """
-    curr = 0
-    for i in range(k):
-        curr += nums[i]
 
-    ans = curr
 
-    for i in range(k, len(nums)):
-        curr += nums[i] - nums[i - k]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# –––––––––––––––––––––––––––––––––––––––––––––––––––––––
+# Brute force
+def findMaxAverage_bruteforce(nums, k):
+    ans = float('-inf')
+
+    for i in range(len(nums) - k + 1):
+        curr = 0
+        for j in range(k):
+            curr += nums[i + j]
         ans = max(ans, curr)
 
     return ans / k
 
-nums = [1, 2, 3, 4]
+
+nums = [4, -2, 1, 7, -1]
 k = 2
-print(solution.findMaxAverage(nums, k))  
-# Output: 3.5  --> Subarray [3, 4] (length 2, sum 3 + 4 = 7, average 7/2 = 3.5) has the largest average for k=2.
+print(findMaxAverage_bruteforce(nums, k))
+# Output: 4 → Try every length-k subarray, sum each from scratch, return max average.
 
 """
+Time: O(N × k)
+  - Let N = length of nums.
+
+  - Step 1: Outer loop tries every valid starting index → O(N).
+      • There are N - k + 1 possible windows.
+
+  - Step 2: Inner loop sums k elements for each start → O(k).
+      • Each window is recomputed from scratch.
+
+  - Combined: O(N × k).
+  - Overall: O(N × k).
+
+
+Space: O(1)
+  - Only ans, curr, and loop counters are used.
+  - No additional data structures.
+  - Overall: O(1).
+
+
+Interview Answer: Worst Case
+
+Time: O(N × k)
+  - Every starting position re-sums all k elements in its window.
+
+Space: O(1)
+  - Constant extra variables only.
+
+
+---
 Overview for Each Iteration
-Input: nums = [1, 2, 3, 4], k = 2
-Step 1: Calculate initial sum for first window of size k
-i   | curr      | ans
-----|-----------|----
--   | 0         | 0
-0   | 1         | 1
-1   | 3 (1+2)   | 3
+nums = [4, -2, 1, 7, -1], k = 2
 
-Step 2: Slide window and compute maximum sum
-i   | curr      | nums[i] | nums[i-k] | ans
-----|-----------|---------|-----------|--------------
-2   | 5 (3+3-1) | 3       | 1         | 5 (max(3, 5))
-3   | 7 (5+4-2) | 4       | 2         | 7 (max(5, 7))
-Final: 7/2 = 3.5 ([3, 4])
+    ans starts = -inf
+
+    i = 0 → sum nums[0..1] = 4 + (-2) = 2  → ans = 2
+    i = 1 → sum nums[1..2] = -2 + 1 = -1   → ans = 2
+    i = 2 → sum nums[2..3] = 1 + 7 = 8     → ans = 8
+    i = 3 → sum nums[3..4] = 7 + (-1) = 6  → ans = 8
+
+    return ans / k
+    8 / 2 = 4
+
+Final: 4
 
 """
-
-
-
