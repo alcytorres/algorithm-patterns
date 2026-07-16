@@ -1,6 +1,5 @@
 # Ask Claude, Grok, ChatGPT to name the top 50 most common DSA problems you rec I know.
 # In the prompt find a way to include the ones you already have pracitced
-# Make a new weighted average list of it all
 
 
 
@@ -14,18 +13,12 @@
 
 
 
-# Update full breakdown guide. dont talk about time or space compelxicty. i already have a custom gpt for that.
-
-
-
-
-
-
-
 #   a = (b × whole times) + leftover
 
 # n % 10   # get the last digit
 # n // 10  # remove the last digit
+
+
 
 
 

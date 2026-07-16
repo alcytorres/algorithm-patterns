@@ -108,49 +108,156 @@ Final: [1, 3, 6, 0, 0]
 
 ---
 Most IMPORTANT thing to Understand:
-    • We must keep all non-zero numbers in their original order — no rearranging allowed.
+    • We keep two pointers: slow marks the next spot to place a non-zero, fast scans every element.
 
-    • The goal is to shift all non-zero elements to the front, then fill the rest with zeros.
+    • Every time fast finds a non-zero, we copy it to the slow spot and move slow forward.
 
-    • The slow pointer marks where the next non-zero should be placed.
+    • After the first pass, all non-zeros sit at the front in their original order, and slow points to the first "leftover" spot.
+
+    • Whatever positions come after slow must become 0, so a second pass fills them with zeros.
 
 ---
 Why this code Works:
-    • Data structure idea: Two-pointer scan — fast reads, slow writes.
+    • Two pointers role:
+        • slow = the write position (next place a non-zero belongs).
+        • fast = the read position (currently inspected element).
 
-    • Technique: Copy all non-zeros forward (preserves order), then overwrite leftover positions with zeros.
+    • If nums[fast] != 0:
+        • We found a non-zero, so write it at slow and advance slow.
+        • This "packs" non-zeros toward the front without breaking their order.
 
-    • Efficiency: Avoids extra arrays and avoids unnecessary swaps → optimal O(N) time, O(1) space.
+    • If nums[fast] == 0:
+        • Do nothing, only fast moves on.
+        • We simply skip zeros during the packing phase.
 
-    • Intuition: It's like packing a suitcase — slide all useful items to the front, then fill extra space with padding (zeros).
+    • Second pass:
+        • Everything from slow to the end is filler.
+        • Set those positions to 0 to complete the move.
+
+    • Efficiency:
+        • Phase 1 scans the array once → O(N).
+        • Phase 2 fills the tail once → O(N).
+        • Time: O(N). Space: O(1), all in-place.
+
+    • Intuition:
+        • Think of slow as a "shelf pointer" where you neatly stack every non-zero book you pick up.
+        • Once all books are stacked, you fill the empty shelf space with zeros.
 
 ---
 TLDR:
-    • Move all non-zero values forward using a slow pointer, then fill remaining slots with zeros.
+    • It packs every non-zero to the front in order with a write pointer, then fills the remaining tail with zeros — all in-place in O(N).
+
 
 ---
 Quick Example Walkthrough:
-
     nums = [0, 1, 0, 3, 6]
 
-    Phase 1 — Move non-zeros forward:
+    Step 1: Initialize slow = 0, then scan with fast
+        • fast=0, nums[0]=0 → zero, skip
+        • fast=1, nums[1]=1 → non-zero, nums[0]=1, slow=1
+        • fast=2, nums[2]=0 → zero, skip
+        • fast=3, nums[3]=3 → non-zero, nums[1]=3, slow=2
+        • fast=4, nums[4]=6 → non-zero, nums[2]=6, slow=3
 
-        fast=0 → 0  → skip
+    Step 2: Array after packing → [1, 3, 6, 3, 6], slow=3
 
-        fast=1 → 1  → place at slow=0 → nums = [1, 1, 0, 3, 6], slow=1
+    Step 3: Fill from index slow(3) to end with 0
+        • nums[3]=0, nums[4]=0
 
-        fast=2 → 0  → skip
+    Final Answer: [1, 3, 6, 0, 0]
 
-        fast=3 → 3  → place at slow=1 → nums = [1, 3, 0, 3, 6], slow=2
 
-        fast=4 → 6  → place at slow=2 → nums = [1, 3, 6, 3, 6], slow=3
+---
+Full Example Walkthrough:
+    nums = [0, 1, 0, 3, 6]
 
-    Phase 2 — Fill remaining positions with zero:
+    Starting State:
+        slow = 0
+        nums = [0, 1, 0, 3, 6]
 
-        positions 3, 4 → set to 0  
-        nums = [1, 3, 6, 0, 0]
+    Phase 1 — Pack non-zeros to the front:
 
-    Final Output: [1, 3, 6, 0, 0]
+    Loop Iteration 1:
+        Compare:
+            nums[fast] != 0 → nums[0] = 0 → NO (it IS zero)
+
+        Since it is zero:
+            slow does NOT move
+            nothing is written
+
+        Now:
+            slow = 0, fast = 0
+            nums = [0, 1, 0, 3, 6]
+
+    --------------------------------------------------
+
+    Loop Iteration 2:
+        Compare:
+            nums[1] = 1 != 0 → YES (non-zero)
+
+        Since it is non-zero:
+            nums[slow] = nums[fast] → nums[0] = 1
+            slow += 1 → slow = 1
+
+        Now:
+            slow = 1, fast = 1
+            nums = [1, 1, 0, 3, 6]
+
+    --------------------------------------------------
+
+    Loop Iteration 3:
+        Compare:
+            nums[2] = 0 != 0 → NO (it IS zero)
+
+        slow stays the same, nothing written.
+
+        Now:
+            slow = 1, fast = 2
+            nums = [1, 1, 0, 3, 6]
+
+    --------------------------------------------------
+
+    Loop Iteration 4:
+        Compare:
+            nums[3] = 3 != 0 → YES (non-zero)
+
+        Since it is non-zero:
+            nums[slow] = nums[fast] → nums[1] = 3
+            slow += 1 → slow = 2
+
+        Now:
+            slow = 2, fast = 3
+            nums = [1, 3, 0, 3, 6]
+
+    --------------------------------------------------
+
+    Loop Iteration 5:
+        Compare:
+            nums[4] = 6 != 0 → YES (non-zero)
+
+        Since it is non-zero:
+            nums[slow] = nums[fast] → nums[2] = 6
+            slow += 1 → slow = 3
+
+        Now:
+            slow = 3, fast = 4
+            nums = [1, 3, 6, 3, 6]
+
+    --------------------------------------------------
+
+    Phase 2 — Fill the rest with zeros (from index slow = 3):
+
+        nums[3] = 0 → [1, 3, 6, 0, 6]
+        nums[4] = 0 → [1, 3, 6, 0, 0]
+
+    --------------------------------------------------
+
+    Final Check:
+        Return nums → [1, 3, 6, 0, 0]
+
+        This means:
+            All non-zeros kept their original order at the front,
+            and every zero was pushed to the end — done in-place.
 
 """
 
@@ -199,8 +306,8 @@ Same pattern as Remove Element (27):
 
 Memory hook:
     If you know this slow/fast loop, you already know Remove Element — same loop, just "!= val" and skip Phase 2.
-"""
 
+"""
 
 
 
@@ -241,23 +348,3 @@ print(moveZeroes_Optimized(nums))
 
 
 
-
-# # Snowball Method (Shift Non-Zeros Forward)
-# def moveZeroes(nums):
-#     snowball = 0
-#     for i in range(len(nums)):
-#         if nums[i] == 0:
-#             snowball += 1
-#         else:
-#             nums[i - snowball] = nums[i]
-    
-#     for i in range(len(nums) - snowball, len(nums)):
-#         nums[i] = 0
-
-#     return nums
-
-# nums = [0, 1, 0, 3, 12]
-# print(moveZeroes(nums))
-
-# # Time:  O(n)   — one pass to shift, one pass to write zeros
-# # Space: O(1)   — in-place

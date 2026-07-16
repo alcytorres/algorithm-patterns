@@ -7,7 +7,12 @@ Example:
     Output: 4
     Explanation: nums[1] was flipped from 0 to 1. We are left with [1, 1, 1, 1] 
 
-Solution: https://leetcode.com/problems/max-consecutive-ones-iii/solutions/409192/max-consecutive-ones-iii/
+Constraints:
+    1 <= nums.length <= 105
+    nums[i] is either 0 or 1.
+    0 <= k <= nums.length
+
+Solution: https://leetcode.com/problems/max-consecutive-ones-iii/description/
 """
 
 # Solution: Sliding Window: Shrink Window When Zero Count Exceeds k
@@ -101,7 +106,7 @@ r | nums[r] | l | curr(0s) | Action / Decision        | ans | Window
 
 Shrink Process at r = 4
 
-l move | Removed | curr(0s) | New l | Window
+l move | Removed | curr(0s)  | New l | Window
 -------|---------|-----------|-------|----------
 0 → 1  | 1       | 2         | 1     | [0,1,1,0]
 1 → 2  | 0       | 1         | 2     | [1,1,0]

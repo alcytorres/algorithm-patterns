@@ -37,20 +37,19 @@ Solution: https://leetcode.com/problems/valid-palindrome/description/
 """
 
 
-# Solution 1: Build String → Two Pointers (with list + join)
+# Solution 1: Build List → Two Pointers
 
 def is_palindrome(s):
     chars = []
     for c in s:
         if c.isalnum():
             chars.append(c.lower())
-    new_string = "".join(chars)
 
     l = 0
-    r = len(new_string) - 1
+    r = len(chars) - 1
 
     while l < r:
-        if new_string[l] != new_string[r]:
+        if chars[l] != chars[r]:
             return False
         l += 1
         r -= 1
@@ -59,52 +58,49 @@ def is_palindrome(s):
 
 s = "A man, a plan, a canal: Panama"
 print(is_palindrome(s))
-# Output: True → Keep alnum lowercase → "amanaplanacanalpanama"; l/r pointers match inward
+# Output: True → Keep alnum lowercase in chars; l/r pointers match inward
 
 
 # ––––––––––––––––––––––––––––––––––––––––––––––––––
 # Breakdown
 def is_palindrome(s):
 
-    # Step 1: Create a new string with only letters and numbers, all lowercase
+    # Step 1: Collect only letters and numbers, all lowercase
     chars = []                        # Empty list to collect valid characters
 
     for c in s:                       # Go through each character in the string
         if c.isalnum():               # Keep only letters and numbers
             chars.append(c.lower())   # Lowercase it and add to the list
-    new_string = "".join(chars)       # Turn the list into one clean string
 
 
-    # Step 2: Check if the new string reads the same forwards and backwards
-    l = 0                             # Left pointer starts at the beginning
-    r = len(new_string) - 1           # Right pointer starts at the end
+    # Step 2: Check if chars reads the same forwards and backwards
+    l = 0                           # Left pointer starts at the beginning
+    r = len(chars) - 1              # Right pointer starts at the end
 
-    while l < r:                      # Keep going until pointers meet in the middle
-        if new_string[l] != new_string[r]:  # If the two ends don't match
-            return False              # Not a palindrome — stop early
-        l += 1                        # Move left pointer inward
-        r -= 1                        # Move right pointer inward
+    while l < r:                    # Keep going until pointers meet in the middle
+        if chars[l] != chars[r]:    # If the two ends don't match
+            return False            # Not a palindrome — stop early
+        l += 1                      # Move left pointer inward
+        r -= 1                      # Move right pointer inward
 
-    return True                       # Every pair matched — it's a palindrome
+    return True                     # Every pair matched — it's a palindrome
 
 
 """
 Time: O(N)
   - Let N = length of the input string s.
 
-  - Step 1: Build cleaned string with list + join → O(N).
+  - Step 1: Build cleaned list → O(N).
       • Scan s once → O(N).
       • Filter: c.isalnum() → O(1) per character.
       • Lowercase: c.lower() → O(1) per character.
       • chars.append() → O(1) per character.
-      • "".join(chars) → one O(N) pass to build the final string.
 
-  - Step 2: Two pointers scan new_string from both ends → at most N/2 comparisons → O(N).
+  - Step 2: Two pointers scan chars from both ends → at most N/2 comparisons → O(N).
   - Overall: O(N).
 
 Space: O(N)
   - chars stores up to N characters (worst case: every char is alphanumeric).
-  - new_string stores up to N characters.
   - Pointer variables (l, r) → O(1).
   - Overall: O(N).
 
@@ -112,17 +108,17 @@ Space: O(N)
 Interview Answer: Worst Case
 
 Time: O(N)
-  - One pass to build cleaned string, one pass to compare from both ends.
+  - One pass to build cleaned list, one pass to compare from both ends.
 
 Space: O(N)
-  - List and cleaned string can be as long as the original input.
+  - List can be as long as the original input.
 
 
 ---
 Overview for Each Iteration
 Input: s = "A man, a plan, a canal: Panama"
 
-Step 1: Build cleaned string (list + join)
+Step 1: Build cleaned list
 c            | isalnum? | append      | chars (after)
 -------------|----------|-------------|--------------------
 A            | Yes      | a           | ['a']
@@ -134,7 +130,7 @@ n            | Yes      | n           | ['a', 'm', 'a', 'n']
 ...          | ...      | ...         | → continues
 a            | Yes      | a           | [..., 'a']
 
-join → new_string = "amanaplanacanalpanama"
+Done → chars = ['a', 'm', 'a', 'n', 'a', 'p', 'l', 'a', 'n', 'a', 'c', 'a', 'n', 'a', 'l', 'p', 'a', 'n', 'a', 'm', 'a']
 
 Step 2: Two-pointer validation
 l  | r  | char l | char r | match? | Action
@@ -164,8 +160,7 @@ Most IMPORTANT thing to Understand:
 Why this code Works:
     • Step 1 — Build a clean version:
         • We collect valid characters into a list, lowercased.
-        • Then "".join(chars) glues them into one final string.
-        • Using a list + join avoids the slow string += pattern.
+        • A list lets us append in O(1) and index like a string — no join needed since we only compare, not return a string.
 
     • Step 2 — Two pointers:
         • l starts at the beginning, r starts at the end.
@@ -174,20 +169,19 @@ Why this code Works:
         • If they don't match, return False immediately.
 
     • Why two pointers work:
-        • A palindrome is symmetric, so position i from the start
-          must equal position i from the end.
+        • A palindrome is symmetric, so position i from the start must equal position i from the end.
 
     • Efficiency:
         • Each character is touched a constant number of times.
         • No nested loops, no sorting, no extra scans.
 
     • Intuition:
-        • Think of folding the cleaned string in half.
+        • Think of folding the cleaned list in half.
         • Every character on the left must line up with its mirror on the right.
 
 ---
 TLDR:
-    • Clean the string (letters + digits, lowercased), then walk two pointers inward from both ends — first mismatch means False.
+    • Collect valid chars in a list (letters + digits, lowercased), then walk two pointers inward from both ends — first mismatch means False.
 
 
 ---
@@ -195,14 +189,14 @@ Quick Example Walkthrough:
 
     s = "A man, a plan, a canal: Panama"
 
-    Step 1: Build the cleaned string
+    Step 1: Build the cleaned list
         • Skip spaces, commas, and the colon.
         • Lowercase each kept character.
-        • Result: new_string = "amanaplanacanalpanama"
+        • Result: chars holds "amanaplanacanalpanama" as a list
 
     Step 2: Walk two pointers from both ends
         • l = 0, r = 20
-        • Compare new_string[l] vs new_string[r] at each step.
+        • Compare chars[l] vs chars[r] at each step.
         • Every pair matches as they move inward.
         • Pointers meet in the middle → return True.
 
@@ -228,7 +222,7 @@ Full Example Walkthrough:
         l, r = (set after Step 1)
 
     --------------------------------------------------
-    Step 1: Build cleaned string
+    Step 1: Build cleaned list
 
     Go through each character in s:
 
@@ -241,18 +235,19 @@ Full Example Walkthrough:
         ... (continues for the rest of the string) ...
 
     After the loop:
-        new_string = "".join(chars) = "amanaplanacanalpanama"
+        chars = ['a', 'm', 'a', 'n', 'a', 'p', 'l', 'a', 'n', 'a',
+                 'c', 'a', 'n', 'a', 'l', 'p', 'a', 'n', 'a', 'm', 'a']
 
     --------------------------------------------------
     Step 2: Two-pointer validation
 
     Set up:
         l = 0
-        r = len(new_string) - 1 = 20
+        r = len(chars) - 1 = 20
 
     Loop Iteration 1:
         Compare:
-            new_string[0] == new_string[20]
+            chars[0] == chars[20]
             'a' == 'a' → MATCH
 
         Move:
@@ -263,7 +258,7 @@ Full Example Walkthrough:
 
     Loop Iteration 2:
         Compare:
-            new_string[1] == new_string[19]
+            chars[1] == chars[19]
             'm' == 'm' → MATCH
 
         Move:
@@ -273,7 +268,7 @@ Full Example Walkthrough:
 
     Loop Iteration 3:
         Compare:
-            new_string[2] == new_string[18]
+            chars[2] == chars[18]
             'a' == 'a' → MATCH
 
         Move:
@@ -294,7 +289,7 @@ Full Example Walkthrough:
 
         This means:
             Every pair of characters matched from both ends inward,
-            so the cleaned string is a palindrome.
+            so the cleaned list is a palindrome.
 
 
 
@@ -307,7 +302,6 @@ Q: Why is the space complexity O(N)?
 A: Because we store the cleaned version of the input in extra memory.
 
   • `chars` holds up to N valid characters (worst case: every char is kept).
-  • `new_string` from `"".join(chars)` stores up to N characters too.
   • Pointer variables (`l`, `r`) are just O(1).
 
   • Extra memory grows with input size → O(N) space.
@@ -315,13 +309,8 @@ A: Because we store the cleaned version of the input in extra memory.
 
 
 ---
-Q: Why can't a string be changed in place?
-
-A: Because strings in Python are immutable — once created, they cannot be modified.
-
-  • `new_string += c` does NOT edit the old string — it creates a brand-new one.
-  • That's why building a string in a loop with `+=` can get slow.
-  • Use a list + `"".join()` when you need to build a string piece by piece.
+Note: We use a list because we only need to compare — not return a string.
+  See "String Building in Python" below for list vs += vs join.
 """
 
 
@@ -333,7 +322,7 @@ A: Because strings in Python are immutable — once created, they cannot be modi
 """
 Read the problem (10 sec)
     • Check if a string is a palindrome after removing non-alphanumeric chars and lowercasing.
-    • Key hint: "removing" and "lowercase" → you need a clean version of the string first.
+    • Key hint: "removing" and "lowercase" → you need a clean version of the input first.
 
 Start naive (totally fine)
     • Clean the string, reverse it, compare: cleaned == cleaned[::-1]
@@ -355,28 +344,24 @@ Thought → line of code
     chars.append(c.lower())
         → "A" and "a" should be treated the same. Lowercase and add to the list.
 
-    new_string = "".join(chars)
-        → Turn the list into one clean string in one pass.
-        → List + join avoids the O(N²) trap of string += in a loop.
-
-    l, r = 0, len(new_string) - 1
-        → Two pointers at opposite ends of the cleaned string.
+    l, r = 0, len(chars) - 1
+        → Two pointers at opposite ends of the cleaned list.
 
     while l < r
         → Stop when they meet or cross. If l == r, the middle char doesn't need a partner.
 
-    if new_string[l] != new_string[r]: return False
+    if chars[l] != chars[r]: return False
         → First mismatch = not a palindrome. Done.
 
 Memory hook (one sentence)
-    • Collect valid chars → join into a string → squeeze inward from both ends.
+    • Collect valid chars in a list → squeeze inward from both ends.
 
 Would you arrive at this cold?
     • Yes — this is one of the more intuitive problems.
-    • "Build a clean string" is the obvious first step anyone would think of.
+    • "Collect valid chars" is the obvious first step anyone would think of.
     • Two pointers from both ends is natural once you picture what a palindrome looks like.
-    • The only non-obvious details: remembering .isalnum() exists, and list + join instead of +=.
-    • list + join is bookkeeping for performance — the real insight is still filter + compare.
+    • The only non-obvious detail: remembering .isalnum() exists.
+    • The real insight is filter + two-pointer compare — no join needed since you never return the cleaned string.
 """
 
 
@@ -386,6 +371,7 @@ Would you arrive at this cold?
 # Solution 2: Build String → Reverse Compare (with list + join)
 def is_palindrome(s):
     chars = []
+
     for c in s:
         if c.isalnum():
             chars.append(c.lower())
@@ -424,27 +410,8 @@ Time: O(N)
 
 Space: O(N)
   - Cleaned string plus a temporary reversed copy (uses more memory than two pointers).
-"""
 
-
-
-"""
----
-Biggest Takeaway
-
-This is one of the most important Python performance lessons:
-
-    string += char
-
-    inside a loop is usually bad.
-
-Instead use:
-
-    chars.append(char)
-    "".join(chars)
-
-    because lists append in O(1) amortized time.
-
+Note: join makes sense here — you're comparing one string to its reverse.
 """
 
 
@@ -459,9 +426,8 @@ Instead use:
 
 
 # ––––––––––––––––––––––––––––––––––––––––––––––––––
-# MY OLD SOLUTION
+# Old Solution (string +=) — kept for reference
 # ––––––––––––––––––––––––––––––––––––––––––––––––––
-# Simple Palindrome Check (Build String → Two Pointers)
 
 def is_palindrome(s):
     new_string = ""
@@ -486,55 +452,34 @@ s = "A man, a plan, a canal: Panama"
 print(is_palindrome(s))
 # Output: True → Same check: build cleaned string with +=, then l/r pointers compare inward
 
-
 """
----
-Note: new_string += c
-    • On paper: each += copies the whole string → O(N²).
-    • In CPython (normal Python): usually optimized to O(N) in practice.
-    • Interview-safe: say O(N). list + join is the cleaner fix.
-
-
----
-Time: O(N)
-  - Let N = length of the input string s.
-  
-  - Step 1: Build a cleaned string by scanning s once → O(N).
-      • Filter: c.isalpha() / c.isdigit() → O(1) per character.
-      • Lowercase: c.lower() → O(1) per character.
-
-      • Note: new_string += c copies the entire string each 
-      time (strings are immutable).
-        Technically O(N) per append → O(N²) total.
-        Python often optimizes this away, and list + join 
-        avoids it entirely.
-        For interviews: safe to say O(N).
-
-      • See note above on += (naive O(N²), CPython usually O(N)).
-
-  - Step 2: Two pointers scan new_string from both ends → at most N/2 comparisons → O(N).
-  - Overall: O(N).
-
-Space: O(N)
-  - new_string stores up to N characters (worst case: every char is alphanumeric).
-  - Pointer variables (l, r) → O(1).
-  - Overall: O(N).
-
-  
 Interview Answer: Worst Case
 
 Time: O(N)
-  - One pass to build cleaned string, one pass to compare from both ends.
+  - One pass to build cleaned string, one pass to compare from 
+  both ends.
 
 Space: O(N)
   - Cleaned string can be as long as the original input.
 
+
+Same two-pointer logic as Solution 1.
+Build step uses += instead of a list.
+See "String Building in Python" below for why we moved away from this.
 """
 
 
 
 # ––––––––––––––––––––––––––––––––––––––––––––––––––
-# Why += on Strings is O(N²) and How List + Join Fixes It
+# String Building in Python
+# ––––––––––––––––––––––––––––––––––––––––––––––––––
+# Quick reference:
+#   Solution 1 (list + two pointers):   Time O(N), Space O(N)  ← learn this
+#   Solution 2 (list + join + reverse): Time O(N), Space O(N)
+#   Old Solution (+= + two pointers):   Build O(N²) naive, check O(N)
+#
+# Pattern to learn:  filter → collect in list → two pointers inward
+# Python lesson:     don't += strings in a loop; use a list
 
 # String += (copies entire string each time)
 new_string = ""
@@ -555,11 +500,23 @@ result = "".join(chars)  # "abc"           (one O(N) pass)
 
 """
 ---
-Q: Why += on Strings is O(N²)
+Strings are immutable — `s += c` creates a new copy each time, not an in-place edit.
 
-The code above shows why:
-    • Each += rebuilds the entire string from scratch (strings are immutable).
-    • List + join appends in O(1), then builds the final string once.
+Three ways to collect characters:
+    • List only       → compare only (Solution 1)        → O(N) build
+    • List + join     → need a final string (Solution 2) → O(N) build
+    • String +=       → avoid in interviews              → O(N²) naive
+
+CPython sometimes optimizes += to ~O(N) in practice — don't rely on it.
+
+Interview script:
+    "Overall O(N) — one pass to clean, one pass with two pointers.
+     I use a list because += in a loop is O(N²) naively since strings are immutable."
+
+---
+Q: Why is += O(N²)?
+
+Each += rebuilds the entire string from scratch.
 
 Think of it like writing on paper.
 
@@ -618,7 +575,6 @@ Why NOT N³?
 
 
 TLDR:
-    • N rounds of rewriting
-    • Each rewrite costs 1, 2, 3, ... up to N
-    • Sum = N(N+1)/2 = O(N²)
+    • += in a loop: 1 + 2 + 3 + ... + N = O(N²)
+    • List append: O(1) each + optional one join = O(N)
 """
