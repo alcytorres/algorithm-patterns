@@ -108,39 +108,155 @@ We say O(N) because we count everything, and in interviews counting the output i
 
 ---
 Most IMPORTANT thing to Understand:
-    • For each number from 1 to n, check divisibility by 3 and 5 to decide what string to add.
+    • We build one answer string for every number from 1 to n.
 
-    • Order matters: check "both 3 and 5" FIRST, then 3 alone, then 5 alone, then default to the number as a string.
+    • The order of checks matters: check divisible by BOTH 3 and 5 first.
 
-    • If you check 3 or 5 individually first, you'll never reach the "both" case — it'll get caught early.
+    • If we checked "divisible by 3" before "both", numbers like 15 would wrongly become "Fizz".
+
+    • `%` asks: "does this number divide evenly?" → remainder 0 means yes.
 
 ---
 Why this code Works:
-    • Loop from 1 to n: each number gets exactly one label — FizzBuzz, Fizz, Buzz, or the number itself.
+    • Loop:
+        • Go through every i from 1 to n.
+        • Decide the correct label for that i, then append it.
 
-    • if/elif/else chain: guarantees only ONE branch runs per number. The first true condition wins.
+    • If / elif chain:
+        • First: i divisible by 3 AND 5 → "FizzBuzz"
+        • Else if divisible by 3 → "Fizz"
+        • Else if divisible by 5 → "Buzz"
+        • Else → the number itself as a string
 
-    • Why check "both" first: 15 is divisible by 3 AND 5. If we checked `i % 3` first, it would match "Fizz" and skip "FizzBuzz." Checking both first prevents this.
+    • Efficiency:
+        • One pass from 1 to n.
+        • Time: O(n)
+        • Space: O(n) for the output list
 
-    • Efficiency: one pass, constant work per number → O(N) time. No nested loops, no sorting.
-
-    • Intuition: it's just a labeling machine — feed it numbers 1 through n, and it stamps each one with the right label.
+    • Intuition:
+        • Like sorting mail into 4 boxes.
+        • "Both 3 and 5" is the special box — check it first so those numbers don't land in the wrong pile.
 
 ---
-TLDR
-    • Loop 1 to n, check divisibility in order (both → 3 → 5 → number), append the matching string.
+TLDR:
+    • Loop 1 to n and label each number by divisibility rules, checking 3-and-5 first so FizzBuzz is never mislabeled as only Fizz or only Buzz.
+
 
 ---
 Quick Example Walkthrough:
+
+n = 15
+
+Step 1: Start with empty list
+    ans = []
+
+Step 2: Check each i from 1 to 15
+    • i=1 → not 3 or 5 → "1"
+    • i=2 → not 3 or 5 → "2"
+    • i=3 → divisible by 3 → "Fizz"
+    • i=4 → not 3 or 5 → "4"
+    • i=5 → divisible by 5 → "Buzz"
+    • i=6 → divisible by 3 → "Fizz"
+    • i=7 → "7"
+    • i=8 → "8"
+    • i=9 → "Fizz"
+    • i=10 → "Buzz"
+    • i=11 → "11"
+    • i=12 → "Fizz"
+    • i=13 → "13"
+    • i=14 → "14"
+    • i=15 → divisible by 3 AND 5 → "FizzBuzz"
+
+Final Answer: ["1","2","Fizz","4","Buzz","Fizz","7","8","Fizz","Buzz","11","Fizz","13","14","FizzBuzz"]
+
+
+---
+Full Example Walkthrough:
     n = 5
 
-    i=1: not divisible by 3 or 5 → append "1"
-    i=2: not divisible by 3 or 5 → append "2"
-    i=3: divisible by 3          → append "Fizz"
-    i=4: not divisible by 3 or 5 → append "4"
-    i=5: divisible by 5          → append "Buzz"
+    Starting State:
+        ans = []
+        Loop will run i = 1, 2, 3, 4, 5
 
-    Final Answer: ["1", "2", "Fizz", "4", "Buzz"]
+    Loop Iteration 1 (i = 1):
+        Compare:
+            1 % 3 == 0 and 1 % 5 == 0? → NO
+            1 % 3 == 0? → NO
+            1 % 5 == 0? → NO
+
+        Else branch:
+            ans.append("1")
+
+        Now:
+            ans = ["1"]
+
+    --------------------------------------------------
+
+    Loop Iteration 2 (i = 2):
+        Compare:
+            2 % 3 == 0 and 2 % 5 == 0? → NO
+            2 % 3 == 0? → NO
+            2 % 5 == 0? → NO
+
+        Else branch:
+            ans.append("2")
+
+        Now:
+            ans = ["1", "2"]
+
+    --------------------------------------------------
+
+    Loop Iteration 3 (i = 3):
+        Compare:
+            3 % 3 == 0 and 3 % 5 == 0? → NO (3 is not divisible by 5)
+            3 % 3 == 0? → YES
+
+        Elif branch:
+            ans.append("Fizz")
+
+        Now:
+            ans = ["1", "2", "Fizz"]
+
+    --------------------------------------------------
+
+    Loop Iteration 4 (i = 4):
+        Compare:
+            4 % 3 == 0 and 4 % 5 == 0? → NO
+            4 % 3 == 0? → NO
+            4 % 5 == 0? → NO
+
+        Else branch:
+            ans.append("4")
+
+        Now:
+            ans = ["1", "2", "Fizz", "4"]
+
+    --------------------------------------------------
+
+    Loop Iteration 5 (i = 5):
+        Compare:
+            5 % 3 == 0 and 5 % 5 == 0? → NO (5 is not divisible by 3)
+            5 % 3 == 0? → NO
+            5 % 5 == 0? → YES
+
+        Elif branch:
+            ans.append("Buzz")
+
+        Now:
+            ans = ["1", "2", "Fizz", "4", "Buzz"]
+
+    --------------------------------------------------
+
+    Final Check:
+        Loop finished (i went through 1 → 5).
+
+        return ans
+        → ["1", "2", "Fizz", "4", "Buzz"]
+
+        This means:
+            Every number from 1 to n got the correct label by checking both, then 3, then 5, then the number itself.
+
+
 
 
 
