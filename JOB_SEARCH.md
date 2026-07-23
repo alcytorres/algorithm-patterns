@@ -129,6 +129,7 @@ Sliding Window was missing from your original list — it’s Core for arrays/st
 | 8 | Linked Lists (basic) | 7 | Nov 13–19 | Reverse / merge — low depth |
 | 9 | Trees BFS/DFS | 8 | Nov 20–28 | Common at entry level — now core |
 | 10 | Grid BFS/DFS | 9 | Nov 30–Dec 4 | Number of Islands family — very common |
+| 11 | Intervals | 10 | Dec 7–10 | Merge Intervals — high-frequency, cheap |
 
 **Defer:** DP, advanced graphs (Dijkstra/union-find/topo), backtracking, tries, matrix spiral/rotation. Wrong tier for your targets. *(Trees + grid promoted to core Jul 23 — see `DSA_CURRICULUM.md`.)*
 

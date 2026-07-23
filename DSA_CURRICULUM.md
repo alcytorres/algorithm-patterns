@@ -5,8 +5,8 @@ Difficulty rules: **Easy-majority per sub-pattern · Easies listed first · zero
 
 | | |
 |---|---|
-| Core problems | **~107 free** (skip 2 Premium if no sub) · 0 Hard |
-| Core patterns | 9 (added 8 Trees, 9 Grid BFS/DFS) |
+| Core problems | **~109 free** (skip Premium if no sub) · 0 Hard |
+| Core patterns | 10 (added 8 Trees, 9 Grid BFS/DFS, 10 Intervals) |
 | Optional | 6.2 rotated BS · 3.2 stretch · 9 heap add-on |
 | List order | = drill order. Top → bottom inside each sub-pattern. |
 | Calendar below | = target dates. Slip is expected — see pacing rules. |
@@ -93,7 +93,9 @@ These are non-negotiable for *your* retention profile (looked-up solutions that 
 | **Sat Nov 28** | Lock-in 8 | 0 | |
 | **Mon Nov 30 – Thu Dec 3** | 9 Grid BFS/DFS — **now core** | 4 | Number of Islands family — very common |
 | **Fri Dec 4** | Lock-in 9 | 0 | |
-| **Mon Dec 7 →** | Maintenance loop | — | Majority-mixed timed + reviews. Interviewing continues. Add-ons only if hunting cold. |
+| **Mon Dec 7 – Wed Dec 9** | 10 Intervals | 2–3 | Merge Intervals family |
+| **Thu Dec 10** | Lock-in 10 | 0 | |
+| **Fri Dec 11 →** | Maintenance loop | — | Majority-mixed timed + reviews. Interviewing continues. Add-ons only if hunting cold. |
 
 **Note:** DSA new-learning now runs to ~Dec 4, past the Nov 22 job-search checkpoint. That's intentional — trees + grid are too common to cut, and **interviewing does not stop on Nov 22.** Applications, networking, and mocks in `JOB_SEARCH.md` continue straight through; the DSA tail just overlaps the early maintenance loop.
 
@@ -439,6 +441,23 @@ Promoted because trees appear too often at entry level to gamble on skipping. Th
 
 ---
 
+## 10 Intervals — Core (light)
+
+**When: Mon Dec 7 – Wed Dec 9** · **Thu Dec 10 lock-in** (first thing in the loop)
+Promoted from add-back to core: "sort by start, then merge/compare overlaps" is a high-frequency entry-level pattern that stands alone and is cheap to learn.
+
+| Day | Solve |
+|---|---|
+| Mon Dec 7 | 56 Merge Intervals (M) |
+| Tue Dec 8 | 57 Insert Interval (M) |
+| Wed Dec 9 | 252 Meeting Rooms (E, *Premium — skip if no sub; 56 already teaches it*) |
+| Thu Dec 10 | Lock-in: re-solve 56 |
+
+**Unlocks:** the sort-then-sweep pattern — 56 is the canonical version; recognizing "these are intervals" is most of the battle.
+**Exception:** interval Easies are mostly Premium, so this leans Medium — kept small (really just 56 + 57).
+
+---
+
 ## Why this timeline favors retention
 
 | Design choice | Why it helps you |
@@ -452,9 +471,9 @@ Promoted because trees appear too often at entry level to gamble on skipping. Th
 | Trees + Grid last | They reuse recursion/DFS/BFS — easier once 1–7 built the base |
 | Slip pushes dates; never skip reviews | Reviews are the product; the calendar is a guide |
 
-**Still excluded on purpose:** DP, advanced graphs (Dijkstra / union-find / topo sort), backtracking, tries, intervals deep-dives, monotonic deques, every Hard (including 76 and 3347 from your seed). *(Trees and grid BFS/DFS were promoted to core — see 8, 9.)*
+**Still excluded on purpose:** DP, advanced graphs (Dijkstra / union-find / topo sort), backtracking, tries, monotonic deques, every Hard (including 76 and 3347 from your seed). *(Trees, grid BFS/DFS, and basic intervals were promoted to core — see 8, 9, 10.)*
 
-**First add-backs** (only in the loop, still hunting): heap add-on (9) → 56 Merge Intervals → 146 LRU Cache → 6.2 → 875 Koko.
+**First add-backs** (only in the loop, still hunting): heap add-on (9) → 146 LRU Cache → 6.2 → 875 Koko → 2 intro DP (70 Climbing Stairs, 198 House Robber).
 
 ---
 
@@ -466,7 +485,7 @@ Promoted because trees appear too often at entry level to gamble on skipping. Th
 | **Mediums trimmed** | 16, 18, 259 · 2337, 2938 · variable-window grind list |
 | **Moved** | 1 → 2.1 · 876 → 1.2 · 2461 → 3.1 |
 | **Easies added** | 125, 680, 2824, 234, 88, 1089, 917, 1652, 1876, 121, 485, 674 (+142 M) |
-| **Gaps closed (this pass)** | 8 Trees promoted to **core**; new 9 **Grid BFS/DFS** (200/695/733/994); complexity-analysis rule (pacing 8); optional heap add-on |
+| **Gaps closed** | 8 Trees promoted to **core**; new 9 **Grid BFS/DFS** (200/695/733/994); new 10 **Intervals** (56/57); complexity-analysis rule (pacing 8); optional heap add-on |
 | **Timeline** | Day-level dates Aug 3 → **Dec 4**; lock-ins; Phase 1 no longer includes Hashing; DSA tail overlaps early loop |
 
 ---
