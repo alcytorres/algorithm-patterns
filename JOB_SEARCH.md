@@ -55,16 +55,16 @@ Drop apps to ~5/day this week only. Fix the machine:
 - Book one Boston tech meetup for August.
 
 ### Phase 1 — Mon Aug 3 – Sun Aug 30 · Two Pointers core only
-- DSA: Curriculum **§1.1–1.4** only (Converging → Fast/Slow → Fixed Separation → In-place). Hashing waits for Phase 2 — packing both into 4 weeks was too much new for retention.
+- DSA: Curriculum **1.1–1.4** only (Converging → Fast/Slow → Fixed Separation → In-place). Hashing waits for Phase 2 — packing both into 4 weeks was too much new for retention.
 - Full app volume resumes Aug 3 (~55/wk).
 - Project 1 starts Aug 3: deployed Python web app (FastAPI/Flask + DB + simple UI). Ship by late Sep. Commit every project day.
 - Networking: 10 outreach/week.
-- First mixed Saturday: Aug 15. **Sat Aug 29 = §1 lock-in** (mixed Two Pointers only).
+- First mixed Saturday: Aug 15. **Sat Aug 29 = 1 lock-in** (mixed Two Pointers only).
 
 **Checkpoint Sun Aug 30:** ~150 apps since Jul 24. Responses &lt;2% → professional resume review before Phase 2.
 
 ### Phase 2 — Mon Aug 31 – Sun Sep 27 · Hashing + string Two Pointers
-- DSA: Curriculum **§2** Hashing → **§1.5–1.7** (string skips / expand-center / reversal). Day-level dates in `DSA_CURRICULUM.md`.
+- DSA: Curriculum **2** Hashing → **1.5–1.7** (string skips / expand-center / reversal). Day-level dates in `DSA_CURRICULUM.md`.
 - Draft 6 STAR stories by Sun Sep 13. Practice “tell me about yourself” out loud.
 - Mocks: Sat Sep 12, Sat Sep 26.
 - Ship Project 1 by Sun Sep 27 (deployed, README, demo GIF, on resume).
@@ -72,7 +72,7 @@ Drop apps to ~5/day this week only. Fix the machine:
 **Checkpoint Sun Sep 27:** zero interviews → move 30 min/day from apps to networking/referrals.
 
 ### Phase 3 — Mon Sep 28 – Sun Oct 25 · Sliding Window + Prefix Sum + start Stack
-- DSA: Curriculum **§3** Sliding Window → **§4** Prefix Sum → start **§5.1** Stack (from ~Oct 23).
+- DSA: Curriculum **3** Sliding Window → **4** Prefix Sum → start **5.1** Stack (from ~Oct 23).
 - Mixed Saturdays from 6+ patterns.
 - Mocks: Oct 10, Oct 24.
 - Project 2 starts Sep 28: real data/users + tests + CI (GitHub Actions). SQLBolt ~2 hrs.
@@ -80,7 +80,7 @@ Drop apps to ~5/day this week only. Fix the machine:
 **Checkpoint Sun Oct 25:** re-solve rate &lt;80% on review queue → Phase 4 drops remaining new topics and goes consolidation-only.
 
 ### Phase 4 — Mon Oct 26 – Sun Nov 22 · Finish Stack → BS → Linked List → start Trees
-- DSA: finish **§5** → **§6.1** Binary Search → **§7** Linked List → start **§8** Trees (dates in curriculum). **§8 Trees + §9 Grid BFS/DFS are now core** and run into early Dec — interviewing continues past Nov 22, so DSA does too.
+- DSA: finish **5** → **6.1** Binary Search → **7** Linked List → start **8** Trees (dates in curriculum). **8 Trees + 9 Grid BFS/DFS are now core** and run into early Dec — interviewing continues past Nov 22, so DSA does too.
 - Weekly mocks: Oct 31, Nov 7, Nov 14, Nov 21.
 - Project 2 shipped by Nov 15; resume updated.
 - Apps + networking stay at full volume.
@@ -119,16 +119,16 @@ Sliding Window was missing from your original list — it’s Core for arrays/st
 
 | # | Topic | Curriculum | When | Why |
 |---|---|---|---|---|
-| 1 | Two Pointers core | §1.1–1.4 | Aug 3–29 | Highest-frequency easy/medium array pattern |
-| 2 | Hashing (freq / seen) | §2 | Aug 31–Sep 15 | Most common entry-level “trick”; unlocks windows |
-| 3 | String Two Pointers | §1.5–1.7 | Sep 16–24 | After hashing; bridges into stacks |
-| 4 | Sliding Window | §3 | Sep 28–Oct 15 | Needs hashing first |
-| 5 | Prefix Sum | §4 | Oct 16–22 | Cheap, high-ROI Mediums (560, 238) |
-| 6 | Stacks | §5 | Oct 23–Nov 2 | Parentheses family |
-| 7 | Binary Search (basic) | §6.1 | Nov 3–12 | One template, many easy wins |
-| 8 | Linked Lists (basic) | §7 | Nov 13–19 | Reverse / merge — low depth |
-| 9 | Trees BFS/DFS | §8 | Nov 20–28 | Common at entry level — now core |
-| 10 | Grid BFS/DFS | §9 | Nov 30–Dec 4 | Number of Islands family — very common |
+| 1 | Two Pointers core | 1.1–1.4 | Aug 3–29 | Highest-frequency easy/medium array pattern |
+| 2 | Hashing (freq / seen) | 2 | Aug 31–Sep 15 | Most common entry-level “trick”; unlocks windows |
+| 3 | String Two Pointers | 1.5–1.7 | Sep 16–24 | After hashing; bridges into stacks |
+| 4 | Sliding Window | 3 | Sep 28–Oct 15 | Needs hashing first |
+| 5 | Prefix Sum | 4 | Oct 16–22 | Cheap, high-ROI Mediums (560, 238) |
+| 6 | Stacks | 5 | Oct 23–Nov 2 | Parentheses family |
+| 7 | Binary Search (basic) | 6.1 | Nov 3–12 | One template, many easy wins |
+| 8 | Linked Lists (basic) | 7 | Nov 13–19 | Reverse / merge — low depth |
+| 9 | Trees BFS/DFS | 8 | Nov 20–28 | Common at entry level — now core |
+| 10 | Grid BFS/DFS | 9 | Nov 30–Dec 4 | Number of Islands family — very common |
 
 **Defer:** DP, advanced graphs (Dijkstra/union-find/topo), backtracking, tries, matrix spiral/rotation. Wrong tier for your targets. *(Trees + grid promoted to core Jul 23 — see `DSA_CURRICULUM.md`.)*
 
