@@ -1,306 +1,376 @@
 # DSA Interview Curriculum — Entry-Level SWE (Python)
 
-**Source of truth for what to solve.** Companion to `JOB_SEARCH.md` (which says *when*; this says *what*).
-Difficulty rules enforced throughout: **Easy-majority per sub-pattern · Easies listed first · zero Hards anywhere.**
+**Source of truth for what to solve *and when*.** Companion to `JOB_SEARCH.md` (apps / networking / projects live there).
+Difficulty rules: **Easy-majority per sub-pattern · Easies listed first · zero Hards anywhere.**
 
 | | |
 |---|---|
-| Core problems | **100** (63% Easy, 37% Medium, 0 Hard) |
-| Optional problems | 12 (rotated binary search, trees, stretch mediums) |
-| Patterns | 8 · 19 sub-patterns |
-| List order | = drill order. Within each sub-pattern, solve top to bottom. |
-| Pacing rule | **1 new Medium OR 2 new Easies per day.** Easies are half-days. |
+| Core problems | **~96 free** (skip 2 Premium if no sub) · 0 Hard |
+| Optional | §6.2 rotated BS · §3.2 stretch · §8 Trees |
+| List order | = drill order. Top → bottom inside each sub-pattern. |
+| Calendar below | = target dates. Slip is expected — see pacing rules. |
 
-**One structural change from your seed:** Sliding Window moved to **after Hashing** (your sheet had it second). Nearly every variable-window problem (424, 904, 1004, 438, 567) uses a frequency map internally — drilling Hashing first makes Sliding Window dramatically easier.
+**Structural note:** Sliding Window drills **after** Hashing. Variable windows (424, 1004, 438, 567) all use frequency maps — hashing first makes them stick.
 
 ---
 
-## Phase map (matches JOB_SEARCH.md)
+## Pacing rules (retention > speed)
 
-| Phase | Dates | Sections |
+These are non-negotiable for *your* retention profile (looked-up solutions that don’t stick):
+
+1. **Mon–Fri only for new problems.** One current sub-pattern at a time. Finish it before starting the next.
+2. **Daily new cap:** `1 Medium` **or** `up to 2 Easies`. Second Easy only if the first took **≤25 minutes** without a lookup. If it took longer or you peeked → that Easy is your only new for the day; re-attempt tomorrow before advancing.
+3. **Looked-up ≠ done.** If you read/watched the solution, close it and re-implement the same day. It still enters the review queue and does **not** count as mastered until **two cold re-solves** (≈2 days later, ≈1 week later).
+4. **Lock-in day** (marked below): no new pattern. Cold re-solve 2–3 problems from the block you just finished. This is what makes depth-first drilling stick.
+5. **Saturday:** mixed set from *finished* sub-patterns only (see `JOB_SEARCH.md`). No new sub-pattern starts on Saturday.
+6. **Sunday:** rest + 30-min retro. Zero new problems.
+7. **If you slip:** push dates forward. Never skip lock-in or Saturday mixed to “catch up.” Catch-up by dropping Optional/stretch only — never by skipping reviews.
+
+**Why this is doable:** ~5 new weekdays/week × ~16 weeks (Aug 3 → Nov 20) ≈ 80 slots. Core free list needs ~75 slots at the 2E/1M rate, leaving room for lock-ins and slip. The old “Phase 1 = Two Pointers + Hashing” packing (~43 problems / 20 days) was not retention-safe — redistributed below.
+
+---
+
+## Master calendar (sub-pattern → dates)
+
+| When | Sub-pattern | New #s (approx) | Notes |
+|---|---|---|---|
+| **Fri Jul 24 – Sun Aug 2** | **Setup warm-up** | 0 new | Cold re-solve: 27, 26, 283, 905, 977, 217, 242, 1 |
+| **Mon Aug 3 – Tue Aug 11** | §1.1 Converging | 9 | First Two Pointers block |
+| **Wed Aug 12 – Tue Aug 18** | §1.2 Fast & Slow | 7 | |
+| **Wed Aug 19 – Thu Aug 20** | §1.3 Fixed Separation | 2 | Tiny; no separate lock-in |
+| **Fri Aug 21 – Fri Aug 28** | §1.4 In-place Modification | 9 | |
+| **Sat Aug 29** | **Lock-in: §1.1–1.4** | 0 | Mixed Two Pointers only |
+| **Sun Aug 30** | Phase 1 checkpoint | — | See `JOB_SEARCH.md` |
+| **Mon Aug 31 – Fri Sep 4** | §2.1 Seen Set | 7 | |
+| **Mon Sep 7 – Mon Sep 14** | §2.2 Frequency Map | 9 | Sep 7 is Labor Day — still a study day if you can |
+| **Tue Sep 15** | **Lock-in: §2** | 0 | Hashing re-solves |
+| **Wed Sep 16 – Thu Sep 17** | §1.5 String Skips | 3 | Bridge into Stack |
+| **Fri Sep 18 – Mon Sep 21** | §1.6 Expand From Center | 2 | Exception: all Medium |
+| **Tue Sep 22 – Thu Sep 24** | §1.7 String Reversal | 5 | |
+| **Fri Sep 25** | **Buffer / catch-up** | 0 | Use for any slipped §1.5–1.7 or §2 |
+| **Sat Sep 26** | Mock (plan) | — | Mixed from everything done so far |
+| **Sun Sep 27** | Phase 2 checkpoint | — | |
+| **Mon Sep 28 – Thu Oct 1** | §3.1 Fixed Window | 6 free | Skip 346/2985 if no Premium |
+| **Fri Oct 2** | Lock-in §3.1 | 0 | |
+| **Mon Oct 5 – Mon Oct 12** | §3.2 Variable Window | 8 | Stretch 713/904/1493 only if cruising |
+| **Tue Oct 13** | Lock-in §3.2 | 0 | |
+| **Wed Oct 14 – Thu Oct 15** | §3.3 Anagram Windows | 2 | After §2.2 only |
+| **Fri Oct 16 – Wed Oct 21** | §4 Prefix Sum | 6 | |
+| **Thu Oct 22** | Lock-in §3–§4 | 0 | |
+| **Fri Oct 23 – Wed Oct 28** | §5.1 Stack Matching | 6 | Spans Phase 3 → 4 |
+| **Thu Oct 29** | Lock-in §5.1 | 0 | |
+| **Fri Oct 30 – Mon Nov 2** | §5.2 Monotonic Stack (light) | 3 | |
+| **Tue Nov 3 – Wed Nov 11** | §6.1 Classic Binary Search | 8 | |
+| **Thu Nov 12** | Lock-in §6.1 | 0 | §6.2 optional after this |
+| **Fri Nov 13 – Wed Nov 18** | §7 Linked List | 6 | Cross-refs from §1.2/1.3 already done |
+| **Thu Nov 19** | Lock-in §7 | 0 | |
+| **Fri Nov 20 – Sun Nov 22** | **Phase 4 wrap** | 0–few | Majority mixed · §8 Trees only if §1–7 cold |
+| **Mon Nov 23 →** | Maintenance loop | — | 1 mixed timed + reviews; no new curriculum unless add-backs |
+
+```
+Jul 24          Aug 3              Aug 31             Sep 28             Oct 26              Nov 22
+  │ Setup │········ Phase 1 ········│···· Phase 2 ······│···· Phase 3 ······│···· Phase 4 ······│→ loop
+  │warm-up│  §1.1–1.4 Two Pointers  │ §2 Hash + §1.5–1.7│ §3 Window + §4    │ §5→§6→§7 + mixed │
+  └───────┘                         │   string TP       │ + start §5        │  consolidate     │
+```
+
+---
+
+## Phase map (synced with JOB_SEARCH.md)
+
+| Phase | Dates | DSA focus |
 |---|---|---|
-| Setup warm-up | Jul 24 – Aug 2 | Re-solve cold 8–10 Easies you've seen: 27, 26, 283, 905, 977, 217, 242, 1 |
-| Phase 1 | Aug 3 – Aug 30 | §1.1–1.4 Two Pointers + §2 Hashing |
-| Phase 2 | Aug 31 – Sep 27 | §3 Sliding Window + §1.5–1.7 Strings + §4 Prefix Sum |
-| Phase 3 | Sep 28 – Oct 25 | §5 Stack + §6 Binary Search + §7 Linked List |
-| Phase 4 → loop | Oct 26 → | Mixed re-solves + leftovers + §8 Trees (only if ahead) |
+| Setup | Jul 24 – Aug 2 | Warm-up re-solves only (no new patterns) |
+| Phase 1 | Aug 3 – Aug 30 | **§1.1–1.4** Two Pointers core only |
+| Phase 2 | Aug 31 – Sep 27 | **§2** Hashing → **§1.5–1.7** string TP |
+| Phase 3 | Sep 28 – Oct 25 | **§3** Sliding Window → **§4** Prefix Sum → start **§5.1** |
+| Phase 4 | Oct 26 – Nov 22 | Finish **§5** → **§6.1** → **§7** → mixed consolidation · **§8** optional |
+| Loop | Nov 23 → | Reviews + mixed timed; curriculum add-backs only if hunting cold |
 
 ---
 
 ## §1 Two Pointers
 
+**Phase 1 block: Mon Aug 3 – Sat Aug 29** (string sub-patterns §1.5–1.7 wait until Phase 2, after Hashing).
+
 ### 1.1 Converging (opposite ends) — Core
+**When: Mon Aug 3 – Tue Aug 11** (7 weekdays)
 
-| LC # | Problem | Difficulty |
-|---|---|---|
-| 125 | Valid Palindrome | Easy |
-| 977 | Squares of a Sorted Array | Easy |
-| 349 | Intersection of Two Arrays | Easy |
-| 2824 | Count Pairs Whose Sum is Less than Target | Easy |
-| 680 | Valid Palindrome II | Easy |
-| 167 | Two Sum II – Input Array Is Sorted | Medium |
-| 15 | 3Sum | Medium |
-| 11 | Container With Most Water | Medium |
-| 881 | Boats to Save People | Medium |
+| Day | Solve |
+|---|---|
+| Mon Aug 3 | 125 Valid Palindrome (E), 977 Squares of a Sorted Array (E) |
+| Tue Aug 4 | 349 Intersection of Two Arrays (E), 2824 Count Pairs Whose Sum is Less than Target (E) |
+| Wed Aug 5 | 680 Valid Palindrome II (E) |
+| Thu Aug 6 | 167 Two Sum II – Input Array Is Sorted (M) |
+| Fri Aug 7 | 15 3Sum (M) |
+| Mon Aug 10 | 11 Container With Most Water (M) |
+| Tue Aug 11 | 881 Boats to Save People (M) · if time: cold re-solve 125 or 167 |
 
-**Unlocks:** any "sorted array + pair/condition" problem — the single most common two-pointer setup.
-**Changes to your list:** removed **16. 3Sum Closest**, **18. 4Sum**, **259. 3Sum Smaller** (all Mediums; 16/18 are grindy variants of 15 with near-zero new technique, 259 is also Premium). Added Easies 125, 680, 2824 to restore Easy-majority (was 2E/7M, now 5E/4M).
+**Unlocks:** any "sorted array + pair/condition" problem — the most common two-pointer setup.
+**Changes to your list:** removed 16, 18, 259. Added 125, 680, 2824.
 
 ### 1.2 Fast & Slow — Core
+**When: Wed Aug 12 – Tue Aug 18** (5 weekdays)
 
-| LC # | Problem | Difficulty |
-|---|---|---|
-| 141 | Linked List Cycle | Easy |
-| 876 | Middle of the Linked List | Easy |
-| 202 | Happy Number | Easy |
-| 234 | Palindrome Linked List | Easy |
-| 392 | Is Subsequence | Easy |
-| 142 | Linked List Cycle II | Medium |
-| 287 | Find the Duplicate Number | Medium |
+| Day | Solve |
+|---|---|
+| Wed Aug 12 | 141 Linked List Cycle (E), 876 Middle of the Linked List (E) |
+| Thu Aug 13 | 202 Happy Number (E), 234 Palindrome Linked List (E) |
+| Fri Aug 14 | 392 Is Subsequence (E) |
+| Mon Aug 17 | 142 Linked List Cycle II (M) |
+| Tue Aug 18 | 287 Find the Duplicate Number (M) |
 
-**Unlocks:** cycle detection + middle-finding, the two moves behind most linked-list interview questions.
-**Changes:** added 234 (fast/slow + reverse = classic combo), 142 (asked constantly, tiny step past 141), and **moved 876 here from your Fixed Separation list** — it's textbook fast & slow. Note: 392 is really "parallel pointers over two sequences," not fast/slow, but it's a one-off — leaving it here rather than inventing a sub-pattern for one problem.
+**Unlocks:** cycle detection + middle-finding.
+**Changes:** added 234, 142; moved 876 here from Fixed Separation. 392 is parallel pointers (one-off), parked here.
 
 ### 1.3 Fixed Separation (n apart) — Important
+**When: Wed Aug 19 – Thu Aug 20**
 
-| LC # | Problem | Difficulty |
-|---|---|---|
-| 19 | Remove Nth Node From End of List | Medium |
-| 2095 | Delete the Middle Node of a Linked List | Medium |
+| Day | Solve |
+|---|---|
+| Wed Aug 19 | 19 Remove Nth Node From End of List (M) |
+| Thu Aug 20 | 2095 Delete the Middle Node of a Linked List (M) |
 
-**Unlocks:** the "gap trick" for one-pass linked-list deletion.
-**Changes:** 876 moved to §1.2. That leaves a 2-Medium micro-pattern — **flagged exception** to Easy-majority: no Easies exist in this family, and both problems are small twists on §1.2 skills, so they're scheduled immediately after it. If you want to drop one, drop 2095.
+**Unlocks:** gap trick for one-pass linked-list deletion.
+**Exception:** no Easies in this family. Drop 2095 if you need to cut.
 
 ### 1.4 In-place Array Modification — Core
+**When: Fri Aug 21 – Fri Aug 28** (6 weekdays)
 
-| LC # | Problem | Difficulty |
-|---|---|---|
-| 27 | Remove Element | Easy |
-| 26 | Remove Duplicates from Sorted Array | Easy |
-| 283 | Move Zeroes | Easy |
-| 905 | Sort Array By Parity | Easy |
-| 88 | Merge Sorted Array | Easy |
-| 1089 | Duplicate Zeros | Easy |
-| 80 | Remove Duplicates from Sorted Array II | Medium |
-| 75 | Sort Colors | Medium |
-| 443 | String Compression | Medium |
+| Day | Solve |
+|---|---|
+| Fri Aug 21 | 27 Remove Element (E), 26 Remove Duplicates from Sorted Array (E) |
+| Mon Aug 24 | 283 Move Zeroes (E), 905 Sort Array By Parity (E) |
+| Tue Aug 25 | 88 Merge Sorted Array (E), 1089 Duplicate Zeros (E) |
+| Wed Aug 26 | 80 Remove Duplicates from Sorted Array II (M) |
+| Thu Aug 27 | 75 Sort Colors (M) |
+| Fri Aug 28 | 443 String Compression (M) |
 
-**Unlocks:** reader/writer pointer separation — the foundation for every "modify without extra space" question.
-**Changes:** removed **2337. Move Pieces** and **2938. Separate Black and White Balls** (niche Mediums, low transfer; 2938 is 283 with counting). Added 88 (merge-from-the-end is a must-know Easy) and 1089. Was 4E/5M, now 6E/3M.
+**Sat Aug 29 — Lock-in §1.1–1.4:** 3 mixed Two Pointers (unlabeled, timed). No new problems.
+**Sun Aug 30 — Phase 1 checkpoint.**
+
+**Unlocks:** reader/writer pointer separation.
+**Changes:** removed 2337, 2938; added 88, 1089.
 
 ### 1.5 String Comparison with Skips — Important
+**When: Wed Sep 16 – Thu Sep 17** *(Phase 2 — after Hashing)*
 
-| LC # | Problem | Difficulty |
-|---|---|---|
-| 844 | Backspace String Compare | Easy |
-| 1598 | Crawler Log Folder | Easy |
-| 2390 | Removing Stars From a String | Medium |
+| Day | Solve |
+|---|---|
+| Wed Sep 16 | 844 Backspace String Compare (E), 1598 Crawler Log Folder (E) |
+| Thu Sep 17 | 2390 Removing Stars From a String (M) |
 
-**Unlocks:** processing strings with "undo" characters — also your bridge into Stack thinking (§5).
-**Changes:** none. Already compliant.
+**Unlocks:** “undo” characters; bridge into Stack (§5).
 
-### 1.6 Expanding From Center — Important ⚠ exception
+### 1.6 Expanding From Center — Important ⚠
+**When: Fri Sep 18 – Mon Sep 21**
 
-| LC # | Problem | Difficulty |
-|---|---|---|
-| 647 | Palindromic Substrings | Medium |
-| 5 | Longest Palindromic Substring | Medium |
+| Day | Solve |
+|---|---|
+| Fri Sep 18 | 647 Palindromic Substrings (M) |
+| Mon Sep 21 | 5 Longest Palindromic Substring (M) |
 
-**Unlocks:** palindrome scanning without DP.
-**Exception flagged:** zero Easy problems exist in this family — it's the only all-Medium sub-pattern kept, because #5 is one of the most-asked interview questions anywhere and both problems are literally the same technique. Warm-up: 125 (§1.1). Scheduled last within Two Pointers.
+**Unlocks:** palindrome scanning without DP. Warm-up already done: 125.
+**Exception:** no Easies exist; both are the same technique. Kept because #5 is extremely common.
 
 ### 1.7 String Reversal — Important
+**When: Tue Sep 22 – Thu Sep 24**
 
-| LC # | Problem | Difficulty |
-|---|---|---|
-| 344 | Reverse String | Easy |
-| 345 | Reverse Vowels of a String | Easy |
-| 541 | Reverse String II | Easy |
-| 917 | Reverse Only Letters | Easy |
-| 151 | Reverse Words in a String | Medium |
+| Day | Solve |
+|---|---|
+| Tue Sep 22 | 344 Reverse String (E), 345 Reverse Vowels of a String (E) |
+| Wed Sep 23 | 541 Reverse String II (E), 917 Reverse Only Letters (E) |
+| Thu Sep 24 | 151 Reverse Words in a String (M) |
 
-**Unlocks:** in-place swap mechanics; 151 adds word-level parsing (a real interview favorite).
-**Changes:** reordered Easies first (151 was listed first); added 917.
+**Fri Sep 25 — Buffer:** finish any slipped §2 / §1.5–1.7. Do not start §3 early unless fully caught up.
+**Unlocks:** in-place swaps + word-level parsing (151).
 
 ---
 
 ## §2 Hashing
 
+**Phase 2 start: Mon Aug 31 – Tue Sep 15**
+
 ### 2.1 Seen Set / Existence Check — Core
+**When: Mon Aug 31 – Fri Sep 4**
 
-| LC # | Problem | Difficulty |
-|---|---|---|
-| 217 | Contains Duplicate | Easy |
-| 1 | Two Sum | Easy |
-| 136 | Single Number | Easy |
-| 268 | Missing Number | Easy |
-| 448 | Find All Numbers Disappeared in an Array | Easy |
-| 128 | Longest Consecutive Sequence | Medium |
-| 36 | Valid Sudoku | Medium |
+| Day | Solve |
+|---|---|
+| Mon Aug 31 | 217 Contains Duplicate (E), 1 Two Sum (E) |
+| Tue Sep 1 | 136 Single Number (E), 268 Missing Number (E) |
+| Wed Sep 2 | 448 Find All Numbers Disappeared in an Array (E) |
+| Thu Sep 3 | 128 Longest Consecutive Sequence (M) |
+| Fri Sep 4 | 36 Valid Sudoku (M) |
 
-**Unlocks:** the "have I seen this before?" reflex — the most common optimization in all of entry-level interviewing.
-**Changes:** **1. Two Sum moved here from your Sliding Window §11** — it's a hash-map problem, not a window problem.
+**Unlocks:** “have I seen this before?”
+**Changes:** 1 Two Sum moved here from your old Sliding Window list.
 
 ### 2.2 Frequency Map / Counting — Core
+**When: Mon Sep 7 – Mon Sep 14**
 
-| LC # | Problem | Difficulty |
-|---|---|---|
-| 242 | Valid Anagram | Easy |
-| 383 | Ransom Note | Easy |
-| 387 | First Unique Character in a String | Easy |
-| 169 | Majority Element | Easy |
-| 205 | Isomorphic Strings | Easy |
-| 290 | Word Pattern | Easy |
-| 1207 | Unique Number of Occurrences | Easy |
-| 49 | Group Anagrams | Medium |
-| 347 | Top K Frequent Elements | Medium |
+| Day | Solve |
+|---|---|
+| Mon Sep 7 | 242 Valid Anagram (E), 383 Ransom Note (E) |
+| Tue Sep 8 | 387 First Unique Character in a String (E), 169 Majority Element (E) |
+| Wed Sep 9 | 205 Isomorphic Strings (E), 290 Word Pattern (E) |
+| Thu Sep 10 | 1207 Unique Number of Occurrences (E) |
+| Fri Sep 11 | 49 Group Anagrams (M) |
+| Mon Sep 14 | 347 Top K Frequent Elements (M) |
 
-**Unlocks:** `Counter`/dict fluency, anagram family, and the prerequisite for §3.3 frequency-matching windows.
+**Tue Sep 15 — Lock-in §2:** cold re-solve 217, 242, and either 1 or 49.
+
+**Unlocks:** `Counter`/dict fluency; required before §3.3.
 
 ---
 
 ## §3 Sliding Window
 
+**Phase 3: Mon Sep 28 – Thu Oct 15**
+
 ### 3.1 Fixed Size — Core
+**When: Mon Sep 28 – Thu Oct 1** · **Fri Oct 2 lock-in**
 
-| LC # | Problem | Difficulty |
-|---|---|---|
-| 643 | Maximum Average Subarray I | Easy |
-| 1652 | Defuse the Bomb | Easy |
-| 1876 | Substrings of Size Three with Distinct Characters | Easy |
-| 3318 | Find X-Sum of All K-Long Subarrays I | Easy |
-| 346 | Moving Average from Data Stream *(Premium — skip if no sub)* | Easy |
-| 2985 | Calculate Compressed Mean *(Premium — skip if no sub)* | Easy |
-| 2461 | Maximum Sum of Distinct Subarrays With Length K | Medium |
-| 3254 | Find the Power of K-Size Subarrays I | Medium |
+| Day | Solve |
+|---|---|
+| Mon Sep 28 | 643 Maximum Average Subarray I (E), 1652 Defuse the Bomb (E) |
+| Tue Sep 29 | 1876 Substrings of Size Three with Distinct Characters (E), 3318 Find X-Sum of All K-Long Subarrays I (E) |
+| Wed Sep 30 | 2461 Maximum Sum of Distinct Subarrays With Length K (M) |
+| Thu Oct 1 | 3254 Find the Power of K-Size Subarrays I (M) |
+| Fri Oct 2 | Lock-in: re-solve 643 + 2461 |
 
-**Unlocks:** the add-one/remove-one window update — never recompute the window from scratch.
-**Changes:** added 1652, 1876; **moved 2461 here from your Variable Size list** (it's a fixed length-K window). Premium items kept but flagged — they're skippable, four free Easies cover the same skill.
+Skip if no Premium: 346 Moving Average, 2985 Calculate Compressed Mean.
+**Unlocks:** add-one / remove-one window update.
+**Changes:** added 1652, 1876; moved 2461 from Variable Size.
 
 ### 3.2 Variable Size — Core
+**When: Mon Oct 5 – Mon Oct 12** · **Tue Oct 13 lock-in**
 
-| LC # | Problem | Difficulty |
-|---|---|---|
-| 121 | Best Time to Buy and Sell Stock | Easy |
-| 219 | Contains Duplicate II | Easy |
-| 485 | Max Consecutive Ones | Easy |
-| 674 | Longest Continuous Increasing Subsequence | Easy |
-| 209 | Minimum Size Subarray Sum | Medium |
-| 3 | Longest Substring Without Repeating Characters | Medium |
-| 424 | Longest Repeating Character Replacement | Medium |
-| 1004 | Max Consecutive Ones III | Medium |
+| Day | Solve |
+|---|---|
+| Mon Oct 5 | 121 Best Time to Buy and Sell Stock (E), 219 Contains Duplicate II (E) |
+| Tue Oct 6 | 485 Max Consecutive Ones (E), 674 Longest Continuous Increasing Subsequence (E) |
+| Wed Oct 7 | 209 Minimum Size Subarray Sum (M) |
+| Thu Oct 8 | 3 Longest Substring Without Repeating Characters (M) |
+| Fri Oct 9 | 424 Longest Repeating Character Replacement (M) |
+| Mon Oct 12 | 1004 Max Consecutive Ones III (M) |
+| Tue Oct 13 | Lock-in: re-solve 209 + 3 |
 
-Stretch (optional, only if cruising): 713 (M), 904 (M), 1493 (M — note 1004 generalizes it).
+**Stretch (only if Oct 13 lock-in felt easy):** 713, 904, 1493 — do not steal time from §3.3/§4.
+**Unlocks:** grow-right / shrink-left with an invariant.
+**Changes:** removed Hard 76 and Hard 3347; trimmed grindy Mediums; added Easies 121, 219, 485, 674. Lands 4E/4M (tie) — flagged ceiling for this family.
 
-**Unlocks:** grow-right/shrink-left with an invariant — solves the entire "longest/shortest subarray such that X" family.
-**Changes — the big cleanup:**
-- **Removed 76. Minimum Window Substring — it is HARD**, not Medium. Non-negotiable rule violation.
-- Removed 12 grindy Mediums: 1438, 1658, 1838, 2516, 2762, 2779, 2981, 3026, 3346, and **3347 (also HARD)**, plus 713/904/1493 demoted to stretch. They're interchangeable reps of the same shrink-loop; 3/209/424/1004 teach everything they teach.
-- Added the only 4 worthwhile Easies in this family (121, 219, 485, 674). ⚠ Even so this lands 4E/4M — a tie, not a majority. That's the ceiling: variable-window is inherently Medium territory on LeetCode. Flagged, not hidden.
+### 3.3 Frequency-Matching Windows — Important ⚠
+**When: Wed Oct 14 – Thu Oct 15**
 
-### 3.3 Frequency-Matching Windows (anagram windows) — Important ⚠ exception
+| Day | Solve |
+|---|---|
+| Wed Oct 14 | 567 Permutation in String (M) |
+| Thu Oct 15 | 438 Find All Anagrams in a String (M) |
 
-| LC # | Problem | Difficulty |
-|---|---|---|
-| 567 | Permutation in String | Medium |
-| 438 | Find All Anagrams in a String | Medium |
+**Unlocks:** fixed window + frequency map (top phone-screen type).
+**Exception:** no Easies; warm-ups were §2.2 (242, 383).
 
-**Unlocks:** fixed window + frequency map combo — a top-5 startup phone-screen question type.
-**Exception flagged:** no Easies exist; kept because both are one technique and your §2.2 Easies (242, 383) are the real warm-ups. Do this sub-pattern only after §2.2.
-
-### ~~3.4 Monotonic Queue for Max/Min~~ — REMOVED
-
-Your Pattern 10 is **dropped entirely**: 239 Sliding Window Maximum and 862 Shortest Subarray with Sum at Least K are both **Hard** (rule violation), and 1696 alone doesn't justify learning monotonic deques. This is FAANG-tier technique, wrong tier for your targets.
+### ~~3.4 Monotonic Queue~~ — REMOVED
+Hard-gated (239, 862). Wrong tier for entry-level.
 
 ---
 
 ## §4 Prefix Sum — Core
 
-| LC # | Problem | Difficulty |
-|---|---|---|
-| 1480 | Running Sum of 1d Array | Easy |
-| 724 | Find Pivot Index | Easy |
-| 1732 | Find the Highest Altitude | Easy |
-| 303 | Range Sum Query – Immutable | Easy |
-| 560 | Subarray Sum Equals K | Medium |
-| 238 | Product of Array Except Self | Medium |
+**When: Fri Oct 16 – Wed Oct 21** · **Thu Oct 22 lock-in §3–§4**
 
-**Unlocks:** precompute-then-query thinking; 560 (prefix + hashmap) and 238 (prefix/suffix) are two of the most-asked array Mediums in existence.
+| Day | Solve |
+|---|---|
+| Fri Oct 16 | 1480 Running Sum of 1d Array (E), 724 Find Pivot Index (E) |
+| Mon Oct 19 | 1732 Find the Highest Altitude (E), 303 Range Sum Query – Immutable (E) |
+| Tue Oct 20 | 560 Subarray Sum Equals K (M) |
+| Wed Oct 21 | 238 Product of Array Except Self (M) |
+| Thu Oct 22 | Lock-in: 724 + 560 or 238 |
+
+**Unlocks:** precompute-then-query; 560 and 238 are high-frequency Mediums.
+**Sun Oct 25 — Phase 3 checkpoint** (`JOB_SEARCH.md`).
 
 ---
 
 ## §5 Stack
 
+**Starts end of Phase 3, finishes early Phase 4.**
+
 ### 5.1 Matching / Processing — Core
+**When: Fri Oct 23 – Wed Oct 28** · **Thu Oct 29 lock-in**
 
-| LC # | Problem | Difficulty |
-|---|---|---|
-| 20 | Valid Parentheses | Easy |
-| 1047 | Remove All Adjacent Duplicates in String | Easy |
-| 682 | Baseball Game | Easy |
-| 232 | Implement Queue using Stacks | Easy |
-| 155 | Min Stack | Medium |
-| 150 | Evaluate Reverse Polish Notation | Medium |
+| Day | Solve |
+|---|---|
+| Fri Oct 23 | 20 Valid Parentheses (E), 1047 Remove All Adjacent Duplicates in String (E) |
+| Mon Oct 26 | 682 Baseball Game (E), 232 Implement Queue using Stacks (E) |
+| Tue Oct 27 | 155 Min Stack (M) |
+| Wed Oct 28 | 150 Evaluate Reverse Polish Notation (M) |
+| Thu Oct 29 | Lock-in: 20 + 155 |
 
-**Unlocks:** push/pop-on-match reflex. 20 is arguably the single most-asked entry-level question; 155 is a design favorite. §1.5 already primed you for this.
+**Unlocks:** push/pop-on-match. 20 is among the most-asked entry-level questions.
 
 ### 5.2 Monotonic Stack (light) — Important
+**When: Fri Oct 30 – Mon Nov 2**
 
-| LC # | Problem | Difficulty |
-|---|---|---|
-| 496 | Next Greater Element I | Easy |
-| 1475 | Final Prices With a Special Discount in a Shop | Easy |
-| 739 | Daily Temperatures | Medium |
+| Day | Solve |
+|---|---|
+| Fri Oct 30 | 496 Next Greater Element I (E), 1475 Final Prices With a Special Discount in a Shop (E) |
+| Mon Nov 2 | 739 Daily Temperatures (M) |
 
-**Unlocks:** "next greater/smaller element" — kept light on purpose; deeper monotonic-stack problems (84, 42) are Hard and excluded.
+**Unlocks:** next greater/smaller. Deeper monotonic stack (84, 42) is Hard — excluded.
 
 ---
 
 ## §6 Binary Search
 
 ### 6.1 Classic on Sorted Data — Core
+**When: Tue Nov 3 – Wed Nov 11** · **Thu Nov 12 lock-in**
 
-| LC # | Problem | Difficulty |
-|---|---|---|
-| 704 | Binary Search | Easy |
-| 35 | Search Insert Position | Easy |
-| 744 | Find Smallest Letter Greater Than Target | Easy |
-| 278 | First Bad Version | Easy |
-| 69 | Sqrt(x) | Easy |
-| 367 | Valid Perfect Square | Easy |
-| 34 | Find First and Last Position of Element in Sorted Array | Medium |
-| 74 | Search a 2D Matrix | Medium |
+| Day | Solve |
+|---|---|
+| Tue Nov 3 | 704 Binary Search (E), 35 Search Insert Position (E) |
+| Wed Nov 4 | 744 Find Smallest Letter Greater Than Target (E), 278 First Bad Version (E) |
+| Thu Nov 5 | 69 Sqrt(x) (E), 367 Valid Perfect Square (E) |
+| Fri Nov 6 | *(buffer / re-solve template if any Easy felt shaky)* |
+| Mon Nov 9 | 34 Find First and Last Position of Element in Sorted Array (M) |
+| Tue Nov 10 | 74 Search a 2D Matrix (M) |
+| Wed Nov 11 | cold re-solve 704 + 34 |
+| Thu Nov 12 | Lock-in §6.1 |
 
-**Unlocks:** one memorized template (`lo, hi, mid`, no off-by-ones) → eight problems fall. 34 teaches the leftmost/rightmost boundary variant, which is the actual interview skill.
+**Unlocks:** one `lo/hi/mid` template without off-by-ones; 34 is the real interview skill (boundaries).
 
 ### 6.2 Rotated Arrays — Optional
+**When: only after Thu Nov 12, and only if §6.1 is cold** — else skip until a company is known to ask it.
 
 | LC # | Problem | Difficulty |
 |---|---|---|
 | 153 | Find Minimum in Rotated Sorted Array | Medium |
 | 33 | Search in Rotated Sorted Array | Medium |
 
-Both Medium, no Easies exist — do only after 6.1 is cold, or skip until an interviewer's company is known to ask it. **Excluded:** binary-search-on-answer (875, 1011) — clever but low frequency at entry level.
+Excluded: binary-search-on-answer (875, 1011) — low entry-level frequency.
 
 ---
 
 ## §7 Linked List Manipulation — Core
 
-| LC # | Problem | Difficulty |
-|---|---|---|
-| 206 | Reverse Linked List | Easy |
-| 21 | Merge Two Sorted Lists | Easy |
-| 83 | Remove Duplicates from Sorted List | Easy |
-| 203 | Remove Linked List Elements | Easy |
-| 2 | Add Two Numbers | Medium |
-| 24 | Swap Nodes in Pairs | Medium |
+**When: Fri Nov 13 – Wed Nov 18** · **Thu Nov 19 lock-in**
 
-Cross-refs already covered elsewhere: 141, 142, 234, 876 (§1.2), 19, 2095 (§1.3).
-**Unlocks:** pointer rewiring + dummy-head trick. 206 and 21 are near-guaranteed to appear somewhere in an entry-level loop. **Excluded:** 146 LRU Cache (M, first add-back below), 25 Reverse Nodes in k-Group (Hard).
+| Day | Solve |
+|---|---|
+| Fri Nov 13 | 206 Reverse Linked List (E), 21 Merge Two Sorted Lists (E) |
+| Mon Nov 16 | 83 Remove Duplicates from Sorted List (E), 203 Remove Linked List Elements (E) |
+| Tue Nov 17 | 2 Add Two Numbers (M) |
+| Wed Nov 18 | 24 Swap Nodes in Pairs (M) |
+| Thu Nov 19 | Lock-in: 206 + 21 |
+
+Already done via §1: 141, 142, 234, 876, 19, 2095.
+**Unlocks:** pointer rewiring + dummy head. Excluded: 146 LRU (add-back), 25 (Hard).
 
 ---
 
-## §8 Trees BFS/DFS — Optional (Phase 4 only, if §1–7 are solid)
+## §8 Trees BFS/DFS — Optional
+
+**When: Fri Nov 20 – Sun Nov 22 only if §1–7 re-solve rate is ≥80% cold.** Otherwise spend these days on mixed reviews from weak sub-patterns.
 
 | LC # | Problem | Difficulty |
 |---|---|---|
@@ -312,28 +382,25 @@ Cross-refs already covered elsewhere: 141, 142, 234, 876 (§1.2), 19, 2095 (§1.
 | 102 | Binary Tree Level Order Traversal | Medium |
 | 235 | Lowest Common Ancestor of a BST | Medium |
 
-**Unlocks:** recursive DFS template + BFS queue — enough to survive the one tree question a startup might ask, without opening the full trees rabbit hole.
+If you start this block: 2 Easies/day Nov 20–21, then 102 or 235 on Nov 22 — or skip Mediums and bank confidence.
 
 ---
 
-## Why this set is sufficient (and what's deliberately missing)
+## Why this timeline favors retention
 
-**Sufficiency:** every sub-pattern above is a *template family* — master the 3–9 listed problems cold and unseen problems in the family are re-skins (same loop shape, different wrapper story). The set covers ~90% of what small/mid companies actually ask at entry level: arrays, strings, hash maps, windows, stacks, basic search, basic linked lists. Combined with the plan's spaced re-solves and Saturday mixed sets, ~100 problems deeply retained beats 300 half-remembered — which is the exact failure mode of your first 54.
-
-**Excluded on purpose (don't second-guess these):**
-
-| Excluded | Why |
+| Design choice | Why it helps you |
 |---|---|
-| Dynamic Programming | Biggest time sink in all of interview prep; rare in entry-level startup screens; mostly Medium/Hard |
-| Graphs (DFS/BFS on grids, topo sort, union-find) | Almost entirely Medium+; FAANG-tier frequency |
-| Backtracking (subsets, permutations, combination sum) | All Medium+; low startup frequency |
-| Heaps / Priority Queues | 347 (bucket-sortable) is the only common one and it's already in §2.2 |
-| Tries, intervals, greedy theory, bit manipulation, math tricks | One-off topics; learn on demand if a specific company asks |
-| Monotonic deque (239, 862) | Hard-gated — removed per your rules |
-| Matrix spiral/rotation, cyclic sort | Ceremony-heavy, low transfer |
-| **Every Hard problem** | Including 76 and 3347, which were hiding in your seed lists |
+| One sub-pattern at a time | Stops the “random problems → zero retention” failure mode |
+| 2 Easy / 1 Medium cap + 25-min gate | Prevents fake progress from rushing Easies you didn’t own |
+| Lock-in days after every block | Forces retrieval practice when the pattern is still warm |
+| Hashing before Sliding Window | Removes the “I need a map but don’t feel it yet” wall |
+| Phase 1 = Two Pointers only | Old plan crammed hashing into the same 4 weeks — too much new for weak retention |
+| Phase 4 = finish Stack/BS/LL + mixed | New topics taper while mixed practice rises (matches how interviews feel) |
+| Slip pushes dates; never skip reviews | Reviews are the product; the calendar is a guide |
 
-**First add-backs** if you finish everything and are still hunting: 56 Merge Intervals (M) → 146 LRU Cache (M) → 33/153 (§6.2) → 875 Koko Eating Bananas (M).
+**Still excluded on purpose:** DP, graphs, backtracking, heaps, tries, intervals deep-dives, monotonic deques, every Hard (including 76 and 3347 from your seed).
+
+**First add-backs** (only after Nov 22 loop, still hunting): 56 Merge Intervals → 146 LRU Cache → §6.2 → 875 Koko.
 
 ---
 
@@ -341,9 +408,12 @@ Cross-refs already covered elsewhere: 141, 142, 234, 876 (§1.2), 19, 2095 (§1.
 
 | Change | Detail |
 |---|---|
-| **Hards removed** | 76 Minimum Window Substring, 3347 Max Frequency II, 239 Sliding Window Maximum, 862 Shortest Subarray (→ Pattern 10 dropped entirely) |
-| **Mediums trimmed** | 16, 18, 259 (3Sum variants) · 2337, 2938 (in-place niche) · 1438, 1658, 1838, 2516, 2762, 2779, 2981, 3026, 3346, 1696 (variable-window grind) |
-| **Moved** | 1 Two Sum → §2.1 Hashing · 876 → §1.2 Fast & Slow · 2461 → §3.1 Fixed Size |
+| **Hards removed** | 76, 3347, 239, 862 (Pattern 10 dropped) |
+| **Mediums trimmed** | 16, 18, 259 · 2337, 2938 · variable-window grind list |
+| **Moved** | 1 → §2.1 · 876 → §1.2 · 2461 → §3.1 |
 | **Easies added** | 125, 680, 2824, 234, 88, 1089, 917, 1652, 1876, 121, 485, 674 (+142 M) |
-| **Reordered** | All lists now Easy-first; Sliding Window now drills after Hashing |
-| **Exceptions kept & flagged** | §1.3 (2M), §1.6 (2M), §3.2 (4E/4M tie), §3.3 (2M), §6.2 optional (2M) — families where Easies don't exist |
+| **Timeline** | Day-level dates Aug 3 → Nov 19; lock-ins; Phase 1 no longer includes Hashing |
+
+---
+
+*Curriculum calendar built for start Fri Jul 24, 2026. If a weekday is lost (travel, interview), shift this file’s dates forward as a block — don’t compress.*
