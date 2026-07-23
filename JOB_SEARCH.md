@@ -3,7 +3,7 @@
 **Source of truth** — edit this file whenever the plan changes.  
 Pin this tab (right-click → Pin). Cmd+P → `JOB_SEARCH` opens it instantly.
 
-From-zero plan starting **Thursday, July 23, 2026** · Python · US-wide (remote + onsite) · startups / less competitive entry-level. You’re not actually at zero — compress Setup + Phase 1, don’t skip them.
+From-zero plan starting **Friday, July 24, 2026** · Python · US-wide (remote + onsite) · startups / less competitive entry-level. You’re not actually at zero — compress Setup + Phase 1, don’t skip them.
 
 | | |
 |---|---|
@@ -40,11 +40,11 @@ Depth-first pattern blocks are right for learning. Pure blocking hides recogniti
 ## Timeline
 
 ```
-Jul 23 ── Setup ── Aug 2 ── Phase1 ── Aug 30 ── Phase2 ── Sep 27 ── Phase3 ── Oct 25 ── Phase4 ── Nov 22 ── loop →
+Jul 24 ── Setup ── Aug 2 ── Phase1 ── Aug 30 ── Phase2 ── Sep 27 ── Phase3 ── Oct 25 ── Phase4 ── Nov 22 ── loop →
          1.5 wks           4 wks             4 wks             4 wks             4 wks
 ```
 
-### Setup Sprint — Thu Jul 23 – Sun Aug 2
+### Setup Sprint — Fri Jul 24 – Sun Aug 2
 Drop apps to ~5/day this week only. Fix the machine:
 
 - Rewrite resume (1 page, metrics, links). Get **2 outside reviews** (r/EngineeringResumes wiki format).
@@ -55,16 +55,16 @@ Drop apps to ~5/day this week only. Fix the machine:
 - Book one Boston tech meetup for August.
 
 ### Phase 1 — Mon Aug 3 – Sun Aug 30 · Two Pointers + Hashing
-- DSA: Thita §1.1–1.4 Core, then §2.4 Hashing. ~24 new problems.
+- DSA: Curriculum §1.1–1.4 (Two Pointers core), then §2 (Hashing).
 - Full app volume resumes Aug 3 (~55/wk).
 - Project 1 starts Aug 3: deployed Python web app (FastAPI/Flask + DB + simple UI). Ship by late Sep. Commit every project day.
 - Networking: 10 outreach/week.
 - First mixed Saturday: Aug 15.
 
-**Checkpoint Sun Aug 30:** ~150 apps since Jul 23. Responses &lt;2% → professional resume review before Phase 2.
+**Checkpoint Sun Aug 30:** ~150 apps since Jul 24. Responses &lt;2% → professional resume review before Phase 2.
 
 ### Phase 2 — Mon Aug 31 – Sun Sep 27 · Sliding Window + Prefix Sum + Strings
-- DSA: Thita §4 Sliding Window Core, §2.5 Prefix Sum, §7 String Core. ~24 new.
+- DSA: Curriculum §3 (Sliding Window), §1.5–1.7 (string sub-patterns), §4 (Prefix Sum).
 - Draft 6 STAR stories by Sun Sep 13. Practice “tell me about yourself” out loud.
 - Mocks: Sat Sep 12, Sat Sep 26.
 - Ship Project 1 by Sun Sep 27 (deployed, README, demo GIF, on resume).
@@ -72,7 +72,7 @@ Drop apps to ~5/day this week only. Fix the machine:
 **Checkpoint Sun Sep 27:** zero interviews → move 30 min/day from apps to networking/referrals.
 
 ### Phase 3 — Mon Sep 28 – Sun Oct 25 · Stacks + Binary Search + Linked Lists
-- DSA: §6 Stacks Core (2 wks), §5 Binary Search Core (1 wk), §3 Linked Lists Core (1 wk). ~22 new.
+- DSA: Curriculum §5 Stack (2 wks), §6 Binary Search (1 wk), §7 Linked List (1 wk).
 - Mixed Saturdays from 6+ patterns.
 - Mocks: Oct 10, Oct 24.
 - Project 2 starts Sep 28: real data/users + tests + CI (GitHub Actions). SQLBolt ~2 hrs.
@@ -115,17 +115,18 @@ Drop apps to ~5/day this week only. Fix the machine:
 ## Pattern priority (entry-level ROI)
 
 Sliding Window was missing from your original list — it’s Core for arrays/strings.
+**Full problem-by-problem list: [`DSA_CURRICULUM.md`](DSA_CURRICULUM.md)** — section numbers below refer to it.
 
-| # | Topic | Thita | When | Why |
+| # | Topic | Curriculum | When | Why |
 |---|---|---|---|---|
-| 1 | Two Pointers | §1.1–1.4 Core | Aug 3–16 | Highest-frequency easy/medium array pattern |
-| 2 | Hashing (freq / seen) | §2.4 Core | Aug 17–30 | Most common entry-level “trick” |
-| 3 | Sliding Window | §4 Core | Aug 31–Sep 13 | Core arrays/strings |
-| 4 | Prefix Sum + Strings | §2.5, §7 Core | Sep 14–27 | Cheap, rounds out arrays/strings |
-| 5 | Stacks | §6 Core | Sep 28–Oct 11 | Parentheses family shows up constantly |
-| 6 | Binary Search (basic) | §5 Core | Oct 12–18 | One template, many easy wins |
-| 7 | Linked Lists (basic) | §3 Core | Oct 19–25 | Reverse / merge / cycle — low depth |
-| 8* | Trees BFS/DFS (optional) | §9 Core | Phase 4 if ahead | Only if 1–7 are solid |
+| 1 | Two Pointers | §1.1–1.4 | Aug 3–16 | Highest-frequency easy/medium array pattern |
+| 2 | Hashing (freq / seen) | §2 | Aug 17–30 | Most common entry-level “trick” |
+| 3 | Sliding Window | §3 | Aug 31–Sep 13 | Core arrays/strings |
+| 4 | Prefix Sum + Strings | §4 + §1.5–1.7 | Sep 14–27 | Cheap, rounds out arrays/strings |
+| 5 | Stacks | §5 | Sep 28–Oct 11 | Parentheses family shows up constantly |
+| 6 | Binary Search (basic) | §6 | Oct 12–18 | One template, many easy wins |
+| 7 | Linked Lists (basic) | §7 | Oct 19–25 | Reverse / merge / cycle — low depth |
+| 8* | Trees BFS/DFS (optional) | §8 | Phase 4 if ahead | Only if 1–7 are solid |
 
 **Defer:** graphs, DP, backtracking, heaps, tries, matrix spiral/rotation. Wrong tier for your targets.
 
@@ -135,8 +136,9 @@ Sliding Window was missing from your original list — it’s Core for arrays/st
 
 | Role | Resource | How | Cost |
 |---|---|---|---|
-| Spine | Thita DSA Patterns | Curriculum map. ~40% Pro-locked; theory quality unverified — 2 weeks free before paying. | Free → maybe Pro |
-| Explanations | NeetCode (site + YouTube) | Watch after every attempt. If Thita disappoints, NeetCode roadmap becomes the spine. | Free |
+| Spine | `DSA_CURRICULUM.md` (this repo) | The exact problem set: pattern → sub-pattern → problems, Easy-first, zero Hards. Work through it in order. | Free |
+| Theory / visuals | Thita DSA Patterns (free tier) | Read the subpattern page before starting each block. ~40% Pro-locked; 2 weeks free before paying. | Free → maybe Pro |
+| Explanations | NeetCode (site + YouTube) | Watch after every attempt. | Free |
 | Written lookup | LeetCode Crash Course (owned) | Don’t go linear. Lookup only for priority topics. | Owned |
 | Practical | Projects + SQLBolt + Exercism | Ship projects. SQLBolt ~2 hrs in Phase 3. Exercism only for syntax gaps. | Free |
 
@@ -148,12 +150,14 @@ Sliding Window was missing from your original list — it’s Core for arrays/st
 
 | Channel | Why | Cadence |
 |---|---|---|
-| LinkedIn (saved alerts) | Entry level, US remote + Boston/NYC; apply within 3 days | Daily |
-| Wellfound + YC Work at a Startup | Less competition; founders often reply | Daily |
-| Built In + Welcome to the Jungle | Mid-size / startup filters | 3×/week |
+| **LinkedIn (saved alerts) — PRIMARY** | Entry level, US remote + Boston/NYC; apply within 3 days of posting; most daily volume goes here | Daily |
+| Wellfound | Startup roles; founders sometimes reply directly | Daily |
+| Welcome to the Jungle | Mid-size / startup filters | 3×/week |
 | HN “Who’s Hiring” | 1st of month; email founders; high reply rate | Aug–Nov 1st |
 | Boring industries (insurance, banks, healthcare, logistics, gov) | Far less competition | Weekly batch |
 | Staffing / contract-to-hire | Fast placement; real on-ramp | Profiles in Aug; lean in from Oct if needed |
+
+*Dropped Jul 23: Built In + YC Work at a Startup (repeated apps, zero responses — too competitive for the return).*
 
 ### Networking weekly quota
 
@@ -180,4 +184,4 @@ Sliding Window was missing from your original list — it’s Core for arrays/st
 
 ---
 
-*Built Jul 23, 2026. Assumes job search is primary (~5 hrs/day). Part-time: same block order, half durations — cut project time last, application time first.*
+*Built Jul 23, 2026 · updated Jul 23 (start → Jul 24; LinkedIn primary; Built In + YC WaaS dropped; curriculum moved to `DSA_CURRICULUM.md`). Assumes job search is primary (~5 hrs/day). Part-time: same block order, half durations — cut project time last, application time first.*
