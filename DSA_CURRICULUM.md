@@ -5,12 +5,36 @@ Difficulty rules: **Easy-majority per sub-pattern · Easies listed first · zero
 
 | | |
 |---|---|
-| Core problems | **~96 free** (skip 2 Premium if no sub) · 0 Hard |
-| Optional | §6.2 rotated BS · §3.2 stretch · §8 Trees |
+| Core problems | **~107 free** (skip 2 Premium if no sub) · 0 Hard |
+| Core patterns | 9 (added §8 Trees, §9 Grid BFS/DFS) |
+| Optional | §6.2 rotated BS · §3.2 stretch · §9 heap add-on |
 | List order | = drill order. Top → bottom inside each sub-pattern. |
 | Calendar below | = target dates. Slip is expected — see pacing rules. |
 
 **Structural note:** Sliding Window drills **after** Hashing. Variable windows (424, 1004, 438, 567) all use frequency maps — hashing first makes them stick.
+
+---
+
+## Read this first — honest confidence (you asked for 95%)
+
+**I cannot honestly tell you "do this file and you're 95% to get a job." Anyone who does is selling you something.** Here is the real breakdown, because you asked me to verify claims rather than flatter you:
+
+Getting hired = **(interviews you get) × (technical screens you pass) × (behavioral you pass) × (fit / timing / market luck)**. DSA only controls the second term.
+
+| Term | What controls it | This file's job |
+|---|---|---|
+| Get interviews | Resume, applications, networking, referrals | ❌ Not this file — **that's the binding constraint** (`JOB_SEARCH.md`) |
+| Pass technical screen | DSA pattern recognition + communication | ✅ **This file** |
+| Pass behavioral | STAR stories, comms | ❌ `JOB_SEARCH.md` |
+| Offer / timing / market | Mostly outside your control | ❌ Nobody controls this |
+
+**My honest confidence levels, if you fully execute:**
+- **That this DSA set (fully retained) makes you pass the large majority of entry-level technical screens you reach: ~85–90%.** That part I *can* get near your bar, and the additions below push it there.
+- **That you have an offer by Nov 22 doing everything in both files: NOT 95%.** Realistically ~40–65%, driven mostly by how many interviews you generate and the market — not by LeetCode. It may take longer than this timeline, and that is normal, not failure.
+
+**What this means for you:** after a year of applying, your bottleneck is almost certainly *getting interviews*, not DSA depth. More LeetCode past this list has sharply diminishing returns. If you want to move the real number up, the highest-leverage hours are resume + referrals + interview volume in `JOB_SEARCH.md`. This file's promise is narrow and real: **DSA will not be the reason you get rejected.**
+
+**Gaps I found and just added** to hit the ~85–90% technical-pass bar: complexity analysis (pacing rule 8), **Grid BFS/DFS §9** (Number of Islands family — one of the most-asked entry-level questions, was wrongly excluded), and **Trees promoted from optional to core §8** (they show up too often to be optional).
 
 ---
 
@@ -25,8 +49,9 @@ These are non-negotiable for *your* retention profile (looked-up solutions that 
 5. **Saturday:** mixed set from *finished* sub-patterns only (see `JOB_SEARCH.md`). No new sub-pattern starts on Saturday.
 6. **Sunday:** rest + 30-min retro. Zero new problems.
 7. **If you slip:** push dates forward. Never skip lock-in or Saturday mixed to “catch up.” Catch-up by dropping Optional/stretch only — never by skipping reviews.
+8. **State the complexity out loud, every problem.** Before you look at any solution, say the time and space Big-O of your approach and *why*. Interviewers ask "what's the complexity?" on essentially every screen — a correct solution you can't analyze still fails. If you can't state it, you haven't finished the problem.
 
-**Why this is doable:** ~5 new weekdays/week × ~16 weeks (Aug 3 → Nov 20) ≈ 80 slots. Core free list needs ~75 slots at the 2E/1M rate, leaving room for lock-ins and slip. The old “Phase 1 = Two Pointers + Hashing” packing (~43 problems / 20 days) was not retention-safe — redistributed below.
+**Why this is doable:** ~5 new weekdays/week × ~18 weeks (Aug 3 → Dec 4) ≈ 90 slots. Core free list (~107 problems, many paired 2-Easy days) needs ~85 slots at the 2E/1M rate, leaving room for lock-ins and slip. The old “Phase 1 = Two Pointers + Hashing” packing (~43 problems / 20 days) was not retention-safe — redistributed below.
 
 ---
 
@@ -64,14 +89,19 @@ These are non-negotiable for *your* retention profile (looked-up solutions that 
 | **Thu Nov 12** | Lock-in §6.1 | 0 | §6.2 optional after this |
 | **Fri Nov 13 – Wed Nov 18** | §7 Linked List | 6 | Cross-refs from §1.2/1.3 already done |
 | **Thu Nov 19** | Lock-in §7 | 0 | |
-| **Fri Nov 20 – Sun Nov 22** | **Phase 4 wrap** | 0–few | Majority mixed · §8 Trees only if §1–7 cold |
-| **Mon Nov 23 →** | Maintenance loop | — | 1 mixed timed + reviews; no new curriculum unless add-backs |
+| **Fri Nov 20 – Fri Nov 27** | §8 Trees (BFS/DFS) — **now core** | 7 | Common at entry level; don't skip |
+| **Sat Nov 28** | Lock-in §8 | 0 | |
+| **Mon Nov 30 – Thu Dec 3** | §9 Grid BFS/DFS — **now core** | 4 | Number of Islands family — very common |
+| **Fri Dec 4** | Lock-in §9 | 0 | |
+| **Mon Dec 7 →** | Maintenance loop | — | Majority-mixed timed + reviews. Interviewing continues. Add-ons only if hunting cold. |
+
+**Note:** DSA new-learning now runs to ~Dec 4, past the Nov 22 job-search checkpoint. That's intentional — trees + grid are too common to cut, and **interviewing does not stop on Nov 22.** Applications, networking, and mocks in `JOB_SEARCH.md` continue straight through; the DSA tail just overlaps the early maintenance loop.
 
 ```
-Jul 24          Aug 3              Aug 31             Sep 28             Oct 26              Nov 22
-  │ Setup │········ Phase 1 ········│···· Phase 2 ······│···· Phase 3 ······│···· Phase 4 ······│→ loop
-  │warm-up│  §1.1–1.4 Two Pointers  │ §2 Hash + §1.5–1.7│ §3 Window + §4    │ §5→§6→§7 + mixed │
-  └───────┘                         │   string TP       │ + start §5        │  consolidate     │
+Jul 24          Aug 3              Aug 31             Sep 28             Oct 26          Nov 22    Dec 4
+  │ Setup │········ Phase 1 ········│···· Phase 2 ······│···· Phase 3 ······│·· Phase 4 ··│· tail ·│→ loop
+  │warm-up│  §1.1–1.4 Two Pointers  │ §2 Hash + §1.5–1.7│ §3 Window + §4    │ §5→§6→§7    │ §8 §9  │
+  └───────┘                         │   string TP       │ + start §5        │             │trees/grid│
 ```
 
 ---
@@ -84,8 +114,9 @@ Jul 24          Aug 3              Aug 31             Sep 28             Oct 26 
 | Phase 1 | Aug 3 – Aug 30 | **§1.1–1.4** Two Pointers core only |
 | Phase 2 | Aug 31 – Sep 27 | **§2** Hashing → **§1.5–1.7** string TP |
 | Phase 3 | Sep 28 – Oct 25 | **§3** Sliding Window → **§4** Prefix Sum → start **§5.1** |
-| Phase 4 | Oct 26 – Nov 22 | Finish **§5** → **§6.1** → **§7** → mixed consolidation · **§8** optional |
-| Loop | Nov 23 → | Reviews + mixed timed; curriculum add-backs only if hunting cold |
+| Phase 4 | Oct 26 – Nov 22 | Finish **§5** → **§6.1** → **§7** → start **§8** Trees |
+| Phase 4 tail | Nov 22 – Dec 4 | **§8** Trees → **§9** Grid BFS/DFS (both core; overlaps loop) |
+| Loop | Dec 7 → | Reviews + mixed timed; add-ons only if hunting cold |
 
 ---
 
@@ -368,21 +399,43 @@ Already done via §1: 141, 142, 234, 876, 19, 2095.
 
 ---
 
-## §8 Trees BFS/DFS — Optional
+## §8 Trees BFS/DFS — Core (promoted from optional)
 
-**When: Fri Nov 20 – Sun Nov 22 only if §1–7 re-solve rate is ≥80% cold.** Otherwise spend these days on mixed reviews from weak sub-patterns.
+**When: Fri Nov 20 – Fri Nov 27** · **Sat Nov 28 lock-in**
+Promoted because trees appear too often at entry level to gamble on skipping. This is the recursion-heavy section — go slow, one per day is fine.
 
-| LC # | Problem | Difficulty |
-|---|---|---|
-| 104 | Maximum Depth of Binary Tree | Easy |
-| 226 | Invert Binary Tree | Easy |
-| 100 | Same Tree | Easy |
-| 101 | Symmetric Tree | Easy |
-| 112 | Path Sum | Easy |
-| 102 | Binary Tree Level Order Traversal | Medium |
-| 235 | Lowest Common Ancestor of a BST | Medium |
+| Day | Solve |
+|---|---|
+| Fri Nov 20 | 104 Maximum Depth of Binary Tree (E) |
+| Mon Nov 23 | 226 Invert Binary Tree (E), 100 Same Tree (E) |
+| Tue Nov 24 | 101 Symmetric Tree (E) |
+| Wed Nov 25 | 112 Path Sum (E) |
+| Thu Nov 26 | 102 Binary Tree Level Order Traversal (M) |
+| Fri Nov 27 | 235 Lowest Common Ancestor of a BST (M) |
+| Sat Nov 28 | Lock-in: re-solve 104 + 102 |
 
-If you start this block: 2 Easies/day Nov 20–21, then 102 or 235 on Nov 22 — or skip Mediums and bank confidence.
+**Unlocks:** the recursive DFS template (`if not node: return ...; recurse left/right`) and the BFS-with-a-queue template — these two cover the vast majority of entry-level tree questions.
+**Recursion note:** if recursion feels shaky, that's expected — trees are where it clicks. Trace a small tree by hand on paper before coding. 104 is the gentlest start.
+**Excluded (still):** balanced/AVL, segment trees, serialization (297 is Hard).
+
+---
+
+## §9 Grid BFS/DFS — Core (new — was wrongly excluded)
+
+**When: Mon Nov 30 – Thu Dec 3** · **Fri Dec 4 lock-in**
+**Number of Islands (200) is one of the single most-asked questions at startups and entry-level loops.** Excluding the whole "graphs" bucket accidentally cut it — a mistake for your target roles. A grid is just an implicit graph; with §8's templates this is mostly applying DFS/BFS to a 2D array.
+
+| Day | Solve |
+|---|---|
+| Mon Nov 30 | 733 Flood Fill (E) |
+| Tue Dec 1 | 200 Number of Islands (M) |
+| Wed Dec 2 | 695 Max Area of Island (M) |
+| Thu Dec 3 | 994 Rotting Oranges (M) |
+| Fri Dec 4 | Lock-in: re-solve 200 |
+
+**Unlocks:** the "visit every cell, flood its neighbors, mark visited" pattern — 733/200/695 are one DFS template; 994 is the same idea with BFS + a queue (multi-source). Covers the grid-traversal family startups love.
+**Optional heap add-on** (only if hunting and everything else is cold): 703 Kth Largest in a Stream (E), 1046 Last Stone Weight (E), 215 Kth Largest Element in an Array (M). One evening; `heapq` fluency, occasionally asked.
+**Excluded (still):** Dijkstra, union-find, topological sort, word-ladder — genuinely FAANG-tier, low ROI for you.
 
 ---
 
@@ -395,12 +448,13 @@ If you start this block: 2 Easies/day Nov 20–21, then 102 or 235 on Nov 22 —
 | Lock-in days after every block | Forces retrieval practice when the pattern is still warm |
 | Hashing before Sliding Window | Removes the “I need a map but don’t feel it yet” wall |
 | Phase 1 = Two Pointers only | Old plan crammed hashing into the same 4 weeks — too much new for weak retention |
-| Phase 4 = finish Stack/BS/LL + mixed | New topics taper while mixed practice rises (matches how interviews feel) |
+| Phase 4 = finish Stack/BS/LL → Trees → Grid | New topics taper while mixed practice rises (matches how interviews feel) |
+| Trees + Grid last | They reuse recursion/DFS/BFS — easier once §1–7 built the base |
 | Slip pushes dates; never skip reviews | Reviews are the product; the calendar is a guide |
 
-**Still excluded on purpose:** DP, graphs, backtracking, heaps, tries, intervals deep-dives, monotonic deques, every Hard (including 76 and 3347 from your seed).
+**Still excluded on purpose:** DP, advanced graphs (Dijkstra / union-find / topo sort), backtracking, tries, intervals deep-dives, monotonic deques, every Hard (including 76 and 3347 from your seed). *(Trees and grid BFS/DFS were promoted to core — see §8, §9.)*
 
-**First add-backs** (only after Nov 22 loop, still hunting): 56 Merge Intervals → 146 LRU Cache → §6.2 → 875 Koko.
+**First add-backs** (only in the loop, still hunting): heap add-on (§9) → 56 Merge Intervals → 146 LRU Cache → §6.2 → 875 Koko.
 
 ---
 
@@ -412,8 +466,9 @@ If you start this block: 2 Easies/day Nov 20–21, then 102 or 235 on Nov 22 —
 | **Mediums trimmed** | 16, 18, 259 · 2337, 2938 · variable-window grind list |
 | **Moved** | 1 → §2.1 · 876 → §1.2 · 2461 → §3.1 |
 | **Easies added** | 125, 680, 2824, 234, 88, 1089, 917, 1652, 1876, 121, 485, 674 (+142 M) |
-| **Timeline** | Day-level dates Aug 3 → Nov 19; lock-ins; Phase 1 no longer includes Hashing |
+| **Gaps closed (this pass)** | §8 Trees promoted to **core**; new §9 **Grid BFS/DFS** (200/695/733/994); complexity-analysis rule (pacing 8); optional heap add-on |
+| **Timeline** | Day-level dates Aug 3 → **Dec 4**; lock-ins; Phase 1 no longer includes Hashing; DSA tail overlaps early loop |
 
 ---
 
-*Curriculum calendar built for start Fri Jul 24, 2026. If a weekday is lost (travel, interview), shift this file’s dates forward as a block — don’t compress.*
+*Curriculum calendar built for start Fri Jul 24, 2026; DSA new-learning runs to ~Dec 4 (Trees + Grid added as core). If a weekday is lost (travel, interview), shift this file’s dates forward as a block — don’t compress. Reminder: this file maximizes your technical-screen pass rate; it does not by itself get you the job — interview volume in `JOB_SEARCH.md` is the binding constraint.*

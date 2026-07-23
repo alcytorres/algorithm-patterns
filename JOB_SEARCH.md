@@ -79,8 +79,8 @@ Drop apps to ~5/day this week only. Fix the machine:
 
 **Checkpoint Sun Oct 25:** re-solve rate &lt;80% on review queue → Phase 4 drops remaining new topics and goes consolidation-only.
 
-### Phase 4 — Mon Oct 26 – Sun Nov 22 · Finish Stack → BS → Linked List → mixed
-- DSA: finish **§5** → **§6.1** Binary Search → **§7** Linked List (dates in curriculum). Then majority-mixed. **§8 Trees only if §1–7 are ≥80% cold.**
+### Phase 4 — Mon Oct 26 – Sun Nov 22 · Finish Stack → BS → Linked List → start Trees
+- DSA: finish **§5** → **§6.1** Binary Search → **§7** Linked List → start **§8** Trees (dates in curriculum). **§8 Trees + §9 Grid BFS/DFS are now core** and run into early Dec — interviewing continues past Nov 22, so DSA does too.
 - Weekly mocks: Oct 31, Nov 7, Nov 14, Nov 21.
 - Project 2 shipped by Nov 15; resume updated.
 - Apps + networking stay at full volume.
@@ -127,9 +127,10 @@ Sliding Window was missing from your original list — it’s Core for arrays/st
 | 6 | Stacks | §5 | Oct 23–Nov 2 | Parentheses family |
 | 7 | Binary Search (basic) | §6.1 | Nov 3–12 | One template, many easy wins |
 | 8 | Linked Lists (basic) | §7 | Nov 13–19 | Reverse / merge — low depth |
-| 9* | Trees BFS/DFS (optional) | §8 | Nov 20–22 if ahead | Only if §1–7 are ≥80% cold |
+| 9 | Trees BFS/DFS | §8 | Nov 20–28 | Common at entry level — now core |
+| 10 | Grid BFS/DFS | §9 | Nov 30–Dec 4 | Number of Islands family — very common |
 
-**Defer:** graphs, DP, backtracking, heaps, tries, matrix spiral/rotation. Wrong tier for your targets.
+**Defer:** DP, advanced graphs (Dijkstra/union-find/topo), backtracking, tries, matrix spiral/rotation. Wrong tier for your targets. *(Trees + grid promoted to core Jul 23 — see `DSA_CURRICULUM.md`.)*
 
 ---
 
