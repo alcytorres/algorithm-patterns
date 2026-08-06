@@ -38,11 +38,11 @@ def is_subsequence(s, t):
     i = j = 0            # Pointer for string s, and t starts at index 0
 
     while i < len(s) and j < len(t):  # Continue until s or t is exhausted
-        if s[i] == t[j]:        # Match found, move s pointer
+        if s[i] == t[j]:      # Match found, move s pointer
             i += 1
-        j += 1                  # Always move t pointer
+        j += 1                # Always move t pointer
 
-    return i == len(s)          # True if all characters in s were found. Same as saying return True
+    return i == len(s)        # True if all characters in s were found. Same as saying return True
 
 
 """

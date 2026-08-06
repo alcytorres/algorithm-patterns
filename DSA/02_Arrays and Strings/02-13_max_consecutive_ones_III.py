@@ -51,10 +51,10 @@ def longestOnes(nums, k):
         if nums[right] == 0:        # If current element is 0
             curr += 1               # Increment 0's count
         
-        while curr > k:            # Shrink window if 0's exceed k
-            if nums[left] == 0:    # If leftmost element is 0
-                curr -= 1          # Decrement 0's count
-            left += 1              # Move left pointer forward
+        while curr > k:             # Shrink window if 0's exceed k
+            if nums[left] == 0:     # If leftmost element is 0
+                curr -= 1           # Decrement 0's count
+            left += 1               # Move left pointer forward
         
         ans = max(ans, right - left + 1)  # Update max window size
     

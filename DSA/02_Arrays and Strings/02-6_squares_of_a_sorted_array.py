@@ -341,8 +341,8 @@ Would you arrive at this cold?
     • Naive path: yes, immediately (square + sort).
     • Optimal path: only after you ask "what does sorted input buy me?"
     • [0] * n and backward range are NOT first instincts — they come AFTER
-      you decide to place largest squares from the end. Then the code is just
-      bookkeeping for that decision.
+      you decide to place largest squares from the end. 
+      Then the code is just bookkeeping for that decision.
 
 
 """

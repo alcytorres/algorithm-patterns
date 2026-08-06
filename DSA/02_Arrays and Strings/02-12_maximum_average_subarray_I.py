@@ -297,7 +297,7 @@ Memory hook (one sentence)
 Would you arrive at this cold?
     • Immediately: nested loops — "try every start, sum k elements." O(N × k) without studying.
 
-    • After asking "what does the input buy me?": fixed size + contiguous → sliding window; adjacent windows overlap almost completely.
+    • After asking "what does the input buy me?": fixed size + contiguous → sliding window; adjacent windows share k−1 elements — only the edges change.
 
     • Bookkeeping: `curr`, `ans`, two loops, the add-minus slide line.
 
