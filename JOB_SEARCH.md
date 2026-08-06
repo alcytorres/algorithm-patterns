@@ -3,14 +3,15 @@
 **Source of truth** — edit this file whenever the plan changes.  
 Pin this tab (right-click → Pin). Cmd+P → `JOB_SEARCH` opens it instantly.
 
-From-zero plan starting **Friday, July 24, 2026** · Python · US-wide (remote + onsite) · startups / less competitive entry-level. You’re not actually at zero — compress Setup + Phase 1, don’t skip them.
+From-zero plan starting **Friday, August 7, 2026** · Python · US-wide (remote + onsite) · startups / less competitive entry-level. You’re not actually at zero — compress Setup + Phase 1, don’t skip them.
 
 | | |
 |---|---|
-| Core timeline | 17.5 weeks (then ongoing loop) |
+| Core job-search timeline | 17.5 weeks (Aug 7 – Dec 6), then ongoing loop |
+| DSA learning tail | Runs to Dec 24 (Trees → Grid → Intervals), overlaps early loop |
 | Weekday load | ~5 hrs structured |
 | Applications | ~55/week (tiered) |
-| LeetCode | ~110 new problems, each re-solved 2–3× |
+| LeetCode | ~109 new problems, each re-solved 2–3× |
 
 ---
 
@@ -30,8 +31,8 @@ Depth-first pattern blocks are right for learning. Pure blocking hides recogniti
 ## Pillars you were missing
 
 1. **Resume / LinkedIn / GitHub** — highest ROI after a year of low conversion. Week one.
-2. **Behavioral** — ~6 STAR stories by mid-September.
-3. **Mocks** — Pramp / peers starting September.
+2. **Behavioral** — ~6 STAR stories by late September.
+3. **Mocks** — Pramp / peers starting late September / early October.
 4. **Practical skills** — Git, SQL, HTTP/APIs, debugging, take-homes (many startups skip LeetCode).
 5. **Tracker + Sunday retro** — catches drift in a week, not a month.
 
@@ -40,11 +41,12 @@ Depth-first pattern blocks are right for learning. Pure blocking hides recogniti
 ## Timeline
 
 ```
-Jul 24 ── Setup ── Aug 2 ── Phase1 ── Aug 30 ── Phase2 ── Sep 27 ── Phase3 ── Oct 25 ── Phase4 ── Nov 22 ── loop →
+Aug 7 ── Setup ── Aug 16 ── Phase1 ── Sep 13 ── Phase2 ── Oct 11 ── Phase3 ── Nov 8 ── Phase4 ── Dec 6 ── loop →
          1.5 wks           4 wks             4 wks             4 wks             4 wks
+                                                                    (DSA tail: trees/grid/intervals → Dec 24)
 ```
 
-### Setup Sprint — Fri Jul 24 – Sun Aug 2
+### Setup Sprint — Fri Aug 7 – Sun Aug 16
 Drop apps to ~5/day this week only. Fix the machine:
 
 - Rewrite resume (1 page, metrics, links). Get **2 outside reviews** (r/EngineeringResumes wiki format).
@@ -52,42 +54,43 @@ Drop apps to ~5/day this week only. Fix the machine:
 - GitHub: pin 2–3 best repos, READMEs + screenshots, hide junk.
 - Tracker sheet: company, role, date, source, tier, referral?, response, stage.
 - Python warm-up: re-solve 8–10 easy array problems cold (seeds review queue).
-- Book one Boston tech meetup for August.
+- Book one Boston tech meetup for August/September.
 
-### Phase 1 — Mon Aug 3 – Sun Aug 30 · Two Pointers core only
+### Phase 1 — Mon Aug 17 – Sun Sep 13 · Two Pointers core only
 - DSA: Curriculum **1.1–1.4** only (Converging → Fast/Slow → Fixed Separation → In-place). Hashing waits for Phase 2 — packing both into 4 weeks was too much new for retention.
-- Full app volume resumes Aug 3 (~55/wk).
-- Project 1 starts Aug 3: deployed Python web app (FastAPI/Flask + DB + simple UI). Ship by late Sep. Commit every project day.
+- Full app volume resumes Aug 17 (~55/wk).
+- Project 1 starts Aug 17: deployed Python web app (FastAPI/Flask + DB + simple UI). Ship by mid-Oct. Commit every project day.
 - Networking: 10 outreach/week.
-- First mixed Saturday: Aug 15. **Sat Aug 29 = 1 lock-in** (mixed Two Pointers only).
+- First mixed Saturday: Aug 29. **Sat Sep 12 = 1 lock-in** (mixed Two Pointers only).
 
-**Checkpoint Sun Aug 30:** ~150 apps since Jul 24. Responses &lt;2% → professional resume review before Phase 2.
+**Checkpoint Sun Sep 13:** ~150 apps since Aug 7. Responses &lt;2% → professional resume review before Phase 2.
 
-### Phase 2 — Mon Aug 31 – Sun Sep 27 · Hashing + string Two Pointers
+### Phase 2 — Mon Sep 14 – Sun Oct 11 · Hashing + string Two Pointers
 - DSA: Curriculum **2** Hashing → **1.5–1.7** (string skips / expand-center / reversal). Day-level dates in `DSA_CURRICULUM.md`.
-- Draft 6 STAR stories by Sun Sep 13. Practice “tell me about yourself” out loud.
-- Mocks: Sat Sep 12, Sat Sep 26.
-- Ship Project 1 by Sun Sep 27 (deployed, README, demo GIF, on resume).
+- Draft 6 STAR stories by Sun Sep 27. Practice “tell me about yourself” out loud.
+- Mocks: Sat Sep 26, Sat Oct 10.
+- Ship Project 1 by Sun Oct 11 (deployed, README, demo GIF, on resume).
 
-**Checkpoint Sun Sep 27:** zero interviews → move 30 min/day from apps to networking/referrals.
+**Checkpoint Sun Oct 11:** zero interviews → move 30 min/day from apps to networking/referrals.
 
-### Phase 3 — Mon Sep 28 – Sun Oct 25 · Sliding Window + Prefix Sum + start Stack
-- DSA: Curriculum **3** Sliding Window → **4** Prefix Sum → start **5.1** Stack (from ~Oct 23).
+### Phase 3 — Mon Oct 12 – Sun Nov 8 · Sliding Window + Prefix Sum + start Stack
+- DSA: Curriculum **3** Sliding Window → **4** Prefix Sum → start **5.1** Stack (from ~Nov 6).
 - Mixed Saturdays from 6+ patterns.
-- Mocks: Oct 10, Oct 24.
-- Project 2 starts Sep 28: real data/users + tests + CI (GitHub Actions). SQLBolt ~2 hrs.
+- Mocks: Oct 24, Nov 7.
+- Project 2 starts Oct 12: real data/users + tests + CI (GitHub Actions). SQLBolt ~2 hrs.
 
-**Checkpoint Sun Oct 25:** re-solve rate &lt;80% on review queue → Phase 4 drops remaining new topics and goes consolidation-only.
+**Checkpoint Sun Nov 8:** re-solve rate &lt;80% on review queue → Phase 4 drops remaining new topics and goes consolidation-only.
 
-### Phase 4 — Mon Oct 26 – Sun Nov 22 · Finish Stack → BS → Linked List → start Trees
-- DSA: finish **5** → **6.1** Binary Search → **7** Linked List → start **8** Trees (dates in curriculum). **8 Trees + 9 Grid BFS/DFS are now core** and run into early Dec — interviewing continues past Nov 22, so DSA does too.
-- Weekly mocks: Oct 31, Nov 7, Nov 14, Nov 21.
-- Project 2 shipped by Nov 15; resume updated.
+### Phase 4 — Mon Nov 9 – Sun Dec 6 · Finish Stack → BS → Linked List → start Trees
+- DSA: finish **5** → **6.1** Binary Search → **7** Linked List → start **8** Trees (dates in curriculum). **8 Trees, 9 Grid BFS/DFS, and 10 Intervals are all core** and run into early Dec (through Dec 24) — interviewing continues past Dec 6, so DSA does too.
+- Weekly mocks: Nov 14, Nov 21, Nov 28, Dec 5.
+- Project 2 shipped by Nov 29; resume updated.
 - Apps + networking stay at full volume.
 
-**Checkpoint Sun Nov 22:** no traction → reposition (contract-to-hire, apprenticeships, QA automation / support eng as SWE on-ramps) — change positioning, not effort.
+**Checkpoint Sun Dec 6:** no traction → reposition (contract-to-hire, apprenticeships, QA automation / support eng as SWE on-ramps) — change positioning, not effort.
 
-### Maintenance loop — Mon Nov 23 → ongoing
+### Maintenance loop — Mon Dec 7 → ongoing
+Dec 7 – Dec 24 the loop overlaps the DSA tail (Trees → Grid → Intervals per curriculum). From **Dec 25** onward it's pure loop (or first weekday after holidays):
 1 mixed timed + 1 review daily · ~40 apps/week · networking quota · 1 mock/week · project iteration.  
 **Interview scheduled → prep overrides the calendar.**
 
@@ -119,19 +122,19 @@ Sliding Window was missing from your original list — it’s Core for arrays/st
 
 | # | Topic | Curriculum | When | Why |
 |---|---|---|---|---|
-| 1 | Two Pointers core | 1.1–1.4 | Aug 3–29 | Highest-frequency easy/medium array pattern |
-| 2 | Hashing (freq / seen) | 2 | Aug 31–Sep 15 | Most common entry-level “trick”; unlocks windows |
-| 3 | String Two Pointers | 1.5–1.7 | Sep 16–24 | After hashing; bridges into stacks |
-| 4 | Sliding Window | 3 | Sep 28–Oct 15 | Needs hashing first |
-| 5 | Prefix Sum | 4 | Oct 16–22 | Cheap, high-ROI Mediums (560, 238) |
-| 6 | Stacks | 5 | Oct 23–Nov 2 | Parentheses family |
-| 7 | Binary Search (basic) | 6.1 | Nov 3–12 | One template, many easy wins |
-| 8 | Linked Lists (basic) | 7 | Nov 13–19 | Reverse / merge — low depth |
-| 9 | Trees BFS/DFS | 8 | Nov 20–28 | Common at entry level — now core |
-| 10 | Grid BFS/DFS | 9 | Nov 30–Dec 4 | Number of Islands family — very common |
-| 11 | Intervals | 10 | Dec 7–10 | Merge Intervals — high-frequency, cheap |
+| 1 | Two Pointers core | 1.1–1.4 | Aug 17–Sep 12 | Highest-frequency easy/medium array pattern |
+| 2 | Hashing (freq / seen) | 2 | Sep 14–Sep 29 | Most common entry-level “trick”; unlocks windows |
+| 3 | String Two Pointers | 1.5–1.7 | Sep 30–Oct 8 | After hashing; bridges into stacks |
+| 4 | Sliding Window | 3 | Oct 12–Oct 29 | Needs hashing first |
+| 5 | Prefix Sum | 4 | Oct 30–Nov 5 | Cheap, high-ROI Mediums (560, 238) |
+| 6 | Stacks | 5 | Nov 6–Nov 16 | Parentheses family |
+| 7 | Binary Search (basic) | 6.1 | Nov 17–26 | One template, many easy wins |
+| 8 | Linked Lists (basic) | 7 | Nov 27–Dec 3 | Reverse / merge — low depth |
+| 9 | Trees BFS/DFS | 8 | Dec 4–12 | Common at entry level — now core |
+| 10 | Grid BFS/DFS | 9 | Dec 14–Dec 18 | Number of Islands family — very common |
+| 11 | Intervals | 10 | Dec 21–24 | Merge Intervals — high-frequency, cheap |
 
-**Defer:** DP, advanced graphs (Dijkstra/union-find/topo), backtracking, tries, matrix spiral/rotation. Wrong tier for your targets. *(Trees + grid promoted to core Jul 23 — see `DSA_CURRICULUM.md`.)*
+**Defer:** DP, advanced graphs (Dijkstra/union-find/topo), backtracking, tries, matrix spiral/rotation. Wrong tier for your targets. *(Trees, grid BFS/DFS, and basic intervals were promoted to core — see `DSA_CURRICULUM.md`.)*
 
 ---
 
@@ -156,9 +159,9 @@ Sliding Window was missing from your original list — it’s Core for arrays/st
 | **LinkedIn (saved alerts) — PRIMARY** | Entry level, US remote + Boston/NYC; apply within 3 days of posting; most daily volume goes here | Daily |
 | Wellfound | Startup roles; founders sometimes reply directly | Daily |
 | Welcome to the Jungle | Mid-size / startup filters | 3×/week |
-| HN “Who’s Hiring” | 1st of month; email founders; high reply rate | Aug–Nov 1st |
+| HN “Who’s Hiring” | 1st of month; email founders; high reply rate | Sep–Dec 1st |
 | Boring industries (insurance, banks, healthcare, logistics, gov) | Far less competition | Weekly batch |
-| Staffing / contract-to-hire | Fast placement; real on-ramp | Profiles in Aug; lean in from Oct if needed |
+| Staffing / contract-to-hire | Fast placement; real on-ramp | Profiles in Aug/Sep; lean in from Nov if needed |
 
 *Dropped Jul 23: Built In + YC Work at a Startup (repeated apps, zero responses — too competitive for the return).*
 
@@ -177,14 +180,15 @@ Sliding Window was missing from your original list — it’s Core for arrays/st
 
 | Date (Sun) | Checkpoint | Decision rule |
 |---|---|---|
-| Aug 2 | Resume rewritten + reviewed 2×, LinkedIn, GitHub, tracker | Not done → Phase 1 waits |
-| Aug 30 | ~150 apps, ~24 problems mastered | Response rate &lt;2% → professional resume review |
-| Sep 27 | Project 1 live, 2 mocks, story bank | Zero interviews → 30 min/day apps → networking |
-| Oct 25 | 7 patterns covered | Re-solve &lt;80% → Phase 4 consolidation only |
-| Nov 22 | 4-month review | No traction → contract-to-hire / apprenticeships / adjacent roles |
+| Aug 16 | Resume rewritten + reviewed 2×, LinkedIn, GitHub, tracker | Not done → Phase 1 waits |
+| Sep 13 | ~150 apps, ~24 problems mastered | Response rate &lt;2% → professional resume review |
+| Oct 11 | Project 1 live, 2 mocks, story bank | Zero interviews → 30 min/day apps → networking |
+| Nov 8 | Patterns 1–4 done (TP, Hash, Window, Prefix) + Stack started | Re-solve &lt;80% → Phase 4 drops new-topic time, mixed reviews only |
+| Dec 6 | 4-month review · patterns 5–7 done, 8 Trees in progress | No traction → reposition (contract-to-hire / apprenticeships / adjacent roles) |
+| Dec 24 | DSA new-learning complete (patterns 1–10) | From here, curriculum stops adding; only reviews + mixed |
 
 **Standing rule:** a scheduled interview overrides the calendar.
 
 ---
 
-*Built Jul 23, 2026 · updated Jul 23 (start → Jul 24; LinkedIn primary; Built In + YC WaaS dropped; curriculum moved to `DSA_CURRICULUM.md`). Assumes job search is primary (~5 hrs/day). Part-time: same block order, half durations — cut project time last, application time first.*
+*Built Jul 23, 2026 · updated Aug 6, 2026 (start → **Aug 7**; all phase/DSA dates shifted +14 days; DSA tail → Dec 24). Assumes job search is primary (~5 hrs/day). Part-time: same block order, half durations — cut project time last, application time first.*

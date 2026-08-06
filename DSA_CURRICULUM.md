@@ -30,7 +30,7 @@ Getting hired = **(interviews you get) × (technical screens you pass) × (behav
 
 **My honest confidence levels, if you fully execute:**
 - **That this DSA set (fully retained) makes you pass the large majority of entry-level technical screens you reach: ~85–90%.** That part I *can* get near your bar, and the additions below push it there.
-- **That you have an offer by Nov 22 doing everything in both files: NOT 95%.** Realistically ~40–65%, driven mostly by how many interviews you generate and the market — not by LeetCode. It may take longer than this timeline, and that is normal, not failure.
+- **That you have an offer by Dec 6 doing everything in both files: NOT 95%.** Realistically ~40–65%, driven mostly by how many interviews you generate and the market — not by LeetCode. It may take longer than this timeline, and that is normal, not failure.
 
 **What this means for you:** after a year of applying, your bottleneck is almost certainly *getting interviews*, not DSA depth. More LeetCode past this list has sharply diminishing returns. If you want to move the real number up, the highest-leverage hours are resume + referrals + interview volume in `JOB_SEARCH.md`. This file's promise is narrow and real: **DSA will not be the reason you get rejected.**
 
@@ -51,7 +51,7 @@ These are non-negotiable for *your* retention profile (looked-up solutions that 
 7. **If you slip:** push dates forward. Never skip lock-in or Saturday mixed to “catch up.” Catch-up by dropping Optional/stretch only — never by skipping reviews.
 8. **State the complexity out loud, every problem.** Before you look at any solution, say the time and space Big-O of your approach and *why*. Interviewers ask "what's the complexity?" on essentially every screen — a correct solution you can't analyze still fails. If you can't state it, you haven't finished the problem.
 
-**Why this is doable:** ~5 new weekdays/week × ~18 weeks (Aug 3 → Dec 4) ≈ 90 slots. Core free list (~107 problems, many paired 2-Easy days) needs ~85 slots at the 2E/1M rate, leaving room for lock-ins and slip. The old “Phase 1 = Two Pointers + Hashing” packing (~43 problems / 20 days) was not retention-safe — redistributed below.
+**Why this is doable:** ~5 new weekdays/week × ~18 weeks (Aug 17 → Dec 24) ≈ 90 slots. Core free list (~109 problems, many paired 2-Easy days) needs ~85 slots at the 2E/1M rate, leaving room for lock-ins and slip. The old “Phase 1 = Two Pointers + Hashing” packing (~43 problems / 20 days) was not retention-safe — redistributed below.
 
 ---
 
@@ -59,48 +59,50 @@ These are non-negotiable for *your* retention profile (looked-up solutions that 
 
 | When | Sub-pattern | New #s (approx) | Notes |
 |---|---|---|---|
-| **Fri Jul 24 – Sun Aug 2** | **Setup warm-up** | 0 new | Cold re-solve: 27, 26, 283, 905, 977, 217, 242, 1 |
-| **Mon Aug 3 – Tue Aug 11** | 1.1 Converging | 9 | First Two Pointers block |
-| **Wed Aug 12 – Tue Aug 18** | 1.2 Fast & Slow | 7 | |
-| **Wed Aug 19 – Thu Aug 20** | 1.3 Fixed Separation | 2 | Tiny; no separate lock-in |
-| **Fri Aug 21 – Fri Aug 28** | 1.4 In-place Modification | 9 | |
-| **Sat Aug 29** | **Lock-in: 1.1–1.4** | 0 | Mixed Two Pointers only |
-| **Sun Aug 30** | Phase 1 checkpoint | — | See `JOB_SEARCH.md` |
-| **Mon Aug 31 – Fri Sep 4** | 2.1 Seen Set | 7 | |
-| **Mon Sep 7 – Mon Sep 14** | 2.2 Frequency Map | 9 | Sep 7 is Labor Day — still a study day if you can |
-| **Tue Sep 15** | **Lock-in: 2** | 0 | Hashing re-solves |
-| **Wed Sep 16 – Thu Sep 17** | 1.5 String Skips | 3 | Bridge into Stack |
-| **Fri Sep 18 – Mon Sep 21** | 1.6 Expand From Center | 2 | Exception: all Medium |
-| **Tue Sep 22 – Thu Sep 24** | 1.7 String Reversal | 5 | |
-| **Fri Sep 25** | **Buffer / catch-up** | 0 | Use for any slipped 1.5–1.7 or 2 |
-| **Sat Sep 26** | Mock (plan) | — | Mixed from everything done so far |
-| **Sun Sep 27** | Phase 2 checkpoint | — | |
-| **Mon Sep 28 – Thu Oct 1** | 3.1 Fixed Window | 6 free | Skip 346/2985 if no Premium |
-| **Fri Oct 2** | Lock-in 3.1 | 0 | |
-| **Mon Oct 5 – Mon Oct 12** | 3.2 Variable Window | 8 | Stretch 713/904/1493 only if cruising |
-| **Tue Oct 13** | Lock-in 3.2 | 0 | |
-| **Wed Oct 14 – Thu Oct 15** | 3.3 Anagram Windows | 2 | After 2.2 only |
-| **Fri Oct 16 – Wed Oct 21** | 4 Prefix Sum | 6 | |
-| **Thu Oct 22** | Lock-in 3–4 | 0 | |
-| **Fri Oct 23 – Wed Oct 28** | 5.1 Stack Matching | 6 | Spans Phase 3 → 4 |
-| **Thu Oct 29** | Lock-in 5.1 | 0 | |
-| **Fri Oct 30 – Mon Nov 2** | 5.2 Monotonic Stack (light) | 3 | |
-| **Tue Nov 3 – Wed Nov 11** | 6.1 Classic Binary Search | 8 | |
-| **Thu Nov 12** | Lock-in 6.1 | 0 | 6.2 optional after this |
-| **Fri Nov 13 – Wed Nov 18** | 7 Linked List | 6 | Cross-refs from 1.2/1.3 already done |
-| **Thu Nov 19** | Lock-in 7 | 0 | |
-| **Fri Nov 20 – Fri Nov 27** | 8 Trees (BFS/DFS) — **now core** | 7 | Common at entry level; don't skip |
-| **Sat Nov 28** | Lock-in 8 | 0 | |
-| **Mon Nov 30 – Thu Dec 3** | 9 Grid BFS/DFS — **now core** | 4 | Number of Islands family — very common |
-| **Fri Dec 4** | Lock-in 9 | 0 | |
-| **Mon Dec 7 – Wed Dec 9** | 10 Intervals | 2–3 | Merge Intervals family |
-| **Thu Dec 10** | Lock-in 10 | 0 | |
-| **Fri Dec 11 →** | Maintenance loop | — | Majority-mixed timed + reviews. Interviewing continues. Add-ons only if hunting cold. |
+| **Fri Aug 7 – Sun Aug 16** | **Setup warm-up** | 0 new | Cold re-solve: 27, 26, 283, 905, 977, 217, 242, 1 |
+| **Mon Aug 17 – Tue Aug 25** | 1.1 Converging | 9 | First Two Pointers block |
+| **Wed Aug 26 – Tue Sep 1** | 1.2 Fast & Slow | 7 | |
+| **Wed Sep 2 – Thu Sep 3** | 1.3 Fixed Separation | 2 | Tiny; no separate lock-in |
+| **Fri Sep 4 – Fri Sep 11** | 1.4 In-place Modification | 9 | |
+| **Sat Sep 12** | **Lock-in: 1.1–1.4** | 0 | Mixed Two Pointers only |
+| **Sun Sep 13** | Phase 1 checkpoint | — | See `JOB_SEARCH.md` |
+| **Mon Sep 14 – Fri Sep 18** | 2.1 Seen Set | 7 | |
+| **Mon Sep 21 – Mon Sep 28** | 2.2 Frequency Map | 9 |
+| **Tue Sep 29** | **Lock-in: 2** | 0 | Hashing re-solves |
+| **Wed Sep 30 – Thu Oct 1** | 1.5 String Skips | 3 | Bridge into Stack |
+| **Fri Oct 2 – Mon Oct 5** | 1.6 Expand From Center | 2 | Exception: all Medium |
+| **Tue Oct 6 – Thu Oct 8** | 1.7 String Reversal | 5 | |
+| **Fri Oct 9** | **Buffer / catch-up** | 0 | Use for any slipped 1.5–1.7 or 2 |
+| **Sat Oct 10** | Mock (plan) | — | Mixed from everything done so far |
+| **Sun Oct 11** | Phase 2 checkpoint | — | |
+| **Mon Oct 12 – Thu Oct 15** | 3.1 Fixed Window | 6 free | Skip 346/2985 if no Premium |
+| **Fri Oct 16** | Lock-in 3.1 | 0 | |
+| **Mon Oct 19 – Mon Oct 26** | 3.2 Variable Window | 8 | Stretch 713/904/1493 only if cruising |
+| **Tue Oct 27** | Lock-in 3.2 | 0 | |
+| **Wed Oct 28 – Thu Oct 29** | 3.3 Anagram Windows | 2 | After 2.2 only |
+| **Fri Oct 30 – Wed Nov 4** | 4 Prefix Sum | 6 | |
+| **Thu Nov 5** | Lock-in 3–4 | 0 | |
+| **Fri Nov 6 – Wed Nov 11** | 5.1 Stack Matching | 6 | Spans Phase 3 → 4 |
+| **Thu Nov 12** | Lock-in 5.1 | 0 | |
+| **Fri Nov 13 – Mon Nov 16** | 5.2 Monotonic Stack (light) | 3 | |
+| **Tue Nov 17 – Wed Nov 25** | 6.1 Classic Binary Search | 8 | |
+| **Thu Nov 26** | Lock-in 6.1 | 0 | 6.2 optional after this |
+| **Fri Nov 27 – Wed Dec 2** | 7 Linked List | 6 | Cross-refs from 1.2/1.3 already done |
+| **Thu Dec 3** | Lock-in 7 | 0 | |
+| **Fri Dec 4 – Fri Dec 11** | 8 Trees (BFS/DFS) — **now core** | 7 | Common at entry level; don't skip |
+| **Sat Dec 12** | Lock-in 8 | 0 | |
+| **Mon Dec 14 – Thu Dec 17** | 9 Grid BFS/DFS — **now core** | 4 | Number of Islands family — very common |
+| **Fri Dec 18** | Lock-in 9 | 0 | |
+| **Mon Dec 21 – Wed Dec 23** | 10 Intervals | 2–3 | Merge Intervals family |
+| **Thu Dec 24** | Lock-in 10 | 0 | |
+| **Fri Dec 25 →** | Maintenance loop | — | Majority-mixed timed + reviews. Interviewing continues. Add-ons only if hunting cold. |
 
-**Note:** DSA new-learning now runs to ~Dec 4, past the Nov 22 job-search checkpoint. That's intentional — trees + grid are too common to cut, and **interviewing does not stop on Nov 22.** Applications, networking, and mocks in `JOB_SEARCH.md` continue straight through; the DSA tail just overlaps the early maintenance loop.
+**Note:** DSA new-learning now runs to ~Dec 24, past the Dec 6 job-search checkpoint. That's intentional — trees + grid + intervals are too common to cut, and **interviewing does not stop on Dec 6.** Applications, networking, and mocks in `JOB_SEARCH.md` continue straight through; the DSA tail just overlaps the early maintenance loop.
+
+**Holiday note:** Thu Nov 26 is Thanksgiving — treat the 6.1 lock-in as optional that day (do it Fri Nov 27 or slip). Intervals land Dec 21–24 near Christmas — if needed, push that block to the first week of January rather than grinding holidays.
 
 ```
-Jul 24          Aug 3              Aug 31             Sep 28             Oct 26          Nov 22    Dec 4
+Aug 7          Aug 17              Sep 14             Oct 12             Nov 9          Dec 6    Dec 18
   │ Setup │········ Phase 1 ········│···· Phase 2 ······│···· Phase 3 ······│·· Phase 4 ··│· tail ·│→ loop
   │warm-up│  1.1–1.4 Two Pointers  │ 2 Hash + 1.5–1.7│ 3 Window + 4    │ 5→6→7    │ 8 9  │
   └───────┘                         │   string TP       │ + start 5        │             │trees/grid│
@@ -112,145 +114,145 @@ Jul 24          Aug 3              Aug 31             Sep 28             Oct 26 
 
 | Phase | Dates | DSA focus |
 |---|---|---|
-| Setup | Jul 24 – Aug 2 | Warm-up re-solves only (no new patterns) |
-| Phase 1 | Aug 3 – Aug 30 | **1.1–1.4** Two Pointers core only |
-| Phase 2 | Aug 31 – Sep 27 | **2** Hashing → **1.5–1.7** string TP |
-| Phase 3 | Sep 28 – Oct 25 | **3** Sliding Window → **4** Prefix Sum → start **5.1** |
-| Phase 4 | Oct 26 – Nov 22 | Finish **5** → **6.1** → **7** → start **8** Trees |
-| Phase 4 tail | Nov 22 – Dec 4 | **8** Trees → **9** Grid BFS/DFS (both core; overlaps loop) |
-| Loop | Dec 7 → | Reviews + mixed timed; add-ons only if hunting cold |
+| Setup | Aug 7 – Aug 16 | Warm-up re-solves only (no new patterns) |
+| Phase 1 | Aug 17 – Sep 13 | **1.1–1.4** Two Pointers core only |
+| Phase 2 | Sep 14 – Oct 11 | **2** Hashing → **1.5–1.7** string TP |
+| Phase 3 | Oct 12 – Nov 8 | **3** Sliding Window → **4** Prefix Sum → start **5.1** |
+| Phase 4 | Nov 9 – Dec 6 | Finish **5** → **6.1** → **7** → start **8** Trees |
+| Phase 4 tail | Dec 4 – Dec 24 | **8** Trees → **9** Grid → **10** Intervals (core; overlaps loop) |
+| Loop | Dec 25 → | Reviews + mixed timed; add-ons only if hunting cold |
 
 ---
 
 ## 1 Two Pointers
 
-**Phase 1 block: Mon Aug 3 – Sat Aug 29** (string sub-patterns 1.5–1.7 wait until Phase 2, after Hashing).
+**Phase 1 block: Mon Aug 17 – Sat Sep 12** (string sub-patterns 1.5–1.7 wait until Phase 2, after Hashing).
 
 ### 1.1 Converging (opposite ends) — Core
-**When: Mon Aug 3 – Tue Aug 11** (7 weekdays)
+**When: Mon Aug 17 – Tue Aug 25** (7 weekdays)
 
 | Day | Solve |
 |---|---|
-| Mon Aug 3 | 125 Valid Palindrome (E), 977 Squares of a Sorted Array (E) |
-| Tue Aug 4 | 349 Intersection of Two Arrays (E), 2824 Count Pairs Whose Sum is Less than Target (E) |
-| Wed Aug 5 | 680 Valid Palindrome II (E) |
-| Thu Aug 6 | 167 Two Sum II – Input Array Is Sorted (M) |
-| Fri Aug 7 | 15 3Sum (M) |
-| Mon Aug 10 | 11 Container With Most Water (M) |
-| Tue Aug 11 | 881 Boats to Save People (M) · if time: cold re-solve 125 or 167 |
+| Mon Aug 17 | 125 Valid Palindrome (E), 977 Squares of a Sorted Array (E) |
+| Tue Aug 18 | 349 Intersection of Two Arrays (E), 2824 Count Pairs Whose Sum is Less than Target (E) |
+| Wed Aug 19 | 680 Valid Palindrome II (E) |
+| Thu Aug 20 | 167 Two Sum II – Input Array Is Sorted (M) |
+| Fri Aug 21 | 15 3Sum (M) |
+| Mon Aug 24 | 11 Container With Most Water (M) |
+| Tue Aug 25 | 881 Boats to Save People (M) · if time: cold re-solve 125 or 167 |
 
 **Unlocks:** any "sorted array + pair/condition" problem — the most common two-pointer setup.
 **Changes to your list:** removed 16, 18, 259. Added 125, 680, 2824.
 
 ### 1.2 Fast & Slow — Core
-**When: Wed Aug 12 – Tue Aug 18** (5 weekdays)
+**When: Wed Aug 26 – Tue Sep 1** (5 weekdays)
 
 | Day | Solve |
 |---|---|
-| Wed Aug 12 | 141 Linked List Cycle (E), 876 Middle of the Linked List (E) |
-| Thu Aug 13 | 202 Happy Number (E), 234 Palindrome Linked List (E) |
-| Fri Aug 14 | 392 Is Subsequence (E) |
-| Mon Aug 17 | 142 Linked List Cycle II (M) |
-| Tue Aug 18 | 287 Find the Duplicate Number (M) |
+| Wed Aug 26 | 141 Linked List Cycle (E), 876 Middle of the Linked List (E) |
+| Thu Aug 27 | 202 Happy Number (E), 234 Palindrome Linked List (E) |
+| Fri Aug 28 | 392 Is Subsequence (E) |
+| Mon Aug 31 | 142 Linked List Cycle II (M) |
+| Tue Sep 1 | 287 Find the Duplicate Number (M) |
 
 **Unlocks:** cycle detection + middle-finding.
 **Changes:** added 234, 142; moved 876 here from Fixed Separation. 392 is parallel pointers (one-off), parked here.
 
 ### 1.3 Fixed Separation (n apart) — Important
-**When: Wed Aug 19 – Thu Aug 20**
+**When: Wed Sep 2 – Thu Sep 3**
 
 | Day | Solve |
 |---|---|
-| Wed Aug 19 | 19 Remove Nth Node From End of List (M) |
-| Thu Aug 20 | 2095 Delete the Middle Node of a Linked List (M) |
+| Wed Sep 2 | 19 Remove Nth Node From End of List (M) |
+| Thu Sep 3 | 2095 Delete the Middle Node of a Linked List (M) |
 
 **Unlocks:** gap trick for one-pass linked-list deletion.
 **Exception:** no Easies in this family. Drop 2095 if you need to cut.
 
 ### 1.4 In-place Array Modification — Core
-**When: Fri Aug 21 – Fri Aug 28** (6 weekdays)
+**When: Fri Sep 4 – Fri Sep 11** (6 weekdays)
 
 | Day | Solve |
 |---|---|
-| Fri Aug 21 | 27 Remove Element (E), 26 Remove Duplicates from Sorted Array (E) |
-| Mon Aug 24 | 283 Move Zeroes (E), 905 Sort Array By Parity (E) |
-| Tue Aug 25 | 88 Merge Sorted Array (E), 1089 Duplicate Zeros (E) |
-| Wed Aug 26 | 80 Remove Duplicates from Sorted Array II (M) |
-| Thu Aug 27 | 75 Sort Colors (M) |
-| Fri Aug 28 | 443 String Compression (M) |
+| Fri Sep 4 | 27 Remove Element (E), 26 Remove Duplicates from Sorted Array (E) |
+| Mon Sep 7 | 283 Move Zeroes (E), 905 Sort Array By Parity (E) |
+| Tue Sep 8 | 88 Merge Sorted Array (E), 1089 Duplicate Zeros (E) |
+| Wed Sep 9 | 80 Remove Duplicates from Sorted Array II (M) |
+| Thu Sep 10 | 75 Sort Colors (M) |
+| Fri Sep 11 | 443 String Compression (M) |
 
-**Sat Aug 29 — Lock-in 1.1–1.4:** 3 mixed Two Pointers (unlabeled, timed). No new problems.
-**Sun Aug 30 — Phase 1 checkpoint.**
+**Sat Sep 12 — Lock-in 1.1–1.4:** 3 mixed Two Pointers (unlabeled, timed). No new problems.
+**Sun Sep 13 — Phase 1 checkpoint.**
 
 **Unlocks:** reader/writer pointer separation.
 **Changes:** removed 2337, 2938; added 88, 1089.
 
 ### 1.5 String Comparison with Skips — Important
-**When: Wed Sep 16 – Thu Sep 17** *(Phase 2 — after Hashing)*
+**When: Wed Sep 30 – Thu Oct 1** *(Phase 2 — after Hashing)*
 
 | Day | Solve |
 |---|---|
-| Wed Sep 16 | 844 Backspace String Compare (E), 1598 Crawler Log Folder (E) |
-| Thu Sep 17 | 2390 Removing Stars From a String (M) |
+| Wed Sep 30 | 844 Backspace String Compare (E), 1598 Crawler Log Folder (E) |
+| Thu Oct 1 | 2390 Removing Stars From a String (M) |
 
 **Unlocks:** “undo” characters; bridge into Stack (5).
 
 ### 1.6 Expanding From Center — Important ⚠
-**When: Fri Sep 18 – Mon Sep 21**
+**When: Fri Oct 2 – Mon Oct 5**
 
 | Day | Solve |
 |---|---|
-| Fri Sep 18 | 647 Palindromic Substrings (M) |
-| Mon Sep 21 | 5 Longest Palindromic Substring (M) |
+| Fri Oct 2 | 647 Palindromic Substrings (M) |
+| Mon Oct 5 | 5 Longest Palindromic Substring (M) |
 
 **Unlocks:** palindrome scanning without DP. Warm-up already done: 125.
 **Exception:** no Easies exist; both are the same technique. Kept because #5 is extremely common.
 
 ### 1.7 String Reversal — Important
-**When: Tue Sep 22 – Thu Sep 24**
+**When: Tue Oct 6 – Thu Oct 8**
 
 | Day | Solve |
 |---|---|
-| Tue Sep 22 | 344 Reverse String (E), 345 Reverse Vowels of a String (E) |
-| Wed Sep 23 | 541 Reverse String II (E), 917 Reverse Only Letters (E) |
-| Thu Sep 24 | 151 Reverse Words in a String (M) |
+| Tue Oct 6 | 344 Reverse String (E), 345 Reverse Vowels of a String (E) |
+| Wed Oct 7 | 541 Reverse String II (E), 917 Reverse Only Letters (E) |
+| Thu Oct 8 | 151 Reverse Words in a String (M) |
 
-**Fri Sep 25 — Buffer:** finish any slipped 2 / 1.5–1.7. Do not start 3 early unless fully caught up.
+**Fri Oct 9 — Buffer:** finish any slipped 2 / 1.5–1.7. Do not start 3 early unless fully caught up.
 **Unlocks:** in-place swaps + word-level parsing (151).
 
 ---
 
 ## 2 Hashing
 
-**Phase 2 start: Mon Aug 31 – Tue Sep 15**
+**Phase 2 start: Mon Sep 14 – Tue Sep 29**
 
 ### 2.1 Seen Set / Existence Check — Core
-**When: Mon Aug 31 – Fri Sep 4**
+**When: Mon Sep 14 – Fri Sep 18**
 
 | Day | Solve |
 |---|---|
-| Mon Aug 31 | 217 Contains Duplicate (E), 1 Two Sum (E) |
-| Tue Sep 1 | 136 Single Number (E), 268 Missing Number (E) |
-| Wed Sep 2 | 448 Find All Numbers Disappeared in an Array (E) |
-| Thu Sep 3 | 128 Longest Consecutive Sequence (M) |
-| Fri Sep 4 | 36 Valid Sudoku (M) |
+| Mon Sep 14 | 217 Contains Duplicate (E), 1 Two Sum (E) |
+| Tue Sep 15 | 136 Single Number (E), 268 Missing Number (E) |
+| Wed Sep 16 | 448 Find All Numbers Disappeared in an Array (E) |
+| Thu Sep 17 | 128 Longest Consecutive Sequence (M) |
+| Fri Sep 18 | 36 Valid Sudoku (M) |
 
 **Unlocks:** “have I seen this before?”
 **Changes:** 1 Two Sum moved here from your old Sliding Window list.
 
 ### 2.2 Frequency Map / Counting — Core
-**When: Mon Sep 7 – Mon Sep 14**
+**When: Mon Sep 21 – Mon Sep 28**
 
 | Day | Solve |
 |---|---|
-| Mon Sep 7 | 242 Valid Anagram (E), 383 Ransom Note (E) |
-| Tue Sep 8 | 387 First Unique Character in a String (E), 169 Majority Element (E) |
-| Wed Sep 9 | 205 Isomorphic Strings (E), 290 Word Pattern (E) |
-| Thu Sep 10 | 1207 Unique Number of Occurrences (E) |
-| Fri Sep 11 | 49 Group Anagrams (M) |
-| Mon Sep 14 | 347 Top K Frequent Elements (M) |
+| Mon Sep 21 | 242 Valid Anagram (E), 383 Ransom Note (E) |
+| Tue Sep 22 | 387 First Unique Character in a String (E), 169 Majority Element (E) |
+| Wed Sep 23 | 205 Isomorphic Strings (E), 290 Word Pattern (E) |
+| Thu Sep 24 | 1207 Unique Number of Occurrences (E) |
+| Fri Sep 25 | 49 Group Anagrams (M) |
+| Mon Sep 28 | 347 Top K Frequent Elements (M) |
 
-**Tue Sep 15 — Lock-in 2:** cold re-solve 217, 242, and either 1 or 49.
+**Tue Sep 29 — Lock-in 2:** cold re-solve 217, 242, and either 1 or 49.
 
 **Unlocks:** `Counter`/dict fluency; required before 3.3.
 
@@ -258,47 +260,47 @@ Jul 24          Aug 3              Aug 31             Sep 28             Oct 26 
 
 ## 3 Sliding Window
 
-**Phase 3: Mon Sep 28 – Thu Oct 15**
+**Phase 3: Mon Oct 12 – Thu Oct 29**
 
 ### 3.1 Fixed Size — Core
-**When: Mon Sep 28 – Thu Oct 1** · **Fri Oct 2 lock-in**
+**When: Mon Oct 12 – Thu Oct 15** · **Fri Oct 16 lock-in**
 
 | Day | Solve |
 |---|---|
-| Mon Sep 28 | 643 Maximum Average Subarray I (E), 1652 Defuse the Bomb (E) |
-| Tue Sep 29 | 1876 Substrings of Size Three with Distinct Characters (E), 3318 Find X-Sum of All K-Long Subarrays I (E) |
-| Wed Sep 30 | 2461 Maximum Sum of Distinct Subarrays With Length K (M) |
-| Thu Oct 1 | 3254 Find the Power of K-Size Subarrays I (M) |
-| Fri Oct 2 | Lock-in: re-solve 643 + 2461 |
+| Mon Oct 12 | 643 Maximum Average Subarray I (E), 1652 Defuse the Bomb (E) |
+| Tue Oct 13 | 1876 Substrings of Size Three with Distinct Characters (E), 3318 Find X-Sum of All K-Long Subarrays I (E) |
+| Wed Oct 14 | 2461 Maximum Sum of Distinct Subarrays With Length K (M) |
+| Thu Oct 15 | 3254 Find the Power of K-Size Subarrays I (M) |
+| Fri Oct 16 | Lock-in: re-solve 643 + 2461 |
 
 Skip if no Premium: 346 Moving Average, 2985 Calculate Compressed Mean.
 **Unlocks:** add-one / remove-one window update.
 **Changes:** added 1652, 1876; moved 2461 from Variable Size.
 
 ### 3.2 Variable Size — Core
-**When: Mon Oct 5 – Mon Oct 12** · **Tue Oct 13 lock-in**
+**When: Mon Oct 19 – Mon Oct 26** · **Tue Oct 27 lock-in**
 
 | Day | Solve |
 |---|---|
-| Mon Oct 5 | 121 Best Time to Buy and Sell Stock (E), 219 Contains Duplicate II (E) |
-| Tue Oct 6 | 485 Max Consecutive Ones (E), 674 Longest Continuous Increasing Subsequence (E) |
-| Wed Oct 7 | 209 Minimum Size Subarray Sum (M) |
-| Thu Oct 8 | 3 Longest Substring Without Repeating Characters (M) |
-| Fri Oct 9 | 424 Longest Repeating Character Replacement (M) |
-| Mon Oct 12 | 1004 Max Consecutive Ones III (M) |
-| Tue Oct 13 | Lock-in: re-solve 209 + 3 |
+| Mon Oct 19 | 121 Best Time to Buy and Sell Stock (E), 219 Contains Duplicate II (E) |
+| Tue Oct 20 | 485 Max Consecutive Ones (E), 674 Longest Continuous Increasing Subsequence (E) |
+| Wed Oct 21 | 209 Minimum Size Subarray Sum (M) |
+| Thu Oct 22 | 3 Longest Substring Without Repeating Characters (M) |
+| Fri Oct 23 | 424 Longest Repeating Character Replacement (M) |
+| Mon Oct 26 | 1004 Max Consecutive Ones III (M) |
+| Tue Oct 27 | Lock-in: re-solve 209 + 3 |
 
-**Stretch (only if Oct 13 lock-in felt easy):** 713, 904, 1493 — do not steal time from 3.3/4.
+**Stretch (only if Oct 27 lock-in felt easy):** 713, 904, 1493 — do not steal time from 3.3/4.
 **Unlocks:** grow-right / shrink-left with an invariant.
 **Changes:** removed Hard 76 and Hard 3347; trimmed grindy Mediums; added Easies 121, 219, 485, 674. Lands 4E/4M (tie) — flagged ceiling for this family.
 
 ### 3.3 Frequency-Matching Windows — Important ⚠
-**When: Wed Oct 14 – Thu Oct 15**
+**When: Wed Oct 28 – Thu Oct 29**
 
 | Day | Solve |
 |---|---|
-| Wed Oct 14 | 567 Permutation in String (M) |
-| Thu Oct 15 | 438 Find All Anagrams in a String (M) |
+| Wed Oct 28 | 567 Permutation in String (M) |
+| Thu Oct 29 | 438 Find All Anagrams in a String (M) |
 
 **Unlocks:** fixed window + frequency map (top phone-screen type).
 **Exception:** no Easies; warm-ups were 2.2 (242, 383).
@@ -310,18 +312,18 @@ Hard-gated (239, 862). Wrong tier for entry-level.
 
 ## 4 Prefix Sum — Core
 
-**When: Fri Oct 16 – Wed Oct 21** · **Thu Oct 22 lock-in 3–4**
+**When: Fri Oct 30 – Wed Nov 4** · **Thu Nov 5 lock-in 3–4**
 
 | Day | Solve |
 |---|---|
-| Fri Oct 16 | 1480 Running Sum of 1d Array (E), 724 Find Pivot Index (E) |
-| Mon Oct 19 | 1732 Find the Highest Altitude (E), 303 Range Sum Query – Immutable (E) |
-| Tue Oct 20 | 560 Subarray Sum Equals K (M) |
-| Wed Oct 21 | 238 Product of Array Except Self (M) |
-| Thu Oct 22 | Lock-in: 724 + 560 or 238 |
+| Fri Oct 30 | 1480 Running Sum of 1d Array (E), 724 Find Pivot Index (E) |
+| Mon Nov 2 | 1732 Find the Highest Altitude (E), 303 Range Sum Query – Immutable (E) |
+| Tue Nov 3 | 560 Subarray Sum Equals K (M) |
+| Wed Nov 4 | 238 Product of Array Except Self (M) |
+| Thu Nov 5 | Lock-in: 724 + 560 or 238 |
 
 **Unlocks:** precompute-then-query; 560 and 238 are high-frequency Mediums.
-**Sun Oct 25 — Phase 3 checkpoint** (`JOB_SEARCH.md`).
+**Sun Nov 8 — Phase 3 checkpoint** (`JOB_SEARCH.md`).
 
 ---
 
@@ -330,25 +332,25 @@ Hard-gated (239, 862). Wrong tier for entry-level.
 **Starts end of Phase 3, finishes early Phase 4.**
 
 ### 5.1 Matching / Processing — Core
-**When: Fri Oct 23 – Wed Oct 28** · **Thu Oct 29 lock-in**
+**When: Fri Nov 6 – Wed Nov 11** · **Thu Nov 12 lock-in**
 
 | Day | Solve |
 |---|---|
-| Fri Oct 23 | 20 Valid Parentheses (E), 1047 Remove All Adjacent Duplicates in String (E) |
-| Mon Oct 26 | 682 Baseball Game (E), 232 Implement Queue using Stacks (E) |
-| Tue Oct 27 | 155 Min Stack (M) |
-| Wed Oct 28 | 150 Evaluate Reverse Polish Notation (M) |
-| Thu Oct 29 | Lock-in: 20 + 155 |
+| Fri Nov 6 | 20 Valid Parentheses (E), 1047 Remove All Adjacent Duplicates in String (E) |
+| Mon Nov 9 | 682 Baseball Game (E), 232 Implement Queue using Stacks (E) |
+| Tue Nov 10 | 155 Min Stack (M) |
+| Wed Nov 11 | 150 Evaluate Reverse Polish Notation (M) |
+| Thu Nov 12 | Lock-in: 20 + 155 |
 
 **Unlocks:** push/pop-on-match. 20 is among the most-asked entry-level questions.
 
 ### 5.2 Monotonic Stack (light) — Important
-**When: Fri Oct 30 – Mon Nov 2**
+**When: Fri Nov 13 – Mon Nov 16**
 
 | Day | Solve |
 |---|---|
-| Fri Oct 30 | 496 Next Greater Element I (E), 1475 Final Prices With a Special Discount in a Shop (E) |
-| Mon Nov 2 | 739 Daily Temperatures (M) |
+| Fri Nov 13 | 496 Next Greater Element I (E), 1475 Final Prices With a Special Discount in a Shop (E) |
+| Mon Nov 16 | 739 Daily Temperatures (M) |
 
 **Unlocks:** next greater/smaller. Deeper monotonic stack (84, 42) is Hard — excluded.
 
@@ -357,23 +359,23 @@ Hard-gated (239, 862). Wrong tier for entry-level.
 ## 6 Binary Search
 
 ### 6.1 Classic on Sorted Data — Core
-**When: Tue Nov 3 – Wed Nov 11** · **Thu Nov 12 lock-in**
+**When: Tue Nov 17 – Wed Nov 25** · **Thu Nov 26 lock-in**
 
 | Day | Solve |
 |---|---|
-| Tue Nov 3 | 704 Binary Search (E), 35 Search Insert Position (E) |
-| Wed Nov 4 | 744 Find Smallest Letter Greater Than Target (E), 278 First Bad Version (E) |
-| Thu Nov 5 | 69 Sqrt(x) (E), 367 Valid Perfect Square (E) |
-| Fri Nov 6 | *(buffer / re-solve template if any Easy felt shaky)* |
-| Mon Nov 9 | 34 Find First and Last Position of Element in Sorted Array (M) |
-| Tue Nov 10 | 74 Search a 2D Matrix (M) |
-| Wed Nov 11 | cold re-solve 704 + 34 |
-| Thu Nov 12 | Lock-in 6.1 |
+| Tue Nov 17 | 704 Binary Search (E), 35 Search Insert Position (E) |
+| Wed Nov 18 | 744 Find Smallest Letter Greater Than Target (E), 278 First Bad Version (E) |
+| Thu Nov 19 | 69 Sqrt(x) (E), 367 Valid Perfect Square (E) |
+| Fri Nov 20 | *(buffer / re-solve template if any Easy felt shaky)* |
+| Mon Nov 23 | 34 Find First and Last Position of Element in Sorted Array (M) |
+| Tue Nov 24 | 74 Search a 2D Matrix (M) |
+| Wed Nov 25 | cold re-solve 704 + 34 |
+| Thu Nov 26 | Lock-in 6.1 |
 
 **Unlocks:** one `lo/hi/mid` template without off-by-ones; 34 is the real interview skill (boundaries).
 
 ### 6.2 Rotated Arrays — Optional
-**When: only after Thu Nov 12, and only if 6.1 is cold** — else skip until a company is known to ask it.
+**When: only after Thu Nov 26, and only if 6.1 is cold** — else skip until a company is known to ask it.
 
 | LC # | Problem | Difficulty |
 |---|---|---|
@@ -386,15 +388,15 @@ Excluded: binary-search-on-answer (875, 1011) — low entry-level frequency.
 
 ## 7 Linked List Manipulation — Core
 
-**When: Fri Nov 13 – Wed Nov 18** · **Thu Nov 19 lock-in**
+**When: Fri Nov 27 – Wed Dec 2** · **Thu Dec 3 lock-in**
 
 | Day | Solve |
 |---|---|
-| Fri Nov 13 | 206 Reverse Linked List (E), 21 Merge Two Sorted Lists (E) |
-| Mon Nov 16 | 83 Remove Duplicates from Sorted List (E), 203 Remove Linked List Elements (E) |
-| Tue Nov 17 | 2 Add Two Numbers (M) |
-| Wed Nov 18 | 24 Swap Nodes in Pairs (M) |
-| Thu Nov 19 | Lock-in: 206 + 21 |
+| Fri Nov 27 | 206 Reverse Linked List (E), 21 Merge Two Sorted Lists (E) |
+| Mon Nov 30 | 83 Remove Duplicates from Sorted List (E), 203 Remove Linked List Elements (E) |
+| Tue Dec 1 | 2 Add Two Numbers (M) |
+| Wed Dec 2 | 24 Swap Nodes in Pairs (M) |
+| Thu Dec 3 | Lock-in: 206 + 21 |
 
 Already done via 1: 141, 142, 234, 876, 19, 2095.
 **Unlocks:** pointer rewiring + dummy head. Excluded: 146 LRU (add-back), 25 (Hard).
@@ -403,18 +405,18 @@ Already done via 1: 141, 142, 234, 876, 19, 2095.
 
 ## 8 Trees BFS/DFS — Core (promoted from optional)
 
-**When: Fri Nov 20 – Fri Nov 27** · **Sat Nov 28 lock-in**
+**When: Fri Dec 4 – Fri Dec 11** · **Sat Dec 12 lock-in**
 Promoted because trees appear too often at entry level to gamble on skipping. This is the recursion-heavy section — go slow, one per day is fine.
 
 | Day | Solve |
 |---|---|
-| Fri Nov 20 | 104 Maximum Depth of Binary Tree (E) |
-| Mon Nov 23 | 226 Invert Binary Tree (E), 100 Same Tree (E) |
-| Tue Nov 24 | 101 Symmetric Tree (E) |
-| Wed Nov 25 | 112 Path Sum (E) |
-| Thu Nov 26 | 102 Binary Tree Level Order Traversal (M) |
-| Fri Nov 27 | 235 Lowest Common Ancestor of a BST (M) |
-| Sat Nov 28 | Lock-in: re-solve 104 + 102 |
+| Fri Dec 4 | 104 Maximum Depth of Binary Tree (E) |
+| Mon Dec 7 | 226 Invert Binary Tree (E), 100 Same Tree (E) |
+| Tue Dec 8 | 101 Symmetric Tree (E) |
+| Wed Dec 9 | 112 Path Sum (E) |
+| Thu Dec 10 | 102 Binary Tree Level Order Traversal (M) |
+| Fri Dec 11 | 235 Lowest Common Ancestor of a BST (M) |
+| Sat Dec 12 | Lock-in: re-solve 104 + 102 |
 
 **Unlocks:** the recursive DFS template (`if not node: return ...; recurse left/right`) and the BFS-with-a-queue template — these two cover the vast majority of entry-level tree questions.
 **Recursion note:** if recursion feels shaky, that's expected — trees are where it clicks. Trace a small tree by hand on paper before coding. 104 is the gentlest start.
@@ -424,16 +426,16 @@ Promoted because trees appear too often at entry level to gamble on skipping. Th
 
 ## 9 Grid BFS/DFS — Core (new — was wrongly excluded)
 
-**When: Mon Nov 30 – Thu Dec 3** · **Fri Dec 4 lock-in**
+**When: Mon Dec 14 – Thu Dec 17** · **Fri Dec 18 lock-in**
 **Number of Islands (200) is one of the single most-asked questions at startups and entry-level loops.** Excluding the whole "graphs" bucket accidentally cut it — a mistake for your target roles. A grid is just an implicit graph; with 8's templates this is mostly applying DFS/BFS to a 2D array.
 
 | Day | Solve |
 |---|---|
-| Mon Nov 30 | 733 Flood Fill (E) |
-| Tue Dec 1 | 200 Number of Islands (M) |
-| Wed Dec 2 | 695 Max Area of Island (M) |
-| Thu Dec 3 | 994 Rotting Oranges (M) |
-| Fri Dec 4 | Lock-in: re-solve 200 |
+| Mon Dec 14 | 733 Flood Fill (E) |
+| Tue Dec 15 | 200 Number of Islands (M) |
+| Wed Dec 16 | 695 Max Area of Island (M) |
+| Thu Dec 17 | 994 Rotting Oranges (M) |
+| Fri Dec 18 | Lock-in: re-solve 200 |
 
 **Unlocks:** the "visit every cell, flood its neighbors, mark visited" pattern — 733/200/695 are one DFS template; 994 is the same idea with BFS + a queue (multi-source). Covers the grid-traversal family startups love.
 **Optional heap add-on** (only if hunting and everything else is cold): 703 Kth Largest in a Stream (E), 1046 Last Stone Weight (E), 215 Kth Largest Element in an Array (M). One evening; `heapq` fluency, occasionally asked.
@@ -443,15 +445,15 @@ Promoted because trees appear too often at entry level to gamble on skipping. Th
 
 ## 10 Intervals — Core (light)
 
-**When: Mon Dec 7 – Wed Dec 9** · **Thu Dec 10 lock-in** (first thing in the loop)
+**When: Mon Dec 21 – Wed Dec 23** · **Thu Dec 24 lock-in** (first thing in the loop)
 Promoted from add-back to core: "sort by start, then merge/compare overlaps" is a high-frequency entry-level pattern that stands alone and is cheap to learn.
 
 | Day | Solve |
 |---|---|
-| Mon Dec 7 | 56 Merge Intervals (M) |
-| Tue Dec 8 | 57 Insert Interval (M) |
-| Wed Dec 9 | 252 Meeting Rooms (E, *Premium — skip if no sub; 56 already teaches it*) |
-| Thu Dec 10 | Lock-in: re-solve 56 |
+| Mon Dec 21 | 56 Merge Intervals (M) |
+| Tue Dec 22 | 57 Insert Interval (M) |
+| Wed Dec 23 | 252 Meeting Rooms (E, *Premium — skip if no sub; 56 already teaches it*) |
+| Thu Dec 24 | Lock-in: re-solve 56 |
 
 **Unlocks:** the sort-then-sweep pattern — 56 is the canonical version; recognizing "these are intervals" is most of the battle.
 **Exception:** interval Easies are mostly Premium, so this leans Medium — kept small (really just 56 + 57).
@@ -486,8 +488,8 @@ Promoted from add-back to core: "sort by start, then merge/compare overlaps" is 
 | **Moved** | 1 → 2.1 · 876 → 1.2 · 2461 → 3.1 |
 | **Easies added** | 125, 680, 2824, 234, 88, 1089, 917, 1652, 1876, 121, 485, 674 (+142 M) |
 | **Gaps closed** | 8 Trees promoted to **core**; new 9 **Grid BFS/DFS** (200/695/733/994); new 10 **Intervals** (56/57); complexity-analysis rule (pacing 8); optional heap add-on |
-| **Timeline** | Day-level dates Aug 3 → **Dec 4**; lock-ins; Phase 1 no longer includes Hashing; DSA tail overlaps early loop |
+| **Timeline** | Day-level dates Aug 17 → **Dec 18**; lock-ins; Phase 1 no longer includes Hashing; DSA tail overlaps early loop |
 
 ---
 
-*Curriculum calendar built for start Fri Jul 24, 2026; DSA new-learning runs to ~Dec 4 (Trees + Grid added as core). If a weekday is lost (travel, interview), shift this file’s dates forward as a block — don’t compress. Reminder: this file maximizes your technical-screen pass rate; it does not by itself get you the job — interview volume in `JOB_SEARCH.md` is the binding constraint.*
+*Curriculum calendar built for start **Fri Aug 7, 2026**; DSA new-learning runs to ~Dec 24 (Trees + Grid + Intervals). If a weekday is lost (travel, interview, holiday), shift this file’s dates forward as a block — don’t compress. Reminder: this file maximizes your technical-screen pass rate; it does not by itself get you the job — interview volume in `JOB_SEARCH.md` is the binding constraint.*
