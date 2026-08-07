@@ -23,7 +23,7 @@ Example 3
 
 Video https://www.youtube.com/watch?v=QgRZcbYboxg
 
-Solution: https://leetcode.com/problems/minimum-value-to-get-positive-step-by-step-sum/solutions/1513266/minimum-value-to-get-positive-step-by-step-sum/
+Solution: https://leetcode.com/problems/minimum-value-to-get-positive-step-by-step-sum/description/
 """
 
 # Solution — Minimum Value to Get Positive Step by Step Sum
@@ -46,8 +46,8 @@ print(minStartValue(nums))
 # –––––––––––––––––––––––––––––––––––––––––––––––––––––––
 # Breakdown 
 def minStartValue(nums):
-    min_val = 0    # Tracks the lowest running sum seen so far
-    total = 0      # Current running sum (starts as if startValue=0)
+    min_val = 0     # Tracks the lowest running sum seen so far
+    total = 0       # Current running sum (starts as if startValue=0)
     
     for num in nums:    # One pass through the array
         total += num    # Update running sum with next number
@@ -101,6 +101,37 @@ i   | num  | total | min_val
 4   | 2    | 2     | -4 (min(-4, 2))
 
 Final: -(-4) + 1 = 5
+
+
+---
+Overview for Each Iteration
+Input: nums = [3, 2, 1]
+
+Step: Calculate step-by-step sum and track minimum total
+i   | num  | total | min_val
+----|------|-------|-----------------
+-   | -    | 0     | 0
+0   | 3    | 3     | 0 (min(0, 3))
+1   | 2    | 5     | 0 (min(0, 5))
+2   | 1    | 6     | 0 (min(0, 6))
+
+Final: -(0) + 1 = 1
+
+
+---
+Overview for Each Iteration
+Input: nums = [-1, -2, -3]
+
+Step: Calculate step-by-step sum and track minimum total
+i   | num  | total | min_val
+----|------|-------|-----------------
+-   | -    | 0     | 0
+0   | -1   | -1    | -1 (min(0, -1))
+1   | -2   | -3    | -3 (min(-1, -3))
+2   | -3   | -6    | -6 (min(-3, -6))
+
+Final: -(-6) + 1 = 7
+
 
 
 
@@ -330,6 +361,12 @@ Final Answer
 """
 
 
+
+
+
+
+
+
 # ––––––––––––––––––––––––––––––––––––––––––––––––
 # Q: Why min_val = 0 (not float('inf'))
 
@@ -373,39 +410,8 @@ Memory hook
 
 
 
-# –––––––––––––––––––––––––––––––––––––––––––––––––––––––
-# Solution — Minimum Value to Get Positive Step by Step Sum
-# More Examples
-
-def minStartValue(nums):
-    total = 0
-    min_val = 0
-
-    for num in nums:
-        total += num
-        min_val = min(min_val, total)
-    
-    return -min_val + 1
-
-nums = [3, 2, 1]
-print(minStartValue(nums))
-# Output: 1
 
 
-
-def minStartValue(nums):
-    total = 0
-    min_val = 0
-
-    for num in nums:
-        total += num
-        min_val = min(min_val, total)
-    
-    return -min_val + 1
-
-nums = [-1, -2, -3]
-print(minStartValue(nums))
-# Output: 7
 
 
 
@@ -430,7 +436,6 @@ solution = Solution()
 nums = [-3, 2, -3, 4, 2]
 print(solution.minStartValue(nums))
 # Output: 5
-
 
 
 

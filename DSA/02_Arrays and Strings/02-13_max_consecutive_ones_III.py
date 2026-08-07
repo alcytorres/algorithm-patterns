@@ -319,6 +319,70 @@ Final Answer:
     The longest stretch of 1s after flipping at most 1 zero is 4.
 
 
+---
+🧠 First Time? Thoughts → Code
+
+Read the problem (10 sec)
+    • Longest stretch of 1s if you can flip at most k zeros.
+
+    • Contiguous + "at most k flips" → longest window that contains ≤ k zeros.
+
+
+Start naive (totally fine)
+    • Try every subarray, count its zeros, keep the longest with zeros ≤ k.
+
+    • O(N²) — works, but checks way too many windows.
+
+
+The one insight that unlocks the optimal code
+    • Don't flip anything in code — just find the longest window with ≤ k zeros.
+
+    • Grow right; when zeros > k, shrink from the left until valid again.
+
+    • Track zero count (`curr`) and best length (`ans`) as you go → one O(N) pass.
+
+
+Why sliding window?
+    • Contiguous window whose validity depends on a count (zeros ≤ k) — classic variable-size window.
+
+    • Once too many zeros, extending further can't help until you drop a zero from the left.
+
+
+Thought → line of code
+    • `l = ans = curr = 0`
+        → Left edge, best length, zeros in the window.
+
+    • `if nums[r] == 0: curr += 1`
+        → Only zeros cost a flip — 1s are free.
+
+    • `while curr > k:`
+        → Window invalid — keep shrinking until zeros ≤ k again.
+        → `while`, not `if`: may need to drop more than one element.
+
+    • `if nums[l] == 0: curr -= 1` then `l += 1`
+        → Drop left; only decrement `curr` when the leaving element was a zero.
+
+    • `ans = max(ans, r - l + 1)`
+        → After the window is valid, record its length.
+
+
+Memory hook (one sentence)
+    • Longest window with ≤ k zeros: grow right, shrink left when zeros exceed k.
+
+
+Would you arrive at this cold?
+    • Immediately: nested loops over every subarray, count zeros — yes.
+
+    • After asking "what does the input buy me?": flip → "zeros in the window"; contiguous + budget k → variable sliding window.
+
+    • Bookkeeping: `l`, `curr`, `ans`, the expand/shrink loop.
+
+    • Real insight: reframe as "at most k zeros," then shrink only when that budget breaks.
+
+
+
+
+
 
 
 
