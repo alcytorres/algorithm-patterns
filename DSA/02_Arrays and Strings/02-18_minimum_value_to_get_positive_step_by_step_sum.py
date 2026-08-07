@@ -208,33 +208,22 @@ TLDR
 
 ---
 Quick Example Walkthrough
-
     nums = [-3, 2, -3, 4, 2]
 
     Step 1:
         Start with running sum = 0
 
     Step 2:
-        Build running sums:
-            -3
-            -1
-            -4
-            0
-            2
+        Build running sums: -3, -1, -4, 0, 2
 
     Step 3:
-        Lowest running sum:
-            -4
+        Lowest running sum: -4
 
     Step 4:
-        We need:
-            startValue + (-4) >= 1
+        Need startValue + (-4) >= 1 → startValue = 5
 
-        So:
-            startValue = 5
-
-    Final Answer:
-        5
+    Final Answer: 5
+    
 
 ---
 Full Example Walkthrough
