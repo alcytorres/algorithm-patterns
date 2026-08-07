@@ -476,17 +476,20 @@ See "String Building in Python" below for why we moved away from this.
 # Quick reference:
 #   Solution 1 (list + two pointers):   Time O(N), Space O(N)  ← learn this
 #   Solution 2 (list + join + reverse): Time O(N), Space O(N)
-#   Old Solution (+= + two pointers):   Build O(N²) naive, check O(N)
+#   Old Solution (+= + two pointers):   Build O(N²) naive*, check O(N)
 #
 # Pattern to learn:  filter → collect in list → two pointers inward
 # Python lesson:     don't += strings in a loop; use a list
+#
+# *Naive model (strings are immutable → copy each +=).
+#  CPython may make a simple s += c loop ~O(N) — don't rely on it.
 
-# String += (copies entire string each time)
+# String += — naive model (copy each time)
 new_string = ""
-new_string += "a"   # creates "a"          (copies 1 char)
-new_string += "b"   # creates "ab"         (copies 2 chars)
-new_string += "c"   # creates "abc"        (copies 3 chars)
-# Each += rebuilds from scratch → 1 + 2 + 3 + ... + N = O(N²)
+new_string += "a"   # new string "a"       (copy 1)
+new_string += "b"   # new string "ab"      (copy 2)
+new_string += "c"   # new string "abc"     (copy 3)
+# Naive total: 1 + 2 + 3 + ... + N = O(N²)
 
 
 # List + join (appends in place, joins once)
@@ -494,29 +497,39 @@ chars = []
 chars.append("a")   # ["a"]               (O(1))
 chars.append("b")   # ["a", "b"]          (O(1))
 chars.append("c")   # ["a", "b", "c"]     (O(1))
-result = "".join(chars)  # "abc"           (one O(N) pass)
+result = "".join(chars)  # "abc"          (one O(N) pass)
 # Total: N appends at O(1) + one join at O(N) = O(N)
 
 
 """
 ---
-Strings are immutable — `s += c` creates a new copy each time, not an in-place edit.
+The idea (naive model)
+
+Strings are immutable — you can't edit one in place.
+So the language model of `s += c` is: make a brand-new string and copy everything.
+
+That's why interviews call += in a loop O(N²) naive.
+
 
 Three ways to collect characters:
     • List only       → compare only (Solution 1)        → O(N) build
     • List + join     → need a final string (Solution 2) → O(N) build
     • String +=       → avoid in interviews              → O(N²) naive
 
-CPython sometimes optimizes += to ~O(N) in practice — don't rely on it.
+
+Nuance:
+    CPython may make a simple `s += c` loop ~O(N) in practice.
+    Don't rely on it — use a list. Interview answer still says O(N²) naive.
+
 
 Interview script:
     "Overall O(N) — one pass to clean, one pass with two pointers.
      I use a list because += in a loop is O(N²) naively since strings are immutable."
 
 ---
-Q: Why is += O(N²)?
+Q: Why is += O(N²) naive?
 
-Each += rebuilds the entire string from scratch.
+Under the naive model, each += rebuilds the entire string from scratch.
 
 Think of it like writing on paper.
 
@@ -575,6 +588,7 @@ Why NOT N³?
 
 
 TLDR:
-    • += in a loop: 1 + 2 + 3 + ... + N = O(N²)
-    • List append: O(1) each + optional one join = O(N)
+    • Naive model: += loop = 1 + 2 + ... + N = O(N²)
+    • Safe / guaranteed: list appends + optional one join = O(N)
+    • CPython may speed up += — still don't rely on it
 """

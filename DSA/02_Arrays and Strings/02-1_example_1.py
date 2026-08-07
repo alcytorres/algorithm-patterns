@@ -276,6 +276,7 @@ def is_palindrome_bruteforce(s):
     reversed_s = ""
     
     for c in s:
+        # Prepend: put the new character at the front to build the reverse.
         reversed_s = c + reversed_s
     
     if reversed_s == s:

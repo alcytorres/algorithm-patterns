@@ -1,9 +1,46 @@
 
 
-
 # ============================================================
 # MY GUIDES
 # ============================================================
+#
+# Table of Contents
+# -----------------
+# Collections
+#   • defaultdict(list)
+#   • collections.Counter
+#
+# Booleans & counting
+#   • True = 1 and False = 0 in Python
+#   • sum(condition for x in items)
+#   • Condition-First Rule in any(), all(), sum()
+#
+# Loops & control flow
+#   • When to Use `continue` in LeetCode
+#   • for i in range(n - 1, -1, -1)
+#   • How Python Reads Loops + if Statements
+#
+# Strings
+#   • Build a string with .join() (and the opposite)
+#   • .split() + .join() in LeetCode
+#
+# Lists & objects
+#   • List Comprehension
+#   • Mutation in Python
+#
+# Sorting & selecting
+#   • What is key= used for?
+#
+# Sentinels
+#   • float('inf') and float('-inf')
+#
+# Classes
+#   • @staticmethod in Python
+#
+# Also in this file
+#   • Algorithm Tools You Should Know
+#
+
 
 # ––––––––––––––––––––––––––––––––––––––––––––––
 """
@@ -151,89 +188,6 @@ else:
 
 # ––––––––––––––––––––––––––––––––––––––––––––––
 """
-📘 Tutorial: @staticmethod in Python
-
-- A @staticmethod is just a normal function stored inside a class.
-- It does NOT get 'self' automatically.
-- You can call it from the class OR from an instance.
-- Key idea: instance calls would break without @staticmethod
-  because Python would try to pass the instance as 'self'.
-"""
-
-# Example 1: Dog class
-class Dog:
-    def __init__(self, age):
-        self.age = age
-
-    @staticmethod
-    def bark_times(n):
-        print("Woof! " * n)
-
-d1 = Dog(3)
-
-print(d1.bark_times(3))   # Instance call
-# Without @staticmethod this breaks:
-# Python would secretly do: Dog.bark_times(d1, 3)
-# 'd1' becomes self → too many arguments → error
-
-
-# Works both ways:
-Dog.bark_times(3)         # Class call
-
-
-"""
-Without @staticmethod:
-    • d1.bark_times(3) becomes Dog.bark_times(d1, 3)
-    • That means 2 arguments get sent in
-    • But the method only expects (n)
-    • → TypeError
-
-With @staticmethod:
-    • Python does NOT pass 'self'
-    • d1.bark_times(3) just passes (3)
-    • Works from instance OR class
-    • Acts like a normal function stored inside a class
-"""
-
-
-# Example 2: Math class
-class Math:
-
-    @staticmethod
-    def add(a, b):
-        return a + b
-
-m1 = Math()
-print(m1.add(1, 2))     # Instance call
-# Without @staticmethod this breaks:
-# Python would secretly do: Math.add(m1, 1, 2)
-# That extra 'm1' becomes self → too many arguments → error
-
-
-# Works both ways:
-print(Math.add(1, 2))   # Class call
-
-
-"""
-Without @staticmethod:
-    • Calling m1.add(1, 2) secretly becomes Math.add(m1, 1, 2)
-    • That means 3 arguments get sent in
-    • But the function only expects (a, b)
-    • → TypeError
-
-With @staticmethod:
-    • Python does NOT pass 'self'
-    • m1.add(1, 2) just passes (1, 2)
-    • Works from instance OR class
-    • Acts like a normal function stored inside a class
-
-"""
-
-
-
-
-# ––––––––––––––––––––––––––––––––––––––––––––––
-"""
 📘 Tutorial: When to Use `continue` in LeetCode
 
   • `continue` skips the *rest of the loop* and jumps to the next item.
@@ -282,6 +236,156 @@ print(simplifyPath("/a/./b//c/../"))  # Output: "/a/b"
 
 # ––––––––––––––––––––––––––––––––––––––––––––––
 """
+📘 Tutorial: for i in range(n - 1, -1, -1)
+
+This pattern means:
+- Start at index n-1 (the LAST index)
+- Stop at -1 (but not including -1)
+- Move by -1 each time (counting backwards)
+
+Why it's useful:
+- Lets you fill an array from RIGHT → LEFT
+- Perfect when the largest values are picked first (like in sortedSquares)
+- Removes the need to reverse the final result
+
+Think of it as: "Give me all valid indices, but backwards."
+"""
+
+# ---------------------------------------------------------
+# Basic Example
+# ---------------------------------------------------------
+# Goal: Fill an array from RIGHT to LEFT using range(n-1, -1, -1)
+n = 5
+ans = [None] * n
+
+# Fill ans with its own indices, but backwards.
+for i in range(n - 1, -1, -1):
+    print(ans)
+    ans[i] = i
+
+print(ans)
+# Output:
+# [None, None, None, None, None]
+# [None, None, None, None, 4]
+# [None, None, None, 3, 4]
+# [None, None, 2, 3, 4]
+# [None, 1, 2, 3, 4]
+# → [0, 1, 2, 3, 4]
+
+
+# ---------------------------------------------------------
+# Example in a Function (Real DSA Use Case)
+# ---------------------------------------------------------
+# 977. Squares of a Sorted Array
+# Two-pointer trick + fill from the back using range(n-1, -1, -1)
+
+def sortedSquares(nums):
+    n = len(nums)
+    ans = [0] * n
+    l, r = 0, n - 1
+
+    # i goes from last index → 0
+    for i in range(n - 1, -1, -1):
+        # pick the bigger square from the ends
+        if abs(nums[l]) < abs(nums[r]):
+            square = nums[r]
+            r -= 1
+        else:
+            square = nums[l]
+            l += 1
+
+        # place square in correct sorted position
+        ans[i] = square * square
+
+    return ans
+
+
+nums = [-4, -1, 0, 3, 10]
+print(sortedSquares(nums))
+# Output: [0, 1, 9, 16, 100]
+
+"""
+Key takeaways:
+  - range(n-1, -1, -1) = indices in reverse order
+  - Ideal when your algorithm produces biggest → smallest results
+  - Lets you build the final sorted array in ONE pass without reversing
+"""
+
+
+
+
+# ------------------------------------------------------------
+"""
+📘 Tutorial: How Python Reads Loops + if Statements
+
+- Python reads code TOP → BOTTOM within one loop iteration.
+
+- An if statement is NOT a loop.
+  It only checks the condition ONCE, then continues downward.
+
+- Python does NOT jump back to the if statement.
+  It only restarts after reaching the END of the loop body.
+
+- Important:
+    • Code OUTSIDE the if block always runs.
+    • Code INSIDE the if block only runs if the condition is True.
+"""
+
+# Example:
+i = 0
+
+while i < 3:
+
+    if i == 1:
+        print("MATCH")
+
+    print("Always runs")
+
+    i += 1
+
+# Output:
+# Always runs
+# MATCH
+# Always runs
+# Always runs
+
+
+"""
+Easy Mental Model:
+    • One loop iteration = reading a page top-to-bottom.
+    • Python keeps moving downward until the loop body ends.
+    • THEN the next iteration begins.
+"""
+
+
+# ------------------------------------------------------------
+
+# ––––––––––––––––––––––––––––––––––––––––––––––
+"""
+📘 Tutorial: Build a string with .join() (and the opposite)
+
+- Don't build with s += char in a loop — each += makes a new string.
+- Collect pieces in a list, then "".join(parts) once.
+
+Opposite:
+  - list(s)        → string to list of characters
+  - "".join(chars) → list of characters back to string
+"""
+
+# Efficient build: list → string
+chars = []
+for c in "hello":
+    chars.append(c)     
+word = "".join(chars)
+print(word)  # Output: hello
+
+# Opposite: string → list
+chars = list("hello")
+print(chars)  # Output: ['h', 'e', 'l', 'l', 'o']
+
+
+# ––––––––––––––––––––––––––––––––––––––––––––––
+"""
 Tutorial: .split() + .join() in LeetCode
 
   - .split() turns string into list of parts
@@ -326,6 +430,220 @@ def build_path(s):
     return "/" + "/".join(stack)
 
 print(build_path("/home/user/docs/"))  # "/home/user/docs"
+
+
+
+# ––––––––––––––––––––––––––––––––––––––––––––––
+"""
+📘 Tutorial: List Comprehension
+
+List comprehension = create a new list by doing something to each item — all in one line.
+
+Syntax:
+    [expression for item in iterable]
+    [expression for item in iterable if condition]
+         ↑              ↑                   ↑
+    what to keep     the loop         optional filter
+
+Memory trick — read it left to right:
+    "Give me [this] for each [item] in [collection]"
+    [n * n   for n   in nums]
+      result   var    source
+"""
+
+# Example 1: Transform — square each number
+nums = [1, 2, 3, 4]
+squares = [n * n for n in nums]
+print(squares)  # [1, 4, 9, 16]
+
+# Example 2: Filter — keep only evens
+nums = [1, 2, 3, 4, 5, 6]
+evens = [n for n in nums if n % 2 == 0]
+print(evens)  # [2, 4, 6]
+
+# Example 3: Transform + Filter — square only evens
+nums = [1, 2, 3, 4, 5, 6]
+even_squares = [n * n for n in nums if n % 2 == 0]
+print(even_squares)  # [4, 16, 36]
+
+# Example 4: Strings — uppercase each word
+words = ["hello", "world"]
+upper = [w.upper() for w in words]
+print(upper)  # ['HELLO', 'WORLD']
+
+# Example 5: Extract part of each item
+pairs = [(1, 'a'), (2, 'b'), (3, 'c')]
+first_items = [p[0] for p in pairs]
+print(first_items)  # [1, 2, 3]
+
+"""
+vs. regular loop (same result, more lines):
+    squares = []
+    for n in nums:
+        squares.append(n * n)
+
+List comprehension does all of that in ONE line.
+"""
+
+
+# ============================================================
+# Mini Guide: Mutation in Python
+# ============================================================
+"""
+Mutation = changing an object directly after it's created (in place).
+
+Key idea:
+- Some methods CHANGE the original object → they usually return None
+- Some functions CREATE A NEW object → they return the new one
+
+Common trap: assigning the result of a mutating method → you get None!
+"""
+
+# How to TEST if a method mutates an object
+# Simple 3-step trick every beginner can use:
+
+original = [4, 2, 7, 1]          # make a list
+print("Before:", original)       # remember what it looks like
+
+result = original.sort()         # try the method
+
+print("After: ", original)       # did the list change?
+print("Result:", result)         # what did the method return?
+
+# Output pattern tells you everything:
+# Before: [4, 2, 7, 1]
+# After:  [1, 2, 4, 7]          ← changed → mutated!
+# Result: None                  ← returned None → mutates
+
+
+# Quick reference: Common mutating vs non-mutating methods
+
+# Mutates (changes original, usually returns None)
+nums = [3, 1, 4]
+nums.sort()          # mutates
+nums.append(5)       # mutates
+nums.pop()           # mutates
+nums.reverse()       # mutates
+d = {"a": 1}
+d.update({"b": 2})   # mutates
+my_set = {1, 2}
+my_set.add(3)        # mutates
+
+# Does NOT mutate (returns new object, original stays same)
+nums = [3, 1, 4]
+sorted_list = sorted(nums)   # new list
+reversed_list = list(reversed(nums))  # new list
+upper_string = "hello".upper()  # new string
+new_dict = dict(d)        # new dict
+
+print(nums)          # still [3, 1, 4]
+print(sorted_list)      # [1, 3, 4]
+
+
+# Golden rule to remember
+"""
+If you see:
+x = my_list.sort()   → almost always wrong! x becomes None
+
+Do this instead:
+my_list.sort()       # just call it
+# or
+x = sorted(my_list)  # get new sorted version
+"""
+
+# Test it yourself pattern (copy-paste this template)
+"""
+original = [your object here]
+print("Before:", original)
+
+result = original.your_method()   # or function(original)
+
+print("After: ", original)
+print("Result:", result)
+"""
+
+
+# ============================================================
+# 📘 GUIDE: What is key= used for?
+# Sorting & Selecting the Smart Way
+# ============================================================
+"""
+What is key= ?
+
+    key= tells Python HOW TO COMPARE the items.
+    Instead of comparing items by their face value,
+    it calls the function you give it on each item
+    and compares THOSE RESULTS instead.
+
+    It changes the RULER, not what gets returned.
+
+    • Without key=  
+    →  max([3, 1, 2])  →  compares 3, 1, 2 directly  
+    →  returns 3
+
+    • With key=     
+    →  max(["hi", "banana"], key=len)  →  compares lengths  
+    →  returns "banana"
+
+
+Important rule:
+    key= expects a FUNCTION, not a result.
+
+    • count.get      → gives max() a TOOL to use later  ✅
+    • count.get()    → runs the tool right now (wrong)   ❌
+
+TLDR:
+    key=   → "Sort or pick based on this function's result"
+
+Why no parentheses?
+    We want max() to CALL the function for us internally
+    on each item it checks. 
+    We hand over the tool — max() decides when to use it.
+"""
+
+# --------------------------
+# Basic Example (Strings)
+# --------------------------
+words = ["hi", "banana", "yo"]
+
+# key=len  → "Use length to decide which is biggest"
+longest = max(words, key=len)
+
+print(longest)   # Output: "banana"
+
+# Behind the scenes, max() does this:
+#   len("hi")      → 2
+#   len("banana")  → 6
+#   len("yo")      → 2
+#   6 is biggest   → returns "banana"  (the original item, NOT 6)
+
+
+# ------------------------------------
+# Example Inside a Function (LeetCode)
+# Pick the key with the highest value
+# ------------------------------------
+def majorityElement(nums):
+    count = {}
+
+    for num in nums:
+        count[num] = count.get(num, 0) + 1
+
+    # key=count.get → "Compare keys by their values"
+    return max(count, key=count.get)
+
+nums = [1, 3, 3]
+print(majorityElement(nums))  # Output: 3
+
+# Behind the scenes:
+#   1. After the loop, count = {1: 1, 3: 2}
+#   2. max() loops through the keys: 1, 3
+#   3. For each one, it calls count.get() to decide how to compare:
+#        count.get(1)  → 1
+#        count.get(3)  → 2
+#   4. Python internally holds those results: [1, 2]
+#   5. Picks the biggest: 2
+#   6. Returns the original key that produced it: 3
+
 
 
 
@@ -415,296 +733,85 @@ print(max_profit([7, 1, 5, 3, 6, 4]))  # → 5
 
 # ––––––––––––––––––––––––––––––––––––––––––––––
 """
-📘 Tutorial: for i in range(n - 1, -1, -1)
+📘 Tutorial: @staticmethod in Python
 
-This pattern means:
-- Start at index n-1 (the LAST index)
-- Stop at -1 (but not including -1)
-- Move by -1 each time (counting backwards)
-
-Why it's useful:
-- Lets you fill an array from RIGHT → LEFT
-- Perfect when the largest values are picked first (like in sortedSquares)
-- Removes the need to reverse the final result
-
-Think of it as: "Give me all valid indices, but backwards."
+- A @staticmethod is just a normal function stored inside a class.
+- It does NOT get 'self' automatically.
+- You can call it from the class OR from an instance.
+- Key idea: instance calls would break without @staticmethod
+  because Python would try to pass the instance as 'self'.
 """
 
-# ---------------------------------------------------------
-# Basic Example
-# ---------------------------------------------------------
-# Goal: Fill an array from RIGHT to LEFT using range(n-1, -1, -1)
-n = 5
-ans = [None] * n
+# Example 1: Dog class
+class Dog:
+    def __init__(self, age):
+        self.age = age
 
-# Fill ans with its own indices, but backwards.
-for i in range(n - 1, -1, -1):
-    print(ans)
-    ans[i] = i
+    @staticmethod
+    def bark_times(n):
+        print("Woof! " * n)
 
-print(ans)
-# Output:
-# [None, None, None, None, None]
-# [None, None, None, None, 4]
-# [None, None, None, 3, 4]
-# [None, None, 2, 3, 4]
-# [None, 1, 2, 3, 4]
-# → [0, 1, 2, 3, 4]
+d1 = Dog(3)
+
+print(d1.bark_times(3))   # Instance call
+# Without @staticmethod this breaks:
+# Python would secretly do: Dog.bark_times(d1, 3)
+# 'd1' becomes self → too many arguments → error
 
 
-# ---------------------------------------------------------
-# Example in a Function (Real DSA Use Case)
-# ---------------------------------------------------------
-# 977. Squares of a Sorted Array
-# Two-pointer trick + fill from the back using range(n-1, -1, -1)
+# Works both ways:
+Dog.bark_times(3)         # Class call
 
-def sortedSquares(nums):
-    n = len(nums)
-    ans = [0] * n
-    l, r = 0, n - 1
-
-    # i goes from last index → 0
-    for i in range(n - 1, -1, -1):
-        # pick the bigger square from the ends
-        if abs(nums[l]) < abs(nums[r]):
-            square = nums[r]
-            r -= 1
-        else:
-            square = nums[l]
-            l += 1
-
-        # place square in correct sorted position
-        ans[i] = square * square
-
-    return ans
-
-
-nums = [-4, -1, 0, 3, 10]
-print(sortedSquares(nums))
-# Output: [0, 1, 9, 16, 100]
 
 """
-Key takeaways:
-  - range(n-1, -1, -1) = indices in reverse order
-  - Ideal when your algorithm produces biggest → smallest results
-  - Lets you build the final sorted array in ONE pass without reversing
+Without @staticmethod:
+    • d1.bark_times(3) becomes Dog.bark_times(d1, 3)
+    • That means 2 arguments get sent in
+    • But the method only expects (n)
+    • → TypeError
+
+With @staticmethod:
+    • Python does NOT pass 'self'
+    • d1.bark_times(3) just passes (3)
+    • Works from instance OR class
+    • Acts like a normal function stored inside a class
 """
 
 
+# Example 2: Math class
+class Math:
+
+    @staticmethod
+    def add(a, b):
+        return a + b
+
+m1 = Math()
+print(m1.add(1, 2))     # Instance call
+# Without @staticmethod this breaks:
+# Python would secretly do: Math.add(m1, 1, 2)
+# That extra 'm1' becomes self → too many arguments → error
 
 
-# ============================================================
-# 📘 GUIDE: What is key= used for?
-# Sorting & Selecting the Smart Way
-# ============================================================
+# Works both ways:
+print(Math.add(1, 2))   # Class call
+
+
 """
-What is key= ?
+Without @staticmethod:
+    • Calling m1.add(1, 2) secretly becomes Math.add(m1, 1, 2)
+    • That means 3 arguments get sent in
+    • But the function only expects (a, b)
+    • → TypeError
 
-    key= tells Python HOW TO COMPARE the items.
-    Instead of comparing items by their face value,
-    it calls the function you give it on each item
-    and compares THOSE RESULTS instead.
+With @staticmethod:
+    • Python does NOT pass 'self'
+    • m1.add(1, 2) just passes (1, 2)
+    • Works from instance OR class
+    • Acts like a normal function stored inside a class
 
-    It changes the RULER, not what gets returned.
-
-    • Without key=  
-    →  max([3, 1, 2])  →  compares 3, 1, 2 directly  
-    →  returns 3
-
-    • With key=     
-    →  max(["hi", "banana"], key=len)  →  compares lengths  
-    →  returns "banana"
-
-
-Important rule:
-    key= expects a FUNCTION, not a result.
-
-    • count.get      → gives max() a TOOL to use later  ✅
-    • count.get()    → runs the tool right now (wrong)   ❌
-
-TLDR:
-    key=   → "Sort or pick based on this function's result"
-
-Why no parentheses?
-    We want max() to CALL the function for us internally
-    on each item it checks. 
-    We hand over the tool — max() decides when to use it.
-"""
-
-# --------------------------
-# Basic Example (Strings)
-# --------------------------
-words = ["hi", "banana", "yo"]
-
-# key=len  → "Use length to decide which is biggest"
-longest = max(words, key=len)
-
-print(longest)   # Output: "banana"
-
-# Behind the scenes, max() does this:
-#   len("hi")      → 2
-#   len("banana")  → 6
-#   len("yo")      → 2
-#   6 is biggest   → returns "banana"  (the original item, NOT 6)
-
-
-# ------------------------------------
-# Example Inside a Function (LeetCode)
-# Pick the key with the highest value
-# ------------------------------------
-def majorityElement(nums):
-    count = {}
-
-    for num in nums:
-        count[num] = count.get(num, 0) + 1
-
-    # key=count.get → "Compare keys by their values"
-    return max(count, key=count.get)
-
-nums = [1, 3, 3]
-print(majorityElement(nums))  # Output: 3
-
-# Behind the scenes:
-#   1. After the loop, count = {1: 1, 3: 2}
-#   2. max() loops through the keys: 1, 3
-#   3. For each one, it calls count.get() to decide how to compare:
-#        count.get(1)  → 1
-#        count.get(3)  → 2
-#   4. Python internally holds those results: [1, 2]
-#   5. Picks the biggest: 2
-#   6. Returns the original key that produced it: 3
-
-
-
-
-# ============================================================
-# Mini Guide: Mutation in Python
-# ============================================================
-"""
-Mutation = changing an object directly after it's created (in place).
-
-Key idea:
-- Some methods CHANGE the original object → they usually return None
-- Some functions CREATE A NEW object → they return the new one
-
-Common trap: assigning the result of a mutating method → you get None!
-"""
-
-# How to TEST if a method mutates an object
-# Simple 3-step trick every beginner can use:
-
-original = [4, 2, 7, 1]          # make a list
-print("Before:", original)       # remember what it looks like
-
-result = original.sort()         # try the method
-
-print("After: ", original)       # did the list change?
-print("Result:", result)         # what did the method return?
-
-# Output pattern tells you everything:
-# Before: [4, 2, 7, 1]
-# After:  [1, 2, 4, 7]          ← changed → mutated!
-# Result: None                  ← returned None → mutates
-
-
-# Quick reference: Common mutating vs non-mutating methods
-
-# Mutates (changes original, usually returns None)
-nums = [3, 1, 4]
-nums.sort()          # mutates
-nums.append(5)       # mutates
-nums.pop()           # mutates
-nums.reverse()       # mutates
-d = {"a": 1}
-d.update({"b": 2})   # mutates
-my_set = {1, 2}
-my_set.add(3)        # mutates
-
-# Does NOT mutate (returns new object, original stays same)
-nums = [3, 1, 4]
-sorted_list = sorted(nums)   # new list
-reversed_list = list(reversed(nums))  # new list
-upper_string = "hello".upper()  # new string
-new_dict = dict(d)        # new dict
-
-print(nums)          # still [3, 1, 4]
-print(sorted_list)      # [1, 3, 4]
-
-
-# Golden rule to remember
-"""
-If you see:
-x = my_list.sort()   → almost always wrong! x becomes None
-
-Do this instead:
-my_list.sort()       # just call it
-# or
-x = sorted(my_list)  # get new sorted version
-"""
-
-# Test it yourself pattern (copy-paste this template)
-"""
-original = [your object here]
-print("Before:", original)
-
-result = original.your_method()   # or function(original)
-
-print("After: ", original)
-print("Result:", result)
 """
 
 
-# ––––––––––––––––––––––––––––––––––––––––––––––
-"""
-📘 Tutorial: List Comprehension
-
-List comprehension = create a new list by doing something to each item — all in one line.
-
-Syntax:
-    [expression for item in iterable]
-    [expression for item in iterable if condition]
-         ↑              ↑                   ↑
-    what to keep     the loop         optional filter
-
-Memory trick — read it left to right:
-    "Give me [this] for each [item] in [collection]"
-    [n * n   for n   in nums]
-      result   var    source
-"""
-
-# Example 1: Transform — square each number
-nums = [1, 2, 3, 4]
-squares = [n * n for n in nums]
-print(squares)  # [1, 4, 9, 16]
-
-# Example 2: Filter — keep only evens
-nums = [1, 2, 3, 4, 5, 6]
-evens = [n for n in nums if n % 2 == 0]
-print(evens)  # [2, 4, 6]
-
-# Example 3: Transform + Filter — square only evens
-nums = [1, 2, 3, 4, 5, 6]
-even_squares = [n * n for n in nums if n % 2 == 0]
-print(even_squares)  # [4, 16, 36]
-
-# Example 4: Strings — uppercase each word
-words = ["hello", "world"]
-upper = [w.upper() for w in words]
-print(upper)  # ['HELLO', 'WORLD']
-
-# Example 5: Extract part of each item
-pairs = [(1, 'a'), (2, 'b'), (3, 'c')]
-first_items = [p[0] for p in pairs]
-print(first_items)  # [1, 2, 3]
-
-"""
-vs. regular loop (same result, more lines):
-    squares = []
-    for n in nums:
-        squares.append(n * n)
-
-List comprehension does all of that in ONE line.
-"""
 
 
 # ––––––––––––––––––––––––––––––––––––––––––––––
@@ -791,52 +898,6 @@ print(check_membership([3, 7, 9], [7, 2, 9]))
 
 
  
-# ------------------------------------------------------------
-"""
-📘 Tutorial: How Python Reads Loops + if Statements
-
-- Python reads code TOP → BOTTOM within one loop iteration.
-
-- An if statement is NOT a loop.
-  It only checks the condition ONCE, then continues downward.
-
-- Python does NOT jump back to the if statement.
-  It only restarts after reaching the END of the loop body.
-
-- Important:
-    • Code OUTSIDE the if block always runs.
-    • Code INSIDE the if block only runs if the condition is True.
-"""
-
-# Example:
-i = 0
-
-while i < 3:
-
-    if i == 1:
-        print("MATCH")
-
-    print("Always runs")
-
-    i += 1
-
-# Output:
-# Always runs
-# MATCH
-# Always runs
-# Always runs
-
-
-"""
-Easy Mental Model:
-    • One loop iteration = reading a page top-to-bottom.
-    • Python keeps moving downward until the loop body ends.
-    • THEN the next iteration begins.
-"""
-
-
-# ------------------------------------------------------------
-
 
 
 

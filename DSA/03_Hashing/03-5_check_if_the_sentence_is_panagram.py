@@ -9,7 +9,7 @@ Example:
     Output: True
     Explanation: sentence contains at least one of every letter of the English alphabet.
 
-Solution: https://leetcode.com/problems/check-if-the-sentence-is-pangram/editorial/
+Solution: https://leetcode.com/problems/check-if-the-sentence-is-pangram/description/
 """
 
 def checkIfPangram(sentence):

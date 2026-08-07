@@ -110,7 +110,7 @@ separator.join(iterable)  # Returns string from 'iterable' elements
 
 # Basic Example 1 (Space Separator):
 chars = ["a", "b"]
-print(" ".join(words))  # Output: "a b"
+print(" ".join(chars))  # Output: "a b"
 
 # Basic Example 2 (No Separator):
 chars = ["a", "b"]
@@ -122,11 +122,16 @@ print(",".join(chars))  # Output: "a,b,c"
 
 # Basic Example 4 (Arrow Separator):
 nums = ["1", "2", "3", "4"]
-print(" -> ".join(words))  # 1 -> 2 -> 3 -> 4
+print(" -> ".join(nums))  # 1 -> 2 -> 3 -> 4
 
 # DSA Example (List to String):
 chars = ["a", "b"]
-print("".join(words))  # Output: "ab"
+print("".join(chars))  # Output: "ab"
+
+# DSA Example (List to String):
+chars = ["h", "e", "l", "l", "o"]
+word = "".join(chars)
+print(word)  # Output: hello
 
 
 # STRING METHOD: 
