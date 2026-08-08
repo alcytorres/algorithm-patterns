@@ -32,6 +32,25 @@ print(longest_subarray_sum(nums, k))
 # Output: 4  →  Subarray [1, 1, 2, 2] (length 4, sum 6) is the longest subarray with sum <= 8.
 
 
+# ––––––––––––––––––––––––––––––––––––––––––––––––
+# Breakdown 
+def longest_subarray_sum(nums, k):
+    left = 0          # Left bound of the window
+    curr = 0          # Tracks sum of current window
+    ans = 0           # Tracks length of longest valid subarray
+    
+    for right in range(len(nums)):  # Iterate right pointer over array
+        curr += nums[right]         # Add element to window sum
+        
+        while curr > k:            # Shrink window while sum exceeds k
+            curr -= nums[left]     # Remove leftmost element from sum
+            left += 1              # Move left pointer forward
+            
+        ans = max(ans, right - left + 1)  # Update max window size
+    
+    return ans   # Return length of longest subarray
+
+
 """
 Time: O(N)
   - Let N = length of nums.
@@ -137,7 +156,6 @@ Q: Why use for right in range(len(nums)) and NOT
 ---   
 Q: Why is left += 1 always executed when shrinking the window (aka why is it inside the while loop)?
 
-
     • The only way to reduce the window sum is by removing elements from the left.  
 
     • So whenever curr > k, left must move forward—no exceptions.  
@@ -147,23 +165,7 @@ Q: Why is left += 1 always executed when shrinking the window (aka why is it ins
 """
 
 
-# ––––––––––––––––––––––––––––––––––––––––––––––––
-# Breakdown 
-def longest_subarray_sum(nums, k):
-    left = 0          # Left bound of the window
-    curr = 0          # Tracks sum of current window
-    ans = 0           # Tracks length of longest valid subarray
-    
-    for right in range(len(nums)):  # Iterate right pointer over array
-        curr += nums[right]         # Add element to window sum
-        
-        while curr > k:            # Shrink window while sum exceeds k
-            curr -= nums[left]     # Remove leftmost element from sum
-            left += 1              # Move left pointer forward
-            
-        ans = max(ans, right - left + 1)  # Update max window size
-    
-    return ans   # Return length of longest subarray
+
 
 
 
@@ -250,6 +252,4 @@ r | nums[r] | curr | l | curr >= k | ans
 Final: 0
 
 """
-
-
 

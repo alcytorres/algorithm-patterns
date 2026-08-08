@@ -35,36 +35,46 @@ Run operators.py guide through Claude to make it better? maybe more examples
 
 
 
-# Find Pair with Target Sum in Sorted Array
+# Example 2: Longest Substring with At Most One "0"
 """
-Given a sorted array of unique integers and a target integer, return true if there exists a pair of numbers that sum to target, false otherwise. 
+Finds the longest substring with at most one "0" by flipping at most one "0" to "1". 
 
-This problem is similar to Two Sum. (In Two Sum, the input is not sorted).
+In other words "what is the longest substring that contains at most one "0"?
 
-Example
-    Input: nums = [1, 3, 4, 6, 8, 10, 12], target = 14
-    Output: True
-    Explanation: nums[2] + nums[5] = 4 + 10 = 14 matches the target.
+Example:
+    Input: s = "10101"
+    Output: 3
+    Explanation: "101" is the longest substring containing at most one "0".
 """
 
-# Solution: Two Pointers: Target Sum Pair Search
 
-def find_pair_sum(nums, target):
-    l = 0
-    r = len(nums) - 1
+from methods import it
 
-    while l < r:
-        if nums[l] + nums[r] < target:
+
+def longest_substring_one_zero(s):
+    l = curr = ans = 0
+
+    for r in range(len(s)):
+        if s[r] == "0":
+            curr += 1
+        
+        while curr > 1:
+            if s[l] == "0":
+                curr -= 1
             l += 1
-        elif nums[l] + nums[r] > target:
-            r -= 1
-        else:
-            return True
+        
+        ans = max(ans, r-l+1)
     
-    return False
+    return ans
+
+s = "10101"
+print(longest_substring_one_zero(s))
+# Output: 3  →  Substring "101" (length 3) is the longest with at most one "0".
+
+Double check the explanation for time complexity. It says how each character is visited a constant number of times. I need to ask about clarifying this because the right pointer scans through every character in the string, but the left pointer also scans through them. So when it says each character is visited a constant number of times, is it okay that each character is visited, could be visited more than once if the left pointer also visits it? Just help me clarify this wording to make it crystal clear, easy to understand, consistent with the other timing complexities that have been provided. That have been provided in this project of Leaco problems.
 
 
-nums = [1, 3, 4, 6, 8, 10, 12]
-target = 14
-print(find_pair_sum(nums, target))  
-# Output: True -> nums[2] + nums[5] = 4 + 10 = 14 matches the target.
+is this another way to say it        
+• l only moves forward, never backward — each character is added and removed at most once.
+
+
