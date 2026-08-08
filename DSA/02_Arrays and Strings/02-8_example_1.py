@@ -54,9 +54,10 @@ def longest_subarray_sum(nums, k):
 """
 Time: O(N)
   - Let N = length of nums.
-  - The right pointer expands the window once per element → O(N).
-  - The left pointer only moves forward when sum exceeds k, and never moves backward → total O(N) steps.
-  - Each element is added and removed from the running sum at most once.
+  - Right pointer scans the array once → O(N).
+  - Left pointer only moves forward when sum exceeds k, and never moves backward → O(N).
+  - Each element is added to the running sum (by right) and removed at most once (by left).
+  - Combined: O(N + N).
   - Overall: O(N).
 
 Space: O(1)
@@ -68,7 +69,9 @@ Space: O(1)
 Interview Answer: Worst Case
 
 Time: O(N)
-  - Sliding window processes each element at most twice (once added, once removed).
+  - Sliding window scans the array once with the r pointer.
+  - Left pointer also moves forward at most N times total.
+  - Same element can be touched by both pointers — that's still O(1) work per element, so O(N) overall.
 
 Space: O(1)
   - Constant extra space for variables.

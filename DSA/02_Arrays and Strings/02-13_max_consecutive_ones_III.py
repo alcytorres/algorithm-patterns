@@ -64,8 +64,8 @@ def longestOnes(nums, k):
 """
 Time: O(N)
   - Let N = number of elements in nums.
-  - The right pointer scans through the array once → O(N).
-  - The left pointer also only moves forward, never backward → O(N) total across the whole algorithm.
+  - Right pointer scans the array once → O(N).
+  - Left pointer only moves forward, never backward → O(N).
   - Each element is added to the window once and removed from the window at most once.
   - Combined: O(N + N).
   - Overall: O(N).
@@ -80,8 +80,9 @@ Space: O(1)
 Interview Answer: Worst Case
 
 Time: O(N)
-  - Sliding window scans the array once with the right pointer.
-  - The left pointer also moves forward at most N times total.
+  - Sliding window scans the array once with the r pointer.
+  - Left pointer also moves forward at most N times total.
+  - Same element can be touched by both pointers — that's still O(1) work per element, so O(N) overall.
 
 Space: O(1)
   - Only pointer and counter variables are used.

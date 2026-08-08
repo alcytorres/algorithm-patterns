@@ -59,7 +59,7 @@ def longest_substring_one_zero(s):
 Time: O(N)
   - Let N = length of the string s.
   - Right pointer r scans the string once → O(N).
-  - Left pointer l only moves forward, never backward → O(N) total across the whole algorithm.
+  - Left pointer l only moves forward, never backward → O(N).
   - Each character is added to the window once (by r) and removed at most once (by l).
   - Combined: O(N + N).
   - Overall: O(N).
@@ -74,7 +74,8 @@ Space: O(1)
 Interview Answer: Worst Case
 
 Time: O(N)
-  - Sliding window: r scans once; l also moves forward at most N times total.
+  - Sliding window scans the string once with the r pointer.
+  - Left pointer also moves forward at most N times total.
   - Same character can be touched by both pointers — that's still O(1) work per character, so O(N) overall.
 
 Space: O(1)

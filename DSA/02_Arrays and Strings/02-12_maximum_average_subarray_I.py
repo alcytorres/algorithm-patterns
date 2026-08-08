@@ -68,13 +68,14 @@ def findMaxAverage(nums, k):
 Time: O(N)
   - Let N = length of nums.
   - Step 1: Compute the sum of the first k elements → O(k).
-  - Step 2: Slide the window across the array → O(N - k).
-      • Add the next element and remove the element leaving the window → O(1) per step.
-  - Each element is processed at most twice (once added, once subtracted).
+  - Step 2: Slide the window across the rest of the array → O(N - k).
+    • Each step: add the new right, subtract the leaving left → O(1).
+  - Each element is added once and subtracted at most once.
+  - Combined: O(k + (N - k)) = O(N).
   - Overall: O(N).
 
 Space: O(1)
-  - Only integer and float variables are used (curr, ans, loop counters).
+  - Only curr, ans, and loop counters.
   - No additional data structures are created.
   - Overall: O(1).
 
@@ -82,11 +83,11 @@ Space: O(1)
 Interview Answer: Worst Case
 
 Time: O(N)
-  - Sliding window computes all subarray sums in one pass.
+  - Fixed-size sliding window, single pass through array.
+  - Each slide updates the sum in O(1) — no re-summing k elements.
 
 Space: O(1)
-  - Constant space for running total and average calculation.
-
+  - Constant space for running sum and best value.
 
 
 ---

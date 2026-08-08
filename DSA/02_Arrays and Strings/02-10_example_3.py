@@ -79,10 +79,13 @@ def num_subarrays_product_less_than_k(nums, k):
 """
 Time: O(N)
   - Let N = length of nums.
-  - Right pointer r moves through the array once → N steps.
-  - Left pointer l only moves forward (never backward).
-  - Each element is multiplied in once and divided out at most once → at most 2N window updates total.
+  - Right pointer r scans the array once → O(N).
+  - Left pointer l only moves forward, never backward → O(N).
+  
+  - Each element is multiplied in once (by r) and divided out at most once (by l)
   - Each step inside the loop is O(1) (multiply, divide, add to ans).
+
+  - Combined: O(N + N).
   - Overall: O(N).
 
 
@@ -95,7 +98,9 @@ Space: O(1)
 Interview Answer: Worst Case
 
 Time: O(N)
-  - Sliding window — each index enters and leaves the window at most once.
+  - Sliding window scans the array once with the r pointer.
+  - Left pointer also moves forward at most N times total.
+  - Same element can be touched by both pointers — that's still O(1) work per element, so O(N) overall.
 
 Space: O(1)
   - Constant extra variables only.

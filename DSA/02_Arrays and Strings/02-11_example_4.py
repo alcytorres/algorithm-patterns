@@ -51,9 +51,10 @@ def find_best_subarray(nums, k):
 Time: O(N)
   - Let N = length of nums.
   - Step 1: Compute the initial sum of the first k elements → O(k).
-  - Step 2: Slide the window across the array → O(N - k).
-      • For each new element, add one and remove one → O(1) per step.
-  - Each element is processed a constant number of times.
+  - Step 2: Slide the window across the rest of the array → O(N - k).
+    • Each step: add the new right, subtract the leaving left → O(1).
+  - Each element is added once and subtracted at most once.
+  - Combined: O(k + (N - k)) = O(N).
   - Overall: O(N).
 
 Space: O(1)
@@ -66,6 +67,7 @@ Interview Answer: Worst Case
 
 Time: O(N)
   - Fixed-size sliding window, single pass through array.
+  - Each slide updates the sum in O(1) — no re-summing k elements.
 
 Space: O(1)
   - Constant space for running sum and best value.
