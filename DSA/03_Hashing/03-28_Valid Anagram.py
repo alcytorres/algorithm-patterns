@@ -68,10 +68,10 @@ def isAnagram(s, t):
     for c in t:               # Go through each char in t
         count[c] -= 1         # Use up one occurrence of this char
         
-        if count[c] < 0:     # If we used more than we had
-            return False     # t has extra char → not anagram
+        if count[c] < 0:      # If we used more than we had
+            return False      # t has extra char → not anagram
     
-    return True              # All counts zero → perfect anagram!
+    return True               # All counts zero → perfect anagram!
 
 
 
@@ -87,7 +87,7 @@ Time: O(N)
 Space: O(1)
   - count dictionary stores frequencies of lowercase English letters.
   - Maximum distinct keys = 26 → constant space (doesn't grow with N).
-  - A few loop variables use O(1).
+  - Loop variable c is just one character → O(1).
   - Overall: O(1) because of the "only a-z" constraint.
 
   If Unicode were allowed:
@@ -199,6 +199,16 @@ Quick Example Walkthrough:
 
 
 
+---
+Q: Why is time O(N) with 2 loops instead of O(N + M)? 
+
+A: Because in this problem, both strings are the same length whenever we actually run the loops!
+
+  • If lengths differ → we return False immediately. No loops happen!
+
+  • So the only time we do both loops is when N = M → N steps + N steps = 2N steps → O(2N) = O(N).
+
+
 
 ---
 Q: Why do we say this solution uses O(1) space 
@@ -230,16 +240,6 @@ Answer for beginners:
 Most interview / LeetCode problems like this limit to lowercase letters → so we happily say O(1) space. 😄
 
 
-
-
----
-Q: Why is time O(N) with 2 loops instead of O(N + M)? 
-
-A: Because in this problem, both strings are the same length whenever we actually run the loops!
-
-  • If lengths differ → we return False immediately. No loops happen!
-
-  • So the only time we do both loops is when N = M → N steps + N steps = 2N steps → O(2N) = O(N).
 
 
 
