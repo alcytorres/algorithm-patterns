@@ -98,10 +98,12 @@ Space: O(1)
 Interview Answer: Worst Case
 
 Time: O(N)
-  - Build counts from s, subtract using t.
+  - One pass over s to build counts, one pass over t to subtract.
+  - Each character is a O(1) hash-map update, so 2N steps → O(N).
+  - (Lengths must match to reach both loops; otherwise we return early.)
 
 Space: O(1) for lowercase English letters
-  - Hash map holds at most 26 keys.
+  - Hash map has at most 26 keys (a-z) — fixed, does not grow with N.
 
 
 
@@ -195,7 +197,68 @@ Quick Example Walkthrough:
 
     Final Output: True
 
-    
+
+---
+🧠 First Time? Thoughts → Code
+
+Read the problem (10 sec)
+    • Return true if t is an anagram of s — same letters, same counts, any order.
+
+    • Constraint hint: only lowercase English letters (a-z) → at most 26 distinct chars.
+
+Start naive (totally fine)
+    • Sort both strings and compare: sorted(s) == sorted(t).
+
+    • O(N log N) — correct, but sorting is extra work if you only need counts.
+
+The one insight that unlocks the optimal code
+    • Anagrams are equal frequency maps — not about order.
+
+    • Count letters in s, then "spend" those counts while scanning t.
+
+    • If any count goes negative, t used a letter s did not have enough of → False.
+
+Why a hash map? (only if needed)
+    • You need char → how many times — a dict (or 26-slot array) is the natural tool.
+
+    • One map is enough: +1 for s, -1 for t. No need to build two maps and compare (also fine, just more space/bookkeeping).
+
+    • Length check first: different lengths can never be anagrams.
+
+Thought → line of code
+    • if len(s) != len(t): return False
+        → Cheap reject before any counting.
+
+    • count = defaultdict(int)
+        → Char → remaining expected count; missing keys start at 0.
+
+    • for c in s: count[c] += 1
+        → Stock the shelves from s.
+
+    • for c in t: count[c] -= 1
+        → Remove one of each letter t uses.
+
+    • if count[c] < 0: return False
+        → t needed a letter we did not have → not an anagram.
+
+    • return True
+        → Same length + never went negative → counts all landed at zero.
+
+Memory hook (one sentence)
+    • Count s, subtract t, reject on any negative.
+
+Would you arrive at this cold?
+    • Immediately: sort both and compare — totally natural.
+
+    • After "anagram = same counts": frequency map clicks fast.
+
+    • Early length check + negative check while subtracting: easy to miss until you walk a failing case like "rat"/"car".
+
+    • Real insight = frequency equality; defaultdict + two loops = the clean O(N) write-up.
+
+
+
+
 
 
 
