@@ -9,6 +9,10 @@ Example:
     Output: True
     Explanation: sentence contains at least one of every letter of the English alphabet.
 
+Constraints:
+    1 <= sentence.length <= 1000
+    sentence consists of lowercase English letters.
+
 Solution: https://leetcode.com/problems/check-if-the-sentence-is-pangram/description/
 """
 

@@ -299,12 +299,19 @@ Full Example Walkthrough:
 ---
 Q: Why is the space complexity O(N)?
 
-A: Because we store the cleaned version of the input in extra memory.
+A: Because chars stores the cleaned input — and that list can grow with N.
 
-  • `chars` holds up to N valid characters (worst case: every char is kept).
-  • Pointer variables (`l`, `r`) are just O(1).
+  • Worst case: every character is kept → chars has N entries.
+  • Bigger input → bigger list → O(N) space.
+  • Pointers l and r are just two numbers → O(1).
 
-  • Extra memory grows with input size → O(N) space.
+  Contrast (why some problems are O(1) space):
+  • Pangram (1832) / Valid Anagram (242): set or count map of letters a-z → at most 26 keys.
+  • 26 is fixed — it does NOT grow when N gets bigger → O(1).
+
+  Rule of thumb:
+  • Extra memory grows with N → O(N).
+  • Extra memory capped by a fixed alphabet (26) → O(1).
 
 
 
