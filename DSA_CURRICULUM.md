@@ -493,3 +493,4 @@ Promoted from add-back to core: "sort by start, then merge/compare overlaps" is 
 ---
 
 *Curriculum calendar built for start **Fri Aug 7, 2026**; DSA new-learning runs to ~Dec 24 (Trees + Grid + Intervals). If a weekday is lost (travel, interview, holiday), shift this file’s dates forward as a block — don’t compress. Reminder: this file maximizes your technical-screen pass rate; it does not by itself get you the job — interview volume in `JOB_SEARCH.md` is the binding constraint.*
+
