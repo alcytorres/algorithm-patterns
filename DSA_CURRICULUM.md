@@ -156,6 +156,7 @@ Two jobs this week: seed the review queue with problems you've seen, and get thr
 
 ### 1.1 Converging (opposite ends) — Core
 **When: Mon Aug 17 – Tue Aug 25** (7 weekdays)
+**Theory:** [`Theory/1.1_Two_Pointers_Converging.md`](Theory/1.1_Two_Pointers_Converging.md) — read before Day 1.
 
 | Day | Solve |
 |---|---|
