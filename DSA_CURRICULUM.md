@@ -54,7 +54,7 @@ These are non-negotiable for *your* retention profile (looked-up solutions that 
 8. **State the complexity out loud, every problem.** Before you look at any solution, say the time and space Big-O of your approach and *why*. Interviewers ask "what's the complexity?" on essentially every screen — a correct solution you can't analyze still fails. If you can't state it, you haven't finished the problem.
 9. **Optional is delayed, not deleted.** If you fall behind, **skip `Optional` items first** and keep moving through Core. Finish every Core block, then come back and clear the Optional backlog. Core order is never broken to fit the calendar — if dates overflow, the block shifts forward. You are completing this whole curriculum; the only question is when.
 
-**Why this is doable:** ~5 new weekdays/week × ~21 weeks (Aug 12 → Jan 6) ≈ 100 weekdays, minus 4 holiday rest days ≈ 96 usable. The 114-problem Core list needs ~80 study days at the 2E/1M rate (many Easies pair up), plus 13 lock-in days ≈ 93 — which fits with a little slack. The old “Phase 1 = Two Pointers + Hashing” packing (~43 problems / 20 days) was not retention-safe — redistributed below.
+**Why this is doable:** ~5 new weekdays/week × ~21 weeks (Aug 12 → Jan 7) ≈ 100 weekdays, minus 5 holiday rest days ≈ 95 usable. The 114-problem Core list needs ~80 study days at the 2E/1M rate (many Easies pair up), plus 13 lock-in days ≈ 93 — which fits with a little slack. The old “Phase 1 = Two Pointers + Hashing” packing (~43 problems / 20 days) was not retention-safe — redistributed below.
 
 ---
 
@@ -97,18 +97,20 @@ These are non-negotiable for *your* retention profile (looked-up solutions that 
 | **Mon Dec 21** | Lock-in 8 | 0 | |
 | **Tue Dec 22 – Tue Dec 29** | 9 Grid BFS/DFS — **core** | 5 | Number of Islands family — very common |
 | **Wed Dec 30** | Lock-in 9 | 0 | |
-| **Thu Dec 31 – Tue Jan 5** | 10 Intervals | 3 | Merge Intervals family |
-| **Wed Jan 6** | Lock-in 10 | 0 | **DSA new-learning complete** |
-| **Thu Jan 7 →** | Maintenance loop | — | Majority-mixed timed + reviews. Interviewing continues. Add-ons only if hunting cold. |
+| **Thu Dec 31** | **New Year's Eve — rest** | 0 | No new problems |
+| **Fri Jan 1** | **New Year — rest** | 0 | No new problems |
+| **Mon Jan 4 – Wed Jan 6** | 10 Intervals | 3 | Merge Intervals family |
+| **Thu Jan 7** | Lock-in 10 | 0 | **DSA new-learning complete** |
+| **Fri Jan 8 →** | Maintenance loop | — | Majority-mixed timed + reviews. Interviewing continues. Add-ons only if hunting cold. |
 
-**Holiday rest days (no new problems):** Thu Nov 26 (Thanksgiving) · Thu Dec 24 – Fri Dec 25 (Christmas) · Fri Jan 1 (New Year). These are built into the dates above, not slip.
+**Holiday rest days (no new problems):** Thu Nov 26 (Thanksgiving) · Thu Dec 24 – Fri Dec 25 (Christmas) · Thu Dec 31 – Fri Jan 1 (New Year's Eve + New Year). These are built into the dates above, not slip.
 
-**Note:** DSA new-learning runs to **Wed Jan 6, 2027**, past the Dec 6 job-search checkpoint. That's intentional — trees + grid + intervals are too common to cut, and **interviewing does not stop on Dec 6.** Applications, networking, and mocks in `JOB_SEARCH.md` continue straight through; the DSA tail just overlaps the early maintenance loop.
+**Note:** DSA new-learning runs to **Thu Jan 7, 2027**, past the Dec 6 job-search checkpoint. That's intentional — trees + grid + intervals are too common to cut, and **interviewing does not stop on Dec 6.** Applications, networking, and mocks in `JOB_SEARCH.md` continue straight through; the DSA tail just overlaps the early maintenance loop.
 
-**Why Jan 6 and not Dec 24:** the Aug 12 audit added 10 problems (53 Kadane's, four Trees, 346, 463, and the three Setup Easies), which is about 7 extra study days. Add the three holiday rest blocks and the tail lands in the first week of January. That is the correct trade — per pacing rule 9, blocks shift forward and Core is never dropped. The only content past Dec 24 is **9 Grid (finishing)** and **10 Intervals**, and by then you're deep in the maintenance loop anyway.
+**Why Jan 7 and not Dec 24:** the Aug 12 audit added 10 problems (53 Kadane's, four Trees, 346, 463, and the three Setup Easies), which is about 7 extra study days. Add the holiday rest blocks (including New Year's Eve) and the tail lands in the first week of January. That is the correct trade — per pacing rule 9, blocks shift forward and Core is never dropped. The only content past Dec 24 is **9 Grid (finishing)** and **10 Intervals**, and by then you're deep in the maintenance loop anyway.
 
 ```
-Aug 12        Aug 17             Sep 14            Oct 12            Nov 9         Dec 6      Jan 6
+Aug 12        Aug 17             Sep 14            Oct 12            Nov 9         Dec 6      Jan 7
   │ Setup │······ Phase 1 ······│··· Phase 2 ·····│··· Phase 3 ·····│· Phase 4 ·│···· tail ····│→ loop
   │warm-up│ 1.1–1.4 Two Pointers│ 2 Hash + 1.5–1.7│ 3 Window + 4    │ 5→6.1→7   │ 8 → 9 → 10   │
   │13/14/66│                    │   string TP     │ + start 5       │           │ trees/grid/iv │
@@ -126,8 +128,8 @@ Aug 12        Aug 17             Sep 14            Oct 12            Nov 9      
 | Phase 2 | Sep 14 – Oct 11 | **2** Hashing → **1.5–1.7** string TP |
 | Phase 3 | Oct 12 – Nov 8 | **3** Sliding Window → **4** Prefix Sum (incl. 53) |
 | Phase 4 | Nov 9 – Dec 6 | **5** Stack → **6.1** Binary Search → **7** Linked List → start **8** Trees |
-| Phase 4 tail | Dec 7 – Jan 6 | **8** Trees → **9** Grid → **10** Intervals (core; overlaps loop) |
-| Loop | Jan 7 → | Reviews + mixed timed; add-ons only if hunting cold |
+| Phase 4 tail | Dec 7 – Jan 7 | **8** Trees → **9** Grid → **10** Intervals (core; overlaps loop) |
+| Loop | Jan 8 → | Reviews + mixed timed; add-ons only if hunting cold |
 
 ---
 
@@ -487,16 +489,16 @@ Promoted because trees appear too often at entry level to gamble on skipping. Th
 
 ## 10 Intervals — Core (light)
 
-**When: Thu Dec 31 – Tue Jan 5** · **Wed Jan 6 lock-in — last day of new learning**
+**When: Mon Jan 4 – Wed Jan 6** · **Thu Jan 7 lock-in — last day of new learning**
 Promoted from add-back to core: "sort by start, then merge/compare overlaps" is a high-frequency entry-level pattern that stands alone and is cheap to learn.
 
 | Day | Solve |
 |---|---|
-| Thu Dec 31 | 252 Meeting Rooms (E, *Premium — you have it*) |
-| Fri Jan 1 | **New Year — rest.** No new problems. |
-| Mon Jan 4 | 56 Merge Intervals (M) |
-| Tue Jan 5 | 57 Insert Interval (M) |
-| Wed Jan 6 | Lock-in: re-solve 56 · **curriculum complete** |
+| Thu Dec 31 – Fri Jan 1 | **New Year's Eve + New Year — rest.** No new problems. |
+| Mon Jan 4 | 252 Meeting Rooms (E, *Premium — you have it*) |
+| Tue Jan 5 | 56 Merge Intervals (M) |
+| Wed Jan 6 | 57 Insert Interval (M) |
+| Thu Jan 7 | Lock-in: re-solve 56 · **curriculum complete** |
 
 **Unlocks:** the sort-then-sweep pattern — 56 is the canonical version; recognizing "these are intervals" is most of the battle.
 **Exception:** interval Easies are thin, so this leans Medium (1E/2M) — kept small on purpose.
@@ -532,7 +534,7 @@ Promoted from add-back to core: "sort by start, then merge/compare overlaps" is 
 | **Moved** | 1 → 2.1 · 876 → 1.2 · 2461 → 3.1 |
 | **Easies added** | 125, 680, 2824, 234, 88, 1089, 917, 1652, 1876, 121, 485, 674 (+142 M) |
 | **Gaps closed** | 8 Trees promoted to **core**; new 9 **Grid BFS/DFS** (200/695/733/994); new 10 **Intervals** (56/57); complexity-analysis rule (pacing 8); optional heap add-on |
-| **Timeline** | Day-level dates Aug 17 → **Jan 6**; lock-ins; Phase 1 no longer includes Hashing; DSA tail overlaps early loop |
+| **Timeline** | Day-level dates Aug 17 → **Jan 7**; lock-ins; Phase 1 no longer includes Hashing; DSA tail overlaps early loop |
 
 ### Second audit (Aug 12) — verified against Grind 75 / Blind 75
 
@@ -547,5 +549,5 @@ Promoted from add-back to core: "sort by start, then merge/compare overlaps" is 
 
 ---
 
-*Curriculum calendar built for start **Wed Aug 12, 2026**; DSA new-learning runs to **Wed Jan 6, 2027** (Trees → Grid → Intervals in the tail). If a weekday is lost (travel, interview, holiday), shift this file’s dates forward as a block — don’t compress, and don’t drop Core (pacing rule 9). Reminder: this file maximizes your technical-screen pass rate; it does not by itself get you the job — interview volume in `JOB_SEARCH.md` is the binding constraint.*
+*Curriculum calendar built for start **Wed Aug 12, 2026**; DSA new-learning runs to **Thu Jan 7, 2027** (Trees → Grid → Intervals in the tail). If a weekday is lost (travel, interview, holiday), shift this file’s dates forward as a block — don’t compress, and don’t drop Core (pacing rule 9). Reminder: this file maximizes your technical-screen pass rate; it does not by itself get you the job — interview volume in `JOB_SEARCH.md` is the binding constraint.*
 

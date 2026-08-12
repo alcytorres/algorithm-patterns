@@ -8,7 +8,7 @@ From-zero plan starting **Wednesday, August 12, 2026** · Python · US-wide (rem
 | | |
 |---|---|
 | Core job-search timeline | ~17 weeks (Aug 12 – Dec 6), then ongoing loop |
-| DSA learning tail | Runs to **Jan 6, 2027** (Trees → Grid → Intervals), overlaps early loop |
+| DSA learning tail | Runs to **Jan 7, 2027** (Trees → Grid → Intervals), overlaps early loop |
 | Weekday load | ~5 hrs structured |
 | Applications | ~55/week (tiered) |
 | LeetCode | **114 Core** problems (+8 Optional), each re-solved 2–3× |
@@ -43,7 +43,7 @@ Depth-first pattern blocks are right for learning. Pure blocking hides recogniti
 ```
 Aug 12 ── Setup ── Aug 16 ── Phase1 ── Sep 13 ── Phase2 ── Oct 11 ── Phase3 ── Nov 8 ── Phase4 ── Dec 6 ── loop →
           5 days            4 wks             4 wks             4 wks             4 wks
-                                                                 (DSA tail: trees/grid/intervals → Jan 6, 2027)
+                                                                 (DSA tail: trees/grid/intervals → Jan 7, 2027)
 ```
 
 ### Setup Sprint — Wed Aug 12 – Sun Aug 16
@@ -84,7 +84,7 @@ Drop apps to ~5/day this week only. Fix the machine:
 **Checkpoint Sun Nov 8:** re-solve rate &lt;80% on review queue → Phase 4 drops remaining new topics and goes consolidation-only.
 
 ### Phase 4 — Mon Nov 9 – Sun Dec 6 · Stack → BS → Linked List → start Trees
-- DSA: **5** Stack → **6.1** Binary Search → **7** Linked List → start **8** Trees on Dec 7 (dates in curriculum). **8 Trees, 9 Grid BFS/DFS, and 10 Intervals are all core** and run through **Jan 6, 2027** — interviewing continues past Dec 6, so DSA does too.
+- DSA: **5** Stack → **6.1** Binary Search → **7** Linked List → start **8** Trees on Dec 7 (dates in curriculum). **8 Trees, 9 Grid BFS/DFS, and 10 Intervals are all core** and run through **Jan 7, 2027** — interviewing continues past Dec 6, so DSA does too.
 - Weekly mocks: Nov 14, Nov 21, Nov 28, Dec 5.
 - Project 2 shipped by Nov 29; resume updated.
 - Apps + networking stay at full volume.
@@ -92,7 +92,7 @@ Drop apps to ~5/day this week only. Fix the machine:
 **Checkpoint Sun Dec 6:** no traction → reposition (contract-to-hire, apprenticeships, QA automation / support eng as SWE on-ramps) — change positioning, not effort.
 
 ### Maintenance loop — Mon Dec 7 → ongoing
-Dec 7 – Jan 6 the loop overlaps the DSA tail (Trees → Grid → Intervals per curriculum). From **Thu Jan 7** onward it's pure loop:
+Dec 7 – Jan 7 the loop overlaps the DSA tail (Trees → Grid → Intervals per curriculum). From **Fri Jan 8** onward it's pure loop:
 1 mixed timed + 1 review daily · ~40 apps/week · networking quota · 1 mock/week · project iteration.  
 **Interview scheduled → prep overrides the calendar.**
 
@@ -135,7 +135,7 @@ Sliding Window was missing from your original list — it’s Core for arrays/st
 | 8 | Linked Lists (basic) | 7 | Nov 30–Dec 4 | Reverse / merge — low depth |
 | 9 | Trees BFS/DFS | 8 | Dec 7–Dec 21 | Highest-frequency non-array topic — 11 problems, go slow |
 | 10 | Grid BFS/DFS | 9 | Dec 22–Dec 30 | Number of Islands family — very common |
-| 11 | Intervals | 10 | Dec 31–Jan 6 | Merge Intervals — high-frequency, cheap |
+| 11 | Intervals | 10 | Jan 4–Jan 7 | Merge Intervals — high-frequency, cheap |
 
 **Defer:** DP, advanced graphs (Dijkstra/union-find/topo), backtracking, tries, matrix spiral/rotation. Wrong tier for your targets. *(Trees, grid BFS/DFS, and basic intervals were promoted to core — see `DSA_CURRICULUM.md`.)*
 
@@ -188,10 +188,10 @@ Sliding Window was missing from your original list — it’s Core for arrays/st
 | Oct 11 | Project 1 live, 2 mocks, story bank | Zero interviews → 30 min/day apps → networking |
 | Nov 8 | Patterns 1–4 done (TP, Hash, Window, Prefix incl. Kadane's) | Re-solve &lt;80% → Phase 4 slows new-topic pace, mixed reviews rise. **Never drop Core — shift dates instead.** |
 | Dec 6 | 4-month review · patterns 5–7 done, 8 Trees starting Dec 7 | No traction → reposition (contract-to-hire / apprenticeships / adjacent roles) |
-| Jan 6 | DSA new-learning complete (patterns 0–10, 114 Core) | From here, curriculum stops adding; only reviews + mixed. Clear any Optional backlog. |
+| Jan 7 | DSA new-learning complete (patterns 0–10, 114 Core) | From here, curriculum stops adding; only reviews + mixed. Clear any Optional backlog. |
 
 **Standing rule:** a scheduled interview overrides the calendar.
 
 ---
 
-*Built Jul 23, 2026 · updated Aug 12, 2026 (start → **Aug 12**; Setup compressed to 5 days so Phase 1 still opens Mon Aug 17; resume-review gate no longer blocks DSA; curriculum audited → 114 Core problems, Trees expanded, Kadane's added; **DSA tail → Jan 6, 2027** with holiday rest days built in). Assumes job search is primary (~5 hrs/day). Part-time: same block order, half durations — cut project time last, application time first.*
+*Built Jul 23, 2026 · updated Aug 12, 2026 (start → **Aug 12**; Setup compressed to 5 days so Phase 1 still opens Mon Aug 17; resume-review gate no longer blocks DSA; curriculum audited → 114 Core problems, Trees expanded, Kadane's added; **DSA tail → Jan 7, 2027** with holiday rest days built in). Assumes job search is primary (~5 hrs/day). Part-time: same block order, half durations — cut project time last, application time first.*
