@@ -1,9 +1,5 @@
-
-
-
 # ––––––––––––––––––––––––––––––––––––––––––––––––
 # Python Data Structures — Time & Space Cheat Sheet (LeetCode / Entry Level)
-
 
 """
 ================================================================================
@@ -138,8 +134,52 @@ Linked List | O(N)            | O(N) by position
 BST         | O(log N) avg    | —
 
 
+
 ================================================================================
-PART 2 — WHY (short explanations)
+PART 2 — CONSTRAINTS → WHAT COMPLEXITY IS ALLOWED
+================================================================================
+Read n from Constraints. Compare n² to ~10 million. That one check
+tells you whether nested loops are legal.
+
+The budget (Python / LeetCode):
+  ~10 million operations (10^7) is a safe personal budget.
+  Interviewers often say 10^8. Same idea, slightly looser.
+  If your algorithm does more than that at worst-case n, it will TLE.
+
+The 10-second check:
+  1. Look at the largest n.
+  2. Square it (or picture n × n).
+  3. Is that bigger than 10 million?
+       YES → nested loops (O(n²)) are out. Need O(n) or O(n log n).
+       NO  → O(n²) is allowed. Don't panic-optimize past it.
+
+────────────────────────────────────────────────────────────────────────────────
+n (max)        | n²                    | Allowed time          | Typical tell
+---------------|-----------------------|-----------------------|----------------
+≤ 20           | tiny                  | O(2^n) ok             | subsets / backtracking
+≤ 100          | 10,000                | O(n³) sometimes       | rare at entry-level
+≤ 3,000        | 9 million (9×10⁶)     | O(n²) allowed         | 3Sum-style (n=3000)
+≤ 10^4         | 100 million (10^8)    | O(n²) too slow        | need O(n log n) or O(n)
+≤ 10^5         | 10 billion (10¹⁰)     | O(n) or O(n log n)    | most array problems
+≤ 10^6         | huge                  | O(n)                  | n log n may TLE in Python
+≥ 10^9         | impossible            | O(log n) or O(1)      | binary search / math
+────────────────────────────────────────────────────────────────────────────────
+
+Worked in one line:
+  n = 10^5 → (10^5)² = 10 billion. Nested loops die. Sort + scan (O(n log n))
+             is ~100,000 × 17 ≈ 1.7 million — well under 10 million. Allowed.
+  n = 3000 → 3000² = 9 million. Nested two-pointer (O(n²)) is allowed.
+
+Space (even simpler):
+  O(N) extra  → almost always fine (a dict, a result list).
+  O(N²) extra → only if n is small (a few hundred).
+  O(1) extra  → only chase this when the problem asks, or when they
+                already sorted the input for you (that's a hint).
+
+
+
+================================================================================
+PART 3 — WHY (short explanations)
 ================================================================================
 
 LIST (dynamic array)
@@ -191,6 +231,7 @@ BINARY SEARCH TREE
 
 ---
 Interview tips:
+  • First: look at n (PART 2). If n² > 10 million, nested loops are out.
   • "in list" → O(N).  "in set" / "in dict" → O(1) avg.
   • Need fast lookup? → dict or set.
   • Need fast ends insert/delete? → deque.
