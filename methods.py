@@ -1046,6 +1046,7 @@ sorted(iterable, reverse=False)  # New sorted list
 # Ascending (default)
 nums = [3, 1, 2]
 print(sorted(nums))            # [1, 2, 3]
+print(nums)                    # [3, 1, 2]
 
 # Descending
 nums = [3, 1, 2]
