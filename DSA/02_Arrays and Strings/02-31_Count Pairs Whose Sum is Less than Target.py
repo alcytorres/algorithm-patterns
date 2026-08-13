@@ -1,9 +1,7 @@
 # 2824. Count Pairs Whose Sum is Less than Target 
-# Easy
 """
 Given a 0-indexed integer array nums of length n and an integer target, return the number of pairs (i, j) where 0 <= i < j < n and nums[i] + nums[j] < target.
  
-
 Example 1:
     Input: nums = [-1,1,2,3,1], target = 2
     Output: 3
@@ -89,10 +87,9 @@ Time: O(N²)
 
 Space: O(1)
   - Only a running count and loop indices are used.
-"""
 
 
-"""
+
 ---
 Most IMPORTANT thing to Understand:
 
@@ -297,6 +294,7 @@ Would you arrive at this cold?
     • After doing Two Sum, the trap is reaching for a hash map — skip it; "less than" is not a lookup.
 
     • `count = 0` / `return count` are bookkeeping; the real line is `for j in range(i + 1, n)`.
+    
 """
 
 
@@ -331,8 +329,8 @@ print(countPairs(nums, target))
 # ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 # Breakdown
 def countPairs(nums, target):
-    nums.sort()                    # Line up from small to big
-    count = 0                      # Tally of pairs that work
+    nums.sort()                     # Line up from small to big
+    count = 0                       # Tally of pairs that work
     left, right = 0, len(nums) - 1  # Start at both ends
 
     while left < right:            # Keep going until they meet
@@ -368,10 +366,10 @@ Time: O(N log N)
 
 Space: O(N)
   - A few pointers plus Python sort's extra buffers.
-"""
 
 
-"""
+
+
 ---
 Most IMPORTANT thing to Understand:
 
@@ -620,5 +618,6 @@ Would you arrive at this cold?
     • What you would NOT invent on instinct: `count += right - left`. That is the line you study. Without it you still have a correct but slower "move right down until it fits, then count += 1" loop.
 
     • `nums.sort()` / `left, right = ...` / `while left < right` are setup; the real insight is the batch add, then move left.
+
 """
 
