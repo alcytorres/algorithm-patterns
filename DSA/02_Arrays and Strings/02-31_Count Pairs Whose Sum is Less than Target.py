@@ -3,7 +3,7 @@
 Given a 0-indexed integer array nums of length n and an integer target, return the number of pairs (i, j) where 0 <= i < j < n and nums[i] + nums[j] < target.
  
 Example 1:
-    Input: nums = [-1,1,2,3,1], target = 2
+    Input: nums = [-1, 1, 2, 3, 1], target = 2
     Output: 3
     Explanation: There are 3 pairs of indices that satisfy the conditions in the statement:
     - (0, 1) since 0 < 1 and nums[0] + nums[1] = 0 < target
@@ -12,7 +12,7 @@ Example 1:
     Note that (0, 3) is not counted since nums[0] + nums[3] is not strictly less than the target.
 
 Example 2:
-    Input: nums = [-6,2,5,-2,-7,-1,3], target = -2
+    Input: nums = [-6, 2, 5, -2, -7, -1, 3], target = -2
     Output: 10
     Explanation: There are 10 pairs of indices that satisfy the conditions in the statement:
     - (0, 1) since 0 < 1 and nums[0] + nums[1] = -4 < target
@@ -294,7 +294,7 @@ Would you arrive at this cold?
     • After doing Two Sum, the trap is reaching for a hash map — skip it; "less than" is not a lookup.
 
     • `count = 0` / `return count` are bookkeeping; the real line is `for j in range(i + 1, n)`.
-    
+
 """
 
 
@@ -309,7 +309,8 @@ Would you arrive at this cold?
 def countPairs(nums, target):
     nums.sort()
     count = 0
-    left, right = 0, len(nums) - 1
+    left = 0
+    right = len(nums) - 1
 
     while left < right:
         if nums[left] + nums[right] < target:
@@ -331,7 +332,8 @@ print(countPairs(nums, target))
 def countPairs(nums, target):
     nums.sort()                     # Line up from small to big
     count = 0                       # Tally of pairs that work
-    left, right = 0, len(nums) - 1  # Start at both ends
+    left = 0                        # Start at the smallest number
+    right = len(nums) - 1           # Start at the largest number
 
     while left < right:            # Keep going until they meet
         if nums[left] + nums[right] < target:  # Smallest + largest still below target
@@ -586,8 +588,11 @@ Thought → line of code
         → Order the numbers so "too small / too big" tells you which pointer to move.
         → Legal because we only return a count.
 
-    • `left, right = 0, len(nums) - 1`
-        → Start at the smallest and the largest.
+    • `left = 0`
+        → Start at the smallest number (first index after sorting).
+
+    • `right = len(nums) - 1`
+        → Start at the largest number (last index).
 
     • `while left < right`
         → Two different spots. Stop when they meet.
@@ -617,7 +622,7 @@ Would you arrive at this cold?
 
     • What you would NOT invent on instinct: `count += right - left`. That is the line you study. Without it you still have a correct but slower "move right down until it fits, then count += 1" loop.
 
-    • `nums.sort()` / `left, right = ...` / `while left < right` are setup; the real insight is the batch add, then move left.
+    • `nums.sort()` / `left = 0` / `right = len(nums) - 1` / `while left < right` are setup; the real insight is the batch add, then move left.
 
 """
 
