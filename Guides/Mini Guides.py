@@ -37,6 +37,9 @@
 # Classes
 #   • @staticmethod in Python
 #
+# Functions
+#   • Helper functions (same job, different inputs)
+#
 # Also in this file
 #   • Algorithm Tools You Should Know
 #
@@ -815,8 +818,76 @@ With @staticmethod:
 
 
 # ––––––––––––––––––––––––––––––––––––––––––––––
+"""
+📘 Tutorial: Helper functions (same job, different inputs)
+
+  • A helper is a small function for a job you need to run more than once.
+
+  • Signal: you are about to paste the same steps twice — only the inputs change.
+
+  • Name that job in one sentence → that is the function name.
+    What changes → that is the arguments.
+
+  • Split the jobs:
+      Main function = the special / one-time rule for this problem.
+      Helper = the boring, reusable check with no special rule.
+
+  • If the job is "look at part of the same list/string," pass indexes (l, r)
+    instead of copying a slice. Same answer, less memory.
+
+  Memory hook: same job, different inputs → helper. Only need it once? keep it in main.
+"""
+
+# ---------------------------------------------------------
+# Basic Example
+# ---------------------------------------------------------
+# Same palindrome check, two different ranges — don't paste the loop twice.
+
+def is_palindrome(s, l, r):
+    while l < r:
+        if s[l] != s[r]:
+            return False
+        l += 1
+        r -= 1
+    return True
+
+s = "racecar"
+print(is_palindrome(s, 0, 6))  # Output: True  → whole word
+print(is_palindrome(s, 1, 5))  # Output: True  → "aceca"
+print(is_palindrome(s, 0, 3))  # Output: False → "race"
 
 
+# ---------------------------------------------------------
+# Example in a Function (Real DSA Use Case)
+# ---------------------------------------------------------
+# 680. Valid Palindrome II
+# Special rule lives in validPalindrome (one free delete).
+# Helper is the normal palindrome check on a range — called twice.
+
+class Solution:
+    def validPalindrome(self, s):
+        def is_palindrome(l, r):          # "is s[l..r] a palindrome?"
+            while l < r:
+                if s[l] != s[r]:
+                    return False
+                l += 1
+                r -= 1
+            return True
+
+        l = 0
+        r = len(s) - 1
+
+        while l < r:
+            if s[l] != s[r]:
+                # same job, two leftovers → helper with different (l, r)
+                return is_palindrome(l + 1, r) or is_palindrome(l, r - 1)
+            l += 1
+            r -= 1
+
+        return True
+
+print(Solution().validPalindrome("abca"))  # Output: True  → drop 'b' or 'c'
+print(Solution().validPalindrome("abc"))   # Output: False
 
 
 # ============================================================

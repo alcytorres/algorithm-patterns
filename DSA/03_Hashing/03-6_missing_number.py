@@ -14,13 +14,13 @@ Example 2:
 
 Constraints:
     n == nums.length
-    1 <= n <= 104
+    1 <= n <= 10⁴
     0 <= nums[i] <= n
     All the numbers of nums are unique. 
 
 Follow up: Could you implement a solution using only O(1) extra space complexity and O(n) runtime complexity?
 
-Solution: https://leetcode.com/problems/missing-number/editorial/
+Solution: https://leetcode.com/problems/missing-number/description/
 """
 
 def missingNumber(nums):

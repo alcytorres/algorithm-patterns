@@ -11,12 +11,10 @@ Example 2:
     Output: false
 
 Constraints:
-    1 <= s.length, t.length <= 5 * 104
+    1 <= s.length, t.length <= 5 * 10⁴
     s and t consist of lowercase English letters.
 
 An anagram is a word or phrase formed by rearranging the letters of another word or phrase, using all original letters exactly once. 
-    
-Solution: https://leetcode.com/problems/valid-anagram/description/?envType=problem-list-v2&envId=oizxjoit
 
 Follow up: What if the inputs contain Unicode characters? How would you adapt your solution to such a case?
     • My python solutions already support Unicode because sorting and dictionaries work with all Unicode characters.
@@ -24,6 +22,8 @@ Follow up: What if the inputs contain Unicode characters? How would you adapt yo
     • No code changes are required for the follow-up in Python.
 
     • The follow-up mainly targets Java/C++ solutions that use fixed 26-length arrays, which break for Unicode.    
+
+Solution: https://leetcode.com/problems/valid-anagram/description/?envType=problem-list-v2&envId=oizxjoit
 """
 
 # Solution 1: One Dictionary Frequency Check

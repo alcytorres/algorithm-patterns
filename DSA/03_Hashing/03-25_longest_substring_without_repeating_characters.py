@@ -2,8 +2,6 @@
 """
 Given a string s, find the length of the longest substring without duplicate characters.
 
-Solution: https://leetcode.com/problems/longest-substring-without-repeating-characters/description/
-
 Example 1:
     Input: s = "ababcb"
     Output: 3
@@ -15,8 +13,11 @@ Example 2:
     Explanation: The answer is "b", with the length of 1.
 
 Constraints:
-    0 <= s.length <= 5 * 104
+    0 <= s.length <= 10⁵
     s consists of English letters, digits, symbols and spaces.
+
+Solution: https://leetcode.com/problems/longest-substring-without-repeating-characters/description/
+
 """
 # Approach: Sliding Window with Set
 def lengthOfLongestSubstring(s):

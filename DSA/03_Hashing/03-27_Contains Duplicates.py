@@ -15,8 +15,8 @@ Example 2:
     All elements are distinct.
  
 Constraints:
-    1 <= nums.length <= 105
-    -109 <= nums[i] <= 109
+    1 <= nums.length <= 10⁵
+    -10⁹ <= nums[i] <= 10⁹
 
 Solution: https://leetcode.com/problems/contains-duplicate/submissions/2013652533/
 """

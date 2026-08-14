@@ -34,7 +34,7 @@
 #
 #
 # Constraints:
-#   1 < n < 10^9
+#   1 < n < 10⁹
 #
 #
 # Input Format for Custom Testing

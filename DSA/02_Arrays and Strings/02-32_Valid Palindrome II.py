@@ -352,7 +352,42 @@ Would you arrive at this cold?
     • After "n is 10⁵, I already know Valid Palindrome": two pointers from both ends.
 
     • What you would NOT invent on instinct: the `or` line that tries both skips. Greedy pick-one fails. That is the line you study.
+
+
+
+
+
+---
+Q: Why does a helper function help here?
+
+    • We need the same palindrome check twice: leftover after dropping the left letter, leftover after dropping the right letter.
+
+    • The helper's only job is: "does s from index l to index r read the same both ways?" No extra delete.
+
+    • The main function owns the special rule (one free delete). The helper is the normal palindrome check.
+
+    • Passing l and r (indexes) means we do not copy the string. That is why Solution 1 is O(1) space and Solution 2 is O(N).
+
+---
+Q: How would I arrive at a helper next time?
+
+    • This is not a palindrome trick. A helper is just: "I have a small job I need to run more than once."
+
+    • Write the obvious solution first. Then look for a chunk you are about to paste twice — same steps, only the inputs change (a different index, a different leftover, a different node).
+
+    • Name that chunk in one sentence. If you can say it ("is this range a palindrome?", "is this path valid?"), it is a helper. The sentence becomes the function name. What changes becomes the arguments.
+
+    • Split the jobs:
+        • Main function = the special / one-time rule for this problem.
+        • Helper = the boring, reusable check with no special rule.
+
+    • If the repeated job is "look at part of the same list/string," pass indexes (l, r) instead of copying a slice. Same answer, less memory.
+
+    • Signal to remember: same job, different inputs → helper. If you only need it once, keep it in the main function.
 """
+
+
+
 
 
 

@@ -142,8 +142,8 @@ Read n from Constraints. Compare n² to ~10 million. That one check
 tells you whether nested loops are legal.
 
 The budget (Python / LeetCode):
-  ~10 million operations (10^7) is a safe personal budget.
-  Interviewers often say 10^8. Same idea, slightly looser.
+  ~10 million operations (10⁷) is a safe personal budget.
+  Interviewers often say 10⁸. Same idea, slightly looser.
   If your algorithm does more than that at worst-case n, it will TLE.
 
 The 10-second check:
@@ -159,14 +159,14 @@ n (max)        | n²                    | Allowed time          | Typical tell
 ≤ 20           | tiny                  | O(2^n) ok             | subsets / backtracking
 ≤ 100          | 10,000                | O(n³) sometimes       | rare at entry-level
 ≤ 3,000        | 9 million (9×10⁶)     | O(n²) allowed         | 3Sum-style (n=3000)
-≤ 10^4         | 100 million (10^8)    | O(n²) too slow        | need O(n log n) or O(n)
-≤ 10^5         | 10 billion (10¹⁰)     | O(n) or O(n log n)    | most array problems
-≤ 10^6         | huge                  | O(n)                  | n log n may TLE in Python
-≥ 10^9         | impossible            | O(log n) or O(1)      | binary search / math
+≤ 10⁴          | 100 million (10⁸)     | O(n²) too slow        | need O(n log n) or O(n)
+≤ 10⁵          | 10 billion (10¹⁰)     | O(n) or O(n log n)    | most array problems
+≤ 10⁶          | huge                  | O(n)                  | n log n may TLE in Python
+≥ 10⁹          | impossible            | O(log n) or O(1)      | binary search / math
 ────────────────────────────────────────────────────────────────────────────────
 
 Worked in one line:
-  n = 10^5 → (10^5)² = 10 billion. Nested loops die. Sort + scan (O(n log n))
+  n = 10⁵ → (10⁵)² = 10 billion. Nested loops die. Sort + scan (O(n log n))
              is ~100,000 × 17 ≈ 1.7 million — well under 10 million. Allowed.
   n = 3000 → 3000² = 9 million. Nested two-pointer (O(n²)) is allowed.
 

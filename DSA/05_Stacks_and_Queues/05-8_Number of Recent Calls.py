@@ -9,8 +9,6 @@ Implement the RecentCounter class:
 
 It is guaranteed that every call to ping uses a strictly larger value of t than the previous call.
 
-Solution: https://leetcode.com/problems/number-of-recent-calls/description/
-
 Example 1:
     # Input: ["RecentCounter", "ping", "ping", "ping", "ping"]
     # [[], [1], [100], [3001], [3002]]
@@ -24,9 +22,15 @@ Example 1:
     # recentCounter.ping(3002);  // requests = [1, 100, 3001, 3002], range is [2,3002], return 3
 
 Constraints:
-    # 1 <= t <= 109
-    # Each test case will call ping with strictly increasing values of t.
-    # At most 104 calls will be made to ping.
+    1 <= t <= 10⁹
+    Each test case will call ping with strictly increasing values of t.
+    At most 10⁴ calls will be made to ping.
+
+
+Solution: https://leetcode.com/problems/number-of-recent-calls/description/
+
+
+
 
 
 ---

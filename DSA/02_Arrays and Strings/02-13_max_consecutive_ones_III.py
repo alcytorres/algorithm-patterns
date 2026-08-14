@@ -8,7 +8,7 @@ Example:
     Explanation: nums[1] was flipped from 0 to 1. We are left with [1, 1, 1, 1] 
 
 Constraints:
-    1 <= nums.length <= 105
+    1 <= nums.length <= 10⁵
     nums[i] is either 0 or 1.
     0 <= k <= nums.length
 

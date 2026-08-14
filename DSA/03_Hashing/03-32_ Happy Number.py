@@ -41,7 +41,7 @@ Example 2:
     Since we never reach 1, the number is not happy.
  
 Constraints:
-    1 <= n <= 231 - 1
+    1 <= n <= 2³¹ - 1
 
 Solution: https://leetcode.com/problems/happy-number/
 """

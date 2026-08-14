@@ -13,8 +13,8 @@ Example 2:
     Output: [0]
  
 Constraints:
-    1 <= nums.length <= 104
-    -231 <= nums[i] <= 231 - 1
+    1 <= nums.length <= 10⁴
+    -2³¹ <= nums[i] <= 2³¹ - 1
  
 Follow up: Could you minimize the total number of operations done?
     • The Two-Pointer solution already minimizes the number of operations.

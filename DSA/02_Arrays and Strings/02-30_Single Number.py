@@ -17,8 +17,8 @@ Example 3:
     Output: 1
 
 Constraints:
-    1 <= nums.length <= 3 * 104
-    -3 * 104 <= nums[i] <= 3 * 104
+    1 <= nums.length <= 3 * 10⁴
+    -3 * 10⁴ <= nums[i] <= 3 * 10⁴
     Each element in the array appears twice except for one element which appears only once.
 
 Solution: https://leetcode.com/problems/single-number/
@@ -44,12 +44,12 @@ print(singleNumber(nums))
 # ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 # Breakdown
 def singleNumber(nums):
-    ans = 0                   # Start at 0 — XOR with 0 leaves any number unchanged
+    ans = 0                # Start at 0 — XOR with 0 leaves any number unchanged
 
-    for num in nums:          # Go through each number in the list
-        ans ^= num            # XOR in this number — pairs cancel, single one stays
+    for num in nums:       # Go through each number in the list
+        ans ^= num         # XOR in this number — pairs cancel, single one stays
 
-    return ans                # Return the only number that never got canceled out
+    return ans             # Return the only number that never got canceled out
 
 """
 Time: O(N)

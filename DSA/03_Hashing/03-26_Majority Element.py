@@ -14,8 +14,8 @@ Example 2:
  
 Constraints:
     n == nums.length
-    1 <= n <= 5 * 104
-    -109 <= nums[i] <= 109
+    1 <= n <= 5 * 10⁴
+    -10⁹ <= nums[i] <= 10⁹
     The input is generated such that a majority element will exist in the array.
  
 Follow-up: Could you solve the problem in linear time and in O(1) space?

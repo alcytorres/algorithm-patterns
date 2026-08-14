@@ -17,10 +17,10 @@ Example 3:
     Output: true
 
 Constraints:
-    1 <= ransomNote.length, magazine.length <= 10^5
+    1 <= ransomNote.length, magazine.length <= 10⁵
     ransomNote and magazine consist of only lowercase English letters.
 
-Solution: https://leetcode.com/problems/ransom-note/solutions/540284/ransom-note/
+Solution: https://leetcode.com/problems/ransom-note/description/
 """
 
 

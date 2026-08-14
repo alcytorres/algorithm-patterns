@@ -9,8 +9,8 @@ Example:
     After sorting, it becomes [0, 1, 9, 16, 100]
 
 Constraints:
-    1 <= nums.length <= 104
-    -104 <= nums[i] <= 104
+    1 <= nums.length <= 10⁴
+    -10⁴ <= nums[i] <= 10⁴
     nums is sorted in non-decreasing order
 
 Solution: https://leetcode.com/problems/squares-of-a-sorted-array/description/

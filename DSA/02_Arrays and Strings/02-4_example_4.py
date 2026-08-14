@@ -10,7 +10,7 @@ Example 1:
 
 Constraints:
     0 <= s.length <= 100
-    0 <= t.length <= 104
+    0 <= t.length <= 10⁴
     s and t consist only of lowercase English letters.
 
 Solution: https://leetcode.com/problems/is-subsequence/
