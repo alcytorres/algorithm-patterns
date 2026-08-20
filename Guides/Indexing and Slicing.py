@@ -200,8 +200,20 @@ text = "Python"
 print(text[10:15])  # Output: "" (empty string)
 
 # Empty Slices
+# Start equals stop → nothing is included (stop is exclusive).
 text = "Python"
 print(text[3:3])  # Output: "" (start equals stop)
+
+# Same idea with omitted start. [:0] means start=0, stop=0.
+# You never include the stop index, so 0-to-0 is empty.
+# On a STRING this is "" (empty string), NOT [] (that's a list).
+s = "abca"
+print(s[:0])          # Output: "" (empty string)
+print(s[:0] + s[1:])  # Output: "bca"  (drop index 0, glue the rest)
+
+nums = [10, 20, 30]
+print(nums[:0])               # Output: [] (empty list)
+print(nums[:0] + nums[1:])    # Output: [20, 30]  (drop index 0)
 
 # Step of Zero
 # A step of 0 is invalid:
@@ -232,6 +244,7 @@ print("Pythonista"[::3])  # 4. Output: "Phia"
 # | Single item | [3]     | text[3]            | h      |
 # | Basic slice | [1:4]   | text[1:4]          | yth    |
 # | Omit start  | [:3]    | text[:3]           | Pyt    |
+# | Empty slice | [:0]    | s[:0]              | ""     |
 # | Omit stop   | [2:]    | text[2:]           | thon   |
 # | With step   | [::2]   | text[::2]          | Pto    |
 # | Reverse     | [::-1]  | text[::-1]         | nohtyP |

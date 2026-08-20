@@ -23,6 +23,7 @@
 # Strings
 #   • Build a string with .join() (and the opposite)
 #   • .split() + .join() in LeetCode
+#   • Drop one letter: s[:i] + s[i+1:]
 #
 # Lists & objects
 #   • List Comprehension
@@ -434,6 +435,61 @@ def build_path(s):
 
 print(build_path("/home/user/docs/"))  # "/home/user/docs"
 
+
+
+# ––––––––––––––––––––––––––––––––––––––––––––––
+"""
+📘 Tutorial: Drop one letter: s[:i] + s[i+1:]
+
+  • s is a STRING, not a list. Slices of a string are strings.
+  • Leftover = the WHOLE string minus that one letter.
+  • newS = s[:i] + s[i+1:]
+        s[:i]     = letters BEFORE index i
+        s[i]      = the letter we drop (not in newS)
+        s[i+1:]   = letters AFTER index i
+        +         = glue two strings together
+
+  • If i is 0, nothing is before it → s[:0] is "" (empty string), NOT [].
+    "" + "bca" is still the string "bca".
+
+  Memory hook: same slice on a list is []. String → "". List → [].
+"""
+
+# ---------------------------------------------------------
+# Basic Example
+# ---------------------------------------------------------
+s = "abca"
+print(s[:0])          # Output: ""     (empty string, not [])
+print(s[:0] + s[1:])  # Output: "bca"  (drop index 0)
+
+print(s[:1] + s[2:])  # Output: "aca"  (drop index 1, the 'b')
+print(s[:2] + s[3:])  # Output: "aba"  (drop index 2, the 'c')
+
+nums = [10, 20, 30, 40]
+print(nums[:0])               # Output: []            (empty list)
+print(nums[:0] + nums[1:])    # Output: [20, 30, 40]  (drop index 0)
+
+
+# ---------------------------------------------------------
+# Example in a Function (Real DSA Use Case)
+# ---------------------------------------------------------
+# 680. Valid Palindrome II — brute force
+# Try the original, then drop one letter at a time (left to right).
+
+class Solution:
+    def validPalindrome(self, s):
+        if s == s[::-1]:
+            return True
+
+        for i in range(len(s)):
+            newS = s[:i] + s[i + 1:]
+            if newS == newS[::-1]:
+                return True
+
+        return False
+
+print(Solution().validPalindrome("abca"))  # Output: True  → drop 'b' first ("aca"); 'c' also works
+print(Solution().validPalindrome("abc"))   # Output: False
 
 
 # ––––––––––––––––––––––––––––––––––––––––––––––

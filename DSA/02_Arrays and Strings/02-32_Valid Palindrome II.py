@@ -9,7 +9,7 @@ Example 1:
 Example 2:
     Input: s = "abca"
     Output: true
-    Explanation: You could delete the character 'c'.
+    Explanation: You could delete the character 'b' or 'c'.
 
 Example 3:
     Input: s = "abc"
@@ -56,7 +56,7 @@ print(solution.validPalindrome(s))
 
 s = "abca"
 print(solution.validPalindrome(s))
-# Output: True → mismatch at 'b' vs 'c'; skip 'c' and "aba" is a palindrome
+# Output: True → mismatch at 'b' vs 'c'; skip 'b' → "aca" (skip 'c' → "aba" also works)
 
 s = "abc"
 print(solution.validPalindrome(s))
@@ -393,8 +393,7 @@ Q: How would I arrive at a helper next time?
 
 
 
-
-
+# –––––––––––––––––––––––––––––––––––––––––––––––––––––––
 # Solution 2: Two Pointers + Slice Remaining
 # Walk inward. On mismatch, delete left or right and check the leftover string against its reverse.
 class Solution:
@@ -404,9 +403,9 @@ class Solution:
 
         while l < r:
             if s[l] != s[r]:
-                skip_left = s[l + 1 : r + 1]   # drop s[l]
-                skip_right = s[l : r]          # drop s[r]
-                return skip_left == skip_left[::-1] or skip_right == skip_right[::-1]
+                skipL = s[l + 1 : r + 1]   # drop s[l]
+                skipR = s[l : r]           # drop s[r]
+                return skipL == skipL[::-1] or skipR == skipR[::-1]
             l += 1
             r -= 1
 
@@ -418,19 +417,50 @@ s = "abca"
 print(solution.validPalindrome(s))
 # Output: True
 
+s = "aaaaza"
+print(solution.validPalindrome(s))
+# Output: True → skipL "aaz" fails; skipR drops 'z' → "aaa"
+
+
+# ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+# Breakdown
+class Solution:
+    def validPalindrome(self, s: str) -> bool:
+        l = 0                             # Left pointer at the start
+        r = len(s) - 1                    # Right pointer at the end
+
+        while l < r:                      # Walk inward from both ends
+            if s[l] != s[r]:              # First mismatch — one free delete
+                skipL = s[l + 1 : r + 1]  # Always built — leftover after dropping s[l]
+                skipR = s[l : r]          # Always built — leftover after dropping s[r]
+                return skipL == skipL[::-1] or skipR == skipR[::-1]  # Check skipL, then skipR. or skips the second CHECK only
+            l += 1                        # Ends match — move left in
+            r -= 1                        # Ends match — move right in
+
+        return True                       # Already a palindrome — nothing to delete
+
 """
 Intuition
-    • Walk inward. On the first mismatch, try deleting the left letter or the right letter.
-    • Check each leftover by comparing it to its reverse.
-      Example: "abca" → drop 'b' → "aca", or drop 'c' → "aba".
+    • Don't try every removal. Walk inward from both ends.
+    • Matching letters: keep going.
+    • First mismatch: that's where the problem is. Only two choices —
+      remove the left letter or remove the right letter.
+    • If either leftover is a palindrome, return True.
     • Same idea as Solution 1, but here you build a new string instead of moving pointers.
       That copy is why space is O(N). Memorize Solution 1.
 
-How it works
-    • Walk inward from both ends.
-    • Mismatch → skip_left = s[l+1:r+1] (drop s[l]) or skip_right = s[l:r] (drop s[r]).
-    • [::-1] is the palindrome check.
-    • Either skip works → True. Loop finishes with no mismatch → already a palindrome.
+Why this solution works
+    • A palindrome has matching ends as you walk inward.
+    • You may delete at most one letter.
+
+    • Walk in from both ends.
+    • Matching letters are fine — leave them.
+    • First mismatch: one of those two letters is the extra one. You don't know which.
+    • Try dropping the left one. If that leftover is a palindrome → True.
+    • If not, try dropping the right one.
+
+    • Same idea as brute force ("delete one letter"), but you only try the two letters
+      that actually failed to match — not every letter.
 
 Interview Answer: Worst Case
 
@@ -442,20 +472,85 @@ Space: O(N)
 
 
 ---
-Quick Example Walkthrough:
+Full Example Walkthrough:
 
     s = "abca"
+        0: a
+        1: b
+        2: c
+        3: a
+
+    Starting State:
+        l = 0  →  s[0] = "a"
+        r = 3  →  s[3] = "a"
+
+    Loop Iteration 1:
+        Compare:
+            "a" == "a" → MATCH
+
+        Since they match:
+            l += 1
+            r -= 1
+
+        Now:
+            l = 1  →  "b"
+            r = 2  →  "c"
+
+        The outer "a"s already matched. We do not check them again.
+
+    --------------------------------------------------
+
+    Loop Iteration 2:
+        Compare:
+            "b" vs "c" → NO MATCH
+
+        First mismatch — one free delete.
+
+        We build BOTH leftovers:
+            skipL = s[l + 1 : r + 1] = s[2:3] → "c"    drop 'b'
+            skipR = s[l : r]         = s[1:2] → "b"    drop 'c'
+
+        Then the check:
+            return skipL == skipL[::-1] or skipR == skipR[::-1]
+                 = "c" == "c"[::-1]     or "b" == "b"[::-1]
+                 = True                 or (not needed)
+
+        skipL already passed, so `or` skips the skipR CHECK.
+        skipR was still built. Building and checking are two different steps.
+
+        Whole-string picture: drop 'b' → "aca". Drop 'c' → "aba" (also works).
+
+    --------------------------------------------------
+
+    Final Check:
+        return True
+
+
+---
+Quick Example Walkthrough:
+
+    s = "aaaaza"
+        0: a
+        1: a
+        2: a
+        3: a
+        4: z
+        5: a
 
     Step 1: Start
-        l = 0 ('a'), r = 3 ('a')
+        l = 0 ('a'), r = 5 ('a')
 
     Step 2: Walk inward
         • 'a' == 'a' → match, move in
-        • 'b' != 'c' → first mismatch
+        • l = 1 ('a'), r = 4 ('z')
+        • 'a' != 'z' → first mismatch
 
-    Step 3: Try both leftovers
-        • skip_left  (drop 'b') = "aca"  → "aca" == "aca" → True
-        • skip_right (drop 'c') is not needed (`or` stops), but "aba" would also work
+    Step 3: Try both skips
+        • skipL = s[2:5] = "aaz" → "aaz" != "zaa" → no
+        • skipR = s[1:4] = "aaa" → "aaa" == "aaa" → True
+
+        skipL failed, so `or` does check skipR.
+        Whole-string picture: delete 'z' → "aaaaa"
 
     Final Answer: True
 """
@@ -479,13 +574,13 @@ class Solution:
 
 
 solution = Solution()
+s = "abca"
+print(solution.validPalindrome(s))
+# Output: True → left to right hits 'b' first ("aca"); 'c' would also work ("aba")
+
 s = "aba"
 print(solution.validPalindrome(s))
 # Output: True
-
-s = "abca"
-print(solution.validPalindrome(s))
-# Output: True → delete 'b' → "aca", or delete 'c' → "aba"
 
 s = "abc"
 print(solution.validPalindrome(s))
@@ -505,6 +600,23 @@ How it works
     • newS == newS[::-1]? return True.
     • Else False.
 
+Why this answers the question
+    • "At most one" means 0 deletes or 1 delete.
+    • 0 deletes: the first line, s == s[::-1]. Nothing removed. Still allowed.
+    • 1 delete: the loop. Each pass drops only s[i]. newS never drops a second letter.
+    • Direction: i goes 0, 1, 2, ... so we try dropping the leftmost letter first, then the next, then the next. One letter per pass, left to right. First leftover that is a palindrome → stop.
+    • If the original fails and every one-letter drop fails → False.
+
+What leftover means
+    • Leftover = the WHOLE string minus that one letter. Not a palindrome hiding inside s.
+    • Example "abaX": first three "aba" is a palindrome, but that alone does not win.
+      It only wins when we drop "X" and the leftover is the entire rest: "aba".
+      Left to right still catches that. i is which letter we drop:
+          drop index 0 → "baX"
+          drop index 1 → "aaX"
+          drop index 2 → "abX"
+          drop index 3 → "aba" → True
+
 Interview Answer: Worst Case
 
 Time: O(N²)
@@ -515,16 +627,66 @@ Space: O(N)
 
 
 ---
-Quick Example Walkthrough:
+Full Example Walkthrough:
 
-    s = "abca"
+    s = "abca"          ← this is a STRING, not a list
+        0: a
+        1: b
+        2: c
+        3: a
 
-    Step 1: Already a palindrome?
+    How we drop one letter (every loop):
+        newS = s[:i] + s[i + 1:]
+        s[:i]     = letters BEFORE index i   (always a string)
+                    if i is 0, there is nothing before → ""
+        s[i]      = the letter we drop       (not in newS)
+        s[i + 1:] = letters AFTER index i    (always a string)
+        +         = glue two strings together
+                    "" + "bca" is still the string "bca"
+                    not an array
+
+    Starting State:
+        Check the original first.
+        s == s[::-1]
         "abca" == "acba" → No
+        So we start the loop and try deleting one letter at a time.
 
-    Step 2: Try deleting each character
-        • i = 0  delete 'a'  newS = "bca"  "bca" == "acb" → No
-        • i = 1  delete 'b'  newS = "aca"  "aca" == "aca" → Yes
+    --------------------------------------------------
 
-    Final Answer: True
+    Loop i = 0: drop s[0] = "a"
+
+        s[:0]     = ""          nothing before index 0
+        s[1:]     = "bca"       everything after "a"
+        newS      = "" + "bca" = "bca"
+
+        newS == newS[::-1]
+        "bca" == "acb" → No
+
+        Keep going.
+
+    --------------------------------------------------
+
+    Loop i = 1: drop s[1] = "b"
+
+        s[:1]     = "a"         everything before "b"
+        s[2:]     = "ca"        everything after "b"
+        newS      = "a" + "ca" = "aca"
+
+        newS == newS[::-1]
+        "aca" == "aca" → Yes
+
+        return True
+        Stop. We do not try i = 2 or i = 3.
+        (Dropping "c" at i = 2 would also leave "aba", but we already returned True on "b".)
+
+    --------------------------------------------------
+
+    Final Check:
+        return True
+
+        This means:
+            After deleting one letter ("b"), the leftover string "aca"
+            reads the same forwards and backwards.
+
+            Deleting "c" would also work — brute force just hits "b" first (left to right).
 """
