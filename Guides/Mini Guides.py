@@ -9,6 +9,7 @@
 # Collections
 #   • defaultdict(list)
 #   • collections.Counter
+#   • Two inputs, one dictionary (what to count?)
 #
 # Booleans & counting
 #   • True = 1 and False = 0 in Python
@@ -103,6 +104,25 @@ word_counts = Counter(words)
 print(word_counts)
 # Output:
 # Counter({'apple':3, 'banana':2, 'orange':1})
+
+
+# ––––––––––––––––––––––––––––––––––––––––––––––
+"""
+📘 Tutorial: Two inputs, one dictionary — what to count?
+
+When a problem gives you two strings/arrays and you use one hash map:
+
+    Count the expected / original / "have" input.
+    Scan the extra / missing / different / "need" input.
+
+Examples:
+    Find the Difference → count s (original), scan t (has the extra letter)
+    Ransom Note         → count magazine (have), scan ransomNote (need)
+
+Not a rule that you always count the smaller one (or the first one).
+Hash the smaller input only when both play the same role and you want to save space
+(e.g. intersection of two arrays).
+"""
 
 
 # ––––––––––––––––––––––––––––––––––––––––––––––

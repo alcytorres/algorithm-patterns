@@ -21,38 +21,44 @@ Constraints:
     s and t consist of lowercase English letters.
 
 Solution: https://leetcode.com/problems/find-the-difference/description/
+
+NeetCode: https://neetcode.io/solutions/find-the-difference
 """
 
 
-from collections import defaultdict
+# Solution 1: Counter Frequency Check
+from collections import Counter
 
 def findTheDifference(s, t):
-    count = defaultdict(int)
-    for c in s:
-        count[c] += 1
+    count = Counter(s)          # O(N)
 
-    for c in t:
-        count[c] -= 1
-        if count[c] < 0:
+    for c in t:                 # O(N) iterations
+        count[c] -= 1           # O(1)
+        if count[c] < 0:        # O(1)
             return c
 
 
-s = "abcd"
-t = "abcde"
+s = "abca"
+t = "abcae"
 
 print(findTheDifference(s, t))
 # Output: "e"
 
-# count = {a:1, b:1, c:1, d:1} → returns 'e' (the extra letter in t)
+# count = {a:2, b:1, c:1} → returns 'e' (the extra letter in t)
+
+s = ""
+t = "a"
+print(findTheDifference(s, t))
+# Output: "a"
+
+# count = {} → 'a' goes 0 → -1 → returns 'a'
 
 # ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 # Breakdown
-from collections import defaultdict
+from collections import Counter
 
 def findTheDifference(s, t):
-    count = defaultdict(int)    # Notebook to count each letter in s
-    for c in s:                 # Go through each letter in s
-        count[c] += 1           # Add 1 to this letter's count
+    count = Counter(s)          # Notebook: how many of each letter s has
 
     for c in t:                 # Go through each letter in t
         count[c] -= 1           # Use up one count for this letter
@@ -63,14 +69,14 @@ def findTheDifference(s, t):
 """
 Time: O(N)
   - Let N = length of s (t has length N + 1).
-  - Step 1: Count each letter in s → O(N).
-  - Step 2: Subtract counts while scanning t → O(N + 1).
+  - Step 1: Counter(s) scans every letter in s once → O(N).
+  - Step 2: Subtract count while scanning t → O(N + 1).
       • May return early when the extra letter is found.
   - Combined: O(N + N) = O(N).
   - Overall: O(N).
 
 Space: O(1)
-  - count dictionary stores frequencies of lowercase English letters.
+  - count stores frequencies of lowercase English letters.
   - Maximum distinct keys = 26 → constant space (doesn't grow with N).
   - A few loop variables use O(1).
   - Overall: O(1) because of the "only a-z" constraint.
@@ -86,47 +92,27 @@ Time: O(N)
   - One pass to count letters in s, one pass to subtract using t.
 
 Space: O(1) for lowercase English letters
-  - Hash map holds at most 26 keys.
-
-
----
-Overview for Each Iteration
-Input: s = "abcd", t = "abcde"
-
-Step 1: Count each letter in s
-i | c | count
---|---|--------------------
-- | - | {}
-0 | a | {a:1}
-1 | b | {a:1, b:1}
-2 | c | {a:1, b:1, c:1}
-3 | d | {a:1, b:1, c:1, d:1}
-
-Step 2: Subtract using t
-i | c | count[c] | <0? | Result
---|---|----------|-----|-----------
-0 | a | 1→0      | No  | continue
-1 | b | 1→0      | No  | continue
-2 | c | 1→0      | No  | continue
-3 | d | 1→0      | No  | continue
-4 | e | 0→ -1    | Yes | return 'e'
-
-Final: "e"
+  - For lowercase English letters - Hash map holds at most 26 keys.
 
 
 ---
 Most IMPORTANT thing to Understand:
     • t is just s with all its letters shuffled, plus one extra letter added somewhere.
 
-    • Count how many times each letter appears in s, then subtract those counts while scanning t.
+    • Counter(s) tallies how many times each letter appears in s, then you subtract those counts while scanning t.
 
     • The first letter that makes the count go negative is the extra letter that was added to t.
+
+    • Rule of thumb (two inputs, one dictionary):
+          Count the expected / original input.
+          Scan the one that might be extra, missing, or different.
+          Here: s is expected → count s.  t has the extra letter → scan t.
 
 ---
 Why this code Works:
     • Hash map role: count[c] tracks how many of each letter we still "expect" to see from s.
 
-    • Technique: Add +1 for each letter in s, then -1 for each letter in t; the extra letter is the one that goes below zero.
+    • Technique: Counter(s) tallies s in one line, then -1 for each letter in t; the extra letter is the one that goes below zero.
 
     • Efficiency: One pass to build counts, one pass to subtract → O(N), no sorting required.
 
@@ -134,23 +120,43 @@ Why this code Works:
 
 ---
 TLDR:
-    • Count letters from s, subtract using t, and return the first letter whose count goes negative.
+    • Count the expected input (s), scan the one that might be extra (t), and return the first letter whose count goes negative.
+
+
+
+    ---
+    Overview for Each Iteration
+    Input: s = "abca", t = "abcae"
+
+    Step 1: Build Counter from s
+    count = {a:2, b:1, c:1}
+
+    Step 2: Subtract using t
+    i | c | count[c] | <0? | Result
+    --|---|----------|-----|-----------
+    0 | a | 2→1      | No  | continue
+    1 | b | 1→0      | No  | continue
+    2 | c | 1→0      | No  | continue
+    3 | a | 1→0      | No  | continue
+    4 | e | 0→ -1    | Yes | return 'e'
+
+    Final: "e"
 
 
 ---
 Quick Example Walkthrough:
 
-    s = "abcd"
-    t = "abcde"
+    s = "abca"
+    t = "abcae"
 
-    Step 1 — Build counts from s:
-        {'a':1, 'b':1, 'c':1, 'd':1}
+    Step 1 — Build Counter from s:
+        count = {'a':2, 'b':1, 'c':1}
 
     Step 2 — Process t:
-        'a' → 1 → 0
+        'a' → 2 → 1
         'b' → 1 → 0
         'c' → 1 → 0
-        'd' → 1 → 0
+        'a' → 1 → 0
         'e' → 0 → -1  →  return 'e'
 
     Final Answer: "e"
@@ -158,62 +164,24 @@ Quick Example Walkthrough:
 
 ---
 Full Example Walkthrough:
-    s = "abcd"
-    t = "abcde"
+    s = "abca"
+    t = "abcae"
 
     Starting State:
-        count = {} (empty defaultdict)
+        count = Counter("abca") → {'a': 2, 'b': 1, 'c': 1}
 
     --------------------------------------------------
 
-    Loop 1 — Count letters in s:
+    Loop — Subtract using t:
 
     Iteration 1:
         c = 'a'
-        count['a'] += 1
-
-        Now:
-            count = {'a': 1}
-
-    --------------------------------------------------
-
-    Iteration 2:
-        c = 'b'
-        count['b'] += 1
-
-        Now:
-            count = {'a': 1, 'b': 1}
-
-    --------------------------------------------------
-
-    Iteration 3:
-        c = 'c'
-        count['c'] += 1
-
-        Now:
-            count = {'a': 1, 'b': 1, 'c': 1}
-
-    --------------------------------------------------
-
-    Iteration 4:
-        c = 'd'
-        count['d'] += 1
-
-        Now:
-            count = {'a': 1, 'b': 1, 'c': 1, 'd': 1}
-
-    --------------------------------------------------
-
-    Loop 2 — Subtract using t:
-
-    Iteration 1:
-        c = 'a'
-        count['a'] -= 1  →  1 → 0
+        count['a'] -= 1  →  2 → 1
 
         Check: count['a'] < 0?  No  →  continue
 
         Now:
-            count = {'a': 0, 'b': 1, 'c': 1, 'd': 1}
+            count = {'a': 1, 'b': 1, 'c': 1}
 
     --------------------------------------------------
 
@@ -224,7 +192,7 @@ Full Example Walkthrough:
         Check: count['b'] < 0?  No  →  continue
 
         Now:
-            count = {'a': 0, 'b': 0, 'c': 1, 'd': 1}
+            count = {'a': 1, 'b': 0, 'c': 1}
 
     --------------------------------------------------
 
@@ -235,18 +203,18 @@ Full Example Walkthrough:
         Check: count['c'] < 0?  No  →  continue
 
         Now:
-            count = {'a': 0, 'b': 0, 'c': 0, 'd': 1}
+            count = {'a': 1, 'b': 0, 'c': 0}
 
     --------------------------------------------------
 
     Iteration 4:
-        c = 'd'
-        count['d'] -= 1  →  1 → 0
+        c = 'a'
+        count['a'] -= 1  →  1 → 0
 
-        Check: count['d'] < 0?  No  →  continue
+        Check: count['a'] < 0?  No  →  continue
 
         Now:
-            count = {'a': 0, 'b': 0, 'c': 0, 'd': 0}
+            count = {'a': 0, 'b': 0, 'c': 0}
 
     --------------------------------------------------
 
@@ -262,6 +230,25 @@ Full Example Walkthrough:
         "e"
 
         This is the one letter in t that s did not have.
+
+
+---
+Quick Example Walkthrough:
+
+    s = ""
+    t = "a"
+
+    Step 1 — Build Counter from s:
+        count = {}  (s is empty — nothing to count)
+
+    Step 2 — Process t:
+        'a' → 0 → -1  →  return 'a'
+
+    Final Answer: "a"
+
+
+
+
 
 
 ---
@@ -287,21 +274,21 @@ The one insight that unlocks the optimal code
     • Same pattern as Valid Anagram — but return the letter instead of True/False.
 
 
-Why a hash map?
+Why a Counter / hash map?
     • You need "how many of each letter do I have?" not just "is this letter in s?"
-    • defaultdict(int) starts missing letters at 0 — so the extra letter goes 0 → -1 automatically.
+    • A Counter treats missing letters as 0 — so the extra letter goes 0 → -1 automatically.
     • Only 26 possible keys — fast lookups, no sorting.
 
 
 Thought → line of code
-    count = defaultdict(int)
-        → "Empty notebook — each letter starts at 0."
+    count = Counter(s)
+        → "Stock the shelf — tally every letter in s before I start spending."
 
-    for c in s: count[c] += 1
-        → "Stock the shelf with everything s has."
+    for c in t:
+        → "Walk each letter t uses, one at a time."
 
-    for c in t: count[c] -= 1
-        → "Remove one of each letter t uses from my tally."
+    count[c] -= 1
+        → "Remove one of this letter from my tally."
 
     if count[c] < 0: return c
         → "Went below zero — t used a letter s didn't have."
@@ -315,7 +302,7 @@ Memory hook (one sentence)
 Would you arrive at this cold?
     • Immediately: cross letters off a copy of s while scanning t (the brute force).
     • After doing Valid Anagram: realize this is the same count-up / count-down pattern with a different return.
-    • Bookkeeping: two loops, defaultdict — pattern you've seen before.
+    • Bookkeeping: build a Counter, loop the other string — pattern you've seen before.
     • Real insight: negative count = extra letter. You'd only write `return c` instead of `return False` once you connect it to the anagram problem.
 
 
@@ -326,58 +313,65 @@ Would you arrive at this cold?
 # Brute force — List + remove (cross off letters from a copy of s)
 
 def findTheDifference_bruteforce(s, t):
-    available = list(s)
+    available = list(s)          # O(N)
 
-    for c in t:
-        if c not in available:
+    for c in t:                  # O(N) iterations
+        if c not in available:   # O(N) scan
             return c
-        available.remove(c)
+        available.remove(c)      # O(N) find/remove
 
 
-s = "abcd"
-t = "abcde"
+s = "abca"
+t = "abcae"
 print(findTheDifference_bruteforce(s, t))
 # Output: "e"
 
 
 """
 Time: O(N²)
-  - Let N = length of s (t has length N + 1).
+  - Let N = length of s. t has N + 1 letters.
 
-  - Step 1: Copy s into a list → O(N).
+  - available = list(s) → O(N)
 
-  - Step 2: For each letter in t → O(N + 1) iterations.
-      • c not in available scans the list → O(N).
-      • available.remove(c) finds and removes → O(N).
+  - The loop runs O(N) times.
+    Inside each loop:
+      • c not in available → O(N)
+      • available.remove(c) → O(N)
 
-  - Combined: O(N + N × N).
-  - Overall: O(N²).
+  - Work inside one loop:
+      O(N) + O(N) = O(N)
+
+  - That O(N) work happens O(N) times:
+      O(N) × O(N) = O(N²)
+
+  - Including the initial copy:
+      O(N) + O(N²) = O(N²)
 
 
 Space: O(N)
-  - available list stores up to N letters from s.
-  - Overall: O(N).
+  - available stores a copy of the N letters in s.
 
 
 Interview Answer: Worst Case
 
 Time: O(N²)
   - Each letter in t may scan the full list to check and remove.
+  - O(N) loop iterations, with O(N) list work inside each iteration.
 
 Space: O(N)
-  - Mutable copy of s as a list.
+  - Stores a mutable copy of s as a list.
 
 
 ---
 Overview for Each Iteration
-Input: s = "abcd", t = "abcde"
+Input: s = "abca", t = "abcae"
 
-    available starts = ['a', 'b', 'c', 'd']
+    available starts = ['a', 'b', 'c', 'a']
 
-    c = 'a' → in list → remove → ['b', 'c', 'd']
-    c = 'b' → in list → remove → ['c', 'd']
-    c = 'c' → in list → remove → ['d']
-    c = 'd' → in list → remove → []
+    c = 'a' → in list → remove → ['b', 'c', 'a']
+    c = 'b' → in list → remove → ['c', 'a']
+    c = 'c' → in list → remove → ['a']
+    c = 'a' → in list → remove → []
     c = 'e' → NOT in list → return 'e'
 
 Final: "e"
@@ -385,37 +379,48 @@ Final: "e"
 """
 
 
+# Solution 2: Two Counter Comparison
+from collections import Counter
 
-
-
-
-
-# 2. Sort both strings and compare
 class Solution:
     def findTheDifference(self, s: str, t: str) -> str:
-        s = sorted(s)
-        t = sorted(t)
+        count_s, count_t = Counter(s), Counter(t)  # O(N)
 
-        for i in range(len(s)):
-            if s[i] != t[i]:
+        for c in count_t:                          # O(1) — at most 26 keys
+            if c not in count_s or count_s[c] < count_t[c]:  # O(1)
+                return c
+
+# Time: O(N) - Count both strings, then compare unique letters in t.
+# Space: O(1) for lowercase English letters - Two hash maps, at most 26 keys each.
+
+
+
+# 3. Sort both strings and compare
+class Solution:
+    def findTheDifference(self, s: str, t: str) -> str:
+        s = sorted(s)                # O(N log N)
+        t = sorted(t)                # O(N log N)
+
+        for i in range(len(s)):      # O(N)
+            if s[i] != t[i]:         # O(1)
                 return t[i]
 
-        return t[-1]
+        return t[-1]                 # O(1)
 
 # Time: O(N log N) - Sort both strings, then one pass to compare.
 # Space: O(N) - sorted copies of s and t.
 
 
 
-# 3. XOR solution
+# 4. XOR solution
 class Solution:
     def findTheDifference(self, s: str, t: str) -> str:
-        ans = 0
+        ans = 0                      # O(1)
 
-        for c in s + t:
-            ans ^= ord(c)
+        for c in s + t:              # O(N) iterations
+            ans ^= ord(c)            # O(1)
 
-        return chr(ans)
+        return chr(ans)              # O(1)
 
 # Time: O(N) - One pass over all characters in s and t.
 # Space: O(1) - Only the ans variable; pairs cancel via XOR.
