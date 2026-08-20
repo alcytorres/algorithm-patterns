@@ -415,11 +415,15 @@ class Solution:
 solution = Solution()
 s = "abca"
 print(solution.validPalindrome(s))
-# Output: True
+# Output: True → mismatch 'b' vs 'c'; skipL works first ("aca"); skipR ("aba") also works
 
 s = "aaaaza"
 print(solution.validPalindrome(s))
 # Output: True → skipL "aaz" fails; skipR drops 'z' → "aaa"
+
+s = "abc"
+print(solution.validPalindrome(s))
+# Output: False → skipL "bc" no; skipR "ab" no
 
 
 # ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
@@ -431,11 +435,11 @@ class Solution:
 
         while l < r:                      # Walk inward from both ends
             if s[l] != s[r]:              # First mismatch — one free delete
-                skipL = s[l + 1 : r + 1]  # Always built — leftover after dropping s[l]
-                skipR = s[l : r]          # Always built — leftover after dropping s[r]
-                return skipL == skipL[::-1] or skipR == skipR[::-1]  # Check skipL, then skipR. or skips the second CHECK only
-            l += 1                        # Ends match — move left in
-            r -= 1                        # Ends match — move right in
+                skipL = s[l + 1 : r + 1]  # Drop s[l]. r+1 keeps s[r] (stop is exclusive)
+                skipR = s[l : r]          # Drop s[r]. stop is r, so s[r] is not included
+                return skipL == skipL[::-1] or skipR == skipR[::-1]  # If skipL is a palindrome, return True; otherwise check if skipR is a palindrome
+            l += 1                        # Characters match — move left pointer inward
+            r -= 1                        # Characters match — move right pointer inward
 
         return True                       # Already a palindrome — nothing to delete
 
@@ -553,7 +557,32 @@ Quick Example Walkthrough:
         Whole-string picture: delete 'z' → "aaaaa"
 
     Final Answer: True
+
+
+---
+Quick Example Walkthrough:
+
+    s = "abc"
+        0: a
+        1: b
+        2: c
+
+    Step 1: Start
+        l = 0 ('a'), r = 2 ('c')
+
+    Step 2: Walk inward
+        • 'a' != 'c' → first mismatch (no matching pair first)
+
+    Step 3: Try both skips
+        • skipL = s[1:3] = "bc" → "bc" != "cb" → no
+        • skipR = s[0:2] = "ab" → "ab" != "ba" → no
+
+        skipL failed, so `or` does check skipR. skipR also failed.
+
+    Final Answer: False
 """
+
+
 
 
 
@@ -580,11 +609,26 @@ print(solution.validPalindrome(s))
 
 s = "aba"
 print(solution.validPalindrome(s))
-# Output: True
+# Output: True → original is already a palindrome (0 deletes)
 
 s = "abc"
 print(solution.validPalindrome(s))
 # Output: False → "bc", "ac", "ab" are all not palindromes
+
+
+# ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+# Breakdown
+class Solution:
+    def validPalindrome(self, s: str) -> bool:
+        if s == s[::-1]:                  # Already a palindrome? 0 deletes. Still allowed.
+            return True
+
+        for i in range(len(s)):           # Drop one letter per pass, left to right
+            newS = s[:i] + s[i + 1:]      # Drop s[i]. Glue before + after. If i is 0, s[:0] is ""
+            if newS == newS[::-1]:        # If the leftover is a palindrome, return True
+                return True
+
+        return False                      # Original failed and every one-letter drop failed
 
 """
 Intuition
@@ -593,12 +637,6 @@ Intuition
       That is 100,000 deletions, and each deletion scans ~100,000 letters.
       100,000 × 100,000 = 10 billion steps → Time Limit Exceeded (TLE).
     • The two-pointer solutions only try a deletion when two letters first fail to match.
-
-How it works
-    • Already a palindrome? return True.
-    • For each i, newS = s without s[i].
-    • newS == newS[::-1]? return True.
-    • Else False.
 
 Why this answers the question
     • "At most one" means 0 deletes or 1 delete.
@@ -689,4 +727,43 @@ Full Example Walkthrough:
             reads the same forwards and backwards.
 
             Deleting "c" would also work — brute force just hits "b" first (left to right).
+
+
+---
+Quick Example Walkthrough:
+
+    s = "aba"
+        0: a
+        1: b
+        2: a
+
+    Step 1: Original first
+        "aba" == "aba" → Yes
+
+    Step 2: Loop never runs
+        Zero deletes is allowed. We already have a palindrome.
+
+    Final Answer: True
+
+
+---
+Quick Example Walkthrough:
+
+    s = "abc"
+        0: a
+        1: b
+        2: c
+
+    Step 1: Original first
+        "abc" == "cba" → No
+        Try deleting one letter, left to right.
+
+    Step 2: Loop
+        • i = 0 drop 'a' → newS = "" + "bc" = "bc" → "bc" != "cb" → no
+        • i = 1 drop 'b' → newS = "a" + "c"  = "ac" → "ac" != "ca" → no
+        • i = 2 drop 'c' → newS = "ab" + ""  = "ab" → "ab" != "ba" → no
+
+    Step 3: Every one-letter drop failed
+
+    Final Answer: False
 """

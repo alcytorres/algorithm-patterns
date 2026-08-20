@@ -35,7 +35,7 @@ Run operators.py guide through Claude to make it better? maybe more examples
 # Have AI make me a LEETCODE GUIDE with OPUS
 
 
-
+# Review 2-32: valid palindromes # Solution 2: Two Pointers + Slice Remaining
 
 
 
