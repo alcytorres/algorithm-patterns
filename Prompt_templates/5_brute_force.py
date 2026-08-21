@@ -45,6 +45,7 @@ If NO to any of these → skip brute force code entirely. Use the "No Brute Forc
 
 --------------------------------------------------
 FORMAT A — when a natural brute force EXISTS
+(Steps 2, 3, and 4 below are all required.)
 
 Provide the **simple brute force Python solution**.
 
@@ -54,13 +55,85 @@ Rules for the brute force code:
 - Avoid advanced tricks (no prefix sums, sliding window, bit tricks, etc.)
 - Code should be easy for someone learning algorithms to understand
 
-Add the complexity explanation inside a """ """ block, matching the study + interview format:
+--------------------------------------------------
+STEP 2: REQUIRED — inline cost annotations ON the code
+
+Add a short `# O(...)` comment on every line whose cost is NOT obviously O(1).
+
+This is the most important part of the brute force write-up. The whole point of
+brute force is to see WHERE the slowness lives, and the slow line is usually a
+short, innocent-looking one-liner. A loop can look linear while the real cost is
+hidden inside a built-in method.
+
+Annotate lines like these:
+
+    x in some_list          → # O(N) scan
+    some_list.remove(x)     → # O(N) find + shift
+    some_list.index(x)      → # O(N) scan
+    some_list.pop(0)        → # O(N) shift
+    s = c + s   (in a loop) → # O(N) builds a new string
+    sorted(x) / x.sort()    → # O(N log N)
+    max/min/sum(collection) → # O(N)
+    s[i:j]  (slice)         → # O(K) copy
+    the loop header itself  → # O(N) iterations
+
+Do NOT annotate obvious O(1) lines (`count += 1`, `return c`, `left = 0`).
+Keep each annotation to ~2-5 words after the O(...).
+Align the comments in a column so the code stays easy to read.
+
+--------------------------------------------------
+STEP 3: the complexity block
+
+Add the complexity explanation inside a """ """ block.
+
+Pick ONE of the two forms below.
+
+
+FORM 1 — MULTIPLY-OUT (use this whenever the cost is "loop × expensive work inside")
+
+Use this when a loop contains a non-O(1) operation — including when the loop
+LOOKS linear because nothing is visibly nested. This is the default for brute force.
+
+Time: O(...)
+  - Define variables (e.g., N = input size).
+
+  - <setup line before the loop> → O(...)
+
+  - The loop runs O(...) times.
+    Inside each loop:
+      • <slow line 1> → O(...)
+      • <slow line 2> → O(...)
+
+  - Work inside one loop:
+      O(...) + O(...) = O(...)
+
+  - That O(...) work happens O(...) times:
+      O(...) × O(...) = O(...)
+
+  - Including the setup:
+      O(...) + O(...) = O(...)
+
+  - Overall: O(...).
+
+Why this form matters: seeing "each piece is O(N)" is NOT enough. The step that
+must be written out explicitly is iterations × work per iteration. Never compress
+that into a single line like "Combined: O(N + N × N)".
+
+
+FORM 2 — STEP LIST (use only when there is no expensive work inside a loop)
+
+Use this when the brute force is just a sequence of separate O(1)/O(N) passes and
+the extra cost is memory, not nesting.
 
 Time: O(...)
   - Define variables (e.g., N = input size).
   - Step 1: ... → O(...).
   - Step 2: ... → O(...).
-  - Combined / Overall: O(...).
+  - Combined: O(...) + O(...) = O(...).
+  - Overall: O(...).
+
+
+BOTH FORMS then end with:
 
 Space: O(...)
   - State main structures or variables.
@@ -70,14 +143,24 @@ Interview Answer: Worst Case
 
 Time: O(...)
   - 1-2 bullets highlighting the dominant step(s).
+  - When Form 1 was used, one bullet should name BOTH pieces:
+    the number of iterations AND the work done inside each iteration.
+  - Do NOT put the multiply-out chain here. Keep the interview answer short.
 
 Space: O(...)
   - 1-2 bullets summarizing memory usage.
 
+--------------------------------------------------
+STEP 4: REQUIRED — Overview for Each Iteration
+
+Always include this. Never drop it.
+The complexity block explains WHY it is slow; the Overview explains WHAT happens.
+I need both.
 
 Add a final section inside the same """ """ block:
 ---
 Overview for Each Iteration
+Input: ...
 
 Show a **simple high-level walkthrough** of how the algorithm works on the example input.
 
@@ -118,22 +201,26 @@ IMPORTANT STYLE RULES
 • Do NOT provide multiple solutions with identical complexity — that adds unnecessary mental overhead.
 • Prefer clarity over cleverness.
 • Assume brute force comes BEFORE the optimized version in learning — but only when it genuinely exists.
+• ALWAYS annotate the slow lines with # O(...) — abstract "Step 2" wording alone is not enough.
+• ALWAYS write out iterations × work-per-iteration as its own step (Form 1).
+• ALWAYS keep the Overview for Each Iteration section.
+• Point at the specific line that causes the slowness, not just the overall Big-O.
 
 --------------------------------------------------
 """
 
 # Example 1: Brute force EXISTS (is_palindrome — O(N²) → O(N))
+# Uses FORM 1 (multiply-out): the loop looks linear, but string building is O(N) inside.
 
 # –––––––––––––––––––––––––––––––––––––––––––––––––––––––
-# Brute force
+# Brute force — Reverse the string and compare
 def is_palindrome_bruteforce(s):
-    # Reverse the string and compare
     reversed_s = ""
-    
-    for c in s:
-        reversed_s = c + reversed_s
-    
-    if reversed_s == s:
+
+    for c in s:                       # O(N) iterations
+        reversed_s = c + reversed_s   # O(N) builds a new string
+
+    if reversed_s == s:               # O(N) compare
         return True
     return False
 
@@ -146,13 +233,24 @@ print(is_palindrome_bruteforce(s))
 Time: O(N²)
   - Let N = length of the string s.
 
-  - Step 1: Build reversed string → O(N²).
-      • Loop runs N times (once per character).
-      • Each step: reversed_s = c + reversed_s creates a new string → O(N).
+  - reversed_s = "" → O(1)
 
-  - Step 2: Compare reversed_s == s → O(N).
+  - The loop runs O(N) times.
+    Inside each loop:
+      • reversed_s = c + reversed_s → O(N)
+        (strings are immutable, so Python builds a brand-new string every time)
 
-  - Combined: O(N² + N).
+  - Work inside one loop:
+      O(N)
+
+  - That O(N) work happens O(N) times:
+      O(N) × O(N) = O(N²)
+
+  - Final compare reversed_s == s → O(N)
+
+  - Including the compare:
+      O(N²) + O(N) = O(N²)
+
   - Overall: O(N²).
 
 
@@ -164,7 +262,7 @@ Space: O(N)
 Interview Answer: Worst Case
 
 Time: O(N²)
-  - Each prepend builds a new string; N prepends → quadratic time.
+  - N loop iterations, and each prepend rebuilds the whole string → O(N) work inside.
 
 Space: O(N)
   - Reversed copy of the string.
@@ -172,7 +270,7 @@ Space: O(N)
 
 ---
 Overview for Each Iteration
-s = "racecar"
+Input: s = "racecar"
 
     reversed_s starts = ""
 
@@ -191,7 +289,84 @@ Final: True
 """
 
 
-# Example 2: NO natural brute force (Build Array from Permutation — O(N) is already optimal)
+# Example 2: Brute force EXISTS (389. Find the Difference — O(N²) → O(N))
+# Uses FORM 1 (multiply-out) with TWO slow lines inside one loop.
+# This is the clearest example of hidden cost: the loop has no nested loop in it,
+# but `in` and `.remove()` each scan the whole list.
+
+# –––––––––––––––––––––––––––––––––––––––––––––––––––––––
+# Brute force — List + remove (cross off letters from a copy of s)
+
+def findTheDifference_bruteforce(s, t):
+    available = list(s)          # O(N) copy
+
+    for c in t:                  # O(N) iterations
+        if c not in available:   # O(N) scan
+            return c
+        available.remove(c)      # O(N) find + shift
+
+
+s = "abca"
+t = "abcae"
+print(findTheDifference_bruteforce(s, t))
+# Output: "e"
+
+
+"""
+Time: O(N²)
+  - Let N = length of s. t has N + 1 letters.
+
+  - available = list(s) → O(N)
+
+  - The loop runs O(N) times.
+    Inside each loop:
+      • c not in available → O(N)
+      • available.remove(c) → O(N)
+
+  - Work inside one loop:
+      O(N) + O(N) = O(N)
+
+  - That O(N) work happens O(N) times:
+      O(N) × O(N) = O(N²)
+
+  - Including the initial copy:
+      O(N) + O(N²) = O(N²)
+
+  - Overall: O(N²).
+
+
+Space: O(N)
+  - available stores a copy of the N letters in s.
+  - Overall: O(N).
+
+
+Interview Answer: Worst Case
+
+Time: O(N²)
+  - O(N) loop iterations, with O(N) list work inside each iteration.
+  - Each letter in t may scan the full list to check and remove.
+
+Space: O(N)
+  - Stores a mutable copy of s as a list.
+
+
+---
+Overview for Each Iteration
+Input: s = "abca", t = "abcae"
+
+    available starts = ['a', 'b', 'c', 'a']
+
+    c = 'a' → in list → remove → ['b', 'c', 'a']
+    c = 'b' → in list → remove → ['c', 'a']
+    c = 'c' → in list → remove → ['a']
+    c = 'a' → in list → remove → []
+    c = 'e' → NOT in list → return 'e'
+
+Final: "e"
+"""
+
+
+# Example 3: NO natural brute force (Build Array from Permutation — O(N) is already optimal)
 
 # ––––––––––––––––––––––––––––––––––––––––––––––
 # No Natural Brute Force Solution

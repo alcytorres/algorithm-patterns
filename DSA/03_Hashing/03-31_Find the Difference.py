@@ -309,16 +309,17 @@ Would you arrive at this cold?
 """
 
 
+
 # –––––––––––––––––––––––––––––––––––––––––––––––––––––––
 # Brute force — List + remove (cross off letters from a copy of s)
 
 def findTheDifference_bruteforce(s, t):
-    available = list(s)          # O(N)
+    available = list(s)          # O(N) copy
 
     for c in t:                  # O(N) iterations
         if c not in available:   # O(N) scan
             return c
-        available.remove(c)      # O(N) find/remove
+        available.remove(c)      # O(N) find + shift
 
 
 s = "abca"
@@ -347,16 +348,19 @@ Time: O(N²)
   - Including the initial copy:
       O(N) + O(N²) = O(N²)
 
+  - Overall: O(N²).
+
 
 Space: O(N)
   - available stores a copy of the N letters in s.
+  - Overall: O(N).
 
 
 Interview Answer: Worst Case
 
 Time: O(N²)
-  - Each letter in t may scan the full list to check and remove.
   - O(N) loop iterations, with O(N) list work inside each iteration.
+  - Each letter in t may scan the full list to check and remove.
 
 Space: O(N)
   - Stores a mutable copy of s as a list.
@@ -379,6 +383,7 @@ Final: "e"
 """
 
 
+# –––––––––––––––––––––––––––––––––––––––––––––––––––––––
 # Solution 2: Two Counter Comparison
 from collections import Counter
 
@@ -394,7 +399,7 @@ class Solution:
 # Space: O(1) for lowercase English letters - Two hash maps, at most 26 keys each.
 
 
-
+# –––––––––––––––––––––––––––––––––––––––––––––––––––––––
 # 3. Sort both strings and compare
 class Solution:
     def findTheDifference(self, s: str, t: str) -> str:
@@ -411,7 +416,7 @@ class Solution:
 # Space: O(N) - sorted copies of s and t.
 
 
-
+# –––––––––––––––––––––––––––––––––––––––––––––––––––––––
 # 4. XOR solution
 class Solution:
     def findTheDifference(self, s: str, t: str) -> str:

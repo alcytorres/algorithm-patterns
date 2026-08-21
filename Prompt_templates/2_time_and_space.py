@@ -62,6 +62,44 @@ Space: O(...)
   - 1-2 bullets summarizing memory usage at a high level.
 
   
+------------------------------------------------
+SPECIAL CASE — hidden cost inside a loop
+
+Most of my top solutions are simple linear passes, so the normal
+Step 1 / Step 2 / Combined format above is the right default. Keep using it.
+
+BUT if a loop contains an operation that is NOT O(1) — especially when the loop
+does not LOOK nested — expand it instead of compressing it. Trigger operations:
+
+    x in some_list        → O(N) scan
+    some_list.remove(x)   → O(N) find + shift
+    some_list.index(x)    → O(N) scan
+    some_list.pop(0)      → O(N) shift
+    s = c + s  in a loop  → O(N) builds a new string
+    sorted(x) / x.sort()  → O(N log N)
+    max/min/sum(...)      → O(N)
+    s[i:j]  (slice)       → O(K) copy
+
+When one of those appears inside a loop, use this expanded form:
+
+  - The loop runs O(...) times.
+    Inside each loop:
+      • <slow line> → O(...)
+  - Work inside one loop:
+      O(...) + O(...) = O(...)
+  - That O(...) work happens O(...) times:
+      O(...) × O(...) = O(...)
+  - Overall: O(...).
+
+Rules:
+- Never compress the multiply into one line like "Combined: O(N + N × N)".
+  The step "iterations × work per iteration" must stand on its own.
+- Do NOT use this expanded form for a plain O(N) pass where every line is O(1).
+  Expanding "O(1) happens N times" adds noise with no insight.
+- Do NOT add # O(...) comments to the Breakdown code block. That block uses short
+  plain-English comments (see 1_solution_annotations.py). Complexity stays in the
+  """ """ block. Inline # O(...) annotations belong on brute force / secondary
+  solutions, which have no Breakdown.
 
 ------------------------------------------------
 Example 1: 1133. Largest Unique Number

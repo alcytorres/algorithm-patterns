@@ -133,7 +133,41 @@ Heap        | O(N)            | O(1) peek min only
 Linked List | O(N)            | O(N) by position
 BST         | O(log N) avg    | —
 
+================================================================================
+HIDDEN COSTS — one-liners that LOOK O(1) but are not
+================================================================================
+These are the lines that make a "linear looking" loop secretly quadratic.
+If any of these sits inside a loop, the loop is NOT O(N).
 
+Line of code            | Real cost   | Why
+------------------------|-------------|--------------------------------------
+x in some_list          | O(N)        | scans element by element
+some_list.remove(x)     | O(N)        | finds it, then shifts everything after
+some_list.index(x)      | O(N)        | scans element by element
+some_list.pop(0)        | O(N)        | shifts every remaining element left
+some_list.insert(0, x)  | O(N)        | shifts every element right
+s = c + s   (in a loop) | O(N)        | strings are immutable → new string
+s[i:j]      (slice)     | O(K)        | copies K characters
+sorted(x) / x.sort()    | O(N log N)  | full sort
+max/min/sum(collection) | O(N)        | one full pass
+list(x) / x.copy()      | O(N)        | copies N elements
+del some_list[i]        | O(N)        | shifts everything after i
+
+Safe inside a loop (truly O(1)):
+    x in some_set / some_dict     → hash lookup
+    some_dict[k] / count[c] += 1  → hash lookup
+    some_list[i]                  → index math
+    some_list.append(x)           → amortized O(1)
+    some_list.pop()               → from the END only
+    left += 1, right -= 1         → integer math
+
+The check: for each line in the loop body, ask "does this line touch every
+element?" If yes, multiply its cost by the number of iterations.
+
+  loop iterations × work inside one iteration = total time
+
+Example: `for c in t:` with `c not in available` and `available.remove(c)` inside
+  → O(N) iterations × (O(N) + O(N)) = O(N²), even though nothing looks nested.
 
 ================================================================================
 PART 2 — CONSTRAINTS → WHAT COMPLEXITY IS ALLOWED
@@ -232,6 +266,7 @@ BINARY SEARCH TREE
 ---
 Interview tips:
   • First: look at n (PART 2). If n² > 10 million, nested loops are out.
+  • A loop is only O(N) if EVERY line inside it is O(1) — check Hidden Costs above.
   • "in list" → O(N).  "in set" / "in dict" → O(1) avg.
   • Need fast lookup? → dict or set.
   • Need fast ends insert/delete? → deque.

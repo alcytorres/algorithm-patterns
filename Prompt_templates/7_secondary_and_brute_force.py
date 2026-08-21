@@ -67,6 +67,10 @@ RULES
     • Same skeleton for every extra solution so they scan the same way.
     • class Solution (LeetCode / interview style).
     • Interview time/space only — no long study complexity block.
+    • Add a short # O(...) comment on any line that is not obviously O(1)
+      (x in list, list.remove, list.pop(0), s = c + s, sorted, slice).
+      See 5_brute_force.py for the full trigger list.
+      Only annotate the slow lines — do not annotate every line.
     • No Breakdown, no Most IMPORTANT, no Thoughts → Code, no Full Walkthrough.
     • Quick Example: one main example is enough (the one that shows the idea).
     • Brute force: say it is correct, why it is too slow, and what the two-pointer / optimal versions do instead.
